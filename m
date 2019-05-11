@@ -2,61 +2,66 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 338E9181FB
-	for <lists+nbd@lfdr.de>; Thu,  9 May 2019 00:18:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 945601A7A1
+	for <lists+nbd@lfdr.de>; Sat, 11 May 2019 13:04:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0DD7F209AC; Wed,  8 May 2019 22:18:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed May  8 22:18:08 2019
-Old-Return-Path: <colin.king@canonical.com>
+	id 5F15320762; Sat, 11 May 2019 11:04:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat May 11 11:04:14 2019
+Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.0 required=4.0 tests=DIGITS_LETTERS,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
+X-Spam-Status: No, score=-15.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,RCVD_IN_DNSWL_HI autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 22C78205D4
-	for <lists-other-nbd@bendel.debian.org>; Wed,  8 May 2019 22:02:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DDAEC206A2
+	for <lists-other-nbd@bendel.debian.org>; Sat, 11 May 2019 11:04:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-10.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+X-Amavis-Spam-Status: No, score=-11.9 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5, RCVD_IN_DNSWL_HI=-5]
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 5wHTTVATLMoR for <lists-other-nbd@bendel.debian.org>;
-	Wed,  8 May 2019 22:02:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from youngberry.canonical.com (youngberry.canonical.com [91.189.89.112])
-	by bendel.debian.org (Postfix) with ESMTP id C5C2E205D2
-	for <nbd@other.debian.org>; Wed,  8 May 2019 22:02:13 +0000 (UTC)
-Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
-	by youngberry.canonical.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.76)
-	(envelope-from <colin.king@canonical.com>)
-	id 1hOUdc-0007yV-Eg; Wed, 08 May 2019 22:02:08 +0000
-From: Colin King <colin.king@canonical.com>
-To: Josef Bacik <josef@toxicpanda.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org
-Cc: kernel-janitors@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] nbd: add null check on dev_list to avoid potential null pointer dereference
-Date: Wed,  8 May 2019 23:02:08 +0100
-Message-Id: <20190508220208.26146-1-colin.king@canonical.com>
-X-Mailer: git-send-email 2.20.1
+	with ESMTP id BobdabEt6fnD for <lists-other-nbd@bendel.debian.org>;
+	Sat, 11 May 2019 11:04:01 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id F3A59205DE
+	for <nbd@other.debian.org>; Sat, 11 May 2019 11:04:00 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 5CB9130832D3
+	for <nbd@other.debian.org>; Sat, 11 May 2019 11:03:57 +0000 (UTC)
+Received: from localhost (ovpn-116-243.ams2.redhat.com [10.36.116.243])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id F1CBB604DA;
+	Sat, 11 May 2019 11:03:56 +0000 (UTC)
+Date: Sat, 11 May 2019 12:03:56 +0100
+From: "Richard W.M. Jones" <rjones@redhat.com>
+To: Nir Soffer <nsoffer@redhat.com>
+Cc: nbd@other.debian.org, Eric Blake <eblake@redhat.com>,
+	mkletzan@redhat.com
+Subject: Re: Requirements for an NBD client library in userspace
+Message-ID: <20190511110356.GN9582@redhat.com>
+References: <20190430124626.GA11138@redhat.com>
+ <CAMRbyytny=8nC1LevEBwYN9cbuzJwG_HjdN5QQsXR-+ROy-MpA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMRbyytny=8nC1LevEBwYN9cbuzJwG_HjdN5QQsXR-+ROy-MpA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.44]); Sat, 11 May 2019 11:03:57 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <UFFcNdkAI0H.A.wiB.gW10cB@bendel>
+Resent-Message-ID: <9Ynlh8sszdG.A.fsF.uwq1cB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/491
+X-Mailing-List: <nbd@other.debian.org> archive/latest/492
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -66,38 +71,115 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190508220208.26146-1-colin.king@canonical.com
-Resent-Date: Wed,  8 May 2019 22:18:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190511110356.GN9582@redhat.com
+Resent-Date: Sat, 11 May 2019 11:04:14 +0000 (UTC)
 
-From: Colin Ian King <colin.king@canonical.com>
+On Tue, Apr 30, 2019 at 04:43:03PM +0300, Nir Soffer wrote:
+> On Tue, Apr 30, 2019, 15:46 Richard W.M. Jones <rjones@redhat.com> wrote:
+> 
+> > I believe there is no simple NBD client library.  Am I wrong about
+> > this?  Let's assume I'm not for the sake of the rest of this email ...
+> >
+> > We do however have at least 4 places this could be consumed if it existed:
+> >
+> >  - fio's proposed NBD engine
+> >    https://www.spinics.net/lists/fio/msg07831.html
+> >
+> >  - nbdkit-nbd-plugin
+> >    https://github.com/libguestfs/nbdkit/tree/master/plugins/nbd
+> >
+> >  - Martin K's forthcoming VMware liberation tool
+> >
+> >  - qemu, maybe?
+> >    https://github.com/qemu/qemu/blob/master/block/nbd-client.c
+> 
+> 
+> oVirt imageio, replacing pure python client, used to implement nbd-http
+> proxy
+> https://github.com/oVirt/ovirt-imageio/blob/master/common/ovirt_imageio_common/nbd.py
 
-The call to nla_nest_start_noflag can return a null pointer and currently
-this is not being checked and this can lead to a null pointer dereference
-when the null pointer dev_list is passed to function nla_nest_end. Fix
-this by adding in a null pointer check.
+It looks like imageio is Python 2.  I'm trying to write libnbd
+bindings for Python now, but TBH supporting Python 2 is turning out to
+be painful, because there are plenty of Python 3 features it would be
+nice to use ("b" boolean conversions, proper bytes handling and
+PyUnicode_FSConverter are three particular features).  Do you really
+need Python 2?  What is the roadmap for using Python 3 with imageio?
 
-Addresses-Coverity: ("Dereference null return value")
-Fixes: 47d902b90a32 ("nbd: add a status netlink command")
-Signed-off-by: Colin Ian King <colin.king@canonical.com>
----
- drivers/block/nbd.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Rich.
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 053958a8a2ba..ed263963e778 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -2117,6 +2117,10 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
- 	}
- 
- 	dev_list = nla_nest_start_noflag(reply, NBD_ATTR_DEVICE_LIST);
-+	if (!dev_list) {
-+		nlmsg_free(reply);
-+		goto out;
-+	}
- 	if (index == -1) {
- 		ret = idr_for_each(&nbd_index_idr, &status_cb, reply);
- 		if (ret) {
+> 
+> > In this email I'm trying to assemble some requirements for such a
+> > library, and I've also attempted to categorize them according to how
+> > difficult they might be to implement.  I guess everyone will have
+> > their own opinions on which features are most "required" and which are
+> > optional, but I've added mine below too.
+> >
+> > Did I miss out anything?
+> >
+> > 1 = easy to implement  ...  5 = hard to implement
+> > |
+> > | R* = required, library could not be used without it
+> > | R  = required
+> > | O+ = optional, but very useful for many users
+> > | O  = optional
+> > | O- = optional, not likely to be useful for many users
+> > | |
+> > v v
+> >
+> > 1 R*   Library which runs in userspace, callable from C programs
+> >
+> > 3 O+   Callable from other programming languages, eg Python etc.
+> >
+> > 1 R*   Connect to Unix domain socket
+> >
+> > 1 R*   Connect to TCP port
+> >
+> > 1 R    Connect to TCP port over IPv6
+> >
+> > 1 O-   Connect to arbitrary file descriptor [eg. for nbdkit -s]
+> >
+> > 2 R    Synchronous support for easy initial use
+> >
+> > 5 O+   Non-blocking/asynch support, use with select/poll
+> >
+> > 4 O+   Integrates with external main loops, glib2, APR pollset, etc.
+> >
+> > 4 O    TLS support using X.509 certs
+> >
+> > 4 O    TLS-PSK support
+> >
+> > 5 O    NBD MULTI_CONN
+> >
+> > 5 O    NBD out of order requests on single socket
+> >
+> > 2 O-   Old-style protocol
+> >
+> > 3 R    NBD_OPT_INFO mode [required for qemu]
+> >
+> > 5 O    NBD structured replies
+> >
+> 
+> Should be O+, this gives huge performance improvment when reading mostly
+> empty range, even without block status.
+> 
+> This is also not so hard to implement, maybe 3?
+> 
+> 
+> > 3 O+   NBD block status querying
+> >
+> 
+> Should be able to query qemu meta context
+> 
+> 
+> > ? ?    NBD resize extension
+> >
+> 
+> Nir
+
 -- 
-2.20.1
+Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+Read my programming and virtualization blog: http://rwmj.wordpress.com
+Fedora Windows cross-compiler. Compile Windows programs, test, and
+build Windows installers. Over 100 libraries supported.
+http://fedoraproject.org/wiki/MinGW
 
