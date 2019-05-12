@@ -2,69 +2,70 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1839E1A9BE
-	for <lists+nbd@lfdr.de>; Sun, 12 May 2019 00:55:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A47F81AB9A
+	for <lists+nbd@lfdr.de>; Sun, 12 May 2019 12:07:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E7EDE2058B; Sat, 11 May 2019 22:55:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat May 11 22:55:12 2019
-Old-Return-Path: <w@uter.be>
+	id 7E82D2059F; Sun, 12 May 2019 10:07:51 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun May 12 10:07:51 2019
+Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8 autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-15.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,RCVD_IN_DNSWL_HI
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 037AC20586
-	for <lists-other-nbd@bendel.debian.org>; Sat, 11 May 2019 22:55:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EA3472059A
+	for <lists-other-nbd@bendel.debian.org>; Sun, 12 May 2019 10:07:43 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.88 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-11.9 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=no autolearn_force=no
+	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id I13RM0r5xZdi for <lists-other-nbd@bendel.debian.org>;
-	Sat, 11 May 2019 22:55:01 +0000 (UTC)
+	with ESMTP id ia7VjDhYwdMs for <lists-other-nbd@bendel.debian.org>;
+	Sun, 12 May 2019 10:07:39 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-Received: from latin.grep.be (latin.grep.be [IPv6:2a01:4f8:140:52e5::2])
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D5EAC20583
-	for <nbd@other.debian.org>; Sat, 11 May 2019 22:55:01 +0000 (UTC)
-Received: from [105.228.48.136] (helo=gangtai.home.grep.be)
-	by latin.grep.be with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <w@uter.be>)
-	id 1hPaqC-0007QQ-OZ; Sun, 12 May 2019 00:51:41 +0200
-Received: from wouter by gangtai.home.grep.be with local (Exim 4.92)
-	(envelope-from <w@uter.be>)
-	id 1hPaq5-00018A-AZ; Sun, 12 May 2019 00:51:33 +0200
-Date: Sun, 12 May 2019 00:51:32 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Eric Blake <eblake@redhat.com>
-Cc: "Richard W.M. Jones" <rjones@redhat.com>, libguestfs@redhat.com,
-	nbd@other.debian.org
-Subject: Re: [Libguestfs] [nbdkit PATCH 3/7] RFC: protocol: Only send
- EOVERFLOW when valid
-Message-ID: <20190511225132.GB3801@grep.be>
-References: <20190423005026.21496-1-eblake@redhat.com>
- <20190423005026.21496-4-eblake@redhat.com>
- <20190423073639.GE5429@redhat.com>
- <2155d05a-99ed-b1c6-0edc-553c4778e278@redhat.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 21F662040B
+	for <nbd@other.debian.org>; Sun, 12 May 2019 10:07:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 2481A81F1B
+	for <nbd@other.debian.org>; Sun, 12 May 2019 10:07:35 +0000 (UTC)
+Received: from localhost (ovpn-116-243.ams2.redhat.com [10.36.116.243])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B735160148;
+	Sun, 12 May 2019 10:07:34 +0000 (UTC)
+Date: Sun, 12 May 2019 11:07:33 +0100
+From: "Richard W.M. Jones" <rjones@redhat.com>
+To: Nir Soffer <nsoffer@redhat.com>
+Cc: nbd@other.debian.org, Eric Blake <eblake@redhat.com>,
+	Martin Kletzander <mkletzan@redhat.com>
+Subject: Re: Requirements for an NBD client library in userspace
+Message-ID: <20190512100733.GP9582@redhat.com>
+References: <20190430124626.GA11138@redhat.com>
+ <CAMRbyytny=8nC1LevEBwYN9cbuzJwG_HjdN5QQsXR-+ROy-MpA@mail.gmail.com>
+ <20190511110356.GN9582@redhat.com>
+ <CAMRbyyt+1y+E5=oT6ZS1iRwXG+wUvHh0ZKR+3ANAX1GsYHdPpg@mail.gmail.com>
+ <20190511123957.GO9582@redhat.com>
+ <CAMRbyyurc0wF0=HOicVVEhLte7Oy=oHDGnxHOQH5afN=CVO6+A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2155d05a-99ed-b1c6-0edc-553c4778e278@redhat.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <CAMRbyyurc0wF0=HOicVVEhLte7Oy=oHDGnxHOQH5afN=CVO6+A@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.25]); Sun, 12 May 2019 10:07:35 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <CQkKza7-y1G.A.vSC.QL11cB@bendel>
+Resent-Message-ID: <m9iiquJqumG.A.o1.3B_1cB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/496
+X-Mailing-List: <nbd@other.debian.org> archive/latest/497
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,77 +75,138 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190511225132.GB3801@grep.be
-Resent-Date: Sat, 11 May 2019 22:55:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190512100733.GP9582@redhat.com
+Resent-Date: Sun, 12 May 2019 10:07:51 +0000 (UTC)
 
-On Tue, Apr 23, 2019 at 07:38:41AM -0500, Eric Blake wrote:
-> [adding NBD list]
+On Sat, May 11, 2019 at 06:48:15PM +0300, Nir Soffer wrote:
+> On Sat, May 11, 2019, 15:39 Richard W.M. Jones <rjones@redhat.com> wrote:
 > 
-> On 4/23/19 2:36 AM, Richard W.M. Jones wrote:
-> > On Mon, Apr 22, 2019 at 07:50:22PM -0500, Eric Blake wrote:
-> >> Previously, we were squashing EOVERFLOW into EINVAL; continue to do so
-> >> at points in the protocol where the client may not be expecting
-> >> EOVERFLOW.
+> > On Sat, May 11, 2019 at 03:28:28PM +0300, Nir Soffer wrote:
+> > > On Sat, May 11, 2019, 14:03 Richard W.M. Jones <rjones@redhat.com>
+> > wrote:
+> > >
+> > > > On Tue, Apr 30, 2019 at 04:43:03PM +0300, Nir Soffer wrote:
+> > > > > On Tue, Apr 30, 2019, 15:46 Richard W.M. Jones <rjones@redhat.com>
+> > > > wrote:
+> > > > >
+> > > > > > I believe there is no simple NBD client library.  Am I wrong about
+> > > > > > this?  Let's assume I'm not for the sake of the rest of this email
+> > ...
+> > > > > >
+> > > > > > We do however have at least 4 places this could be consumed if it
+> > > > existed:
+> > > > > >
+> > > > > >  - fio's proposed NBD engine
+> > > > > >    https://www.spinics.net/lists/fio/msg07831.html
+> > > > > >
+> > > > > >  - nbdkit-nbd-plugin
+> > > > > >    https://github.com/libguestfs/nbdkit/tree/master/plugins/nbd
+> > > > > >
+> > > > > >  - Martin K's forthcoming VMware liberation tool
+> > > > > >
+> > > > > >  - qemu, maybe?
+> > > > > >    https://github.com/qemu/qemu/blob/master/block/nbd-client.c
+> > > > >
+> > > > >
+> > > > > oVirt imageio, replacing pure python client, used to implement
+> > nbd-http
+> > > > > proxy
+> > > > >
+> > > >
+> > https://github.com/oVirt/ovirt-imageio/blob/master/common/ovirt_imageio_common/nbd.py
+> > > >
+> > > > It looks like imageio is Python 2.  I'm trying to write libnbd
+> > > > bindings for Python now, but TBH supporting Python 2 is turning out to
+> > > > be painful, because there are plenty of Python 3 features it would be
+> > > > nice to use ("b" boolean conversions, proper bytes handling and
+> > > > PyUnicode_FSConverter are three particular features).  Do you really
+> > > > need Python 2?  What is the roadmap for using Python 3 with imageio?
+> > > >
+> > >
+> > > We plan to drop python 2 for 4.4. I don't that anyone care about python 2
+> > > now.
+> >
+> > I wrote some initial, very preliminary bindings, see top commit(s) here:
+> >
+> >   https://github.com/rwmjones/libnbd
+> >
+> > Simple synchronous calls appear to work.  However they don't work for
+> > asynchronous calls because the idiom of:
+> >
+> >   char buf[512];
 > 
-> > 
-> > The protocol spec is unclear on whether EOVERFLOW can be returned in
-> > cases other than the DF flag being set.  Whether we include this patch
-> > or not seems to hinge on the interpretation of the protocol spec which
-> > I'm not really in a position to make.
 > 
-> Context: nbdkit previously did not allow the EOVERFLOW value over the
-> wire, so I'm proposing a patch to nbdkit to support it.  But it raises
-> the question on whether allowing EOVERFLOW to any arbitrary command is
-> okay, or whether EOVERFLOW should only be exposed over the wire to a
-> client that is likely to expect it. The NBD spec added EOVERFLOW as a
-> valid error value when commit 7ff2e45e (Apr 2016) promoted structured
-> replies to be part of the protocol, so any client that negotiates
-> structured replies is thus new enough to expect EOVERFLOW; conversely,
-> EOVERFLOW is only documented as being reasonable for the server to send
-> in response to a client using NBD_CMD_FLAG_DF to NBD_CMD_READ (again,
-> which implies the client negotiated structured replies), and not all
-> clients support structured replies.
+> >   conn = nbd_get_connection (nbd, 0);
+> >   hid = nbd_aio_pread (conn, buf, sizeof buf, 0);
+> >   /* ... various calls to poll/wait here ... */
+> >   if (nbd_aio_command_completed (conn, hid)) {
+> >     /* now we can use the data in buf ... */
+> >   }
+> >
+> > doesn't translate well into Python and passing buffers in and out of C
+> > code.  That's TBD.
+> >
+> 
+> buf can come from the python layer, using the buffer protocol.
+> 
+>     Py_buffer b;
+> 
+>     if (!PyArg_ParseTuple(args, "s*", &b))
+>         return NULL;
+> 
+>     nbd_pread(h, &b.buf, b.len, offset);
+> 
+>     PyBuffer_Release(&b);
+> 
+> The argument on the python side can be bytearray(), mmap(), or memoryview().
+> 
+> If you want to provide the simplest interface returning bytes:
+> 
+>    pread(offset, length) -> bytes
 
-OTOH, for backcompat reasons it is reasonable to state that older
-versions of nbd-server could send pretty much anything over the wire[1],
-and that clients should therefore treat any nonzero value as an unknown
-error.
+This is how the synchronous version works already.  The problem is
+binding the AIO version where the caller must pass in a buf pointer
+that persists while the command is being run across multiple API
+calls.
 
-I think that might also be a correct way to deal with error numbers in
-cases where the client does not know what to do with it.
+But if imageio doesn't need AIO then it's not urgent to address this.
 
-[1] I originally thought that errno values were way more standardized
-than they happen to be in practice, and so the initial error handling in
-nbd-server just sent the value of errno, whatever it happened to be,
-over the wire. That worked just fine if client and server were the same
-platform -- and more so since all the client would ever do when it saw
-an error was yell "the server sent error code X" and abort, so that the
-actual error number didn't even matter -- but it obviously wasn't ideal;
-and when we chose the error values that got written in stone, we chose
-the errno values that Linux/x86 uses for the types of errors that seemed
-reasonable. What older servers sent is however not really defined, and
-therefore should be treated as nasal daemons.
+> You can add a version receiving a buffer:
+> 
+>     pread_into(offset, buf) -> n
+> 
+> Like socket.recv(), socket.recv_into().
+> 
+> In imageio nbd client we implement read() and readinto().
+> 
+> Adding readinfo() to imageio show 12% improvement, see:
+> https://github.com/oVirt/ovirt-imageio/commit/dbc3463349128357030903addb3f5d1ad464f30b
+> 
+> Buffer size is also important, another reason to let the client provide the
+> buffer. See:
+> https://github.com/oVirt/ovirt-imageio/commit/d9ad5ea75013598074e07587c6902767fcbcb4a2
+> 
+> 
+> > The imageio code goes appear to be doing anything asynch if I'm
+> > understanding the code correctly.
+> >
+> 
+> imageio is using only synchronous code. I'm not sure how are we going to map
+> http to nbd using async api.
+> 
+> It will be interesting to compare libnbd with imageio pure python nbd
+> client.
+> We can use imageio example nbd-client:
+> https://github.com/oVirt/ovirt-imageio/blob/91609bf5b56e1e9a85bf1edae4b916659514c7fd/examples/nbd-client#L72
 
-[...]
-> SHOULD NOT rather than MUST NOT, as a server may still choose to expose
-> non-standard errors over the wire if a client might benefit from those
-> errors, and a well-written client will squash non-standard errors
-> received over the wire back to EINVAL.
+libnbd can't do structured replies or read allocation status at the
+moment.  Also TBD.
 
-Indeed; I think that is what we should do.
-
-> So the question at hand is whether I should patch the NBD spec to
-> recommend that a server SHOULD NOT send EOVERFLOW except in response to
-> NBD_CMD_READ when the NBD_CMD_FLAG_DF bit is set (similar to my proposed
-> wording that a server SHOULD NOT send ENOTSUP except in response to
-> NBD_CMD_FLAG_FAST_ZERO).
-
-I think we can say that, but we should definitely also say that a client
-should treat unknown errors in a particular way. Possibly "abort the
-connection and give up", but something.
+Rich.
 
 -- 
-To the thief who stole my anti-depressants: I hope you're happy
-
-  -- seen somewhere on the Internet on a photo of a billboard
+Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+Read my programming and virtualization blog: http://rwmj.wordpress.com
+virt-builder quickly builds VMs from scratch
+http://libguestfs.org/virt-builder.1.html
 
