@@ -2,72 +2,70 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 389872A95E
-	for <lists+nbd@lfdr.de>; Sun, 26 May 2019 13:18:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 226F02A95F
+	for <lists+nbd@lfdr.de>; Sun, 26 May 2019 13:20:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0E8D9204B3; Sun, 26 May 2019 11:18:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sun May 26 11:18:22 2019
+	id DD12F204AF; Sun, 26 May 2019 11:20:35 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun May 26 11:20:35 2019
 Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
+X-Spam-Status: No, score=-15.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A1467204B2
-	for <lists-other-nbd@bendel.debian.org>; Sun, 26 May 2019 11:18:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 9A8E820452
+	for <lists-other-nbd@bendel.debian.org>; Sun, 26 May 2019 11:20:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-11.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-11.88 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id hwl-J14DtPgx for <lists-other-nbd@bendel.debian.org>;
-	Sun, 26 May 2019 11:18:10 +0000 (UTC)
+	with ESMTP id ycHNm3jPHQEF for <lists-other-nbd@bendel.debian.org>;
+	Sun, 26 May 2019 11:20:24 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 46BAB203A2
-	for <nbd@other.debian.org>; Sun, 26 May 2019 11:18:10 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+	by bendel.debian.org (Postfix) with ESMTPS id 3DC8B20451
+	for <nbd@other.debian.org>; Sun, 26 May 2019 11:20:24 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 1C8BCC058CBA;
-	Sun, 26 May 2019 11:18:07 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 1E0423082E51;
+	Sun, 26 May 2019 11:20:21 +0000 (UTC)
 Received: from localhost (ovpn-116-27.ams2.redhat.com [10.36.116.27])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id B2BB2100200A;
-	Sun, 26 May 2019 11:18:06 +0000 (UTC)
-Date: Sun, 26 May 2019 12:18:06 +0100
+	by smtp.corp.redhat.com (Postfix) with ESMTP id BB6B360F9B;
+	Sun, 26 May 2019 11:20:20 +0000 (UTC)
+Date: Sun, 26 May 2019 12:20:20 +0100
 From: "Richard W.M. Jones" <rjones@redhat.com>
-To: Nir Soffer <nsoffer@redhat.com>
-Cc: Wouter Verhelst <w@uter.be>, nbd@other.debian.org,
-	Eric Blake <eblake@redhat.com>,
-	"Daniel P. Berrange" <berrange@redhat.com>,
-	Martin Kletzander <mkletzan@redhat.com>
+To: Wouter Verhelst <w@uter.be>
+Cc: nbd@other.debian.org, eblake@redhat.com, nsoffer@redhat.com,
+	berrange@redhat.com, mkletzan@redhat.com
 Subject: Re: [PATCH for discussion] doc: Define a standard URI syntax for NBD
  URIs.
-Message-ID: <20190526111805.GD9368@redhat.com>
+Message-ID: <20190526112020.GE9368@redhat.com>
 References: <20190525170518.4799-1-rjones@redhat.com>
  <20190526081532.GA6936@grep.be>
  <20190526090018.GO9582@redhat.com>
- <20190526092411.GB9368@redhat.com>
- <CAMRbyyt3d9nKpnd6X1zggNnqN_vxjJqg62PhatztH6Nfw7Uvkg@mail.gmail.com>
+ <20190526101908.GC6936@grep.be>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAMRbyyt3d9nKpnd6X1zggNnqN_vxjJqg62PhatztH6Nfw7Uvkg@mail.gmail.com>
+In-Reply-To: <20190526101908.GC6936@grep.be>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.32]); Sun, 26 May 2019 11:18:07 +0000 (UTC)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.46]); Sun, 26 May 2019 11:20:21 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <SKeluFmQs6M.A.H0B.-Xn6cB@bendel>
+Resent-Message-ID: <3D8lxy61HvM.A.g8B.Dan6cB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/529
+X-Mailing-List: <nbd@other.debian.org> archive/latest/530
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -77,31 +75,27 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190526111805.GD9368@redhat.com
-Resent-Date: Sun, 26 May 2019 11:18:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190526112020.GE9368@redhat.com
+Resent-Date: Sun, 26 May 2019 11:20:35 +0000 (UTC)
 
-On Sun, May 26, 2019 at 02:05:54PM +0300, Nir Soffer wrote:
-> > On Sun, May 26, 2019 at 10:00:18AM +0100, Richard W.M. Jones wrote:
-> > > Anyway I was going to say:
-> > >
-> > >  - There's no way to specify abstract Unix domain sockets.
+On Sun, May 26, 2019 at 12:19:08PM +0200, Wouter Verhelst wrote:
+> On Sun, May 26, 2019 at 10:00:18AM +0100, Richard W.M. Jones wrote:
+> > ).  If we were to specify every file by name then it would require
+> > probably 3 or 4 extra parameters (CA cert, client cert, client private
+> > key file, and optionally revocation list).
 > 
-> 
-> Isn't this enough?
-> 
->     nbd+unix:///export?socket=%00/org/foo
+> That's what nbd-client and nbd-server expect, FWIW.
 
-I can foresee this causing endless problems with C-based parsers :-(
-But yes it would work if the parsers are written to expect it, which
-means if we go with this we need to mention it in the spec.  And it
-looks like Python can handle it already.
+It's unfortunate that qemu went with the "directory of named files"
+approach, because the two approaches are incompatible.  Personally I
+think nbd-client gets this right and qemu should change.
 
 Rich.
 
 -- 
 Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
 Read my programming and virtualization blog: http://rwmj.wordpress.com
-virt-top is 'top' for virtual machines.  Tiny program with many
-powerful monitoring features, net stats, disk stats, logging, etc.
-http://people.redhat.com/~rjones/virt-top
+virt-df lists disk usage of guests without needing to install any
+software inside the virtual machine.  Supports Linux and Windows.
+http://people.redhat.com/~rjones/virt-df/
 
