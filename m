@@ -1,70 +1,69 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F6DA37EFC
-	for <lists+nbd@lfdr.de>; Thu,  6 Jun 2019 22:52:31 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C3ED3B3EA
+	for <lists+nbd@lfdr.de>; Mon, 10 Jun 2019 13:20:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6C58A20485; Thu,  6 Jun 2019 20:52:31 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  6 20:52:31 2019
-Old-Return-Path: <w@uter.be>
+	id 47FA520336; Mon, 10 Jun 2019 11:20:02 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 10 11:20:02 2019
+Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-15.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 910D92047F
-	for <lists-other-nbd@bendel.debian.org>; Thu,  6 Jun 2019 20:52:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C94A6202D7
+	for <lists-other-nbd@bendel.debian.org>; Mon, 10 Jun 2019 11:19:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02]
+X-Amavis-Spam-Status: No, score=-11.88 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id BdHO6r9BdQAE for <lists-other-nbd@bendel.debian.org>;
-	Thu,  6 Jun 2019 20:52:20 +0000 (UTC)
+	with ESMTP id 3GUJvBCPcBnC for <lists-other-nbd@bendel.debian.org>;
+	Mon, 10 Jun 2019 11:19:50 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-Received: from latin.grep.be (latin.grep.be [IPv6:2a01:4f8:140:52e5::2])
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B0CE120483
-	for <nbd@other.debian.org>; Thu,  6 Jun 2019 20:52:20 +0000 (UTC)
-Received: from [197.83.227.238] (helo=gangtai.home.grep.be)
-	by latin.grep.be with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <w@uter.be>)
-	id 1hYzMv-0007hD-2q; Thu, 06 Jun 2019 22:52:17 +0200
-Received: from wouter by gangtai.home.grep.be with local (Exim 4.92)
-	(envelope-from <w@uter.be>)
-	id 1hYzMk-0006Tp-1j; Thu, 06 Jun 2019 22:52:06 +0200
-Date: Thu, 6 Jun 2019 22:52:05 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Eric Blake <eblake@redhat.com>
-Cc: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
-	"Richard W.M. Jones" <rjones@redhat.com>, nbd@other.debian.org,
-	mkletzan@redhat.com
+	by bendel.debian.org (Postfix) with ESMTPS id 38A4E201FB
+	for <nbd@other.debian.org>; Mon, 10 Jun 2019 11:19:50 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id E6AF95D60F;
+	Mon, 10 Jun 2019 11:19:34 +0000 (UTC)
+Received: from localhost (ovpn-116-27.ams2.redhat.com [10.36.116.27])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 570175C224;
+	Mon, 10 Jun 2019 11:19:33 +0000 (UTC)
+Date: Mon, 10 Jun 2019 12:19:32 +0100
+From: "Richard W.M. Jones" <rjones@redhat.com>
+To: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
+Cc: nbd@other.debian.org, w@uter.be, eblake@redhat.com, mkletzan@redhat.com
 Subject: Re: [PATCH v2] doc: Define a standard URI syntax for NBD URIs.
-Message-ID: <20190606205205.GA23266@grep.be>
+Message-ID: <20190610111932.GG3888@redhat.com>
 References: <20190528103537.15081-1-rjones@redhat.com>
  <20190528103537.15081-2-rjones@redhat.com>
  <20190605171920.GB12691@redhat.com>
- <3b439521-a1c9-5409-9694-31d50e048dd7@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <3b439521-a1c9-5409-9694-31d50e048dd7@redhat.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20190605171920.GB12691@redhat.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.39]); Mon, 10 Jun 2019 11:19:39 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <rdOl_IN2uOC.A.djF.P0X-cB@bendel>
+Resent-Message-ID: <IbmZcPGSPIK.A.dAE.izj_cB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/564
+X-Mailing-List: <nbd@other.debian.org> archive/latest/565
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,47 +73,70 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190606205205.GA23266@grep.be
-Resent-Date: Thu,  6 Jun 2019 20:52:31 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190610111932.GG3888@redhat.com
+Resent-Date: Mon, 10 Jun 2019 11:20:02 +0000 (UTC)
 
-On Wed, Jun 05, 2019 at 01:27:48PM -0500, Eric Blake wrote:
-> We could, of course, teach qemu to support whatever this spec ends up
-> with in addition to everything else; but there's also the point that the
-> qemu code uses a consistent model for TLS across multiple entities (not
-> just NBD, but also Spice, chardevs, ...), and then there's the question
-> of whether a compatibility hack should be global to all of them or just
-> to the NBD code.
+On Wed, Jun 05, 2019 at 06:19:20PM +0100, Daniel P. Berrangé wrote:
+> > +* `tls-verify-peer`: This optional parameter may be `0` or `1` to
+> > +  control whether the client verifies the server's identity.  By
+> > +  default clients SHOULD verify the server's identity if TLS is
+> > +  negotiated and if a suitable Certificate Authorty is available.
+> 
+> I'd prefer if this is a "MUST" for the default value to be 1, if
+> omitted.
 
-I'm starting to think more and more that TLS certificate things should
-not be part of the URL. If you think about it, all URLs are portable;
-that is, you can take a URL from one host to the next, and it will just
-work, and you don't need to change it. If you point to files on the
-local file system from the URL, then that doesn't work anymore, which I
-think breaks the paradigm of the URL. Of course with the obvious
-exception of the file:// URL, which is supposed to point to a local
-file...
+"SHOULD" here means that's what implementations ought to do, and most
+will do it by default, but it leaves some leeway for implementations
+which cannot or choose not to verify the peer for whatever reason
+(even though we know that is unsafe in some MITM cases).  I've tried
+to avoid mandating implementations except when it's absolutely
+necessary.
 
-Yes, in TLS you sometimes need to pass authentication tokens, but *how*
-you do that is an implementation detail of the software you're using,
-and I think standardizing that is a bad idea. After all, browsers also
-don't standardize how you specify a client certificate to authenticate
-with, and I think neither should we. I think it feels like a mistake to
-do so.
+> > +### TLS certificates directory
+> > +
+> > +The `tls-certificates` parameter (if used) refers to a directory
+> > +containing the Certificate Authority (CA) certificates bundle, client
+> > +certificate, client private key, and CA Certificate Revocation List.
+> > +
+> > +These are all optional except for the CA certificates bundle.
+> > +
+> > +The files in this directory SHOULD use the following names:
+> > +
+> > +    Filename               Usage
+> > +    --------------------------------------------------
+> > +    ca-cert.pem            CA certificates bundle
+> > +    client-cert.pem        Client certificate
+> > +    client-key.pem         Client private key
+> > +    ca-crl.pem             CA Certificate Revocation List
+> 
+> QEMU suports a "dh-params.pem" file for the diffie-hellman parameters.
+> 
+> With PSK, it uses a "tls-creds-psk" file with optional dh-params.pem
+> file too.
 
-(yes, I know I made the initial suggestion, but still)
+This is really the crux of the issue that prevents me from getting a
+submitting draft.
 
-[...]
-> > There ought to be a way to specify the TLS priority string to control
-> > what valid cipher settings are.
+I think there are three ways forward:
 
-I think that too is not something that needs to be done as part of the
-URL. After all, if you want to set a TLS priority string on one
-connection, you probably want to set it on *all* connections, so it's
-not something specific to a particular connection, which it would be for
-options you specify in a URL.
+(1) Mandate the QEMU-style certificates directory, as outlined above
+(with Dan's amendment).  This requires a small change to libnbd.  It
+is compatible with nbd-client albeit reducing the "flexibility" os
+what nbd-client allows.
+
+(2) Add tls-* parameters for each individual file.  Requires
+substantial changes to QEMU and libnbd.  Flexible but you're going to
+end up with very long TLS URIs.
+
+(3) Drop all the TLS parameters related to the certificate and key
+names / paths.  It's a free-for-all until someone else decides what's
+best to do.
+
+Rich.
 
 -- 
-To the thief who stole my anti-depressants: I hope you're happy
-
-  -- seen somewhere on the Internet on a photo of a billboard
+Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+Read my programming and virtualization blog: http://rwmj.wordpress.com
+libguestfs lets you edit virtual machines.  Supports shell scripting,
+bindings from many languages.  http://libguestfs.org
 
