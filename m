@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DF653D24C
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2019 18:31:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 753B33D399
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2019 19:10:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id EB09F203AD; Tue, 11 Jun 2019 16:31:30 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 16:31:30 2019
+	id 5A44D203D0; Tue, 11 Jun 2019 17:10:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 17:10:24 2019
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-20.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DF9CC203A0
-	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2019 16:31:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 9C9B120382
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2019 17:10:17 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-16.88 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
@@ -26,28 +26,29 @@ X-Amavis-Spam-Status: No, score=-16.88 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 59Z0HHSM6fAr for <lists-other-nbd@bendel.debian.org>;
-	Tue, 11 Jun 2019 16:31:18 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id z4z41dHWRn7p for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 Jun 2019 17:10:13 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 666BB2036C
-	for <nbd@other.debian.org>; Tue, 11 Jun 2019 16:31:18 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+	by bendel.debian.org (Postfix) with ESMTPS id 38967203C6
+	for <nbd@other.debian.org>; Tue, 11 Jun 2019 17:10:13 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id B22903162919;
-	Tue, 11 Jun 2019 16:31:09 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 1427E30C0DE1;
+	Tue, 11 Jun 2019 17:10:10 +0000 (UTC)
 Received: from [10.3.116.85] (ovpn-116-85.phx2.redhat.com [10.3.116.85])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 158C110013D9;
-	Tue, 11 Jun 2019 16:31:09 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 776B960BF1;
+	Tue, 11 Jun 2019 17:10:09 +0000 (UTC)
 Subject: Re: [PATCH v3] doc: Define a standard URI syntax for NBD URIs.
 To: Martin Kletzander <mkletzan@redhat.com>,
  "Richard W.M. Jones" <rjones@redhat.com>
 Cc: nbd@other.debian.org, w@uter.be, berrange@redhat.com
 References: <20190611115330.6842-1-rjones@redhat.com>
  <20190611115330.6842-2-rjones@redhat.com> <20190611142259.GG29602@wheatley>
+ <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
 From: Eric Blake <eblake@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=eblake@redhat.com; keydata=
@@ -74,22 +75,22 @@ Autocrypt: addr=eblake@redhat.com; keydata=
  Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
  2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
 Organization: Red Hat, Inc.
-Message-ID: <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
-Date: Tue, 11 Jun 2019 11:31:08 -0500
+Message-ID: <24d70886-d29a-9283-5ec9-f98308ce2ce9@redhat.com>
+Date: Tue, 11 Jun 2019 12:10:08 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190611142259.GG29602@wheatley>
+In-Reply-To: <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="4yupwefYiLJeewf8jFfSALjfaG29PlSl4"
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.41]); Tue, 11 Jun 2019 16:31:09 +0000 (UTC)
+ boundary="en9x8MX5tVyhdkpTApbBRJ7z5wuo3jX4M"
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.45]); Tue, 11 Jun 2019 17:10:10 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <SVv4uzOi-MP.A.5vE.id9_cB@bendel>
+Resent-Message-ID: <jJ-9Kk1gmzD.A.g4C.AC-_cB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/573
+X-Mailing-List: <nbd@other.debian.org> archive/latest/574
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -99,98 +100,67 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com
-Resent-Date: Tue, 11 Jun 2019 16:31:30 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/24d70886-d29a-9283-5ec9-f98308ce2ce9@redhat.com
+Resent-Date: Tue, 11 Jun 2019 17:10:24 +0000 (UTC)
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---4yupwefYiLJeewf8jFfSALjfaG29PlSl4
-Content-Type: multipart/mixed; boundary="uo1VlICruCkHM56IhcpwbeMUeb41vOxxF";
+--en9x8MX5tVyhdkpTApbBRJ7z5wuo3jX4M
+Content-Type: multipart/mixed; boundary="ZCeafVxE3G2jpdkez65x7fJF8u64RLKXq";
  protected-headers="v1"
 From: Eric Blake <eblake@redhat.com>
 To: Martin Kletzander <mkletzan@redhat.com>,
  "Richard W.M. Jones" <rjones@redhat.com>
 Cc: nbd@other.debian.org, w@uter.be, berrange@redhat.com
-Message-ID: <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
+Message-ID: <24d70886-d29a-9283-5ec9-f98308ce2ce9@redhat.com>
 Subject: Re: [PATCH v3] doc: Define a standard URI syntax for NBD URIs.
 References: <20190611115330.6842-1-rjones@redhat.com>
  <20190611115330.6842-2-rjones@redhat.com> <20190611142259.GG29602@wheatley>
-In-Reply-To: <20190611142259.GG29602@wheatley>
+ <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
+In-Reply-To: <cda4d898-39c7-1d76-8dd3-e0067d2cbce8@redhat.com>
 
---uo1VlICruCkHM56IhcpwbeMUeb41vOxxF
+--ZCeafVxE3G2jpdkez65x7fJF8u64RLKXq
 Content-Type: text/plain; charset=windows-1252
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-On 6/11/19 9:22 AM, Martin Kletzander wrote:
-> On Tue, Jun 11, 2019 at 12:53:30PM +0100, Richard W.M. Jones wrote:
->> For further information about discussion around this standard, see
->> this thread on the mailing list:
->> https://lists.debian.org/nbd/2019/05/msg00013.html
->>
+On 6/11/19 11:31 AM, Eric Blake wrote:
 
->> +## Other NBD URI query parameters
->> +
->> +Clients SHOULD prefix experimental query parameters using `x-`.=A0 Th=
+>> What I thought of would be another parameter that would specify which =
+other
+>> parameters must be supported, so that the client quits if any of them =
 is
->> +SHOULD NOT be used for query parameters which are expected to be
->> +widely used.
->> +
->> +Any other query parameters which the client does not understand SHOUL=
-D
->> +be ignored by the parser.
->> +
+>> unknown.=A0 On the other hand it should be perfectly fine to make sure=
+ new
+>> enough
+>> version of the client is used.
 >=20
-> Everything seems good to me, I just have one "idea".=A0 I, however, am =
-not
-> sure
-> whether it might be helpful or utterly stupid.=A0 But since I would nev=
-er
-> forgive
-> myself not mentioning it, here goes:
->=20
-> TL;DR: Is it worth to care about
-> versioning/some-kind-of-forward-compatibility?
+> So, you're asking for some way to know that ?foo=3Dbar is supported by =
+the
+> client, by having a way to fail if the client doesn't know how to parse=
 
-That may actually be a good idea.
-
->=20
-> If there is a new query parameter added later on, which would significa=
-ntly
-> change the behaviour (or security), then a client might want to depend
-> on it not
-> being ignored by the parser (e.g. if just ignoring it would cause a
-> security
-> concern).
->=20
-> What I thought of would be another parameter that would specify which o=
-ther
-> parameters must be supported, so that the client quits if any of them i=
-s
-> unknown.=A0 On the other hand it should be perfectly fine to make sure =
-new
-> enough
-> version of the client is used.
-
-So, you're asking for some way to know that ?foo=3Dbar is supported by th=
+> the foo query.  What if we document mandatory support for a parameter
+> '?features=3Dcomma,list,of,names', where a client MUST fail to parse th=
 e
-client, by having a way to fail if the client doesn't know how to parse
-the foo query.  What if we document mandatory support for a parameter
-'?features=3Dcomma,list,of,names', where a client MUST fail to parse the
-URI if it does not recognize one of the feature names from the list
-given to features?  Then we can have:
+> URI if it does not recognize one of the feature names from the list
+> given to features?  Then we can have:
+>=20
+> nbd://host/?foo=3Dbar
+>  - okay to ignore query foo=3D as unknown
+> nbd://host/?foo=3Dbar&features=3Dfoo
+>  - client MUST fail to parse URI unless it also knows how to parse the
+> foo query parameter
+>=20
+> The initial set of features mandated by the NBD URI spec is 'features'
+> for self-description, as well as 'socket' for Unix but not necessarily
+> TCP.  Then the queries '?features=3D' and '?features=3Dfeatures' must b=
+oth
+> succeed, the query '?features=3Dsocket' depends on the scheme, and any
+> other '?features=3D...' query becomes a feature probe.
 
-nbd://host/?foo=3Dbar
- - okay to ignore query foo=3D as unknown
-nbd://host/?foo=3Dbar&features=3Dfoo
- - client MUST fail to parse URI unless it also knows how to parse the
-foo query parameter
-
-The initial set of features mandated by the NBD URI spec is 'features'
-for self-description, as well as 'socket' for Unix but not necessarily
-TCP.  Then the queries '?features=3D' and '?features=3Dfeatures' must bot=
-h
-succeed, the query '?features=3Dsocket' depends on the scheme, and any
-other '?features=3D...' query becomes a feature probe.
+We could also reserve feature 'fail' as something that MUST NOT be
+recognized as a query parameter name, to use 'nbd://host/?features=3Dfail=
+'
+as a way to probe whether a client correctly rejects unknown features.
 
 --=20
 Eric Blake, Principal Software Engineer
@@ -198,24 +168,24 @@ Red Hat, Inc.           +1-919-301-3226
 Virtualization:  qemu.org | libvirt.org
 
 
---uo1VlICruCkHM56IhcpwbeMUeb41vOxxF--
+--ZCeafVxE3G2jpdkez65x7fJF8u64RLKXq--
 
---4yupwefYiLJeewf8jFfSALjfaG29PlSl4
+--en9x8MX5tVyhdkpTApbBRJ7z5wuo3jX4M
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlz/10wACgkQp6FrSiUn
-Q2qA8Qf/Z4eRh58suYaU9sOO6NwXtvSIj/W+MT0TeZ7ZFwQYxyiFHx+pR27cGeQW
-4hBN96lyJXjmVoyPyTV3Fp6MKyAQdk0y3Evhere8hvUKMbu16xXQS/qglpmXnr5L
-gJLcjLTGJfgCrqJSbdCdD5f4ktrLcA4epGRQiGExtduW1L7ORouFeOFtSmF9O1j7
-1L559WKx8VPKYslECv4xKe341QEiJFnkfMmVGYg5iWgm8IUhFVRNmT8Y+Dlw8gvI
-cJ4Cz+jdj3T7K9pm/5INInfotNDJnJPx5sfsFUbs8tYaM5hyUvazROhMDO3kEzHE
-4sv1q+hngUWihZ7L0nUIU0h4NGUjGA==
-=8r1S
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlz/4HAACgkQp6FrSiUn
+Q2pgCQf/QTprHdN/tdmPBvwZzElDxemIkj2djxUD2P1T9Y/LXasSJTzmwrh+RI+Q
+/xP7sjRla4oBZd0dPrjEotHNT1er1Mal/71R11bIq0QCRikvSvgsZOoCW4mgLMIB
+XhyeE/O7u/ljLXaq/y1oFTX5yK93WgS12ml2FHo52LI2oDcoEiKXtqaVXPYrEpJ2
+BkU6StAl6/KgVpvalNzpxmDudeHCEt7i3sRfyRsdST6jqzgZgWQ4MlpXA1/uzdPA
+nzKYX4t1zN9TRbuFYoVY7FId8jPdOW1iBvGTZaj5Ibz94AD0q+lA+3ZoSuhjCqQ/
+stX+RfyB2+7QWcjDGhr+hdMR0dGiEw==
+=OhXz
 -----END PGP SIGNATURE-----
 
---4yupwefYiLJeewf8jFfSALjfaG29PlSl4--
+--en9x8MX5tVyhdkpTApbBRJ7z5wuo3jX4M--
 
