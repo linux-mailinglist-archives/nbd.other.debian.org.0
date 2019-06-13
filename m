@@ -2,98 +2,90 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id A556943995
-	for <lists+nbd@lfdr.de>; Thu, 13 Jun 2019 17:15:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D55E14423A
+	for <lists+nbd@lfdr.de>; Thu, 13 Jun 2019 18:21:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7CB672042E; Thu, 13 Jun 2019 15:15:00 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 13 15:15:00 2019
-Old-Return-Path: <eblake@redhat.com>
+	id A521820418; Thu, 13 Jun 2019 16:21:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 13 16:21:08 2019
+Old-Return-Path: <roman.stratiienko@globallogic.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-21.0 required=4.0 tests=DIGITS_LETTERS,LDOSUBSCRIBER,
-	LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,PGPSIGNATURE,
-	RCVD_IN_DNSWL_HI autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,MD5_SHA1_SUM,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 8A98120397
-	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Jun 2019 15:14:53 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E060320398
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Jun 2019 16:05:56 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-16.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, LDO_WHITELIST=-5,
-	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, PGPSIGNATURE=-5,
-	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.18 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id yBl60zgbV3D9 for <lists-other-nbd@bendel.debian.org>;
-	Thu, 13 Jun 2019 15:14:49 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id EC22220210
-	for <nbd@other.debian.org>; Thu, 13 Jun 2019 15:14:48 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 5352B3058838;
-	Thu, 13 Jun 2019 15:14:33 +0000 (UTC)
-Received: from [10.3.116.85] (ovpn-116-85.phx2.redhat.com [10.3.116.85])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 164D67C593;
-	Thu, 13 Jun 2019 15:14:28 +0000 (UTC)
-Subject: Re: [PATCH 2/2] nbd: add support for nbd as root device
-To: Roman Stratiienko <roman.stratiienko@globallogic.com>,
- Josef Bacik <josef@toxicpanda.com>
-Cc: linux-kernel@vger.kernel.org, nbd@other.debian.org,
- Aleksandr Bulyshchenko <A.Bulyshchenko@globallogic.com>,
- linux-block@vger.kernel.org, axboe@kernel.dkn.org
+	with ESMTP id OtUFaThZeHWG for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Jun 2019 16:05:52 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .globallogic. - helo: .mail-ed1-x544.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com [IPv6:2a00:1450:4864:20::544])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id D4E6520379
+	for <nbd@other.debian.org>; Thu, 13 Jun 2019 16:05:52 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id g13so31976253edu.5
+        for <nbd@other.debian.org>; Thu, 13 Jun 2019 09:05:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=globallogic.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=mLABAOBxUi7apPgtRPROSyumsCPedDiB3eVS3aen4Uc=;
+        b=OhQ1gd9hI7gUmtNiW/OqjsHiQzwW6iZW8IGNtHnPK8zug5HhC3kYfdVVJXheeoRaC6
+         tbmDhYFOS083pJUz6jcfjmqIHLpaa597AhPSvEEAQBLMcwwRZdZ9O7lGn8Jrx1FkCvdA
+         RfoNRWL1Q1taE5K1YXiR/zwm5WR9EoJjDgXouRhoyKnyxhNXGKOCVqG682PKrplC0mP1
+         Qpfiw8SI/tUrfiIzQe/qG1BF+PWPkB7bpYVgOpQ13Zx0Rbd4MCnxbKjoLNKRwofxot0+
+         wUn9KJjxcqacAAr3a+vEKvbp/n79eMo2Fiugl2fTd1aDgFw1RPt3MF66M1s1hvXWy13C
+         7JuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=mLABAOBxUi7apPgtRPROSyumsCPedDiB3eVS3aen4Uc=;
+        b=AFkOBHd0kyYMy1f2JqOBnDAn0LQNvWxIntn2IXwPyCNw6H4YTiULHW/njQL25111TW
+         mC7ovLJHY0BdxPcMd8CbhfZGtOHTWccJNgjC84fbCBvuFz0SHeJ1BpvukFMIVrR4D491
+         nNvuzCU7oghIMnrAj6MdtODIwfFpVqjbmyVmFU8LLwOujVYzZCEN1NFNlyHMJ6Orm94E
+         +629LxWSnqvzx8LdYBjF6RyIwSkbwa1wiCROCrI/U/rHXeBBpgHYD+CJ1BTqobf0A2/J
+         2faUfdQBkQlsil4kxUfpE1X48bfGugOV6FYIrdSM5LiLniE9j5U0KHbbipXu35upKvuh
+         YaXg==
+X-Gm-Message-State: APjAAAXgLgCu5LE5RcTuCE6ZDvEOhReorJVU4a9wkpIPJTCEvmCxhl6e
+	ooK+Q4NmRslVUOsdTFfpmQVZPQb9Dju/EDyiiK32cw==
+X-Google-Smtp-Source: APXvYqw9eTL1smFdgM5CBMWe55qQwq7Ixm6mxLmSKQlk/U+TTmtbbBQA33hoHb3lK2Sjp3Q8KGTRfudgroyIOzz5krs=
+X-Received: by 2002:a50:9918:: with SMTP id k24mr47972367edb.173.1560441949919;
+ Thu, 13 Jun 2019 09:05:49 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190612163144.18486-1-roman.stratiienko@globallogic.com>
  <20190612163144.18486-2-roman.stratiienko@globallogic.com>
- <20190613135241.aghcrrz7rg2au3bw@MacBook-Pro-91.local>
- <CAODwZ7v=RSsmVj5GjcvGn2dn+ejLRBHZ79x-+S9DrX4GoXuVaQ@mail.gmail.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <adc59944-7654-ea38-8dfc-f91361a80987@redhat.com>
-Date: Thu, 13 Jun 2019 10:14:27 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <CAODwZ7v=RSsmVj5GjcvGn2dn+ejLRBHZ79x-+S9DrX4GoXuVaQ@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="eee2xFe75vs2A2ScnCuVGakVCSApzTrMR"
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.41]); Thu, 13 Jun 2019 15:14:45 +0000 (UTC)
+ <20190613135241.aghcrrz7rg2au3bw@MacBook-Pro-91.local> <CAODwZ7v=RSsmVj5GjcvGn2dn+ejLRBHZ79x-+S9DrX4GoXuVaQ@mail.gmail.com>
+ <adc59944-7654-ea38-8dfc-f91361a80987@redhat.com>
+In-Reply-To: <adc59944-7654-ea38-8dfc-f91361a80987@redhat.com>
+From: Roman Stratiienko <roman.stratiienko@globallogic.com>
+Date: Thu, 13 Jun 2019 19:05:38 +0300
+Message-ID: <CAODwZ7u+f9vco8h1ZAwwoCefB6kM9gi4L_Mc7muLXYkwHRVc8Q@mail.gmail.com>
+Subject: Re: [PATCH 2/2] nbd: add support for nbd as root device
+To: Eric Blake <eblake@redhat.com>
+Cc: Josef Bacik <josef@toxicpanda.com>, linux-kernel@vger.kernel.org, 
+	nbd@other.debian.org, Aleksandr Bulyshchenko <A.Bulyshchenko@globallogic.com>, 
+	linux-block@vger.kernel.org, axboe@kernel.dkn.org
+Content-Type: text/plain; charset="UTF-8"
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <rZR7QGaHFhG.A._Z.0hmAdB@bendel>
+Resent-Message-ID: <0DpcnUMC3oH.A.XBC.0fnAdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/589
+X-Mailing-List: <nbd@other.debian.org> archive/latest/590
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -103,96 +95,55 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/adc59944-7654-ea38-8dfc-f91361a80987@redhat.com
-Resent-Date: Thu, 13 Jun 2019 15:15:00 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAODwZ7u+f9vco8h1ZAwwoCefB6kM9gi4L_Mc7muLXYkwHRVc8Q@mail.gmail.com
+Resent-Date: Thu, 13 Jun 2019 16:21:08 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---eee2xFe75vs2A2ScnCuVGakVCSApzTrMR
-Content-Type: multipart/mixed; boundary="5N8QQ9ksT8qW138LJWwnZPp8pi4LDryqo";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Roman Stratiienko <roman.stratiienko@globallogic.com>,
- Josef Bacik <josef@toxicpanda.com>
-Cc: linux-kernel@vger.kernel.org, nbd@other.debian.org,
- Aleksandr Bulyshchenko <A.Bulyshchenko@globallogic.com>,
- linux-block@vger.kernel.org, axboe@kernel.dkn.org
-Message-ID: <adc59944-7654-ea38-8dfc-f91361a80987@redhat.com>
-Subject: Re: [PATCH 2/2] nbd: add support for nbd as root device
-References: <20190612163144.18486-1-roman.stratiienko@globallogic.com>
- <20190612163144.18486-2-roman.stratiienko@globallogic.com>
- <20190613135241.aghcrrz7rg2au3bw@MacBook-Pro-91.local>
- <CAODwZ7v=RSsmVj5GjcvGn2dn+ejLRBHZ79x-+S9DrX4GoXuVaQ@mail.gmail.com>
-In-Reply-To: <CAODwZ7v=RSsmVj5GjcvGn2dn+ejLRBHZ79x-+S9DrX4GoXuVaQ@mail.gmail.com>
+On Thu, Jun 13, 2019 at 6:14 PM Eric Blake <eblake@redhat.com> wrote:
+>
+> On 6/13/19 9:45 AM, Roman Stratiienko wrote:
+>
+> >>
+> >> Just throw nbd-client in your initramfs.  Every nbd server has it's own
+> >> handshake protocol, embedding one particular servers handshake protocol into the
+> >> kernel isn't the answer here.  Thanks,
+>
+> The handshake protocol is well-specified:
+> https://github.com/NetworkBlockDevice/nbd/blob/cdb0bc57f3faefd7a5562d57ad57cd990781c415/doc/proto.md
+>
+> All servers implement various subsets of that document for the handshake.
+>
+> > Also, as far as I know mainline nbd-server daemon have only 2
+> > handshake protocols. So called OLD-STYLE and NEW-STYLE. And OLD-STYLE
+> > is no longer supported. So it should not be a problem, or please fix
+> > me if I'm wrong.
+>
+> You are correct that oldstyle is no longer recommended. However, the
+> current NBD specification states that newstyle has two different
+> flavors, NBD_OPT_EXPORT_NAME (which you used, but is also old) and
+> NBD_OPT_GO (which is newer, but is more likely to encounter differences
+> where not all servers support it).
+>
+> The NBD specification includes a compatibility baseline:
+> https://github.com/NetworkBlockDevice/nbd/blob/cdb0bc57f3faefd7a5562d57ad57cd990781c415/doc/proto.md#compatibility-and-interoperability
+>
+> and right now, NBD_OPT_GO (and _not_ NBD_OPT_EXPORT_NAME) is the
+> preferred way forward.  As long as your handshake implementation
+> complies with the baseline documented there, you'll have maximum
+> portability to the largest number of servers that also support the
+> baseline - but not all servers are up to that baseline yet.
+>
+> So, this becomes a question of how much are you reinventing baseline
+> portability handshake concerns in the kernel, vs. in initramfs.
+>
+> --
+> Eric Blake, Principal Software Engineer
+> Red Hat, Inc.           +1-919-301-3226
+> Virtualization:  qemu.org | libvirt.org
+>
 
---5N8QQ9ksT8qW138LJWwnZPp8pi4LDryqo
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Thank you for the review comments, I will address them in v2.
 
-On 6/13/19 9:45 AM, Roman Stratiienko wrote:
-
->>
->> Just throw nbd-client in your initramfs.  Every nbd server has it's ow=
-n
->> handshake protocol, embedding one particular servers handshake protoco=
-l into the
->> kernel isn't the answer here.  Thanks,
-
-The handshake protocol is well-specified:
-https://github.com/NetworkBlockDevice/nbd/blob/cdb0bc57f3faefd7a5562d57ad=
-57cd990781c415/doc/proto.md
-
-All servers implement various subsets of that document for the handshake.=
-
-
-> Also, as far as I know mainline nbd-server daemon have only 2
-> handshake protocols. So called OLD-STYLE and NEW-STYLE. And OLD-STYLE
-> is no longer supported. So it should not be a problem, or please fix
-> me if I'm wrong.
-
-You are correct that oldstyle is no longer recommended. However, the
-current NBD specification states that newstyle has two different
-flavors, NBD_OPT_EXPORT_NAME (which you used, but is also old) and
-NBD_OPT_GO (which is newer, but is more likely to encounter differences
-where not all servers support it).
-
-The NBD specification includes a compatibility baseline:
-https://github.com/NetworkBlockDevice/nbd/blob/cdb0bc57f3faefd7a5562d57ad=
-57cd990781c415/doc/proto.md#compatibility-and-interoperability
-
-and right now, NBD_OPT_GO (and _not_ NBD_OPT_EXPORT_NAME) is the
-preferred way forward.  As long as your handshake implementation
-complies with the baseline documented there, you'll have maximum
-portability to the largest number of servers that also support the
-baseline - but not all servers are up to that baseline yet.
-
-So, this becomes a question of how much are you reinventing baseline
-portability handshake concerns in the kernel, vs. in initramfs.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---5N8QQ9ksT8qW138LJWwnZPp8pi4LDryqo--
-
---eee2xFe75vs2A2ScnCuVGakVCSApzTrMR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl0CaFQACgkQp6FrSiUn
-Q2pm7gf/YgMHlLWD2BT2imqW/yN9a1Es25xRJvErM5AHt6pMGxP8Wfe3mvHi2hLk
-H9UeSdcbgVqMp5ODGh63j4DGB3ag499E+NBJUGIcAm1TZi3GE+/qHcTaN4i9Deb5
-sNT0DLoqMikKYZu+N7t4uOckPSdxiMA52ReLVGwoUusZ+Oxb+kVHnukxEjUqUE4N
-gbNVJwS+sFEyjcIXyvb8LxhCzkfoUEEN48hPI7ZfjEkWa//uQ7iRBia6vqlUU0pW
-Am1QEbFENHSu8VqYpIzUKisNOIbVaXqFZ89Md7CDABJdyEyw3oGn+iO/dn4Q3N7L
-+wJFmB5X9rfYco3X6NQOy/eGDQInuQ==
-=G4i4
------END PGP SIGNATURE-----
-
---eee2xFe75vs2A2ScnCuVGakVCSApzTrMR--
+--
+Regards,
+Roman
 
