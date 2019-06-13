@@ -1,52 +1,52 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F4F44361D
-	for <lists+nbd@lfdr.de>; Thu, 13 Jun 2019 14:57:18 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A2743631
+	for <lists+nbd@lfdr.de>; Thu, 13 Jun 2019 15:03:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 268E4203E2; Thu, 13 Jun 2019 12:57:18 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 13 12:57:18 2019
+	id F00A7203F4; Thu, 13 Jun 2019 13:03:16 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 13 13:03:16 2019
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
-	PGPSIGNATURE,RCVD_IN_DNSWL_HI,TO_TOO_MANY autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-20.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI,TO_TOO_MANY
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1A333203DC
-	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Jun 2019 12:57:10 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C38A8203EE
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Jun 2019 13:03:08 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-15.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, PGPSIGNATURE=-5,
-	RCVD_IN_DNSWL_HI=-5, TO_TOO_MANY=1] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-15.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5, TO_TOO_MANY=1]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id MsTSKBMU7Qyi for <lists-other-nbd@bendel.debian.org>;
-	Thu, 13 Jun 2019 12:57:05 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id 4TRscczqbHBd for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Jun 2019 13:03:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 741D7203CA
-	for <nbd@other.debian.org>; Thu, 13 Jun 2019 12:57:05 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+	by bendel.debian.org (Postfix) with ESMTPS id 5D7B1203DD
+	for <nbd@other.debian.org>; Thu, 13 Jun 2019 13:03:04 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 4693530872E2;
-	Thu, 13 Jun 2019 12:56:46 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 3B21DCA36F;
+	Thu, 13 Jun 2019 13:03:00 +0000 (UTC)
 Received: from [10.3.116.85] (ovpn-116-85.phx2.redhat.com [10.3.116.85])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 1021D10018E0;
-	Thu, 13 Jun 2019 12:56:39 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id D484E541F2;
+	Thu, 13 Jun 2019 13:02:57 +0000 (UTC)
 Subject: Re: [PATCH 2/2] nbd: add support for nbd as root device
 To: roman.stratiienko@globallogic.com, linux-kernel@vger.kernel.org,
  josef@toxicpanda.com, nbd@other.debian.org, A.Bulyshchenko@globallogic.com,
- linux-block@vger.kernel.org, axboe@kernel.dkn.org
+ linux-block@vger.kernel.org, axboe@kernel.dkn.org,
+ "Richard W.M. Jones" <rjones@redhat.com>
 References: <20190612163144.18486-1-roman.stratiienko@globallogic.com>
  <20190612163144.18486-2-roman.stratiienko@globallogic.com>
 From: Eric Blake <eblake@redhat.com>
@@ -75,22 +75,22 @@ Autocrypt: addr=eblake@redhat.com; keydata=
  Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
  2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
 Organization: Red Hat, Inc.
-Message-ID: <3a15a92f-16d6-cca3-8842-b0866579a95a@redhat.com>
-Date: Thu, 13 Jun 2019 07:56:38 -0500
+Message-ID: <b988f702-f394-6f2e-43ea-61298c0f2b03@redhat.com>
+Date: Thu, 13 Jun 2019 08:02:56 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
 In-Reply-To: <20190612163144.18486-2-roman.stratiienko@globallogic.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="1mFPIR4gUIZspv7ZUjGD9XHyqwoM6f3do"
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.47]); Thu, 13 Jun 2019 12:57:01 +0000 (UTC)
+ boundary="9Icx9ItsU53ORwiANl09EUUC5IOzpGhUD"
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.38]); Thu, 13 Jun 2019 13:03:01 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <TNAWDzseHqO.A.J8.ugkAdB@bendel>
+Resent-Message-ID: <XHo_e400M6N.A.wJD.UmkAdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/583
+X-Mailing-List: <nbd@other.debian.org> archive/latest/584
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -100,24 +100,25 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/3a15a92f-16d6-cca3-8842-b0866579a95a@redhat.com
-Resent-Date: Thu, 13 Jun 2019 12:57:18 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/b988f702-f394-6f2e-43ea-61298c0f2b03@redhat.com
+Resent-Date: Thu, 13 Jun 2019 13:03:16 +0000 (UTC)
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---1mFPIR4gUIZspv7ZUjGD9XHyqwoM6f3do
-Content-Type: multipart/mixed; boundary="sgH4lnP1uGSxVKzPJ1Q9zkQ6LMEiCSRAg";
+--9Icx9ItsU53ORwiANl09EUUC5IOzpGhUD
+Content-Type: multipart/mixed; boundary="GcPkFI5vKHhM5L3R0laXCr11kPXSMamS8";
  protected-headers="v1"
 From: Eric Blake <eblake@redhat.com>
 To: roman.stratiienko@globallogic.com, linux-kernel@vger.kernel.org,
  josef@toxicpanda.com, nbd@other.debian.org, A.Bulyshchenko@globallogic.com,
- linux-block@vger.kernel.org, axboe@kernel.dkn.org
-Message-ID: <3a15a92f-16d6-cca3-8842-b0866579a95a@redhat.com>
+ linux-block@vger.kernel.org, axboe@kernel.dkn.org,
+ "Richard W.M. Jones" <rjones@redhat.com>
+Message-ID: <b988f702-f394-6f2e-43ea-61298c0f2b03@redhat.com>
 Subject: Re: [PATCH 2/2] nbd: add support for nbd as root device
 References: <20190612163144.18486-1-roman.stratiienko@globallogic.com>
  <20190612163144.18486-2-roman.stratiienko@globallogic.com>
 In-Reply-To: <20190612163144.18486-2-roman.stratiienko@globallogic.com>
 
---sgH4lnP1uGSxVKzPJ1Q9zkQ6LMEiCSRAg
+--GcPkFI5vKHhM5L3R0laXCr11kPXSMamS8
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
@@ -136,58 +137,26 @@ s
 > The arguments for the server are passed via kernel command line.
 > The kernel command line has the format
 > 'nbdroot=3D[<SERVER_IP>:]<SERVER_PORT>/<EXPORT_NAME>'.
-> SERVER_IP is optional. If it is not available it will use the
-> root_server_addr transmitted through DHCP.
->=20
-> Based on those arguments, the connection to the server is established
-> and is connected to the nbd0 device. The rootdevice therefore is
-> root=3D/dev/nbd0.
->=20
-> Patch was initialy posted by Markus Pargmann <mpa@pengutronix.de>
-> and can be found at https://lore.kernel.org/patchwork/patch/532556/
->=20
-> Change-Id: I78f7313918bf31b9dc01a74a42f0f068bede312c
-> Signed-off-by: Roman Stratiienko <roman.stratiienko@globallogic.com>
-> Reviewed-by: Aleksandr Bulyshchenko <A.Bulyshchenko@globallogic.com>
 
-> +static int nbd_connection_negotiate(struct socket *sock, char *export_=
-name,
-> +				    size_t *rsize, u16 *nflags)
-> +{
+Did you intend for nbdroot=3D1234 to connect to port 1234 or to server
+1234 port 10809?  Is an export name mandatory even when it is the empty
+string, in which case, is the / character mandatory?  Maybe this would
+be better written as:
 
-> +
-> +	ret =3D sock_xmit_buf(sock, 0, &flags, sizeof(flags));
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	*nflags =3D ntohs(flags);
-> +
-> +	client_flags =3D 0;
+ [<SERVER_IP>[:<SERVER_PORT]][/<EXPORT_NAME]
 
-Why not reply with NBD_FLAG_C_FIXED_NEWSTYLE? Which in turn would be
-necessary...
+although that would allow nbdroot=3D using all defaults (will that still
+do the right thing?).
 
-> +
-> +	ret =3D sock_xmit_buf(sock, 1, &client_flags, sizeof(client_flags));
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	magic =3D cpu_to_be64(nbd_opts_magic);
-> +	ret =3D sock_xmit_buf(sock, 1, &magic, sizeof(magic));
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	opt =3D htonl(NBD_OPT_EXPORT_NAME);
+Should we support nbdroot=3DURI, and tie this in to Rich's proposal [1] o=
+n
+standardizing the set of URIs that refer to an NBD export?  It seems
+like you are still limited to a TCP socket (not Unix) with no
+encryption, so this would be equivalent to the URI:
 
-Why not use NBD_OPT_GO?  That's a better interface (better error
-recovery, and some servers can even use it to advertise preferred block
-sizing - particularly if a server insists on a 4k minimum block instead
-of 512).
+nbd://[server[:port]][/export]
 
-=2E..using NBD_OPT_GO would require checking that the server advertised
-FIXED_NEWSTYLE as well as replying that we intend to rely on it.
-
-Otherwise the idea looks interesting to me.
+[1] https://lists.debian.org/nbd/2019/06/msg00011.html
 
 --=20
 Eric Blake, Principal Software Engineer
@@ -195,24 +164,24 @@ Red Hat, Inc.           +1-919-301-3226
 Virtualization:  qemu.org | libvirt.org
 
 
---sgH4lnP1uGSxVKzPJ1Q9zkQ6LMEiCSRAg--
+--GcPkFI5vKHhM5L3R0laXCr11kPXSMamS8--
 
---1mFPIR4gUIZspv7ZUjGD9XHyqwoM6f3do
+--9Icx9ItsU53ORwiANl09EUUC5IOzpGhUD
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl0CSAYACgkQp6FrSiUn
-Q2pQVgf/SAkzO/2y16ZWAOWbE/P/FZSQbPMBqGLAz1/Rk5z64pdkETpf4GyxwZt9
-KzaafzGckPzYHp1gsoFP1/QveKPvNOdhldLJHD5LkD1uEM/3d8z8uRypR2u1gsCJ
-EhlIuCpIfoGIMR7hizyZJflpRgwYDBNCyOyN4Y0plN5vZ5cZfMNvI+chKvhuneBX
-ZgxfoorSWCx0F1PDviTrfwIclR2ZciBjEEzrDiP4SAg4N9Sg/RDg66P3rxAnuDPa
-vWSn5xu2ImK2vPbG3vnBQwsCl1E4cDs+SYo28mFAipi5J+NAmVW355fomubmvCwt
-hF75HdVcRncQbmRFlEvU3BIhG4MyEg==
-=WxSM
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl0CSYAACgkQp6FrSiUn
+Q2rmfAf8ChmatMRfkJIY+wjmA8EpvunLFeeBfqMUiCnyHNvBwC4gnGLM+bicQbaH
+daIi5U8i80IsZZ3su8d8eaBxBaFF9iy+CoRjczdUZnE1XdkDoJyA+0csp1+LiggC
+0SmwnYAF9o8XRSJrhkg0xeVHwBljDbKsd1bwWzDVD6YDFERJPuGjVPYFM6sX//Qh
+6fj1jDb2Y3jVg/6eiEOOzofmP5aO9aN4IGOWs5LgI7SFrk7r3gg33qlMrNk2e0sH
+9d/D+8fBkuDFaoCGBk/1uBoBcLN9lkzB3MopCSMIilvavvv5+Wb1c84f+TE/0Fnm
+xb7WMLpghXn8h/JLGjX503VhNmx7dw==
+=Uh/K
 -----END PGP SIGNATURE-----
 
---1mFPIR4gUIZspv7ZUjGD9XHyqwoM6f3do--
+--9Icx9ItsU53ORwiANl09EUUC5IOzpGhUD--
 
