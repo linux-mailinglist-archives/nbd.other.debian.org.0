@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3444581CC7
-	for <lists+nbd@lfdr.de>; Mon,  5 Aug 2019 15:27:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 03DE481D7A
+	for <lists+nbd@lfdr.de>; Mon,  5 Aug 2019 15:42:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 02EB120409; Mon,  5 Aug 2019 13:27:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug  5 13:27:08 2019
+	id DB7FF20541; Mon,  5 Aug 2019 13:42:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug  5 13:42:08 2019
 Old-Return-Path: <gregkh@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-4.0 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D0BF52056A
-	for <lists-other-nbd@bendel.debian.org>; Mon,  5 Aug 2019 13:11:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A201920541
+	for <lists-other-nbd@bendel.debian.org>; Mon,  5 Aug 2019 13:25:20 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-5.881 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
@@ -28,26 +28,26 @@ X-Amavis-Spam-Status: No, score=-5.881 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id SLZHsE51pxmK for <lists-other-nbd@bendel.debian.org>;
-	Mon,  5 Aug 2019 13:11:16 +0000 (UTC)
+	with ESMTP id pxJMsDPJnk0D for <lists-other-nbd@bendel.debian.org>;
+	Mon,  5 Aug 2019 13:25:16 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -3.5
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D5E2C20562
-	for <nbd@other.debian.org>; Mon,  5 Aug 2019 13:11:15 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 6C70C20577
+	for <nbd@other.debian.org>; Mon,  5 Aug 2019 13:25:16 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 786072075B;
-	Mon,  5 Aug 2019 13:11:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 576FE20644;
+	Mon,  5 Aug 2019 13:25:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1565010672;
-	bh=KnrFv3vDarcaPhQcdemoJlumUpCpVGh+3zak/sjMUo4=;
+	s=default; t=1565011512;
+	bh=xpJM/gqp3zYrSfs70sHH80p2hZCGqfxlZBzlDuDyikQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=qnMKDvt899UrATZEZrj2gSAA9lvefcI72rCMvr7D+iC9T4jpgfF6jvYfYtICyMfXy
-	 0HIcTYd1KcZQHYnRcz0abP/VSdf1rE7w5XpY5fB7gQBn9mCDPuVN7z4bEk6nvTQL0Q
-	 Q/n3ORhCL9nCFzHGbMlYWiAEQg1MCvRJJaqDUhqw=
+	b=yKeqRwbqXoYBlzX7wfNiHiZkV52HFJFESa68nYxWSSXDFcIuUu/MlsR3JRHuRAc+6
+	 D35tMl80icwIIfiiYXsSHiTvsMiXWQI8Jc2KxFVcaoxNvEGvvlxn3l8HZNKYWcBq0R
+	 BeWzW3Dk4EGLhqwfQ8B2N7euLqHnCdHpzlZOopfM=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -59,12 +59,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Josef Bacik <josef@toxicpanda.com>,
 	Munehisa Kamata <kamatam@amazon.com>,
 	Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 4.19 60/74] nbd: replace kill_bdev() with __invalidate_device() again
-Date: Mon,  5 Aug 2019 15:03:13 +0200
-Message-Id: <20190805124940.695248947@linuxfoundation.org>
+Subject: [PATCH 5.2 117/131] nbd: replace kill_bdev() with __invalidate_device() again
+Date: Mon,  5 Aug 2019 15:03:24 +0200
+Message-Id: <20190805124959.791932900@linuxfoundation.org>
 X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190805124935.819068648@linuxfoundation.org>
-References: <20190805124935.819068648@linuxfoundation.org>
+In-Reply-To: <20190805124951.453337465@linuxfoundation.org>
+References: <20190805124951.453337465@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -72,9 +72,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <VVGfmrzOL8K.A.KcB.s6CSdB@bendel>
+Resent-Message-ID: <VDPuMWPiz_D.A.l0D.wIDSdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/614
+X-Mailing-List: <nbd@other.debian.org> archive/latest/615
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,8 +84,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190805124940.695248947@linuxfoundation.org
-Resent-Date: Mon,  5 Aug 2019 13:27:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190805124959.791932900@linuxfoundation.org
+Resent-Date: Mon,  5 Aug 2019 13:42:08 +0000 (UTC)
 
 From: Munehisa Kamata <kamatam@amazon.com>
 
@@ -147,7 +147,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1218,7 +1218,7 @@ static void nbd_clear_sock_ioctl(struct
+@@ -1229,7 +1229,7 @@ static void nbd_clear_sock_ioctl(struct
  				 struct block_device *bdev)
  {
  	sock_shutdown(nbd);
