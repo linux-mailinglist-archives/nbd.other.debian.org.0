@@ -1,80 +1,62 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03DE481D7A
-	for <lists+nbd@lfdr.de>; Mon,  5 Aug 2019 15:42:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00B6489EA0
+	for <lists+nbd@lfdr.de>; Mon, 12 Aug 2019 14:42:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id DB7FF20541; Mon,  5 Aug 2019 13:42:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug  5 13:42:08 2019
-Old-Return-Path: <gregkh@linuxfoundation.org>
+	id BC02321301; Mon, 12 Aug 2019 12:42:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 12 12:42:08 2019
+Old-Return-Path: <sunke32@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VERIFIED,FOURLA,GMAIL,MD5_SHA1_SUM,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,TO_TOO_MANY autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A201920541
-	for <lists-other-nbd@bendel.debian.org>; Mon,  5 Aug 2019 13:25:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 539592125E
+	for <lists-other-nbd@bendel.debian.org>; Mon, 12 Aug 2019 12:25:19 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.881 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, FOURLA=0.1, GMAIL=1,
-	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.28 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, TO_TOO_MANY=1] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id pxJMsDPJnk0D for <lists-other-nbd@bendel.debian.org>;
-	Mon,  5 Aug 2019 13:25:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	with ESMTP id 6wuHFflj9Tz6 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 12 Aug 2019 12:25:15 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.7
+Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 6C70C20577
-	for <nbd@other.debian.org>; Mon,  5 Aug 2019 13:25:16 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 576FE20644;
-	Mon,  5 Aug 2019 13:25:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1565011512;
-	bh=xpJM/gqp3zYrSfs70sHH80p2hZCGqfxlZBzlDuDyikQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=yKeqRwbqXoYBlzX7wfNiHiZkV52HFJFESa68nYxWSSXDFcIuUu/MlsR3JRHuRAc+6
-	 D35tMl80icwIIfiiYXsSHiTvsMiXWQI8Jc2KxFVcaoxNvEGvvlxn3l8HZNKYWcBq0R
-	 BeWzW3Dk4EGLhqwfQ8B2N7euLqHnCdHpzlZOopfM=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: linux-kernel@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	stable@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	Ratna Manoj Bolla <manoj.br@gmail.com>,
-	nbd@other.debian.org,
-	David Woodhouse <dwmw@amazon.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Munehisa Kamata <kamatam@amazon.com>,
-	Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 5.2 117/131] nbd: replace kill_bdev() with __invalidate_device() again
-Date: Mon,  5 Aug 2019 15:03:24 +0200
-Message-Id: <20190805124959.791932900@linuxfoundation.org>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190805124951.453337465@linuxfoundation.org>
-References: <20190805124951.453337465@linuxfoundation.org>
-User-Agent: quilt/0.66
+	by bendel.debian.org (Postfix) with ESMTPS id 6820221293
+	for <nbd@other.debian.org>; Mon, 12 Aug 2019 12:25:15 +0000 (UTC)
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
+	by Forcepoint Email with ESMTP id 3FD46459B3490B51E00F;
+	Mon, 12 Aug 2019 20:25:10 +0800 (CST)
+Received: from RH5885H-V3.huawei.com (10.90.53.225) by
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.439.0; Mon, 12 Aug 2019 20:25:03 +0800
+From: Sun Ke <sunke32@huawei.com>
+To: <sunke32@huawei.com>, <josef@toxicpanda.com>, <axboe@kernel.dk>,
+	<linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>
+Subject: [PATCH] nbd: add a missed nbd_config_put() in nbd_xmit_timeout()
+Date: Mon, 12 Aug 2019 20:31:26 +0800
+Message-ID: <1565613086-13776-1-git-send-email-sunke32@huawei.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.90.53.225]
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <VDPuMWPiz_D.A.l0D.wIDSdB@bendel>
+Resent-Message-ID: <Vf7RQLGFweC.A.x4G.g6VUdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/615
+X-Mailing-List: <nbd@other.debian.org> archive/latest/616
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,77 +66,39 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190805124959.791932900@linuxfoundation.org
-Resent-Date: Mon,  5 Aug 2019 13:42:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1565613086-13776-1-git-send-email-sunke32@huawei.com
+Resent-Date: Mon, 12 Aug 2019 12:42:08 +0000 (UTC)
 
-From: Munehisa Kamata <kamatam@amazon.com>
+When try to get the lock failed, before return, execute the
+nbd_config_put() to decrease the nbd->config_refs.
 
-commit 2b5c8f0063e4b263cf2de82029798183cf85c320 upstream.
+If the nbd->config_refs is added but not decreased. Then will not
+execute nbd_clear_sock() in nbd_config_put(). bd->task_setup will
+not be cleared away. Finally, print"Device being setup by another
+task" in nbd_add_sock() and nbd device can not be reused.
 
-Commit abbbdf12497d ("replace kill_bdev() with __invalidate_device()")
-once did this, but 29eaadc03649 ("nbd: stop using the bdev everywhere")
-resurrected kill_bdev() and it has been there since then. So buffer_head
-mappings still get killed on a server disconnection, and we can still
-hit the BUG_ON on a filesystem on the top of the nbd device.
-
-  EXT4-fs (nbd0): mounted filesystem with ordered data mode. Opts: (null)
-  block nbd0: Receive control failed (result -32)
-  block nbd0: shutting down sockets
-  print_req_error: I/O error, dev nbd0, sector 66264 flags 3000
-  EXT4-fs warning (device nbd0): htree_dirblock_to_tree:979: inode #2: lblock 0: comm ls: error -5 reading directory block
-  print_req_error: I/O error, dev nbd0, sector 2264 flags 3000
-  EXT4-fs error (device nbd0): __ext4_get_inode_loc:4690: inode #2: block 283: comm ls: unable to read itable block
-  EXT4-fs error (device nbd0) in ext4_reserve_inode_write:5894: IO failure
-  ------------[ cut here ]------------
-  kernel BUG at fs/buffer.c:3057!
-  invalid opcode: 0000 [#1] SMP PTI
-  CPU: 7 PID: 40045 Comm: jbd2/nbd0-8 Not tainted 5.1.0-rc3+ #4
-  Hardware name: Amazon EC2 m5.12xlarge/, BIOS 1.0 10/16/2017
-  RIP: 0010:submit_bh_wbc+0x18b/0x190
-  ...
-  Call Trace:
-   jbd2_write_superblock+0xf1/0x230 [jbd2]
-   ? account_entity_enqueue+0xc5/0xf0
-   jbd2_journal_update_sb_log_tail+0x94/0xe0 [jbd2]
-   jbd2_journal_commit_transaction+0x12f/0x1d20 [jbd2]
-   ? __switch_to_asm+0x40/0x70
-   ...
-   ? lock_timer_base+0x67/0x80
-   kjournald2+0x121/0x360 [jbd2]
-   ? remove_wait_queue+0x60/0x60
-   kthread+0xf8/0x130
-   ? commit_timeout+0x10/0x10 [jbd2]
-   ? kthread_bind+0x10/0x10
-   ret_from_fork+0x35/0x40
-
-With __invalidate_device(), I no longer hit the BUG_ON with sync or
-unmount on the disconnected device.
-
-Fixes: 29eaadc03649 ("nbd: stop using the bdev everywhere")
-Cc: linux-block@vger.kernel.org
-Cc: Ratna Manoj Bolla <manoj.br@gmail.com>
-Cc: nbd@other.debian.org
-Cc: stable@vger.kernel.org
-Cc: David Woodhouse <dwmw@amazon.com>
-Reviewed-by: Josef Bacik <josef@toxicpanda.com>
-Signed-off-by: Munehisa Kamata <kamatam@amazon.com>
-Signed-off-by: Jens Axboe <axboe@kernel.dk>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-
+Fixes: 8f3ea35929a0 ("nbd: handle unexpected replies better")
+Signed-off-by: Sun Ke <sunke32@huawei.com>
 ---
- drivers/block/nbd.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/block/nbd.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index e21d2de..a69a90a 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1229,7 +1229,7 @@ static void nbd_clear_sock_ioctl(struct
- 				 struct block_device *bdev)
- {
- 	sock_shutdown(nbd);
--	kill_bdev(bdev);
-+	__invalidate_device(bdev, true);
- 	nbd_bdev_reset(bdev);
- 	if (test_and_clear_bit(NBD_HAS_CONFIG_REF,
- 			       &nbd->config->runtime_flags))
-
+@@ -357,8 +357,10 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
+ 	}
+ 	config = nbd->config;
+ 
+-	if (!mutex_trylock(&cmd->lock))
++	if (!mutex_trylock(&cmd->lock)) {
++		nbd_config_put(nbd);
+ 		return BLK_EH_RESET_TIMER;
++	}
+ 
+ 	if (config->num_connections > 1) {
+ 		dev_err_ratelimited(nbd_to_dev(nbd),
+-- 
+2.7.4
 
