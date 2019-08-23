@@ -2,91 +2,64 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F5909B202
-	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 16:30:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 704DF9B214
+	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 16:34:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6C29D204E8; Fri, 23 Aug 2019 14:30:58 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 14:30:58 2019
+	id 58BE4204F3; Fri, 23 Aug 2019 14:34:42 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 14:34:42 2019
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-20.5 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MONEY,MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-16.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 03DC9204E4
-	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 14:30:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3C09E204F0
+	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 14:34:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-16.48 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MONEY=0.5,
-	MURPHY_DRUGS_REL8=0.02, PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-11.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Gwer4ul6EHsm for <lists-other-nbd@bendel.debian.org>;
-	Fri, 23 Aug 2019 14:30:46 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id Z3n6qjFllGqu for <lists-other-nbd@bendel.debian.org>;
+	Fri, 23 Aug 2019 14:34:32 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 4FCB0204DB
-	for <nbd@other.debian.org>; Fri, 23 Aug 2019 14:30:43 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 7F882204E7
+	for <nbd@other.debian.org>; Fri, 23 Aug 2019 14:34:32 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E1E003007C53;
-	Fri, 23 Aug 2019 14:30:39 +0000 (UTC)
-Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 6059D6CE77;
-	Fri, 23 Aug 2019 14:30:37 +0000 (UTC)
-To: QEMU <qemu-devel@nongnu.org>,
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>, nbd@other.debian.org,
- libguestfs@redhat.com
+	by mx1.redhat.com (Postfix) with ESMTPS id 6655210F23EA;
+	Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
+Received: from blue.redhat.com (ovpn-116-234.phx2.redhat.com [10.3.116.234])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 8A0596CE58;
+	Fri, 23 Aug 2019 14:34:26 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
-Subject: cross-project patches: Add NBD Fast Zero support
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
-Date: Fri, 23 Aug 2019 09:30:36 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+To: nbd@other.debian.org
+Cc: qemu-block@nongnu.org,
+	qemu-devel@nongnu.org,
+	libguestfs@redhat.com
+Subject: [PATCH 0/1] NBD protocol change to add fast zero support
+Date: Fri, 23 Aug 2019 09:34:25 -0500
+Message-Id: <20190823143426.26838-1-eblake@redhat.com>
+In-Reply-To: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
+References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="KoNlDQdYXupYuaYo47M6gS1lgKsKGawn8"
+Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.40]); Fri, 23 Aug 2019 14:30:39 +0000 (UTC)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2 (mx1.redhat.com [10.5.110.66]); Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <I6uHN7Rh4wI.A.9qB.ii_XdB@bendel>
+Resent-Message-ID: <eWRWLXFvZJH.A.-AC.Cm_XdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/630
+X-Mailing-List: <nbd@other.debian.org> archive/latest/631
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,256 +69,18 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/25ead363-4f37-5450-b985-1876374e314d@redhat.com
-Resent-Date: Fri, 23 Aug 2019 14:30:58 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190823143426.26838-1-eblake@redhat.com
+Resent-Date: Fri, 23 Aug 2019 14:34:42 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---KoNlDQdYXupYuaYo47M6gS1lgKsKGawn8
-Content-Type: multipart/mixed; boundary="9Zhp6P2yeYw46OWfvoMffdRgBkDhdXNwZ";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: QEMU <qemu-devel@nongnu.org>,
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>, nbd@other.debian.org,
- libguestfs@redhat.com
-Message-ID: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
-Subject: cross-project patches: Add NBD Fast Zero support
+See the cross-post cover letter for details:
+https://www.redhat.com/archives/libguestfs/2019-August/msg00322.html
 
---9Zhp6P2yeYw46OWfvoMffdRgBkDhdXNwZ
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Eric Blake (1):
+  protocol: Add NBD_CMD_FLAG_FAST_ZERO
 
-This is a cover letter to a series of patches being proposed in tandem
-to four different projects:
-- nbd: Document a new NBD_CMD_FLAG_FAST_ZERO command flag
-- qemu: Implement the flag for both clients and server
-- libnbd: Implement the flag for clients
-- nbdkit: Implement the flag for servers, including the nbd passthrough
-client
+ doc/proto.md | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 49 insertions(+), 1 deletion(-)
 
-If you want to test the patches together, I've pushed a 'fast-zero'
-branch to each of:
-https://repo.or.cz/nbd/ericb.git/shortlog/refs/heads/fast-zero
-https://repo.or.cz/qemu/ericb.git/shortlog/refs/heads/fast-zero
-https://repo.or.cz/libnbd/ericb.git/shortlog/refs/heads/fast-zero
-https://repo.or.cz/nbdkit/ericb.git/shortlog/refs/heads/fast-zero
-
-
-I've run several tests to demonstrate why this is useful, as well as
-prove that because I have multiple interoperable projects, it is worth
-including in the NBD standard.  The original proposal was here:
-https://lists.debian.org/nbd/2019/03/msg00004.html
-where I stated:
-
-> I will not push this without both:
-> - a positive review (for example, we may decide that burning another
-> NBD_FLAG_* is undesirable, and that we should instead have some sort
-> of NBD_OPT_ handshake for determining when the server supports
-> NBD_CMF_FLAG_FAST_ZERO)
-> - a reference client and server implementation (probably both via qemu,=
-
-> since it was qemu that raised the problem in the first place)
-
-Consensus on that thread seemed to be that a new NBD_FLAG was okay; and
-this thread solves the second bullet of having reference implementations.=
-
-
-Here's what I did for testing full-path interoperability:
-
-nbdkit memory -> qemu-nbd -> nbdkit nbd -> nbdsh
-
-$ nbdkit -p 10810 --filter=3Dnozero --filter=3Ddelay memory 1m delay-writ=
-e=3D3
-zeromode=3Demulate
-$ qemu-nbd -p 10811 -f raw nbd://localhost:10810
-$ nbdkit -p 10812 nbd nbd://localhost:10811
-$ time nbdsh --connect nbd://localhost:10812 -c 'buf =3D h.zero(512, 0)'
-# takes more than 3 seconds, but succeeds
-$ time nbdsh --connect nbd://localhost:10812 -c 'buf =3D h.zero(512, 0,
-nbd.CMD_FLAG_FAST_ZERO)'
-# takes less than 1 second to fail with ENOTSUP
-
-And here's some demonstrations on why the feature matters, starting with
-this qemu thread as justification:
-https://lists.gnu.org/archive/html/qemu-devel/2019-03/msg06389.html
-
-First, I had to create a scenario where falling back to writes is
-noticeably slower than performing a zero operation, and where
-pre-zeroing also shows an effect.  My choice: let's test 'qemu-img
-convert' on an image that is half-sparse (every other megabyte is a
-hole) to an in-memory nbd destination.  Then I use a series of nbdkit
-filters to force the destination to behave in various manners:
- log logfile=3D>(sed ...|uniq -c) (track how many normal/fast zero
-requests the client makes)
- nozero $params (fine-tune how zero requests behave - the parameters
-zeromode and fastzeromode are the real drivers of my various tests)
- blocksize maxdata=3D256k (allows large zero requests, but forces large
-writes into smaller chunks, to magnify the effects of write delays and
-allow testing to provide obvious results with a smaller image)
- delay delay-write=3D20ms delay-zero=3D5ms (also to magnify the effects o=
-n a
-smaller image, with writes penalized more than zeroing)
- stats statsfile=3D/dev/stderr (to track overall time and a decent summar=
-y
-of how much I/O occurred).
- noextents (forces the entire image to report that it is allocated,
-which eliminates any testing variability based on whether qemu-img uses
-that to bypass a zeroing operation [1])
-
-So here's my one-time setup, followed by repetitions of the nbdkit
-command with different parameters to the nozero filter to explore
-different behaviors.
-
-$ qemu-img create -f qcow2 src 100m
-$ for i in `seq 0 2 99`; do qemu-io -f qcow2 -c "w ${i}m 1m" src; done
-$ nbdkit -U - --filter=3Dlog --filter=3Dnozero --filter=3Dblocksize \
-  --filter=3Ddelay --filter=3Dstats --filter=3Dnoextents memory 100m \
-  logfile=3D>(sed -n '/Zero.*\.\./ s/.*\(fast=3D.\).*/\1/p' |sort|uniq -c=
-) \
-  statsfile=3D/dev/stderr delay-write=3D20ms delay-zero=3D5s maxdata=3D25=
-6k \
-  --run 'qemu-img convert -n -f qcow2 -O raw src $nbd' $params
-
-Establish a baseline: when qemu-img does not see write zero support at
-all (such as when talking to /dev/nbd0, because the kernel NBD
-implementation still does not support write zeroes), qemu is forced to
-write the entire disk, including the holes, but doesn't waste any time
-pre-zeroing or checking block status for whether the disk is zero (the
-default of the nozero filter is to turn off write zero advertisement):
-
-params=3D
-elapsed time: 8.54488 s
-write: 400 ops, 104857600 bytes, 9.81712e+07 bits/s
-
-Next, let's emulate what qemu 3.1 was like, with a blind pre-zeroing
-pass of the entire image without regards to whether that pass is fast or
-slow.  For this test, it was easier to use modern qemu and merely ignore
-the fast zero bit in nbdkit, but the numbers should be similar when
-actually using older qemu.  If qemu guessed right that pre-zeroing is
-fast, we see:
-
-params=3D'zeromode=3Dplugin fastzeromode=3Dignore'
-elapsed time: 4.30183 s
-write: 200 ops, 52428800 bytes, 9.75005e+07 bits/s
-zero: 4 ops, 104857600 bytes, 1.95001e+08 bits/s
-      4 fast=3D1
-
-which is definite win - instead of having to write the half of the image
-that was zero on the source, the fast pre-zeroing pass already cleared
-it (qemu-img currently breaks write zeroes into 32M chunks [1], and thus
-requires 4 zero requests to pre-zero the image).  But if qemu guesses wro=
-ng:
-
-params=3D'zeromode=3Demulate fastzeromode=3Dignore'
-elapsed time: 12.5065 s
-write: 600 ops, 157286400 bytes, 1.00611e+08 bits/s
-      4 fast=3D1
-
-Ouch - that is actually slower than the case when zeroing is not used at
-all, because the zeroes turned into writes result in performing double
-the I/O over the data portions of the file (once during the pre-zero
-pass, then again during the data).  The qemu 3.1 behavior is very
-bi-polar in nature, and we don't like that.
-
-So qemu 4.0 introduced BDRV_REQ_NO_FALLBACK, which qemu uses during the
-pre-zero request to fail quickly if pre-zeroing is not viable. At the
-time, NBD did not have a way to support fast zero requests, so qemu
-blindly assumes that pre-zeroing is not viable over NBD:
-
-params=3D'zeromode=3Demulate fastzeromode=3Dnone'
-elapsed time: 8.32433 s
-write: 400 ops, 104857600 bytes, 1.00772e+08 bits/s
-     50 fast=3D0
-
-When zeroing is slow, our time actually beats the baseline by about 0.2
-seconds (although zeroing still turned into writes, the use of zero
-requests results in less network traffic; you also see that there are 50
-zero requests, one per hole, rather than 4 requests for pre-zeroing the
-image).  So we've avoided the pre-zeroing penalty.  However:
-
-params=3D'zeromode=3Dplugin fastzeromode=3Dnone'
-elapsed time: 4.53951 s
-write: 200 ops, 52428800 bytes, 9.23955e+07 bits/s
-zero: 50 ops, 52428800 bytes, 9.23955e+07 bits/s
-     50 fast=3D0
-
-when zeroing is fast, we're still 0.2 seconds slower than the
-pre-zeroing behavior (zeroing runs fast, but one request per hole is
-still more transactions than pre-zeroing used to use).  The qemu 4.0
-decision thus regained the worst degradation seen in 3.1 when zeroing is
-slow, but at a penalty to the case when zeroing is fast.
-
-Since guessing is never as nice as knowing, let's repeat the test, but
-now exploiting the new NBD fast zero:
-
-params=3D'zeromode=3Demulate'
-elapsed time: 8.41174 s
-write: 400 ops, 104857600 bytes, 9.9725e+07 bits/s
-     50 fast=3D0
-      1 fast=3D1
-
-Good: when zeroes are not fast, qemu-img's initial fast-zero request
-immediately fails, and then it switches back to writing the entire image
-using regular zeroing for the holes; performance is comparable to the
-baseline and to the qemu 4.0 behavior.
-
-params=3D'zeromode=3Dplugin'
-elapsed time: 4.31356 s
-write: 200 ops, 52428800 bytes, 9.72354e+07 bits/s
-zero: 4 ops, 104857600 bytes, 1.94471e+08 bits/s
-      4 fast=3D1
-
-Good: when zeroes are fast, qemu-img is able to use pre-zeroing on the
-entire image, resulting in fewer zero transactions overall, getting us
-back to the qemu 3.1 maximum performance (and better than the 4.0 behavio=
-r).
-
-I hope you enjoyed reading this far, and agree with my interpretation of
-the numbers about why this feature is useful!
-
-
-
-[1] Orthogonal to these patches are other ideas I have for improving the
-NBD protocol in its effects to qemu-img convert, which will result in
-later cross-project patches:
-- NBD should have a way to advertise (probably via NBD_INFO_ during
-NBD_OPT_GO) if the initial image is known to begin life with all zeroes
-(if that is the case, qemu-img can skip the extents calls and
-pre-zeroing pass altogether)
-- improving support to allow NBD to pass larger zero requests (qemu is
-currently capping zero requests at 32m based on NBD_INFO_BLOCK_SIZE, but
-could easily go up to ~4G with proper info advertisement of maximum zero
-request sizing, or if we introduce 64-bit commands to the NBD protocol)
-
-Given that NBD extensions need not be present in every server, each
-orthogonal improvement should be tested in isolation to show that it
-helps, even though qemu-img will probably use all of the extensions at
-once when the server supports all of them.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---9Zhp6P2yeYw46OWfvoMffdRgBkDhdXNwZ--
-
---KoNlDQdYXupYuaYo47M6gS1lgKsKGawn8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1f+IwACgkQp6FrSiUn
-Q2rltwf/X0iV41HBok9+Z5w3Fj7k5GVT0VpEHZzoFOlgF9vW0NLOmdcjZAAlPxMs
-v03MBrmkqNCpp1U+aXInhfA+/GXZ0G7ETJ5RRAj39rwSZOOLLYtwIZiyi04nSSvE
-c0y8JqDU/Wylnb4BPf/Fhd2PFKeR8pgLS0O+ZLth0ycftV0NEH/tB4Ytmar/hXKD
-EQn93kwyuofx/0NBPiJnlwMHlFLBQVMRtvsOCrt7EXWMRd/6F1tm6F1MY+tlkzrK
-+PyMgsMSbiDvrx23IFZhdFoP1daKCmN5S/Rbw44ohrbyJ9P0B18Ov4KWp9/WYguq
-RLG6+Q9tnU0KANaIlvI6PYmKZT2c0A==
-=cgaX
------END PGP SIGNATURE-----
-
---KoNlDQdYXupYuaYo47M6gS1lgKsKGawn8--
+-- 
+2.21.0
 
