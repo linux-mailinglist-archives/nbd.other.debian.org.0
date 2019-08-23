@@ -1,65 +1,67 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 704DF9B214
-	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 16:34:42 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 207C79B215
+	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 16:34:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 58BE4204F3; Fri, 23 Aug 2019 14:34:42 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 14:34:42 2019
+	id DE082204F1; Fri, 23 Aug 2019 14:34:44 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 14:34:44 2019
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-14.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3C09E204F0
-	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 14:34:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 7BE7D204E7
+	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 14:34:37 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-11.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-10.88 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Z3n6qjFllGqu for <lists-other-nbd@bendel.debian.org>;
-	Fri, 23 Aug 2019 14:34:32 +0000 (UTC)
+	with ESMTP id WfAWI_3Ab8Ry for <lists-other-nbd@bendel.debian.org>;
+	Fri, 23 Aug 2019 14:34:33 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7F882204E7
-	for <nbd@other.debian.org>; Fri, 23 Aug 2019 14:34:32 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 05830204EF
+	for <nbd@other.debian.org>; Fri, 23 Aug 2019 14:34:33 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 6655210F23EA;
+	by mx1.redhat.com (Postfix) with ESMTPS id E36358980EE;
 	Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
 Received: from blue.redhat.com (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8A0596CE58;
-	Fri, 23 Aug 2019 14:34:26 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 7F4F36CE58;
+	Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: nbd@other.debian.org
 Cc: qemu-block@nongnu.org,
 	qemu-devel@nongnu.org,
 	libguestfs@redhat.com
-Subject: [PATCH 0/1] NBD protocol change to add fast zero support
-Date: Fri, 23 Aug 2019 09:34:25 -0500
-Message-Id: <20190823143426.26838-1-eblake@redhat.com>
-In-Reply-To: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
+Subject: [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
+Date: Fri, 23 Aug 2019 09:34:26 -0500
+Message-Id: <20190823143426.26838-2-eblake@redhat.com>
+In-Reply-To: <20190823143426.26838-1-eblake@redhat.com>
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
+ <20190823143426.26838-1-eblake@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2 (mx1.redhat.com [10.5.110.66]); Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2 (mx1.redhat.com [10.5.110.67]); Fri, 23 Aug 2019 14:34:29 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <eWRWLXFvZJH.A.-AC.Cm_XdB@bendel>
+Resent-Message-ID: <N4S8QhP3UmM.A.qBC.Em_XdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/631
+X-Mailing-List: <nbd@other.debian.org> archive/latest/632
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -69,18 +71,179 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20190823143426.26838-1-eblake@redhat.com
-Resent-Date: Fri, 23 Aug 2019 14:34:42 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20190823143426.26838-2-eblake@redhat.com
+Resent-Date: Fri, 23 Aug 2019 14:34:44 +0000 (UTC)
 
-See the cross-post cover letter for details:
-https://www.redhat.com/archives/libguestfs/2019-August/msg00322.html
+While it may be counterintuitive at first, the introduction of
+NBD_CMD_WRITE_ZEROES and NBD_CMD_BLOCK_STATUS has caused a performance
+regression in qemu [1], when copying a sparse file. When the
+destination file must contain the same contents as the source, but it
+is not known in advance whether the destination started life with all
+zero content, then there are cases where it is faster to request a
+bulk zero of the entire device followed by writing only the portions
+of the device that are to contain data, as that results in fewer I/O
+transactions overall. In fact, there are even situations where
+trimming the entire device prior to writing zeroes may be faster than
+bare write zero request [2]. However, if a bulk zero request ever
+falls back to the same speed as a normal write, a bulk pre-zeroing
+algorithm is actually a pessimization, as it ends up writing portions
+of the disk twice.
 
-Eric Blake (1):
-  protocol: Add NBD_CMD_FLAG_FAST_ZERO
+[1] https://lists.gnu.org/archive/html/qemu-devel/2019-03/msg06389.html
+[2] https://github.com/libguestfs/nbdkit/commit/407f8dde
 
+Hence, it is desirable to have a way for clients to specify that a
+particular write zero request is being attempted for a fast wipe, and
+get an immediate failure if the zero request would otherwise take the
+same time as a write.  Conversely, if the client is not performing a
+pre-initialization pass, it is still more efficient in terms of
+networking traffic to send NBD_CMD_WRITE_ZERO requests where the
+server implements the fallback to the slower write, than it is for the
+client to have to perform the fallback to send NBD_CMD_WRITE with a
+zeroed buffer.
+
+Add a protocol flag and corresponding transmission advertisement flag
+to make it easier for clients to inform the server of their intent. If
+the server advertises NBD_FLAG_SEND_FAST_ZERO, then it promises two
+things: to perform a fallback to write when the client does not
+request NBD_CMD_FLAG_FAST_ZERO (so that the client benefits from the
+lower network overhead); and to fail quickly with ENOTSUP, preferably
+without modifying the export, if the client requested the flag but the
+server cannot write zeroes more efficiently than a normal write (so
+that the client is not penalized with the time of writing data areas
+of the disk twice).
+
+Note that the semantics are chosen so that servers should advertise
+the new flag whether or not they have fast zeroing (that is, this is
+NOT the server advertising that it has fast zeroes, but rather
+advertising that the client can get fast feedback as needed on whether
+zeroing is fast).  It is also intentional that the new advertisement
+includes a new errno value, ENOTSUP, with rules that this error should
+not be returned for any pre-existing behaviors, must not happen when
+the client does not request a fast zero, and must be returned quickly
+if the client requested fast zero but anything other than the error
+would not be fast; while leaving it possible for clients to
+distinguish other errors like EINVAL if alignment constraints are not
+met.  Clients should not send the flag unless the server advertised
+support, but well-behaved servers should already be reporting EINVAL
+to unrecognized flags. If the server does not advertise the new
+feature, clients can safely fall back to assuming that writing zeroes
+is no faster than normal writes (whether or not the assumption
+actually holds).
+
+Note that the Linux fallocate(2) interface may or may not be powerful
+enough to easily determine if zeroing will be efficient - in
+particular, FALLOC_FL_ZERO_RANGE in isolation does NOT give that
+insight; likewise, for block devices, it is known that
+ioctl(BLKZEROOUT) does NOT have a way for userspace to probe if it is
+efficient or slow.  But with enough demand, the kernel may add another
+FALLOC_FL_ flag to use with FALLOC_FL_ZERO_RANGE, and/or appropriate
+ioctls with guaranteed ENOTSUP failures if a fast path cannot be
+taken.  If a server cannot easily determine if write zeroes will be
+efficient, the server should either fail all NBD_CMD_FLAG_FAST_ZERO
+with ENOTSUP, or else choose to not advertise NBD_FLAG_SEND_FAST_ZERO.
+
+Signed-off-by: Eric Blake <eblake@redhat.com>
+---
  doc/proto.md | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
  1 file changed, 49 insertions(+), 1 deletion(-)
 
+diff --git a/doc/proto.md b/doc/proto.md
+index 52d3e7b..702688b 100644
+--- a/doc/proto.md
++++ b/doc/proto.md
+@@ -1070,6 +1070,18 @@ The field has the following format:
+   which support the command without advertising this bit, and
+   conversely that this bit does not guarantee that the command will
+   succeed or have an impact.
++- bit 11, `NBD_FLAG_SEND_FAST_ZERO`: allow clients to detect whether
++  `NBD_CMD_WRITE_ZEROES` is faster than a corresponding write. The
++  server MUST set this transmission flag to 1 if the
++  `NBD_CMD_WRITE_ZEROES` request supports the `NBD_CMD_FLAG_FAST_ZERO`
++  flag, and MUST set this transmission flag to 0 if
++  `NBD_FLAG_SEND_WRITE_ZEROES` is not set. Servers MAY set this this
++  transmission flag even if it will always use `NBD_ENOTSUP` failures for
++  requests with `NBD_CMD_FLAG_FAST_ZERO` set (such as if the server
++  cannot quickly determine whether a particular write zeroes request
++  will be faster than a regular write). Clients MUST NOT set the
++  `NBD_CMD_FLAG_FAST_ZERO` request flag unless this transmission flag
++  is set.
+
+ Clients SHOULD ignore unknown flags.
+
+@@ -1647,6 +1659,12 @@ valid may depend on negotiation during the handshake phase.
+   MUST NOT send metadata on more than one extent in the reply. Client
+   implementors should note that using this flag on multiple contiguous
+   requests is likely to be inefficient.
++- bit 4, `NBD_CMD_FLAG_FAST_ZERO`; valid during
++  `NBD_CMD_WRITE_ZEROES`. If set, but the server cannot perform the
++  write zeroes any faster than it would for an equivalent
++  `NBD_CMD_WRITE`, then the server MUST fail quickly with an error of
++  `NBD_ENOTSUP`. The client MUST NOT set this unless the server advertised
++  `NBD_FLAG_SEND_FAST_ZERO`.
+
+ ##### Structured reply flags
+
+@@ -2015,7 +2033,10 @@ The following request types exist:
+     reached permanent storage, unless `NBD_CMD_FLAG_FUA` is in use.
+
+     A client MUST NOT send a write zeroes request unless
+-    `NBD_FLAG_SEND_WRITE_ZEROES` was set in the transmission flags field.
++    `NBD_FLAG_SEND_WRITE_ZEROES` was set in the transmission flags
++    field. Additionally, a client MUST NOT send the
++    `NBD_CMD_FLAG_FAST_ZERO` flag unless `NBD_FLAG_SEND_FAST_ZERO` was
++    set in the transimssion flags field.
+
+     By default, the server MAY use trimming to zero out the area, even
+     if it did not advertise `NBD_FLAG_SEND_TRIM`; but it MUST ensure
+@@ -2025,6 +2046,28 @@ The following request types exist:
+     same area will not cause fragmentation or cause failure due to
+     insufficient space.
+
++    If the server advertised `NBD_FLAG_SEND_FAST_ZERO` but
++    `NBD_CMD_FLAG_FAST_ZERO` is not set, then the server MUST NOT fail
++    with `NBD_ENOTSUP`, even if the operation is no faster than a
++    corresponding `NBD_CMD_WRITE`. Conversely, if
++    `NBD_CMD_FLAG_FAST_ZERO` is set, the server MUST fail quickly with
++    `NBD_ENOTSUP` unless the request can be serviced in less time than
++    a corresponding `NBD_CMD_WRITE`, and SHOULD NOT alter the contents
++    of the export when returning this failure. The server's
++    determination of a fast request MAY depend on a number of factors,
++    such as whether the request was suitably aligned, on whether the
++    `NBD_CMD_FLAG_NO_HOLE` flag was present, or even on whether a
++    previous `NBD_CMD_TRIM` had been performed on the region.  If the
++    server did not advertise `NBD_FLAG_SEND_FAST_ZERO`, then it SHOULD
++    NOT fail with `NBD_ENOTSUP`, regardless of the speed of servicing
++    a request, and SHOULD fail with `NBD_EINVAL` if the
++    `NBD_CMD_FLAG_FAST_ZERO` flag was set. A server MAY advertise
++    `NBD_FLAG_SEND_FAST_ZERO` whether or not it can perform fast
++    zeroing; similarly, a server SHOULD fail with `NBD_ENOTSUP` when
++    the flag is set if the server cannot quickly determine in advance
++    whether that request would have been fast, even if it turns out
++    that the same request without the flag would be fast after all.
++
+     If an error occurs, the server MUST set the appropriate error code
+     in the error field.
+
+@@ -2125,6 +2168,7 @@ The following error values are defined:
+ * `NBD_EINVAL` (22), Invalid argument.
+ * `NBD_ENOSPC` (28), No space left on device.
+ * `NBD_EOVERFLOW` (75), Value too large.
++* `NBD_ENOTSUP` (95), Operation not supported.
+ * `NBD_ESHUTDOWN` (108), Server is in the process of being shut down.
+
+ The server SHOULD return `NBD_ENOSPC` if it receives a write request
+@@ -2139,6 +2183,10 @@ read-only export.
+ The server SHOULD NOT return `NBD_EOVERFLOW` except as documented in
+ response to `NBD_CMD_READ` when `NBD_CMD_FLAG_DF` is supported.
+
++The server SHOULD NOT return `NBD_ENOTSUP` except as documented in
++response to `NBD_CMD_WRITE_ZEROES` when `NBD_CMD_FLAG_FAST_ZERO` is
++supported.
++
+ The server SHOULD return `NBD_EINVAL` if it receives an unknown command.
+
+ The server SHOULD return `NBD_EINVAL` if it receives an unknown
 -- 
 2.21.0
 
