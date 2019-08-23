@@ -1,97 +1,124 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60AAB9B688
-	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 20:59:02 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E3579B76E
+	for <lists+nbd@lfdr.de>; Fri, 23 Aug 2019 21:54:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 41F59204CE; Fri, 23 Aug 2019 18:59:02 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 18:59:02 2019
-Old-Return-Path: <eblake@redhat.com>
+	id 3A42B204CF; Fri, 23 Aug 2019 19:54:18 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 23 19:54:18 2019
+Old-Return-Path: <vsementsov@virtuozzo.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-20.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
-	LDO_WHITELIST,MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,THREADTOPIC autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7247420487
-	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 18:58:55 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 70549204B1
+	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Aug 2019 19:39:09 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-16.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.32 tagged_above=-10000 required=5.3
+	tests=[BAYES_05=-1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, THREADTOPIC=2]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Iu2tuqSmBham for <lists-other-nbd@bendel.debian.org>;
-	Fri, 23 Aug 2019 18:58:51 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	with ESMTP id tWozUNHYQhnU for <lists-other-nbd@bendel.debian.org>;
+	Fri, 23 Aug 2019 19:39:05 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL16_SUBNET=-0.41 (check from: .virtuozzo. - helo: .eur03-db5-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM/MX_MATCHES_UNVR_HELO(DOMAIN)_OR_CL_NAME(DOMAIN)=-1.5 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -4.66
+X-Greylist: delayed 15512 seconds by postgrey-1.36 at bendel; Fri, 23 Aug 2019 19:39:05 UTC
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com (mail-db5eur03on0704.outbound.protection.outlook.com [IPv6:2a01:111:f400:fe0a::704])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5A77A2010A
-	for <nbd@other.debian.org>; Fri, 23 Aug 2019 18:58:51 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id F21213175285;
-	Fri, 23 Aug 2019 18:58:47 +0000 (UTC)
-Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 8027F600C1;
-	Fri, 23 Aug 2019 18:58:44 +0000 (UTC)
-Subject: Re: [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
-To: Wouter Verhelst <w@uter.be>
-Cc: nbd@other.debian.org, qemu-block@nongnu.org, qemu-devel@nongnu.org,
- libguestfs@redhat.com
+	(Client CN "mail.protection.outlook.com", Issuer "GlobalSign Organization Validation CA - SHA256 - G3" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id B21E820425
+	for <nbd@other.debian.org>; Fri, 23 Aug 2019 19:39:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Thx4tbBY2iH1vzkyh7yQgF1qFpaP6gZadxmlWqeP7KbZuS+eIFFArocsu1EQMTnfagbmYTulVv6LPZTV5fp/ubvBICdTOhjJiuEhHzZ1RfzA+5QdzBCoRcqCszw7xmOxClEI+8pnNteHa1lRl9qa8ChP6ajAElvtJBEgn/9K9P1JRwJZMJMedUcuydPBfEyGAoj4z2vxlzEyJfidegLNj4RN3Gdtb6TGbguJDvpIPNJjgtplDkiuwnLP0jLE/dvfOzrqsXKnRMDFdz0G2iT4ObLQYwW5Ei3Pl4nnPvlUVgMgejWhfLCPK7ipdroTVYnyAFEgAwXYfZHd8erpEiRG3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Fs10yTQqe3mVFz/YRDYXZr7vs+j1B4zPDoxF8K41b+A=;
+ b=XEn/uyoDxenmkdHTgEBGyYbvO4SkxeAYSflDgjuSy/HBwCkZR0kXeFy3b5EOsK6YIwhQc1kE1bEL8hqCAVjVYgf3AUfRMyqzAdCPYuCA/F1AW9pbof+oJI4iYsOjOCWjsy2zBCyJ1dJjFBCJO+WYe0bFLOMjR0tCmendLnCcJUyI+LFvsxdFNRnZ/bTqVj6epuydFG418D90W7xaM+Zo7IN6j2MYxUU7d+g+9Egf/NgSY+RG4+toga0WLkaUjpDoDNoVu+xEyUCN3pR5S6xb/BOqavtTwJ+nad8Moa8rkjEVa9aLDkSPJxaQhwHAaMOf+35ZeB3oitQTRn1aVsResw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Fs10yTQqe3mVFz/YRDYXZr7vs+j1B4zPDoxF8K41b+A=;
+ b=O/ZAEm0qzde3vaufdSHtuRZoQTxuyfzStk0tQHnKmixrNK7Fhmbx5nxSi66fByJlNUPS/22162FMjN8xAGdUCXAo2XwNPq7c+1P/CW5uXLvCHi13q315Zk3iVnor0w08RmmfRdm8GPas2q/7n7bg2YqEGT34G17dGW1R+8AG+to=
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
+ DB8PR08MB5033.eurprd08.prod.outlook.com (10.255.17.213) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2178.18; Fri, 23 Aug 2019 15:05:32 +0000
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::617b:d2c2:11e9:4604]) by DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::617b:d2c2:11e9:4604%3]) with mapi id 15.20.2178.020; Fri, 23 Aug 2019
+ 15:05:32 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Eric Blake <eblake@redhat.com>, QEMU <qemu-devel@nongnu.org>,
+	"qemu-block@nongnu.org" <qemu-block@nongnu.org>, "nbd@other.debian.org"
+	<nbd@other.debian.org>, "libguestfs@redhat.com" <libguestfs@redhat.com>
+Subject: Re: [Qemu-devel] cross-project patches: Add NBD Fast Zero support
+Thread-Topic: [Qemu-devel] cross-project patches: Add NBD Fast Zero support
+Thread-Index: AQHVWb+6QvwHE28+MUauWUhIkXuSiKcI1OeA
+Date: Fri, 23 Aug 2019 15:05:32 +0000
+Message-ID: <89042b51-42c8-27b3-f742-894c0a62119a@virtuozzo.com>
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143426.26838-1-eblake@redhat.com>
- <20190823143426.26838-2-eblake@redhat.com>
- <20190823184834.brhsfbc4sdq5xuij@grep.be>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <d3d1590e-e276-e449-c3da-0bdc4d4977d7@redhat.com>
-Date: Fri, 23 Aug 2019 13:58:44 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+In-Reply-To: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-clientproxiedby: HE1PR0301CA0022.eurprd03.prod.outlook.com
+ (2603:10a6:3:76::32) To DB8PR08MB5498.eurprd08.prod.outlook.com
+ (2603:10a6:10:11c::24)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20190823180529760
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: fe319ae2-526c-43ed-05ec-08d727db57bf
+x-microsoft-antispam:
+ BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);SRVR:DB8PR08MB5033;
+x-ms-traffictypediagnostic: DB8PR08MB5033:
+x-microsoft-antispam-prvs:
+ <DB8PR08MB5033A462C0B9386583A39D30C1A40@DB8PR08MB5033.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6108;
+x-forefront-prvs: 0138CD935C
+x-forefront-antispam-report:
+ SFV:NSPM;SFS:(10019020)(346002)(376002)(366004)(396003)(136003)(39850400004)(189003)(199004)(66946007)(386003)(31686004)(2616005)(53936002)(446003)(6436002)(6116002)(3846002)(11346002)(25786009)(102836004)(4744005)(7736002)(6506007)(478600001)(66446008)(64756008)(316002)(229853002)(66476007)(66556008)(66066001)(6486002)(2906002)(6512007)(486006)(26005)(36756003)(186003)(476003)(6246003)(2201001)(31696002)(305945005)(256004)(14454004)(99286004)(86362001)(81156014)(8936002)(71200400001)(71190400001)(8676002)(52116002)(81166006)(5660300002)(76176011)(110136005)(2501003);DIR:OUT;SFP:1102;SCL:1;SRVR:DB8PR08MB5033;H:DB8PR08MB5498.eurprd08.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;MX:1;A:1;
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info:
+ v/ZpbUNUvyifNLwNGOWgU1eNil59HbchHxEqwsQiFwlNf1QSv7pPHUiBl/Ap1WHOdO7eYuLHnlYbRf7o9SDQxAblwoaCYG1lgcnjJUCYMLsb8FP8aABKkjRAlY550U2BLYcj/jmpFKk3U7kQSQklulIWmQWfWubeX7LZlyuS+NzVgDh8x7adaD0g7ZSRIcqg8//SPWAp1Mo7vfpVAYN1BbNN94xlpGHYTb74FxUbWiqrqJfrdo9u6rlRWA3SvEBhlvY0yWhq3eOemLOd9cFavwPAhR/eJv5DFvmc2q8jO9WNMCS1KEq3DgQh3KIROoqFizaN+AA6hGekk9Hqs84niAr5WmIqSg6+iKXIEQoUnhE9Jgj2Ln3wgOahKUL8fH+lLwmbIEJEUmIkLtk6ToalpFfjmYctqjZ79Nr9FMW16NM=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <3C929FB1C131FE47A0A60CA5E59504B9@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <20190823184834.brhsfbc4sdq5xuij@grep.be>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="EH2bSYSWGcIkMUKvlAApzOkXl3E28Wsmi"
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.49]); Fri, 23 Aug 2019 18:58:48 +0000 (UTC)
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe319ae2-526c-43ed-05ec-08d727db57bf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Aug 2019 15:05:32.1583
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: TF9bIycHjViJwrYkO/hDesB3dvQBpHD1Iv25U/xBQzLEybN02tVUIBLMFzl+cFc6Q+wWhjeGl+UXyFqcaqeraWsr7U6tSPX3V+PCAdEs6IU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5033
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <hJuhnNCIFtG.A.5v.2dDYdB@bendel>
+Resent-Message-ID: <bsndFzHr9JF.A.5-E.qREYdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/647
+X-Mailing-List: <nbd@other.debian.org> archive/latest/648
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -101,100 +128,16 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/d3d1590e-e276-e449-c3da-0bdc4d4977d7@redhat.com
-Resent-Date: Fri, 23 Aug 2019 18:59:02 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/89042b51-42c8-27b3-f742-894c0a62119a@virtuozzo.com
+Resent-Date: Fri, 23 Aug 2019 19:54:18 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---EH2bSYSWGcIkMUKvlAApzOkXl3E28Wsmi
-Content-Type: multipart/mixed; boundary="4aDRVcsv1YZBCvrlCxWe9GiPmIO2C73z2";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Wouter Verhelst <w@uter.be>
-Cc: nbd@other.debian.org, qemu-block@nongnu.org, qemu-devel@nongnu.org,
- libguestfs@redhat.com
-Message-ID: <d3d1590e-e276-e449-c3da-0bdc4d4977d7@redhat.com>
-Subject: Re: [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
-References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143426.26838-1-eblake@redhat.com>
- <20190823143426.26838-2-eblake@redhat.com>
- <20190823184834.brhsfbc4sdq5xuij@grep.be>
-In-Reply-To: <20190823184834.brhsfbc4sdq5xuij@grep.be>
-
---4aDRVcsv1YZBCvrlCxWe9GiPmIO2C73z2
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 8/23/19 1:48 PM, Wouter Verhelst wrote:
-> On Fri, Aug 23, 2019 at 09:34:26AM -0500, Eric Blake wrote:
->> +- bit 4, `NBD_CMD_FLAG_FAST_ZERO`; valid during
->> +  `NBD_CMD_WRITE_ZEROES`. If set, but the server cannot perform the
->> +  write zeroes any faster than it would for an equivalent
->> +  `NBD_CMD_WRITE`,
->=20
-> One way of fulfilling the letter of this requirement but not its spirit=
-
-> could be to have background writes; that is, the server makes a note
-> that the zeroed region should contain zeroes, makes an error-free reply=
-
-> to the client, and then starts updating things in the background (with
-> proper layering so that an NBD_CMD_READ would see zeroes).
-
-For writes, this should still be viable IF the server can also cancel
-that background write of zeroes in favor of a foreground request for
-actual data to be written to the same offset.  In other words, as long
-as the behavior to the client is "as if" there is no duplicated I/O
-cost, the zero appears fast, even if it kicked off a long-running async
-process to actually accomplish it.
-
->=20
-> This could negatively impact performance after that command to the
-> effect that syncing the device would be slower rather than faster, if
-> not done right.
-
-Oh. I see - for flush requests, you're worried about the cost of the
-flush forcing the I/O for the background zero to complete before flush
-can return.
-
-Perhaps that merely means that a client using fast zero requests as a
-means of probing whether it can do a bulk pre-zero pass even though it
-will be rewriting part of that image with data later SHOULD NOT attempt
-to flush the disk until all other interesting write requests are also
-ready to queue.  In the 'qemu-img convert' case which spawned this
-discussion, that's certainly the case (qemu-img does not call flush
-after the pre-zeroing, but only after all data is copied - and then it
-really DOES want to wait for any remaining backgrounded zeroing to land
-on the disk along with any normal writes when it does its final flush).
-
->=20
-> Do we want to keep that in consideration?
-
-Ideas on how best to add what I mentioned above into the specification?
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---4aDRVcsv1YZBCvrlCxWe9GiPmIO2C73z2--
-
---EH2bSYSWGcIkMUKvlAApzOkXl3E28Wsmi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1gN2QACgkQp6FrSiUn
-Q2riDwgApROHFJjgCRdVzWdGKJNRQP7KYEVqLDLMxff7YzQb00gwnr2ig7xcd0QM
-4LwN6f1FKCMDWFoLdLn5nA8LCCfKJl6Hu7YrLQZfRzWMb0gQSnNwdrWXDQgYY8CQ
-dwmbKx9H3cZrK6Nm2fCCtCHNnufj9rxaSPeHu+lelRZWgW7qraJOfvIl0PjL7DrS
-pot+1o1ZUoJZtxYeFuOb9C0v6SNUu2ELseLBKSJNQsCVTO6TH+A3hFePC6H8Vl7n
-9d4YGNg4fIevreg749HxF8Bb2aedNnmTAYuz+aeS/IeyuMacv9t+UEebhtC5bhhz
-tGMY1zmsBF54h+Y/tq3fCFsuFIqPGw==
-=muzs
------END PGP SIGNATURE-----
-
---EH2bSYSWGcIkMUKvlAApzOkXl3E28Wsmi--
+MjMuMDguMjAxOSAxNzozMCwgRXJpYyBCbGFrZSB3cm90ZToNCj4gVGhpcyBpcyBhIGNvdmVyIGxl
+dHRlciB0byBhIHNlcmllcyBvZiBwYXRjaGVzIGJlaW5nIHByb3Bvc2VkIGluIHRhbmRlbQ0KPiB0
+byBmb3VyIGRpZmZlcmVudCBwcm9qZWN0czoNCg0KSSBhbHdheXMga25ldyB5b3Ugd2VyZSBncmVh
+dCwgYnV0IHRoYXQgYnJlYWtzIGFsbCB0aGUgcmVjb3Jkcw0KDQo+IC0gbmJkOiBEb2N1bWVudCBh
+IG5ldyBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJPIGNvbW1hbmQgZmxhZw0KPiAtIHFlbXU6IEltcGxl
+bWVudCB0aGUgZmxhZyBmb3IgYm90aCBjbGllbnRzIGFuZCBzZXJ2ZXINCj4gLSBsaWJuYmQ6IElt
+cGxlbWVudCB0aGUgZmxhZyBmb3IgY2xpZW50cw0KPiAtIG5iZGtpdDogSW1wbGVtZW50IHRoZSBm
+bGFnIGZvciBzZXJ2ZXJzLCBpbmNsdWRpbmcgdGhlIG5iZCBwYXNzdGhyb3VnaA0KPiBjbGllbnQN
+Cj4gDQoNCi0tIA0KQmVzdCByZWdhcmRzLA0KVmxhZGltaXINCg==
 
