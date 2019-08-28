@@ -1,97 +1,128 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB068A0427
-	for <lists+nbd@lfdr.de>; Wed, 28 Aug 2019 16:05:31 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 31775A0665
+	for <lists+nbd@lfdr.de>; Wed, 28 Aug 2019 17:33:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 84B0D204AC; Wed, 28 Aug 2019 14:05:31 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Aug 28 14:05:31 2019
-Old-Return-Path: <eblake@redhat.com>
+	id 19CA02040C; Wed, 28 Aug 2019 15:33:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Aug 28 15:33:24 2019
+Old-Return-Path: <vsementsov@virtuozzo.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-21.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.8 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,FOURLA,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,THREADTOPIC autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 6312120478
-	for <lists-other-nbd@bendel.debian.org>; Wed, 28 Aug 2019 14:05:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 314D620394
+	for <lists-other-nbd@bendel.debian.org>; Wed, 28 Aug 2019 15:16:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-16.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.08 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001, THREADTOPIC=2]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id IwydK9keAOb0 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 28 Aug 2019 14:05:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 1F30020282
-	for <nbd@other.debian.org>; Wed, 28 Aug 2019 14:05:16 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id CA59181129;
-	Wed, 28 Aug 2019 14:05:12 +0000 (UTC)
-Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 7E5F15D6B0;
-	Wed, 28 Aug 2019 14:05:07 +0000 (UTC)
-Subject: Re: [Qemu-devel] [PATCH 0/5] Add NBD fast zero support to qemu client
- and server
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "libguestfs@redhat.com" <libguestfs@redhat.com>,
- "nbd@other.debian.org" <nbd@other.debian.org>
+	with ESMTP id vpI-8kwLeWcV for <lists-other-nbd@bendel.debian.org>;
+	Wed, 28 Aug 2019 15:16:49 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL16_SUBNET=-0.41 (check from: .virtuozzo. - helo: .eur03-db5-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM/MX_MATCHES_UNVR_HELO(DOMAIN)_OR_CL_NAME(DOMAIN)=-1.5 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -4.66
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com (mail-db5eur03on071c.outbound.protection.outlook.com [IPv6:2a01:111:f400:fe0a::71c])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(Client CN "mail.protection.outlook.com", Issuer "GlobalSign Organization Validation CA - SHA256 - G3" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id BF93620370
+	for <nbd@other.debian.org>; Wed, 28 Aug 2019 15:16:48 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gnltvTDPc8UTQbtLzwQQJu6tlIpBgpv+UGjja3US2v9chWph6I4dpI6VdIJnqzYL3PIXEHnbwbRuYtDs6y6LFZPssXKqYkz0dYou9oDVI5o/e0wGGCKHVA3hEID+psEwKLWlG6UOuwX2SkG8IYlFo7TmjIIfiYVh7C5VsIVKpp7GtY0pdBITLuVo3lzWNTVGWe03kz9LoeuJfiAx2yF5m43MRWwsl7ZH5XG/fpSD3oriy1p36jb5tgj5u4YRcPdHUu073O3b5ZuEPzkc5miDrD9XAQ6D6/wO/79ZOVGBD0nZr8tjWDtvRthzLmZpJf8aFtlyJKMAkiWOH0+0TPsfXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wAObLB+gNd1X+r6QseHXsheeFsAptr4RITB6ZVU4tCk=;
+ b=ZHyFnb+RtiQp9NmI1Bbx0brJXgMP3q5h4qOISk7+g//3dElk4xhIxhSxMLJcEjF2ZyHR2++jMga8SFDN508rBVQHwzO1HWT3TW7LOoCN2ZxJAUy5nMz6nrzue3VIihke6Da7l5pRSn4s4wQUsJYailxkJmUbkB3cpAMbjJ2mWGxpIFLVj41w3gaCwSPJ1OkAsF9OKmWjlBTgacIs2JQR23qSxhjWI4YzH+qrLENOLw9e4iWZ4T56R91BKpZ0mdMSiv1gt3oIcjOtj0aK6kHoSy+vqjPL+v5q0YK8+DJe7z5h95mL9FXeOXRQklShAtqbxMsbtMiOEjDAk1Q7GPACqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wAObLB+gNd1X+r6QseHXsheeFsAptr4RITB6ZVU4tCk=;
+ b=c3X7kg47liYzkGZ+WKkk+gBWqxAI/5q6Tr/Oo38uGbZ1TwhYDBN3idqscPqrrOVrdocGI/UG/upY7kkftUuS3NJCqFZq8s2WbIE6BGBBml7PNgBdbk3cy9mEXFBY8+5WAUdCjEPsLFNhzZMpwhS5gCb9D+j5/47wA2w0/KI+6jE=
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
+ DB8PR08MB4187.eurprd08.prod.outlook.com (20.179.9.82) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2199.21; Wed, 28 Aug 2019 13:45:09 +0000
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2199.021; Wed, 28 Aug 2019
+ 13:45:08 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Eric Blake <eblake@redhat.com>, "nbd@other.debian.org"
+	<nbd@other.debian.org>
+CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-block@nongnu.org"
+	<qemu-block@nongnu.org>, "libguestfs@redhat.com" <libguestfs@redhat.com>
+Subject: Re: [Qemu-devel] [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
+Thread-Topic: [Qemu-devel] [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
+Thread-Index: AQHVWcFpy4hSeVJKj0eg17mhrngR4acQWlsAgAA0ggCAAAs4gA==
+Date: Wed, 28 Aug 2019 13:45:08 +0000
+Message-ID: <3b8fd5cb-4c9d-801e-61e0-3a620e758cb7@virtuozzo.com>
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143726.27062-1-eblake@redhat.com>
- <9d2ee7ad-a575-dc33-a7c7-dcaceea63792@virtuozzo.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <e0dd8b33-8711-8591-25f3-60ff626989b3@redhat.com>
-Date: Wed, 28 Aug 2019 09:05:06 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <20190823143426.26838-1-eblake@redhat.com>
+ <20190823143426.26838-2-eblake@redhat.com>
+ <274bc60d-f57d-2f97-4be9-8de1aabb0949@virtuozzo.com>
+ <810779d1-0289-d635-0446-93b3dd32ec95@redhat.com>
+In-Reply-To: <810779d1-0289-d635-0446-93b3dd32ec95@redhat.com>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-clientproxiedby: HE1PR0501CA0006.eurprd05.prod.outlook.com
+ (2603:10a6:3:1a::16) To DB8PR08MB5498.eurprd08.prod.outlook.com
+ (2603:10a6:10:11c::24)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20190828164505856
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 8d1a3ce0-c952-41c1-839a-08d72bbdf0e4
+x-microsoft-antispam:
+ BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(5600166)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);SRVR:DB8PR08MB4187;
+x-ms-traffictypediagnostic: DB8PR08MB4187:
+x-microsoft-antispam-prvs:
+ <DB8PR08MB418771BF16724C03EFB8E10CC1A30@DB8PR08MB4187.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 014304E855
+x-forefront-antispam-report:
+ SFV:NSPM;SFS:(10019020)(346002)(396003)(136003)(39840400004)(366004)(376002)(189003)(199004)(305945005)(6436002)(7736002)(4326008)(66556008)(64756008)(36756003)(256004)(66446008)(8936002)(81166006)(81156014)(8676002)(6486002)(66476007)(14444005)(2501003)(2906002)(14454004)(52116002)(76176011)(186003)(71190400001)(478600001)(71200400001)(26005)(3846002)(6116002)(99286004)(66946007)(31686004)(86362001)(486006)(66066001)(6246003)(53936002)(446003)(476003)(2616005)(316002)(54906003)(6506007)(386003)(102836004)(53546011)(229853002)(5660300002)(110136005)(6512007)(25786009)(31696002)(11346002);DIR:OUT;SFP:1102;SCL:1;SRVR:DB8PR08MB4187;H:DB8PR08MB5498.eurprd08.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;MX:1;A:1;
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info:
+ JxtP6jR4kYdekZDeP7ak+ixGnOhWL2H7X5JAWZgiSiymXxlUbP2xRf6nhxgJMgXDRC0Jmlv0uhj3z7Vvq9vZlKbCmSt0pa5zxXQb8e+413ktPSBPIT0He/jl0YKkz+xTiNvJdNbGUL6tzDL63W4o1+cnBh8fzW0G825KCOokVPUZ1N4fJR1cNG4fTkEf70vvkfGsOFtCYuJuL/XTnNS9PaETZ5/C9OOWARuvy0NwZCKLMhEMx5tkevQnvkEr/oyJw3f7xb8bLhkRDLtxzK8amF7+/yCKDkyVNVL94Um35OKUUAnDCpdHpaFXZUdviRLKugpeXN8q+rio1un6Do7QIDmIxd4YgaIgB7FkWhrYmCymb4tLnShWsZ21/TMRk/Di7eSv18aZrC1SlyD9dbIoEUe3Km6xxZq1ipkE3uvq+TU=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <BAB736C3C05578499CBE08F51AF6782B@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <9d2ee7ad-a575-dc33-a7c7-dcaceea63792@virtuozzo.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="I9Jaf7Cxo1Cy6si1BfRsSYHzYBBmerqeM"
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.27]); Wed, 28 Aug 2019 14:05:12 +0000 (UTC)
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d1a3ce0-c952-41c1-839a-08d72bbdf0e4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Aug 2019 13:45:08.8667
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jYaCDEIq5VBqilN7/2ywnY7lH4X4n0fE3ZocP1v6m1VFpMOCVOA+73zOGi1FghmJYUGjlaabSV5eUbs3qksDpWidd8G7x8V41hmK6MaEEj4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB4187
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <qSCyHYHW7IN.A.I4D.rooZdB@bendel>
+Resent-Message-ID: <_eiOSvptEDI.A.vO.E7pZdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/657
+X-Mailing-List: <nbd@other.debian.org> archive/latest/658
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -101,75 +132,124 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/e0dd8b33-8711-8591-25f3-60ff626989b3@redhat.com
-Resent-Date: Wed, 28 Aug 2019 14:05:31 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/3b8fd5cb-4c9d-801e-61e0-3a620e758cb7@virtuozzo.com
+Resent-Date: Wed, 28 Aug 2019 15:33:24 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---I9Jaf7Cxo1Cy6si1BfRsSYHzYBBmerqeM
-Content-Type: multipart/mixed; boundary="sxdxhjp3YoqaiqLPWDoosiMeTVtq8x53N";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "libguestfs@redhat.com" <libguestfs@redhat.com>,
- "nbd@other.debian.org" <nbd@other.debian.org>
-Message-ID: <e0dd8b33-8711-8591-25f3-60ff626989b3@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH 0/5] Add NBD fast zero support to qemu client
- and server
-References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143726.27062-1-eblake@redhat.com>
- <9d2ee7ad-a575-dc33-a7c7-dcaceea63792@virtuozzo.com>
-In-Reply-To: <9d2ee7ad-a575-dc33-a7c7-dcaceea63792@virtuozzo.com>
-
---sxdxhjp3YoqaiqLPWDoosiMeTVtq8x53N
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 8/28/19 8:55 AM, Vladimir Sementsov-Ogievskiy wrote:
-> 23.08.2019 17:37, Eric Blake wrote:
->> See the cross-post cover letter for more details:
->> https://www.redhat.com/archives/libguestfs/2019-August/msg00322.html
->>
->> Based-on: https://lists.gnu.org/archive/html/qemu-devel/2019-08/msg048=
-05.html
->> [Andrey Shinkevich block: workaround for unaligned byte range in fallo=
-cate()]
->=20
-> I assume, I can look at git://repo.or.cz/qemu/ericb.git fast-zero branc=
-h?
-
-Yes, I posted a fast-zero branch for all four projects that I touched
-(with the obvious similar URLs). They might have non-fast-forward
-changes as I rebase things (for example, the nbdkit stuff needs to
-s/1.13.9/1.15.0/ in docs about which version introduced things), but
-should be sufficient to reproduce experiments with the feature supported.=
-
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---sxdxhjp3YoqaiqLPWDoosiMeTVtq8x53N--
-
---I9Jaf7Cxo1Cy6si1BfRsSYHzYBBmerqeM
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1mihIACgkQp6FrSiUn
-Q2pzigf/dCScJNRFxs3jJbSAeoqaKWwyGFKKiMtuIZ2slOJRkXM7scMQWUyDdLFf
-OLJ36NjX51aTo5pChRf72URUQSUiinffjmvn6aemJhBYx/tqWRGp03pQoXQpQ0LZ
-W8307KWwvvWo3llD08BRLgtlbtthXCMkB3QVAB3LpGKkLKzhVki7kHCwgu/HioDa
-RbjjgeejVltcRG478gH5zyVQYEWBcYF5hpq3xtrWZObdTG4TRNvnIKB7ONNqCr1k
-thrfoQvOUOMeDaOGT9fe4yDWsAxiUao2WF8L7oEIuLiLZYn7gO5xr5LfvjUoG6sc
-FY/jrk60hSudvKYZlOi1qWB0NMFXwA==
-=JzmC
------END PGP SIGNATURE-----
-
---I9Jaf7Cxo1Cy6si1BfRsSYHzYBBmerqeM--
+MjguMDguMjAxOSAxNjowNCwgRXJpYyBCbGFrZSB3cm90ZToNCj4gT24gOC8yOC8xOSA0OjU3IEFN
+LCBWbGFkaW1pciBTZW1lbnRzb3YtT2dpZXZza2l5IHdyb3RlOg0KPiANCj4+PiBIZW5jZSwgaXQg
+aXMgZGVzaXJhYmxlIHRvIGhhdmUgYSB3YXkgZm9yIGNsaWVudHMgdG8gc3BlY2lmeSB0aGF0IGEN
+Cj4+PiBwYXJ0aWN1bGFyIHdyaXRlIHplcm8gcmVxdWVzdCBpcyBiZWluZyBhdHRlbXB0ZWQgZm9y
+IGEgZmFzdCB3aXBlLCBhbmQNCj4+PiBnZXQgYW4gaW1tZWRpYXRlIGZhaWx1cmUgaWYgdGhlIHpl
+cm8gcmVxdWVzdCB3b3VsZCBvdGhlcndpc2UgdGFrZSB0aGUNCj4+PiBzYW1lIHRpbWUgYXMgYSB3
+cml0ZS4gIENvbnZlcnNlbHksIGlmIHRoZSBjbGllbnQgaXMgbm90IHBlcmZvcm1pbmcgYQ0KPj4+
+IHByZS1pbml0aWFsaXphdGlvbiBwYXNzLCBpdCBpcyBzdGlsbCBtb3JlIGVmZmljaWVudCBpbiB0
+ZXJtcyBvZg0KPj4+IG5ldHdvcmtpbmcgdHJhZmZpYyB0byBzZW5kIE5CRF9DTURfV1JJVEVfWkVS
+TyByZXF1ZXN0cyB3aGVyZSB0aGUNCj4+PiBzZXJ2ZXIgaW1wbGVtZW50cyB0aGUgZmFsbGJhY2sg
+dG8gdGhlIHNsb3dlciB3cml0ZSwgdGhhbiBpdCBpcyBmb3IgdGhlDQo+Pj4gY2xpZW50IHRvIGhh
+dmUgdG8gcGVyZm9ybSB0aGUgZmFsbGJhY2sgdG8gc2VuZCBOQkRfQ01EX1dSSVRFIHdpdGggYQ0K
+Pj4+IHplcm9lZCBidWZmZXIuDQo+Pg0KPj4gSG93IGFyZSB5b3UgZ29pbmcgdG8gZmluYWxseSB1
+c2UgaXQgaW4gcWVtdS1pbWcgY29udmVydD8NCj4gDQo+IEl0J3MgYWxyZWFkeSBpbiB1c2UgdGhl
+cmUgKGluIGZhY3QsIHRoZSBjb3ZlciBsZXR0ZXIgc2hvd3MgYWN0dWFsIHRpbWluZw0KPiBleGFt
+cGxlcyBvZiBob3cgcWVtdS1pbWcncyB1c2Ugb2YgQkRSVl9SRVFfTk9fRkFMTEJBQ0ssIHdoaWNo
+IHRyYW5zbGF0ZXMNCj4gdG8gTkJEX0NNRF9GTEFHX0ZBU1RfWkVSTywgb2JzZXJ2YWJseSBhZmZl
+Y3RzIHRpbWluZykuDQo+IA0KPj4gT2ssIHdlIGhhdmUgYSBsb29wDQo+PiBvZiBzZW5kaW5nIHdy
+aXRlLXplcm8gcmVxdWVzdHMuIEFuZCBvbiBmaXJzdCBFTk9UU1VQIHdlJ2xsIGFzc3VtZSB0aGF0
+IHRoZXJlDQo+PiBpcyBubyBiZW5lZml0IHRvIGNvbnRpbnVlPyBCdXQgd2hhdCBpZiBhY3R1YWxs
+eSBzZXJ2ZXIgcmV0dXJucyBFTk9UU1VQIG9ubHkNCj4+IG9uY2Ugd2hlbiB3ZSBoYXZlIDEwMDAg
+aXRlcmF0aW9ucz8gU2VlbXMgd2Ugc2hvdWxkIHN0aWxsIGRvIHplcm9pbmcgaWYgd2UNCj4+IGhh
+dmUgb25seSBhIGZldyBFTk9UU1VQcy4uLg0KPiANCj4gV2hlbiBhdHRlbXB0aW5nIGEgYnVsayB6
+ZXJvLCB5b3UgdHJ5IHRvIHdpcGUgdGhlIGVudGlyZSBkZXZpY2UsDQo+IHByZXN1bWFibHkgd2l0
+aCBzb21ldGhpbmcgdGhhdCBpcyBsYXJnZSBhbmQgYWxpZ25lZC4gIFllcywgaWYgeW91IGhhdmUN
+Cj4gdG8gc3BsaXQgdGhlIHdyaXRlIHplcm8gcmVxdWVzdCBkdWUgdG8gc2l6ZSBsaW1pdGF0aW9u
+cywgdGhlbiB5b3Ugcmlzaw0KPiB0aGF0IHRoZSBmaXJzdCB3cml0ZSB6ZXJvIHN1Y2NlZWRzIGJ1
+dCBsYXRlciBvbmVzIGZhaWwsIHRoZW4geW91IGRpZG4ndA0KPiB3aXBlIHRoZSBlbnRpcmUgZGlz
+aywgYnV0IHlvdSBhbHNvIGRvbid0IG5lZWQgdG8gcmVkbyB0aGUgd29yayBvbiB0aGUNCj4gZmly
+c3QgaGFsZiBvZiB0aGUgaW1hZ2UuICBCdXQgaXQgaXMgbXVjaCBtb3JlIGxpa2VseSB0aGF0IHRo
+ZSBmaXJzdA0KPiB3cml0ZSBvZiB0aGUgYnVsayB6ZXJvIGlzIHJlcHJlc2VudGF0aXZlIG9mIHRo
+ZSBvdmVyYWxsIG9wZXJhdGlvbiAoYW5kDQo+IHNvIGluIHByYWN0aWNlLCBpdCBvbmx5IHRha2Vz
+IG9uZSBmYXN0IHplcm8gYXR0ZW1wdCB0byBsZWFybiBpZiBidWxrDQo+IHplcm9pbmcgaXMgd29y
+dGh3aGlsZSwgdGhlbiBjb250aW51ZSB3aXRoIGZhc3QgemVyb2VzIHdpdGhvdXQgaXNzdWVzKS4N
+Cj4gDQo+Pg0KPj4gSSB1bmRlcnN0YW5kIHRoYXQgZmFpbC1vbi1maXJzdCBFTk9UU1VQIGlzIE9L
+IGZvciByYXctd2l0aG91dC1mYWxsb2N0ZSB2cyBxY293MiwNCj4+IGFzIGZpcnN0IHdpbGwgYWx3
+YXlzIHJldHVybiBFTk9UU1VQIGFuZCBzZWNvbmQgd2lsbCBuZXZlciBmYWlsLi4gQnV0IGluIHN1
+Y2ggd2F5DQo+PiB3ZSdsbCBPSyB3aXRoIHNpbXBsZXIgZXh0ZW5zaW9uLCB3aGljaCBvbmx5IGhh
+dmUgb25lIHNlcnZlci1hZHZpcnRpc2VkIG5lZ290aWF0aW9uDQo+PiBmbGFnIE5CRF9GTEFHX1pF
+Uk9fSVNfRkFTVC4NCj4gDQo+IEFkdmVydGlzaW5nIHRoYXQgYSBzZXJ2ZXIncyB6ZXJvIGJlaGF2
+aW9yIGlzIGFsd2F5cyBnb2luZyB0byBiZQ0KPiBzdWNjZXNzZnVsbHkgZmFzdCBpcyBhIG11Y2gg
+aGFyZGVyIGZsYWcgdG8gaW1wbGVtZW50LiAgVGhlIGp1c3RpZmljYXRpb24NCj4gZm9yIHRoZSBz
+ZW1hbnRpY3MgSSBjaG9zZSAoYWR2ZXJ0aXNpbmcgdGhhdCB0aGUgc2VydmVyIGNhbiBxdWlja2x5
+DQo+IHJlcG9ydCBmYWlsdXJlIGlmIHN1Y2Nlc3MgaXMgbm90IGZhc3QsIGJ1dCBub3QgcmVxdWly
+aW5nIGZhc3QgemVybykNCj4gY292ZXJzIHRoZSBjYXNlIHdoZW4gdGhlIGRlY2lzaW9uIG9mIHdo
+ZXRoZXIgYSB6ZXJvIGlzIGZhc3QgbWF5IGFsc28NCj4gZGVwZW5kIG9uIG90aGVyIGZhY3RvcnMg
+LSBmb3IgZXhhbXBsZSwgaWYgdGhlIHNlcnZlciBrbm93cyB0aGUgaW1hZ2UNCj4gc3RhcnRzIGlu
+IGFuIGFsbC16ZXJvIHN0YXRlLCB0aGVuIGl0IGNhbiB0cmFjayBhIGJvb2xlYW46IGFsbCB3cml0
+ZSB6ZXJvDQo+IHJlcXVlc3RzIHdoaWxlIHRoZSBib29sZWFuIGlzIHNldCByZXR1cm4gaW1tZWRp
+YXRlIHN1Y2Nlc3MgKG5vdGhpbmcgdG8NCj4gZG8pLCBidXQgYWZ0ZXIgdGhlIGZpcnN0IHJlZ3Vs
+YXIgd3JpdGUsIHRoZSBib29sZWFuIGlzIHNldCB0byBmYWxzZSwgYW5kDQo+IGFsbCBmdXJ0aGVy
+IHdyaXRlIHplcm8gcmVxdWVzdHMgZmFpbCBhcyBiZWluZyBwb3RlbnRpYWxseSBzbG93OyBhbmQg
+c3VjaA0KPiBhbiBpbXBsZW1lbnRhdGlvbiBpcyBzdGlsbCB1c2VmdWwgZm9yIHRoZSBxZW11LWlt
+ZyBjb252ZXJ0IGNhc2UuDQoNCkFncmVlZCwgdGhhbmtzIGZvciB0aGlzIGV4YW1wbGUpDQoNCj4g
+DQo+Pg0KPj4gVGhlcmUgaXMgbm90IHN1Y2ggcHJvYmxlbSBpZiB3ZSBoYXZlIG9ubHkgb25lIGl0
+ZXJhdGlvbiwgc28gbWF5IGJlIG5ldyBjb21tYW5kDQo+PiBGSUxMX1pFUk8sIGZpbGxpbmcgdGhl
+IHdob2xlIGRldmljZSBieSB6ZXJvcz8NCj4gDQo+IE9yIGJldHRlciB5ZXQsIGltcGxlbWVudCBz
+dXBwb3J0IGZvciA2NC1iaXQgY29tbWFuZHMuICBZZXMsIG15IGNvdmVyDQo+IGxldHRlciBjYWxs
+ZWQgb3V0IGZ1cnRoZXIgb3J0aG9nb25hbCBleHRlbnNpb25zLCBhbmQgaW1wbGVtZW50aW5nIDY0
+LWJpdA0KPiB6ZXJvaW5nIChzbyB0aGF0IHlvdSBjYW4gaXNzdWUgYSB3cml0ZSB6ZXJvIHJlcXVl
+c3Qgb3ZlciB0aGUgZW50aXJlDQo+IGltYWdlIGluIG9uZSBjb21tYW5kKSwgYXMgd2VsbCBhcyBh
+IHdheSBmb3IgYSBzZXJ2ZXIgdG8gYWR2ZXJ0aXNlIHdoZW4NCj4gdGhlIGltYWdlIGJlZ2lucyBs
+aWZlIGluIGFuIGFsbC16ZXJvIHN0YXRlLCBhcmUgYWxzbyBmdXJ0aGVyIGV4dGVuc2lvbnMNCj4g
+Y29taW5nIGRvd24gdGhlIHBpcGVsaW5lLiAgQnV0IGFzIG5vdCBhbGwgc2VydmVycyBoYXZlIHRv
+IGltcGxlbWVudCBhbGwNCj4gb2YgdGhlIGV4dGVuc2lvbnMsIGVhY2ggZXh0ZW5zaW9uIHRoYXQg
+Y2FuIGJlIG9ydGhvZ29uYWxseSBpbXBsZW1lbnRlZA0KPiBhbmQgc2hvdyBhbiBpbXByb3ZlbWVu
+dCBvbiBpdHMgb3duIGlzIHN0aWxsIHdvcnRod2hpbGU7IGFuZCBteSBjb3Zlcg0KPiBsZXR0ZXIg
+aGFzIHNob3duIHRoYXQgZmFzdCB6ZXJvZXMgb24gdGhlaXIgb3duIG1ha2UgYSBtZWFzdXJhYmxl
+DQo+IGRpZmZlcmVuY2UgdG8gY2VydGFpbiB3b3JrbG9hZHMuDQo+IA0KPj4+ICsgICAgSWYgdGhl
+IHNlcnZlciBhZHZlcnRpc2VkIGBOQkRfRkxBR19TRU5EX0ZBU1RfWkVST2AgYnV0DQo+Pj4gKyAg
+ICBgTkJEX0NNRF9GTEFHX0ZBU1RfWkVST2AgaXMgbm90IHNldCwgdGhlbiB0aGUgc2VydmVyIE1V
+U1QgTk9UIGZhaWwNCj4+PiArICAgIHdpdGggYE5CRF9FTk9UU1VQYCwgZXZlbiBpZiB0aGUgb3Bl
+cmF0aW9uIGlzIG5vIGZhc3RlciB0aGFuIGENCj4+PiArICAgIGNvcnJlc3BvbmRpbmcgYE5CRF9D
+TURfV1JJVEVgLiBDb252ZXJzZWx5LCBpZg0KPj4+ICsgICAgYE5CRF9DTURfRkxBR19GQVNUX1pF
+Uk9gIGlzIHNldCwgdGhlIHNlcnZlciBNVVNUIGZhaWwgcXVpY2tseSB3aXRoDQo+Pj4gKyAgICBg
+TkJEX0VOT1RTVVBgIHVubGVzcyB0aGUgcmVxdWVzdCBjYW4gYmUgc2VydmljZWQgaW4gbGVzcyB0
+aW1lIHRoYW4NCj4+PiArICAgIGEgY29ycmVzcG9uZGluZyBgTkJEX0NNRF9XUklURWAsIGFuZCBT
+SE9VTEQgTk9UIGFsdGVyIHRoZSBjb250ZW50cw0KPj4+ICsgICAgb2YgdGhlIGV4cG9ydCB3aGVu
+IHJldHVybmluZyB0aGlzIGZhaWx1cmUuIFRoZSBzZXJ2ZXIncw0KPj4+ICsgICAgZGV0ZXJtaW5h
+dGlvbiBvZiBhIGZhc3QgcmVxdWVzdCBNQVkgZGVwZW5kIG9uIGEgbnVtYmVyIG9mIGZhY3RvcnMs
+DQo+Pj4gKyAgICBzdWNoIGFzIHdoZXRoZXIgdGhlIHJlcXVlc3Qgd2FzIHN1aXRhYmx5IGFsaWdu
+ZWQsIG9uIHdoZXRoZXIgdGhlDQo+Pj4gKyAgICBgTkJEX0NNRF9GTEFHX05PX0hPTEVgIGZsYWcg
+d2FzIHByZXNlbnQsIG9yIGV2ZW4gb24gd2hldGhlciBhDQo+Pj4gKyAgICBwcmV2aW91cyBgTkJE
+X0NNRF9UUklNYCBoYWQgYmVlbiBwZXJmb3JtZWQgb24gdGhlIHJlZ2lvbi4gIElmIHRoZQ0KPj4+
+ICsgICAgc2VydmVyIGRpZCBub3QgYWR2ZXJ0aXNlIGBOQkRfRkxBR19TRU5EX0ZBU1RfWkVST2As
+IHRoZW4gaXQgU0hPVUxEDQo+Pj4gKyAgICBOT1QgZmFpbCB3aXRoIGBOQkRfRU5PVFNVUGAsIHJl
+Z2FyZGxlc3Mgb2YgdGhlIHNwZWVkIG9mIHNlcnZpY2luZw0KPj4+ICsgICAgYSByZXF1ZXN0LCBh
+bmQgU0hPVUxEIGZhaWwgd2l0aCBgTkJEX0VJTlZBTGAgaWYgdGhlDQo+Pj4gKyAgICBgTkJEX0NN
+RF9GTEFHX0ZBU1RfWkVST2AgZmxhZyB3YXMgc2V0LiBBIHNlcnZlciBNQVkgYWR2ZXJ0aXNlDQo+
+Pj4gKyAgICBgTkJEX0ZMQUdfU0VORF9GQVNUX1pFUk9gIHdoZXRoZXIgb3Igbm90IGl0IGNhbiBw
+ZXJmb3JtIGZhc3QNCj4+PiArICAgIHplcm9pbmc7IHNpbWlsYXJseSwgYSBzZXJ2ZXIgU0hPVUxE
+IGZhaWwgd2l0aCBgTkJEX0VOT1RTVVBgIHdoZW4NCj4+PiArICAgIHRoZSBmbGFnIGlzIHNldCBp
+ZiB0aGUgc2VydmVyIGNhbm5vdCBxdWlja2x5IGRldGVybWluZSBpbiBhZHZhbmNlDQo+Pj4gKyAg
+ICB3aGV0aGVyIHRoYXQgcmVxdWVzdCB3b3VsZCBoYXZlIGJlZW4gZmFzdCwgZXZlbiBpZiBpdCB0
+dXJucyBvdXQNCj4+PiArICAgIHRoYXQgdGhlIHNhbWUgcmVxdWVzdCB3aXRob3V0IHRoZSBmbGFn
+IHdvdWxkIGJlIGZhc3QgYWZ0ZXIgYWxsLg0KPj4+ICsNCj4+DQo+PiBXaGF0IGlmIFdSSVRFX1pF
+Uk8gaW4gdGhlIGF2ZXJhZ2UgaXMgZmFzdGVyIHRoYW4gV1JJVEUgKGZvciBleGFtcGxlIGJ5IDIw
+JSksDQo+PiBidXQgc2VydmVyIG5ldmVyIGNhbiBndWFyYW50ZWUgcGVyZm9ybWFuY2UgZm9yIG9u
+ZSBXUklURV9aRVJPIG9wZXJhdGlvbiwgZG8NCj4+IHlvdSByZXN0cmljdCBzdWNoIGNhc2U/IEht
+bSwgT0ssIFNIT1VMRCBpcyBub3QgTVVTVCBhY3R1YWxseS4uDQo+IA0KPiBJIHRoaW5rIG15IGZv
+bGxvd3VwIG1haWwsIGJhc2VkIG9uIFdvdXRlcidzIHF1ZXN0aW9ucywgY292ZXJzIHRoaXM6IHRo
+ZQ0KDQpIbW0sIE9LLCBzb3JyeSBmb3IgZHVwbGljYXRpb24NCg0KPiBnb2FsIGlzIHRvIGRvY3Vt
+ZW50IHRoZSB1c2UgY2FzZSBvZiBvcHRpbWl6aW5nIHRoZSBjb3B5IG9mIGEgc3BhcnNlDQo+IGlt
+YWdlLCBieSBwcm9iaW5nIHdoZXRoZXIgYSBidWxrIHByZS16ZXJvaW5nIHBhc3MgaXMgd29ydGh3
+aGlsZS4gIFRoYXQNCj4gc2hvdWxkIGJlIHRoZSBtZWFzdXJpbmcgcm9kIC0gaWYgdGhlIGltcGxl
+bWVudGF0aW9uIGNhbiBwZXJmb3JtIGEgZmFzdGVyDQo+IHNwYXJzZSBjb3B5IGJlY2F1c2Ugb2Yg
+d3JpdGUgemVyb2VzIHRoYXQgYXJlIHNvbWV0aW1lcywgYnV0IG5vdCBhbHdheXMsDQo+IGZhc3Rl
+ciB0aGFuIHdyaXRlcywgaW4gc3BpdGUgb2YgdGhlIGR1cGxpY2F0ZWQgSS9PIHRoYXQgaGFwcGVu
+cyB0byB0aGUNCj4gZGF0YSBwb3J0aW9ucyBvZiB0aGUgaW1hZ2UgdGhhdCB3ZXJlIHRvdWNoZWQg
+dHdpY2UgYnkgdGhlIHByZS16ZXJvIHBhc3MNCj4gdGhlbiB0aGUgYWN0dWFsIGRhdGEgcGFzcywg
+dGhlbiBzdWNjZWVkaW5nIG9uIGZhc3QgemVybyByZXF1ZXN0cyBpcw0KPiBva2F5LiAgQnV0IGlm
+IGl0IG1ha2VzIHRoZSBvdmVyYWxsIGltYWdlIGNvcHkgc2xvd2VyLCB0aGVuIGZhaWxpbmcgd2l0
+aA0KPiBFTk9UU1VQIGlzIHByb2JhYmx5IGJldHRlci4gIEFuZCBhdCB0aGUgZW5kIG9mIHRoZSBk
+YXksIGl0IGlzIHJlYWxseQ0KPiBqdXN0IGEgaGV1cmlzdGljIC0gaWYgdGhlIHNlcnZlciBndWVz
+c2VkIHdyb25nLCB0aGUgd29yc3QgdGhhdCBoYXBwZW5zDQo+IGlzIHNsb3dlciBwZXJmb3JtYW5j
+ZSAoYW5kIG5vdCBkYXRhIGNvcnJ1cHRpb24pLg0KPiANCg0KT0ssIEkgdW5kZXJzdGFuZCwgdGhh
+biBpdCdzIGFsbCBzb3VuZHMgZ29vZA0KDQotLSANCkJlc3QgcmVnYXJkcywNClZsYWRpbWlyDQo=
 
