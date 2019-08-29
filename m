@@ -2,127 +2,69 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A842A0DBB
-	for <lists+nbd@lfdr.de>; Thu, 29 Aug 2019 00:48:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25C91A2B45
+	for <lists+nbd@lfdr.de>; Fri, 30 Aug 2019 02:06:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B91A020375; Wed, 28 Aug 2019 22:48:21 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Aug 28 22:48:21 2019
-Old-Return-Path: <vsementsov@virtuozzo.com>
+	id B498B20647; Fri, 30 Aug 2019 00:06:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 30 00:06:08 2019
+Old-Return-Path: <mchristi@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.8 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,THREADTOPIC autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A7AF72031C
-	for <lists-other-nbd@bendel.debian.org>; Wed, 28 Aug 2019 22:32:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A68A120518
+	for <lists-other-nbd@bendel.debian.org>; Thu, 29 Aug 2019 23:49:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.92 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001, THREADTOPIC=2]
+X-Amavis-Spam-Status: No, score=-5.86 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 2N6jbZVUEuCb for <lists-other-nbd@bendel.debian.org>;
-	Wed, 28 Aug 2019 22:32:54 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL16_SUBNET=-0.41 (check from: .virtuozzo. - helo: .eur03-am5-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM/MX_MATCHES_UNVR_HELO(DOMAIN)_OR_CL_NAME(DOMAIN)=-1.5 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -4.66
-X-Greylist: delayed 18025 seconds by postgrey-1.36 at bendel; Wed, 28 Aug 2019 22:32:54 UTC
-Received: from EUR03-AM5-obe.outbound.protection.outlook.com (mail-am5eur03on0712.outbound.protection.outlook.com [IPv6:2a01:111:f400:fe08::712])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "GlobalSign Organization Validation CA - SHA256 - G3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 09205202F1
-	for <nbd@other.debian.org>; Wed, 28 Aug 2019 22:32:52 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MFMeOH3uerAnaaBL/3XvO21lkwRRTDrDsHnpaaE5CX18p45mQcKoLYETWFrEofqg7zzW/apo83us8YIM+w8mBDAjJ6rG67n6p/DENt/XwfSzyZ760rZtUgFsoFRrDGuAHzXHnfydOTBvqOQFRbryCO7RRowaOqa4VjK9de15siFhZhcHe1OcrOLGyeRd6dyjFjyfApY6wjC6cXmhOX62oXbADT7xSsPjVU+ga1VzRv4S0OOMKk7n9E+zmbPQx9R263rjkEkpKrfjelVUxWNOlAAbEPlvGDjoe4vr54nTW/cWhC0msT6+HXDsKQN4Knd33rcDWvEwWYnM7yg4GdGnjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/TQ2Dqp1OBA/O4nGWgoEGl4M/mnW/ldvKQcMsab/Cq0=;
- b=Hidif8gTWTKimfw/9M6YHE2NnuU8nNqxhOvz+rkhabb6z5fnWncOr1MTuoScs5fqeaMt96k/Uurvv6CONGNEwtRYY32X8j4pI87gXuJgCz3EifTxuUeXQyMSWok8KlTj+GlY+1+GZQMS6QL/W6tl1uYgv+a5UXcgSQcBO2VT1PkRIBR4VkCwNHVb3s8uNCGGs8mYjs2iVj/2+fDZHfCsgF3tUc4Ia6juHtoqphHpwMs3rhOmBph9omdoXLxZjibuMmtJZZ0DEQcHkmA2Gbc8C9b9aYNPaJsLhWggqo1A7/KiznvqUq03QtjypvSksGatCuhW6ZBLLuubaWYUyUnkcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
- header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/TQ2Dqp1OBA/O4nGWgoEGl4M/mnW/ldvKQcMsab/Cq0=;
- b=VG1ie7/4dwQpsTHGejhmVWTWLvA2PJZ3rOdRrXBa+F8KzdFqkwJrWsycQ76mw0JwSpn1erJC74vzsqyG3r+O7/NPEI9dju2wP6rvTemCLEakc1A8m+fBgnv0z9XWgwmDlA1qDqE+zHFVFpkInxadrqBd/HEZDUytb2SF/9X8x+U=
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
- DB8PR08MB3980.eurprd08.prod.outlook.com (20.179.12.87) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2199.19; Wed, 28 Aug 2019 09:57:02 +0000
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2199.021; Wed, 28 Aug 2019
- 09:57:02 +0000
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: Eric Blake <eblake@redhat.com>, "nbd@other.debian.org"
-	<nbd@other.debian.org>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-block@nongnu.org"
-	<qemu-block@nongnu.org>, "libguestfs@redhat.com" <libguestfs@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
-Thread-Topic: [Qemu-devel] [PATCH 1/1] protocol: Add NBD_CMD_FLAG_FAST_ZERO
-Thread-Index: AQHVWcFpy4hSeVJKj0eg17mhrngR4acQWlsA
-Date: Wed, 28 Aug 2019 09:57:02 +0000
-Message-ID: <274bc60d-f57d-2f97-4be9-8de1aabb0949@virtuozzo.com>
-References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143426.26838-1-eblake@redhat.com>
- <20190823143426.26838-2-eblake@redhat.com>
-In-Reply-To: <20190823143426.26838-2-eblake@redhat.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-clientproxiedby: HE1PR0101CA0015.eurprd01.prod.exchangelabs.com
- (2603:10a6:3:77::25) To DB8PR08MB5498.eurprd08.prod.outlook.com
- (2603:10a6:10:11c::24)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=vsementsov@virtuozzo.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tagtoolbar-keys: D20190828125700378
-x-originating-ip: [185.231.240.5]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 40c3ebc2-4a6b-4f45-26c0-08d72b9e1351
-x-microsoft-antispam:
- BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);SRVR:DB8PR08MB3980;
-x-ms-traffictypediagnostic: DB8PR08MB3980:
-x-ms-exchange-purlcount: 2
-x-microsoft-antispam-prvs:
- <DB8PR08MB398049CE06984F2B5D3FFF0CC1A30@DB8PR08MB3980.eurprd08.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 014304E855
-x-forefront-antispam-report:
- SFV:NSPM;SFS:(10019020)(136003)(396003)(39840400004)(366004)(346002)(376002)(199004)(189003)(229853002)(6436002)(386003)(3846002)(486006)(7736002)(6116002)(53936002)(478600001)(8936002)(81156014)(81166006)(71200400001)(71190400001)(36756003)(6246003)(5660300002)(54906003)(2501003)(2906002)(6486002)(66066001)(966005)(14454004)(305945005)(25786009)(102836004)(30864003)(256004)(14444005)(4326008)(31696002)(31686004)(316002)(2616005)(66556008)(446003)(64756008)(66446008)(8676002)(11346002)(66476007)(66946007)(476003)(6512007)(52116002)(99286004)(76176011)(6506007)(26005)(6306002)(110136005)(186003)(86362001);DIR:OUT;SFP:1102;SCL:1;SRVR:DB8PR08MB3980;H:DB8PR08MB5498.eurprd08.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
-received-spf: None (protection.outlook.com: virtuozzo.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info:
- r5TUEj1nAJ/89WFrS5529lMAn8sPAb9BIzO+OckzEMwV0qy9Dmv5OXDN5KNo4EGD0VKJlZDFwA+KyLb989kQzruzId0noRU3zAx+tlr8y0gTxtVoVzEcF7nCYZxtS2R0iHmrCszlHWMtaR3zI/NqeXUitrPWYxGlSFjs7hO7JA5SeJg/G/MndnAGA/YoMXu+/fdyltB3Ozd8yU5xyStvEEEAEr+ewoWM2NLBskCzijzBdc5MY/n64cZ2WV/myLdjAQbM5tynXE/59LPDn6PVHqEfG5iy+KDBT/AvrL50fp9ph7xloKyX83xJEh5T+eGgCnNxwVEtWPY0jYZZB5kmW0T8hkk+KKOuleTo/G+HqyPTbozeESVJtclUvF0cpzFxwm2+KVTZVPaS9tYfco8J0V40vs5vzqjkfODWgjPl5Kg=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8D37C2D2EE11204FA4CD0C87B5E768EF@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	with ESMTP id BH9m-b5j7dQX for <lists-other-nbd@bendel.debian.org>;
+	Thu, 29 Aug 2019 23:49:50 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id CD7E22055F
+	for <nbd@other.debian.org>; Thu, 29 Aug 2019 23:49:49 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 73242308218D;
+	Thu, 29 Aug 2019 23:49:46 +0000 (UTC)
+Received: from [10.10.121.225] (ovpn-121-225.rdu2.redhat.com [10.10.121.225])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 6BFEE5D9CA;
+	Thu, 29 Aug 2019 23:49:45 +0000 (UTC)
+Subject: Re: [PATCH 2/2 v3] nbd: fix possible page fault for nbd disk
+To: xiubli@redhat.com, josef@toxicpanda.com, axboe@kernel.dk
+References: <20190822075923.11996-1-xiubli@redhat.com>
+ <20190822075923.11996-3-xiubli@redhat.com>
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org
+From: Mike Christie <mchristi@redhat.com>
+Message-ID: <5D686498.5090602@redhat.com>
+Date: Thu, 29 Aug 2019 18:49:44 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+ Thunderbird/38.6.0
 MIME-Version: 1.0
-X-OriginatorOrg: virtuozzo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40c3ebc2-4a6b-4f45-26c0-08d72b9e1351
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Aug 2019 09:57:02.6107
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: m+zHvEPVGjLIsNC23tlVQOD7tk69P96wMh8KYk1HPdhPqeUBpbGcBcfqw+tJO1bwa/X0BJZJKVZkiVOW/y3gmYBNwGrRyp8tVkBBSmg9kpg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB3980
+In-Reply-To: <20190822075923.11996-3-xiubli@redhat.com>
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.47]); Thu, 29 Aug 2019 23:49:46 +0000 (UTC)
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Ucr84DNJVoF.A.TdG.1SwZdB@bendel>
+Resent-Message-ID: <rgIWeU1G03E.A.nfE.whGadB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/661
+X-Mailing-List: <nbd@other.debian.org> archive/latest/662
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -132,196 +74,214 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/274bc60d-f57d-2f97-4be9-8de1aabb0949@virtuozzo.com
-Resent-Date: Wed, 28 Aug 2019 22:48:21 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/5D686498.5090602@redhat.com
+Resent-Date: Fri, 30 Aug 2019 00:06:08 +0000 (UTC)
 
-MjMuMDguMjAxOSAxNzozNCwgRXJpYyBCbGFrZSB3cm90ZToNCj4gV2hpbGUgaXQgbWF5IGJlIGNv
-dW50ZXJpbnR1aXRpdmUgYXQgZmlyc3QsIHRoZSBpbnRyb2R1Y3Rpb24gb2YNCj4gTkJEX0NNRF9X
-UklURV9aRVJPRVMgYW5kIE5CRF9DTURfQkxPQ0tfU1RBVFVTIGhhcyBjYXVzZWQgYSBwZXJmb3Jt
-YW5jZQ0KPiByZWdyZXNzaW9uIGluIHFlbXUgWzFdLCB3aGVuIGNvcHlpbmcgYSBzcGFyc2UgZmls
-ZS4gV2hlbiB0aGUNCj4gZGVzdGluYXRpb24gZmlsZSBtdXN0IGNvbnRhaW4gdGhlIHNhbWUgY29u
-dGVudHMgYXMgdGhlIHNvdXJjZSwgYnV0IGl0DQo+IGlzIG5vdCBrbm93biBpbiBhZHZhbmNlIHdo
-ZXRoZXIgdGhlIGRlc3RpbmF0aW9uIHN0YXJ0ZWQgbGlmZSB3aXRoIGFsbA0KPiB6ZXJvIGNvbnRl
-bnQsIHRoZW4gdGhlcmUgYXJlIGNhc2VzIHdoZXJlIGl0IGlzIGZhc3RlciB0byByZXF1ZXN0IGEN
-Cj4gYnVsayB6ZXJvIG9mIHRoZSBlbnRpcmUgZGV2aWNlIGZvbGxvd2VkIGJ5IHdyaXRpbmcgb25s
-eSB0aGUgcG9ydGlvbnMNCj4gb2YgdGhlIGRldmljZSB0aGF0IGFyZSB0byBjb250YWluIGRhdGEs
-IGFzIHRoYXQgcmVzdWx0cyBpbiBmZXdlciBJL08NCj4gdHJhbnNhY3Rpb25zIG92ZXJhbGwuIElu
-IGZhY3QsIHRoZXJlIGFyZSBldmVuIHNpdHVhdGlvbnMgd2hlcmUNCj4gdHJpbW1pbmcgdGhlIGVu
-dGlyZSBkZXZpY2UgcHJpb3IgdG8gd3JpdGluZyB6ZXJvZXMgbWF5IGJlIGZhc3RlciB0aGFuDQo+
-IGJhcmUgd3JpdGUgemVybyByZXF1ZXN0IFsyXS4gSG93ZXZlciwgaWYgYSBidWxrIHplcm8gcmVx
-dWVzdCBldmVyDQo+IGZhbGxzIGJhY2sgdG8gdGhlIHNhbWUgc3BlZWQgYXMgYSBub3JtYWwgd3Jp
-dGUsIGEgYnVsayBwcmUtemVyb2luZw0KPiBhbGdvcml0aG0gaXMgYWN0dWFsbHkgYSBwZXNzaW1p
-emF0aW9uLCBhcyBpdCBlbmRzIHVwIHdyaXRpbmcgcG9ydGlvbnMNCj4gb2YgdGhlIGRpc2sgdHdp
-Y2UuDQo+IA0KPiBbMV0gaHR0cHM6Ly9saXN0cy5nbnUub3JnL2FyY2hpdmUvaHRtbC9xZW11LWRl
-dmVsLzIwMTktMDMvbXNnMDYzODkuaHRtbA0KPiBbMl0gaHR0cHM6Ly9naXRodWIuY29tL2xpYmd1
-ZXN0ZnMvbmJka2l0L2NvbW1pdC80MDdmOGRkZQ0KPiANCj4gSGVuY2UsIGl0IGlzIGRlc2lyYWJs
-ZSB0byBoYXZlIGEgd2F5IGZvciBjbGllbnRzIHRvIHNwZWNpZnkgdGhhdCBhDQo+IHBhcnRpY3Vs
-YXIgd3JpdGUgemVybyByZXF1ZXN0IGlzIGJlaW5nIGF0dGVtcHRlZCBmb3IgYSBmYXN0IHdpcGUs
-IGFuZA0KPiBnZXQgYW4gaW1tZWRpYXRlIGZhaWx1cmUgaWYgdGhlIHplcm8gcmVxdWVzdCB3b3Vs
-ZCBvdGhlcndpc2UgdGFrZSB0aGUNCj4gc2FtZSB0aW1lIGFzIGEgd3JpdGUuICBDb252ZXJzZWx5
-LCBpZiB0aGUgY2xpZW50IGlzIG5vdCBwZXJmb3JtaW5nIGENCj4gcHJlLWluaXRpYWxpemF0aW9u
-IHBhc3MsIGl0IGlzIHN0aWxsIG1vcmUgZWZmaWNpZW50IGluIHRlcm1zIG9mDQo+IG5ldHdvcmtp
-bmcgdHJhZmZpYyB0byBzZW5kIE5CRF9DTURfV1JJVEVfWkVSTyByZXF1ZXN0cyB3aGVyZSB0aGUN
-Cj4gc2VydmVyIGltcGxlbWVudHMgdGhlIGZhbGxiYWNrIHRvIHRoZSBzbG93ZXIgd3JpdGUsIHRo
-YW4gaXQgaXMgZm9yIHRoZQ0KPiBjbGllbnQgdG8gaGF2ZSB0byBwZXJmb3JtIHRoZSBmYWxsYmFj
-ayB0byBzZW5kIE5CRF9DTURfV1JJVEUgd2l0aCBhDQo+IHplcm9lZCBidWZmZXIuDQoNCkhvdyBh
-cmUgeW91IGdvaW5nIHRvIGZpbmFsbHkgdXNlIGl0IGluIHFlbXUtaW1nIGNvbnZlcnQ/IE9rLCB3
-ZSBoYXZlIGEgbG9vcA0Kb2Ygc2VuZGluZyB3cml0ZS16ZXJvIHJlcXVlc3RzLiBBbmQgb24gZmly
-c3QgRU5PVFNVUCB3ZSdsbCBhc3N1bWUgdGhhdCB0aGVyZQ0KaXMgbm8gYmVuZWZpdCB0byBjb250
-aW51ZT8gQnV0IHdoYXQgaWYgYWN0dWFsbHkgc2VydmVyIHJldHVybnMgRU5PVFNVUCBvbmx5DQpv
-bmNlIHdoZW4gd2UgaGF2ZSAxMDAwIGl0ZXJhdGlvbnM/IFNlZW1zIHdlIHNob3VsZCBzdGlsbCBk
-byB6ZXJvaW5nIGlmIHdlDQpoYXZlIG9ubHkgYSBmZXcgRU5PVFNVUHMuLi4NCg0KSSB1bmRlcnN0
-YW5kIHRoYXQgZmFpbC1vbi1maXJzdCBFTk9UU1VQIGlzIE9LIGZvciByYXctd2l0aG91dC1mYWxs
-b2N0ZSB2cyBxY293MiwNCmFzIGZpcnN0IHdpbGwgYWx3YXlzIHJldHVybiBFTk9UU1VQIGFuZCBz
-ZWNvbmQgd2lsbCBuZXZlciBmYWlsLi4gQnV0IGluIHN1Y2ggd2F5DQp3ZSdsbCBPSyB3aXRoIHNp
-bXBsZXIgZXh0ZW5zaW9uLCB3aGljaCBvbmx5IGhhdmUgb25lIHNlcnZlci1hZHZpcnRpc2VkIG5l
-Z290aWF0aW9uDQpmbGFnIE5CRF9GTEFHX1pFUk9fSVNfRkFTVC4NCg0KVGhlcmUgaXMgbm90IHN1
-Y2ggcHJvYmxlbSBpZiB3ZSBoYXZlIG9ubHkgb25lIGl0ZXJhdGlvbiwgc28gbWF5IGJlIG5ldyBj
-b21tYW5kDQpGSUxMX1pFUk8sIGZpbGxpbmcgdGhlIHdob2xlIGRldmljZSBieSB6ZXJvcz8NCg0K
-PiANCj4gQWRkIGEgcHJvdG9jb2wgZmxhZyBhbmQgY29ycmVzcG9uZGluZyB0cmFuc21pc3Npb24g
-YWR2ZXJ0aXNlbWVudCBmbGFnDQo+IHRvIG1ha2UgaXQgZWFzaWVyIGZvciBjbGllbnRzIHRvIGlu
-Zm9ybSB0aGUgc2VydmVyIG9mIHRoZWlyIGludGVudC4gSWYNCj4gdGhlIHNlcnZlciBhZHZlcnRp
-c2VzIE5CRF9GTEFHX1NFTkRfRkFTVF9aRVJPLCB0aGVuIGl0IHByb21pc2VzIHR3bw0KPiB0aGlu
-Z3M6IHRvIHBlcmZvcm0gYSBmYWxsYmFjayB0byB3cml0ZSB3aGVuIHRoZSBjbGllbnQgZG9lcyBu
-b3QNCj4gcmVxdWVzdCBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJPIChzbyB0aGF0IHRoZSBjbGllbnQg
-YmVuZWZpdHMgZnJvbSB0aGUNCj4gbG93ZXIgbmV0d29yayBvdmVyaGVhZCk7IGFuZCB0byBmYWls
-IHF1aWNrbHkgd2l0aCBFTk9UU1VQLCBwcmVmZXJhYmx5DQo+IHdpdGhvdXQgbW9kaWZ5aW5nIHRo
-ZSBleHBvcnQsIGlmIHRoZSBjbGllbnQgcmVxdWVzdGVkIHRoZSBmbGFnIGJ1dCB0aGUNCj4gc2Vy
-dmVyIGNhbm5vdCB3cml0ZSB6ZXJvZXMgbW9yZSBlZmZpY2llbnRseSB0aGFuIGEgbm9ybWFsIHdy
-aXRlIChzbw0KPiB0aGF0IHRoZSBjbGllbnQgaXMgbm90IHBlbmFsaXplZCB3aXRoIHRoZSB0aW1l
-IG9mIHdyaXRpbmcgZGF0YSBhcmVhcw0KPiBvZiB0aGUgZGlzayB0d2ljZSkuDQo+IA0KPiBOb3Rl
-IHRoYXQgdGhlIHNlbWFudGljcyBhcmUgY2hvc2VuIHNvIHRoYXQgc2VydmVycyBzaG91bGQgYWR2
-ZXJ0aXNlDQo+IHRoZSBuZXcgZmxhZyB3aGV0aGVyIG9yIG5vdCB0aGV5IGhhdmUgZmFzdCB6ZXJv
-aW5nICh0aGF0IGlzLCB0aGlzIGlzDQo+IE5PVCB0aGUgc2VydmVyIGFkdmVydGlzaW5nIHRoYXQg
-aXQgaGFzIGZhc3QgemVyb2VzLCBidXQgcmF0aGVyDQo+IGFkdmVydGlzaW5nIHRoYXQgdGhlIGNs
-aWVudCBjYW4gZ2V0IGZhc3QgZmVlZGJhY2sgYXMgbmVlZGVkIG9uIHdoZXRoZXINCj4gemVyb2lu
-ZyBpcyBmYXN0KS4gIEl0IGlzIGFsc28gaW50ZW50aW9uYWwgdGhhdCB0aGUgbmV3IGFkdmVydGlz
-ZW1lbnQNCj4gaW5jbHVkZXMgYSBuZXcgZXJybm8gdmFsdWUsIEVOT1RTVVAsIHdpdGggcnVsZXMg
-dGhhdCB0aGlzIGVycm9yIHNob3VsZA0KPiBub3QgYmUgcmV0dXJuZWQgZm9yIGFueSBwcmUtZXhp
-c3RpbmcgYmVoYXZpb3JzLCBtdXN0IG5vdCBoYXBwZW4gd2hlbg0KPiB0aGUgY2xpZW50IGRvZXMg
-bm90IHJlcXVlc3QgYSBmYXN0IHplcm8sIGFuZCBtdXN0IGJlIHJldHVybmVkIHF1aWNrbHkNCj4g
-aWYgdGhlIGNsaWVudCByZXF1ZXN0ZWQgZmFzdCB6ZXJvIGJ1dCBhbnl0aGluZyBvdGhlciB0aGFu
-IHRoZSBlcnJvcg0KPiB3b3VsZCBub3QgYmUgZmFzdDsgd2hpbGUgbGVhdmluZyBpdCBwb3NzaWJs
-ZSBmb3IgY2xpZW50cyB0bw0KPiBkaXN0aW5ndWlzaCBvdGhlciBlcnJvcnMgbGlrZSBFSU5WQUwg
-aWYgYWxpZ25tZW50IGNvbnN0cmFpbnRzIGFyZSBub3QNCj4gbWV0LiAgQ2xpZW50cyBzaG91bGQg
-bm90IHNlbmQgdGhlIGZsYWcgdW5sZXNzIHRoZSBzZXJ2ZXIgYWR2ZXJ0aXNlZA0KPiBzdXBwb3J0
-LCBidXQgd2VsbC1iZWhhdmVkIHNlcnZlcnMgc2hvdWxkIGFscmVhZHkgYmUgcmVwb3J0aW5nIEVJ
-TlZBTA0KPiB0byB1bnJlY29nbml6ZWQgZmxhZ3MuIElmIHRoZSBzZXJ2ZXIgZG9lcyBub3QgYWR2
-ZXJ0aXNlIHRoZSBuZXcNCj4gZmVhdHVyZSwgY2xpZW50cyBjYW4gc2FmZWx5IGZhbGwgYmFjayB0
-byBhc3N1bWluZyB0aGF0IHdyaXRpbmcgemVyb2VzDQo+IGlzIG5vIGZhc3RlciB0aGFuIG5vcm1h
-bCB3cml0ZXMgKHdoZXRoZXIgb3Igbm90IHRoZSBhc3N1bXB0aW9uDQo+IGFjdHVhbGx5IGhvbGRz
-KS4NCj4gDQo+IE5vdGUgdGhhdCB0aGUgTGludXggZmFsbG9jYXRlKDIpIGludGVyZmFjZSBtYXkg
-b3IgbWF5IG5vdCBiZSBwb3dlcmZ1bA0KPiBlbm91Z2ggdG8gZWFzaWx5IGRldGVybWluZSBpZiB6
-ZXJvaW5nIHdpbGwgYmUgZWZmaWNpZW50IC0gaW4NCj4gcGFydGljdWxhciwgRkFMTE9DX0ZMX1pF
-Uk9fUkFOR0UgaW4gaXNvbGF0aW9uIGRvZXMgTk9UIGdpdmUgdGhhdA0KPiBpbnNpZ2h0OyBsaWtl
-d2lzZSwgZm9yIGJsb2NrIGRldmljZXMsIGl0IGlzIGtub3duIHRoYXQNCj4gaW9jdGwoQkxLWkVS
-T09VVCkgZG9lcyBOT1QgaGF2ZSBhIHdheSBmb3IgdXNlcnNwYWNlIHRvIHByb2JlIGlmIGl0IGlz
-DQo+IGVmZmljaWVudCBvciBzbG93LiAgQnV0IHdpdGggZW5vdWdoIGRlbWFuZCwgdGhlIGtlcm5l
-bCBtYXkgYWRkIGFub3RoZXINCj4gRkFMTE9DX0ZMXyBmbGFnIHRvIHVzZSB3aXRoIEZBTExPQ19G
-TF9aRVJPX1JBTkdFLCBhbmQvb3IgYXBwcm9wcmlhdGUNCj4gaW9jdGxzIHdpdGggZ3VhcmFudGVl
-ZCBFTk9UU1VQIGZhaWx1cmVzIGlmIGEgZmFzdCBwYXRoIGNhbm5vdCBiZQ0KPiB0YWtlbi4gIElm
-IGEgc2VydmVyIGNhbm5vdCBlYXNpbHkgZGV0ZXJtaW5lIGlmIHdyaXRlIHplcm9lcyB3aWxsIGJl
-DQo+IGVmZmljaWVudCwgdGhlIHNlcnZlciBzaG91bGQgZWl0aGVyIGZhaWwgYWxsIE5CRF9DTURf
-RkxBR19GQVNUX1pFUk8NCj4gd2l0aCBFTk9UU1VQLCBvciBlbHNlIGNob29zZSB0byBub3QgYWR2
-ZXJ0aXNlIE5CRF9GTEFHX1NFTkRfRkFTVF9aRVJPLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogRXJp
-YyBCbGFrZSA8ZWJsYWtlQHJlZGhhdC5jb20+DQo+IC0tLQ0KPiAgIGRvYy9wcm90by5tZCB8IDUw
-ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystDQo+ICAg
-MSBmaWxlIGNoYW5nZWQsIDQ5IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IGRp
-ZmYgLS1naXQgYS9kb2MvcHJvdG8ubWQgYi9kb2MvcHJvdG8ubWQNCj4gaW5kZXggNTJkM2U3Yi4u
-NzAyNjg4YiAxMDA2NDQNCj4gLS0tIGEvZG9jL3Byb3RvLm1kDQo+ICsrKyBiL2RvYy9wcm90by5t
-ZA0KPiBAQCAtMTA3MCw2ICsxMDcwLDE4IEBAIFRoZSBmaWVsZCBoYXMgdGhlIGZvbGxvd2luZyBm
-b3JtYXQ6DQo+ICAgICB3aGljaCBzdXBwb3J0IHRoZSBjb21tYW5kIHdpdGhvdXQgYWR2ZXJ0aXNp
-bmcgdGhpcyBiaXQsIGFuZA0KPiAgICAgY29udmVyc2VseSB0aGF0IHRoaXMgYml0IGRvZXMgbm90
-IGd1YXJhbnRlZSB0aGF0IHRoZSBjb21tYW5kIHdpbGwNCj4gICAgIHN1Y2NlZWQgb3IgaGF2ZSBh
-biBpbXBhY3QuDQo+ICstIGJpdCAxMSwgYE5CRF9GTEFHX1NFTkRfRkFTVF9aRVJPYDogYWxsb3cg
-Y2xpZW50cyB0byBkZXRlY3Qgd2hldGhlcg0KPiArICBgTkJEX0NNRF9XUklURV9aRVJPRVNgIGlz
-IGZhc3RlciB0aGFuIGEgY29ycmVzcG9uZGluZyB3cml0ZS4gVGhlDQo+ICsgIHNlcnZlciBNVVNU
-IHNldCB0aGlzIHRyYW5zbWlzc2lvbiBmbGFnIHRvIDEgaWYgdGhlDQo+ICsgIGBOQkRfQ01EX1dS
-SVRFX1pFUk9FU2AgcmVxdWVzdCBzdXBwb3J0cyB0aGUgYE5CRF9DTURfRkxBR19GQVNUX1pFUk9g
-DQo+ICsgIGZsYWcsIGFuZCBNVVNUIHNldCB0aGlzIHRyYW5zbWlzc2lvbiBmbGFnIHRvIDAgaWYN
-Cj4gKyAgYE5CRF9GTEFHX1NFTkRfV1JJVEVfWkVST0VTYCBpcyBub3Qgc2V0LiBTZXJ2ZXJzIE1B
-WSBzZXQgdGhpcyB0aGlzDQo+ICsgIHRyYW5zbWlzc2lvbiBmbGFnIGV2ZW4gaWYgaXQgd2lsbCBh
-bHdheXMgdXNlIGBOQkRfRU5PVFNVUGAgZmFpbHVyZXMgZm9yDQo+ICsgIHJlcXVlc3RzIHdpdGgg
-YE5CRF9DTURfRkxBR19GQVNUX1pFUk9gIHNldCAoc3VjaCBhcyBpZiB0aGUgc2VydmVyDQo+ICsg
-IGNhbm5vdCBxdWlja2x5IGRldGVybWluZSB3aGV0aGVyIGEgcGFydGljdWxhciB3cml0ZSB6ZXJv
-ZXMgcmVxdWVzdA0KPiArICB3aWxsIGJlIGZhc3RlciB0aGFuIGEgcmVndWxhciB3cml0ZSkuIENs
-aWVudHMgTVVTVCBOT1Qgc2V0IHRoZQ0KPiArICBgTkJEX0NNRF9GTEFHX0ZBU1RfWkVST2AgcmVx
-dWVzdCBmbGFnIHVubGVzcyB0aGlzIHRyYW5zbWlzc2lvbiBmbGFnDQo+ICsgIGlzIHNldC4NCj4g
-DQo+ICAgQ2xpZW50cyBTSE9VTEQgaWdub3JlIHVua25vd24gZmxhZ3MuDQo+IA0KPiBAQCAtMTY0
-Nyw2ICsxNjU5LDEyIEBAIHZhbGlkIG1heSBkZXBlbmQgb24gbmVnb3RpYXRpb24gZHVyaW5nIHRo
-ZSBoYW5kc2hha2UgcGhhc2UuDQo+ICAgICBNVVNUIE5PVCBzZW5kIG1ldGFkYXRhIG9uIG1vcmUg
-dGhhbiBvbmUgZXh0ZW50IGluIHRoZSByZXBseS4gQ2xpZW50DQo+ICAgICBpbXBsZW1lbnRvcnMg
-c2hvdWxkIG5vdGUgdGhhdCB1c2luZyB0aGlzIGZsYWcgb24gbXVsdGlwbGUgY29udGlndW91cw0K
-PiAgICAgcmVxdWVzdHMgaXMgbGlrZWx5IHRvIGJlIGluZWZmaWNpZW50Lg0KPiArLSBiaXQgNCwg
-YE5CRF9DTURfRkxBR19GQVNUX1pFUk9gOyB2YWxpZCBkdXJpbmcNCj4gKyAgYE5CRF9DTURfV1JJ
-VEVfWkVST0VTYC4gSWYgc2V0LCBidXQgdGhlIHNlcnZlciBjYW5ub3QgcGVyZm9ybSB0aGUNCj4g
-KyAgd3JpdGUgemVyb2VzIGFueSBmYXN0ZXIgdGhhbiBpdCB3b3VsZCBmb3IgYW4gZXF1aXZhbGVu
-dA0KPiArICBgTkJEX0NNRF9XUklURWAsIHRoZW4gdGhlIHNlcnZlciBNVVNUIGZhaWwgcXVpY2ts
-eSB3aXRoIGFuIGVycm9yIG9mDQo+ICsgIGBOQkRfRU5PVFNVUGAuIFRoZSBjbGllbnQgTVVTVCBO
-T1Qgc2V0IHRoaXMgdW5sZXNzIHRoZSBzZXJ2ZXIgYWR2ZXJ0aXNlZA0KPiArICBgTkJEX0ZMQUdf
-U0VORF9GQVNUX1pFUk9gLg0KPiANCj4gICAjIyMjIyBTdHJ1Y3R1cmVkIHJlcGx5IGZsYWdzDQo+
-IA0KPiBAQCAtMjAxNSw3ICsyMDMzLDEwIEBAIFRoZSBmb2xsb3dpbmcgcmVxdWVzdCB0eXBlcyBl
-eGlzdDoNCj4gICAgICAgcmVhY2hlZCBwZXJtYW5lbnQgc3RvcmFnZSwgdW5sZXNzIGBOQkRfQ01E
-X0ZMQUdfRlVBYCBpcyBpbiB1c2UuDQo+IA0KPiAgICAgICBBIGNsaWVudCBNVVNUIE5PVCBzZW5k
-IGEgd3JpdGUgemVyb2VzIHJlcXVlc3QgdW5sZXNzDQo+IC0gICAgYE5CRF9GTEFHX1NFTkRfV1JJ
-VEVfWkVST0VTYCB3YXMgc2V0IGluIHRoZSB0cmFuc21pc3Npb24gZmxhZ3MgZmllbGQuDQo+ICsg
-ICAgYE5CRF9GTEFHX1NFTkRfV1JJVEVfWkVST0VTYCB3YXMgc2V0IGluIHRoZSB0cmFuc21pc3Np
-b24gZmxhZ3MNCj4gKyAgICBmaWVsZC4gQWRkaXRpb25hbGx5LCBhIGNsaWVudCBNVVNUIE5PVCBz
-ZW5kIHRoZQ0KPiArICAgIGBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJPYCBmbGFnIHVubGVzcyBgTkJE
-X0ZMQUdfU0VORF9GQVNUX1pFUk9gIHdhcw0KPiArICAgIHNldCBpbiB0aGUgdHJhbnNpbXNzaW9u
-IGZsYWdzIGZpZWxkLg0KPiANCj4gICAgICAgQnkgZGVmYXVsdCwgdGhlIHNlcnZlciBNQVkgdXNl
-IHRyaW1taW5nIHRvIHplcm8gb3V0IHRoZSBhcmVhLCBldmVuDQo+ICAgICAgIGlmIGl0IGRpZCBu
-b3QgYWR2ZXJ0aXNlIGBOQkRfRkxBR19TRU5EX1RSSU1gOyBidXQgaXQgTVVTVCBlbnN1cmUNCj4g
-QEAgLTIwMjUsNiArMjA0NiwyOCBAQCBUaGUgZm9sbG93aW5nIHJlcXVlc3QgdHlwZXMgZXhpc3Q6
-DQo+ICAgICAgIHNhbWUgYXJlYSB3aWxsIG5vdCBjYXVzZSBmcmFnbWVudGF0aW9uIG9yIGNhdXNl
-IGZhaWx1cmUgZHVlIHRvDQo+ICAgICAgIGluc3VmZmljaWVudCBzcGFjZS4NCj4gDQo+ICsgICAg
-SWYgdGhlIHNlcnZlciBhZHZlcnRpc2VkIGBOQkRfRkxBR19TRU5EX0ZBU1RfWkVST2AgYnV0DQo+
-ICsgICAgYE5CRF9DTURfRkxBR19GQVNUX1pFUk9gIGlzIG5vdCBzZXQsIHRoZW4gdGhlIHNlcnZl
-ciBNVVNUIE5PVCBmYWlsDQo+ICsgICAgd2l0aCBgTkJEX0VOT1RTVVBgLCBldmVuIGlmIHRoZSBv
-cGVyYXRpb24gaXMgbm8gZmFzdGVyIHRoYW4gYQ0KPiArICAgIGNvcnJlc3BvbmRpbmcgYE5CRF9D
-TURfV1JJVEVgLiBDb252ZXJzZWx5LCBpZg0KPiArICAgIGBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJP
-YCBpcyBzZXQsIHRoZSBzZXJ2ZXIgTVVTVCBmYWlsIHF1aWNrbHkgd2l0aA0KPiArICAgIGBOQkRf
-RU5PVFNVUGAgdW5sZXNzIHRoZSByZXF1ZXN0IGNhbiBiZSBzZXJ2aWNlZCBpbiBsZXNzIHRpbWUg
-dGhhbg0KPiArICAgIGEgY29ycmVzcG9uZGluZyBgTkJEX0NNRF9XUklURWAsIGFuZCBTSE9VTEQg
-Tk9UIGFsdGVyIHRoZSBjb250ZW50cw0KPiArICAgIG9mIHRoZSBleHBvcnQgd2hlbiByZXR1cm5p
-bmcgdGhpcyBmYWlsdXJlLiBUaGUgc2VydmVyJ3MNCj4gKyAgICBkZXRlcm1pbmF0aW9uIG9mIGEg
-ZmFzdCByZXF1ZXN0IE1BWSBkZXBlbmQgb24gYSBudW1iZXIgb2YgZmFjdG9ycywNCj4gKyAgICBz
-dWNoIGFzIHdoZXRoZXIgdGhlIHJlcXVlc3Qgd2FzIHN1aXRhYmx5IGFsaWduZWQsIG9uIHdoZXRo
-ZXIgdGhlDQo+ICsgICAgYE5CRF9DTURfRkxBR19OT19IT0xFYCBmbGFnIHdhcyBwcmVzZW50LCBv
-ciBldmVuIG9uIHdoZXRoZXIgYQ0KPiArICAgIHByZXZpb3VzIGBOQkRfQ01EX1RSSU1gIGhhZCBi
-ZWVuIHBlcmZvcm1lZCBvbiB0aGUgcmVnaW9uLiAgSWYgdGhlDQo+ICsgICAgc2VydmVyIGRpZCBu
-b3QgYWR2ZXJ0aXNlIGBOQkRfRkxBR19TRU5EX0ZBU1RfWkVST2AsIHRoZW4gaXQgU0hPVUxEDQo+
-ICsgICAgTk9UIGZhaWwgd2l0aCBgTkJEX0VOT1RTVVBgLCByZWdhcmRsZXNzIG9mIHRoZSBzcGVl
-ZCBvZiBzZXJ2aWNpbmcNCj4gKyAgICBhIHJlcXVlc3QsIGFuZCBTSE9VTEQgZmFpbCB3aXRoIGBO
-QkRfRUlOVkFMYCBpZiB0aGUNCj4gKyAgICBgTkJEX0NNRF9GTEFHX0ZBU1RfWkVST2AgZmxhZyB3
-YXMgc2V0LiBBIHNlcnZlciBNQVkgYWR2ZXJ0aXNlDQo+ICsgICAgYE5CRF9GTEFHX1NFTkRfRkFT
-VF9aRVJPYCB3aGV0aGVyIG9yIG5vdCBpdCBjYW4gcGVyZm9ybSBmYXN0DQo+ICsgICAgemVyb2lu
-Zzsgc2ltaWxhcmx5LCBhIHNlcnZlciBTSE9VTEQgZmFpbCB3aXRoIGBOQkRfRU5PVFNVUGAgd2hl
-bg0KPiArICAgIHRoZSBmbGFnIGlzIHNldCBpZiB0aGUgc2VydmVyIGNhbm5vdCBxdWlja2x5IGRl
-dGVybWluZSBpbiBhZHZhbmNlDQo+ICsgICAgd2hldGhlciB0aGF0IHJlcXVlc3Qgd291bGQgaGF2
-ZSBiZWVuIGZhc3QsIGV2ZW4gaWYgaXQgdHVybnMgb3V0DQo+ICsgICAgdGhhdCB0aGUgc2FtZSBy
-ZXF1ZXN0IHdpdGhvdXQgdGhlIGZsYWcgd291bGQgYmUgZmFzdCBhZnRlciBhbGwuDQo+ICsNCg0K
-V2hhdCBpZiBXUklURV9aRVJPIGluIHRoZSBhdmVyYWdlIGlzIGZhc3RlciB0aGFuIFdSSVRFIChm
-b3IgZXhhbXBsZSBieSAyMCUpLA0KYnV0IHNlcnZlciBuZXZlciBjYW4gZ3VhcmFudGVlIHBlcmZv
-cm1hbmNlIGZvciBvbmUgV1JJVEVfWkVSTyBvcGVyYXRpb24sIGRvDQp5b3UgcmVzdHJpY3Qgc3Vj
-aCBjYXNlPyBIbW0sIE9LLCBTSE9VTEQgaXMgbm90IE1VU1QgYWN0dWFsbHkuLg0KDQo+ICAgICAg
-IElmIGFuIGVycm9yIG9jY3VycywgdGhlIHNlcnZlciBNVVNUIHNldCB0aGUgYXBwcm9wcmlhdGUg
-ZXJyb3IgY29kZQ0KPiAgICAgICBpbiB0aGUgZXJyb3IgZmllbGQuDQo+IA0KPiBAQCAtMjEyNSw2
-ICsyMTY4LDcgQEAgVGhlIGZvbGxvd2luZyBlcnJvciB2YWx1ZXMgYXJlIGRlZmluZWQ6DQo+ICAg
-KiBgTkJEX0VJTlZBTGAgKDIyKSwgSW52YWxpZCBhcmd1bWVudC4NCj4gICAqIGBOQkRfRU5PU1BD
-YCAoMjgpLCBObyBzcGFjZSBsZWZ0IG9uIGRldmljZS4NCj4gICAqIGBOQkRfRU9WRVJGTE9XYCAo
-NzUpLCBWYWx1ZSB0b28gbGFyZ2UuDQo+ICsqIGBOQkRfRU5PVFNVUGAgKDk1KSwgT3BlcmF0aW9u
-IG5vdCBzdXBwb3J0ZWQuDQo+ICAgKiBgTkJEX0VTSFVURE9XTmAgKDEwOCksIFNlcnZlciBpcyBp
-biB0aGUgcHJvY2VzcyBvZiBiZWluZyBzaHV0IGRvd24uDQo+IA0KPiAgIFRoZSBzZXJ2ZXIgU0hP
-VUxEIHJldHVybiBgTkJEX0VOT1NQQ2AgaWYgaXQgcmVjZWl2ZXMgYSB3cml0ZSByZXF1ZXN0DQo+
-IEBAIC0yMTM5LDYgKzIxODMsMTAgQEAgcmVhZC1vbmx5IGV4cG9ydC4NCj4gICBUaGUgc2VydmVy
-IFNIT1VMRCBOT1QgcmV0dXJuIGBOQkRfRU9WRVJGTE9XYCBleGNlcHQgYXMgZG9jdW1lbnRlZCBp
-bg0KPiAgIHJlc3BvbnNlIHRvIGBOQkRfQ01EX1JFQURgIHdoZW4gYE5CRF9DTURfRkxBR19ERmAg
-aXMgc3VwcG9ydGVkLg0KPiANCj4gK1RoZSBzZXJ2ZXIgU0hPVUxEIE5PVCByZXR1cm4gYE5CRF9F
-Tk9UU1VQYCBleGNlcHQgYXMgZG9jdW1lbnRlZCBpbg0KPiArcmVzcG9uc2UgdG8gYE5CRF9DTURf
-V1JJVEVfWkVST0VTYCB3aGVuIGBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJPYCBpcw0KPiArc3VwcG9y
-dGVkLg0KPiArDQo+ICAgVGhlIHNlcnZlciBTSE9VTEQgcmV0dXJuIGBOQkRfRUlOVkFMYCBpZiBp
-dCByZWNlaXZlcyBhbiB1bmtub3duIGNvbW1hbmQuDQo+IA0KPiAgIFRoZSBzZXJ2ZXIgU0hPVUxE
-IHJldHVybiBgTkJEX0VJTlZBTGAgaWYgaXQgcmVjZWl2ZXMgYW4gdW5rbm93bg0KPiANCg0KDQot
-LSANCkJlc3QgcmVnYXJkcywNClZsYWRpbWlyDQo=
+On 08/22/2019 02:59 AM, xiubli@redhat.com wrote:
+> From: Xiubo Li <xiubli@redhat.com>
+> 
+> When the NBD_CFLAG_DESTROY_ON_DISCONNECT flag is set and at the same
+> time when the socket is closed due to the server daemon is restarted,
+> just before the last DISCONNET is totally done if we start a new connection
+> by using the old nbd_index, there will be crashing randomly, like:
+> 
+> <3>[  110.151949] block nbd1: Receive control failed (result -32)
+> <1>[  110.152024] BUG: unable to handle page fault for address: 0000058000000840
+> <1>[  110.152063] #PF: supervisor read access in kernel mode
+> <1>[  110.152083] #PF: error_code(0x0000) - not-present page
+> <6>[  110.152094] PGD 0 P4D 0
+> <4>[  110.152106] Oops: 0000 [#1] SMP PTI
+> <4>[  110.152120] CPU: 0 PID: 6698 Comm: kworker/u5:1 Kdump: loaded Not tainted 5.3.0-rc4+ #2
+> <4>[  110.152136] Hardware name: Red Hat KVM, BIOS 0.5.1 01/01/2011
+> <4>[  110.152166] Workqueue: knbd-recv recv_work [nbd]
+> <4>[  110.152187] RIP: 0010:__dev_printk+0xd/0x67
+> <4>[  110.152206] Code: 10 e8 c5 fd ff ff 48 8b 4c 24 18 65 48 33 0c 25 28 00 [...]
+> <4>[  110.152244] RSP: 0018:ffffa41581f13d18 EFLAGS: 00010206
+> <4>[  110.152256] RAX: ffffa41581f13d30 RBX: ffff96dd7374e900 RCX: 0000000000000000
+> <4>[  110.152271] RDX: ffffa41581f13d20 RSI: 00000580000007f0 RDI: ffffffff970ec24f
+> <4>[  110.152285] RBP: ffffa41581f13d80 R08: ffff96dd7fc17908 R09: 0000000000002e56
+> <4>[  110.152299] R10: ffffffff970ec24f R11: 0000000000000003 R12: ffff96dd7374e900
+> <4>[  110.152313] R13: 0000000000000000 R14: ffff96dd7374e9d8 R15: ffff96dd6e3b02c8
+> <4>[  110.152329] FS:  0000000000000000(0000) GS:ffff96dd7fc00000(0000) knlGS:0000000000000000
+> <4>[  110.152362] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> <4>[  110.152383] CR2: 0000058000000840 CR3: 0000000067cc6002 CR4: 00000000001606f0
+> <4>[  110.152401] Call Trace:
+> <4>[  110.152422]  _dev_err+0x6c/0x83
+> <4>[  110.152435]  nbd_read_stat.cold+0xda/0x578 [nbd]
+> <4>[  110.152448]  ? __switch_to_asm+0x34/0x70
+> <4>[  110.152468]  ? __switch_to_asm+0x40/0x70
+> <4>[  110.152478]  ? __switch_to_asm+0x34/0x70
+> <4>[  110.152491]  ? __switch_to_asm+0x40/0x70
+> <4>[  110.152501]  ? __switch_to_asm+0x34/0x70
+> <4>[  110.152511]  ? __switch_to_asm+0x40/0x70
+> <4>[  110.152522]  ? __switch_to_asm+0x34/0x70
+> <4>[  110.152533]  recv_work+0x35/0x9e [nbd]
+> <4>[  110.152547]  process_one_work+0x19d/0x340
+> <4>[  110.152558]  worker_thread+0x50/0x3b0
+> <4>[  110.152568]  kthread+0xfb/0x130
+> <4>[  110.152577]  ? process_one_work+0x340/0x340
+> <4>[  110.152609]  ? kthread_park+0x80/0x80
+> <4>[  110.152637]  ret_from_fork+0x35/0x40
+> 
+> This is very easy to reproduce by running the nbd-runner.
+> 
+> Signed-off-by: Xiubo Li <xiubli@redhat.com>
+> ---
+>  drivers/block/nbd.c | 36 +++++++++++++++++++++++++++++++++++-
+>  1 file changed, 35 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 8c2f17b99224..a25b59725c6e 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -26,6 +26,7 @@
+>  #include <linux/ioctl.h>
+>  #include <linux/mutex.h>
+>  #include <linux/compiler.h>
+> +#include <linux/completion.h>
+>  #include <linux/err.h>
+>  #include <linux/kernel.h>
+>  #include <linux/slab.h>
+> @@ -80,6 +81,9 @@ struct link_dead_args {
+>  #define NBD_RT_DESTROY_ON_DISCONNECT	6
+>  #define NBD_RT_DISCONNECT_ON_CLOSE	7
+>  
+> +#define NBD_DESTROY_ON_DISCONNECT	0
+> +#define NBD_DISCONNECT_REQUESTED	1
+> +
+>  struct nbd_config {
+>  	u32 flags;
+>  	unsigned long runtime_flags;
+> @@ -112,6 +116,9 @@ struct nbd_device {
+>  	struct list_head list;
+>  	struct task_struct *task_recv;
+>  	struct task_struct *task_setup;
+> +
+> +	struct completion destroy_complete;
+> +	unsigned long flags;
+>  };
+>  
+>  #define NBD_CMD_REQUEUED	1
+> @@ -222,6 +229,16 @@ static void nbd_dev_remove(struct nbd_device *nbd)
+>  		disk->private_data = NULL;
+>  		put_disk(disk);
+>  	}
+> +
+> +	/*
+> +	 * Place this in the last just before the nbd is freed to
+> +	 * make sure that the disk and the related kobject are also
+> +	 * totally removed to avoid duplicate creation of the same
+> +	 * one.
+> +	 */
+> +	if (test_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags))
+> +		complete(&nbd->destroy_complete);
+> +
+>  	kfree(nbd);
+>  }
+>  
+> @@ -230,8 +247,8 @@ static void nbd_put(struct nbd_device *nbd)
+>  	if (refcount_dec_and_mutex_lock(&nbd->refs,
+>  					&nbd_index_mutex)) {
+>  		idr_remove(&nbd_index_idr, nbd->index);
+> -		mutex_unlock(&nbd_index_mutex);
+>  		nbd_dev_remove(nbd);
+> +		mutex_unlock(&nbd_index_mutex);
+>  	}
+>  }
+>  
+> @@ -1103,6 +1120,7 @@ static int nbd_disconnect(struct nbd_device *nbd)
+>  
+>  	dev_info(disk_to_dev(nbd->disk), "NBD_DISCONNECT\n");
+>  	set_bit(NBD_RT_DISCONNECT_REQUESTED, &config->runtime_flags);
+> +	set_bit(NBD_DISCONNECT_REQUESTED, &nbd->flags);
+>  	send_disconnects(nbd);
+>  	return 0;
+>  }
+> @@ -1596,6 +1614,7 @@ static int nbd_dev_add(int index)
+>  	nbd->tag_set.flags = BLK_MQ_F_SHOULD_MERGE |
+>  		BLK_MQ_F_BLOCKING;
+>  	nbd->tag_set.driver_data = nbd;
+> +	init_completion(&nbd->destroy_complete);
+>  
+>  	err = blk_mq_alloc_tag_set(&nbd->tag_set);
+>  	if (err)
+> @@ -1761,6 +1780,16 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
+>  		mutex_unlock(&nbd_index_mutex);
+>  		return -EINVAL;
+>  	}
+> +
+> +	if (test_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags) &&
+
+Why does this have to be set? If this is not set would you end up
+hitting the config_refs check:
+
+if (refcount_read(&nbd->config_refs)) {
+
+and possibly returning failure?
+
+If you moved the complete() to nbd_config_put would it work if this bit
+was set or not?
+
+
+> +	    test_bit(NBD_DISCONNECT_REQUESTED, &nbd->flags)) {
+> +		mutex_unlock(&nbd_index_mutex);
+> +
+> +		/* Wait untill the recv_work exit */
+
+If that is all you need we could do a flush_workqueue(nbd->recv_workq)
+(you would need Jens's for next branch which has some work queue changes
+in nbd).
+
+I think that might be too messy with how we do the puts for the
+nbd_device and config and the locking though.
+
+
+> +		wait_for_completion(&nbd->destroy_complete);
+
+The completion is allocated as part of the nbd device struct. Right
+after the other thread does a complete() we will free the nbd device
+struct, and we could still access the destroy_complete completion in
+this thread in wait_for_completion.
+
+You would want to do DECLARE_COMPLETION_ONSTACK in this function, make
+destroy_complete a pointer and set the destroy_complete pointer to the
+completion declared in this function.
+
+In nbd_dev_remove you would then just check if destroy_complete is set
+to a non-NULL pointer.
+
+
+
+
+> +		goto again;
+> +	}
+> +
+>  	if (!refcount_inc_not_zero(&nbd->refs)) {
+>  		mutex_unlock(&nbd_index_mutex);
+>  		if (index == -1)
+> @@ -1817,7 +1846,10 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
+>  		if (flags & NBD_CFLAG_DESTROY_ON_DISCONNECT) {
+>  			set_bit(NBD_RT_DESTROY_ON_DISCONNECT,
+>  				&config->runtime_flags);
+> +			set_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags);
+>  			put_dev = true;
+> +		} else {
+> +			clear_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags);
+>  		}
+>  		if (flags & NBD_CFLAG_DISCONNECT_ON_CLOSE) {
+>  			set_bit(NBD_RT_DISCONNECT_ON_CLOSE,
+> @@ -1987,10 +2019,12 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
+>  			if (!test_and_set_bit(NBD_RT_DESTROY_ON_DISCONNECT,
+>  					      &config->runtime_flags))
+>  				put_dev = true;
+> +			set_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags);
+>  		} else {
+>  			if (test_and_clear_bit(NBD_RT_DESTROY_ON_DISCONNECT,
+>  					       &config->runtime_flags))
+>  				refcount_inc(&nbd->refs);
+> +			clear_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags);
+>  		}
+>  
+>  		if (flags & NBD_CFLAG_DISCONNECT_ON_CLOSE) {
+> 
 
