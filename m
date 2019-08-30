@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80D37A4110
-	for <lists+nbd@lfdr.de>; Sat, 31 Aug 2019 01:32:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54003A411A
+	for <lists+nbd@lfdr.de>; Sat, 31 Aug 2019 01:37:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 578A02048A; Fri, 30 Aug 2019 23:32:30 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 30 23:32:30 2019
+	id 2A18D2050D; Fri, 30 Aug 2019 23:37:49 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 30 23:37:49 2019
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-19.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 33BDD2041F
-	for <lists-other-nbd@bendel.debian.org>; Fri, 30 Aug 2019 23:32:23 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 4746920475
+	for <lists-other-nbd@bendel.debian.org>; Fri, 30 Aug 2019 23:37:42 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-15.88 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, LDO_WHITELIST=-5,
@@ -26,24 +26,23 @@ X-Amavis-Spam-Status: No, score=-15.88 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id zx69Wr_jAdX3 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 30 Aug 2019 23:32:18 +0000 (UTC)
+	with ESMTP id z3cUbphhC_db for <lists-other-nbd@bendel.debian.org>;
+	Fri, 30 Aug 2019 23:37:38 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 9E014203ED
-	for <nbd@other.debian.org>; Fri, 30 Aug 2019 23:32:17 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 26B6F20348
+	for <nbd@other.debian.org>; Fri, 30 Aug 2019 23:37:38 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 643F8189DACA;
-	Fri, 30 Aug 2019 23:32:14 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 0980A3064FD3;
+	Fri, 30 Aug 2019 23:37:35 +0000 (UTC)
 Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 4B5FC60BE1;
-	Fri, 30 Aug 2019 23:32:11 +0000 (UTC)
-Subject: Re: [Qemu-devel] [PATCH 1/5] nbd: Improve per-export flag handling in
- server
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id CF98160BE1;
+	Fri, 30 Aug 2019 23:37:31 +0000 (UTC)
+Subject: Re: [Qemu-devel] [PATCH 2/5] nbd: Prepare for NBD_CMD_FLAG_FAST_ZERO
 To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 Cc: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
@@ -52,9 +51,8 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
  "nbd@other.debian.org" <nbd@other.debian.org>
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
  <20190823143726.27062-1-eblake@redhat.com>
- <20190823143726.27062-2-eblake@redhat.com>
- <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
- <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
+ <20190823143726.27062-3-eblake@redhat.com>
+ <9476b1d1-47e4-ecfd-eb23-5b2fbc1410e3@virtuozzo.com>
 From: Eric Blake <eblake@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=eblake@redhat.com; keydata=
@@ -81,22 +79,22 @@ Autocrypt: addr=eblake@redhat.com; keydata=
  Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
  2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
 Organization: Red Hat, Inc.
-Message-ID: <55ebe9db-5a28-d844-89f7-2dc9a7d977d7@redhat.com>
-Date: Fri, 30 Aug 2019 18:32:10 -0500
+Message-ID: <911ecfee-675a-da91-19ec-dd11d6d21e78@redhat.com>
+Date: Fri, 30 Aug 2019 18:37:30 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
+In-Reply-To: <9476b1d1-47e4-ecfd-eb23-5b2fbc1410e3@virtuozzo.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="vvggllkG3A9wqHFBfpDVv29rEON1aoc67"
+ boundary="46va6QQZhRXnzDASUGymO2IFKUF99XQLa"
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2 (mx1.redhat.com [10.5.110.63]); Fri, 30 Aug 2019 23:32:14 +0000 (UTC)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.45]); Fri, 30 Aug 2019 23:37:35 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <blVmaAwK4DG.A.kiD.OIbadB@bendel>
+Resent-Message-ID: <FKrQqjA4xKO.A.9JE.NNbadB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/670
+X-Mailing-List: <nbd@other.debian.org> archive/latest/671
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -106,12 +104,12 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/55ebe9db-5a28-d844-89f7-2dc9a7d977d7@redhat.com
-Resent-Date: Fri, 30 Aug 2019 23:32:30 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/911ecfee-675a-da91-19ec-dd11d6d21e78@redhat.com
+Resent-Date: Fri, 30 Aug 2019 23:37:49 +0000 (UTC)
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---vvggllkG3A9wqHFBfpDVv29rEON1aoc67
-Content-Type: multipart/mixed; boundary="RPpWzgVrtSfl3tfpcd4cx2C6YSVpci26I";
+--46va6QQZhRXnzDASUGymO2IFKUF99XQLa
+Content-Type: multipart/mixed; boundary="eBaeapEhS0IQ8YsghDrEZ0NpdIhuPqJr2";
  protected-headers="v1"
 From: Eric Blake <eblake@redhat.com>
 To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
@@ -120,119 +118,62 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
  "open list:Network Block Dev..." <qemu-block@nongnu.org>,
  "libguestfs@redhat.com" <libguestfs@redhat.com>,
  "nbd@other.debian.org" <nbd@other.debian.org>
-Message-ID: <55ebe9db-5a28-d844-89f7-2dc9a7d977d7@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH 1/5] nbd: Improve per-export flag handling in
- server
+Message-ID: <911ecfee-675a-da91-19ec-dd11d6d21e78@redhat.com>
+Subject: Re: [Qemu-devel] [PATCH 2/5] nbd: Prepare for NBD_CMD_FLAG_FAST_ZERO
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
  <20190823143726.27062-1-eblake@redhat.com>
- <20190823143726.27062-2-eblake@redhat.com>
- <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
- <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
-In-Reply-To: <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
+ <20190823143726.27062-3-eblake@redhat.com>
+ <9476b1d1-47e4-ecfd-eb23-5b2fbc1410e3@virtuozzo.com>
+In-Reply-To: <9476b1d1-47e4-ecfd-eb23-5b2fbc1410e3@virtuozzo.com>
 
---RPpWzgVrtSfl3tfpcd4cx2C6YSVpci26I
+--eBaeapEhS0IQ8YsghDrEZ0NpdIhuPqJr2
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-On 8/30/19 6:10 PM, Eric Blake wrote:
-> On 8/30/19 1:00 PM, Vladimir Sementsov-Ogievskiy wrote:
->> 23.08.2019 17:37, Eric Blake wrote:
->>> When creating a read-only image, we are still advertising support for=
+On 8/30/19 1:07 PM, Vladimir Sementsov-Ogievskiy wrote:
+> 23.08.2019 17:37, Eric Blake wrote:
+>> Commit fe0480d6 and friends added BDRV_REQ_NO_FALLBACK as a way to
+>> avoid wasting time on a preliminary write-zero request that will later=
 
->>> TRIM and WRITE_ZEROES to the client, even though the client should no=
-t
->>> be issuing those commands.  But seeing this requires looking across
->>> multiple functions:
->>>
->=20
->>> @@ -458,10 +458,13 @@ static int nbd_negotiate_handle_export_name(NBD=
-Client *client,
->>>           return -EINVAL;
->>>       }
->>>
->>> -    trace_nbd_negotiate_new_style_size_flags(client->exp->size,
->>> -                                             client->exp->nbdflags |=
- myflags);
->>> +    myflags =3D client->exp->nbdflags;
->>> +    if (client->structured_reply) {
->>> +        myflags |=3D NBD_FLAG_SEND_DF;
->>> +    }
+>> be rewritten by actual data, if it is known that the write-zero
+>> request will use a slow fallback; but in doing so, could not optimize
+>> for NBD.  The NBD specification is now considering an extension that
+>> will allow passing on those semantics; this patch updates the new
+>> protocol bits and 'qemu-nbd --list' output to recognize the bit, as
+>> well as the new errno value possible when using the new flag; while
+>> upcoming patches will improve the client to use the feature when
+>> present, and the server to advertise support for it.
 >>
->>
->> why we cant do just
->> client->exp->nbdflags |=3D NBD_FLAG_SEND_DF ?
+>> Signed-off-by: Eric Blake <eblake@redhat.com>
+
+>> +++ b/nbd/server.c
+>> @@ -55,6 +55,8 @@ static int system_errno_to_nbd_errno(int err)
+>>           return NBD_ENOSPC;
+>>       case EOVERFLOW:
+>>           return NBD_EOVERFLOW;
+>> +    case ENOTSUP:
+>> +        return NBD_ENOTSUP;
 >=20
-> Because myflags is the runtime flags for _this_ client, while
-> client->exp->nbdflags are the base flags shared by _all_ clients.  If
-> client A requests structured reply, but client B does not, then we don'=
-t
-> want to advertise DF to client B; but amending client->exp->nbdflags
-> would have that effect.
+> This may provoke returning NBD_ENOTSUP in other cases, not only new one=
+ we are going to add.
 
-I stand corrected - it looks like a fresh client->exp is created per
-client, as evidenced by:
+Correct. But the spec only said SHOULD avoid ENOTSUP in those other
+cases, not MUST avoid ENOTSUP; and in practice, either the client that
+is not suspecting it will treat it the same as NBD_EINVAL, or we've
+managed to get a slightly better error message across than normal.  I
+don't see that as a real show-stopper.
 
-diff --git i/nbd/client.c w/nbd/client.c
-index b9dc829175f9..9e05f1a0e2a3 100644
---- i/nbd/client.c
-+++ w/nbd/client.c
-@@ -1011,6 +1011,8 @@ int nbd_receive_negotiate(AioContext *aio_context,
-QIOChannel *ioc,
-     assert(info->name);
-     trace_nbd_receive_negotiate_name(info->name);
+But if it bothers you, note that in nbdkit, I actually coded things up
+to refuse to send NBD_EOVERFLOW unless NBD_CMD_FLAG_DF was set, and to
+refuse to send NBD_ENOTSUP unless NBD_CMD_FLAG_FAST_ZERO was set. I
+could copy that behavior here, if we want qemu to be that much stricter
+as a server.
 
-+    if (getenv ("MY_HACK"))
-+        info->structured_reply =3D false;
-     result =3D nbd_start_negotiate(aio_context, ioc, tlscreds, hostname,=
-
-outioc,
-                                  info->structured_reply, &zeroes, errp);=
-
-
-diff --git i/nbd/server.c w/nbd/server.c
-index d5078f7468af..6f3a83704fb3 100644
---- i/nbd/server.c
-+++ w/nbd/server.c
-@@ -457,6 +457,7 @@ static int
-nbd_negotiate_handle_export_name(NBDClient *client, bool no_zeroes,
-     myflags =3D client->exp->nbdflags;
-     if (client->structured_reply) {
-         myflags |=3D NBD_FLAG_SEND_DF;
-+        client->exp->nbdflags |=3D NBD_FLAG_SEND_DF;
-     }
-     trace_nbd_negotiate_new_style_size_flags(client->exp->size, myflags)=
-;
-     stq_be_p(buf, client->exp->size);
-
-$ ./qemu-nbd -r -f raw file -t &
-
-$  ~/qemu/qemu-io -r -f raw --trace=3Dnbd_\*size_flags
-nbd://localhost:10809 -c quit
-32145@1567207628.519883:nbd_receive_negotiate_size_flags Size is
-1049088, export flags 0x48f
-
-$ MY_HACK=3D1 ~/qemu/qemu-io -r -f raw --trace=3Dnbd_\*size_flags
-nbd://localhost:10809 -c quit
-32156@1567207630.417815:nbd_receive_negotiate_size_flags Size is
-1049088, export flags 0x40f
-
-$  ~/qemu/qemu-io -r -f raw --trace=3Dnbd_\*size_flags
-nbd://localhost:10809 -c quit
-32167@1567207635.202940:nbd_receive_negotiate_size_flags Size is
-1049088, export flags 0x48f
-
-The export flags change per client, so I _can_ store into
-client->exp->nbdflags.  Will do that for v2.
-
-Meanwhile, this points out a missing feature in libnbd - for testing
-purposes, it would be really nice to be able to purposefully cripple the
-client to NOT request structured replies automatically (default enabled,
-but the ability to turn it off is useful for interop testing, as in this
-thread).  I already recently added a --no-sr flag to nbdkit for a
-similar reason (but that's creating a server which refuses to advertise,
-where here I want a guest that refuses to ask).  Guess I'll be adding a
-patch for that, too :)
+(Note to self: also check if, when using structured replies to send
+error messages, in addition to the code, if the string contains
+strerror(errno) from BEFORE the mapping, rather than after we've lost
+information to the more-limited NBD_E* values)
 
 --=20
 Eric Blake, Principal Software Engineer
@@ -240,24 +181,24 @@ Red Hat, Inc.           +1-919-301-3226
 Virtualization:  qemu.org | libvirt.org
 
 
---RPpWzgVrtSfl3tfpcd4cx2C6YSVpci26I--
+--eBaeapEhS0IQ8YsghDrEZ0NpdIhuPqJr2--
 
---vvggllkG3A9wqHFBfpDVv29rEON1aoc67
+--46va6QQZhRXnzDASUGymO2IFKUF99XQLa
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1psfoACgkQp6FrSiUn
-Q2pc8Qf9EQLxZFFYD64KBGqrS0jTuPnhmq3tVaC/YacTJzVr/++pxyDW7gGUQvyP
-DDn0Z4tN2a4F4kyCrFWuHHhU1FiQI3E/OyG8SbV+gg6pV0lQLfLJrdZLHGwL0xDx
-1N7IForaIdoM9auujdSYbs+/aLXi/djKeQkwyB9g5mlLyGonPXr3KplS2zE7VdWh
-46AePgHG7E0MTKJiveyUK36ahpWum042qyvoXu5b8665RE37S6wKIOnNWjWDDq75
-mcqp5WHSvZr+GgYq4LS+k9zENpGyXPkckNnkQQFHNNUToTh4TxkXHOPiVTtYFReV
-kwXFT30W+b8blnoI4OZGrtReIIUP9A==
-=YeFM
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1pszsACgkQp6FrSiUn
+Q2o35Af+NRKl9YxnwATtHd3TublZrJG8XRR5EacPuwPRU7HwMvPq04QYV7VqsR0i
+LJb0N+u2QuNc+DlboOR9JqJ+FZE/R9lTKCEWsgBQXMnKRy1JVeSxsEcJwCset5zm
+9fS3DoYDa0tuczcDfjEBFdUoQfVFl36mVady8EgCLjOQ58YhZrfO5zHl8Q52V1NZ
+IkfzM/Lc9nlJ/NmOz4EzssfPETFIH9DUPGEvF+RV6L0PiNKiVj7nz9cgiq1A8TRW
+7qDJn4mGctIRSYBAEdTtdW0v5m9KmX88aI9PdL6co6r9qrZ8MlulCZyVC4IAe1xk
+mylCc6fqTap4yGUv4+i4lnCN/NxuLA==
+=n2dv
 -----END PGP SIGNATURE-----
 
---vvggllkG3A9wqHFBfpDVv29rEON1aoc67--
+--46va6QQZhRXnzDASUGymO2IFKUF99XQLa--
 
