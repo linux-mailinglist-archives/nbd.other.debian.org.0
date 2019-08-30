@@ -1,130 +1,101 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD706A3EB9
-	for <lists+nbd@lfdr.de>; Fri, 30 Aug 2019 22:00:08 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0B61A40CA
+	for <lists+nbd@lfdr.de>; Sat, 31 Aug 2019 01:10:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9907120847; Fri, 30 Aug 2019 20:00:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 30 20:00:08 2019
-Old-Return-Path: <vsementsov@virtuozzo.com>
+	id ABE202092F; Fri, 30 Aug 2019 23:10:43 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 30 23:10:43 2019
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,THREADTOPIC autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-20.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E1962208C7
-	for <lists-other-nbd@bendel.debian.org>; Fri, 30 Aug 2019 19:43:46 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DBB752068E
+	for <lists-other-nbd@bendel.debian.org>; Fri, 30 Aug 2019 23:10:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.82 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001, THREADTOPIC=2]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-16.88 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id H9pu4eSuBCQ3 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 30 Aug 2019 19:43:43 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -1.25
-X-Greylist: delayed 3776 seconds by postgrey-1.36 at bendel; Fri, 30 Aug 2019 19:43:43 UTC
-Received: from EUR03-DB5-obe.outbound.protection.outlook.com (mail-eopbgr40121.outbound.protection.outlook.com [40.107.4.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "GlobalSign Organization Validation CA - SHA256 - G3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 1467720897
-	for <nbd@other.debian.org>; Fri, 30 Aug 2019 19:43:43 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Yjoj7UZj+aZHELq67VfluxlytDjet1+jU1RAczcWgHHV/H42o/mAZ6Y/jUgPII5+O+IlsuabrL5m8zN5K8p+U/P2XcybSFASag9+ZulbXdxTjTSWppu+c8w3mt0cp593cywOScQT3Z1wpgd9OFE29fAOGV1YEnYdxhuQZnH7qkQz8DhohkKUvbULMo9j3CDxSIm+YCVxHyZ5H7rAZsc9hTjMd8SCqQOIEqx6c7tyEqXs5VlyeSNqBpRDgapDNGiYj0A9I24i1cOJ1VwAoLNSfHtDf2BvDR49I+iB6ccQp3cgku69aQ9smQauiO4wz5vycXof3uHGm0oRnJ8NRa2EHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esVz9WS71hnkqClMpJMxRB4ZlrRcCkRRVwbsY5O5Fgk=;
- b=f6gr4RZuhiVSFXMhRWtn897a4JclChX5hunVdV1OTnR7kPpArpCrX3EjJbxcqBQvCu9kxDGSfFv3qrSJ1PVJ2F5bC4h95p4pB+ZqFi6zrJMjAUSmmtJKvUS2/aQzcH7glD5fPu+NgHBD1DjcwTRnYYTGgZ7ORQPoMfXTDZnZfijU4IuJ/btADQpsk2OaAikrSJlYmAoZyOA9iHjifx75Xff2t9osjj5FhSCQ4WgU/Qt0+5JMpJqfbfROMJ3m1JM6V05NquJRyMPghKuOrA8aU6GhveH/8q9SNtAWHl22nw0H/GVgxkXd8CcG2v3iN77W9UalkcK/C8bkKx2tOSs0VA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
- header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esVz9WS71hnkqClMpJMxRB4ZlrRcCkRRVwbsY5O5Fgk=;
- b=mLd/WFYjRwfsD4Nr2KcID2odSMiPsntNyC308UgfNTDTIr67FXItpEMkxItjULEjxA+2rZccdAEk49TmWydJulSBrjHBQSoTKqy+LuO4OvCr2nb5oxLwSeHFJ4xSrjicw752cwOS3FN0GCvwHwFoiKr0YGg4UgwVGCgeTFqBSoo=
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
- DB8PR08MB5370.eurprd08.prod.outlook.com (52.133.240.152) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2199.21; Fri, 30 Aug 2019 18:11:04 +0000
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2199.021; Fri, 30 Aug 2019
- 18:11:04 +0000
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: Eric Blake <eblake@redhat.com>, "qemu-devel@nongnu.org"
-	<qemu-devel@nongnu.org>
-CC: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>, "open
- list:Network Block Dev..." <qemu-block@nongnu.org>, "libguestfs@redhat.com"
-	<libguestfs@redhat.com>, "nbd@other.debian.org" <nbd@other.debian.org>
-Subject: Re: [Qemu-devel] [PATCH 3/5] nbd: Implement client use of NBD
- FAST_ZERO
-Thread-Topic: [Qemu-devel] [PATCH 3/5] nbd: Implement client use of NBD
- FAST_ZERO
-Thread-Index: AQHVWcIJJKnc7e4DxUeQDIdpxc9A66cUCQuA
-Date: Fri, 30 Aug 2019 18:11:03 +0000
-Message-ID: <8dc987a5-ec87-faa6-1e86-d7c3573694f7@virtuozzo.com>
+	with ESMTP id 8zWX4FSJ0Pt5 for <lists-other-nbd@bendel.debian.org>;
+	Fri, 30 Aug 2019 23:10:32 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 96B172069B
+	for <nbd@other.debian.org>; Fri, 30 Aug 2019 23:10:32 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id CB7F9308AA11;
+	Fri, 30 Aug 2019 23:10:28 +0000 (UTC)
+Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id AAAD060BF7;
+	Fri, 30 Aug 2019 23:10:25 +0000 (UTC)
+Subject: Re: [Qemu-devel] [PATCH 1/5] nbd: Improve per-export flag handling in
+ server
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ "open list:Network Block Dev..." <qemu-block@nongnu.org>,
+ "libguestfs@redhat.com" <libguestfs@redhat.com>,
+ "nbd@other.debian.org" <nbd@other.debian.org>
 References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
  <20190823143726.27062-1-eblake@redhat.com>
- <20190823143726.27062-4-eblake@redhat.com>
-In-Reply-To: <20190823143726.27062-4-eblake@redhat.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-clientproxiedby: HE1PR05CA0154.eurprd05.prod.outlook.com
- (2603:10a6:7:28::41) To DB8PR08MB5498.eurprd08.prod.outlook.com
- (2603:10a6:10:11c::24)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=vsementsov@virtuozzo.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tagtoolbar-keys: D20190830211101167
-x-originating-ip: [185.231.240.5]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: dbf0afab-ad97-4281-28c8-08d72d756bb2
-x-microsoft-antispam:
- BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);SRVR:DB8PR08MB5370;
-x-ms-traffictypediagnostic: DB8PR08MB5370:
-x-microsoft-antispam-prvs:
- <DB8PR08MB5370272EAE0C59F3D067357AC1BD0@DB8PR08MB5370.eurprd08.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:2201;
-x-forefront-prvs: 0145758B1D
-x-forefront-antispam-report:
- SFV:NSPM;SFS:(10019020)(396003)(376002)(346002)(136003)(366004)(39840400004)(199004)(189003)(4326008)(64756008)(66476007)(14454004)(81156014)(81166006)(8676002)(316002)(6512007)(86362001)(36756003)(31696002)(305945005)(52116002)(6116002)(6486002)(110136005)(66066001)(54906003)(6436002)(99286004)(7736002)(3846002)(2906002)(8936002)(26005)(53936002)(76176011)(2616005)(25786009)(446003)(71200400001)(478600001)(256004)(14444005)(6246003)(71190400001)(102836004)(486006)(66446008)(31686004)(66946007)(229853002)(5660300002)(2501003)(6506007)(476003)(11346002)(66556008)(186003)(386003);DIR:OUT;SFP:1102;SCL:1;SRVR:DB8PR08MB5370;H:DB8PR08MB5498.eurprd08.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
-received-spf: None (protection.outlook.com: virtuozzo.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info:
- Hipa0Y5icjTuV9ZDgN0WZQBsrarf1P+O1TY9G4zsGj0l3jTjvXtT1vbC4KZW7pQsEqlUOKLg12BiwH3qTuqxZjHKH6vURwhNBtGDIHE38f0WlfOJw0ULstZfIQPw2ojkg/OTUc+VIrYmvLg9WABtbGU3iRqVC71Tb0efDqpwv5prDX3/+f7VQ+K3uBp65BlOpciDbQzX13gsnPwgIc6wc/QJzusVaCp+5b6N5IUMYeu4WnTY6LqOko3uFv2tjepukmltJXWjQFQ0rKqK1O8IYBOci+6cRgM2gaYquCR9JQC7LNTu6zOH/ZqNrC4tlQFufyt7skXvbxZdwmh4LwHnZ2aXtAjyf/ieA7uPXy9FKGkVfOANkruV4dkXM7sbaoiDov1+u0npVzY/hk3bbtOvKLt44E2EXSrJxY45oOZ+eeA=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B2A6E9ACAACAFF4CB954CFA3E19D6CF3@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <20190823143726.27062-2-eblake@redhat.com>
+ <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
+From: Eric Blake <eblake@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=eblake@redhat.com; keydata=
+ xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
+ xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
+ TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
+ GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
+ sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
+ AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
+ CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
+ RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
+ wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
+ Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
+ gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
+ pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
+ zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
+ pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
+ 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
+ NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
+ cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
+ SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
+ I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
+ mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
+ Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
+ 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
+Organization: Red Hat, Inc.
+Message-ID: <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
+Date: Fri, 30 Aug 2019 18:10:24 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-OriginatorOrg: virtuozzo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dbf0afab-ad97-4281-28c8-08d72d756bb2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Aug 2019 18:11:03.9587
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: rrPx/zgnO49UXk2wzS6hWWHhAmlvvr0aEyiVgxXlsdbzcxyMSNPTf/IudE17GbLCjziSa+KLptjJX4wDtTs+DZ/YAfELSnXzBvibQjcPpXs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5370
-X-Rc-Spam: 2008-11-04_01
+In-Reply-To: <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="PKFuRuvEDFdr4TIQr3NNeLmXHwWZulpQm"
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.41]); Fri, 30 Aug 2019 23:10:28 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <suXf5_p7qKL.A.IbC.IBYadB@bendel>
+Resent-Message-ID: <oT1pIwdRagH.A.hG.zzaadB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/668
+X-Mailing-List: <nbd@other.debian.org> archive/latest/669
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -134,36 +105,90 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/8dc987a5-ec87-faa6-1e86-d7c3573694f7@virtuozzo.com
-Resent-Date: Fri, 30 Aug 2019 20:00:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/b1483a24-d524-169a-3440-5a9bf4440265@redhat.com
+Resent-Date: Fri, 30 Aug 2019 23:10:43 +0000 (UTC)
 
-MjMuMDguMjAxOSAxNzozNywgRXJpYyBCbGFrZSB3cm90ZToNCj4gVGhlIGNsaWVudCBzaWRlIGlz
-IGZhaXJseSBzdHJhaWdodGZvcndhcmQ6IGlmIHRoZSBzZXJ2ZXIgYWR2ZXJ0aXNlZA0KPiBmYXN0
-IHplcm8gc3VwcG9ydCwgdGhlbiB3ZSBjYW4gbWFwIHRoYXQgdG8gQkRSVl9SRVFfTk9fRkFMTEJB
-Q0sNCj4gc3VwcG9ydC4gIEEgc2VydmVyIHRoYXQgYWR2ZXJ0aXNlcyBGQVNUX1pFUk8gYnV0IG5v
-dCBXUklURV9aRVJPRVMNCj4gaXMgdGVjaG5pY2FsbHkgYnJva2VuLCBidXQgd2UgY2FuIGlnbm9y
-ZSB0aGF0IHNpdHVhdGlvbiBhcyBpdCBkb2VzDQo+IG5vdCBjaGFuZ2Ugb3VyIGJlaGF2aW9yLg0K
-PiANCj4gU2lnbmVkLW9mZi1ieTogRXJpYyBCbGFrZSA8ZWJsYWtlQHJlZGhhdC5jb20+DQoNClJl
-dmlld2VkLWJ5OiBWbGFkaW1pciBTZW1lbnRzb3YtT2dpZXZza2l5IDx2c2VtZW50c292QHZpcnR1
-b3p6by5jb20+DQoNCj4gDQo+IC0tLQ0KPiANCj4gUGVyaGFwcyB0aGlzIGlzIHdvcnRoIG1lcmdp
-bmcgd2l0aCB0aGUgcHJldmlvdXMgcGF0Y2guDQo+IC0tLQ0KPiAgIGJsb2NrL25iZC5jIHwgNyAr
-KysrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKQ0KPiANCj4gZGlmZiAt
-LWdpdCBhL2Jsb2NrL25iZC5jIGIvYmxvY2svbmJkLmMNCj4gaW5kZXggYmVlZDQ2ZmIzNDE0Li44
-MzM5ZDcxMDYzNjYgMTAwNjQ0DQo+IC0tLSBhL2Jsb2NrL25iZC5jDQo+ICsrKyBiL2Jsb2NrL25i
-ZC5jDQo+IEBAIC0xMDQ0LDYgKzEwNDQsMTAgQEAgc3RhdGljIGludCBuYmRfY2xpZW50X2NvX3B3
-cml0ZV96ZXJvZXMoQmxvY2tEcml2ZXJTdGF0ZSAqYnMsIGludDY0X3Qgb2Zmc2V0LA0KPiAgICAg
-ICBpZiAoIShmbGFncyAmIEJEUlZfUkVRX01BWV9VTk1BUCkpIHsNCj4gICAgICAgICAgIHJlcXVl
-c3QuZmxhZ3MgfD0gTkJEX0NNRF9GTEFHX05PX0hPTEU7DQo+ICAgICAgIH0NCj4gKyAgICBpZiAo
-ZmxhZ3MgJiBCRFJWX1JFUV9OT19GQUxMQkFDSykgew0KPiArICAgICAgICBhc3NlcnQocy0+aW5m
-by5mbGFncyAmIE5CRF9GTEFHX1NFTkRfRkFTVF9aRVJPKTsNCj4gKyAgICAgICAgcmVxdWVzdC5m
-bGFncyB8PSBOQkRfQ01EX0ZMQUdfRkFTVF9aRVJPOw0KPiArICAgIH0NCj4gDQo+ICAgICAgIGlm
-ICghYnl0ZXMpIHsNCj4gICAgICAgICAgIHJldHVybiAwOw0KPiBAQCAtMTIzOSw2ICsxMjQzLDkg
-QEAgc3RhdGljIGludCBuYmRfY2xpZW50X2Nvbm5lY3QoQmxvY2tEcml2ZXJTdGF0ZSAqYnMsIEVy
-cm9yICoqZXJycCkNCj4gICAgICAgfQ0KPiAgICAgICBpZiAocy0+aW5mby5mbGFncyAmIE5CRF9G
-TEFHX1NFTkRfV1JJVEVfWkVST0VTKSB7DQo+ICAgICAgICAgICBicy0+c3VwcG9ydGVkX3plcm9f
-ZmxhZ3MgfD0gQkRSVl9SRVFfTUFZX1VOTUFQOw0KPiArICAgICAgICBpZiAocy0+aW5mby5mbGFn
-cyAmIE5CRF9GTEFHX1NFTkRfRkFTVF9aRVJPKSB7DQo+ICsgICAgICAgICAgICBicy0+c3VwcG9y
-dGVkX3plcm9fZmxhZ3MgfD0gQkRSVl9SRVFfTk9fRkFMTEJBQ0s7DQo+ICsgICAgICAgIH0NCj4g
-ICAgICAgfQ0KPiANCj4gICAgICAgcy0+c2lvYyA9IHNpb2M7DQo+IA0KDQoNCi0tIA0KQmVzdCBy
-ZWdhcmRzLA0KVmxhZGltaXINCg==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--PKFuRuvEDFdr4TIQr3NNeLmXHwWZulpQm
+Content-Type: multipart/mixed; boundary="nkhkj5r1Hn4OmFY326cRQ1UABuL2Wam5l";
+ protected-headers="v1"
+From: Eric Blake <eblake@redhat.com>
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ "open list:Network Block Dev..." <qemu-block@nongnu.org>,
+ "libguestfs@redhat.com" <libguestfs@redhat.com>,
+ "nbd@other.debian.org" <nbd@other.debian.org>
+Message-ID: <b1483a24-d524-169a-3440-5a9bf4440265@redhat.com>
+Subject: Re: [Qemu-devel] [PATCH 1/5] nbd: Improve per-export flag handling in
+ server
+References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
+ <20190823143726.27062-1-eblake@redhat.com>
+ <20190823143726.27062-2-eblake@redhat.com>
+ <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
+In-Reply-To: <92e9cfa2-fbaa-259d-7a04-91187cc809b6@virtuozzo.com>
+
+--nkhkj5r1Hn4OmFY326cRQ1UABuL2Wam5l
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 8/30/19 1:00 PM, Vladimir Sementsov-Ogievskiy wrote:
+> 23.08.2019 17:37, Eric Blake wrote:
+>> When creating a read-only image, we are still advertising support for
+>> TRIM and WRITE_ZEROES to the client, even though the client should not=
+
+>> be issuing those commands.  But seeing this requires looking across
+>> multiple functions:
+>>
+
+>> @@ -458,10 +458,13 @@ static int nbd_negotiate_handle_export_name(NBDC=
+lient *client,
+>>           return -EINVAL;
+>>       }
+>>
+>> -    trace_nbd_negotiate_new_style_size_flags(client->exp->size,
+>> -                                             client->exp->nbdflags | =
+myflags);
+>> +    myflags =3D client->exp->nbdflags;
+>> +    if (client->structured_reply) {
+>> +        myflags |=3D NBD_FLAG_SEND_DF;
+>> +    }
+>=20
+>=20
+> why we cant do just
+> client->exp->nbdflags |=3D NBD_FLAG_SEND_DF ?
+
+Because myflags is the runtime flags for _this_ client, while
+client->exp->nbdflags are the base flags shared by _all_ clients.  If
+client A requests structured reply, but client B does not, then we don't
+want to advertise DF to client B; but amending client->exp->nbdflags
+would have that effect.
+
+--=20
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
+
+
+--nkhkj5r1Hn4OmFY326cRQ1UABuL2Wam5l--
+
+--PKFuRuvEDFdr4TIQr3NNeLmXHwWZulpQm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1prOAACgkQp6FrSiUn
+Q2pk2QgAri0azyBI4Bnz14RyFT+1/1LofTul86EY4+9yV3LgHamcDr/bq8hVV3t0
+m7yaonFy9BqN14vRk8HW4xcNCi2dw6SRS4hkLxLzFs42nHnGspumIAjseqerAyPN
+q3WHQh9soKmpYCd63rcwOy9hM30/D72Ja2Yd9ahc3/EUEfeErTraYhM7Z+S1vSUH
+XYQGs27rFIb4Xg7Eog8NODucnbDDiMJOG0l04VwzqygCuaJ9cWeUMG/OrzHcplLM
+Jq5Rr9RQWLauU9RaqzyO92fArk45K9S1wApji5B52TgGghkvDdtYEvHlI+OHNbse
+/47ycql4cvVCXQ2coAgKcyadeKgHcQ==
+=bKIZ
+-----END PGP SIGNATURE-----
+
+--PKFuRuvEDFdr4TIQr3NNeLmXHwWZulpQm--
 
