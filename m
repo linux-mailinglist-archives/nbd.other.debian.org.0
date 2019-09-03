@@ -2,71 +2,92 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4380AA5EAF
-	for <lists+nbd@lfdr.de>; Tue,  3 Sep 2019 02:45:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 870F2A6BB8
+	for <lists+nbd@lfdr.de>; Tue,  3 Sep 2019 16:42:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2996B202C2; Tue,  3 Sep 2019 00:45:32 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep  3 00:45:32 2019
-Old-Return-Path: <xiubli@redhat.com>
+	id 5B42A2023C; Tue,  3 Sep 2019 14:42:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep  3 14:42:24 2019
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-21.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id EA059202A9
-	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Sep 2019 00:45:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5446020135
+	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Sep 2019 14:42:17 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-10.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-16.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 2ofuW9VP8Kku for <lists-other-nbd@bendel.debian.org>;
-	Tue,  3 Sep 2019 00:45:22 +0000 (UTC)
+	with ESMTP id Qvg9EYwD-6TS for <lists-other-nbd@bendel.debian.org>;
+	Tue,  3 Sep 2019 14:42:13 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 00B7B202A1
-	for <nbd@other.debian.org>; Tue,  3 Sep 2019 00:45:21 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+	by bendel.debian.org (Postfix) with ESMTPS id AF72820038
+	for <nbd@other.debian.org>; Tue,  3 Sep 2019 14:42:12 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 57A1443D5B;
-	Tue,  3 Sep 2019 00:45:18 +0000 (UTC)
-Received: from [10.72.12.60] (ovpn-12-60.pek2.redhat.com [10.72.12.60])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id E4014196AE;
-	Tue,  3 Sep 2019 00:45:15 +0000 (UTC)
-Subject: Re: [PATCH 2/2 v3] nbd: fix possible page fault for nbd disk
-To: Mike Christie <mchristi@redhat.com>, josef@toxicpanda.com, axboe@kernel.dk
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org
-References: <20190822075923.11996-1-xiubli@redhat.com>
- <20190822075923.11996-3-xiubli@redhat.com> <5D686498.5090602@redhat.com>
- <78d16d10-1d06-6ce1-7c51-64c42e51f549@redhat.com>
- <5D6D89ED.6020700@redhat.com>
-From: Xiubo Li <xiubli@redhat.com>
-Message-ID: <e3c0f330-26b4-a305-8e36-b452e46bed8f@redhat.com>
-Date: Tue, 3 Sep 2019 08:45:01 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+	by mx1.redhat.com (Postfix) with ESMTPS id 5DA1B3061421;
+	Tue,  3 Sep 2019 14:42:09 +0000 (UTC)
+Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 47C5B5D6D0;
+	Tue,  3 Sep 2019 14:42:06 +0000 (UTC)
+Subject: Re: [PATCH v3] doc: Define a standard URI syntax for NBD URIs.
+To: "Richard W.M. Jones" <rjones@redhat.com>, nbd@other.debian.org
+Cc: w@uter.be, berrange@redhat.com, mkletzan@redhat.com
+References: <20190611115330.6842-1-rjones@redhat.com>
+ <20190611115330.6842-2-rjones@redhat.com>
+From: Eric Blake <eblake@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=eblake@redhat.com; keydata=
+ xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
+ xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
+ TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
+ GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
+ sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
+ AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
+ CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
+ RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
+ wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
+ Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
+ gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
+ pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
+ zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
+ pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
+ 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
+ NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
+ cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
+ SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
+ I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
+ mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
+ Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
+ 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
+Organization: Red Hat, Inc.
+Message-ID: <27a64c91-7309-31d7-b639-b32e1107c3f5@redhat.com>
+Date: Tue, 3 Sep 2019 09:42:05 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <5D6D89ED.6020700@redhat.com>
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2 (mx1.redhat.com [10.5.110.71]); Tue, 03 Sep 2019 00:45:18 +0000 (UTC)
+In-Reply-To: <20190611115330.6842-2-rjones@redhat.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Zdbn6TThQSEAIuriwpWWrPArg8X3EJt9a"
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.45]); Tue, 03 Sep 2019 14:42:09 +0000 (UTC)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <DjnCZpuvmYH.A.OmC.sebbdB@bendel>
+Resent-Message-ID: <26jaBoRvopB.A.-4H.QvnbdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/677
+X-Mailing-List: <nbd@other.debian.org> archive/latest/678
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -76,121 +97,122 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/e3c0f330-26b4-a305-8e36-b452e46bed8f@redhat.com
-Resent-Date: Tue,  3 Sep 2019 00:45:32 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/27a64c91-7309-31d7-b639-b32e1107c3f5@redhat.com
+Resent-Date: Tue,  3 Sep 2019 14:42:24 +0000 (UTC)
 
-On 2019/9/3 5:30, Mike Christie wrote:
-> On 08/29/2019 07:58 PM, Xiubo Li wrote:
->> On 2019/8/30 7:49, Mike Christie wrote:
->>> On 08/22/2019 02:59 AM, xiubli@redhat.com wrote:
-[...]
->>> @@ -1596,6 +1614,7 @@ static int nbd_dev_add(int index)
->>>        nbd->tag_set.flags = BLK_MQ_F_SHOULD_MERGE |
->>>            BLK_MQ_F_BLOCKING;
->>>        nbd->tag_set.driver_data = nbd;
->>> +    init_completion(&nbd->destroy_complete);
->>>          err = blk_mq_alloc_tag_set(&nbd->tag_set);
->>>        if (err)
->>> @@ -1761,6 +1780,16 @@ static int nbd_genl_connect(struct sk_buff
->>> *skb, struct genl_info *info)
->>>            mutex_unlock(&nbd_index_mutex);
->>>            return -EINVAL;
->>>        }
->>> +
->>> +    if (test_bit(NBD_DESTROY_ON_DISCONNECT, &nbd->flags) &&
->>> Why does this have to be set? If this is not set would you end up
->>> hitting the config_refs check:
->>>
->>> if (refcount_read(&nbd->config_refs)) {
->>>
->>> and possibly returning failure?
->> Yeah, this is a good question. Before I have also tried to fix it with
->> this, but it still won't work for me.
->>
->>  From my test cases almost more than 50% times, the crash will be hit in
->> the gap just after the nbd->config already been released, and before the
->> nbd itself not yet, so the nbd->config_refs will be 0.
->>
->>
->>> If you moved the complete() to nbd_config_put would it work if this bit
->>> was set or not?
->> Tried it already, it still won't work.
->>
->> There is one case that when disconnecting the nbd device, the userspace
->> service will do the open()/release()  things, please see [1], and the
->> sequence is not the same every time, if the
->> NBD_CFLAG_DESTROY_ON_DISCONNECT bit is set the crash still exists.
->>
->> So sometimes when the nbd_put() called from the nbd_config_put(), the
->> &nbd->refs in nbd_put won't be 0, it could be 1. And it will be 0 just
->> after the release() is triggered later.
->>
->> So I just place the complete() before "free(nbd);", or there will be
->> another Call trace will be seen very often:
-> Did this happen because you race with
->
-> nbd_put->nbd_dev_remove->del_gendisk->device_del->sysfs_remove_dir
->
-> ? If so, does that still happen after you moved
->
-> mutex_unlock(&nbd_index_mutex);
->
-> in nbd_put?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Zdbn6TThQSEAIuriwpWWrPArg8X3EJt9a
+Content-Type: multipart/mixed; boundary="DrxaMdAkPQ1NbYd5ie8eA7B289qz6vvdg";
+ protected-headers="v1"
+From: Eric Blake <eblake@redhat.com>
+To: "Richard W.M. Jones" <rjones@redhat.com>, nbd@other.debian.org
+Cc: w@uter.be, berrange@redhat.com, mkletzan@redhat.com
+Message-ID: <27a64c91-7309-31d7-b639-b32e1107c3f5@redhat.com>
+Subject: Re: [PATCH v3] doc: Define a standard URI syntax for NBD URIs.
+References: <20190611115330.6842-1-rjones@redhat.com>
+ <20190611115330.6842-2-rjones@redhat.com>
+In-Reply-To: <20190611115330.6842-2-rjones@redhat.com>
 
-Currently with this fix, there is no any Call Traces anymore from my 
-test cases. I ran the test for almost a whole night long without any 
-problem.
+--DrxaMdAkPQ1NbYd5ie8eA7B289qz6vvdg
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 6/11/19 6:53 AM, Richard W.M. Jones wrote:
+> For further information about discussion around this standard, see
+> this thread on the mailing list:
+> https://lists.debian.org/nbd/2019/05/msg00013.html
+>=20
+> Signed-off-by: Richard W.M. Jones <rjones@redhat.com>
+> ---
+>  doc/Makefile.am |   2 +-
+>  doc/uri.md      | 171 ++++++++++++++++++++++++++++++++++++++++++++++++=
+
+>  2 files changed, 172 insertions(+), 1 deletion(-)
+
+Are we ready to commit this?  There were some discussions about whether
+to recognize/reserve any additional query parameters, but consensus
+seemed to be that was just over-engineering at this point.
+
+> +++ b/doc/uri.md
+
+> +Note that export names are not usually paths, they are free text
+> +strings.  In particular they do not usually start with a `/`
+> +character, they may be an empty string, and they may contain any
+> +Unicode character.
+
+Well, not the NUL character.
+
+Do we need to worry about normalization issues?  That is, a server with
+an export named 'a//b/../c' might be normalized by URI parsers into
+'a/c'.   Maybe we should adjust the NBD spec to recommend against the
+use of export names that could be altered during traditional file name
+normalization?
 
 
->   It seems before that part of your patch was added we could
-> hit this race and got the duplicate sysfs entry trace below:
->
-> 1. nbd_put -> idr_remove.
-> 2. nbd_put drops mutex.
-> 3. nbd_genl_connect takes mutex (index != -1 for this call).
-> 4. nbd_genl_connect-> idr_find fails due to remove in #1.
-> 5. nbd_genl_connect->nbd_dev_add is then able to try to add the device
-> to sysfs before the nbd_put->nbd_dev_remove path has deleted the device.
+> +## NBD URI query parameters related to TLS
+> +
+> +If TLS encryption is to be negotiated then the following query
+> +parameters MAY be present:
+> +
+> +* `tls-type`: Possible values include `anon`, `x509` or `psk`.  This
+> +  specifies the desired TLS authentication method.
+> +
+> +* `tls-hostname`: The optional TLS hostname to use for certificate
+> +  verification.  This can be used when connecting over a Unix domain
+> +  socket since there is no hostname available in the URI authority
+> +  field; or when DNS does not properly resolve the server's hostname.
+> +
+> +* `tls-verify-peer`: This optional parameter may be `0` or `1` to
+> +  control whether the client verifies the server's identity.  By
+> +  default clients SHOULD verify the server's identity if TLS is
+> +  negotiated and if a suitable Certificate Authorty is available.
 
-Yeah, it is. Just before the old stale sysfs entry is totally 
-removed/released, the nbd driver is trying to create it again with the 
-same nbd_index.
+Authority
+
+> +
+> +## Other NBD URI query parameters
+> +
+> +Clients SHOULD prefix experimental query parameters using `x-`.  This
+> +SHOULD NOT be used for query parameters which are expected to be
+> +widely used.
+> +
+> +Any other query parameters which the client does not understand SHOULD=
+
+> +be ignored by the parser.
+> +
+> +## Clients which do not support TLS
+> +
+> +Wherever this document refers to encryption, authentication and TLS,
+> +clients which do not support TLS SHOULD give an error when
+> +encountering an NBD URI that requires TLS (such as one with a scheme
+> +name `nbds` or `nbds+unix`).
+>=20
+
+--=20
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
 
->
-> When you now do the idr and sysfs removal and idr addition/search and
-> sysfs addition all under the nbd_index_mutex it shouldn't happen anymore.
->
-Correctly.
+--DrxaMdAkPQ1NbYd5ie8eA7B289qz6vvdg--
 
-Thanks,
-BRs
+--Zdbn6TThQSEAIuriwpWWrPArg8X3EJt9a
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
->
->
->>     2489 Aug 20 18:10:04 lxbfd2 kernel: sysfs: cannot create duplicate
->> filename '/devices/virtual/block/nbd0'
->>     2490 Aug 20 18:10:04 lxbfd2 kernel: CPU: 0 PID: 8635 Comm: nbd-clid
->> Kdump: loaded Tainted: G      D 5.1.18-300.fc30.x86_64 #1
->>     2491 Aug 20 18:10:04 lxbfd2 kernel: Hardware name: Red Hat KVM, BIOS
->> 0.5.1 01/01/2011
->>     2492 Aug 20 18:10:04 lxbfd2 kernel: Call Trace:
->>     2493 Aug 20 18:10:04 lxbfd2 kernel: dump_stack+0x5c/0x80
->>     2494 Aug 20 18:10:04 lxbfd2 kernel: sysfs_warn_dup.cold+0x17/0x2d
->>     2495 Aug 20 18:10:04 lxbfd2 kernel: sysfs_create_dir_ns+0xb6/0xd0
->>     2496 Aug 20 18:10:04 lxbfd2 kernel: kobject_add_internal+0xb7/0x280
->>     2497 Aug 20 18:10:04 lxbfd2 kernel: kobject_add+0x7e/0xb0
->>     2498 Aug 20 18:10:04 lxbfd2 kernel: ? _cond_resched+0x15/0x30
->>     2499 Aug 20 18:10:04 lxbfd2 kernel: device_add+0x12b/0x690
->>     2500 Aug 20 18:10:04 lxbfd2 kernel: __device_add_disk+0x1b5/0x470
->>     2501 Aug 20 18:10:04 lxbfd2 kernel: nbd_dev_add+0x21d/0x2b0 [nbd]
->>     2502 Aug 20 18:10:04 lxbfd2 kernel: nbd_genl_connect+0x16e/0x630 [nbd]
->>     2503 Aug 20 18:10:04 lxbfd2 kernel: genl_family_rcv_msg+0x1a9/0x3b0
->>     2504 Aug 20 18:10:04 lxbfd2 kernel: ? __switch_to_asm+0x35/0x70
->>     2505 Aug 20 18:10:04 lxbfd2 kernel: ? __switch_to_asm+0x41/0x70
->>     2506 Aug 20 18:10:04 lxbfd2 kernel: ? __switch_to+0x11f/0x4c0
->>     2507 Aug 20 18:10:04 lxbfd2 kernel: ? __switch_to_asm+0x41/0x70
->>     [...]
->>
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1ue70ACgkQp6FrSiUn
+Q2pB+AgApFLPoNGtfw2kO+gkUktp6waTaRUmV2jEn9Mwof5ajOdtIrg0iMHNaXyq
+iwkJKOhtpfyXn6/1CGjvbpPOcIokOzNsvOH/HcN6+oMzzeErWGB/zDx6YhQr+/2l
+NOnFojSIhwpT0EElPmusJtbtr/M2Xms1vM/6Q4Aqdo82UB6A6KyY+P+spGUe6X2Q
+UhhKmj4Fqo7tyVZdvfJodJoo6tnQZCfyoU2XI/35RwNh/MmskpkI/j88OT8uNqK9
+RqvabAWHCNHwqHPisuFtCKf/cnxLyji6hPCAslNKsDArQwAnzQlG9cKikDu0yKta
+q+FKOAic0xMGPc+z7XGfjcVS/7vw/A==
+=OOEI
+-----END PGP SIGNATURE-----
+
+--Zdbn6TThQSEAIuriwpWWrPArg8X3EJt9a--
 
