@@ -2,93 +2,86 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76135A75AF
-	for <lists+nbd@lfdr.de>; Tue,  3 Sep 2019 22:53:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84475A76AA
+	for <lists+nbd@lfdr.de>; Wed,  4 Sep 2019 00:03:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 47662202B1; Tue,  3 Sep 2019 20:53:26 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep  3 20:53:26 2019
-Old-Return-Path: <eblake@redhat.com>
+	id 56AC82025D; Tue,  3 Sep 2019 22:03:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep  3 22:03:20 2019
+Old-Return-Path: <taylor4869@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-21.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,PGPSIGNATURE,RCVD_IN_DNSWL_HI autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,FREEMAIL_ENVFROM_END_DIGIT,
+	FREEMAIL_FROM,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 388FE2024E
-	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Sep 2019 20:53:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3E10A201DC
+	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Sep 2019 21:48:11 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-16.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.949 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ScTFSSg3oczi for <lists-other-nbd@bendel.debian.org>;
-	Tue,  3 Sep 2019 20:53:15 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id DFA6320244
-	for <nbd@other.debian.org>; Tue,  3 Sep 2019 20:53:14 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 740658553F;
-	Tue,  3 Sep 2019 20:53:11 +0000 (UTC)
-Received: from [10.3.116.234] (ovpn-116-234.phx2.redhat.com [10.3.116.234])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 1731B5D6B2;
-	Tue,  3 Sep 2019 20:53:06 +0000 (UTC)
-Subject: Re: [Libguestfs] [PATCH 0/1] NBD protocol change to add fast zero
- support
-To: nbd@other.debian.org
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, libguestfs@redhat.com
-References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143426.26838-1-eblake@redhat.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <e16c427a-c36f-617c-ac58-9941c44c75af@redhat.com>
-Date: Tue, 3 Sep 2019 15:53:05 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	with ESMTP id HZPPHJodFBse for <lists-other-nbd@bendel.debian.org>;
+	Tue,  3 Sep 2019 21:48:07 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-yw1-xc32.google.com (mail-yw1-xc32.google.com [IPv6:2607:f8b0:4864:20::c32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id E85102019B
+	for <nbd@other.debian.org>; Tue,  3 Sep 2019 21:48:06 +0000 (UTC)
+Received: by mail-yw1-xc32.google.com with SMTP id i207so6472061ywc.9
+        for <nbd@other.debian.org>; Tue, 03 Sep 2019 14:48:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=mMAwxjKQu+JSwPe2gzleSRJQSocED1Fv1b9sK+wAI9Y=;
+        b=lzp+yplvJV8MgWW2xpw6QiMzgCDu3HDDHKO1Uyqe6Q9j+2FLKSrtyWQTxHCUU7E1+e
+         h91r7+SjpDrFTTKAi+Oi9j0WRXbi7EKcLSPzjTrcDDXjpFmGwWRAe/nNjG9eYQmvwDBo
+         M7bqSJWyJzM3ZmzZEy7TeVd3w/Qc22I7xHQWvH2biXeW2GC5txd6weZcqCu8lPnAL4Xp
+         exUfxrnz8Z30a+4Te29d5wzoPqDE7psdlVZ5jZjC7aIyOr3KucG67EpaZ4tfVI6sZcPz
+         gvXvkLxZm9fancO9ckL+c5Doft1yHGadEXrL0NZnLJKxqX3gdaOHBnedG5q4MfP6xETL
+         z7XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=mMAwxjKQu+JSwPe2gzleSRJQSocED1Fv1b9sK+wAI9Y=;
+        b=Z5kCsg1AhvUV9p+LqeXhPdt5Z//JHbBoHY7H9+B/IyBzFQa3R7mj8yIWiMVgnESzgf
+         +k6AxDlF2krzLji+JvOYskbyJuB2HIT4Qns9qYSbT+IbubOhLrhQELsr54ZN3qzQTOtH
+         PYa89x0c0e1xM8BmaJieKW52YQ3kH6phnjLvWII/OpHoNObxrRB61xT5GzgzJYF4JYpw
+         8j6U6s7sAJ9IJQX2y6TbJ8wElTc+wgXaonyOXn2io3/pJRn2sPaMdpuE5aVabORYufwz
+         loZrXaCDAngIgAkNHzpoBEtPZQ7/8Qjo6rN5tPeDxJQy25gPy4eotjVZMkqchi5Z3vz3
+         HyFA==
+X-Gm-Message-State: APjAAAWsAlUZHVcXkuNOa6xNahWmTR/NisT0zL2VXwHpDjJG3q9IOBKL
+	JljUjsDn6vFF3Cy3KpPstO/eDUXBsbq8wLm7id4=
+X-Google-Smtp-Source: APXvYqzxVTpLGWbl0jHy6NW107KNS7aXnJqoAbkOHpDcd+95inmC3pRRkG1A91Z3jZjIKfCf15YndjmQKi4qw9S9QiQ=
+X-Received: by 2002:a81:4c55:: with SMTP id z82mr25361810ywa.367.1567547283440;
+ Tue, 03 Sep 2019 14:48:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190823143426.26838-1-eblake@redhat.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="XkOpqTHiHrgU7AgsgAXKCXtkXNMzzSVye"
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.28]); Tue, 03 Sep 2019 20:53:11 +0000 (UTC)
+References: <CAKiK_mD-sk_RqO_gtCL0-aeayZZ1miZ1LvBNGDhRB6ft+810bw@mail.gmail.com>
+ <20190902214851.GA25667@redhat.com>
+In-Reply-To: <20190902214851.GA25667@redhat.com>
+From: Taylor Yang <taylor4869@gmail.com>
+Date: Tue, 3 Sep 2019 14:47:52 -0700
+Message-ID: <CAKiK_mA3c=5z+coCQrwfLnaudgrVTgKUMjN6sQWaL5_ffgNrtQ@mail.gmail.com>
+Subject: Re: Question about IO workload via NBD
+To: "Richard W.M. Jones" <rjones@redhat.com>
+Cc: nbd@other.debian.org
+Content-Type: text/plain; charset="UTF-8"
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <8fZB9sKhak.A.4oC.GLtbdB@bendel>
+Resent-Message-ID: <Y788wanIT5M.A.D9F.oMubdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/680
+X-Mailing-List: <nbd@other.debian.org> archive/latest/681
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -98,68 +91,47 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/e16c427a-c36f-617c-ac58-9941c44c75af@redhat.com
-Resent-Date: Tue,  3 Sep 2019 20:53:26 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAKiK_mA3c=5z+coCQrwfLnaudgrVTgKUMjN6sQWaL5_ffgNrtQ@mail.gmail.com
+Resent-Date: Tue,  3 Sep 2019 22:03:20 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---XkOpqTHiHrgU7AgsgAXKCXtkXNMzzSVye
-Content-Type: multipart/mixed; boundary="Au85QEo7zJWdZXIMLAUXw1Y6P6MJZR3F3";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: nbd@other.debian.org
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, libguestfs@redhat.com
-Message-ID: <e16c427a-c36f-617c-ac58-9941c44c75af@redhat.com>
-Subject: Re: [Libguestfs] [PATCH 0/1] NBD protocol change to add fast zero
- support
-References: <25ead363-4f37-5450-b985-1876374e314d@redhat.com>
- <20190823143426.26838-1-eblake@redhat.com>
-In-Reply-To: <20190823143426.26838-1-eblake@redhat.com>
+Hi Richard,
 
---Au85QEo7zJWdZXIMLAUXw1Y6P6MJZR3F3
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+The command I use is like `fio --name=xxx --rw=randread --output=xxx
+--direct=1 --ioengine=libaio --bs=16k --iodepth=4 --filename=/dev/nbd0
+--size=1024Mb` and I setup both nbd client and nbd server on two
+different hosts. The FIO job is executed on the nbd client side after
+the connection between the nbd client and server being setup. I think
+it is because nbd server uses the buffer cache but I also tried to
+specify the `sync` option in the config file and it still behaves the
+same way.
 
-On 8/23/19 9:34 AM, Eric Blake wrote:
-> See the cross-post cover letter for details:
-> https://www.redhat.com/archives/libguestfs/2019-August/msg00322.html
->=20
-> Eric Blake (1):
->   protocol: Add NBD_CMD_FLAG_FAST_ZERO
->=20
->  doc/proto.md | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 49 insertions(+), 1 deletion(-)
+Any suggestion is appreciated.
+Thank you!
+Best wishes,
+Taylor
 
-I think we've had enough review time with no major objections to this.
-Therefore, I've gone ahead and incorporated the wording changes that
-were mentioned in discussion on this patch, as well as Rich's URI
-specification, into the NBD project.  We can still amend the
-specifications if any problems turn up.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---Au85QEo7zJWdZXIMLAUXw1Y6P6MJZR3F3--
-
---XkOpqTHiHrgU7AgsgAXKCXtkXNMzzSVye
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAl1u0rEACgkQp6FrSiUn
-Q2pkhggAppXccOt2dvbTxyqyorY05DhCRbQVlzhrWwFtzK8NMG7Ixk540ABgPqAA
-iaQ8cGLZm1//ymQPNWADH/ZtCkfdNSAKXdKt1eOQ0/w1E0/IZvmQL9efMJBWk0ee
-WHDkyjVXP9vJNmXhV4CTJblbebH4lbEIwGor1NoHbS5glzBje/LnR59l2Ijk0rrq
-Bw/t72LpNo6Dy/qFJwKva3SUwV4hZeXa5lDbc72He3hOybFb96avOyObEWRCw54b
-WzumYX21v2NYZq8gdayOipSW1z1R0jT4Bz5HsAL67jnspuREuEz7P4PCLp2+lLVw
-MwMy85KggVoVIxhCj5FzAczuugPXkg==
-=nCrj
------END PGP SIGNATURE-----
-
---XkOpqTHiHrgU7AgsgAXKCXtkXNMzzSVye--
+On Mon, Sep 2, 2019 at 2:48 PM Richard W.M. Jones <rjones@redhat.com> wrote:
+>
+> On Fri, Aug 30, 2019 at 05:23:44PM -0700, Taylor Yang wrote:
+> > Hi,
+> >
+> > I worked on driving IO workload using FIO to a device via NBD. There
+> > seems to be some delay on the IO being shown on the original device
+> > after the FIO workload completed on the NBD. Is there a delay on how
+> > long the IO would be acknowledged on the original device? Is there any
+> > logging information I could get to troubleshoot this issue?
+> >
+> > Thank you so much for your help in advance.
+>
+> What's the fio command line / configuration file?  Are you
+> using the NBD engine or a filesystem?
+>
+> Rich.
+>
+> --
+> Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+> Read my programming and virtualization blog: http://rwmj.wordpress.com
+> virt-top is 'top' for virtual machines.  Tiny program with many
+> powerful monitoring features, net stats, disk stats, logging, etc.
+> http://people.redhat.com/~rjones/virt-top
 
