@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2DE8DD3B0
-	for <lists+nbd@lfdr.de>; Sat, 19 Oct 2019 00:21:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ACCEDD453
+	for <lists+nbd@lfdr.de>; Sat, 19 Oct 2019 00:24:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D78302060A; Fri, 18 Oct 2019 22:21:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Oct 18 22:21:08 2019
+	id 6820F20605; Fri, 18 Oct 2019 22:24:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Oct 18 22:24:08 2019
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-5.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1FB0E20602
-	for <lists-other-nbd@bendel.debian.org>; Fri, 18 Oct 2019 22:05:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 05CA720612
+	for <lists-other-nbd@bendel.debian.org>; Fri, 18 Oct 2019 22:07:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-7.181 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
@@ -28,26 +28,26 @@ X-Amavis-Spam-Status: No, score=-7.181 tagged_above=-10000 required=5.3
 	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id oX8gk2Uj8mIj for <lists-other-nbd@bendel.debian.org>;
-	Fri, 18 Oct 2019 22:05:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id iRM8yyrlwffh for <lists-other-nbd@bendel.debian.org>;
+	Fri, 18 Oct 2019 22:07:51 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 11B7C20608
-	for <nbd@other.debian.org>; Fri, 18 Oct 2019 22:05:21 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 519F920608
+	for <nbd@other.debian.org>; Fri, 18 Oct 2019 22:07:51 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 647D9222D2;
-	Fri, 18 Oct 2019 22:05:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id D95CE222D1;
+	Fri, 18 Oct 2019 22:07:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1571436317;
-	bh=o8P20wrNaZNXOqJF+YTebFW1ptiMmPp0UsImFpua9LQ=;
+	s=default; t=1571436467;
+	bh=7anIju3GzbRm18JdCkJS7Bg+9lKUk0OQ3BDxqqY5L24=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=hOi6OKOZyAfd3fQ4xIALDojORDcMCOL+lnIB6L0+vYbAVo4atc6LMcq6bi5d32vtB
-	 pkMjAZOMTzODOeRG0ILTybSJ4IGkc9j78Ts8W+PCqrob/IGCaafawGJeYBT/Ln0JQb
-	 JO3bv4YPr7tao2DyAte/fAhp0gcZIKDMXZUdrZa8=
+	b=Bu2c6ZrzQNAgR6iUWOCpixSD+B04Rsv6aarfMBTMe8KLw9q7Wx2uK/MQyVraFke2I
+	 UH8guMLvzeUnMb6sox1lEzGI8oKUoucXPhGlKZnPbwVMg7ikEz2U9Bvk6HlqPLRrOf
+	 G9ys6yR/f1qX27nunWHK5WhWXcguntLWaS2eoS90=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -58,12 +58,12 @@ Cc: Xiubo Li <xiubli@redhat.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 5.3 85/89] nbd: fix possible sysfs duplicate warning
-Date: Fri, 18 Oct 2019 18:03:20 -0400
-Message-Id: <20191018220324.8165-85-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 097/100] nbd: fix possible sysfs duplicate warning
+Date: Fri, 18 Oct 2019 18:05:22 -0400
+Message-Id: <20191018220525.9042-97-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191018220324.8165-1-sashal@kernel.org>
-References: <20191018220324.8165-1-sashal@kernel.org>
+In-Reply-To: <20191018220525.9042-1-sashal@kernel.org>
+References: <20191018220525.9042-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -71,9 +71,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <8vbRByqBPjF.A.mw.UrjqdB@bendel>
+Resent-Message-ID: <eimVRzuAHIE.A.H8.IujqdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/714
+X-Mailing-List: <nbd@other.debian.org> archive/latest/715
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -83,8 +83,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20191018220324.8165-85-sashal@kernel.org
-Resent-Date: Fri, 18 Oct 2019 22:21:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20191018220525.9042-97-sashal@kernel.org
+Resent-Date: Fri, 18 Oct 2019 22:24:08 +0000 (UTC)
 
 From: Xiubo Li <xiubli@redhat.com>
 
@@ -114,10 +114,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 0b727f7432f9e..bd164192045b0 100644
+index bc2fa4e85f0ca..d445195945618 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -230,8 +230,8 @@ static void nbd_put(struct nbd_device *nbd)
+@@ -228,8 +228,8 @@ static void nbd_put(struct nbd_device *nbd)
  	if (refcount_dec_and_mutex_lock(&nbd->refs,
  					&nbd_index_mutex)) {
  		idr_remove(&nbd_index_idr, nbd->index);
