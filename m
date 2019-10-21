@@ -2,91 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 640AEDF690
-	for <lists+nbd@lfdr.de>; Mon, 21 Oct 2019 22:12:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53CFBDF7D2
+	for <lists+nbd@lfdr.de>; Tue, 22 Oct 2019 00:06:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2898D203B6; Mon, 21 Oct 2019 20:12:19 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 21 20:12:19 2019
-Old-Return-Path: <josef@toxicpanda.com>
+	id 12451203B8; Mon, 21 Oct 2019 22:06:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 21 22:06:09 2019
+Old-Return-Path: <mchristi@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VERIFIED,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-2.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 694B120363
-	for <lists-other-nbd@bendel.debian.org>; Mon, 21 Oct 2019 19:56:42 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1C8D72038D
+	for <lists-other-nbd@bendel.debian.org>; Mon, 21 Oct 2019 21:49:44 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.48 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ycU2QzX1Oedv for <lists-other-nbd@bendel.debian.org>;
-	Mon, 21 Oct 2019 19:56:38 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x742.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com [IPv6:2607:f8b0:4864:20::742])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 12A9D2039B
-	for <nbd@other.debian.org>; Mon, 21 Oct 2019 19:56:37 +0000 (UTC)
-Received: by mail-qk1-x742.google.com with SMTP id p4so13951710qkf.5
-        for <nbd@other.debian.org>; Mon, 21 Oct 2019 12:56:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=olbMooGjFBayOK7jc5tAferY0kolRn7LFl7EO6n9+Nc=;
-        b=2KVIdo4CnFZeezRJGdUURVYAxlQipkL+U3JQu19GH2FVPmUpW8jPkgNcp3A/FaenyN
-         YpDIUISBLUO/+NfQpOynPtqRVUzgjeMb6JGpu3nAufBRVmlsqDu2Gnj1qhczeZX0IW+A
-         CvdTsJBaFh/ytGNiETeuhrPHtWaI44lFx5DD/EjujMDDu3QpoL1iDFSJIIpESUEecBMb
-         a66XPczNy+vrzshaqgkl5bSWZbiTNlSd+v3cv5tREpLsUw8/tiopaJU1VPrwDzu2hXn6
-         0p7w0wNOgxCgzaqslc3rcBA7xzbtodnvQl6D28FMZBFtrugTXGfmbzMWwSk8l0NVaT1/
-         qAlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=olbMooGjFBayOK7jc5tAferY0kolRn7LFl7EO6n9+Nc=;
-        b=Fn15Od02VnmYmInKEssuwdpYf5sazSvBGwBbYmetAOsd7wB2i/cly7/qW6vaDolDFR
-         wZ2wvd6JarAPSuLQkSFuup1q7hPbFfrlPOeDmIZ7o/AzfFuLZStLCeH/vWna+Rb9fhjq
-         RHE0UaXpvgEv4ghwxauLs0cj65Rpb4fZcoymWMWCvS+hFLnkvK7HRSsW/qo0m14Z+g9D
-         8jYVKW+EPpVW8UXKAcGZ01GcNOPz1jnzyhvYuIaxfk42Ojba2pQfKkBEMPt7VFDbcHyP
-         GzcwaAp+5fO6BC3BZN4WY0R/LTUa7h/tm8Zy4N6iQeopNlKyr617UqT4qU/qgQceuYmc
-         CwgA==
-X-Gm-Message-State: APjAAAV31dUOch53CiDwSuqIAtsR/T2JfrvLf6jCNqNa6jjczF9UD2Pf
-	mb5PudykfCNwS2YKU5q5ggW/og==
-X-Google-Smtp-Source: APXvYqynVLEZMpVVt7pXNA5sBJbHLg8xYpkuKPGZrIRVUI+mw+ub3JJnSUuMdGm6zJgRfz/ULG7k2Q==
-X-Received: by 2002:a37:353:: with SMTP id 80mr23331009qkd.439.1571687794781;
-        Mon, 21 Oct 2019 12:56:34 -0700 (PDT)
-Received: from localhost ([107.15.81.208])
-        by smtp.gmail.com with ESMTPSA id d2sm7734516qkj.123.2019.10.21.12.56.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Oct 2019 12:56:34 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-To: axboe@kernel.dk,
-	nbd@other.debian.org,
-	linux-block@vger.kernel.org,
-	kernel-team@fb.com,
-	mchristi@redhat.com
-Subject: [PATCH 2/2] nbd: handle racing with error'ed out commands
-Date: Mon, 21 Oct 2019 15:56:28 -0400
-Message-Id: <20191021195628.19849-3-josef@toxicpanda.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191021195628.19849-1-josef@toxicpanda.com>
+	with ESMTP id Kbc9ANOoR_tJ for <lists-other-nbd@bendel.debian.org>;
+	Mon, 21 Oct 2019 21:49:40 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .redhat. - helo: .us-smtp-1.mimecast. - helo-domain: .mimecast.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+X-Greylist: delayed 309 seconds by postgrey-1.36 at bendel; Mon, 21 Oct 2019 21:49:40 UTC
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+	by bendel.debian.org (Postfix) with ESMTP id 18DB52035B
+	for <nbd@other.debian.org>; Mon, 21 Oct 2019 21:49:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1571694574;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7TGeLaJHLQfa3EPhpXyQnizlrqhS05at+Cg3a1T6joA=;
+	b=XRu6/WJCE45UcpXhANVm7hsnWuNJn2+nkslovnHSEV8Y5El3I0kD5NUz/VujaL2u6m0yfm
+	BPXIpWlRYiSUpq/PG3EcYBrNzfbqEi1Ie3ssq9tQH6kwWwZ3hJCO/i4SD2PkYX5cFUCubO
+	mrUyD8cQtb1P+f8QsWT/lOY4SqHw4ks=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-221-zdn-zzpYOuiyX0UgVCM5ug-1; Mon, 21 Oct 2019 17:43:12 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 90009800D41;
+	Mon, 21 Oct 2019 21:43:11 +0000 (UTC)
+Received: from [10.10.123.171] (ovpn-123-171.rdu2.redhat.com [10.10.123.171])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id BB3DD60CD0;
+	Mon, 21 Oct 2019 21:43:10 +0000 (UTC)
+Subject: Re: [PATCH 0/2] fix double completion of timed out commands
+To: Josef Bacik <josef@toxicpanda.com>, axboe@kernel.dk,
+ nbd@other.debian.org, linux-block@vger.kernel.org, kernel-team@fb.com
 References: <20191021195628.19849-1-josef@toxicpanda.com>
+From: Mike Christie <mchristi@redhat.com>
+Message-ID: <5DAE266E.9020004@redhat.com>
+Date: Mon, 21 Oct 2019 16:43:10 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+ Thunderbird/38.6.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20191021195628.19849-1-josef@toxicpanda.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-MC-Unique: zdn-zzpYOuiyX0UgVCM5ug-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <LTiwN_TRslH.A.EXE.jEhrdB@bendel>
+Resent-Message-ID: <EXjwdl94WgF.A.O1G.RvirdB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/719
+X-Mailing-List: <nbd@other.debian.org> archive/latest/721
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,62 +85,27 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20191021195628.19849-3-josef@toxicpanda.com
-Resent-Date: Mon, 21 Oct 2019 20:12:19 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/5DAE266E.9020004@redhat.com
+Resent-Date: Mon, 21 Oct 2019 22:06:09 +0000 (UTC)
 
-We hit the following warning in production
+On 10/21/2019 02:56 PM, Josef Bacik wrote:
+> We noticed a problem where NBD sometimes double completes the same reques=
+t when
+> things go wrong and we time out the request.  If the other side goes out =
+to
+> lunch but happens to reply just as we're timing out the requests we can e=
+nd up
+> with a double completion on the request.
+>=20
+> We already keep track of the command status, we just need to make sure we
+> protect all cases where we set cmd->status with the cmd->lock, which is p=
+atch
+> #1.  Patch #2 is the fix for the problem, which catches the case where we=
+ race
+> with the timeout handler and the reply handler.  Thanks,
+>=20
 
-print_req_error: I/O error, dev nbd0, sector 7213934408 flags 80700
-------------[ cut here ]------------
-refcount_t: underflow; use-after-free.
-WARNING: CPU: 25 PID: 32407 at lib/refcount.c:190 refcount_sub_and_test_checked+0x53/0x60
-Workqueue: knbd-recv recv_work [nbd]
-RIP: 0010:refcount_sub_and_test_checked+0x53/0x60
-Call Trace:
- blk_mq_free_request+0xb7/0xf0
- blk_mq_complete_request+0x62/0xf0
- recv_work+0x29/0xa1 [nbd]
- process_one_work+0x1f5/0x3f0
- worker_thread+0x2d/0x3d0
- ? rescuer_thread+0x340/0x340
- kthread+0x111/0x130
- ? kthread_create_on_node+0x60/0x60
- ret_from_fork+0x1f/0x30
----[ end trace b079c3c67f98bb7c ]---
+Patches look ok and tested ok for me.
 
-This was preceded by us timing out everything and shutting down the
-sockets for the device.  The problem is we had a request in the queue at
-the same time, so we completed the request twice.  This can actually
-happen in a lot of cases, we fail to get a ref on our config, we only
-have one connection and just error out the command, etc.
-
-Fix this by checking cmd->status in nbd_read_stat.  We only change this
-under the cmd->lock, so we are safe to check this here and see if we've
-already error'ed this command out, which would indicate that we've
-completed it as well.
-
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
- drivers/block/nbd.c | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 8fb8913074b8..e9f5d4e476e7 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -693,6 +693,12 @@ static struct nbd_cmd *nbd_read_stat(struct nbd_device *nbd, int index)
- 		ret = -ENOENT;
- 		goto out;
- 	}
-+	if (cmd->status != BLK_STS_OK) {
-+		dev_err(disk_to_dev(nbd->disk), "Command already handled %p\n",
-+			req);
-+		ret = -ENOENT;
-+		goto out;
-+	}
- 	if (test_bit(NBD_CMD_REQUEUED, &cmd->flags)) {
- 		dev_err(disk_to_dev(nbd->disk), "Raced with timeout on req %p\n",
- 			req);
--- 
-2.21.0
+Reviewed-by: Mike Christie <mchristi@redhat.com>
 
