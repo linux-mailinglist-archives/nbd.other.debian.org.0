@@ -2,71 +2,77 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96FFBE985F
-	for <lists+nbd@lfdr.de>; Wed, 30 Oct 2019 09:43:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F3CEEA179
+	for <lists+nbd@lfdr.de>; Wed, 30 Oct 2019 17:12:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5D5B62085B; Wed, 30 Oct 2019 08:43:05 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct 30 08:43:05 2019
-Old-Return-Path: <w@uter.be>
+	id 5050B2093C; Wed, 30 Oct 2019 16:12:22 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct 30 16:12:22 2019
+Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
-	LDO_WHITELIST,MURPHY_DRUGS_REL8 autolearn=unavailable
+X-Spam-Status: No, score=-5.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,DKIM_VERIFIED,
+	MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3E1CD20828
-	for <lists-other-nbd@bendel.debian.org>; Wed, 30 Oct 2019 08:42:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E2A97207F6
+	for <lists-other-nbd@bendel.debian.org>; Wed, 30 Oct 2019 15:55:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.181 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id GHNdYjFQRjtS for <lists-other-nbd@bendel.debian.org>;
-	Wed, 30 Oct 2019 08:42:54 +0000 (UTC)
+	with ESMTP id ZLuNdoxV3PAw for <lists-other-nbd@bendel.debian.org>;
+	Wed, 30 Oct 2019 15:55:52 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-Received: from latin.grep.be (latin.grep.be [IPv6:2a01:4f8:140:52e5::2])
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5D0E1207F6
-	for <nbd@other.debian.org>; Wed, 30 Oct 2019 08:42:54 +0000 (UTC)
-Received: from [105.12.0.33] (helo=gangtai.home.grep.be)
-	by latin.grep.be with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <w@uter.be>)
-	id 1iPjZ3-0008Al-Rc; Wed, 30 Oct 2019 09:42:49 +0100
-Received: from wouter by gangtai.home.grep.be with local (Exim 4.92.3)
-	(envelope-from <w@uter.be>)
-	id 1iPjY2-0006rQ-9L; Wed, 30 Oct 2019 10:41:46 +0200
-Date: Wed, 30 Oct 2019 10:41:46 +0200
-From: Wouter Verhelst <w@uter.be>
-To: "Richard W.M. Jones" <rjones@redhat.com>
-Cc: Mike Christie <mchristi@redhat.com>,
-	syzbot <syzbot+24c12fa8d218ed26011a@syzkaller.appspotmail.com>,
-	axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org, nbd@other.debian.org,
-	syzkaller-bugs@googlegroups.com
-Subject: Re: INFO: task hung in nbd_ioctl
-Message-ID: <20191030084146.GE25097@grep.be>
-References: <000000000000b1b1ee0593cce78f@google.com>
- <5D93C2DD.10103@redhat.com>
- <20191017140330.GB25667@redhat.com>
- <20191030083957.GD25097@grep.be>
+	by bendel.debian.org (Postfix) with ESMTPS id 23100207FD
+	for <nbd@other.debian.org>; Wed, 30 Oct 2019 15:55:52 +0000 (UTC)
+Received: from sasha-vm.mshome.net (100.50.158.77.rev.sfr.net [77.158.50.100])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 402DB20656;
+	Wed, 30 Oct 2019 15:55:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1572450947;
+	bh=3hErLc/j4wh/06DciMIpf4VuVIV1x9qJcn9Z8UiL7z0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=LPvdp35SIe5MPj39VtNtMsRa3d3ndC268eecl7f+Oo3T8pTV9WEBfXnQMTdVsXAJT
+	 AWFKftQbE2SmH5WUO9zoEo0e8BBOPruLAHkdCUEMmmu30XxPnyu72pnDY9fapg7H51
+	 aceZ4z/MIB2Iyxj67urccqx+n/zQybz4jBWV9kS8=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Josef Bacik <josef@toxicpanda.com>,
+	Mike Christie <mchristi@redhat.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Sasha Levin <sashal@kernel.org>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: [PATCH AUTOSEL 4.19 36/38] nbd: protect cmd->status with cmd->lock
+Date: Wed, 30 Oct 2019 11:54:04 -0400
+Message-Id: <20191030155406.10109-36-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191030155406.10109-1-sashal@kernel.org>
+References: <20191030155406.10109-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20191030083957.GD25097@grep.be>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
-User-Agent: Mutt/1.10.1 (2018-07-13)
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <stynPC89L5N.A.wXE.Z0UudB@bendel>
+Resent-Message-ID: <W8-jklRaw2F.A.7DB.mZbudB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/725
+X-Mailing-List: <nbd@other.debian.org> archive/latest/726
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -76,31 +82,65 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20191030084146.GE25097@grep.be
-Resent-Date: Wed, 30 Oct 2019 08:43:05 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20191030155406.10109-36-sashal@kernel.org
+Resent-Date: Wed, 30 Oct 2019 16:12:22 +0000 (UTC)
 
-On Wed, Oct 30, 2019 at 10:39:57AM +0200, Wouter Verhelst wrote:
-> On Thu, Oct 17, 2019 at 03:03:30PM +0100, Richard W.M. Jones wrote:
-> > On Tue, Oct 01, 2019 at 04:19:25PM -0500, Mike Christie wrote:
-> > > Hey Josef and nbd list,
-> > > 
-> > > I had a question about if there are any socket family restrictions for nbd?
-> > 
-> > In normal circumstances, in userspace, the NBD protocol would only be
-> > used over AF_UNIX or AF_INET/AF_INET6.
-> 
-> Note that someone once also did work to make it work over SCTP. I
-> incorporated the patch into nbd-client and nbd-server, but never
-> actually tested it myself. I have no way of knowing if it even still
-> works anymore...
+From: Josef Bacik <josef@toxicpanda.com>
 
-Actually, I meant SDP (as you pointed out downthread). Sorry for the
-confusion ;-)
+[ Upstream commit de6346ecbc8f5591ebd6c44ac164e8b8671d71d7 ]
 
-(I should probably kick that out though, indeed)
+We already do this for the most part, except in timeout and clear_req.
+For the timeout case we take the lock after we grab a ref on the config,
+but that isn't really necessary because we're safe to touch the cmd at
+this point, so just move the order around.
 
+For the clear_req cause this is initiated by the user, so again is safe.
+
+Reviewed-by: Mike Christie <mchristi@redhat.com>
+Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/block/nbd.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index bc2fa4e85f0ca..46cd52d1d6537 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -349,17 +349,16 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
+ 	struct nbd_device *nbd = cmd->nbd;
+ 	struct nbd_config *config;
+ 
++	if (!mutex_trylock(&cmd->lock))
++		return BLK_EH_RESET_TIMER;
++
+ 	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+ 		cmd->status = BLK_STS_TIMEOUT;
++		mutex_unlock(&cmd->lock);
+ 		goto done;
+ 	}
+ 	config = nbd->config;
+ 
+-	if (!mutex_trylock(&cmd->lock)) {
+-		nbd_config_put(nbd);
+-		return BLK_EH_RESET_TIMER;
+-	}
+-
+ 	if (config->num_connections > 1) {
+ 		dev_err_ratelimited(nbd_to_dev(nbd),
+ 				    "Connection timed out, retrying (%d/%d alive)\n",
+@@ -745,7 +744,10 @@ static void nbd_clear_req(struct request *req, void *data, bool reserved)
+ {
+ 	struct nbd_cmd *cmd = blk_mq_rq_to_pdu(req);
+ 
++	mutex_lock(&cmd->lock);
+ 	cmd->status = BLK_STS_IOERR;
++	mutex_unlock(&cmd->lock);
++
+ 	blk_mq_complete_request(req);
+ }
+ 
 -- 
-To the thief who stole my anti-depressants: I hope you're happy
-
-  -- seen somewhere on the Internet on a photo of a billboard
+2.20.1
 
