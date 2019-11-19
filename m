@@ -1,92 +1,96 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C520102977
-	for <lists+nbd@lfdr.de>; Tue, 19 Nov 2019 17:33:20 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 207AD10298A
+	for <lists+nbd@lfdr.de>; Tue, 19 Nov 2019 17:39:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id EFC1B2089F; Tue, 19 Nov 2019 16:33:19 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov 19 16:33:19 2019
-Old-Return-Path: <josef@toxicpanda.com>
+	id E2E8B2090B; Tue, 19 Nov 2019 16:39:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov 19 16:39:08 2019
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.0 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VERIFIED,FOURLA,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
+X-Spam-Level: **
+X-Spam-Status: No, score=2.0 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VERIFIED,FOURLA,RCVD_IN_DNSWL_NONE,TO_TOO_MANY
 	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D6F8220886
-	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Nov 2019 16:17:16 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E8944208AA
+	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Nov 2019 16:24:00 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.88 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=0.1 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+	DKIM_VALID=-0.1, FOURLA=0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+	TO_TOO_MANY=1] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id KvHjlwfSSKsr for <lists-other-nbd@bendel.debian.org>;
-	Tue, 19 Nov 2019 16:17:12 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x729.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com [IPv6:2607:f8b0:4864:20::729])
+	with ESMTP id v2mvBYh2WhzI for <lists-other-nbd@bendel.debian.org>;
+	Tue, 19 Nov 2019 16:23:56 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com [IPv6:2607:f8b0:4864:20::d43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 523A420894
-	for <nbd@other.debian.org>; Tue, 19 Nov 2019 16:17:04 +0000 (UTC)
-Received: by mail-qk1-x729.google.com with SMTP id m16so18290581qki.11
-        for <nbd@other.debian.org>; Tue, 19 Nov 2019 08:17:04 -0800 (PST)
+	by bendel.debian.org (Postfix) with ESMTPS id E1E0C208A5
+	for <nbd@other.debian.org>; Tue, 19 Nov 2019 16:23:55 +0000 (UTC)
+Received: by mail-io1-xd43.google.com with SMTP id i13so23910205ioj.5
+        for <nbd@other.debian.org>; Tue, 19 Nov 2019 08:23:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20150623.gappssmtp.com; s=20150623;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=ZqRLNz3QoP7lC3GoX4dGbpM/0X+BMWIWcZVOVY7dcIU=;
-        b=EEDZ6kzKJxHxR0jYrvurpFG7/VtWy3lmas2bKyDXg0ZIHpu7ZvgPRmxgNIdJ5Trl8o
-         2i+mkawUu3GG/1fSr9nzBfLa1IwyzlN5vbaTmoKGke3iU9oK6RwfGr4wkUK2CcZ4XRS4
-         T8m6NFVGWYmHUhSii2nMalguQ49rr8DmBIkT46n//mCXFsljMqZhQqpPqcvsVRXp5ZR8
-         j3Yz/HgyL4AScR2b/nyEyR8AHVMVBqeRo3TLRgbr+kXQezQzjhiWi7JePw3i6rj+I7Kk
-         fXVbFKoYoCJ9W+vXBQuspHHAYavKVmMHwyEXIdioL2V4cpezvpipuNysIJNNSxebF/rO
-         m8VA==
+        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=7xBPbB0l5zXDQJ0ykS2pcsoh3Vk0x6ZjZkqP5G3hnUM=;
+        b=Sm8z1kApGq1YRmDHN+gWoe8jgDmvwDTCFFbiUOE1ZzL8UwxD3CHaIoj+U5vroJWotn
+         Scut8GZMnc8ZVRAlIPwAPkDombOWJhIA00gLfMjNYwogATUHyj0IBnX8faNEHJg5o8ca
+         gObf0a+uUbqjo+e6kg0rH3OXqyinmg1Rg8+uGrYDl2GhtmuOFwEm8YpOIyPpKPvfrFpb
+         lIkft9nZX3+00p4t4ppCCYYsyrmw5CGl6t1i6z2UeK2K79X1yq33aKR0DkCeaKTCXlNS
+         TceACMWTRkXkyzpznWBS38sjIeR0hM6kullpYZnPiDZ/0omJbyifVdCf7/AeK4ILPBdj
+         meGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=ZqRLNz3QoP7lC3GoX4dGbpM/0X+BMWIWcZVOVY7dcIU=;
-        b=h8Ix1Nk6K4RZqNRIk+zizCgb3o+T6TYkPtVlB3v1jDQHVaRkZb1wUYl8Z4LeKP0JMK
-         AFOkI0xLoGXlHAY/SKhYvskbxjQjt2Ns41oGh9QBuwwacU8e4a0MpTPZzWLrvqufxDBh
-         R0gglatMs5KEIWNbpw6sHm4U6eE21k1aF6Bp5v3aeadbdWb7Mrf5zcPIhhErInygLlwk
-         S1WwpTmpY+5+IcClMU80goyQdBWir1xBnpGJMM910PAKTvove2lBofxcLuo9qCh5E2Cd
-         oNMEEJCz94jPcvT7Dbr8gdH7s1kpb4/BvY69O5PlZSIGIphPOkyJtD3m5KHQJSE7YsWp
-         qSeQ==
-X-Gm-Message-State: APjAAAUl38lwSp6OWyW7ig0OgcqhFi85NfzFUC1efpA7ngFdGVXv9gm1
-	42CIvY41W1YpA6IIKwl8kNJR/w==
-X-Google-Smtp-Source: APXvYqw4sM1JFEaj5qBtyeVFL3GFBIz1nwvBoJWPMV830wZLNSSNqslB0uqWWe1hYNiEkrIrWvyc7Q==
-X-Received: by 2002:a37:a70b:: with SMTP id q11mr30591722qke.350.1574180221163;
-        Tue, 19 Nov 2019 08:17:01 -0800 (PST)
-Received: from localhost ([2620:10d:c091:480::61cf])
-        by smtp.gmail.com with ESMTPSA id b3sm9769407qkl.88.2019.11.19.08.16.59
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=7xBPbB0l5zXDQJ0ykS2pcsoh3Vk0x6ZjZkqP5G3hnUM=;
+        b=nbDySI3RBvVSoPs+lAX2C1ciJKQIjOjeKLA/EDEPE4jsenhip/cmYpGWJpjrYlfUVe
+         cwXlaz7LAcBpt6VTTL1Bue2VzkWYDgAnAZaJR2ZU5hAgdHP+85DSBNIPN1EQGffsaQwm
+         5dWJHBXUGbg6Oqm7msWWSroNSkoyp1Hk7lDrF+Drn7Jo0BUVRm0geq6BtMkggN3Eke84
+         x9gUn9tUjBDkQuSKrdgGEoIMk0pCLS8c+CJaQxnoYcnHkpEyl0VuB0S5oUELNfYvjQbP
+         gbIr4cOFHDAclchLSEY4DqBQDfSLaPzuPyWXfcjAOgdJOunHMre2kPtu0o22bxac+9+e
+         6SRg==
+X-Gm-Message-State: APjAAAX8Ocq+qAFbOFTSN4e0TEjZJQbMt/M/piZDos2nWuWLEtjNkkQL
+	tg6MVXfra/+vRi0eEqk7TXCgaA==
+X-Google-Smtp-Source: APXvYqz/gjRUdkRFVh4ufDotsnWFDqpbvx2ZHAFudSc3izo4sM/ESTDEoM2N3Z6rLIWo+SHS9cyzig==
+X-Received: by 2002:a02:40c6:: with SMTP id n189mr430847jaa.18.1574180632196;
+        Tue, 19 Nov 2019 08:23:52 -0800 (PST)
+Received: from [192.168.1.159] ([65.144.74.34])
+        by smtp.gmail.com with ESMTPSA id y8sm5611174ilg.47.2019.11.19.08.23.50
         (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 19 Nov 2019 08:17:00 -0800 (PST)
-Date: Tue, 19 Nov 2019 11:16:58 -0500
-From: Josef Bacik <josef@toxicpanda.com>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Sun Ke <sunke32@huawei.com>, josef@toxicpanda.com,
-	linux-block@vger.kernel.org, nbd@other.debian.org,
-	linux-kernel@vger.kernel.org, Mike Christie <mchristi@redhat.com>
+        Tue, 19 Nov 2019 08:23:51 -0800 (PST)
 Subject: Re: [v2] nbd:fix memory leak in nbd_get_socket()
-Message-ID: <20191119161658.mmifoeplc5vsdt64@macbook-pro-91.dhcp.thefacebook.com>
+To: Mike Christie <mchristi@redhat.com>, Sun Ke <sunke32@huawei.com>,
+ josef@toxicpanda.com, linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org
 References: <1574143751-138680-1-git-send-email-sunke32@huawei.com>
- <d68d17be-0c4e-1286-4327-0e3ba6600eca@kernel.dk>
+ <5DD416DB.1040302@redhat.com>
+From: Jens Axboe <axboe@kernel.dk>
+Message-ID: <e7d5d08c-c8d6-cd22-ba0a-e53ab08ea5d8@kernel.dk>
+Date: Tue, 19 Nov 2019 09:23:49 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d68d17be-0c4e-1286-4327-0e3ba6600eca@kernel.dk>
+In-Reply-To: <5DD416DB.1040302@redhat.com>
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <HKFMWY124bH.A.NcB.PlB1dB@bendel>
+Resent-Message-ID: <z--JexBNetC.A.RGC.sqB1dB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/741
+X-Mailing-List: <nbd@other.debian.org> archive/latest/742
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,26 +100,40 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20191119161658.mmifoeplc5vsdt64@macbook-pro-91.dhcp.thefacebook.com
-Resent-Date: Tue, 19 Nov 2019 16:33:19 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/e7d5d08c-c8d6-cd22-ba0a-e53ab08ea5d8@kernel.dk
+Resent-Date: Tue, 19 Nov 2019 16:39:08 +0000 (UTC)
 
-On Tue, Nov 19, 2019 at 09:13:34AM -0700, Jens Axboe wrote:
-> On 11/18/19 11:09 PM, Sun Ke wrote:
-> > Before return NULL,put the sock first.
-> > 
-> > Cc: stable@vger.kernel.org
-> > Fixes: cf1b2326b734 ("nbd: verify socket is supported during setup")
-> > Signed-off-by: Sun Ke <sunke32@huawei.com>
+On 11/19/19 9:22 AM, Mike Christie wrote:
+> On 11/19/2019 12:09 AM, Sun Ke wrote:
+>> Before return NULL,put the sock first.
+>>
+>> Cc: stable@vger.kernel.org
+>> Fixes: cf1b2326b734 ("nbd: verify socket is supported during setup")
+>> Signed-off-by: Sun Ke <sunke32@huawei.com>
+>> ---
+>> v2: add cc:stable tag
+>> ---
+>>   drivers/block/nbd.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>> index a94ee45..19e7599 100644
+>> --- a/drivers/block/nbd.c
+>> +++ b/drivers/block/nbd.c
+>> @@ -993,6 +993,7 @@ static struct socket *nbd_get_socket(struct nbd_device *nbd, unsigned long fd,
+>>   	if (sock->ops->shutdown == sock_no_shutdown) {
+>>   		dev_err(disk_to_dev(nbd->disk), "Unsupported socket: shutdown callout must be supported.\n");
+>>   		*err = -EINVAL;
+>> +		sockfd_put(sock);
+>>   		return NULL;
+>>   	}
+>>   
+>>
 > 
-> Please always CC the author of the patch you're fixing.
-> 
-> Mike, Josef - we probably need to get this upstream ASAP.
+> Reviewed-by: Mike Christie <mchristi@redhat.com>
 
-Yup sorry got distracted,
+Thanks (both of you), applied for 5.4.
 
-Reviewed-by: Josef Bacik <josef@toxicpanda.com>
-
-Thanks,
-
-Josef
+-- 
+Jens Axboe
 
