@@ -1,83 +1,69 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27AE01410AE
-	for <lists+nbd@lfdr.de>; Fri, 17 Jan 2020 19:21:11 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 11695141CA4
+	for <lists+nbd@lfdr.de>; Sun, 19 Jan 2020 07:45:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 31C6E21895; Fri, 17 Jan 2020 18:21:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 17 18:21:10 2020
-Old-Return-Path: <mchristi@redhat.com>
+	id E758F2180E; Sun, 19 Jan 2020 06:45:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jan 19 06:45:10 2020
+Old-Return-Path: <sunke32@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id EE1C1217AF
-	for <lists-other-nbd@bendel.debian.org>; Fri, 17 Jan 2020 18:03:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A2A75217C0
+	for <lists-other-nbd@bendel.debian.org>; Sun, 19 Jan 2020 06:27:27 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.081 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.66 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id hLndDmKtqh0f for <lists-other-nbd@bendel.debian.org>;
-	Fri, 17 Jan 2020 18:03:06 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.7
-Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [205.139.110.61])
-	by bendel.debian.org (Postfix) with ESMTP id 96B6A217AC
-	for <nbd@other.debian.org>; Fri, 17 Jan 2020 18:03:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1579284181;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=V/YBTzCrOCnTnUPO3jYLrCWgF4tW5vUC7tcFD9TTyzQ=;
-	b=REqcXXByS9FFN4SHvEegLJ/2NajBvC1gRO05ILwDtqY+Eaano5VBAS6a60zbwCxivM3eum
-	5oBLn9jkdvDwY1lcSzRU5VurSIl6EDAZy9qwa44XRf8nwtxBZKWkheGqKXNy9EVoMHt7Tv
-	VTTDw+gWD1oaMjgR4bvMNDVHsfZJaE8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-352-EOGSUIB5MLehJqk8hDdr4Q-1; Fri, 17 Jan 2020 12:32:09 -0500
-X-MC-Unique: EOGSUIB5MLehJqk8hDdr4Q-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id ECA5118CA241;
-	Fri, 17 Jan 2020 17:32:07 +0000 (UTC)
-Received: from [10.10.126.209] (ovpn-126-209.rdu2.redhat.com [10.10.126.209])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C9FC581201;
-	Fri, 17 Jan 2020 17:32:06 +0000 (UTC)
+	with ESMTP id url03totegxS for <lists-other-nbd@bendel.debian.org>;
+	Sun, 19 Jan 2020 06:27:24 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .huawei. - helo: .huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
+Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 7F103217B3
+	for <nbd@other.debian.org>; Sun, 19 Jan 2020 06:27:22 +0000 (UTC)
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
+	by Forcepoint Email with ESMTP id 08CAC7AFB64B14A4709A;
+	Sun, 19 Jan 2020 14:27:17 +0800 (CST)
+Received: from [127.0.0.1] (10.173.222.66) by DGGEMS410-HUB.china.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server id 14.3.439.0; Sun, 19 Jan 2020
+ 14:27:16 +0800
 Subject: Re: [PATCH] nbd: fix potential NULL pointer fault in connect and
  disconnect process
-To: Sun Ke <sunke32@huawei.com>, josef@toxicpanda.com, axboe@kernel.dk
+To: Josef Bacik <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>
 References: <20200117115005.37006-1-sunke32@huawei.com>
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>
-From: Mike Christie <mchristi@redhat.com>
-Message-ID: <5E21EF96.1010204@redhat.com>
-Date: Fri, 17 Jan 2020 11:32:06 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
- Thunderbird/38.6.0
+ <875eaffb-d1e1-2d7e-09c9-81bab345e707@toxicpanda.com>
+From: "sunke (E)" <sunke32@huawei.com>
+Message-ID: <8bfc7d03-8944-f435-4ae6-e50b62911621@huawei.com>
+Date: Sun, 19 Jan 2020 14:27:15 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <20200117115005.37006-1-sunke32@huawei.com>
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+In-Reply-To: <875eaffb-d1e1-2d7e-09c9-81bab345e707@toxicpanda.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.173.222.66]
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <S0CIKmjUyQJ.A.hAF.WsfIeB@bendel>
+Resent-Message-ID: <_uh-SAOo_rB.A._0F.2r_IeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/771
+X-Mailing-List: <nbd@other.debian.org> archive/latest/772
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,122 +73,156 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/5E21EF96.1010204@redhat.com
-Resent-Date: Fri, 17 Jan 2020 18:21:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/8bfc7d03-8944-f435-4ae6-e50b62911621@huawei.com
+Resent-Date: Sun, 19 Jan 2020 06:45:10 +0000 (UTC)
 
-On 01/17/2020 05:50 AM, Sun Ke wrote:
-> Connect and disconnect a nbd device repeatedly, will cause
-> NULL pointer fault.
+
+
+在 2020/1/17 22:18, Josef Bacik 写道:
+> On 1/17/20 6:50 AM, Sun Ke wrote:
+>> Connect and disconnect a nbd device repeatedly, will cause
+>> NULL pointer fault.
+>>
+>> It will appear by the steps:
+>> 1. Connect the nbd device and disconnect it, but now nbd device
+>>     is not disconnected totally.
+>> 2. Connect the same nbd device again immediately, it will fail
+>>     in nbd_start_device with a EBUSY return value.
+>> 3. Wait a second to make sure the last config_refs is reduced
+>>     and run nbd_config_put to disconnect the nbd device totally.
+>> 4. Start another process to open the nbd_device, config_refs
+>>     will increase and at the same time disconnect it.
+>>
+>> To fix it, add a NBD_HAS_STARTED flag. Set it in nbd_start_device_ioctl
+>> and nbd_genl_connect if nbd device is started successfully.
+>> Clear it in nbd_config_put. Test it in nbd_genl_disconnect and
+>> nbd_genl_reconfigure.
 > 
-> It will appear by the steps:
-> 1. Connect the nbd device and disconnect it, but now nbd device
->    is not disconnected totally.
-> 2. Connect the same nbd device again immediately, it will fail
->    in nbd_start_device with a EBUSY return value.
-> 3. Wait a second to make sure the last config_refs is reduced
->    and run nbd_config_put to disconnect the nbd device totally.
-> 4. Start another process to open the nbd_device, config_refs
->    will increase and at the same time disconnect it.
+> I don't doubt what you are seeing, but what exactly are we NULL pointer 
+> dereferencing?  I can't quite figure it out from the steps.
+The root case is when do disconnect, pointers in structure nbd_device 
+will not be free immeditily, it should wait for the last config_refs to 
+be decreased.
 
-Just to make sure I understood this, for step 4 the process is doing:
+I got this kernel NULL pointer dereference report:
 
-open(/dev/nbdX);
-ioctl(NBD_DISCONNECT, /dev/nbdX) or nbd_genl_disconnect(for /dev/nbdX)
+[  256.454582] Dev nbd0: unable to read RDB block 0
+[  256.455611] Dev nbd0: unable to read RDB block 0
+[  256.457528] Dev nbd0: unable to read RDB block 0
+[  256.458742] Dev nbd0: unable to read RDB block 0
+[  256.516375] Dev nbd0: unable to read RDB block 0
+[  257.468970] BUG: kernel NULL pointer dereference, address: 
+0000000000000020
+[  257.469645] #PF: supervisor write access in kernel mode
+[  257.470445] #PF: error_code(0x0002) - not-present page
+[  257.470888] PGD 12ecb7067 P4D 12ecb7067 PUD 12f3f2067 PMD 0
+[  257.471384] Oops: 0002 [#1] SMP
+[  257.471671] CPU: 1 PID: 1651 Comm: nbd-client Not tainted 
+5.5.0-rc5-00039-gae6088216ce4 #22
+[  257.472501] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+BIOS ?-20180531_142017-buildhw-08.phx2.fedoraproject.org-1.fc28 04/01/2014
+[  257.473776] RIP: 0010:mutex_lock+0x29/0x60
+[  257.474593] Code: 00 0f 1f 44 00 00 53 48 89 fb 48 83 05 cf f8 01 02 
+01 e8 ea bd ff ff 48 83 05 ca f8 01 02 01 31 c0 65 48 8b 14 25 00 7d 01 
+00 <f0> 48 0f b1 13 74 f
+[  257.476221] RSP: 0018:ffffc900004cfa10 EFLAGS: 00010246
+[  257.476670] RAX: 0000000000000000 RBX: 0000000000000020 RCX: 
+0000000000000000
+[  257.477289] RDX: ffff88812f524a00 RSI: ffffffff82e44212 RDI: 
+0000000000000020
+[  257.477999] RBP: ffffc900004cfab0 R08: ffff88813bc6c110 R09: 
+0000000000000000
+[  257.478617] R10: 8080808080808080 R11: 0000000000000018 R12: 
+ffff88813584b000
+[  257.479228] R13: ffffffff838b1f00 R14: ffffc900004cfbb8 R15: 
+ffffc900004cfa40
+[  257.479871] FS:  00007f0c30d75b40(0000) GS:ffff88813bc40000(0000) 
+knlGS:0000000000000000
+[  257.480569] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  257.481336] CR2: 0000000000000020 CR3: 000000012f5ea000 CR4: 
+00000000000006e0
+[  257.481980] Call Trace:
+[  257.482262]  flush_workqueue+0x91/0x690
+[  257.482627]  ? nbd_size_update+0x180/0x180 [nbd]
+[  257.483063]  nbd_disconnect_and_put+0x80/0xd0 [nbd]
+[  257.483497]  nbd_genl_disconnect+0x153/0x2d0 [nbd]
+[  257.483969]  genl_rcv_msg+0x2ab/0x620
+[  257.484302]  ? netlink_unicast+0x3b8/0x5e0
+[  257.484663]  ? __nlmsg_put+0x78/0x90
+[  257.485009]  ? genl_family_rcv_msg_attrs_parse+0x1a0/0x1a0
+[  257.485488]  netlink_rcv_skb+0x5a/0x1a0
+[  257.485849]  genl_rcv+0x34/0x60
+[  257.486129]  netlink_unicast+0x2a4/0x5e0
+[  257.486468]  netlink_sendmsg+0x369/0x6b0
+[  257.486854]  ? rw_copy_check_uvector+0x50/0x1d0
+[  257.487257]  ____sys_sendmsg+0x1f7/0x370
+[  257.487604]  ? copy_msghdr_from_user+0xff/0x1e0
+[  257.488016]  ___sys_sendmsg+0x8c/0xe0
+[  257.488335]  ? copy_msghdr_from_user+0xff/0x1e0
+[  257.488730]  ? ___sys_recvmsg+0xa1/0xe0
+[  257.489091]  ? handle_mm_fault+0x199/0x390
+[  257.489454]  __sys_sendmsg+0x6b/0xe0
+[  257.489766]  __x64_sys_sendmsg+0x23/0x30
+[  257.490149]  do_syscall_64+0xab/0x410
+[  257.490474]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[  257.490942] RIP: 0033:0x7f0c3047cb87
+[  257.491288] Code: 64 89 02 48 c7 c0 ff ff ff ff eb b9 0f 1f 80 00 00 
+00 00 8b 05 6a 2b 2c 00 48 63 d2 48 63 ff 85 c0 75 18 b8 2e 00 00 00 0f 
+05 <48> 3d 00 f0 ff ff 8
+[  257.492940] RSP: 002b:00007ffefb59db28 EFLAGS: 00000246 ORIG_RAX: 
+000000000000002e
+[  257.493627] RAX: ffffffffffffffda RBX: 00000000023b0120 RCX: 
+00007f0c3047cb87
+[  257.494497] RDX: 0000000000000000 RSI: 00007ffefb59db60 RDI: 
+0000000000000003
+[  257.495116] RBP: 00000000023b01f0 R08: 0000000000000014 R09: 
+0000000000000002
+[  257.495731] R10: 0000000000000006 R11: 0000000000000246 R12: 
+00000000023b0030
+[  257.496356] R13: 00007ffefb59db60 R14: 0000000000000001 R15: 
+00000000ffffffff
+[  257.496989] Modules linked in: nbd
+[  257.497580] CR2: 0000000000000020
 
-?
+Thanks,
 
-There is no successful NBD_DO_IT / nbd_genl_connect between the open and
-disconnect calls at step #4, because it would normally be done at #2 and
-that failed. nbd_disconnect_and_put could then reference a null
-recv_workq. If we are also racing with a close() then that could free
-the device/config from under nbd_disconnect_and_put.
+Ke
 
 > 
-> To fix it, add a NBD_HAS_STARTED flag. Set it in nbd_start_device_ioctl
-
-I'm not sure if we need the new bit. We could just add a check for a non
-null task_recv in nbd_genl_disconnect like how nbd_start_device and
-nbd_genl_disconnect do.
-
-The new bit might be more clear which is nice. If we got this route,
-should the new bit be a runtime_flag like other device state bits?
-
-
-> and nbd_genl_connect if nbd device is started successfully.
-> Clear it in nbd_config_put. Test it in nbd_genl_disconnect and
-> nbd_genl_reconfigure.
+>>
+>> Signed-off-by: Sun Ke <sunke32@huawei.com>
+>> ---
+>>   drivers/block/nbd.c | 21 +++++++++++++++++++++
+>>   1 file changed, 21 insertions(+)
+>>
+>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>> index b4607dd96185..ddd364e208ab 100644
+>> --- a/drivers/block/nbd.c
+>> +++ b/drivers/block/nbd.c
+>> @@ -83,6 +83,7 @@ struct link_dead_args {
+>>   #define NBD_DESTROY_ON_DISCONNECT    0
+>>   #define NBD_DISCONNECT_REQUESTED    1
+>> +#define NBD_HAS_STARTED                2
+>>   struct nbd_config {
+>>       u32 flags;
+>> @@ -1215,6 +1216,7 @@ static void nbd_config_put(struct nbd_device *nbd)
+>>           nbd->disk->queue->limits.discard_alignment = 0;
+>>           blk_queue_max_discard_sectors(nbd->disk->queue, UINT_MAX);
+>>           blk_queue_flag_clear(QUEUE_FLAG_DISCARD, nbd->disk->queue);
+>> +        clear_bit(NBD_HAS_STARTED, &nbd->flags);
+>>           mutex_unlock(&nbd->config_lock);
+>>           nbd_put(nbd);
+>> @@ -1290,6 +1292,8 @@ static int nbd_start_device_ioctl(struct 
+>> nbd_device *nbd, struct block_device *b
+>>       ret = nbd_start_device(nbd);
+>>       if (ret)
+>>           return ret;
+>> +    else
+>> +        set_bit(NBD_HAS_STARTED, &nbd->flags);
 > 
-> Signed-off-by: Sun Ke <sunke32@huawei.com>
-> ---
->  drivers/block/nbd.c | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
+> The else is superfluous here.  Thanks,
 > 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index b4607dd96185..ddd364e208ab 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -83,6 +83,7 @@ struct link_dead_args {
->  
->  #define NBD_DESTROY_ON_DISCONNECT	0
->  #define NBD_DISCONNECT_REQUESTED	1
-> +#define NBD_HAS_STARTED				2
->  
->  struct nbd_config {
->  	u32 flags;
-> @@ -1215,6 +1216,7 @@ static void nbd_config_put(struct nbd_device *nbd)
->  		nbd->disk->queue->limits.discard_alignment = 0;
->  		blk_queue_max_discard_sectors(nbd->disk->queue, UINT_MAX);
->  		blk_queue_flag_clear(QUEUE_FLAG_DISCARD, nbd->disk->queue);
-> +		clear_bit(NBD_HAS_STARTED, &nbd->flags);
->  
->  		mutex_unlock(&nbd->config_lock);
->  		nbd_put(nbd);
-> @@ -1290,6 +1292,8 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *b
->  	ret = nbd_start_device(nbd);
->  	if (ret)
->  		return ret;
-> +	else
-> +		set_bit(NBD_HAS_STARTED, &nbd->flags);
->  
->  	if (max_part)
->  		bdev->bd_invalidated = 1;
-> @@ -1961,6 +1965,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
->  	mutex_unlock(&nbd->config_lock);
->  	if (!ret) {
->  		set_bit(NBD_RT_HAS_CONFIG_REF, &config->runtime_flags);
-> +		set_bit(NBD_HAS_STARTED, &nbd->flags);
->  		refcount_inc(&nbd->config_refs);
->  		nbd_connect_reply(info, nbd->index);
->  	}
-> @@ -2008,6 +2013,14 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
->  		       index);
->  		return -EINVAL;
->  	}
-> +
-> +	if (!test_bit(NBD_HAS_STARTED, &nbd->flags)) {
-> +		mutex_unlock(&nbd_index_mutex);
-> +		printk(KERN_ERR "nbd: device at index %d failed to start\n",
-> +		       index);
-> +		return -EBUSY;
-> +	}
-> +
->  	if (!refcount_inc_not_zero(&nbd->refs)) {
->  		mutex_unlock(&nbd_index_mutex);
->  		printk(KERN_ERR "nbd: device at index %d is going down\n",
-> @@ -2049,6 +2062,14 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
->  		       index);
->  		return -EINVAL;
->  	}
-> +
-> +	if (!test_bit(NBD_HAS_STARTED, &nbd->flags)) {
-> +		mutex_unlock(&nbd_index_mutex);
-> +		printk(KERN_ERR "nbd: device at index %d failed to start\n",
-> +		       index);
-> +		return -EBUSY;
-> +	}
-> +
->  	if (!refcount_inc_not_zero(&nbd->refs)) {
->  		mutex_unlock(&nbd_index_mutex);
->  		printk(KERN_ERR "nbd: device at index %d is going down\n",
+> Josef
 > 
+> .
 
