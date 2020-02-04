@@ -1,67 +1,98 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8576915143F
-	for <lists+nbd@lfdr.de>; Tue,  4 Feb 2020 03:45:06 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A82B15146E
+	for <lists+nbd@lfdr.de>; Tue,  4 Feb 2020 04:00:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 58896206A1; Tue,  4 Feb 2020 02:45:06 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb  4 02:45:06 2020
-Old-Return-Path: <sunke32@huawei.com>
+	id 242022049A; Tue,  4 Feb 2020 03:00:21 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb  4 03:00:21 2020
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	FVGT_m_MULTI_ODD,RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9046F206A0
-	for <lists-other-nbd@bendel.debian.org>; Tue,  4 Feb 2020 02:29:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id BBCD4205B7
+	for <lists-other-nbd@bendel.debian.org>; Tue,  4 Feb 2020 02:43:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.26 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FVGT_m_MULTI_ODD=0.02,
-	MIME_CHARSET_FARAWAY=0.02, RCVD_IN_DNSWL_MED=-2.3]
+X-Amavis-Spam-Status: No, score=-2 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8fv0Xh8JpvJh for <lists-other-nbd@bendel.debian.org>;
-	Tue,  4 Feb 2020 02:29:07 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .huawei. - helo: .huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
-Received: from huawei.com (szxga05-in.huawei.com [45.249.212.191])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5407D2069E
-	for <nbd@other.debian.org>; Tue,  4 Feb 2020 02:29:04 +0000 (UTC)
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
-	by Forcepoint Email with ESMTP id BDF6794BC6A9C7913AE0;
-	Tue,  4 Feb 2020 10:28:55 +0800 (CST)
-Received: from [127.0.0.1] (10.173.222.66) by DGGEMS412-HUB.china.huawei.com
- (10.3.19.212) with Microsoft SMTP Server id 14.3.439.0; Tue, 4 Feb 2020
- 10:28:54 +0800
+	with ESMTP id baLOW62zRplI for <lists-other-nbd@bendel.debian.org>;
+	Tue,  4 Feb 2020 02:43:49 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pl1-x643.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com [IPv6:2607:f8b0:4864:20::643])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id DD8FA205C3
+	for <nbd@other.debian.org>; Tue,  4 Feb 2020 02:43:49 +0000 (UTC)
+Received: by mail-pl1-x643.google.com with SMTP id g6so6639926plt.2
+        for <nbd@other.debian.org>; Mon, 03 Feb 2020 18:43:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=bLnbFVejd+3O1F2qSJJv9BCdZUK0W2Xr7EIvWhOc4yI=;
+        b=PGno+SbowrIU8CKbP76n7XJnkCyx2RPzHD8cjSZKYNNQ+5PDRUyfuygaDKnX0jdF4H
+         fN3Ru1Vy6qSCGSAF8pTm4AiRKc/s/9cwJjWAQjBbM2DM62cg6VhLmF1o9nB74Ik+pYKI
+         tkA82JcbrFs/daJ29fMcfAKpJF0+O2O3+WGZbRNE9aJQXLmeBW8mvLEbHWGvdgxAdS4P
+         D7ShfiG3j4/aFD+DFBZUHDE1BlCU6sXN4e/u1PsjOuSqyPEFqwNz/anE3iSQPvu+ib08
+         3kMVBaOQHm2hoa3raW+IVBY/PWtCtNikvghn+PhIBgyz+hYPmDN+yOnMYMqta6pa+HjB
+         Mk7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=bLnbFVejd+3O1F2qSJJv9BCdZUK0W2Xr7EIvWhOc4yI=;
+        b=oIsT8e7mTp9PRnYmgzB2he3lKyg3fjlGt7QiVWwjGIcnBA9cEJcLIDyQV2910wmeHi
+         7kqh3feLvHFb3euIzTybqCieZTUQHyIYy/RgA8sRx7cJ2D3iwkX4sZ2YrWelPtDsFr2q
+         BHlSn4+MsoysydQv9DcSFfIkxdr4X7P7sg7u4Sq7q/OBZZuHF/sLeWwB0pC5KvbIUTKf
+         DQdxEgc9/R5yAyfRJ/4mkTfjTj/+/G2oIlxfqCn2/9tUKVRat6RLSlva5kIG/ATNmcYb
+         sV8LEdvPGZMc2lIclf93sJzD2PlSglYwd1q76+qQY31Zt9V16+iFkBl8gHXhG343Llrm
+         jgFg==
+X-Gm-Message-State: APjAAAVGezjFo+SlfOh82ClwRhw4fPsBF2GKyuCqD8HEcDaFYcd3uXqS
+	W/ycolYvJ/wwzsdUXfLnanzcKA==
+X-Google-Smtp-Source: APXvYqzc6ciA9jRBi+H4LmQjqeOjXZrmG//h1JNiFsJW8mgEPZYLd9jRNeOJEU9ROi1FuxWxvdVw1Q==
+X-Received: by 2002:a17:902:82c5:: with SMTP id u5mr26272336plz.219.1580784225969;
+        Mon, 03 Feb 2020 18:43:45 -0800 (PST)
+Received: from [172.20.10.2] ([107.72.98.248])
+        by smtp.gmail.com with ESMTPSA id r66sm22716079pfc.74.2020.02.03.18.43.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Feb 2020 18:43:45 -0800 (PST)
 Subject: Re: [v2] nbd: add a flush_workqueue in nbd_start_device
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <mchristi@redhat.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>
+To: "sunke (E)" <sunke32@huawei.com>, josef@toxicpanda.com,
+ mchristi@redhat.com
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org
 References: <20200122031857.5859-1-sunke32@huawei.com>
-From: "sunke (E)" <sunke32@huawei.com>
-Message-ID: <aaa74a5a-3213-7b97-7cc4-89686d985ff2@huawei.com>
-Date: Tue, 4 Feb 2020 10:28:53 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ <aaa74a5a-3213-7b97-7cc4-89686d985ff2@huawei.com>
+From: Jens Axboe <axboe@kernel.dk>
+Message-ID: <03c783e2-dbb1-5807-90a4-1d51e965a0b2@kernel.dk>
+Date: Mon, 3 Feb 2020 19:41:32 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200122031857.5859-1-sunke32@huawei.com>
-Content-Type: text/plain; charset="gbk"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.173.222.66]
-X-CFilter-Loop: Reflected
+In-Reply-To: <aaa74a5a-3213-7b97-7cc4-89686d985ff2@huawei.com>
+Content-Type: text/plain; charset=gbk
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <PozUi3lMVZJ.A.HcB.yqNOeB@bendel>
+Resent-Message-ID: <9FQrqZcpndF.A.pkC.F5NOeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/787
+X-Mailing-List: <nbd@other.debian.org> archive/latest/788
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -71,53 +102,16 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/aaa74a5a-3213-7b97-7cc4-89686d985ff2@huawei.com
-Resent-Date: Tue,  4 Feb 2020 02:45:06 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/03c783e2-dbb1-5807-90a4-1d51e965a0b2@kernel.dk
+Resent-Date: Tue,  4 Feb 2020 03:00:21 +0000 (UTC)
 
-ping
+On 2/3/20 7:28 PM, sunke (E) wrote:
+> ping
 
-ÔÚ 2020/1/22 11:18, Sun Ke Ð´µÀ:
-> When kzalloc fail, may cause trying to destroy the
-> workqueue from inside the workqueue.
-> 
-> If num_connections is m (2 < m), and NO.1 ~ NO.n
-> (1 < n < m) kzalloc are successful. The NO.(n + 1)
-> failed. Then, nbd_start_device will return ENOMEM
-> to nbd_start_device_ioctl, and nbd_start_device_ioctl
-> will return immediately without running flush_workqueue.
-> However, we still have n recv threads. If nbd_release
-> run first, recv threads may have to drop the last
-> config_refs and try to destroy the workqueue from
-> inside the workqueue.
-> 
-> To fix it, add a flush_workqueue in nbd_start_device.
-> 
-> Fixes: e9e006f5fcf2 ("nbd: fix max number of supported devs")
-> Signed-off-by: Sun Ke <sunke32@huawei.com>
-> ---
->   drivers/block/nbd.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
-> 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index b4607dd96185..78181908f0df 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -1265,6 +1265,16 @@ static int nbd_start_device(struct nbd_device *nbd)
->   		args = kzalloc(sizeof(*args), GFP_KERNEL);
->   		if (!args) {
->   			sock_shutdown(nbd);
-> +			/*
-> +			 * If num_connections is m (2 < m),
-> +			 * and NO.1 ~ NO.n(1 < n < m) kzallocs are successful.
-> +			 * But NO.(n + 1) failed. We still have n recv threads.
-> +			 * So, add flush_workqueue here to prevent recv threads
-> +			 * dropping the last config_refs and trying to destroy
-> +			 * the workqueue from inside the workqueue.
-> +			 */
-> +			if (i)
-> +				flush_workqueue(nbd->recv_workq);
->   			return -ENOMEM;
->   		}
->   		sk_set_memalloc(config->socks[i]->sock->sk);
-> 
+Maybe I forgot to reply, but I queued it up last week:
+
+https://git.kernel.dk/cgit/linux-block/commit/?h=block-5.6&id=5c0dd228b5fc30a3b732c7ae2657e0161ec7ed80
+
+-- 
+Jens Axboe
 
