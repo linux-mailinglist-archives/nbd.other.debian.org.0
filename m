@@ -2,60 +2,69 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63085154825
-	for <lists+nbd@lfdr.de>; Thu,  6 Feb 2020 16:33:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1BE3154D05
+	for <lists+nbd@lfdr.de>; Thu,  6 Feb 2020 21:37:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2D8A02052A; Thu,  6 Feb 2020 15:33:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb  6 15:33:13 2020
-Old-Return-Path: <vsementsov@virtuozzo.com>
+	id 80918204D9; Thu,  6 Feb 2020 20:37:31 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb  6 20:37:31 2020
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.1 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	MURPHY_DRUGS_REL8 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-11.0 required=4.0 tests=LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 53D7F207CC
-	for <lists-other-nbd@bendel.debian.org>; Thu,  6 Feb 2020 15:17:13 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0A5FF204CE
+	for <lists-other-nbd@bendel.debian.org>; Thu,  6 Feb 2020 20:37:24 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-6.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id cEs7by7iPgAM for <lists-other-nbd@bendel.debian.org>;
-	Thu,  6 Feb 2020 15:17:08 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
-Received: from relay.sw.ru (relay.sw.ru [185.231.240.75])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	with ESMTP id 4NdUqLk5eBbF for <lists-other-nbd@bendel.debian.org>;
+	Thu,  6 Feb 2020 20:37:19 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from latin.grep.be (latin.grep.be [IPv6:2a01:4f8:140:52e5::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5FFD2204A4
-	for <nbd@other.debian.org>; Thu,  6 Feb 2020 15:16:00 +0000 (UTC)
-Received: from vovaso.qa.sw.ru ([10.94.3.0] helo=kvm.qa.sw.ru)
-	by relay.sw.ru with esmtp (Exim 4.92.3)
-	(envelope-from <vsementsov@virtuozzo.com>)
-	id 1izisf-0007vC-LA; Thu, 06 Feb 2020 18:15:49 +0300
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: nbd@other.debian.org
-Cc: qemu-block@nongnu.org,
-	eblake@redhat.com,
-	w@uter.be,
-	nsoffer@redhat.com,
-	den@openvz.org,
-	vsementsov@virtuozzo.com
-Subject: [RFC v2] nbd/proto: introduce extended request and 64bit commands
-Date: Thu,  6 Feb 2020 18:15:47 +0300
-Message-Id: <20200206151547.5812-1-vsementsov@virtuozzo.com>
-X-Mailer: git-send-email 2.21.0
+	by bendel.debian.org (Postfix) with ESMTPS id E40AA2047B
+	for <nbd@other.debian.org>; Thu,  6 Feb 2020 20:37:19 +0000 (UTC)
+Received: from [105.186.88.40] (helo=gangtai.home.grep.be)
+	by latin.grep.be with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <w@uter.be>)
+	id 1izntj-00043r-0t; Thu, 06 Feb 2020 21:37:15 +0100
+Received: from wouter by gangtai.home.grep.be with local (Exim 4.93-RC4)
+	(envelope-from <w@uter.be>)
+	id 1iznhM-0003I1-M6; Thu, 06 Feb 2020 22:24:28 +0200
+Date: Thu, 6 Feb 2020 22:24:28 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+Cc: Eric Blake <eblake@redhat.com>, nbd@other.debian.org,
+	qemu-block@nongnu.org, nsoffer@redhat.com, den@openvz.org
+Subject: Re: [PATCH 1/2] nbd/proto: introduce structured request
+Message-ID: <20200206202428.GA11709@grep.be>
+References: <20200205164352.16673-1-vsementsov@virtuozzo.com>
+ <20200205164352.16673-2-vsementsov@virtuozzo.com>
+ <5e72ec19-604e-5840-a164-4b7ab0222a3e@redhat.com>
+ <792fea52-f3c1-4bc3-450a-ce30167310a7@virtuozzo.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <792fea52-f3c1-4bc3-450a-ce30167310a7@virtuozzo.com>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
+User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <PIvuAoKKOKI.A.x5.5GDPeB@bendel>
+Resent-Message-ID: <RN5bxY9ns0L.A.PK.LkHPeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/800
+X-Mailing-List: <nbd@other.debian.org> archive/latest/801
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -65,129 +74,33 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200206151547.5812-1-vsementsov@virtuozzo.com
-Resent-Date: Thu,  6 Feb 2020 15:33:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200206202428.GA11709@grep.be
+Resent-Date: Thu,  6 Feb 2020 20:37:31 +0000 (UTC)
 
-Introduce a request type with payload. Use it to add 64bit support to
-data-less commands.
+Hi Vladimir,
 
-Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
----
+On Thu, Feb 06, 2020 at 05:10:07PM +0300, Vladimir Sementsov-Ogievskiy wrote:
+> Hmm, don't you think still, that structured writes may be useful at some
+> point? Now we always translate structured read reply to real allocated in RAM
+> zeroes. But at some point we may instead propagate this concept to the
+> generic block layer, and make support for it in qcow2. Or even with support
+> only in NBD we may benefit if we are coping data from one NBD to andother: we
+> should not unpack zeroes.
 
-v1 was "[PATCH 0/2] Structured requests and 64bit commands"
+No, I'm with Eric on this one.
 
-v2: - don't touch structured replies. Still, no reason to not use the
-same structure as in structured reply chunk
-    - instead of documenting separate 64bit commands, just define
-    support for extended request in original commands.
+It is the client who decides what the size of a request will be. If the
+request is too large to handle in one go, the client can just decide to
+split it up in multiple requests. The server can't do that, and
+therefore needs to be able to split up a single request into multiple
+chunks.
 
- doc/proto.md | 50 +++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 47 insertions(+), 3 deletions(-)
+The logic that is required client side to reassemble the multiple chunks
+with structured requests can already be quite complicated, and it would
+be good if we could avoid having that happen on the server side, too.
 
-diff --git a/doc/proto.md b/doc/proto.md
-index fc7baf6..58e932d 100644
---- a/doc/proto.md
-+++ b/doc/proto.md
-@@ -279,10 +279,10 @@ a soft disconnect.
- 
- ### Transmission
- 
--There are three message types in the transmission phase: the request,
--the simple reply, and the structured reply chunk.  The
-+There are four message types in the transmission phase: the request,
-+the extended request, the simple reply, and the structured reply chunk.  The
- transmission phase consists of a series of transactions, where the
--client submits requests and the server sends corresponding replies
-+client submits (extended) requests and the server sends corresponding replies
- with either a single simple reply or a series of one or more
- structured reply chunks per request.  The phase continues until
- either side terminates transmission; this can be performed cleanly
-@@ -353,6 +353,25 @@ C: 64 bits, offset (unsigned)
- C: 32 bits, length (unsigned)  
- C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)  
- 
-+#### Extended request message
-+
-+The extended request message, sent by the client, looks as follows:
-+
-+C: 32 bits, 0x23876289, magic (`NBD_EXTENDED_REQUEST_MAGIC`)
-+C: 16 bits, flags
-+C: 16 bits, type
-+C: 64 bits, handle
-+C: 32 bits, length of payload (unsigned)
-+C: *length* bytes of payload data (if *length* is nonzero)
-+
-+The client MUST NOT send extended requests, unless
-+NBD_FLAG_EXTENDED_REQUEST is negotiated by the server. If
-+NBD_OPT_STRUCTURED_REPLY is negotiated client MAY send extended
-+requests of types `NBD_CMD_WRITE_ZEROES`, `NBD_CMD_TRIM`,
-+`NBD_CMD_BLOCK_STATUS`.
-+If the server (with negotiated NBD_FLAG_EXTENDED_REQUEST) receive
-+extended request of unsupported type it MUST reply with `NBD_EINVAL`.
-+
- #### Simple reply message
- 
- The simple reply message MUST be sent by the server in response to all
-@@ -1082,6 +1101,8 @@ The field has the following format:
-   will be faster than a regular write). Clients MUST NOT set the
-   `NBD_CMD_FLAG_FAST_ZERO` request flag unless this transmission flag
-   is set.
-+- bit 12, `NBD_FLAG_EXTENDED_REQUEST`; allow clients to use
-+  extended requests.
- 
- Clients SHOULD ignore unknown flags.
- 
-@@ -1825,6 +1846,11 @@ contents, the client MUST initiate a hard disconnect.
- 
- #### Request types
- 
-+The following types are shared for request message and extended
-+request message. Still, client MUST NOT send extended request of
-+specific type unless support for extended request directly defined
-+in type description below.
-+
- The following request types exist:
- 
- * `NBD_CMD_READ` (0)
-@@ -1986,6 +2012,12 @@ The following request types exist:
-     A client MUST NOT send a trim request unless `NBD_FLAG_SEND_TRIM`
-     was set in the transmission flags field.
- 
-+    `NBD_CMD_TRIM` supports extended requests, with the following
-+    16-bytes payload:
-+
-+    64 bits: offset
-+    64 bits: length
-+
- * `NBD_CMD_CACHE` (5)
- 
-     A cache request.  The client is informing the server that it plans
-@@ -2095,6 +2127,12 @@ The following request types exist:
-     including one or more sectors beyond the size of the device. It SHOULD
-     return `NBD_EPERM` if it receives a write zeroes request on a read-only export.
- 
-+    `NBD_CMD_WRITE_ZEROES` supports extended requests, with the following
-+    16-bytes payload:
-+
-+    64 bits: offset
-+    64 bits: length
-+
- * `NBD_CMD_BLOCK_STATUS` (7)
- 
-     A block status query request. Length and offset define the range
-@@ -2154,6 +2192,12 @@ The following request types exist:
-     `NBD_EINVAL` if it receives a `NBD_CMD_BLOCK_STATUS` request including
-     one or more sectors beyond the size of the device.
- 
-+    `NBD_CMD_BLOCK_STATUS` supports extended requests, with the following
-+    16-bytes payload:
-+
-+    64 bits: offset
-+    64 bits: length
-+
- * `NBD_CMD_RESIZE` (8)
- 
-     Defined by the experimental `RESIZE`
 -- 
-2.21.0
+To the thief who stole my anti-depressants: I hope you're happy
+
+  -- seen somewhere on the Internet on a photo of a billboard
 
