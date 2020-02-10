@@ -2,81 +2,84 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B77A15813D
-	for <lists+nbd@lfdr.de>; Mon, 10 Feb 2020 18:21:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F2151584D9
+	for <lists+nbd@lfdr.de>; Mon, 10 Feb 2020 22:37:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6C21120510; Mon, 10 Feb 2020 17:21:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Feb 10 17:21:22 2020
-Old-Return-Path: <mchristi@redhat.com>
+	id E6B1B204B9; Mon, 10 Feb 2020 21:37:52 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Feb 10 21:37:52 2020
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,RCVD_IN_DNSWL_NONE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E70E8204FF
-	for <lists-other-nbd@bendel.debian.org>; Mon, 10 Feb 2020 17:05:57 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3FD0C20484
+	for <lists-other-nbd@bendel.debian.org>; Mon, 10 Feb 2020 21:37:45 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.081 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.101 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id LCup8_9etf2Y for <lists-other-nbd@bendel.debian.org>;
-	Mon, 10 Feb 2020 17:05:53 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [205.139.110.61])
-	by bendel.debian.org (Postfix) with ESMTP id 95EEB20419
-	for <nbd@other.debian.org>; Mon, 10 Feb 2020 17:05:53 +0000 (UTC)
+	with ESMTP id KkLP9wMgR-fT for <lists-other-nbd@bendel.debian.org>;
+	Mon, 10 Feb 2020 21:37:40 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .redhat. - helo: .us-smtp-delivery-1.mimecast. - helo-domain: .mimecast.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
+	by bendel.debian.org (Postfix) with ESMTP id 722E1204A2
+	for <nbd@other.debian.org>; Mon, 10 Feb 2020 21:37:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1581354347;
+	s=mimecast20190719; t=1581370653;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=mrFG4yx5KHZJPEp8JCGY2d7GTCuNuHloXmrmr/9oJ2w=;
-	b=RMH2oZSofDznns3mJUm/BoO6Jbh/ussjHw/U/rW/lH76pbrMC2v6xvwS0kZTvdpcotIcbx
-	6QeEdbWWuU4Qb2MpHNHqcGtgwHRgNiNv1300N42Qn2/HVRoX7Gmh1qPbmz6xGZCy/zoB/B
-	1TcCp4eKKe1Dn+nTNWVGp90INJDTTN4=
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FNPJLAwxlqp6XYsrI52R3aM36dx1U5zMd2uuI+0CAw4=;
+	b=AWvNRD9+8P2VDGxAC2LTqPnzyGrmzMlCGw49HgQTwLRZ96iAkkRfKp/W76lV4jzkWZCNHo
+	tehc1WUJ2SKIS92nLRx/DVPXkV3a28F8yNeF+aGZtw7bHc/eIYF/jv9uzq73j0arWypcRE
+	KZ9/yFl/cNeLgytRvrDvANdIRhAeoHc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-240-ig_F83XcMheKg367QqKYBw-1; Mon, 10 Feb 2020 12:05:41 -0500
-X-MC-Unique: ig_F83XcMheKg367QqKYBw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
+ us-mta-323-o5p4pWqfOUGlSo6mQhP9jA-1; Mon, 10 Feb 2020 16:37:26 -0500
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 23FB18017DF;
-	Mon, 10 Feb 2020 17:05:40 +0000 (UTC)
-Received: from [10.10.123.157] (ovpn-123-157.rdu2.redhat.com [10.10.123.157])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id AC3B15C108;
-	Mon, 10 Feb 2020 17:05:38 +0000 (UTC)
-Subject: Re: [v3] nbd: fix potential NULL pointer fault in nbd_genl_disconnect
-To: Sun Ke <sunke32@huawei.com>, josef@toxicpanda.com, axboe@kernel.dk
-References: <20200210073241.41813-1-sunke32@huawei.com>
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org
-From: Mike Christie <mchristi@redhat.com>
-Message-ID: <5E418D62.8090102@redhat.com>
-Date: Mon, 10 Feb 2020 11:05:38 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
- Thunderbird/38.6.0
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A55C08017CC;
+	Mon, 10 Feb 2020 21:37:24 +0000 (UTC)
+Received: from [10.3.116.180] (ovpn-116-180.phx2.redhat.com [10.3.116.180])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 61FD35C1D4;
+	Mon, 10 Feb 2020 21:37:21 +0000 (UTC)
+To: "nbd@other.debian.org" <nbd@other.debian.org>,
+ QEMU <qemu-devel@nongnu.org>, "qemu-block@nongnu.org"
+ <qemu-block@nongnu.org>, "libguestfs@redhat.com" <libguestfs@redhat.com>
+Cc: "Richard W.M. Jones" <rjones@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ Alberto Garcia <berto@igalia.com>
+From: Eric Blake <eblake@redhat.com>
+Subject: Cross-project NBD extension proposal: NBD_INFO_INIT_STATE
+Organization: Red Hat, Inc.
+Message-ID: <a4394fde-f459-dcb5-1698-013e1e24c388@redhat.com>
+Date: Mon, 10 Feb 2020 15:37:20 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200210073241.41813-1-sunke32@huawei.com>
-Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-MC-Unique: o5p4pWqfOUGlSo6mQhP9jA-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <qjRvkCWBxxG.A.LmD.SEZQeB@bendel>
+Resent-Message-ID: <F7S-5z5ur6.A.yCD.w0cQeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/806
+X-Mailing-List: <nbd@other.debian.org> archive/latest/807
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -86,72 +89,97 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/5E418D62.8090102@redhat.com
-Resent-Date: Mon, 10 Feb 2020 17:21:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/a4394fde-f459-dcb5-1698-013e1e24c388@redhat.com
+Resent-Date: Mon, 10 Feb 2020 21:37:52 +0000 (UTC)
 
-On 02/10/2020 01:32 AM, Sun Ke wrote:
-> Open /dev/nbdX first, the config_refs will be 1 and
-> the pointers in nbd_device are still null. Disconnect
-> /dev/nbdX, then reference a null recv_workq. The
-> protection by config_refs in nbd_genl_disconnect is useless.
-> 
-> To fix it, just add a check for a non null task_recv in
-> nbd_genl_disconnect.
-> 
-> Signed-off-by: Sun Ke <sunke32@huawei.com>
-> ---
-> v1 -> v2:
-> Add an omitted mutex_unlock.
-> 
-> v2 -> v3:
-> Add nbd->config_lock, suggested by Josef.
-> ---
->  drivers/block/nbd.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index b4607dd96185..870b3fd0c101 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -2008,12 +2008,20 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
->  		       index);
->  		return -EINVAL;
->  	}
-> +	mutex_lock(&nbd->config_lock);
->  	if (!refcount_inc_not_zero(&nbd->refs)) {
-> +		mutex_unlock(&nbd->config_lock);
->  		mutex_unlock(&nbd_index_mutex);
->  		printk(KERN_ERR "nbd: device at index %d is going down\n",
->  		       index);
->  		return -EINVAL;
->  	}
-> +	if (!nbd->recv_workq) {
-> +		mutex_unlock(&nbd->config_lock);
-> +		mutex_unlock(&nbd_index_mutex);
-> +		return -EINVAL;
-> +	}
-> +	mutex_unlock(&nbd->config_lock);
->  	mutex_unlock(&nbd_index_mutex);
->  	if (!refcount_inc_not_zero(&nbd->config_refs)) {
->  		nbd_put(nbd);
->
+I will be following up to this email with four separate threads each 
+addressed to the appropriate single list, with proposed changes to:
+- the NBD protocol
+- qemu: both server and client
+- libnbd: client
+- nbdkit: server
 
-With my other patch then we will not need this right? It handles your
-case by just being integrated with the existing checks in:
+The feature in question adds a new optional NBD_INFO_ packet to the 
+NBD_OPT_GO portion of handshake, adding up to 16 bits of information 
+that the server can advertise to the client at connection time about any 
+known initial state of the export [review to this series may propose 
+slight changes, such as using 32 bits; but hopefully by having all four 
+series posted in tandem it becomes easier to see whether any such tweaks 
+are warranted, and can keep such tweaks interoperable before any of the 
+projects land the series upstream].  For now, only 2 of those 16 bits 
+are defined: NBD_INIT_SPARSE (the image has at least one hole) and 
+NBD_INIT_ZERO (the image reads completely as zero); the two bits are 
+orthogonal and can be set independently, although it is easy enough to 
+see completely sparse files with both bits set.  Also, advertising the 
+bits is orthogonal to whether the base:allocation metacontext is used, 
+although a server with all possible extensions is likely to have the two 
+concepts match one another.
 
-nbd_disconnect_and_put->nbd_clear_sock->sock_shutdown
+The new bits are added as an information chunk rather than as runtime 
+flags; this is because the intended client of this information is 
+operations like copying a sparse image into an NBD server destination. 
+Such a client only cares at initialization if it needs to perform a 
+pre-zeroing pass or if it can rely on the destination already reading as 
+zero.  Once the client starts making modifications, burdening the server 
+with the ability to do a live runtime probe of current reads-as-zero 
+state does not help the client, and burning per-export flags for 
+something that quickly goes stale on the first edit was not thought to 
+be wise, similarly, adding a new NBD_CMD did not seem worthwhile.
 
-...
+The existing 'qemu-img convert source... nbd://...' is the first command 
+line example that can benefit from the new information; the goal of 
+adding a protocol extension was to make this benefit automatic without 
+the user having to specify the proposed --target-is-zero when possible. 
+I have a similar thread pending for qemu which adds similar 
+known-reads-zero information to qcow2 files:
+https://lists.gnu.org/archive/html/qemu-devel/2020-01/msg08075.html
 
-static void sock_shutdown(struct nbd_device *nbd)
-{
+That qemu series is at v1, and based on review it has had so far, it 
+will need some interface changes for v2, which means my qemu series here 
+will need a slight rebasing, but I'm posting this series to all lists 
+now to at least demonstrate what is possible when we have better startup 
+information.
 
-....
+Note that with this new bit, it is possible to learn if a destination is 
+sparse as part of NBD_OPT_GO rather than having to use block-status 
+commands.  With existing block-status commands, you can use an O(n) scan 
+of block-status to learn if an image reads as all zeroes (or 
+short-circuit in O(1) time if the first offset is reported as probable 
+data rather than reading as zero); but with this new bit, the answer is 
+O(1).  So even with Vladimir's recent change to make the spec permit 4G 
+block-status even when max block size is 32M, or the proposed work to 
+add 64-bit block-status, you still end up with more on-the-wire traffic 
+for block-status to learn if an image is all zeroes than if the server 
+just advertises this bit.  But by keeping both extensions orthogonal, a 
+server can implement whichever one or both reporting methods it finds 
+easiest, and a client can work with whatever a server supplies with sane 
+fallbacks when the server lacks either extension.  Conversely, 
+block-status tracks live changes to the image, while this bit is only 
+valid at connection time.
 
-        if (config->num_connections == 0)
-                return;
+My repo for each of the four projects contains a tag 'nbd-init-v1':
+  https://repo.or.cz/nbd/ericb.git/shortlog/refs/tags/nbd-init-v1
+  https://repo.or.cz/qemu/ericb.git/shortlog/refs/tags/nbd-init-v1
+  https://repo.or.cz/libnbd/ericb.git/shortlog/refs/tags/nbd-init-v1
+  https://repo.or.cz/nbdkit/ericb.git/shortlog/refs/tags/nbd-init-v1
 
+For doing interoperability testing, I find it handy to use:
 
-num_connections is zero for your case since we never did a
-nbd_genl_disconnect so we would return here.
+PATH=/path/to/built/qemu:/path/to/built/nbdkit:$PATH
+/path/to/libnbd/run your command here
+
+to pick up just-built qemu-nbd, nbdsh, and nbdkit that all support the 
+feature.
+
+For quickly setting flags:
+nbdkit eval init_sparse='exit 0' init_zero='exit 0' ...
+
+For quickly checking flags:
+qemu-nbd --list ... | grep init
+nbdsh -u uri... -c 'print(h.get_init_flags())'
+
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
