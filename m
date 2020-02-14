@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EC5715E366
-	for <lists+nbd@lfdr.de>; Fri, 14 Feb 2020 17:30:20 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A7CF15E469
+	for <lists+nbd@lfdr.de>; Fri, 14 Feb 2020 17:36:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1296320349; Fri, 14 Feb 2020 16:30:20 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 14 16:30:20 2020
+	id 829C92070B; Fri, 14 Feb 2020 16:36:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 14 16:36:09 2020
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-5.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3FB2220609
-	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Feb 2020 16:12:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DFB19206B4
+	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Feb 2020 16:18:16 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-7.161 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
@@ -29,26 +29,26 @@ X-Amavis-Spam-Status: No, score=-7.161 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id b226qhlcT28Z for <lists-other-nbd@bendel.debian.org>;
-	Fri, 14 Feb 2020 16:12:56 +0000 (UTC)
+	with ESMTP id Lmo04PsVEW9C for <lists-other-nbd@bendel.debian.org>;
+	Fri, 14 Feb 2020 16:18:14 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id F188E20676
-	for <nbd@other.debian.org>; Fri, 14 Feb 2020 16:12:55 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 2CBCD20738
+	for <nbd@other.debian.org>; Fri, 14 Feb 2020 16:18:14 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 7AC80246A1;
-	Fri, 14 Feb 2020 16:12:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 2801A24706;
+	Fri, 14 Feb 2020 16:18:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581696772;
-	bh=sgwlTZtHceOcXQlBCBMlRKJUHnRjwhhrQxZY8HOsp7I=;
+	s=default; t=1581697090;
+	bh=/cgqfmp8nwk5RY90ggAflTwKCmubantpkDVWc3yF89U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=0MuvGpfvGcxxNRBc4GHEmXp7TFr83xOhs66f19Zvs1BqQ7cNoxxOSmdqngb7wC77x
-	 G+a8XBBJqbyM/IVkkTbsTBRYPDauDPTOIoQb8lXz+KtfMwyZ3u03o5k3UTxH82JgzZ
-	 v6LBh3VTNjslwmpHjkWM+iLe1U63ZORSqjgYtEhs=
+	b=wbvIQwETtHnD69U6vsTsZrUJXk1KgNPz+IM+1q5hyTcbqYdYJSFy/nfzNA8a5aSP1
+	 2OyzvpWqGH+j6l2XeZef0s5bj2Lv8JWdj0tgzec4ou11TGw7ssZtCMmHNPBRm/iBEM
+	 vo/mQ1YIioeXV/vDgg2wlJhNO0ePD5jRrl03KVhc=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -57,12 +57,12 @@ Cc: Sun Ke <sunke32@huawei.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 4.19 050/252] nbd: add a flush_workqueue in nbd_start_device
-Date: Fri, 14 Feb 2020 11:08:25 -0500
-Message-Id: <20200214161147.15842-50-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 042/186] nbd: add a flush_workqueue in nbd_start_device
+Date: Fri, 14 Feb 2020 11:14:51 -0500
+Message-Id: <20200214161715.18113-42-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214161147.15842-1-sashal@kernel.org>
-References: <20200214161147.15842-1-sashal@kernel.org>
+In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
+References: <20200214161715.18113-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -70,9 +70,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Rb4Awga2UaH.A._IH.cssReB@bendel>
+Resent-Message-ID: <euEnzO9z93P.A.n7H.5xsReB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/824
+X-Mailing-List: <nbd@other.debian.org> archive/latest/825
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -82,8 +82,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200214161147.15842-50-sashal@kernel.org
-Resent-Date: Fri, 14 Feb 2020 16:30:20 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200214161715.18113-42-sashal@kernel.org
+Resent-Date: Fri, 14 Feb 2020 16:36:09 +0000 (UTC)
 
 From: Sun Ke <sunke32@huawei.com>
 
@@ -113,10 +113,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 10 insertions(+)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index b9d321bdaa8a7..226103af30f05 100644
+index 4c661ad91e7d3..8f56e6b2f114f 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1216,6 +1216,16 @@ static int nbd_start_device(struct nbd_device *nbd)
+@@ -1203,6 +1203,16 @@ static int nbd_start_device(struct nbd_device *nbd)
  		args = kzalloc(sizeof(*args), GFP_KERNEL);
  		if (!args) {
  			sock_shutdown(nbd);
