@@ -2,89 +2,89 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id E29C016338F
-	for <lists+nbd@lfdr.de>; Tue, 18 Feb 2020 21:55:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89B36163D2F
+	for <lists+nbd@lfdr.de>; Wed, 19 Feb 2020 07:48:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id ACF3A2037F; Tue, 18 Feb 2020 20:55:52 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 18 20:55:52 2020
-Old-Return-Path: <eblake@redhat.com>
+	id 5D0BC20346; Wed, 19 Feb 2020 06:48:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Feb 19 06:48:09 2020
+Old-Return-Path: <houpu.main@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
-	LDO_WHITELIST,RCVD_IN_DNSWL_NONE autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,MURPHY_DRUGS_REL8
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 2F42120378
-	for <lists-other-nbd@bendel.debian.org>; Tue, 18 Feb 2020 20:55:45 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A362D2033A
+	for <lists-other-nbd@bendel.debian.org>; Wed, 19 Feb 2020 06:32:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.101 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.179 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+	MURPHY_DRUGS_REL8=0.02] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id PnSoZi4Lqw7g for <lists-other-nbd@bendel.debian.org>;
-	Tue, 18 Feb 2020 20:55:40 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
-	by bendel.debian.org (Postfix) with ESMTP id 8B4C420379
-	for <nbd@other.debian.org>; Tue, 18 Feb 2020 20:55:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1582059335;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3Q+ZYE+cxtUvibcqJjja8mk3mm7opy0G92bmyXUjpxY=;
-	b=LlBEBAs/td6ZZonW5U4X5qvNczWpbbuaqofXX8t8qQkIp77FTFOHDzXvJSy0Q/YsNjZVQw
-	moSCh/x0B4Rgy+eztK+r2gs07KnU47TvcG36rrOCziYJ61GuiQS8IWFaW2Ygi8ye9sH6Yt
-	WGwfdW+IQggezDaPymZG5t5IgklC954=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-234-gUKhjVMVNR6N8UsgMQlcTQ-1; Tue, 18 Feb 2020 15:55:26 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AE14FDB20;
-	Tue, 18 Feb 2020 20:55:23 +0000 (UTC)
-Received: from [10.3.116.180] (ovpn-116-180.phx2.redhat.com [10.3.116.180])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 896A960BF7;
-	Tue, 18 Feb 2020 20:55:19 +0000 (UTC)
-Subject: Re: Cross-project NBD extension proposal: NBD_INFO_INIT_STATE
-To: Max Reitz <mreitz@redhat.com>, "nbd@other.debian.org"
- <nbd@other.debian.org>, QEMU <qemu-devel@nongnu.org>,
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
- "libguestfs@redhat.com" <libguestfs@redhat.com>
-Cc: "Richard W.M. Jones" <rjones@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- Alberto Garcia <berto@igalia.com>
-References: <a4394fde-f459-dcb5-1698-013e1e24c388@redhat.com>
- <1b3741aa-7841-9062-ecca-73c38e599e05@redhat.com>
-From: Eric Blake <eblake@redhat.com>
-Organization: Red Hat, Inc.
-Message-ID: <c47d277e-35f8-9837-1f1d-eab4bb6d5840@redhat.com>
-Date: Tue, 18 Feb 2020 14:55:19 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <1b3741aa-7841-9062-ecca-73c38e599e05@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: gUKhjVMVNR6N8UsgMQlcTQ-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+	with ESMTP id Xvrr0gJoBmi4 for <lists-other-nbd@bendel.debian.org>;
+	Wed, 19 Feb 2020 06:32:31 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .gmail. - helo: .mail-pj1-x1041.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 5312020174
+	for <nbd@other.debian.org>; Wed, 19 Feb 2020 06:32:28 +0000 (UTC)
+Received: by mail-pj1-x1041.google.com with SMTP id d5so2136314pjz.5
+        for <nbd@other.debian.org>; Tue, 18 Feb 2020 22:32:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=Qgy6aIuitVSVRLUgnkmkswnIF5SNQ7J4oIPeyJTRMkA=;
+        b=Hzru1pusUyGdeV8M6RRcjDJxg2YxJAjf0qtGNjxsY8CpSmP+3yfog4haYzLBPulCK1
+         5LXLvLgbLGzXT5ZFqflTQWGZgiT522Cr/YWNm4EI3Om6rfoLEojGad6Pz8Plu22YQGRk
+         NbuXYKfdLMzEu55MFm+QlJmkfnRYkR2H+HU7lpkW8Em9QqiUmF74qnKaMUtNe+q2z2tf
+         zN+f9NZwezqAVHCD4zsFYa2MvjlN3IFLvjoEM9HjFoCkLVKweND5Q/I6UFk1eDDSgkoT
+         QmteUHhQUVQULUYy2VuW2dCR6MMOe/8u7FM7eRpzFW5OnQELnhhEzFuCropOTMppEXpU
+         rJUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Qgy6aIuitVSVRLUgnkmkswnIF5SNQ7J4oIPeyJTRMkA=;
+        b=iiUyGJXoQdWZwVxe9+NoFe0xQEPTYFHHKu8vJEEHMM1kWF07lK8Iug5NKNDinQslDp
+         SAzE21F+LplGuzjtRGJB3Q2YxrBv8JlZPJQzvTa7ZIJLTUo7e4oLn8Raz/0DOtq48Kfd
+         rYctim/UBorODedQumuP5bhPJLfe3C8zbmTZ6fGpbdRXMZDZliy3VQM958ltDnw2jGKp
+         n8XxtRo9KqmW2SUMATINZ/ILHD4VJUlabPsdytFJebBg1cxZmkSok8bxxUviuxQzd37J
+         iyi2/r3l8q7ynlo3Amsfy9d4fQHA9gR/zvP16Dgjzoyhge+4HeltXkc/qeCCJKNyf5v3
+         R8pw==
+X-Gm-Message-State: APjAAAXDqcQMVnBSQcbNEIj9TJlBD3kun3KGw9bq6fzT5f/Bjkal+PXY
+	sD7qEomBVJzq/AHqn7n4Tjs=
+X-Google-Smtp-Source: APXvYqzIJksnqer7CyInqvYmguad+0IFUcRA20InqN28rnJ/x6iNawGUGLuStBLSgnApI1Gl09UsMg==
+X-Received: by 2002:a17:902:223:: with SMTP id 32mr24842193plc.167.1582093944724;
+        Tue, 18 Feb 2020 22:32:24 -0800 (PST)
+Received: from debian.lc ([61.120.150.75])
+        by smtp.gmail.com with ESMTPSA id e7sm1184487pfj.114.2020.02.18.22.32.21
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 18 Feb 2020 22:32:24 -0800 (PST)
+From: Hou Pu <houpu.main@gmail.com>
+X-Google-Original-From: Hou Pu <houpu@bytedance.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk,
+	mchristi@redhat.com
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	Hou Pu <houpu@bytedance.com>
+Subject: [PATCH 0/2] requeue request if only one connection is configured
+Date: Wed, 19 Feb 2020 01:31:05 -0500
+Message-Id: <20200219063107.25550-1-houpu@bytedance.com>
+X-Mailer: git-send-email 2.11.0
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <9hasoO_dc5D.A.htG.Y9ETeB@bendel>
+Resent-Message-ID: <Vm1yR8whHvH.A.S_E.poNTeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/827
+X-Mailing-List: <nbd@other.debian.org> archive/latest/828
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -94,130 +94,33 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/c47d277e-35f8-9837-1f1d-eab4bb6d5840@redhat.com
-Resent-Date: Tue, 18 Feb 2020 20:55:52 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200219063107.25550-1-houpu@bytedance.com
+Resent-Date: Wed, 19 Feb 2020 06:48:09 +0000 (UTC)
 
-On 2/17/20 9:13 AM, Max Reitz wrote:
-> Hi,
->=20
-> It=E2=80=99s my understanding that without some is_zero infrastructure fo=
-r QEMU,
-> it=E2=80=99s impossible to implement this flag in qemu=E2=80=99s NBD serv=
-er.
+Hello,
 
-You're right that we may need some more infrastructure before being able=20
-to decide when to report this bit in all cases.  But for raw files, that=20
-infrastructure already exists: does block_status at offset 0 and the=20
-entire image as length return status that the entire file is a hole.=20
-And for qcow2 files, it would not be that hard to teach a similar=20
-block_status request to report the entire image as a hole based on my=20
-proposed qcow2 autoclear bit tracking that the image still reads as zero.
+NBD server could be upgraded if we have multiple connections.
+But if we have only one connection, after we take down NBD server,
+all inflight IO could finally timeout and return error. These
+patches fix this using current reconfiguration framework.
 
->=20
-> At the same time, I still haven=E2=80=99t understood what we need the fla=
-g for.
->=20
-> As far as I understood in our discussion on your qemu series, there is
-> no case where anyone would need to know whether an image is zero.  All > =
-practical cases involve someone having to ensure that some image is
-> zero.  Knowing whether an image is zero can help with that, but that can
-> be an implementation detail.
->=20
-> For qcow2, the idea would be that there is some flag that remains true
-> as long as the image is guaranteed to be zero.  Then we=E2=80=99d have so=
-me
-> bdrv_make_zero function, and qcow2=E2=80=99s implementation would use thi=
-s
-> information to gauge whether there=E2=80=99s something to do as all.
->=20
-> For NBD, we cannot use this idea directly because to implement such a
-> flag (as you=E2=80=99re describing in this mail), we=E2=80=99d need separ=
-ate is_zero
-> infrastructure, and that kind of makes the point of =E2=80=9Cdrivers=E2=
-=80=99
-> bdrv_make_zero() implementations do the right thing by themselves=E2=80=
-=9D moot.
+I noticed that Mike has following patchset
 
-We don't necessarily need a separate is_zero infrastructure if we can=20
-instead teach the existing block_status infrastructure to report that=20
-the entire image reads as zero.  You're right that clients that need to=20
-force an entire image to be zero won't need to directly call=20
-block_status (they can just call bdrv_make_zero, and let that worry=20
-about whether a block status call makes sense among its list of steps to=20
-try).  But since block_status can report all-zero status for some cases,=20
-it's not hard to use that for feeding the NBD bit.
+nbd: local daemon restart support
+https://lore.kernel.org/linux-block/5DD41C49.3080209@redhat.com/
 
-However, there's a difference between qemu's block status (which is=20
-already typed correctly to return a 64-bit answer, even if it may need a=20
-few tweaks for clients that currently don't expect it to request more=20
-than 32 bits) and NBD's block status (which can only report 32 bits=20
-barring a new extension to the protocol), and where a single all-zero=20
-bit at NBD_OPT_GO is just as easy of an extension as a way to report a=20
-64-bit all-zero response to NBD_CMD_BLOCK_STATUS.
+It add another netlink interface (NBD_ATTR_SWAP_SOCKETS) and requeue
+request immediately after recongirure/swap socket. It do not need to
+wait for timeout to fire and requeue in timeout handler, which seems more
+like an improvement. Let fix this in current framework first.
 
->=20
-> OTOH, we wouldn=E2=80=99t need such a flag for the implementation, becaus=
-e we
-> could just send a 64-bit discard/make_zero over the whole block device
-> length to the NBD server, and then the server internally does the right
-> thing(TM).  AFAIU discard and write_zeroes currently have only 32 bit
-> length fields, but there were plans for adding support for 64 bit
-> versions anyway.  From my na=C3=AFve outsider perspective, doing that doe=
-sn=E2=80=99t
-> seem a more complicated protocol addition than adding some way to tell
-> whether an NBD export is zero.
+Hou Pu (2):
+  nbd: enable replace socket if only one connection is configured
+  nbd: requeue command if the soecket is changed
 
-Adding 64-bit commands to NBD is more invasive than adding a single=20
-startup status bit.  Both ideas can be done - doing one does not=20
-preclude the other.  But at the same time, not all servers will=20
-implement both ideas - if one is easy to implement while the other is=20
-hard, it is not unlikely that qemu will still encounter NBD servers that=20
-advertise startup state but not support 64-bit make_zero (even if qemu=20
-as NBD server starts supporting 64-bit make zero) or even 64-bit block=20
-status results.
+ drivers/block/nbd.c | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
 
-Another thing to think about here is timing.  With the proposed NBD=20
-addition, it is the server telling the client that "the image you are=20
-connecting to started zero", prior to the point that the client even has=20
-a chance to request "can you make the image all zero in a quick manner=20
-(and if not, I'll fall back to writing zeroes as I go)".  And even if=20
-NBD gains a 64-bit block status and/or make zero command, it is still=20
-less network traffic for the server to advertise up-front that the image=20
-is all zero than it is for the client to have to issue command requests=20
-of the server (network traffic is not always the bottleneck, but it can=20
-be a consideration).
-
->=20
-> So I=E2=80=99m still wondering whether there are actually cases where we =
-need to
-> tell whether some image or NBD export is zero that do not involve making
-> it zero if it isn=E2=80=99t.
-
-Just because we don't think that qemu-img has such a case does not mean=20
-that other NBD clients will not be able to come up with some use for=20
-knowing if an image starts all zero.
-
->=20
-> (I keep asking because it seems to me that if all we ever really want to
-> do is to ensure that some images/exports are zero, we should implement
-> that.)
-
-The problem is WHERE do you implement it.  Is it more efficient to=20
-implement make_zero in the NBD server (the client merely requests to=20
-make zero, but lets the server do all the work) or in the NBD client=20
-(the client learns whether the server is already zero, and not hearing=20
-yes, the client proceeds to do all the work to write zeroes).  From the=20
-qemu perspective, qemu-img convert needs the image to be zero, and=20
-bdrv_make_zero will report back either "yes I quickly made it zero,=20
-possibly by doing nothing" or "no, making it zero now is no more=20
-efficient than you just writing zeroes as you go".  But although the=20
-code in qemu-img is the same whether bdrv_make_zero is able to request=20
-the work be done in the server or whether the work has to be done in the=20
-client, the code in the block layer that implements bdrv_make_zero may=20
-itself care about knowing whether the NBD server started all zero.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+-- 
+2.11.0
 
