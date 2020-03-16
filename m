@@ -1,95 +1,67 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id F02B6185B09
-	for <lists+nbd@lfdr.de>; Sun, 15 Mar 2020 08:30:12 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D7C3186B4A
+	for <lists+nbd@lfdr.de>; Mon, 16 Mar 2020 13:42:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9A3572054C; Sun, 15 Mar 2020 07:30:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sun Mar 15 07:30:12 2020
-Old-Return-Path: <net147@gmail.com>
+	id 5BD3C205F8; Mon, 16 Mar 2020 12:42:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar 16 12:42:09 2020
+Old-Return-Path: <yuyufen@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 777C220358
-	for <lists-other-nbd@bendel.debian.org>; Sun, 15 Mar 2020 07:12:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5F694205E1
+	for <lists-other-nbd@bendel.debian.org>; Mon, 16 Mar 2020 12:26:51 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.171 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.28 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id d78thv1ynALS for <lists-other-nbd@bendel.debian.org>;
-	Sun, 15 Mar 2020 07:12:35 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 053F2204FC
-	for <nbd@other.debian.org>; Sun, 15 Mar 2020 07:12:31 +0000 (UTC)
-Received: by mail-pf1-x443.google.com with SMTP id n7so7974219pfn.0
-        for <nbd@other.debian.org>; Sun, 15 Mar 2020 00:12:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SbKIoLCW8FktpOjoZM8Ions/hz8w0mHlSIdwzhYClU8=;
-        b=oLRCtpzbReQTzaqwvHnwK0NQxrk+DoSeSFUgXQ92nGXAWvuBX61LBd7ZDNaIMF82q+
-         J0DNXyWg9PHjc1/vlqXFouiy4wyylWjNKbc4scO52Vnl7p/+6ALgXRjuHNqDRSqRhQ5Z
-         CjAstj3e36ftstW/+DWCWmjxHEqZJnDh4bjlEFN0+igqYnMxFegbBXWQwyaXePKevxlL
-         jo9nkZSfc04d7JJ25o7scPv8tNXpZJsOLa/YdOBAoOVx/mFNfMjQAiYwxGBU/LK1eLlL
-         bu7N6GgBQJi4SXNQJbVwx4Ly7Ufk4cIS97uzUzQ4UHRbW0c4VZqhlT2IylaOjr2oobOe
-         dOgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SbKIoLCW8FktpOjoZM8Ions/hz8w0mHlSIdwzhYClU8=;
-        b=EVthbArZS5U3ZfXSwf9x6NOAah5IiJSj36DysxS4C6uIZXg2RWkccKL/8hVfp++HJD
-         7S/oK6ORs031ncm3ZlgGsXQs1o439p94AnHwvRSLESWyWddALMOvjzdz0IPUW+qf+9bC
-         FkYSFgjBC2p8WfVYQwt0n+tza5sMU2oc37f0fzSJyUXpmnW4rWeZEYhkfzKUHfl1dtCI
-         RPfokxuyMq94TvNTsxLkUGjgY5URdRYFKXFxYx++5lLsuNXYZGqkPFjcIfO7LkgMN7Qy
-         y5cQAOBqlGVAtbJn3Kn3Mc1e6oW+EGS+tMum5S/h6p54yE2M/DFSMf8p4P8cjh6uc8Q1
-         Y+fw==
-X-Gm-Message-State: ANhLgQ3C3nGpTwQPj2O6HF6YkACz/yUxIxMj9x+S9x/SNgGzwX77Ujh2
-	FKltEPIHdk21+xGNTI243QzCM1vA
-X-Google-Smtp-Source: ADFU+vsAR777y2U6Qwgci7nk0rHi+vU/u3UGzVlXVrgHlDFAoTRbMjHj5Mk8YWGM3+b0LNJesODgPQ==
-X-Received: by 2002:a63:3449:: with SMTP id b70mr21209935pga.242.1584256348291;
-        Sun, 15 Mar 2020 00:12:28 -0700 (PDT)
-Received: from 119-18-5-146.771205.syd.nbn.aussiebb.net (119-18-5-146.771205.syd.nbn.aussiebb.net. [119.18.5.146])
-        by smtp.gmail.com with ESMTPSA id w27sm12357585pfq.211.2020.03.15.00.12.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Mar 2020 00:12:27 -0700 (PDT)
-Received: by 119-18-5-146.771205.syd.nbn.aussiebb.net (Postfix, from userid 1000)
-	id 6A01F1A3194C; Sun, 15 Mar 2020 18:12:24 +1100 (AEDT)
-From: Jonathan Liu <net147@gmail.com>
-To: nbd@other.debian.org
-Cc: Jonathan Liu <net147@gmail.com>
-Subject: [PATCH] server: trim whitespace from lines in authorization file
-Date: Sun, 15 Mar 2020 18:10:51 +1100
-Message-Id: <20200315071051.9403-1-net147@gmail.com>
-X-Mailer: git-send-email 2.25.1
+	with ESMTP id IjVMvktTqfe9 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 16 Mar 2020 12:26:46 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.7
+Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 86677205E0
+	for <nbd@other.debian.org>; Mon, 16 Mar 2020 12:26:46 +0000 (UTC)
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
+	by Forcepoint Email with ESMTP id 6D3732A51CF7D85A3715;
+	Mon, 16 Mar 2020 20:26:41 +0800 (CST)
+Received: from [10.173.220.74] (10.173.220.74) by
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.487.0; Mon, 16 Mar 2020 20:26:35 +0800
+Subject: Re: [PATCH] nbd: make starting request more reasonable
+From: Yufen Yu <yuyufen@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>, Ming Lei
+	<ming.lei@redhat.com>, Christoph Hellwig <hch@lst.de>
+References: <20200303130843.12065-1-yuyufen@huawei.com>
+Message-ID: <9cdba8b1-f0e5-a079-8d44-0078478dd4d8@huawei.com>
+Date: Mon, 16 Mar 2020 20:26:35 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200303130843.12065-1-yuyufen@huawei.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.173.220.74]
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <vCX2oxNUpgM.A.zY.EmdbeB@bendel>
+Resent-Message-ID: <ILd-h3PmXsK.A.LoD.hQ3beB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/853
+X-Mailing-List: <nbd@other.debian.org> archive/latest/854
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -99,45 +71,103 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200315071051.9403-1-net147@gmail.com
-Resent-Date: Sun, 15 Mar 2020 07:30:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/9cdba8b1-f0e5-a079-8d44-0078478dd4d8@huawei.com
+Resent-Date: Mon, 16 Mar 2020 12:42:09 +0000 (UTC)
 
-The netmask line can fail to parse when passed to getaddrinfo if it
-contains whitespace such as newline when using glibc 2.29 and later.
-This results in clients being denied access even though their IP
-address is listed in the authorization file.
+Ping and Cc to more expert in blk-mq.
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- nbdsrv.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/nbdsrv.c b/nbdsrv.c
-index b4fa800..168d425 100644
---- a/nbdsrv.c
-+++ b/nbdsrv.c
-@@ -127,6 +127,7 @@ int authorized_client(CLIENT *opts) {
-   
- 	while (fgets(line,LINELEN,f)!=NULL) {
- 		char* pos;
-+		char* endpos;
- 		/* Drop comments */
- 		if((pos = strchr(line, '#'))) {
- 			*pos = '\0';
-@@ -140,7 +141,12 @@ int authorized_client(CLIENT *opts) {
- 		if(!(*pos)) {
- 			continue;
- 		}
--		if(address_matches(line, (struct sockaddr*)&opts->clientaddr, NULL)) {
-+		/* Trim trailing whitespace */
-+		endpos = pos;
-+		while ((*endpos) && !isspace(*endpos))
-+			endpos++;
-+		*endpos = '\0';
-+		if(address_matches(pos, (struct sockaddr*)&opts->clientaddr, NULL)) {
- 			fclose(f);
- 			return 1;
- 		}
--- 
-2.25.1
+On 2020/3/3 21:08, Yufen Yu wrote:
+> Our test robot reported a warning for refcount_dec trying to decrease
+> value '0'. The reason is that blk_mq_dispatch_rq_list() try to complete
+> the failed request from nbd driver, while the request have finished in
+> nbd timeout handle function. The race as following:
+> 
+> CPU1                             CPU2
+> 
+> //req->ref = 1
+> blk_mq_dispatch_rq_list
+> nbd_queue_rq
+>    nbd_handle_cmd
+>      blk_mq_start_request
+>                                   blk_mq_check_expired
+>                                     //req->ref = 2
+>                                     blk_mq_rq_timed_out
+>                                       nbd_xmit_timeout
+>                                         blk_mq_complete_request
+>                                           //req->ref = 1
+>                                           refcount_dec_and_test(&req->ref)
+> 
+>                                     refcount_dec_and_test(&req->ref)
+>                                     //req->ref = 0
+>                                       __blk_mq_free_request(req)
+>    ret = BLK_STS_IOERR
+> blk_mq_end_request
+> // req->ref = 0, req have been free
+> refcount_dec_and_test(&rq->ref)
+> 
+> In fact, the bug also have been reported by syzbot:
+>    https://lkml.org/lkml/2018/12/5/1308
+> 
+> Since the request have been freed by timeout handle, it can be reused
+> by others. Then, blk_mq_end_request() may get the re-initialized request
+> and free it, which is unexpected.
+> 
+> To fix the problem, we move blk_mq_start_request() down until the driver
+> will handle the request actully. If .queue_rq return something error in
+> preparation phase, timeout handle may don't need. Thus, moving start
+> request down may be more reasonable. Then, nbd_queue_rq() will not return
+> BLK_STS_IOERR after starting request.
+> 
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Yufen Yu <yuyufen@huawei.com>
+> ---
+>   drivers/block/nbd.c | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 78181908f0df..5256e9d02a03 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -541,6 +541,8 @@ static int nbd_send_cmd(struct nbd_device *nbd, struct nbd_cmd *cmd, int index)
+>   		return -EIO;
+>   	}
+>   
+> +	blk_mq_start_request(req);
+> +
+>   	if (req->cmd_flags & REQ_FUA)
+>   		nbd_cmd_flags |= NBD_CMD_FLAG_FUA;
+>   
+> @@ -879,7 +881,6 @@ static int nbd_handle_cmd(struct nbd_cmd *cmd, int index)
+>   	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+>   		dev_err_ratelimited(disk_to_dev(nbd->disk),
+>   				    "Socks array is empty\n");
+> -		blk_mq_start_request(req);
+>   		return -EINVAL;
+>   	}
+>   	config = nbd->config;
+> @@ -888,7 +889,6 @@ static int nbd_handle_cmd(struct nbd_cmd *cmd, int index)
+>   		dev_err_ratelimited(disk_to_dev(nbd->disk),
+>   				    "Attempted send on invalid socket\n");
+>   		nbd_config_put(nbd);
+> -		blk_mq_start_request(req);
+>   		return -EINVAL;
+>   	}
+>   	cmd->status = BLK_STS_OK;
+> @@ -912,7 +912,6 @@ static int nbd_handle_cmd(struct nbd_cmd *cmd, int index)
+>   			 */
+>   			sock_shutdown(nbd);
+>   			nbd_config_put(nbd);
+> -			blk_mq_start_request(req);
+>   			return -EIO;
+>   		}
+>   		goto again;
+> @@ -923,7 +922,6 @@ static int nbd_handle_cmd(struct nbd_cmd *cmd, int index)
+>   	 * here so that it gets put _after_ the request that is already on the
+>   	 * dispatch list.
+>   	 */
+> -	blk_mq_start_request(req);
+>   	if (unlikely(nsock->pending && nsock->pending != req)) {
+>   		nbd_requeue_cmd(cmd);
+>   		ret = 0;
+> 
 
