@@ -1,68 +1,78 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5EE818F6B8
-	for <lists+nbd@lfdr.de>; Mon, 23 Mar 2020 15:24:15 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 27ADB199CD5
+	for <lists+nbd@lfdr.de>; Tue, 31 Mar 2020 19:27:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8908E20CAF; Mon, 23 Mar 2020 14:24:15 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar 23 14:24:15 2020
-Old-Return-Path: <yuyufen@huawei.com>
+	id EC33D2041D; Tue, 31 Mar 2020 17:27:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar 31 17:27:13 2020
+Old-Return-Path: <3s3mDXgkbAK4gmnYOZZSfOddWR.UccUZSigSfQcbhSbh.Qca@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=4.0 tests=MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FROM_LOCAL_HEX,HEADER_FROM_DIFFERENT_DOMAINS,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,TO_TOO_MANY autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1C3A820CA4
-	for <lists-other-nbd@bendel.debian.org>; Mon, 23 Mar 2020 14:09:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2785820468
+	for <lists-other-nbd@bendel.debian.org>; Tue, 31 Mar 2020 17:11:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.28 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3]
+X-Amavis-Spam-Status: No, score=0.376 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	FROM_LOCAL_DIGITS=0.001, FROM_LOCAL_HEX=0.006,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.25, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, TO_TOO_MANY=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id vvndKD43d3eX for <lists-other-nbd@bendel.debian.org>;
-	Mon, 23 Mar 2020 14:09:02 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.7
-Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id CB41B20C9E
-	for <nbd@other.debian.org>; Mon, 23 Mar 2020 14:09:01 +0000 (UTC)
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
-	by Forcepoint Email with ESMTP id F15DA89CAE8D36E7464F;
-	Mon, 23 Mar 2020 22:08:56 +0800 (CST)
-Received: from [10.173.220.74] (10.173.220.74) by
- DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 23 Mar 2020 22:08:51 +0800
-Subject: Re: [PATCH] nbd: make starting request more reasonable
-To: Ming Lei <ming.lei@redhat.com>
-CC: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
-	<nbd@other.debian.org>, Christoph Hellwig <hch@lst.de>
-References: <20200303130843.12065-1-yuyufen@huawei.com>
- <9cdba8b1-f0e5-a079-8d44-0078478dd4d8@huawei.com>
- <20200316153033.GA11016@ming.t460p>
-From: Yufen Yu <yuyufen@huawei.com>
-Message-ID: <b990c260-ddf6-efa9-0856-9110aa4dd8a4@huawei.com>
-Date: Mon, 23 Mar 2020 22:08:51 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+	with ESMTP id wSUVjHfEfFOF for <lists-other-nbd@bendel.debian.org>;
+	Tue, 31 Mar 2020 17:11:23 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-il1-f198.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
+Received: from mail-il1-f198.google.com (mail-il1-f198.google.com [209.85.166.198])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 05CD720453
+	for <nbd@other.debian.org>; Tue, 31 Mar 2020 17:11:19 +0000 (UTC)
+Received: by mail-il1-f198.google.com with SMTP id h10so20659458ilq.22
+        for <nbd@other.debian.org>; Tue, 31 Mar 2020 10:11:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
+        bh=GeqKjfeAdJEJGZUK1GjRw+TiUXvLDp+2kKiRMtW1LCk=;
+        b=iyzyx5ihnJlmqrMRKzxa/r4NG4f58EIDXar6w5sOgQa1hwN2KjRIAlYfW6es5MtyPV
+         6F225jovQtKmyvvYwV5zv2PPr/c61ZCsCkRVSFOuTcEaEneZXJj7UgV7akwPhodRJS0K
+         diljde0qeYAIsmpUL+mrO1wfPs9tTFE10/rU7Oji6L1FvrH1TwZn5htjaf3Jo/J7wbEf
+         tqUsnRlozE2ZtnYtPZsAlGydmfjY4D0W6GrHIA9O9fJGo1JZw3IxNihGesQRObBXeajT
+         0DqY2SizR5bCNyic7JH2ZUnKysWLGLLtXvn6CSDlhFr6rTv/dez7FWEGfYXEDfr2J5in
+         zrJg==
+X-Gm-Message-State: ANhLgQ1Ky9CIJMeggBTaaJiZ7ovtp+iNy+psRICWlmz2KDBZn47TXvO9
+	+aZEwpYfZHGup5q94tTeRbdGawKNtRARBOCjOGPAwP3WnMou
+X-Google-Smtp-Source: ADFU+vt+Tkk/vonhfkivzolcbjP+ktb+edSvNeC5MpAAEcl8QjOIsuGNwdwt5tE0tU8UThY0NBr6tIuoUZHzvQQy8JX8ZuxIgRsR
 MIME-Version: 1.0
-In-Reply-To: <20200316153033.GA11016@ming.t460p>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.173.220.74]
-X-CFilter-Loop: Reflected
+X-Received: by 2002:a02:c551:: with SMTP id g17mr7773176jaj.52.1585674675789;
+ Tue, 31 Mar 2020 10:11:15 -0700 (PDT)
+Date: Tue, 31 Mar 2020 10:11:15 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000c7a80905a229a785@google.com>
+Subject: memory leak in nbd_add_socket
+From: syzbot <syzbot+934037347002901b8d2a@syzkaller.appspotmail.com>
+To: axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <cZmXCf-e13G.A.s0C.PaMeeB@bendel>
+Resent-Message-ID: <Y8LbFalJrTD.A.bbD.x13geB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/868
+X-Mailing-List: <nbd@other.debian.org> archive/latest/869
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -72,41 +82,218 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/b990c260-ddf6-efa9-0856-9110aa4dd8a4@huawei.com
-Resent-Date: Mon, 23 Mar 2020 14:24:15 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/000000000000c7a80905a229a785@google.com
+Resent-Date: Tue, 31 Mar 2020 17:27:13 +0000 (UTC)
 
-Hi, Ming
+Hello,
 
-On 2020/3/16 23:30, Ming Lei wrote:
-> On Mon, Mar 16, 2020 at 08:26:35PM +0800, Yufen Yu wrote:
->> Ping and Cc to more expert in blk-mq.
->>
->> On 2020/3/3 21:08, Yufen Yu wrote:
->>> Our test robot reported a warning for refcount_dec trying to decrease
->>> value '0'. The reason is that blk_mq_dispatch_rq_list() try to complete
->>> the failed request from nbd driver, while the request have finished in
->>> nbd timeout handle function. The race as following:
->>>
->>> CPU1                             CPU2
->>>
->>> //req->ref = 1
->>> blk_mq_dispatch_rq_list
->>> nbd_queue_rq
->>>     nbd_handle_cmd
->>>       blk_mq_start_request
->>>                                    blk_mq_check_expired
->>>                                      //req->ref = 2
->>>                                      blk_mq_rq_timed_out
->>>                                        nbd_xmit_timeout
-> 
-> This shouldn't happen in reality, given rq->deadline is just updated
-> in blk_mq_start_request(), suppose you use the default 30 sec timeout.
-> How can the race be triggered in so short time? >
-> Could you explain a bit your test case?
->
-In fact, this is reported by syzkaller. We have not actually test case.
-But, I think nbd driver should not start request in case of failure. So fix it.
+syzbot found the following crash on:
 
-Thanks,
-Yufen
+HEAD commit:    673b41e0 staging/octeon: fix up merge error
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=15badadbe00000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=d97026d04c648459
+dashboard link: https://syzkaller.appspot.com/bug?extid=934037347002901b8d2a
+compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12dbb747e00000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=14421b9de00000
+
+IMPORTANT: if you fix the bug, please add the following tag to the commit:
+Reported-by: syzbot+934037347002901b8d2a@syzkaller.appspotmail.com
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.060s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.170s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.270s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.380s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.480s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.590s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.690s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+BUG: memory leak
+unreferenced object 0xffff88810fd584a0 (size 32):
+  comm "syz-executor586", pid 8424, jiffies 4294961663 (age 40.800s)
+  hex dump (first 32 bytes):
+    2f 64 65 76 2f 6e 62 64 30 00 00 00 00 00 00 00  /dev/nbd0.......
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  backtrace:
+    [<0000000090cb73c8>] __do_krealloc mm/slab_common.c:1671 [inline]
+    [<0000000090cb73c8>] krealloc+0x7c/0xa0 mm/slab_common.c:1700
+    [<00000000cf9e6ba7>] nbd_add_socket+0x7d/0x1e0 drivers/block/nbd.c:1040
+    [<0000000040a0a881>] __nbd_ioctl drivers/block/nbd.c:1373 [inline]
+    [<0000000040a0a881>] nbd_ioctl+0x175/0x430 drivers/block/nbd.c:1437
+    [<000000004972a55a>] __blkdev_driver_ioctl block/ioctl.c:322 [inline]
+    [<000000004972a55a>] blkdev_ioctl+0x147/0x300 block/ioctl.c:718
+    [<000000008903d911>] block_ioctl+0x50/0x70 fs/block_dev.c:1995
+    [<00000000c37950d9>] vfs_ioctl fs/ioctl.c:47 [inline]
+    [<00000000c37950d9>] ksys_ioctl+0xa6/0xd0 fs/ioctl.c:763
+    [<00000000ffe4bbdc>] __do_sys_ioctl fs/ioctl.c:772 [inline]
+    [<00000000ffe4bbdc>] __se_sys_ioctl fs/ioctl.c:770 [inline]
+    [<00000000ffe4bbdc>] __x64_sys_ioctl+0x1a/0x20 fs/ioctl.c:770
+    [<00000000ede38b98>] do_syscall_64+0x6e/0x220 arch/x86/entry/common.c:294
+    [<00000000553f73d5>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+
+
+---
+This bug is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this bug report. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+syzbot can test patches for this bug, for details see:
+https://goo.gl/tpsmEJ#testing-patches
 
