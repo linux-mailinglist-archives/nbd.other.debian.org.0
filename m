@@ -1,139 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 537ED1A4A36
-	for <lists+nbd@lfdr.de>; Fri, 10 Apr 2020 21:15:16 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EE1B1B3B04
+	for <lists+nbd@lfdr.de>; Wed, 22 Apr 2020 11:18:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2751520569; Fri, 10 Apr 2020 19:15:16 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Apr 10 19:15:16 2020
-Old-Return-Path: <Markus.Elfring@web.de>
+	id B6AC720484; Wed, 22 Apr 2020 09:18:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 22 09:18:09 2020
+Old-Return-Path: <houpu@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,LDOSUBSCRIBER,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BB1B420560
-	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Apr 2020 19:15:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2D8AA20403
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Apr 2020 09:01:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.879 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7]
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id rta0l00ImRjI for <lists-other-nbd@bendel.debian.org>;
-	Fri, 10 Apr 2020 19:15:04 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-X-Greylist: delayed 354 seconds by postgrey-1.36 at bendel; Fri, 10 Apr 2020 19:15:04 UTC
-Received: from mout.web.de (mout.web.de [217.72.192.78])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8B1392054B
-	for <nbd@other.debian.org>; Fri, 10 Apr 2020 19:15:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-	s=dbaedf251592; t=1586546095;
-	bh=sNyyQCsXyfuYEo6jFFgq3kX3z34MamWp1a11cAuN5zU=;
-	h=X-UI-Sender-Class:To:Cc:Subject:From:Date;
-	b=g+YjgpUxW/h3E4GXmf6vYrxJJp+Q3+tpw63MZxoLmf1e6OqTx6YpyPx79esZnjfvV
-	 sOU/m9jPJUZn/sit4q96aNI621hTleIUTgRl83EwdaCuyG5vTIyc5hEq1xISE+Bj3w
-	 QL86NBWp7ikNo06TAjYgqUy4IptWvq2WGVtpIjBI=
-X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.3] ([78.48.110.107]) by smtp.web.de (mrweb103
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0LpO4v-1ikdbF3Xbp-00fDaZ; Fri, 10
- Apr 2020 21:08:52 +0200
-To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, linux-block@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org, nbd@other.debian.org, stable@kernel.org,
- syzbot+934037347002901b8d2a@syzkaller.appspotmail.com,
- Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH] nbd: Fix memory leak from krealloc() if another
- allocation fails
-From: Markus Elfring <Markus.Elfring@web.de>
-Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
- 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 FEE=
-Message-ID: <c91c88ef-0600-4733-d301-de1e2e62cb94@web.de>
-Date: Fri, 10 Apr 2020 21:08:50 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:XgK3M+Ie6c8esxWP36w86h1EJ+IdOJZFcBjHUfFqC3WwiR5fz42
- YAO13exwf2rwdSPsuWOuKZMh4xF1utnVeLxMT8bFy7/Bx+860bDS40eN9cf8wtC2uCszvg4
- DJAdQDcpcDT0Q62N5+htU6dTJkiJ3XblX8dRreoC8OknBDDTRmeIilBwzNNqf+Jp2nhksTb
- sVjB6r/ww8xbmPmbsVjEg==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:pZd52HDjby4=:0+4mnIVR7k9uIimns4Ml3X
- S+G+JGEd3LZiImj6ZoEh+X5FiV3h+xgv5paOk+5smjM8bdV+8fhFk5UcGL/qUDasPMyw2Cif1
- AlUuKbKZC+adpTt+1oMg6cEsqkI/XErSxPR6p1SXYHY+IRJE6yxTwlO74Acv11Oq0pGYYcEat
- lua0FXUGQ9v7VLBm4CJtYZMiUTzQ7YkQqAb5zneAxI7zWZSFdNCGRx/+WXqZWbjtEJvnRJ7W0
- cwjyZLPBdP3tf95WV1ukLF17ze/aK+a7thCTXhtceC6nz6M0TolP3THmTDBoC9ZSc59U97qEq
- mo5T9HrCx4RZqfw8qMXQ+rXn8kitxYnh0r+mfUa6fCftyNxOK4RRGoIhYuJL9UV5YdjMjtElO
- 9Id40S5xt/DB/x/RSEHZZpL2Ms4eUvgsr+EqUJYYENKvwtcEnh5Psgr0YTxGIj7eLc+DMPaFW
- aFK9tRlpv/hGpKEhAEACNOZ+YS1KPzjeOCXLZST0VD82B0R9aA97mT5ksUFH/c+bC9E8xrYrS
- WRrGqCwPFKw+K86blT/zbReMNX+8IVYzt9PP9Z2i5PF9B+ciF1+R6t8kfYB5t/wPJGhf+1Nmq
- JP/DgxGfB85vb8WKeOcmbEMhKaJWTEfoL0VBZLZdPWO9qqsY/k/F6KlwpwA723acI/TSYRFP7
- WUtXhxAPAl/cLBtfqG9bVUZfzRAJif/BYArawV5qJkWG6a9aTnOZUextGBCR1uarLXW59RaVj
- KaM/AaP4t0zDHwKlFmy1g5sfWc+CE2ZZs2Mg3OjXf6F9XNJKDQP0+s7obU6VsvqBxweDjzSI3
- iSTnjOwxeh87S4dpzz9xrB+DDqFcqsuf6pWTjnBVQabp1y1ddWVUr85QYasxmd/Ky4HrWdnYz
- AY/gMe7k+405pwY3ngDaqo5y1C8BtoTLMpKpI89pG4kpDfl6Z1l7Bv4ZeRjEz/I5a9u6ywOLL
- G2vImV/C2xUetm+QiEMjUqNiheWwwWZz7eXLl0PLRxGtNX5sxw7nFdL7gyq8VRC4LHFEJpEYx
- idkENbW4WFB1EqkeyAmuvqxkJXm1cDh34QoZ4QMqTf7xOreExqxKW/LYoR/QsiBRxcVPgvEgc
- rOBhqI3QNzZv/lTswBV00T4jO/eHOBcUln8i0zRfJq5/4pCE8FMc1RKky+nBHXsvb+0zRI2sy
- ii0d9jL6dus3EkAyX3ZZ3lpt/wSCaYDkAaDJoW9gACPez6f5Mau771Mk6/7RPX32jaMzo+sCB
- CJkAbMBROMIod3wxO
+	with ESMTP id N3UPCGdYC0PQ for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Apr 2020 09:01:00 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pl1-x643.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com [IPv6:2607:f8b0:4864:20::643])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id E116D203C9
+	for <nbd@other.debian.org>; Wed, 22 Apr 2020 09:00:56 +0000 (UTC)
+Received: by mail-pl1-x643.google.com with SMTP id d24so675399pll.8
+        for <nbd@other.debian.org>; Wed, 22 Apr 2020 02:00:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=/lNHrzKG35VPMrePjYUYNbOK/+5taqOUGFBWUbMoiz0=;
+        b=GF0DB9uCqX5LDfTa5GuQLRU6/cbJya7ug5Uk2gUZCxauRxJ2HDYzC4JTBgAhC4G/N8
+         T2iXhEPZoi1t7o0qHG5q4r3cgcZiszl2tt/v6j+0BsFNYRpdfUBg7DAWiNH9L8+tjiDU
+         UnDAfG7eeOa91E/xtSZKfpOl0HCPTMFSmFuqCJ2OBwugh7SJhRKVMhxxi/kRUybl9LSd
+         kFd6gmxMdpq5L0zFVjh0iUfpsV/J9QuuWyIBc73IldxofXIH054YE3m92UMbCE7enClL
+         thvtB1w2jwspELeSPYTQ3iptmVrmHZtpFJAnHd5ln85uVBqA3eeMRUyswr7O0e/6Db28
+         utUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=/lNHrzKG35VPMrePjYUYNbOK/+5taqOUGFBWUbMoiz0=;
+        b=GUabFX0lGZY8396iU5ZY3bouKuehn0bHN8LeaONtQtVuuGokuiiz7CAgsr5+zbJ9Jw
+         Z3XgkNIxBYLRzsAxg+Q5F0fYfB2IOnDQAd6m2v0KJ7/Q4JJs6ydPEXFJQDuVjdBUtCW6
+         aq6yF4Kh4tcnhrXnNSP+9D7840/On5zF3TfG5WOjZlc+Z4krLCQHho0xpJ43/tb88xsr
+         DTq33AEDUb8ld96pAEt902xDBqGmFZ4IvXPkcUrZwGBAO2zNp318iOca7pKMrtmBryHa
+         dg5oxNsxoe0m2q6B6NVsJkEq3QB3IQS9RABp30Ig/vCAoVRbP8SP7sKBSFGQjBOKvpnK
+         /3og==
+X-Gm-Message-State: AGi0PubEkis/zQyNOAQkO6F2yWmrtWreul30waMwHK/NOi14TepbNM3n
+	yEF+lxwSt5OGKcSapBF987pTjw==
+X-Google-Smtp-Source: APiQypKsfBc3CfFgHX6D5DERQfxF2tR+yy5uYKa2Pi7RJWV+BaxEQNZbRWHg7yMlnTJT2sBFEA2JVQ==
+X-Received: by 2002:a17:902:9004:: with SMTP id a4mr23509028plp.275.1587546053434;
+        Wed, 22 Apr 2020 02:00:53 -0700 (PDT)
+Received: from debian.bytedance.net ([61.120.150.75])
+        by smtp.gmail.com with ESMTPSA id p66sm4660054pfb.65.2020.04.22.02.00.50
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 22 Apr 2020 02:00:52 -0700 (PDT)
+From: Hou Pu <houpu@bytedance.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk
+Cc: mpa@pengutronix.de,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	Hou Pu <houpu@bytedance.com>
+Subject: [PATCH 0/2] nbd: export dead connection timeout
+Date: Wed, 22 Apr 2020 05:00:16 -0400
+Message-Id: <20200422090018.23210-1-houpu@bytedance.com>
+X-Mailer: git-send-email 2.11.0
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Z4xTqUass9O.A.RMC.EXMkeB@bendel>
+Resent-Message-ID: <Si8dZ40TsDP.A.PlH.RvAoeB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/871
+X-Mailing-List: <nbd@other.debian.org> archive/latest/872
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -143,17 +93,23 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/c91c88ef-0600-4733-d301-de1e2e62cb94@web.de
-Resent-Date: Fri, 10 Apr 2020 19:15:16 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200422090018.23210-1-houpu@bytedance.com
+Resent-Date: Wed, 22 Apr 2020 09:18:09 +0000 (UTC)
 
-> syzkaller reports a memory leak when injecting allocation failures:
-=E2=80=A6
-> as then config->num_connections is not incremented and the cleanup code
-> freeing config->socks is skipped. Just make it run always.
+Here are two trivial patches:
 
-How do you think about to add the tag =E2=80=9CFixes=E2=80=9D for the fina=
-l change description?
+Hou Pu (2):
+  nbd: export dead_conn_timeout via debugfs
+  nbd: set max discard sectors in the unit of sector
 
-Regards,
-Markus
+ drivers/block/nbd.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+
+Thanks,
+Hou
+
+
+-- 
+2.11.0
 
