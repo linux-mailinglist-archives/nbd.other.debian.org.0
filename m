@@ -2,92 +2,93 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79A461E9009
-	for <lists+nbd@lfdr.de>; Sat, 30 May 2020 11:27:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 186421E9BF3
+	for <lists+nbd@lfdr.de>; Mon,  1 Jun 2020 05:06:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4AAF520533; Sat, 30 May 2020 09:27:45 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat May 30 09:27:45 2020
-Old-Return-Path: <rjones@redhat.com>
+	id D157E203D8; Mon,  1 Jun 2020 03:06:16 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun  1 03:06:16 2020
+Old-Return-Path: <dongli.zhang@oracle.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.9 required=4.0 tests=FOURLA,LDOSUBSCRIBER,
-	LDO_WHITELIST,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-2.3 required=4.0 tests=MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2,UNPARSEABLE_RELAY autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 192BA2051A
-	for <lists-other-nbd@bendel.debian.org>; Sat, 30 May 2020 09:27:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6744C20301
+	for <lists-other-nbd@bendel.debian.org>; Mon,  1 Jun 2020 02:50:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.099 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-4.481 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=ham autolearn_force=no
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H2=-0.001, UNPARSEABLE_RELAY=0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 61f8vg7nQdBw for <lists-other-nbd@bendel.debian.org>;
-	Sat, 30 May 2020 09:27:28 +0000 (UTC)
+	with ESMTP id tSjtxhLDwB23 for <lists-other-nbd@bendel.debian.org>;
+	Mon,  1 Jun 2020 02:50:00 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com [207.211.31.120])
-	by bendel.debian.org (Postfix) with ESMTP id 9C55F204C0
-	for <nbd@other.debian.org>; Sat, 30 May 2020 09:27:28 +0000 (UTC)
-Old-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1590830842;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QNCBlcfXesRsi7EHYn/qiLEFZSVhVTbggu1BTv3xExs=;
-	b=b2FAE5bsmCQfP6gCz0OWSG2qHMPcZ3jzyxEJsMOXWFig1iw7fJ0KbityaiRXoPWJUDPFYY
-	u9ix3/DQ0M7PGnh4mE9mejEjHhMq8UWsYBCwh8WyyrZL7c4jTokFDDw5TdMQNMDsLeJZlJ
-	9vgHpC/rPvW+PO0dCYfbtUMNA0wLuBg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-91-divcMtUfP3iseg-lNCdiTw-1; Sat, 30 May 2020 05:27:20 -0400
-X-MC-Unique: divcMtUfP3iseg-lNCdiTw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id ECEA7107ACCA;
-	Sat, 30 May 2020 09:27:18 +0000 (UTC)
-Received: from localhost (ovpn-112-79.ams2.redhat.com [10.36.112.79])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 064A978366;
-	Sat, 30 May 2020 09:27:15 +0000 (UTC)
-Date: Sat, 30 May 2020 10:27:15 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: Eric Wheeler <nbd@lists.ewheeler.net>
-Cc: Eric Blake <eblake@redhat.com>,
-	Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
-	Nir Soffer <nsoffer@redhat.com>, libguestfs <libguestfs@redhat.com>,
-	nbd@other.debian.org, QEMU <qemu-devel@nongnu.org>
-Subject: Re: [Libguestfs] Provide NBD via Browser over Websockets
-Message-ID: <20200530092715.GX3888@redhat.com>
-References: <CAMRbyytcufK8-XdFu7LU+UwO_FRoGJO2FhhBHtH9etf3A2htwQ@mail.gmail.com>
- <alpine.LRH.2.11.2005280014150.13970@mail.ewheeler.net>
- <20200528090443.GN7304@redhat.com>
- <alpine.LRH.2.11.2005282147410.13970@mail.ewheeler.net>
- <20200529093744.GS3888@redhat.com>
- <13571029-5bf4-2dfa-6879-0ad2642afb3f@redhat.com>
- <20200529135042.GJ2755532@redhat.com>
- <ff2e7dd1-c8b2-b46c-3c3b-ed88d9ad9689@redhat.com>
- <20200529141315.GU3888@redhat.com>
- <alpine.LRH.2.11.2005292107180.10871@mail.ewheeler.net>
-MIME-Version: 1.0
-In-Reply-To: <alpine.LRH.2.11.2005292107180.10871@mail.ewheeler.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
-Content-Disposition: inline
+X-Greylist: delayed 5154 seconds by postgrey-1.36 at bendel; Mon, 01 Jun 2020 02:50:00 UTC
+Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "userp2130.oracle.com", Issuer "DigiCert SHA2 Secure Server CA" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 9CCAD2038E
+	for <nbd@other.debian.org>; Mon,  1 Jun 2020 02:50:00 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+	by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0511HouB057042;
+	Mon, 1 Jun 2020 01:24:00 GMT
+Old-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2020-01-29;
+ bh=df8qxLo7s+iLAVcbs65NCApHg9ADlNh/I0GX/uRW+eI=;
+ b=pY5x/RXVVNt/3US/CmrlZMKV/GkgG9W4bqW4XZMpyT14AitvkkbNWiN5KAkdHDj/NY6z
+ EeEHCGHoRiHQYzrD8ZesWu3nSj/8dkSz2iZlVSfG1NxEly5uLX2qS8dze/bE/v7l3s1T
+ DfGpwd3bijJvUV+E+uAv2fsLLJmnwspQv01mfhDbKIEViRX+4pbNL/jHxuxBU7khJMjP
+ hT3em+FRE8XgkOMS3U7H0lq98S12obb5ciuUGP3rIOsliUjRB/v3fn9IjT1HIIJUwpNO
+ pwAiuRNO8Dnjxhle0e8vcvtdGlZG0eN3Jm4t0WR6xTmI7CDIww6rnYoNJEGVzsPx/cCk 7Q== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+	by userp2130.oracle.com with ESMTP id 31bewqmbst-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 01 Jun 2020 01:24:00 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+	by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0511I068053043;
+	Mon, 1 Jun 2020 01:23:59 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+	by aserp3020.oracle.com with ESMTP id 31c25h5dmq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 01 Jun 2020 01:23:59 +0000
+Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
+	by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 0511NuWd004187;
+	Mon, 1 Jun 2020 01:23:58 GMT
+Received: from localhost.localdomain (/10.211.9.80)
+	by default (Oracle Beehive Gateway v4.0)
+	with ESMTP ; Sun, 31 May 2020 18:23:56 -0700
+From: Dongli Zhang <dongli.zhang@oracle.com>
+To: nbd@other.debian.org, linux-block@vger.kernel.org
+Cc: josef@toxicpanda.com, axboe@kernel.dk, linux-kernel@vger.kernel.org
+Subject: [PATCH 0/2] nbd: two cleanup
+Date: Sun, 31 May 2020 18:16:00 -0700
+Message-Id: <20200601011602.29381-1-dongli.zhang@oracle.com>
+X-Mailer: git-send-email 2.17.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9638 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 suspectscore=8 spamscore=0
+ malwarescore=0 bulkscore=0 mlxscore=0 phishscore=0 mlxlogscore=729
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006010008
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9638 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 bulkscore=0
+ phishscore=0 suspectscore=8 impostorscore=0 cotscore=-2147483648
+ lowpriorityscore=0 mlxscore=0 adultscore=0 spamscore=0 mlxlogscore=749
+ malwarescore=0 clxscore=1015 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2004280000 definitions=main-2006010008
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Uzr4be7-Ck.A.mAB.Rci0eB@bendel>
+Resent-Message-ID: <yriA2knrA7O.A.hIH.oCH1eB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/891
+X-Mailing-List: <nbd@other.debian.org> archive/latest/892
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -97,72 +98,13 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200530092715.GX3888@redhat.com
-Resent-Date: Sat, 30 May 2020 09:27:45 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200601011602.29381-1-dongli.zhang@oracle.com
+Resent-Date: Mon,  1 Jun 2020 03:06:16 +0000 (UTC)
 
-On Fri, May 29, 2020 at 09:08:29PM +0000, Eric Wheeler wrote:
-> On Fri, 29 May 2020, Richard W.M. Jones wrote:
-> > On Fri, May 29, 2020 at 08:58:06AM -0500, Eric Blake wrote:
-> > > On 5/29/20 8:50 AM, Daniel P. BerrangÃ© wrote:
-> > > 
-> > > >>>(2) You need to persuade qemu's NBD client to read from a WebSocket.
-> > > >>>I didn't really know anything about WebSockets until today but it
-> > > >>>seems as if they are a full-duplex protocol layered on top of HTTP [a].
-> > > >>>Is there a WebSocket proxy that turns WS into plain TCP (a bit like
-> > > >>>stunnel)?  Google suggests [b].
-> > > >>>
-> > > >>>[a] https://en.wikipedia.org/wiki/WebSocket#Protocol_handshake
-> > > >>>[b] https://github.com/novnc/websockify
-> > > >>
-> > > >>qemu already knows how to connect as a client to websockets; Dan Berrange
-> > > >>knows more about that setup.  I suspect it would not be too difficult to
-> > > >>teach the qemu NBD client code to use a WebSocket instead of a Unix or TCP
-> > > >>socket as its data source.
-> > > >
-> > > >Actually the inverse. The QIOChannelWebsocket impl is only the server
-> > > >side of the problem, as used by QEMU's VNC server. We've never implemented
-> > > >the client side. There is nothing especially stopping us doing that - just
-> > > >needs someone motivated with time to work on it.
-> > > 
-> > > In the meantime, you may still be able to set up something like:
-> > > 
-> > > local machine:
-> > > iso -> NBD server -> Unix socket -> websockify -> WebSocket
-> > 
-> > I guess the idea is to have a zero-install solution for the browser.
-> > As I said in the email earlier this is very common for IPMI-type
-> > remote access to blade servers and in my experience is implemented
-> > using a Java applet and a proprietary protocol terminated at the BMC
-> > (which then emulates a virtual CDROM to the server).  There are some
-> > HP blade servers on Red Hat's internal Beaker instance where you can
-> > play with this.  For qemu we wouldn't need to invent a new protocol
-> > when NBD is available and already implemented (albeit not yet on top
-> > of WebSockets).
-> > 
-> > The NBD server must run inside the browser and therefore be either
-> > written from scratch in Javascript, or an existing server
-> > cross-compiled to WASM (if that is possible - I don't really know).
-> 
-> Interesting idea about WASM.  I'll see if I can build one of the simple 
-> nbd servers that are around.  Not sure how to link it to the JS file IO, 
-> however.
+This is just cleanup without functional change.
 
-After reading a bit about compiling to WebSockets it sounds like you
-can cross-compile a C program, but there's no library support at all.
-IOW to port an existing server you'd have to implement enough of POSIX
-to make it work.  nbdkit has a liberal license deliberately to make it
-possible to chop it up and incorporate it into completely forked
-codebases (nbdkit is a plot to make NBD more popular).
+Thank you very much!
 
-But since NBD is pretty simple, a fresh Javascript server might be
-easier, especially if you stick to only implementing reads.
+Dongli Zhang
 
-Rich.
-
--- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-virt-top is 'top' for virtual machines.  Tiny program with many
-powerful monitoring features, net stats, disk stats, logging, etc.
-http://people.redhat.com/~rjones/virt-top
 
