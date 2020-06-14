@@ -1,65 +1,88 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F3341F75FA
-	for <lists+nbd@lfdr.de>; Fri, 12 Jun 2020 11:30:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id E381F1F8AE8
+	for <lists+nbd@lfdr.de>; Sun, 14 Jun 2020 23:39:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BD5C22054D; Fri, 12 Jun 2020 09:30:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jun 12 09:30:08 2020
-Old-Return-Path: <zhengbin13@huawei.com>
+	id A81FB2033C; Sun, 14 Jun 2020 21:39:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jun 14 21:39:08 2020
+Old-Return-Path: <mrkiko.rs@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
-	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,RCVD_IN_DNSWL_NONE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A9C91205A3
-	for <lists-other-nbd@bendel.debian.org>; Fri, 12 Jun 2020 09:14:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8284A2037A
+	for <lists-other-nbd@bendel.debian.org>; Sun, 14 Jun 2020 21:22:17 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.278 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H4=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.9 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+	MALFORMED_FREEMAIL=1.299, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id JudVPe1Rg3Kc for <lists-other-nbd@bendel.debian.org>;
-	Fri, 12 Jun 2020 09:14:18 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.7
-X-Greylist: delayed 993 seconds by postgrey-1.36 at bendel; Fri, 12 Jun 2020 09:14:18 UTC
-Received: from huawei.com (szxga06-in.huawei.com [45.249.212.32])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 495E12059F
-	for <nbd@other.debian.org>; Fri, 12 Jun 2020 09:14:17 +0000 (UTC)
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
-	by Forcepoint Email with ESMTP id 7EA043C61EFE8A206547;
-	Fri, 12 Jun 2020 16:57:39 +0800 (CST)
-Received: from huawei.com (10.90.53.225) by DGGEMS406-HUB.china.huawei.com
- (10.3.19.206) with Microsoft SMTP Server id 14.3.487.0; Fri, 12 Jun 2020
- 16:57:32 +0800
-From: Zheng Bin <zhengbin13@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
-	<nbd@other.debian.org>
-CC: <yi.zhang@huawei.com>, <zhengbin13@huawei.com>
-Subject: [PATCH] nbd: Fix memory leak in nbd_add_socket
-Date: Fri, 12 Jun 2020 17:04:37 +0800
-Message-ID: <20200612090437.77977-1-zhengbin13@huawei.com>
-X-Mailer: git-send-email 2.26.0.106.g9fadedd
+	with ESMTP id mlKvXfi_AsJh for <lists-other-nbd@bendel.debian.org>;
+	Sun, 14 Jun 2020 21:22:13 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com [IPv6:2a00:1450:4864:20::434])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 60FD720373
+	for <nbd@other.debian.org>; Sun, 14 Jun 2020 21:22:10 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id l11so15094337wru.0
+        for <nbd@other.debian.org>; Sun, 14 Jun 2020 14:22:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:mime-version;
+        bh=vkKaGrZd8/FWch8LM+2Yi5Cp+VSHjNvxCe4v1yqHnQY=;
+        b=Y66PACa0xEeXR0p0k+Sj1QGaaFQLBVtEYthGu0Y5lda8kfq7ElNI6rjrIIERYFu4sI
+         AW157A/Nh0x0doDXjCxMDyUyxeAqMjaW0WclD53NJSRdtnLLKlu9zklXtJntPX2AGGU6
+         3DoXRJekJSLkzw9gsfvICPgiQV01yVxGE/Xiclifqa6kSW3yeXJgImeMvJR7IKR18Tht
+         tW0m0Txu0mehV/yBE+NoAChRsHWnhzty3ZXGyFukMtLzdmr0Baj7il6pSFmGiV5wYidg
+         +4WTYq4zCBLB+5zq+fw4L3n35LYOYXmo1MzFHUFWN89a+SUW1KjMoliim0NTsERB5NVW
+         yjOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version;
+        bh=vkKaGrZd8/FWch8LM+2Yi5Cp+VSHjNvxCe4v1yqHnQY=;
+        b=R02RuOph2nxDXPRkmfjPzNFOI+Zejps71wdSNTKheRkWlRrrfH0kvtt4dZIwOMbdC5
+         wzn0zLp4qC9GVGzGXpAlN7zTP3DVaIP+syv6iUemTl9Yhcq6BgQFuvG2N++vRydt7BNp
+         d93mZ9e6jJTkf4+2Pw5fMC4pQA8xDndVCNbiQNY4xn4GaG/dx9dqRl4Pt8SF5R07VQpa
+         3VYfYVURgJzqxHhgmcKMflssOurpsCBWP6yqm7eYNBO4kDDhN9ppxuqSucuTbtCwvppp
+         t8XOKqWASyuDyF4LSheI0tOK5J2Lu2M012lCftG7Z4EwOSgOEeKcgwFeq9Tzn2VqWyAP
+         3TUQ==
+X-Gm-Message-State: AOAM530PnVVEhEI3Dkun23GViEWaSNgymv3oXT1S+fGYyZilCdGCgZ3S
+	3lHRqDVX4nXynpyt14f3f0NHqVmm
+X-Google-Smtp-Source: ABdhPJyQaolGotz9SXOSrwPJuuV6YLtgC6hDN7YYMZZXZ0TlkewiobyFI4AKTz8EmXRuLWtrG0UN/g==
+X-Received: by 2002:adf:ecc2:: with SMTP id s2mr28049023wro.60.1592169727858;
+        Sun, 14 Jun 2020 14:22:07 -0700 (PDT)
+Received: from mStation (host-79-51-202-241.retail.telecomitalia.it. [79.51.202.241])
+        by smtp.gmail.com with ESMTPSA id o82sm20290844wmo.40.2020.06.14.14.22.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 14 Jun 2020 14:22:07 -0700 (PDT)
+Date: Sun, 14 Jun 2020 23:22:03 +0200 (CEST)
+From: Enrico Mioso <mrkiko.rs@gmail.com>
+X-X-Sender: mrkiko@mStation.localdomain
+To: nbd@other.debian.org
+cc: linux-block@vger.kernel.org, axboe@kernel.dk, josef@toxicpanda.com
+Subject: nbd leeaves threads around even when unloaded (5.4.46)
+Message-ID: <alpine.LNX.2.22.419.2006142249410.14412@mStation.localdomain>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.90.53.225]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; format=flowed; charset=US-ASCII
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <dot1KqwC1cB.A.cxH.gs04eB@bendel>
+Resent-Message-ID: <nftnFCZ0ngH.A.rR.8jp5eB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/899
+X-Mailing-List: <nbd@other.debian.org> archive/latest/900
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -69,57 +92,21 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200612090437.77977-1-zhengbin13@huawei.com
-Resent-Date: Fri, 12 Jun 2020 09:30:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/alpine.LNX.2.22.419.2006142249410.14412@mStation.localdomain
+Resent-Date: Sun, 14 Jun 2020 21:39:08 +0000 (UTC)
 
-nbd_add_socket
-  socks = krealloc(num_connections+1) -->if num_connections is 0, alloc 1
-  nsock = kzalloc                     -->If fail, will return
+Hello!
+I don't know if this is an issue - still... I used nbd via qemu-nbd, and all worked fine.
+Now, I unloaded the driver after finishing. But still I can see around a kernel thread:
 
-nbd_config_put
-  if (config->num_connections)        -->0, not free
-    kfree(config->socks)
+$ ps ax
+     988 ?        I<     0:02 [kworker/u17:0-knbd0-recv]
 
-Thus memleak happens, this patch fixes that.
+$ lsmod |grep -i nbd
 
-Signed-off-by: Zheng Bin <zhengbin13@huawei.com>
----
- drivers/block/nbd.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+Is this an issue?
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 43cff01a5a67..3e7709317b17 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1037,21 +1037,22 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
- 		return -EBUSY;
- 	}
+Thanks for the great work!
 
-+	nsock = kzalloc(sizeof(struct nbd_sock), GFP_KERNEL);
-+	if (!nsock) {
-+		sockfd_put(sock);
-+		return -ENOMEM;
-+	}
-+
- 	socks = krealloc(config->socks, (config->num_connections + 1) *
- 			 sizeof(struct nbd_sock *), GFP_KERNEL);
- 	if (!socks) {
- 		sockfd_put(sock);
-+		kfree(nsock);
- 		return -ENOMEM;
- 	}
-
- 	config->socks = socks;
-
--	nsock = kzalloc(sizeof(struct nbd_sock), GFP_KERNEL);
--	if (!nsock) {
--		sockfd_put(sock);
--		return -ENOMEM;
--	}
--
- 	nsock->fallback_index = -1;
- 	nsock->dead = false;
- 	mutex_init(&nsock->tx_lock);
---
-2.26.0.106.g9fadedd
+Enrico
 
