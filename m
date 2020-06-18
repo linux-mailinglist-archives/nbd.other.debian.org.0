@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 635071FFD4B
-	for <lists+nbd@lfdr.de>; Thu, 18 Jun 2020 23:18:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A62741FFD4C
+	for <lists+nbd@lfdr.de>; Thu, 18 Jun 2020 23:18:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3D1E9203F2; Thu, 18 Jun 2020 21:18:15 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 18 21:18:15 2020
+	id 8E1EB203E9; Thu, 18 Jun 2020 21:18:25 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 18 21:18:25 2020
 Old-Return-Path: <cascardo@canonical.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-3.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7632F203E3
-	for <lists-other-nbd@bendel.debian.org>; Thu, 18 Jun 2020 21:02:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C6218203E5
+	for <lists-other-nbd@bendel.debian.org>; Thu, 18 Jun 2020 21:03:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-5.878 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
@@ -26,19 +26,19 @@ X-Amavis-Spam-Status: No, score=-5.878 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id zAOoWbGac7aH for <lists-other-nbd@bendel.debian.org>;
-	Thu, 18 Jun 2020 21:02:54 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
+	with ESMTP id fsKeMklvhwgE for <lists-other-nbd@bendel.debian.org>;
+	Thu, 18 Jun 2020 21:03:03 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from youngberry.canonical.com (youngberry.canonical.com [91.189.89.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 33B42203DA
-	for <nbd@other.debian.org>; Thu, 18 Jun 2020 21:02:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id AC98E203DA
+	for <nbd@other.debian.org>; Thu, 18 Jun 2020 21:03:03 +0000 (UTC)
 Received: from [189.110.235.168] (helo=localhost.localdomain)
 	by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.86_2)
 	(envelope-from <cascardo@canonical.com>)
-	id 1jm1gM-00073w-EZ; Thu, 18 Jun 2020 21:02:46 +0000
+	id 1jm1gZ-00073w-PC; Thu, 18 Jun 2020 21:03:00 +0000
 From: Thadeu Lima de Souza Cascardo <cascardo@canonical.com>
 To: Josef Bacik <josef@toxicpanda.com>
 Cc: Jens Axboe <axboe@kernel.dk>,
@@ -48,17 +48,19 @@ Cc: Jens Axboe <axboe@kernel.dk>,
 	netdev@vger.kernel.org,
 	cascardo@canonical.com
 Subject: [PATCH] nbd: allocate sufficient space for NBD_CMD_STATUS
-Date: Thu, 18 Jun 2020 18:02:39 -0300
-Message-Id: <20200618210240.157566-1-cascardo@canonical.com>
+Date: Thu, 18 Jun 2020 18:02:40 -0300
+Message-Id: <20200618210240.157566-2-cascardo@canonical.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200618210240.157566-1-cascardo@canonical.com>
+References: <20200618210240.157566-1-cascardo@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <pflJdpW-r7O.A.hXB.Xo96eB@bendel>
+Resent-Message-ID: <qED3GK55ogK.A.NaB.ho96eB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/901
+X-Mailing-List: <nbd@other.debian.org> archive/latest/902
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -68,8 +70,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200618210240.157566-1-cascardo@canonical.com
-Resent-Date: Thu, 18 Jun 2020 21:18:15 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200618210240.157566-2-cascardo@canonical.com
+Resent-Date: Thu, 18 Jun 2020 21:18:25 +0000 (UTC)
 
 The nest attribute NBD_ATTR_DEVICE_LIST was not accounted for when
 allocating the message, resulting in -EMSGSIZE.
