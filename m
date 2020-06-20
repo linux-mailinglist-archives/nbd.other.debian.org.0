@@ -1,66 +1,67 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A62741FFD4C
-	for <lists+nbd@lfdr.de>; Thu, 18 Jun 2020 23:18:25 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BF962022B2
+	for <lists+nbd@lfdr.de>; Sat, 20 Jun 2020 10:57:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8E1EB203E9; Thu, 18 Jun 2020 21:18:25 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 18 21:18:25 2020
-Old-Return-Path: <cascardo@canonical.com>
+	id 06EA020411; Sat, 20 Jun 2020 08:57:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Jun 20 08:57:09 2020
+Old-Return-Path: <zhengbin13@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
+	RCVD_IN_MSPIKE_WL,TO_TOO_MANY autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C6218203E5
-	for <lists-other-nbd@bendel.debian.org>; Thu, 18 Jun 2020 21:03:07 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DB0E520356
+	for <lists-other-nbd@bendel.debian.org>; Sat, 20 Jun 2020 08:41:27 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.878 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.278 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H4=0.001,
+	RCVD_IN_MSPIKE_WL=0.001, TO_TOO_MANY=1]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id fsKeMklvhwgE for <lists-other-nbd@bendel.debian.org>;
-	Thu, 18 Jun 2020 21:03:03 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from youngberry.canonical.com (youngberry.canonical.com [91.189.89.112])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
+	with ESMTP id dus4Uxp-siuo for <lists-other-nbd@bendel.debian.org>;
+	Sat, 20 Jun 2020 08:41:23 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .huawei. - helo: .huawei. - helo-domain: .huawei.)  CL_HOSTNAME_MATCHES_FROM(DOMAIN)=-1.2; rate: -2.2
+Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id AC98E203DA
-	for <nbd@other.debian.org>; Thu, 18 Jun 2020 21:03:03 +0000 (UTC)
-Received: from [189.110.235.168] (helo=localhost.localdomain)
-	by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.86_2)
-	(envelope-from <cascardo@canonical.com>)
-	id 1jm1gZ-00073w-PC; Thu, 18 Jun 2020 21:03:00 +0000
-From: Thadeu Lima de Souza Cascardo <cascardo@canonical.com>
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	cascardo@canonical.com
-Subject: [PATCH] nbd: allocate sufficient space for NBD_CMD_STATUS
-Date: Thu, 18 Jun 2020 18:02:40 -0300
-Message-Id: <20200618210240.157566-2-cascardo@canonical.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200618210240.157566-1-cascardo@canonical.com>
-References: <20200618210240.157566-1-cascardo@canonical.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 729B720301
+	for <nbd@other.debian.org>; Sat, 20 Jun 2020 08:41:21 +0000 (UTC)
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
+	by Forcepoint Email with ESMTP id 71E1C5320015253F93A7;
+	Sat, 20 Jun 2020 16:41:15 +0800 (CST)
+Received: from huawei.com (10.90.53.225) by DGGEMS410-HUB.china.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server id 14.3.487.0; Sat, 20 Jun 2020
+ 16:41:05 +0800
+From: Zheng Bin <zhengbin13@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <navid.emamdoost@gmail.com>,
+	<linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>
+CC: <yi.zhang@huawei.com>, <zhengbin13@huawei.com>
+Subject: [PATCH v2] nbd: Fix memory leak in nbd_add_socket
+Date: Sat, 20 Jun 2020 16:48:09 +0800
+Message-ID: <20200620084809.126398-1-zhengbin13@huawei.com>
+X-Mailer: git-send-email 2.26.0.106.g9fadedd
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.90.53.225]
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <qED3GK55ogK.A.NaB.ho96eB@bendel>
+Resent-Message-ID: <p8wHK96rIgC.A.oRE.k9c7eB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/902
+X-Mailing-List: <nbd@other.debian.org> archive/latest/903
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -70,37 +71,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200618210240.157566-2-cascardo@canonical.com
-Resent-Date: Thu, 18 Jun 2020 21:18:25 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200620084809.126398-1-zhengbin13@huawei.com
+Resent-Date: Sat, 20 Jun 2020 08:57:09 +0000 (UTC)
 
-The nest attribute NBD_ATTR_DEVICE_LIST was not accounted for when
-allocating the message, resulting in -EMSGSIZE.
+If we add first socket to nbd, config->socks is malloced but
+num_connections does not update(nsock's allocation fail), the memory
+is leaked. Cause in later nbd_config_put(), will only free config->socks
+when num_connections is not 0.
 
-As __alloc_skb aligns size requests to SMP_CACHE_BYTES and SLUB will end up
-allocating more than requested, this can hardly be reproduced on most
-setups.
+Let nsock's allocation first to avoid this.
 
-However, I managed to test this on a 32-bit x86 with 15 entries, by loading
-with nbds_max=15. It failed with -EMSGSIZE, while it worked with 14 or 16
-entries.
-
-Signed-off-by: Thadeu Lima de Souza Cascardo <cascardo@canonical.com>
+Fixes: 03bf73c315ed ("nbd: prevent memory leak")
+Signed-off-by: Zheng Bin <zhengbin13@huawei.com>
 ---
- drivers/block/nbd.c | 1 +
- 1 file changed, 1 insertion(+)
+
+v1->v2: modify comments
+
+ drivers/block/nbd.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 43cff01a5a67..19551d8ca355 100644
+index 43cff01a5a67..3e7709317b17 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -2265,6 +2265,7 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
- 	msg_size = nla_total_size(nla_attr_size(sizeof(u32)) +
- 				  nla_attr_size(sizeof(u8)));
- 	msg_size *= (index == -1) ? nbd_total_devices : 1;
-+	msg_size += nla_total_size(0); /* for NBD_ATTR_DEVICE_LIST */
- 
- 	reply = genlmsg_new(msg_size, GFP_KERNEL);
- 	if (!reply)
--- 
-2.25.1
+@@ -1037,21 +1037,22 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
+ 		return -EBUSY;
+ 	}
+
++	nsock = kzalloc(sizeof(struct nbd_sock), GFP_KERNEL);
++	if (!nsock) {
++		sockfd_put(sock);
++		return -ENOMEM;
++	}
++
+ 	socks = krealloc(config->socks, (config->num_connections + 1) *
+ 			 sizeof(struct nbd_sock *), GFP_KERNEL);
+ 	if (!socks) {
+ 		sockfd_put(sock);
++		kfree(nsock);
+ 		return -ENOMEM;
+ 	}
+
+ 	config->socks = socks;
+
+-	nsock = kzalloc(sizeof(struct nbd_sock), GFP_KERNEL);
+-	if (!nsock) {
+-		sockfd_put(sock);
+-		return -ENOMEM;
+-	}
+-
+ 	nsock->fallback_index = -1;
+ 	nsock->dead = false;
+ 	mutex_init(&nsock->tx_lock);
+--
+2.26.0.106.g9fadedd
 
