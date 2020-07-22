@@ -2,139 +2,99 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id F384222910F
-	for <lists+nbd@lfdr.de>; Wed, 22 Jul 2020 08:42:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9E0B2294DB
+	for <lists+nbd@lfdr.de>; Wed, 22 Jul 2020 11:27:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D90EB20407; Wed, 22 Jul 2020 06:42:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jul 22 06:42:09 2020
-Old-Return-Path: <martin.petersen@oracle.com>
+	id 9DCD120576; Wed, 22 Jul 2020 09:27:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jul 22 09:27:12 2020
+Old-Return-Path: <mlevitsk@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2,UNPARSEABLE_RELAY autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.5 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+	SARE_MSGID_LONG40 autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id F06EB20407
-	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Jul 2020 06:24:31 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C857220523
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Jul 2020 09:11:48 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.481 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=1.555 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H2=-0.001, UNPARSEABLE_RELAY=0.001]
-	autolearn=no autolearn_force=no
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+	SARE_MSGID_LONG40=0.637] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id O7dcpJBEX5w7 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 22 Jul 2020 06:24:27 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 11971 seconds by postgrey-1.36 at bendel; Wed, 22 Jul 2020 06:24:27 UTC
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "userp2130.oracle.com", Issuer "DigiCert SHA2 Secure Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 8E2A9203C6
-	for <nbd@other.debian.org>; Wed, 22 Jul 2020 06:24:27 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-	by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 06M2kTjo191446;
-	Wed, 22 Jul 2020 02:55:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=to : cc : subject :
- from : message-id : references : date : in-reply-to : mime-version :
- content-type; s=corp-2020-01-29;
- bh=01BXubBTTggiGme5bAGTUB+IF85y9Gt5mJRvOB950ac=;
- b=Ert4ww4qHWKQEvayACm71Ls9WksxesZoOaQuXn1rooMPeky0Jrb3Txsjhfab7151opH+
- +ba9k2HaDjO+952t0cWNI9dQ5WIUYlfWf21ewpsJhWYjcp3N0pcTJv58VOOiL/rw4ZJ6
- iz8Tt3rOrUGPL774E+aOOMdpr1AJ4rPAQVYkJ8tuwulHR8WsPhlqGNhCTMtVwJGZI8Su
- HIBl9tQrmPPnenq/MvlY3LRHb4yzdgqsGtAjLjY176yMEaePZyb/9GiUf2AUdZxzL18+
- SsUZlrUq97Om51YkiNCIV1uh+Ie3EhzxivvOSUhEO/vIHZqNevq4QRm6YstexeMtuoCD CA== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-	by userp2130.oracle.com with ESMTP id 32brgrgmt4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 22 Jul 2020 02:55:24 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-	by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 06M2m6rK048369;
-	Wed, 22 Jul 2020 02:55:24 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
-	by aserp3030.oracle.com with ESMTP id 32e9usdjva-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 22 Jul 2020 02:55:23 +0000
-Received: from abhmp0001.oracle.com (abhmp0001.oracle.com [141.146.116.7])
-	by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 06M2tDDp005896;
-	Wed, 22 Jul 2020 02:55:13 GMT
-Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
-	by default (Oracle Beehive Gateway v4.0)
-	with ESMTP ; Wed, 22 Jul 2020 02:55:13 +0000
-To: Christoph Hellwig <hch@lst.de>
-Cc: Maxim Levitsky <mlevitsk@redhat.com>, linux-kernel@vger.kernel.org,
-        Keith Busch <kbusch@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
-        "open list:BLOCK LAYER" <linux-block@vger.kernel.org>,
-        Sagi Grimberg
- <sagi@grimberg.me>, Jens Axboe <axboe@kernel.dk>,
-        "open list:NVM EXPRESS
- DRIVER" <linux-nvme@lists.infradead.org>,
-        "open list:SCSI CDROM DRIVER"
- <linux-scsi@vger.kernel.org>,
-        Tejun Heo <tj@kernel.org>, Bart Van Assche
- <bvanassche@acm.org>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Damien Le Moal <damien.lemoal@wdc.com>,
-        Jason Wang
- <jasowang@redhat.com>,
-        Maxim Levitsky <maximlevitsky@gmail.com>,
-        Stefan
- Hajnoczi <stefanha@redhat.com>,
-        Colin Ian King
- <colin.king@canonical.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Paolo
- Bonzini <pbonzini@redhat.com>,
-        Ulf Hansson <ulf.hansson@linaro.org>, Ajay Joshi <ajay.joshi@wdc.com>,
-        Ming Lei <ming.lei@redhat.com>,
-        "open
- list:SONY MEMORYSTICK SUBSYSTEM" <linux-mmc@vger.kernel.org>,
-        Satya
- Tangirala <satyat@google.com>,
-        "open list:NETWORK BLOCK DEVICE (NBD)"
- <nbd@other.debian.org>,
-        Hou Tao <houtao1@huawei.com>, Jens Axboe
- <axboe@fb.com>,
-        "open list:VIRTIO CORE AND NET DRIVERS"
- <virtualization@lists.linux-foundation.org>,
-        "James E.J. Bottomley"
- <jejb@linux.ibm.com>,
-        Alex Dubov <oakad@yahoo.com>
+	with ESMTP id FGaZymTAUfmo for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Jul 2020 09:11:46 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.7
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-delivery-1.mimecast.com [205.139.110.120])
+	by bendel.debian.org (Postfix) with ESMTP id 1EDA52050C
+	for <nbd@other.debian.org>; Wed, 22 Jul 2020 09:11:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1595409100;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=NzcEIWaSLdd63tVnMlQ4l8CfKkfEyUhff3HORkpk1pw=;
+	b=b8dBzOj024FywY5Penqxp9mkStAXHSUSvE0NXHrAhTSsV6PWTD8143jgEO36fVYNYozMUl
+	0+u20vnIhrZUqhVffNNVe8BMhW/mu8GqGpNzjqujDPDflU+8UdT6Xnh3mPwUmQoQwb0rch
+	W1HFKDXUNYtlRxvdwMabiI8Vu9wtORQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-318-W9xiyZCdNjaZWfNh6eB9Eg-1; Wed, 22 Jul 2020 05:11:36 -0400
+X-MC-Unique: W9xiyZCdNjaZWfNh6eB9Eg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C1173C746E;
+	Wed, 22 Jul 2020 09:11:33 +0000 (UTC)
+Received: from fedora-32-enviroment (unknown [10.35.206.213])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 477AC5C1C3;
+	Wed, 22 Jul 2020 09:11:18 +0000 (UTC)
+Message-ID: <f16aba1020019530564f0869a67951282104a5d2.camel@redhat.com>
 Subject: Re: [PATCH 02/10] block: virtio-blk: check logical block size
-From: "Martin K. Petersen" <martin.petersen@oracle.com>
-Organization: Oracle Corporation
-Message-ID: <yq1zh7sfedj.fsf@ca-mkp.ca.oracle.com>
+From: Maxim Levitsky <mlevitsk@redhat.com>
+To: "Martin K. Petersen" <martin.petersen@oracle.com>, Christoph Hellwig
+	 <hch@lst.de>
+Cc: linux-kernel@vger.kernel.org, Keith Busch <kbusch@kernel.org>, Josef
+ Bacik <josef@toxicpanda.com>, "open list:BLOCK LAYER"
+ <linux-block@vger.kernel.org>,  Sagi Grimberg <sagi@grimberg.me>, Jens
+ Axboe <axboe@kernel.dk>, "open list:NVM EXPRESS DRIVER"
+ <linux-nvme@lists.infradead.org>, "open list:SCSI CDROM DRIVER"
+ <linux-scsi@vger.kernel.org>, Tejun Heo <tj@kernel.org>, Bart Van Assche
+ <bvanassche@acm.org>, Damien Le Moal <damien.lemoal@wdc.com>, Jason Wang
+ <jasowang@redhat.com>, Maxim Levitsky <maximlevitsky@gmail.com>, Stefan
+ Hajnoczi <stefanha@redhat.com>, Colin Ian King <colin.king@canonical.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Ulf Hansson <ulf.hansson@linaro.org>, Ajay Joshi <ajay.joshi@wdc.com>, Ming
+ Lei <ming.lei@redhat.com>, "open list:SONY MEMORYSTICK SUBSYSTEM"
+ <linux-mmc@vger.kernel.org>, Satya Tangirala <satyat@google.com>, "open
+ list:NETWORK BLOCK DEVICE (NBD)" <nbd@other.debian.org>, Hou Tao
+ <houtao1@huawei.com>, Jens Axboe <axboe@fb.com>,  "open list:VIRTIO CORE
+ AND NET DRIVERS" <virtualization@lists.linux-foundation.org>, "James E.J.
+ Bottomley" <jejb@linux.ibm.com>, Alex Dubov <oakad@yahoo.com>
+Date: Wed, 22 Jul 2020 12:11:17 +0300
+In-Reply-To: <yq1zh7sfedj.fsf@ca-mkp.ca.oracle.com>
 References: <20200721105239.8270-1-mlevitsk@redhat.com>
-	<20200721105239.8270-3-mlevitsk@redhat.com>
-	<20200721151437.GB10620@lst.de>
-Date: Tue, 21 Jul 2020 22:55:07 -0400
-In-Reply-To: <20200721151437.GB10620@lst.de> (Christoph Hellwig's message of
-	"Tue, 21 Jul 2020 17:14:37 +0200")
+	 <20200721105239.8270-3-mlevitsk@redhat.com> <20200721151437.GB10620@lst.de>
+	 <yq1zh7sfedj.fsf@ca-mkp.ca.oracle.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.2 (3.36.2-1.fc32) 
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9689 signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 mlxscore=0 phishscore=0
- bulkscore=0 malwarescore=0 suspectscore=1 mlxlogscore=999 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2007220017
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9689 signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 bulkscore=0 spamscore=0
- impostorscore=0 suspectscore=1 adultscore=0 clxscore=1011 mlxlogscore=999
- priorityscore=1501 phishscore=0 lowpriorityscore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2007220017
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Wanw11Y5ABJ.A.VG.B_9FfB@bendel>
+Resent-Message-ID: <Yo_6mKy6BEL.A.qfH.wZAGfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/921
+X-Mailing-List: <nbd@other.debian.org> archive/latest/922
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -144,19 +104,48 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/yq1zh7sfedj.fsf@ca-mkp.ca.oracle.com
-Resent-Date: Wed, 22 Jul 2020 06:42:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f16aba1020019530564f0869a67951282104a5d2.camel@redhat.com
+Resent-Date: Wed, 22 Jul 2020 09:27:12 +0000 (UTC)
 
+On Tue, 2020-07-21 at 22:55 -0400, Martin K. Petersen wrote:
+> Christoph,
+> 
+> > Hmm, I wonder if we should simply add the check and warning to
+> > blk_queue_logical_block_size and add an error in that case.  Then
+> > drivers only have to check the error return, which might add a lot
+> > less boiler plate code.
+> 
+> Yep, I agree.
+> 
 
-Christoph,
+I also agree that this would be cleaner (I actually tried to implement
+this the way you suggest), but let me explain my reasoning for doing it
+this way.
 
-> Hmm, I wonder if we should simply add the check and warning to
-> blk_queue_logical_block_size and add an error in that case.  Then
-> drivers only have to check the error return, which might add a lot
-> less boiler plate code.
+The problem is that most current users of blk_queue_logical_block_size
+(43 uses in the tree, out of which only 9 use constant block size) check
+for the block size relatively early, often store it in some internal
+struct etc, prior to calling blk_queue_logical_block_size thus making
+them only to rely on blk_queue_logical_block_size as the check for 
+block size validity will need non-trivial changes in their code.
 
-Yep, I agree.
+Instead of this adding blk_is_valid_logical_block_size allowed me
+to trivially convert most of the uses.
 
--- 
-Martin K. Petersen	Oracle Linux Engineering
+For RFC I converted only some drivers that I am more familiar with
+and/or can test but I can remove the driver's own checks in most other
+drivers with low chance of introducing a bug, even if I can't test the
+driver.
+
+What do you think?
+
+I can also both make blk_queue_logical_block_size return an error value,
+and have blk_is_valid_logical_block_size and use either of these checks,
+depending on the driver with eventual goal of un-exporting
+blk_is_valid_logical_block_size.
+
+Also note that I did add WARN_ON to blk_queue_logical_block_size.
+
+Best regards,
+	Maxim Levitsky
 
