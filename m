@@ -1,89 +1,79 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 816E22405AC
-	for <lists+nbd@lfdr.de>; Mon, 10 Aug 2020 14:18:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF78124397E
+	for <lists+nbd@lfdr.de>; Thu, 13 Aug 2020 13:55:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 68C84205B3; Mon, 10 Aug 2020 12:18:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 10 12:18:09 2020
-Old-Return-Path: <houpu@bytedance.com>
+	id CBCD4203B0; Thu, 13 Aug 2020 11:55:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Aug 13 11:55:20 2020
+Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 267D1205AC
-	for <lists-other-nbd@bendel.debian.org>; Mon, 10 Aug 2020 12:01:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 432AC203A6
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Aug 2020 11:55:13 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.099 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+	RCVD_IN_MSPIKE_WL=0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 10-W-Ll1uwwj for <lists-other-nbd@bendel.debian.org>;
-	Mon, 10 Aug 2020 12:01:02 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pj1-x1042.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-pj1-x1042.google.com (mail-pj1-x1042.google.com [IPv6:2607:f8b0:4864:20::1042])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id BD32020339
-	for <nbd@other.debian.org>; Mon, 10 Aug 2020 12:00:58 +0000 (UTC)
-Received: by mail-pj1-x1042.google.com with SMTP id t6so4909737pjr.0
-        for <nbd@other.debian.org>; Mon, 10 Aug 2020 05:00:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=J5NMSWLZnk+MsiWSWRywCSAdMKXFevy9G71hx6FYlmU=;
-        b=JXjmPpxSzA+gVk/JHPgluZHOVUYN7iwvYtV7P5MQ6kGnwpLbdiN1vh8sHh60eKo4y8
-         IaUgel1hBWnI6LxxXqNd9oXw3E0p6GoD+rQOktcY90SU7vnJB9CTGkrCz8FACHrH7y7D
-         HBmU+fif+gpbIVXPtZLhh6shMFWUCy7anLXZIEppJhpEYg1nTPH1U3sHrhGcJV1MZyfV
-         /A8Xn/Pgv0cKOaLfroHbn3/zfC2rRkQs6WM61VPZ0HwM12wNHWlKjnplTDLxYHm3KGHm
-         lqLLIhASAOr/8ZHr/B6mVvNLZxmG4/1eevbC3HoZs2jtDO86ggNSr7cDpSCrEGQUO5S2
-         pHIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=J5NMSWLZnk+MsiWSWRywCSAdMKXFevy9G71hx6FYlmU=;
-        b=dbystkRO9vj8qbSSEKm2BEjqrmLprkg9VuvKaVT80plTF+CTG8TuqSDRdrDc5e4H3y
-         GpiuRSxgcSE0XmdOeukwp+pkhc5R+cUibankUd2+SWo6MKuapEcxLGNt8+nDwA98GbdQ
-         ejvPRAm64KNl2wmFy9xJpsd9zMWqu9qNfJjDY2MCn7CEs7LIwGuvOH64Osx8P4RYHqyH
-         sUJm61qJVhk/a+dSAqT68KE1kvau1nVTP2EEA+Px3j/2oFibbXtZD3w9A3CZbf0yKaW4
-         /+jw7A93btmHUPSTmwQrvAWHzACW6KXlM7rBebEKeuDwOa507DYdQpsclZf3AWKORwNt
-         6R/A==
-X-Gm-Message-State: AOAM532vpB8Ux/mHVCNgSCNqDASJb6KI/SObb1Cs5YREt5p6L1f0Z+lZ
-	ToxpqnggizS8v/lC0lG2Kg5rsQ==
-X-Google-Smtp-Source: ABdhPJwq5sbrPHVl71G13+on8Palt8gY94TlYincrSVzLbZ0IroPCkjWv9neUvHk/9Vlas+e8Add9A==
-X-Received: by 2002:a17:902:bc46:: with SMTP id t6mr22965741plz.273.1597060855161;
-        Mon, 10 Aug 2020 05:00:55 -0700 (PDT)
-Received: from debian.bytedance.net ([61.120.150.75])
-        by smtp.gmail.com with ESMTPSA id o134sm22222637pfg.200.2020.08.10.05.00.52
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 10 Aug 2020 05:00:54 -0700 (PDT)
-From: Hou Pu <houpu@bytedance.com>
-To: josef@toxicpanda.com,
-	axboe@kernel.dk,
-	mchristi@redhat.com
-Cc: linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	Hou Pu <houpu@bytedance.com>
-Subject: [PATCH] nbd: restore default timeout when setting it to zero
-Date: Mon, 10 Aug 2020 08:00:44 -0400
-Message-Id: <20200810120044.2152-1-houpu@bytedance.com>
-X-Mailer: git-send-email 2.11.0
-X-Rc-Spam: 2008-11-04_01
+	with ESMTP id fXxRYj_cfJW7 for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Aug 2020 11:55:08 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .redhat. - helo: .us-smtp-1.mimecast. - helo-domain: .mimecast.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com [205.139.110.120])
+	by bendel.debian.org (Postfix) with ESMTP id 9165C20392
+	for <nbd@other.debian.org>; Thu, 13 Aug 2020 11:55:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1597319702;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+	bh=G4vmodytbRkwBmZ4RatMwp3HDdsKn7k3Ucx0KzVshVY=;
+	b=PJ1I+0n7lWVlo2jlbD+I2CGgrgXSMK225ODcaKqA5BtT9qw4LwZo9c47bvG2mqVq7Hn4w+
+	HCi4OtHuPv7V+8lK0lDphuV/IEcfR1LKMKXZnfc2m3HDVPj4CNqLNFSIvPVU26HvQi4exJ
+	IVYROv9DvYH2pwjlVeYb1/KlT47xQl8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-341-uB3eIxo2NZqjgqdpU7nUWg-1; Thu, 13 Aug 2020 07:53:42 -0400
+X-MC-Unique: uB3eIxo2NZqjgqdpU7nUWg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 020CD1DDE0
+	for <nbd@other.debian.org>; Thu, 13 Aug 2020 11:53:42 +0000 (UTC)
+Received: from localhost (ovpn-114-99.ams2.redhat.com [10.36.114.99])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id A149B19C78;
+	Thu, 13 Aug 2020 11:53:41 +0000 (UTC)
+Date: Thu, 13 Aug 2020 12:53:40 +0100
+From: "Richard W.M. Jones" <rjones@redhat.com>
+To: nbd@other.debian.org
+Cc: eblake@redhat.com
+Subject: Client UUID
+Message-ID: <20200813115340.GA12188@redhat.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=rjones@redhat.com
+X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <ECl0lsKGZCD.A.R1H.BsTMfB@bendel>
+Resent-Message-ID: <fCU57AXUgCG.A.fX.ooSNfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/929
+X-Mailing-List: <nbd@other.debian.org> archive/latest/930
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,42 +83,32 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200810120044.2152-1-houpu@bytedance.com
-Resent-Date: Mon, 10 Aug 2020 12:18:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200813115340.GA12188@redhat.com
+Resent-Date: Thu, 13 Aug 2020 11:55:20 +0000 (UTC)
 
-If we configured io timeout of nbd0 to 100s. Later after we
-finished using it, we configured nbd0 again and set the io
-timeout to 0. We expect it would timeout after 30 seconds
-and keep retry. But in fact we could not change the timeout
-when we set it to 0. the timeout is still the original 100s.
+This is just an idea for a possible future revision of the protocol.
 
-So change the timeout to default 30s when we set it to zero.
-It also behaves same as commit 2da22da57348 ("nbd: fix zero
-cmd timeout handling v2").
+It would be nice if clients could send a unique UUID.  The client
+would choose this randomly when they start up and send it as an NBD
+option.  If a client makes multiple connections (ie. multi-conn) then
+they would send the same UUID on each TCP connection.  Of course this
+is entirely optional and clients would not need to send a UUID.
 
-It becomes more important if we were reconfigure a nbd device
-and the io timeout it set to zero. Because it could take 30s
-to detect the new socket and thus io could be completed more
-quickly compared to 100s.
+The use for me would be allow nbdkit-tmpdisk-plugin
+(https://libguestfs.org/nbdkit-tmpdisk-plugin.1.html) to support
+multi-conn and therefore higher performance.  At the moment because
+this plugin serves different content on each connection, multi-conn
+cannot be used -- indeed is gravely unsafe to use.  With a client UUID
+we could associate clients uniquely with the temporary disks and thus
+support multi-conn.  Every other proposal I can think of (eg. going
+off IP address) runs into difficulties.
 
-Signed-off-by: Hou Pu <houpu@bytedance.com>
----
- drivers/block/nbd.c | 2 ++
- 1 file changed, 2 insertions(+)
+Rich.
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index ce7e9f223b20..bc9dc1f847e1 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1360,6 +1360,8 @@ static void nbd_set_cmd_timeout(struct nbd_device *nbd, u64 timeout)
- 	nbd->tag_set.timeout = timeout * HZ;
- 	if (timeout)
- 		blk_queue_rq_timeout(nbd->disk->queue, timeout * HZ);
-+	else
-+		blk_queue_rq_timeout(nbd->disk->queue, 30 * HZ);
- }
- 
- /* Must be called with config_lock held */
 -- 
-2.11.0
+Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+Read my programming and virtualization blog: http://rwmj.wordpress.com
+virt-top is 'top' for virtual machines.  Tiny program with many
+powerful monitoring features, net stats, disk stats, logging, etc.
+http://people.redhat.com/~rjones/virt-top
 
