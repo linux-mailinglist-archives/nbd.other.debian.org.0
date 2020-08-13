@@ -1,65 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEAFC243D00
-	for <lists+nbd@lfdr.de>; Thu, 13 Aug 2020 18:09:19 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 16371243DC2
+	for <lists+nbd@lfdr.de>; Thu, 13 Aug 2020 18:56:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B767D20425; Thu, 13 Aug 2020 16:09:19 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Aug 13 16:09:19 2020
-Old-Return-Path: <eric@garver.life>
+	id BAAC520446; Thu, 13 Aug 2020 16:56:36 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Aug 13 16:56:36 2020
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=4.0 tests=FROM_SUSPICIOUS_NTLD,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 858862024C
-	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Aug 2020 15:52:42 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8AAD620448
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Aug 2020 16:56:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.182 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FROM_SUSPICIOUS_NTLD=0.499,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-8.635 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.453,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id p4yAEzA9onp9 for <lists-other-nbd@bendel.debian.org>;
-	Thu, 13 Aug 2020 15:52:38 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .garver. - helo: .relay8-d.mail.gandi. - helo-domain: .gandi.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 3DA3520410
-	for <nbd@other.debian.org>; Thu, 13 Aug 2020 15:52:37 +0000 (UTC)
-X-Originating-IP: 69.14.212.82
-Received: from roberto (d14-69-82-212.try.wideopenwest.com [69.14.212.82])
-	(Authenticated sender: eric@garver.life)
-	by relay8-d.mail.gandi.net (Postfix) with ESMTPSA id 878E61BF207;
-	Thu, 13 Aug 2020 15:52:34 +0000 (UTC)
-Date: Thu, 13 Aug 2020 11:52:31 -0400
-From: Eric Garver <eric@garver.life>
-To: "Richard W.M. Jones" <rjones@redhat.com>
-Cc: nbd@other.debian.org, firewalld-devel@lists.fedorahosted.org
+	with ESMTP id Sy7Dgm-wi7_B for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Aug 2020 16:56:23 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+	by bendel.debian.org (Postfix) with ESMTP id 205802044B
+	for <nbd@other.debian.org>; Thu, 13 Aug 2020 16:56:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1597337777;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=RILZHThzR/5rRHK3NQbfrzM5/t0O/rYWLqb+HNhzzuE=;
+	b=WYubprbgynkwEfhid2/vU/x3wN7t7hb5ySaGjH8UoiyoMcWFWznNDWKKRsKF6gL4WECRRz
+	OGUQ55EFNB4QHQ29HmE1mGdOK/QKgJyiYJCMpwQppgmY6rcCuO2182JAm71v7w5kWQsDa+
+	2UahNiizOvi1SbcRTvT4magIMC7T0Wo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-519-FBqQaOc1NDm7oS51I6LEgw-1; Thu, 13 Aug 2020 12:25:21 -0400
+X-MC-Unique: FBqQaOc1NDm7oS51I6LEgw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F34C6871805;
+	Thu, 13 Aug 2020 16:25:19 +0000 (UTC)
+Received: from [10.3.113.241] (ovpn-113-241.phx2.redhat.com [10.3.113.241])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id A1D5919C78;
+	Thu, 13 Aug 2020 16:25:19 +0000 (UTC)
 Subject: Re: [PATCH firewalld] feat: service: add nbd (Network Block Device)
  service
-Message-ID: <20200813155231.GB5823@roberto>
+To: Eric Garver <eric@garver.life>, "Richard W.M. Jones" <rjones@redhat.com>
+Cc: nbd@other.debian.org, firewalld-devel@lists.fedorahosted.org
 References: <20200813123854.967482-1-rjones@redhat.com>
  <20200813152831.GA5823@roberto>
- <20200813155017.GX3888@redhat.com>
+From: Eric Blake <eblake@redhat.com>
+Organization: Red Hat, Inc.
+Message-ID: <12f630d0-edf6-399c-f907-bff288a21527@redhat.com>
+Date: Thu, 13 Aug 2020 11:25:18 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200813155017.GX3888@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Rc-Spam: 2008-11-04_01
+In-Reply-To: <20200813152831.GA5823@roberto>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
+X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <ldV7om9KRwP.A.LT.vWWNfB@bendel>
+Resent-Message-ID: <s013xnn1mtJ.A.hcC.EDXNfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/934
+X-Mailing-List: <nbd@other.debian.org> archive/latest/935
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -69,30 +93,29 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200813155231.GB5823@roberto
-Resent-Date: Thu, 13 Aug 2020 16:09:19 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/12f630d0-edf6-399c-f907-bff288a21527@redhat.com
+Resent-Date: Thu, 13 Aug 2020 16:56:36 +0000 (UTC)
 
-On Thu, Aug 13, 2020 at 04:50:17PM +0100, Richard W.M. Jones wrote:
-> On Thu, Aug 13, 2020 at 11:28:31AM -0400, Eric Garver wrote:
-> > On Thu, Aug 13, 2020 at 01:38:54PM +0100, Richard W.M. Jones wrote:
-> > > ---
-> > >  config/Makefile.am      | 1 +
-> > >  config/services/nbd.xml | 6 ++++++
-> > >  po/POTFILES.in          | 1 +
-> > >  3 files changed, 8 insertions(+)
-> > 
-> > Thanks! I applied and pushed this upstream:
-> > 
-> >     8f562559dad8 ("feat: service: add nbd (Network Block Device)
-> >     service")
-> > 
-> > The firewalld-devel list is defunct. Can you tell me where you found it
-> > referenced so I can update/remove the reference?
+On 8/13/20 10:28 AM, Eric Garver wrote:
+> On Thu, Aug 13, 2020 at 01:38:54PM +0100, Richard W.M. Jones wrote:
+>> ---
+>>   config/Makefile.am      | 1 +
+>>   config/services/nbd.xml | 6 ++++++
+>>   po/POTFILES.in          | 1 +
+>>   3 files changed, 8 insertions(+)
 > 
-> Sure, it's mentioned on the website:
+> Thanks! I applied and pushed this upstream:
 > 
-> https://firewalld.org/contribute.html
+>      8f562559dad8 ("feat: service: add nbd (Network Block Device)
+>      service")
 
-Thanks. I've addressed the issues with the list - it should work again.
-No need to remove it with the website now.
+Unrelated question - why can't firewalld automatically support an 
+implied service for every listing in /etc/services, in order to reduce 
+the number of patches needed to config/services/*.xml which end up 
+duplicating efforts?
+
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
