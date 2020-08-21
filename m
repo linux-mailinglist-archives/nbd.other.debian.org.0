@@ -1,46 +1,46 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BB5E24D1E0
-	for <lists+nbd@lfdr.de>; Fri, 21 Aug 2020 12:00:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFDB424D1E1
+	for <lists+nbd@lfdr.de>; Fri, 21 Aug 2020 12:00:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E444220A74; Fri, 21 Aug 2020 10:00:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 21 10:00:09 2020
+	id ACD2D20A77; Fri, 21 Aug 2020 10:00:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 21 10:00:20 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=4.0 tests=CC_TOO_MANY,FOURLA,
+X-Spam-Status: No, score=-1.3 required=4.0 tests=CC_TOO_MANY,FOURLA,
 	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
-	RCVD_IN_MSPIKE_WL,WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no
-	version=3.4.2
+	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 83C6820A6C
-	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Aug 2020 09:43:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 771BD20A6A
+	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Aug 2020 09:43:49 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.285 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.285 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
 	NICE_REPLY_A=-0.107, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001, WORD_WITHOUT_VOWELS=1]
-	autolearn=no autolearn_force=no
+	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id E76Pi_dV8DtG for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id 1Oj798Ahmj-2 for <lists-other-nbd@bendel.debian.org>;
 	Fri, 21 Aug 2020 09:43:44 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 1162 seconds by postgrey-1.36 at bendel; Fri, 21 Aug 2020 09:43:44 UTC
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "*.suse.de", Issuer "DigiCert SHA2 High Assurance Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id C75DF20A6A
+	by bendel.debian.org (Postfix) with ESMTPS id C529620A69
 	for <nbd@other.debian.org>; Fri, 21 Aug 2020 09:43:44 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 1D938AB9F;
-	Fri, 21 Aug 2020 09:24:47 +0000 (UTC)
-Subject: Re: [PATCH 1/2] block: replace bd_set_size with bd_set_nr_sectors
+	by mx2.suse.de (Postfix) with ESMTP id 800CEAC5E;
+	Fri, 21 Aug 2020 09:26:47 +0000 (UTC)
+Subject: Re: [PATCH 2/2] block: fix locking for struct block_device size
+ updates
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Xianting Tian <xianting_tian@126.com>, linux-block@vger.kernel.org,
@@ -49,7 +49,7 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  nbd@other.debian.org, linux-nvme@lists.infradead.org,
  linux-s390@vger.kernel.org
 References: <20200821085600.2395666-1-hch@lst.de>
- <20200821085600.2395666-2-hch@lst.de>
+ <20200821085600.2395666-3-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
 Openpgp: preference=signencrypt
 Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
@@ -95,21 +95,21 @@ Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
  ZtWlhGRERnDH17PUXDglsOA08HCls0PHx8itYsjYCAyETlxlLApXWdVl9YVwbQpQ+i693t/Y
  PGu8jotn0++P19d3JwXW8t6TVvBIQ1dRZHx1IxGLMn+CkDJMOmHAUMWTAXX2rf5tUjas8/v2
  azzYF4VRJsdl+d0MCaSy8mUh
-Message-ID: <93b6d1f0-84e5-d1b9-ac00-bfb61968e2aa@suse.de>
-Date: Fri, 21 Aug 2020 11:24:17 +0200
+Message-ID: <4df016bc-570c-d166-47dd-36a9f21fad13@suse.de>
+Date: Fri, 21 Aug 2020 11:26:19 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <20200821085600.2395666-2-hch@lst.de>
+In-Reply-To: <20200821085600.2395666-3-hch@lst.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <mGMP2842UtD.A.KfH.ps5PfB@bendel>
+Resent-Message-ID: <uk7po6LpskB.A.f3H.0s5PfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/941
+X-Mailing-List: <nbd@other.debian.org> archive/latest/942
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -119,22 +119,33 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/93b6d1f0-84e5-d1b9-ac00-bfb61968e2aa@suse.de
-Resent-Date: Fri, 21 Aug 2020 10:00:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/4df016bc-570c-d166-47dd-36a9f21fad13@suse.de
+Resent-Date: Fri, 21 Aug 2020 10:00:20 +0000 (UTC)
 
-On 8/21/20 10:55 AM, Christoph Hellwig wrote:
-> Replace bd_set_size with a version that takes the number of sectors
-> instead, as that fits most of the current and future callers much better.
+On 8/21/20 10:56 AM, Christoph Hellwig wrote:
+> Two different callers use two different mutexes for updating the
+> block device size, which obviously doesn't help to actually protect
+> against concurrent updates from the different callers.  In addition
+> one of the locks, bd_mutex is rather prone to deadlocks with other
+> parts of the block stack that use it for high level synchronization.
 > 
+> Switch to using a new spinlock protecting just the size updates, as
+> that is all we need, and make sure everyone does the update through
+> the proper helper.
+> 
+> This fixeѕ a bug reported with the nvme revalidating disks during a
+> hot removal operation.
+> 
+> Reported-by: Xianting Tian <xianting_tian@126.com>
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  drivers/block/loop.c     |  4 ++--
->  drivers/block/nbd.c      |  7 ++++---
->  drivers/block/pktcdvd.c  |  2 +-
->  drivers/nvme/host/nvme.h |  2 +-
->  fs/block_dev.c           | 10 +++++-----
->  include/linux/genhd.h    |  2 +-
->  6 files changed, 14 insertions(+), 13 deletions(-)
+>  block/partitions/core.c         |  4 ++--
+>  drivers/block/aoe/aoecmd.c      |  4 +---
+>  drivers/md/dm.c                 | 15 ++-------------
+>  drivers/s390/block/dasd_ioctl.c |  9 ++-------
+>  fs/block_dev.c                  | 18 +++++++++---------
+>  include/linux/blk_types.h       |  1 +
+>  6 files changed, 17 insertions(+), 34 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
