@@ -1,115 +1,97 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFDB424D1E1
-	for <lists+nbd@lfdr.de>; Fri, 21 Aug 2020 12:00:20 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA11224D71F
+	for <lists+nbd@lfdr.de>; Fri, 21 Aug 2020 16:15:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id ACD2D20A77; Fri, 21 Aug 2020 10:00:20 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 21 10:00:20 2020
-Old-Return-Path: <hare@suse.de>
+	id C23D2209FF; Fri, 21 Aug 2020 14:15:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug 21 14:15:09 2020
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=CC_TOO_MANY,FOURLA,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
-	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 771BD20A6A
-	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Aug 2020 09:43:49 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 502A7209FC
+	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Aug 2020 13:57:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.285 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-0.107, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.413 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.107,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 1Oj798Ahmj-2 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 21 Aug 2020 09:43:44 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 1162 seconds by postgrey-1.36 at bendel; Fri, 21 Aug 2020 09:43:44 UTC
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.suse.de", Issuer "DigiCert SHA2 High Assurance Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id C529620A69
-	for <nbd@other.debian.org>; Fri, 21 Aug 2020 09:43:44 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 800CEAC5E;
-	Fri, 21 Aug 2020 09:26:47 +0000 (UTC)
-Subject: Re: [PATCH 2/2] block: fix locking for struct block_device size
- updates
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
- Xianting Tian <xianting_tian@126.com>, linux-block@vger.kernel.org,
- dm-devel@redhat.com, Stefan Haberland <sth@linux.ibm.com>,
- Jan Hoeppner <hoeppner@linux.ibm.com>, linux-kernel@vger.kernel.org,
- nbd@other.debian.org, linux-nvme@lists.infradead.org,
- linux-s390@vger.kernel.org
-References: <20200821085600.2395666-1-hch@lst.de>
- <20200821085600.2395666-3-hch@lst.de>
-From: Hannes Reinecke <hare@suse.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
- 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
- azzYF4VRJsdl+d0MCaSy8mUh
-Message-ID: <4df016bc-570c-d166-47dd-36a9f21fad13@suse.de>
-Date: Fri, 21 Aug 2020 11:26:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+	with ESMTP id wIrh-7qFbTUA for <lists-other-nbd@bendel.debian.org>;
+	Fri, 21 Aug 2020 13:57:47 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qv1-xf42.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qv1-xf42.google.com (mail-qv1-xf42.google.com [IPv6:2607:f8b0:4864:20::f42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id DB203209F2
+	for <nbd@other.debian.org>; Fri, 21 Aug 2020 13:57:47 +0000 (UTC)
+Received: by mail-qv1-xf42.google.com with SMTP id l13so648330qvt.10
+        for <nbd@other.debian.org>; Fri, 21 Aug 2020 06:57:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=Vt8B4qHdUal95IqaET3W02YCHjGO9PrSEH2rm63LReQ=;
+        b=bsVrk+FarUU3KMxx1IVcbNBj1HCftpAuXBu5+HZPxVOb+4NdmQcIst5W3PKaVqy1Vy
+         CgfRFA9hULwq/i9VBM5Do5C3gQdFPxQzTV5HhulCBHfU/gCNuqWZFl2yMTjbHZybTqGP
+         nathFYZiuMbseGIgXeauFCJo6q1/vAnSYjceMvKzLoEyJQkhsTjKStP8VzQRpclrT3Gi
+         QJ6lmMBuXrwDbUdo3rTLpgFfxX1yzdDXANKNN7EPHjKPIUE2lcZ7pBAaDZLUqQqAP3fW
+         svIm45bxhxce3gpHOXVFsTF6ou7gHOopixkgGUDJkp1ZWkojAqyscwPo00znMch6oTnc
+         sM5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=Vt8B4qHdUal95IqaET3W02YCHjGO9PrSEH2rm63LReQ=;
+        b=p6dpKMBGiPo2gE4bR/gX7I/F6AydcqNXYXU3kXiJsnYGg50uczEZ+e3K3u09O7TQWZ
+         5YpVr+WcOXtIv+EEVZ3ndpbwVa6kTt3ji4QU5kQ79DrKL1vcZmZqE09+u2w9POsn6O9p
+         2qSdd2g5eT4cZu6H8+G7TeY1sE+wgVm4Yic9++LGmhTk2uv4aaG16eEMV+CmJFzmkZpj
+         502VxWWaTgC5dvkqHTbea0mh+kHLNq+PAWuhDUw4N48vCgNqEMuYjq4rZr3YjojUFLON
+         aRvjtRj1gs/mmxQ+JFXBOBSiBKoybUNkZ1/wgiyaA3tAxb1sBOhnfP/zuI9RW/42SGII
+         UNlw==
+X-Gm-Message-State: AOAM533u3s5/DxWXoLU3Yv8mtFHfTfstocl3bYRS6AFAQ0UXOCUZ0J0Q
+	GsPnZ4STXd59hGuR3CTi6HjBN5eidLWHSTYo
+X-Google-Smtp-Source: ABdhPJzi+FSEkO899fPqlo4IH6gvoK7KIZ6VvuWK95Z3bE8kE+NfQKmA2dafOT9PMOs3O8marQv+yg==
+X-Received: by 2002:a0c:fbd1:: with SMTP id n17mr2539337qvp.4.1598018263498;
+        Fri, 21 Aug 2020 06:57:43 -0700 (PDT)
+Received: from localhost.localdomain (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
+        by smtp.gmail.com with ESMTPSA id s4sm2093473qtn.34.2020.08.21.06.57.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 21 Aug 2020 06:57:42 -0700 (PDT)
+Subject: Re: [PATCH] nbd: restore default timeout when setting it to zero
+To: Hou Pu <houpu@bytedance.com>, axboe@kernel.dk, mchristi@redhat.com
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org
+References: <20200810120044.2152-1-houpu@bytedance.com>
+ <38b9de9e-38fe-3090-cea0-377c605c86d4@toxicpanda.com>
+ <4e78e4b3-e75b-7428-703d-d8543bcfe348@bytedance.com>
+From: Josef Bacik <josef@toxicpanda.com>
+Message-ID: <1accbf37-1a57-f072-7dc4-063fee991189@toxicpanda.com>
+Date: Fri, 21 Aug 2020 09:57:41 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200821085600.2395666-3-hch@lst.de>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <4e78e4b3-e75b-7428-703d-d8543bcfe348@bytedance.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <uk7po6LpskB.A.f3H.0s5PfB@bendel>
+Resent-Message-ID: <s3oQ0GefgeD.A.cgH.tb9PfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/942
+X-Mailing-List: <nbd@other.debian.org> archive/latest/943
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -119,42 +101,63 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/4df016bc-570c-d166-47dd-36a9f21fad13@suse.de
-Resent-Date: Fri, 21 Aug 2020 10:00:20 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1accbf37-1a57-f072-7dc4-063fee991189@toxicpanda.com
+Resent-Date: Fri, 21 Aug 2020 14:15:09 +0000 (UTC)
 
-On 8/21/20 10:56 AM, Christoph Hellwig wrote:
-> Two different callers use two different mutexes for updating the
-> block device size, which obviously doesn't help to actually protect
-> against concurrent updates from the different callers.  In addition
-> one of the locks, bd_mutex is rather prone to deadlocks with other
-> parts of the block stack that use it for high level synchronization.
+On 8/21/20 3:21 AM, Hou Pu wrote:
 > 
-> Switch to using a new spinlock protecting just the size updates, as
-> that is all we need, and make sure everyone does the update through
-> the proper helper.
 > 
-> This fixeѕ a bug reported with the nvme revalidating disks during a
-> hot removal operation.
+> On 2020/8/21 3:03 AM, Josef Bacik wrote:
+>> On 8/10/20 8:00 AM, Hou Pu wrote:
+>>> If we configured io timeout of nbd0 to 100s. Later after we
+>>> finished using it, we configured nbd0 again and set the io
+>>> timeout to 0. We expect it would timeout after 30 seconds
+>>> and keep retry. But in fact we could not change the timeout
+>>> when we set it to 0. the timeout is still the original 100s.
+>>>
+>>> So change the timeout to default 30s when we set it to zero.
+>>> It also behaves same as commit 2da22da57348 ("nbd: fix zero
+>>> cmd timeout handling v2").
+>>>
+>>> It becomes more important if we were reconfigure a nbd device
+>>> and the io timeout it set to zero. Because it could take 30s
+>>> to detect the new socket and thus io could be completed more
+>>> quickly compared to 100s.
+>>>
+>>> Signed-off-by: Hou Pu <houpu@bytedance.com>
+>>> ---
+>>>   drivers/block/nbd.c | 2 ++
+>>>   1 file changed, 2 insertions(+)
+>>>
+>>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>>> index ce7e9f223b20..bc9dc1f847e1 100644
+>>> --- a/drivers/block/nbd.c
+>>> +++ b/drivers/block/nbd.c
+>>> @@ -1360,6 +1360,8 @@ static void nbd_set_cmd_timeout(struct 
+>>> nbd_device *nbd, u64 timeout)
+>>>       nbd->tag_set.timeout = timeout * HZ;
+>>>       if (timeout)
+>>>           blk_queue_rq_timeout(nbd->disk->queue, timeout * HZ);
+>>> +    else
+>>> +        blk_queue_rq_timeout(nbd->disk->queue, 30 * HZ);
+>>>   }
+>>>   /* Must be called with config_lock held */
+>>>
+>>
+>> What about the tag_set.timeout?  Thanks,
 > 
-> Reported-by: Xianting Tian <xianting_tian@126.com>
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  block/partitions/core.c         |  4 ++--
->  drivers/block/aoe/aoecmd.c      |  4 +---
->  drivers/md/dm.c                 | 15 ++-------------
->  drivers/s390/block/dasd_ioctl.c |  9 ++-------
->  fs/block_dev.c                  | 18 +++++++++---------
->  include/linux/blk_types.h       |  1 +
->  6 files changed, 17 insertions(+), 34 deletions(-)
+> I think user space could set io timeout to 0, thus we set 
+> tag_set.timeout = 0 here and also we should tell the block layer
+> to restore 30s timeout in case it is not. tag_set.timeout == 0
+> imply 30s io timeout and retrying after timeout.
 > 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+> (Sorry, I am not sure if I understand your question here. Could
+> you explain a little more if needed?)
+> 
 
-Cheers,
+I misunderstood what I was using the tagset timeout for.  We don't want 
+this here, if we're dropping a config for an nbd device and we want to 
+reset it to defaults then we need to add this to nbd_config_put().  Thanks,
 
-Hannes
--- 
-Dr. Hannes Reinecke		           Kernel Storage Architect
-hare@suse.de			                  +49 911 74053 688
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 Nürnberg
-HRB 36809 (AG Nürnberg), GF: Felix Imendörffer
+Josef
 
