@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEAB524F364
-	for <lists+nbd@lfdr.de>; Mon, 24 Aug 2020 09:54:12 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43EF724F365
+	for <lists+nbd@lfdr.de>; Mon, 24 Aug 2020 09:54:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id AC0A120452; Mon, 24 Aug 2020 07:54:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 24 07:54:12 2020
+	id 30B962045F; Mon, 24 Aug 2020 07:54:23 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 24 07:54:23 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-1.4 required=4.0 tests=CC_TOO_MANY,FOURLA,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id EF1EF2043E
-	for <lists-other-nbd@bendel.debian.org>; Mon, 24 Aug 2020 07:36:45 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1BAA720440
+	for <lists-other-nbd@bendel.debian.org>; Mon, 24 Aug 2020 07:38:03 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.285 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
@@ -26,20 +26,20 @@ X-Amavis-Spam-Status: No, score=-1.285 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 3Q98hWKn6eEr for <lists-other-nbd@bendel.debian.org>;
-	Mon, 24 Aug 2020 07:36:41 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id pgak5XRaDjlv for <lists-other-nbd@bendel.debian.org>;
+	Mon, 24 Aug 2020 07:37:58 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "*.suse.de", Issuer "DigiCert SHA2 High Assurance Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 8772A20439
-	for <nbd@other.debian.org>; Mon, 24 Aug 2020 07:36:41 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id D241F2043E
+	for <nbd@other.debian.org>; Mon, 24 Aug 2020 07:37:58 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id B65ACAF38;
-	Mon, 24 Aug 2020 07:37:08 +0000 (UTC)
-Subject: Re: [PATCH 2/3] block: fix locking for struct block_device size
- updates
+	by mx2.suse.de (Postfix) with ESMTP id 6B2A5AF38;
+	Mon, 24 Aug 2020 07:38:26 +0000 (UTC)
+Subject: Re: [PATCH 3/3] nvme: don't call revalidate_disk from
+ nvme_set_queue_dying
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Xianting Tian <xianting_tian@126.com>, linux-block@vger.kernel.org,
@@ -48,7 +48,7 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  nbd@other.debian.org, linux-nvme@lists.infradead.org,
  linux-s390@vger.kernel.org
 References: <20200823091043.2600261-1-hch@lst.de>
- <20200823091043.2600261-3-hch@lst.de>
+ <20200823091043.2600261-4-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
 Openpgp: preference=signencrypt
 Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
@@ -94,21 +94,21 @@ Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
  ZtWlhGRERnDH17PUXDglsOA08HCls0PHx8itYsjYCAyETlxlLApXWdVl9YVwbQpQ+i693t/Y
  PGu8jotn0++P19d3JwXW8t6TVvBIQ1dRZHx1IxGLMn+CkDJMOmHAUMWTAXX2rf5tUjas8/v2
  azzYF4VRJsdl+d0MCaSy8mUh
-Message-ID: <73653f9e-2d39-48fb-9842-3a1851fb5bed@suse.de>
-Date: Mon, 24 Aug 2020 09:36:38 +0200
+Message-ID: <bec1889c-5e0f-cd33-f74a-a7d44161a0ee@suse.de>
+Date: Mon, 24 Aug 2020 09:37:56 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <20200823091043.2600261-3-hch@lst.de>
+In-Reply-To: <20200823091043.2600261-4-hch@lst.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <KutYmy83nYM.A.YeG.kI3QfB@bendel>
+Resent-Message-ID: <pIFqxm5HIpM.A.9gG.vI3QfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/947
+X-Mailing-List: <nbd@other.debian.org> archive/latest/948
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -118,34 +118,28 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/73653f9e-2d39-48fb-9842-3a1851fb5bed@suse.de
-Resent-Date: Mon, 24 Aug 2020 07:54:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/bec1889c-5e0f-cd33-f74a-a7d44161a0ee@suse.de
+Resent-Date: Mon, 24 Aug 2020 07:54:23 +0000 (UTC)
 
 On 8/23/20 11:10 AM, Christoph Hellwig wrote:
-> Two different callers use two different mutexes for updating the
-> block device size, which obviously doesn't help to actually protect
-> against concurrent updates from the different callers.  In addition
-> one of the locks, bd_mutex is rather prone to deadlocks with other
-> parts of the block stack that use it for high level synchronization.
+> In nvme_set_queue_dying we really just want to ensure the disk and bdev
+> sizes are set to zero.  Going through revalidate_disk leads to a somewhat
+> arcance and complex callchain relying on special behavior in a few
+> places.  Instead just lift the set_capacity directly to
+> nvme_set_queue_dying, and rename and move the nvme_mpath_update_disk_size
+> helper so that we can use it in nvme_set_queue_dying to propagate the
+> size to the bdev without detours.
 > 
-> Switch to using a new spinlock protecting just the size updates, as
-> that is all we need, and make sure everyone does the update through
-> the proper helper.
-> 
-> This fixes a bug reported with the nvme revalidating disks during a
-> hot removal operation, which can currently deadlock on bd_mutex.
-> 
-> Reported-by: Xianting Tian <xianting_tian@126.com>
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  block/partitions/core.c         |  4 ++--
->  drivers/block/aoe/aoecmd.c      |  4 +---
->  drivers/md/dm.c                 | 15 ++-------------
->  drivers/s390/block/dasd_ioctl.c |  9 ++-------
->  fs/block_dev.c                  | 25 ++++++++++++++-----------
->  include/linux/blk_types.h       |  1 +
->  6 files changed, 22 insertions(+), 36 deletions(-)
-> Reviewed-by: Hannes Reinecke <hare@suse.de>
+>  drivers/nvme/host/core.c | 33 +++++++++++++++++++++++----------
+>  drivers/nvme/host/nvme.h | 13 -------------
+>  2 files changed, 23 insertions(+), 23 deletions(-)
+> 
+YES!
+I've been bitten by this far too often.
+
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 
 Cheers,
 
