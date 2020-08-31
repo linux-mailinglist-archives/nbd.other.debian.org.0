@@ -1,101 +1,78 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 250CB256938
-	for <lists+nbd@lfdr.de>; Sat, 29 Aug 2020 19:03:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5515A257E12
+	for <lists+nbd@lfdr.de>; Mon, 31 Aug 2020 17:57:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 01C59203B1; Sat, 29 Aug 2020 17:03:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Aug 29 17:03:08 2020
-Old-Return-Path: <axboe@kernel.dk>
+	id 3F6DA20458; Mon, 31 Aug 2020 15:57:22 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 31 15:57:22 2020
+Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.1 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
-	DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-5.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MD5_SHA1_SUM,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E78FF20381
-	for <lists-other-nbd@bendel.debian.org>; Sat, 29 Aug 2020 16:47:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 99DF120420
+	for <lists-other-nbd@bendel.debian.org>; Mon, 31 Aug 2020 15:40:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.191 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	NICE_REPLY_A=-0.809, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-8.139 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.959,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id X8bJPXz-iGJg for <lists-other-nbd@bendel.debian.org>;
-	Sat, 29 Aug 2020 16:47:18 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pj1-x102c.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 0B63720309
-	for <nbd@other.debian.org>; Sat, 29 Aug 2020 16:47:17 +0000 (UTC)
-Received: by mail-pj1-x102c.google.com with SMTP id i13so977857pjv.0
-        for <nbd@other.debian.org>; Sat, 29 Aug 2020 09:47:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=5Rt5+Gjo0UGdPCISf5CydG1I/Z+wq56+kU1eC124qs0=;
-        b=m+jv6bJZRhsllEVJr5l4EY9W/YKC3BAZMM01kcSyMJjFYDecSRzG/FmZTuCJs/t2ny
-         OTZ9rLbXL2RR9XafeWT8qZMVX3EveS6Y24+PU4GHbshyYp9ee+dMK+C0YDAdbf9aKVfG
-         jFqCByaqPcul+XLJJeoNuBseGgzPL/FnONYDc4Cu2YlXVbpi+Vb87s5ho1nAAniIHKh2
-         KXR7ViPjwNUAJWYxoNcQWgVEZejYo15uNzb3F2nN2WGlqbFQbig7tdJIWt883ZSPHmjM
-         5IySceO5HRVeWhmNoEcv3uAu5gm6m3KKHdwRHSbGF0wVoZVgzPve+VtbuXjvG8XJZ7Uy
-         as5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=5Rt5+Gjo0UGdPCISf5CydG1I/Z+wq56+kU1eC124qs0=;
-        b=Wq1u1sGRNSksag8UAmjczg8FdNV+di5JRb9d+FfcDC+M8j4c9UPaZw/DCLlknsJWhn
-         IBlngB+uqQICb8ae7vR8Q44k5WDG9SR4VTV3AQUB8fXCUr/dx6hWc+nA7PNVnI4to/HB
-         M+RReYPrzw+nHybgFATocbUDp6Vluh9Gc8Eonnl0BWCIMdYbwrmP71cNBkn3AA+6E7Z4
-         NV2b3Mo8GvIxGnC4wFQJRYJyKPGajyKur9lwmreP5MLXbkmPGE61HI4esCQ4PNkYw+bu
-         hg+H/PZ34cRRkTDgntBJVe1zZMmNWCA1NftR7rvmQOEQUV/hF+oYZAaSTQ5MTNuj1Z+z
-         cxDw==
-X-Gm-Message-State: AOAM532h5DbXBbW+P2Be1rm+cwCGCeKJewDKceYV5UoQj56zvqgquNSQ
-	GWANQSOYv1zSVXIM+17Ff95EEw==
-X-Google-Smtp-Source: ABdhPJwh/IaT8sjJze0JR0UOlWwMhEHIvT0ikyEXE/ycXPb0JRTnRL4uDSst200BKNS1envrwdz+3g==
-X-Received: by 2002:a17:90a:c917:: with SMTP id v23mr3622499pjt.97.1598719634004;
-        Sat, 29 Aug 2020 09:47:14 -0700 (PDT)
-Received: from [192.168.1.182] ([66.219.217.173])
-        by smtp.gmail.com with ESMTPSA id w82sm3114901pfc.183.2020.08.29.09.47.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 29 Aug 2020 09:47:13 -0700 (PDT)
-Subject: Re: fix block device size update serialization v2
-To: Christoph Hellwig <hch@lst.de>
-Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
- Xianting Tian <xianting_tian@126.com>, linux-block@vger.kernel.org,
- dm-devel@redhat.com, Stefan Haberland <sth@linux.ibm.com>,
- Jan Hoeppner <hoeppner@linux.ibm.com>, linux-kernel@vger.kernel.org,
- nbd@other.debian.org, linux-nvme@lists.infradead.org,
- linux-s390@vger.kernel.org
-References: <20200823091043.2600261-1-hch@lst.de>
- <20200827074758.GA8009@lst.de>
-From: Jens Axboe <axboe@kernel.dk>
-Message-ID: <b1960016-c265-1e1d-cfd7-de2330bc5eac@kernel.dk>
-Date: Sat, 29 Aug 2020 10:47:11 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	with ESMTP id bwP6dJfeHUKY for <lists-other-nbd@bendel.debian.org>;
+	Mon, 31 Aug 2020 15:40:30 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id A38D72044E
+	for <nbd@other.debian.org>; Mon, 31 Aug 2020 15:40:30 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id DA7E920767;
+	Mon, 31 Aug 2020 15:30:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1598887820;
+	bh=ht+MpGssPKdJ6E3rsvdmycBCNz+RMWwRINpMqFlTCqE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=AP7mPhhIXZomj4o2XoZnzCtfT9p7rI3/XsbrLq4uRX2koZd2g6tmndwdD17I4amDm
+	 r7DiKc8GM6BVTEa6SN9P9tvgxcoxPzfkn8Jv65muM0505aw+oeawBfBrLghgjqiTLs
+	 GV2M1zDmJXoiE9i3nslbAFVYbjn5Jski6rNMo4RE=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Hou Pu <houpu@bytedance.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Sasha Levin <sashal@kernel.org>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: [PATCH AUTOSEL 5.8 31/42] nbd: restore default timeout when setting it to zero
+Date: Mon, 31 Aug 2020 11:29:23 -0400
+Message-Id: <20200831152934.1023912-31-sashal@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200831152934.1023912-1-sashal@kernel.org>
+References: <20200831152934.1023912-1-sashal@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200827074758.GA8009@lst.de>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <a6NRBx970x.A.PaB.MpoSfB@bendel>
+Resent-Message-ID: <g2l_4LDHxXL.A.POF.i3RTfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/960
+X-Mailing-List: <nbd@other.debian.org> archive/latest/962
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -105,16 +82,49 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/b1960016-c265-1e1d-cfd7-de2330bc5eac@kernel.dk
-Resent-Date: Sat, 29 Aug 2020 17:03:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200831152934.1023912-31-sashal@kernel.org
+Resent-Date: Mon, 31 Aug 2020 15:57:22 +0000 (UTC)
 
-On 8/27/20 1:47 AM, Christoph Hellwig wrote:
-> Jens, can you consider this for 5.9?  It reliably fixes the reported
-> hangs with nvme hotremoval that we've had for a few releases.
+From: Hou Pu <houpu@bytedance.com>
 
-I've queued this up for 5.10. I think it's too late for 5.9 at this
-point, and it's not a regression in this release.
+[ Upstream commit acb19e17c5134dd78668c429ecba5b481f038e6a ]
 
+If we configured io timeout of nbd0 to 100s. Later after we
+finished using it, we configured nbd0 again and set the io
+timeout to 0. We expect it would timeout after 30 seconds
+and keep retry. But in fact we could not change the timeout
+when we set it to 0. the timeout is still the original 100s.
+
+So change the timeout to default 30s when we set it to zero.
+It also behaves same as commit 2da22da57348 ("nbd: fix zero
+cmd timeout handling v2").
+
+It becomes more important if we were reconfigure a nbd device
+and the io timeout it set to zero. Because it could take 30s
+to detect the new socket and thus io could be completed more
+quickly compared to 100s.
+
+Signed-off-by: Hou Pu <houpu@bytedance.com>
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/block/nbd.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index ce7e9f223b20b..bc9dc1f847e19 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -1360,6 +1360,8 @@ static void nbd_set_cmd_timeout(struct nbd_device *nbd, u64 timeout)
+ 	nbd->tag_set.timeout = timeout * HZ;
+ 	if (timeout)
+ 		blk_queue_rq_timeout(nbd->disk->queue, timeout * HZ);
++	else
++		blk_queue_rq_timeout(nbd->disk->queue, 30 * HZ);
+ }
+ 
+ /* Must be called with config_lock held */
 -- 
-Jens Axboe
+2.25.1
 
