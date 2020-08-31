@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5515A257E12
-	for <lists+nbd@lfdr.de>; Mon, 31 Aug 2020 17:57:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EBE1257E11
+	for <lists+nbd@lfdr.de>; Mon, 31 Aug 2020 17:57:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3F6DA20458; Mon, 31 Aug 2020 15:57:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 31 15:57:22 2020
+	id CC0EA20456; Mon, 31 Aug 2020 15:57:11 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 31 15:57:11 2020
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,7 +18,7 @@ X-Spam-Status: No, score=-5.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 99DF120420
+	by bendel.debian.org (Postfix) with ESMTP id 87BA920454
 	for <lists-other-nbd@bendel.debian.org>; Mon, 31 Aug 2020 15:40:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-8.139 tagged_above=-10000 required=5.3
@@ -28,26 +28,27 @@ X-Amavis-Spam-Status: No, score=-8.139 tagged_above=-10000 required=5.3
 	RCVD_IN_DNSWL_HI=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id bwP6dJfeHUKY for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id 7knoJ5UvN-I7 for <lists-other-nbd@bendel.debian.org>;
 	Mon, 31 Aug 2020 15:40:30 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 605 seconds by postgrey-1.36 at bendel; Mon, 31 Aug 2020 15:40:30 UTC
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id A38D72044E
+	by bendel.debian.org (Postfix) with ESMTPS id A33C820420
 	for <nbd@other.debian.org>; Mon, 31 Aug 2020 15:40:30 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id DA7E920767;
-	Mon, 31 Aug 2020 15:30:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id A6B972151B;
+	Mon, 31 Aug 2020 15:31:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1598887820;
-	bh=ht+MpGssPKdJ6E3rsvdmycBCNz+RMWwRINpMqFlTCqE=;
+	s=default; t=1598887865;
+	bh=jgGMZKTpMuWZUCumUs3Zf/xRhs6V9jg+7yCewR8BJWo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=AP7mPhhIXZomj4o2XoZnzCtfT9p7rI3/XsbrLq4uRX2koZd2g6tmndwdD17I4amDm
-	 r7DiKc8GM6BVTEa6SN9P9tvgxcoxPzfkn8Jv65muM0505aw+oeawBfBrLghgjqiTLs
-	 GV2M1zDmJXoiE9i3nslbAFVYbjn5Jski6rNMo4RE=
+	b=VTb4HRMkVv/CU5czHugWpdQuA/skqeWA+EXheRWa2I20FqzUO6nepn2QaHnVg14Ng
+	 XpMukZkPpbFAnSl7uK9CXD0xqCez0te2vSAY9Y8H/2/4NSt8WHz9GhShp3q3xwDmC7
+	 qKHcoXcDbZ0BFk7B3sXCpiNMIC7YO9AeQ9bf/R4I=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -57,12 +58,12 @@ Cc: Hou Pu <houpu@bytedance.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 5.8 31/42] nbd: restore default timeout when setting it to zero
-Date: Mon, 31 Aug 2020 11:29:23 -0400
-Message-Id: <20200831152934.1023912-31-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 16/23] nbd: restore default timeout when setting it to zero
+Date: Mon, 31 Aug 2020 11:30:32 -0400
+Message-Id: <20200831153039.1024302-16-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200831152934.1023912-1-sashal@kernel.org>
-References: <20200831152934.1023912-1-sashal@kernel.org>
+In-Reply-To: <20200831153039.1024302-1-sashal@kernel.org>
+References: <20200831153039.1024302-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -70,9 +71,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <g2l_4LDHxXL.A.POF.i3RTfB@bendel>
+Resent-Message-ID: <Sdq1jyS7UNF.A.tLF.X3RTfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/962
+X-Mailing-List: <nbd@other.debian.org> archive/latest/961
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -82,8 +83,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200831152934.1023912-31-sashal@kernel.org
-Resent-Date: Mon, 31 Aug 2020 15:57:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200831153039.1024302-16-sashal@kernel.org
+Resent-Date: Mon, 31 Aug 2020 15:57:11 +0000 (UTC)
 
 From: Hou Pu <houpu@bytedance.com>
 
@@ -113,10 +114,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index ce7e9f223b20b..bc9dc1f847e19 100644
+index 7b61d53ba050e..7c577cabb9c3b 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1360,6 +1360,8 @@ static void nbd_set_cmd_timeout(struct nbd_device *nbd, u64 timeout)
+@@ -1349,6 +1349,8 @@ static void nbd_set_cmd_timeout(struct nbd_device *nbd, u64 timeout)
  	nbd->tag_set.timeout = timeout * HZ;
  	if (timeout)
  		blk_queue_rq_timeout(nbd->disk->queue, timeout * HZ);
