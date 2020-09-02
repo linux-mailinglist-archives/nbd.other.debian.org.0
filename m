@@ -1,84 +1,77 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1D4225A580
-	for <lists+nbd@lfdr.de>; Wed,  2 Sep 2020 08:24:08 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id F02E725AB01
+	for <lists+nbd@lfdr.de>; Wed,  2 Sep 2020 14:18:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BECB3205BA; Wed,  2 Sep 2020 06:24:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  2 06:24:08 2020
-Old-Return-Path: <song@kernel.org>
+	id D39352060D; Wed,  2 Sep 2020 12:18:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  2 12:18:09 2020
+Old-Return-Path: <penguin-kernel@I-love.SAKURA.ne.jp>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_HI autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.1 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FVGT_m_MULTI_ODD,MD5_SHA1_SUM,MURPHY_DRUGS_REL8 autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id EBC8D205B6
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Sep 2020 06:07:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 153AA20602
+	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Sep 2020 12:01:27 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.181 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+X-Amavis-Spam-Status: No, score=-1.86 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WdV2uc40nkQA for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Sep 2020 06:07:10 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-X-Greylist: delayed 421 seconds by postgrey-1.36 at bendel; Wed, 02 Sep 2020 06:07:10 UTC
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	with ESMTP id Cp7yhBogH3SL for <lists-other-nbd@bendel.debian.org>;
+	Wed,  2 Sep 2020 12:01:22 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 3059 seconds by postgrey-1.36 at bendel; Wed, 02 Sep 2020 12:01:21 UTC
+Received: from www262.sakura.ne.jp (www262.sakura.ne.jp [202.181.97.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 41CBE205A0
-	for <nbd@other.debian.org>; Wed,  2 Sep 2020 06:07:10 +0000 (UTC)
-Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 6AB49207DE
-	for <nbd@other.debian.org>; Wed,  2 Sep 2020 06:07:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1599026826;
-	bh=5+KmkwCh74/cntArpz/UMLM/pddG8ulQKVSpeB3X+RY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=cTkF1377EKFMiKH243aPvnk5sDiPB+mAJ8UbjY3H3CxHW3ub6AhJm8zB6sjCeyjos
-	 0Zb34r3LG95586+asqAax7/k2wV4jNsfLjOB7nVyJnDD7czJn3t7iganE4hOlIZPud
-	 bwrsx4majAT2w7kFdtUeFxc30f6s6TlOONSSdwLw=
-Received: by mail-lj1-f176.google.com with SMTP id w3so4413124ljo.5
-        for <nbd@other.debian.org>; Tue, 01 Sep 2020 23:07:06 -0700 (PDT)
-X-Gm-Message-State: AOAM533MT+ksYM/jS8ZR3fAlJ4ZGTqS8a+boqYHJuc0Sz8DLv1Vhkj7p
-	JHYER5qcEJmAugqzuFkZCK7SXqFDUshaCYyqUp0=
-X-Google-Smtp-Source: ABdhPJyE5jGOrYyZE6ORaRQIp51/fhLfZD64Ax0jpOVcS4L2G+U2YIU+6jbqUjHlXVyGhP2izG2P3ekqYZd5wXuophY=
-X-Received: by 2002:a2e:81c2:: with SMTP id s2mr2472465ljg.10.1599026824658;
- Tue, 01 Sep 2020 23:07:04 -0700 (PDT)
+	by bendel.debian.org (Postfix) with ESMTPS id C0BE620603
+	for <nbd@other.debian.org>; Wed,  2 Sep 2020 12:01:21 +0000 (UTC)
+Received: from fsav106.sakura.ne.jp (fsav106.sakura.ne.jp [27.133.134.233])
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 082B9xWe021165;
+	Wed, 2 Sep 2020 20:09:59 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Received: from www262.sakura.ne.jp (202.181.97.72)
+ by fsav106.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav106.sakura.ne.jp);
+ Wed, 02 Sep 2020 20:09:59 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav106.sakura.ne.jp)
+Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
+	(authenticated bits=0)
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 082B9tPc021145
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 2 Sep 2020 20:09:59 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Subject: [PATCH] tipc: fix shutdown() of connectionless socket
+To: syzbot <syzbot+e36f41d207137b5d12f7@syzkaller.appspotmail.com>,
+        Jon Maloy <jmaloy@redhat.com>, Ying Xue <ying.xue@windriver.com>
+References: <0000000000003feb9805a9c77128@google.com>
+Cc: syzkaller-bugs@googlegroups.com, "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org,
+        tipc-discussion@lists.sourceforge.net
+From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+Message-ID: <1eb799fb-c6e0-3eb5-f6fe-718cd2f62e92@I-love.SAKURA.ne.jp>
+Date: Wed, 2 Sep 2020 20:09:54 +0900
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-References: <20200901155748.2884-1-hch@lst.de> <20200901155748.2884-5-hch@lst.de>
-In-Reply-To: <20200901155748.2884-5-hch@lst.de>
-From: Song Liu <song@kernel.org>
-Date: Tue, 1 Sep 2020 23:06:52 -0700
-X-Gmail-Original-Message-ID: <CAPhsuW5-nfKQK_178R-Y+ps6KLNMrwvWe0Rh5=M1-xvcKHYTgg@mail.gmail.com>
-Message-ID: <CAPhsuW5-nfKQK_178R-Y+ps6KLNMrwvWe0Rh5=M1-xvcKHYTgg@mail.gmail.com>
-Subject: Re: [PATCH 4/9] block: add a new revalidate_disk_size helper
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>, 
-	Dan Williams <dan.j.williams@intel.com>, dm-devel@redhat.com, 
-	"Martin K. Petersen" <martin.petersen@oracle.com>, open list <linux-kernel@vger.kernel.org>, 
-	linux-block@vger.kernel.org, nbd@other.debian.org, ceph-devel@vger.kernel.org, 
-	virtualization@lists.linux-foundation.org, 
-	linux-raid <linux-raid@vger.kernel.org>, linux-nvdimm@lists.01.org, 
-	linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org, 
-	Linux-Fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <0000000000003feb9805a9c77128@google.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <YxqRTDdR0FF.A.ARF.IqzTfB@bendel>
+Resent-Message-ID: <tx7lWZV-J5J.A.XfH.B24TfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/973
+X-Mailing-List: <nbd@other.debian.org> archive/latest/975
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,51 +81,82 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAPhsuW5-nfKQK_178R-Y+ps6KLNMrwvWe0Rh5=M1-xvcKHYTgg@mail.gmail.com
-Resent-Date: Wed,  2 Sep 2020 06:24:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1eb799fb-c6e0-3eb5-f6fe-718cd2f62e92@I-love.SAKURA.ne.jp
+Resent-Date: Wed,  2 Sep 2020 12:18:09 +0000 (UTC)
 
-On Tue, Sep 1, 2020 at 9:00 AM Christoph Hellwig <hch@lst.de> wrote:
->
-[...]
+syzbot is reporting hung task at nbd_ioctl() [1], for there are two
+problems regarding TIPC's connectionless socket's shutdown() operation.
+I found C reproducer for this problem (shown below) from "no output from
+test machine (2)" report.
 
->  drivers/md/md-cluster.c       |  6 ++---
->  drivers/md/md-linear.c        |  2 +-
->  drivers/md/md.c               | 10 ++++-----
+----------
 
-For md bits:
-Acked-by: Song Liu <song@kernel.org>
+int main(int argc, char *argv[])
+{
+        const int fd = open("/dev/nbd0", 3);
+        ioctl(fd, NBD_SET_SOCK, socket(PF_TIPC, SOCK_DGRAM, 0));
+        ioctl(fd, NBD_DO_IT, 0);
+        return 0;
+}
+----------
 
-[...]
->
-> +/**
-> + * revalidate_disk_size - checks for disk size change and adjusts bdev size.
-> + * @disk: struct gendisk to check
-> + * @verbose: if %true log a message about a size change if there is any
-> + *
-> + * This routine checks to see if the bdev size does not match the disk size
-> + * and adjusts it if it differs. When shrinking the bdev size, its all caches
-> + * are freed.
-> + */
-> +void revalidate_disk_size(struct gendisk *disk, bool verbose)
-> +{
-> +       struct block_device *bdev;
-> +
-> +       /*
-> +        * Hidden disks don't have associated bdev so there's no point in
-> +        * revalidating them.
-> +        */
-> +       if (disk->flags & GENHD_FL_HIDDEN)
-> +               return;
-> +
-> +       bdev = bdget_disk(disk, 0);
-> +       if (bdev) {
-> +               check_disk_size_change(disk, bdev, verbose);
-> +               bdput(bdev);
-> +       }
-> +}
-> +EXPORT_SYMBOL(revalidate_disk_size);
+One problem is that wait_for_completion() from flush_workqueue() from
+nbd_start_device_ioctl() from nbd_ioctl() cannot be completed when
+nbd_start_device_ioctl() received a signal at wait_event_interruptible(),
+for tipc_shutdown() from kernel_sock_shutdown(SHUT_RDWR) from
+nbd_mark_nsock_dead() from sock_shutdown() from nbd_start_device_ioctl()
+is failing to wake up a WQ thread sleeping at wait_woken() from
+tipc_wait_for_rcvmsg() from sock_recvmsg() from sock_xmit() from
+nbd_read_stat() from recv_work() scheduled by nbd_start_device() from
+nbd_start_device_ioctl(). Fix this problem by always invoking
+sk->sk_state_change() (like inet_shutdown() does) when tipc_shutdown() is
+called.
 
-Shall we use EXPORT_SYMBOL_GPL() here?
+The other problem is that tipc_wait_for_rcvmsg() cannot return when
+tipc_shutdown() is called, for tipc_shutdown() sets sk->sk_shutdown to
+SEND_SHUTDOWN (despite "how" is SHUT_RDWR) while tipc_wait_for_rcvmsg()
+needs sk->sk_shutdown set to RCV_SHUTDOWN or SHUTDOWN_MASK. Fix this
+problem by setting sk->sk_shutdown to SHUTDOWN_MASK (like inet_shutdown()
+does) when the socket is connectionless.
 
-[...]
+[1] https://syzkaller.appspot.com/bug?id=3fe51d307c1f0a845485cf1798aa059d12bf18b2
+
+Reported-by: syzbot <syzbot+e36f41d207137b5d12f7@syzkaller.appspotmail.com>
+Signed-off-by: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+---
+ net/tipc/socket.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/net/tipc/socket.c b/net/tipc/socket.c
+index 2679e97e0389..ebd280e767bd 100644
+--- a/net/tipc/socket.c
++++ b/net/tipc/socket.c
+@@ -2771,18 +2771,21 @@ static int tipc_shutdown(struct socket *sock, int how)
+ 
+ 	trace_tipc_sk_shutdown(sk, NULL, TIPC_DUMP_ALL, " ");
+ 	__tipc_shutdown(sock, TIPC_CONN_SHUTDOWN);
+-	sk->sk_shutdown = SEND_SHUTDOWN;
++	if (tipc_sk_type_connectionless(sk))
++		sk->sk_shutdown = SHUTDOWN_MASK;
++	else
++		sk->sk_shutdown = SEND_SHUTDOWN;
+ 
+ 	if (sk->sk_state == TIPC_DISCONNECTING) {
+ 		/* Discard any unreceived messages */
+ 		__skb_queue_purge(&sk->sk_receive_queue);
+ 
+-		/* Wake up anyone sleeping in poll */
+-		sk->sk_state_change(sk);
+ 		res = 0;
+ 	} else {
+ 		res = -ENOTCONN;
+ 	}
++	/* Wake up anyone sleeping in poll. */
++	sk->sk_state_change(sk);
+ 
+ 	release_sock(sk);
+ 	return res;
+-- 
+2.18.4
+
 
