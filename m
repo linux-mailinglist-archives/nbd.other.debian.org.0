@@ -1,89 +1,88 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2F162692C5
-	for <lists+nbd@lfdr.de>; Mon, 14 Sep 2020 19:15:26 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18C0D26E261
+	for <lists+nbd@lfdr.de>; Thu, 17 Sep 2020 19:30:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id AF2D620172; Mon, 14 Sep 2020 17:15:26 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 14 17:15:26 2020
-Old-Return-Path: <eblake@redhat.com>
+	id EC4792051C; Thu, 17 Sep 2020 17:30:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 17 17:30:08 2020
+Old-Return-Path: <BATV+c88049fb72e75cdfbebb+6234+infradead.org+hch@casper.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-13.1 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.2 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,FOURLA,HEADER_FROM_DIFFERENT_DOMAINS,
+	MURPHY_DRUGS_REL8 autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9217820120
-	for <lists-other-nbd@bendel.debian.org>; Mon, 14 Sep 2020 17:15:18 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 48C5E204F9
+	for <lists-other-nbd@bendel.debian.org>; Thu, 17 Sep 2020 17:12:55 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-9.329 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, NICE_REPLY_A=-2.13, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=1.021 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+	MURPHY_DRUGS_REL8=0.02] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id i9oj1Sq8t4Bq for <lists-other-nbd@bendel.debian.org>;
-	Mon, 14 Sep 2020 17:15:14 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-X-Greylist: delayed 2435 seconds by postgrey-1.36 at bendel; Mon, 14 Sep 2020 17:15:14 UTC
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [63.128.21.124])
-	by bendel.debian.org (Postfix) with ESMTP id 04F2D2012D
-	for <nbd@other.debian.org>; Mon, 14 Sep 2020 17:15:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1600103708;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pG1UWbRUrjzwEW+eGKT9lwNAwEjx7C3FgAI3nM4EQPo=;
-	b=VspNWQ9wMpccwa9mfcZSHs91vjR0aVBQJDUPP5rlLwRcY09hODv+qabpYJcGv20/rUpomV
-	aHZvQRb70H/7MYlLs9wKPmx9bIBoE0MsbjyRdgKYUcf10bvZw/jL/I3DRZU1kTS+fcIM3X
-	fQ52Dg3pn8sqUsv+t4EtmNZ4QgDAXlQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-458-gkH58FqGM_iOJx4ULBpigw-1; Mon, 14 Sep 2020 13:15:01 -0400
-X-MC-Unique: gkH58FqGM_iOJx4ULBpigw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3569D1800D4A;
-	Mon, 14 Sep 2020 17:15:00 +0000 (UTC)
-Received: from [10.3.113.68] (ovpn-113-68.phx2.redhat.com [10.3.113.68])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 024C560C0F;
-	Mon, 14 Sep 2020 17:14:59 +0000 (UTC)
-Subject: Re: Mounting from multiple devices
-To: Gregor Haas <gregorhaas1997@gmail.com>, nbd@other.debian.org
-References: <CAMqWt3oixWoLuHUUxeRZDPAJGoF_M0sOZtVNfbiaaSq8KxjN0g@mail.gmail.com>
- <166c6457-0ad7-cb3d-d1d3-83c8e6de35a7@redhat.com>
- <CAMqWt3pwsozO145PagT+uEAGKReABMmVfinFURojaoyGJCn-dw@mail.gmail.com>
-From: Eric Blake <eblake@redhat.com>
-Organization: Red Hat, Inc.
-Message-ID: <b5b17845-4ffd-c432-597f-69881f5ca73c@redhat.com>
-Date: Mon, 14 Sep 2020 12:14:59 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+	with ESMTP id HDpUR2OcZdEi for <lists-other-nbd@bendel.debian.org>;
+	Thu, 17 Sep 2020 17:12:51 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 0918B20458
+	for <nbd@other.debian.org>; Thu, 17 Sep 2020 17:12:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=kKrnsk0G0+/53OYcI1nKBJAYP0PP2drQYHczMU8H8l8=; b=MwZFnulZi1LfJM937tTsYWCyhm
+	YerrYib6vq6IbrVzIuSbW2dwtw/Yepy/GgNkmqmDLV1ILR6GIg248ZqX8OTUxI/WDd9d/7o2VHKSj
+	Umr1892Slzjar0tpfD3Po+8+uO86XR3fxhGgpZnrMFxMcj20WED0VmU0O5u8+XdXlIegVum76eBJW
+	m6c4W6pX+MgE5pzcelvsIFRP2yio9EfVSu+YfB+SJEk8CkN/A2A8HFUHBQsJR9uFy+UEwQR0G8OLh
+	KNtugUkN3I1EkMIKHHk73j4uyh3iYLaZHcD8ZKSpcv7fgtUpA/QPY26/mUnRhlRvKmw2KZc2NkchJ
+	tihpW3mA==;
+Received: from 089144214092.atnat0023.highway.a1.net ([89.144.214.92] helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1kIxSZ-0001JQ-E5; Thu, 17 Sep 2020 17:12:39 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Josef Bacik <josef@toxicpanda.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Stefan Haberland <sth@linux.ibm.com>,
+	Jan Hoeppner <hoeppner@linux.ibm.com>,
+	Joseph Qi <joseph.qi@linux.alibaba.com>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Pavel Machek <pavel@ucw.cz>,
+	Len Brown <len.brown@intel.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-kernel@vger.kernel.org,
+	nbd@other.debian.org,
+	linux-ide@vger.kernel.org,
+	linux-s390@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	ocfs2-devel@oss.oracle.com,
+	linux-pm@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-block@vger.kernel.org
+Subject: [PATCH 06/14] zram: cleanup backing_dev_store
+Date: Thu, 17 Sep 2020 18:57:12 +0200
+Message-Id: <20200917165720.3285256-7-hch@lst.de>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200917165720.3285256-1-hch@lst.de>
+References: <20200917165720.3285256-1-hch@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <CAMqWt3pwsozO145PagT+uEAGKReABMmVfinFURojaoyGJCn-dw@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <YyMbVQr9K2L.A.-9C.uU6XfB@bendel>
+Resent-Message-ID: <VarsAKwGZ_E.A.Y5G.g05YfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/980
+X-Mailing-List: <nbd@other.debian.org> archive/latest/981
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,38 +92,34 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/b5b17845-4ffd-c432-597f-69881f5ca73c@redhat.com
-Resent-Date: Mon, 14 Sep 2020 17:15:26 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200917165720.3285256-7-hch@lst.de
+Resent-Date: Thu, 17 Sep 2020 17:30:08 +0000 (UTC)
 
-On 9/14/20 11:47 AM, Gregor Haas wrote:
-> Hi Eric,
-> 
-> Thank you for the quick response. I'm still pretty new to playing with
-> filesystems
-> so thank you also for the information about clustered filesystems. I'll be
-> looking
-> into these for my use case.
-> 
-> So essentially, any synchronization for parallel clients would have to
-> happen at
-> the filesystem layer -- NBD has no mechanisms in place for that, and simply
-> exports a raw block device. Is my understanding of that correct?
+Use blkdev_get_by_dev instead of bdgrab + blkdev_get.
 
-Correct - NBD is _just_ block storage, and has no synchronization 
-primitives beyond NBD_CMD_FLUSH (which flushes all prior writes) or 
-NBD_CMD_FLAG_FUA (which flushes the current write), where even those 
-primitives are optional.  (There may be other forked implementations of 
-the NBD protocol that have added further primitives as additional 
-extensions, but no one has proposed adding such extensions into the 
-upstream NBD protocol documentation yet for interoperability between 
-implementations).
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/block/zram/zram_drv.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-How you use the block storage (whether as a building block to larger 
-storage arrays, as swap space, as a file system, etc) is up to higher 
-layers of software.
-
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index a356275605b104..91ccfe444525b4 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -491,9 +491,10 @@ static ssize_t backing_dev_store(struct device *dev,
+ 		goto out;
+ 	}
+ 
+-	bdev = bdgrab(I_BDEV(inode));
+-	err = blkdev_get(bdev, FMODE_READ | FMODE_WRITE | FMODE_EXCL, zram);
+-	if (err < 0) {
++	bdev = blkdev_get_by_dev(inode->i_rdev,
++			FMODE_READ | FMODE_WRITE | FMODE_EXCL, zram);
++	if (IS_ERR(bdev)) {
++		err = PTR_ERR(bdev);
+ 		bdev = NULL;
+ 		goto out;
+ 	}
 -- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+2.28.0
 
