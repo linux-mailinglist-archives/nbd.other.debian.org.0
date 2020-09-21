@@ -2,87 +2,107 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 821F2271C1F
-	for <lists+nbd@lfdr.de>; Mon, 21 Sep 2020 09:37:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26740271E7E
+	for <lists+nbd@lfdr.de>; Mon, 21 Sep 2020 11:03:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3E84D208D4; Mon, 21 Sep 2020 07:37:00 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 21 07:37:00 2020
-Old-Return-Path: <BATV+776a1a22abff015854b2+6238+infradead.org+hch@casper.srs.infradead.org>
+	id 080A32091B; Mon, 21 Sep 2020 09:03:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 21 09:03:20 2020
+Old-Return-Path: <sergei.shtylyov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: ***
-X-Spam-Status: No, score=3.2 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FOURLA,HEADER_FROM_DIFFERENT_DOMAINS,
-	MURPHY_DRUGS_REL8 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=3.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
+	FREEMAIL_FROM,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7B506208CE
-	for <lists-other-nbd@bendel.debian.org>; Mon, 21 Sep 2020 07:20:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1AC0520901
+	for <lists-other-nbd@bendel.debian.org>; Mon, 21 Sep 2020 08:45:58 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.021 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
-	MURPHY_DRUGS_REL8=0.02] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.209 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FREEMAIL_FROM=0.001, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-2.13,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id RerYizLyBfUj for <lists-other-nbd@bendel.debian.org>;
-	Mon, 21 Sep 2020 07:20:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 18EE7208D6
-	for <nbd@other.debian.org>; Mon, 21 Sep 2020 07:20:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-Type:Content-ID:Content-Description;
-	bh=kKrnsk0G0+/53OYcI1nKBJAYP0PP2drQYHczMU8H8l8=; b=h1WymipwzsfQg6HGoHFnSqm2lG
-	lSXGTKndViTtD3Wqt+Prxiv9pPXKbXQhDojOLblOFVeTB6V5u0uTDKJccl4Yuj8auFwmoVkRVu8Ph
-	OC4Ld6W8CSLSh8alUcRHew6l5j5n/oheWAmJxIkUZrGkDuwMeXX7eQvBUwlquYOi6qEXAmIBthDJO
-	rxUP7OtZoBoTroj/4cKed9bAf5MrfY7nVCYa+Rzutl1yvPIkC83ZFIAFrBRPUAmEJoV6Fu4GmaHpe
-	VHMSAXpnpQAkXRZxUjr+0vzqQmstuZnM2+5oSlYyMisXcqZC8c2nK5u9kpyXtAeJtWD6QgWv2dOwk
-	Anv6OZNQ==;
-Received: from p4fdb0c34.dip0.t-ipconnect.de ([79.219.12.52] helo=localhost)
-	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kKG7A-0003Ex-FW; Mon, 21 Sep 2020 07:19:56 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Josef Bacik <josef@toxicpanda.com>,
-	Minchan Kim <minchan@kernel.org>,
-	Stefan Haberland <sth@linux.ibm.com>,
-	Jan Hoeppner <hoeppner@linux.ibm.com>,
-	Joseph Qi <joseph.qi@linux.alibaba.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Pavel Machek <pavel@ucw.cz>,
-	Len Brown <len.brown@intel.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-kernel@vger.kernel.org,
-	nbd@other.debian.org,
-	linux-ide@vger.kernel.org,
-	linux-s390@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	ocfs2-devel@oss.oracle.com,
-	linux-pm@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-block@vger.kernel.org
-Subject: [PATCH 06/14] zram: cleanup backing_dev_store
-Date: Mon, 21 Sep 2020 09:19:50 +0200
-Message-Id: <20200921071958.307589-7-hch@lst.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200921071958.307589-1-hch@lst.de>
+	with ESMTP id qOYY_qjz9qRD for <lists-other-nbd@bendel.debian.org>;
+	Mon, 21 Sep 2020 08:45:55 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com [IPv6:2a00:1450:4864:20::244])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id A85CD208FE
+	for <nbd@other.debian.org>; Mon, 21 Sep 2020 08:45:55 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id c2so10353896ljj.12
+        for <nbd@other.debian.org>; Mon, 21 Sep 2020 01:45:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=CZmaZ187zMFdVdjh+DfPERuCP3WU0wLxzZIFDgqpQhQ=;
+        b=UWXytXWmkq8pXmYqB0sXkFrf5u7O8zADyv3pKBcOd43273LrLEK/6dwQie7xrTzsFY
+         om+1pH6WEDJNAT2FC5RZEXob/KRC6BhuELwRQTtlvWyS36FiytI4T13PRHgaPvhqTOmm
+         JnxMoCogivVva8Xm2cqsnuYpJ5d7lJj6ft92HDVD4p/9uEForZYyO+gdHPYZMAUq++Qq
+         M1rqpVX3Vnj2KoBKnqSQr5mA55K3Ux9Svkrgvl7128w9LytJpLCirpoWpIfX+fiWXgLN
+         hfRQHGkBqoDrOX6dl6WzzpJsP4xUBo+tICCmmkS34li8nJVViMd6ZQnNGiU/epbwh+QT
+         3mDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=CZmaZ187zMFdVdjh+DfPERuCP3WU0wLxzZIFDgqpQhQ=;
+        b=BHxvud9D7m3j7eVNcCf8FSvm4vE0jID9yye1Ufj3qS8fkmJid2Wq8Rf67H0YqQQ9FQ
+         +C4Lwn9uH39q2jjan2GwSn4ODPTCU7HoC2PXsf2RbYuKlLg6vBnGDsfFm9n+5Jou7YRS
+         /tVU69YrSTxv0WcAxJ8rcLmOS0CdRxrKlltGwKLtnY/0ib5TsapXBafzQW6UdVQd5Fv7
+         ACVPCI6D3kjMfLegsZFyvXVrNTyh8Gnq/e6mSWN7/FfkwcARMBu5kLeUGdbHcFGUhEXw
+         aP9BzYWiTsQppIGHB44TgHcQ4U7n2nOuQm+D4De6ctTf6gyjT8WOxWtyYc2AdmnLXhTX
+         YUIw==
+X-Gm-Message-State: AOAM531PhLaPLT2VY6P9tMC/OKSx2SfEB25Ze0x1+FTciVUHRVPsSvCc
+	+z0V5dn2RYG1L9MXnrqI4XA=
+X-Google-Smtp-Source: ABdhPJx5mav1W62IiUmXTaMhqLWi6f2dGUFFf8sbUeC0z4e5MZ82zAxsAmryelg6X6Izw+2IGouZSQ==
+X-Received: by 2002:a2e:2c0e:: with SMTP id s14mr15080290ljs.174.1600677953001;
+        Mon, 21 Sep 2020 01:45:53 -0700 (PDT)
+Received: from ?IPv6:2a00:1fa0:485b:5520:1d32:5ffa:5dce:483f? ([2a00:1fa0:485b:5520:1d32:5ffa:5dce:483f])
+        by smtp.gmail.com with ESMTPSA id u14sm2551614lji.83.2020.09.21.01.45.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Sep 2020 01:45:52 -0700 (PDT)
+Subject: Re: [PATCH 08/14] dasd: cleanup dasd_scan_partitions
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Josef Bacik <josef@toxicpanda.com>, Minchan Kim <minchan@kernel.org>,
+ Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pavel Machek <pavel@ucw.cz>,
+ Len Brown <len.brown@intel.com>, Andrew Morton <akpm@linux-foundation.org>,
+ linux-kernel@vger.kernel.org, nbd@other.debian.org,
+ linux-ide@vger.kernel.org, linux-s390@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+ linux-pm@vger.kernel.org, linux-mm@kvack.org, linux-block@vger.kernel.org
 References: <20200921071958.307589-1-hch@lst.de>
+ <20200921071958.307589-9-hch@lst.de>
+From: Sergei Shtylyov <sergei.shtylyov@gmail.com>
+Organization: Brain-dead Software
+Message-ID: <28f7f012-2787-2959-394e-cda480786ea9@gmail.com>
+Date: Mon, 21 Sep 2020 11:45:46 +0300
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <20200921071958.307589-9-hch@lst.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <wkjjrGXpIqB.A.zNC.cgFafB@bendel>
+Resent-Message-ID: <OaQrRl--_4P.A.rNF.XxGafB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/987
+X-Mailing-List: <nbd@other.debian.org> archive/latest/988
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,34 +112,50 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200921071958.307589-7-hch@lst.de
-Resent-Date: Mon, 21 Sep 2020 07:37:00 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/28f7f012-2787-2959-394e-cda480786ea9@gmail.com
+Resent-Date: Mon, 21 Sep 2020 09:03:20 +0000 (UTC)
 
-Use blkdev_get_by_dev instead of bdgrab + blkdev_get.
+Hello!
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/block/zram/zram_drv.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+On 21.09.2020 10:19, Christoph Hellwig wrote:
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index a356275605b104..91ccfe444525b4 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -491,9 +491,10 @@ static ssize_t backing_dev_store(struct device *dev,
- 		goto out;
- 	}
- 
--	bdev = bdgrab(I_BDEV(inode));
--	err = blkdev_get(bdev, FMODE_READ | FMODE_WRITE | FMODE_EXCL, zram);
--	if (err < 0) {
-+	bdev = blkdev_get_by_dev(inode->i_rdev,
-+			FMODE_READ | FMODE_WRITE | FMODE_EXCL, zram);
-+	if (IS_ERR(bdev)) {
-+		err = PTR_ERR(bdev);
- 		bdev = NULL;
- 		goto out;
- 	}
--- 
-2.28.0
+> Use blkdev_get_by_dev instead of bdget_disk + blkdev_get.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>   drivers/s390/block/dasd_genhd.c | 15 ++++-----------
+>   1 file changed, 4 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/s390/block/dasd_genhd.c b/drivers/s390/block/dasd_genhd.c
+> index af5b0ecb8f8923..a9698fba9b76ce 100644
+> --- a/drivers/s390/block/dasd_genhd.c
+> +++ b/drivers/s390/block/dasd_genhd.c
+> @@ -101,18 +101,11 @@ int dasd_scan_partitions(struct dasd_block *block)
+>   	struct block_device *bdev;
+>   	int rc;
+>   
+> -	bdev = bdget_disk(block->gdp, 0);
+> -	if (!bdev) {
+> -		DBF_DEV_EVENT(DBF_ERR, block->base, "%s",
+> -			      "scan partitions error, bdget returned NULL");
+> -		return -ENODEV;
+> -	}
+> -
+> -	rc = blkdev_get(bdev, FMODE_READ, NULL);
+> -	if (rc < 0) {
+> +	bdev = blkdev_get_by_dev(disk_devt(block->gdp), FMODE_READ, NULL);
+> +	if (IS_ERR(bdev)) {
+>   		DBF_DEV_EVENT(DBF_ERR, block->base,
+> -			      "scan partitions error, blkdev_get returned %d",
+> -			      rc);
+> +			      "scan partitions error, blkdev_get returned %ld",
+
+    blkdev_get_by_dev() now?
+
+> +			      PTR_ERR(bdev));
+>   		return -ENODEV;
+>   	}
+>   
+
+MBR, Sergei
 
