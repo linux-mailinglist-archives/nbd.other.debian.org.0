@@ -2,166 +2,102 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7259E2745E4
-	for <lists+nbd@lfdr.de>; Tue, 22 Sep 2020 18:00:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A20C3275E13
+	for <lists+nbd@lfdr.de>; Wed, 23 Sep 2020 19:00:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 34AA42046D; Tue, 22 Sep 2020 16:00:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep 22 16:00:10 2020
-Old-Return-Path: <sth@linux.ibm.com>
+	id 72E722053B; Wed, 23 Sep 2020 17:00:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 23 17:00:09 2020
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.2 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,FOURLA,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=no
+X-Spam-Level: **
+X-Spam-Status: No, score=2.9 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1B823203E4
-	for <lists-other-nbd@bendel.debian.org>; Tue, 22 Sep 2020 15:42:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3E7F420532
+	for <lists-other-nbd@bendel.debian.org>; Wed, 23 Sep 2020 16:44:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.811 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-2.13, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.13 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	NICE_REPLY_A=-2.13, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WoGoV2s257_i for <lists-other-nbd@bendel.debian.org>;
-	Tue, 22 Sep 2020 15:42:20 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 1370 seconds by postgrey-1.36 at bendel; Tue, 22 Sep 2020 15:42:20 UTC
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.pphosted.com", Issuer "Thawte RSA CA 2018" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id A9ED8203EC
-	for <nbd@other.debian.org>; Tue, 22 Sep 2020 15:42:20 +0000 (UTC)
-Received: from pps.filterd (m0127361.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 08MFI9C6002529;
-	Tue, 22 Sep 2020 11:19:15 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=s7b0G9lisUfCrCNxaUFmc71Hbq6lYd3xM2O0ZMyJbVU=;
- b=fNQUiQQjJ0O5RSJT3y1fx+etwvA15nMBC5V5JgxKwHs06zE3C6vupZyyi+OuN6tL45bI
- 1pHqyK4HANqAFdynEtxHFiGAQA4HZkIUq2lq32AKF55q9+hBYrTvnP43Kh8xkLl+ticB
- iQty6dX6it0Qgwj3rxk8xee7nDY7h79H/j5eXPu4LbmuNqKQFc03OncT9GbrTOUWW5Y8
- pvnlW1qj1A8XEr8bnrvC4vSK+oXRFDkzVfoYmps/YsGYh7XzaJDyln87jDOJK5BEqVuw
- +f9GiyqWVmzWQQxAR0jZPUme45PCu5WpV9Wko+qwYDmGCbkxRpudRNsyw6jonoFNtsLU 7w== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 33qjj1a9n9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 22 Sep 2020 11:19:13 -0400
-Received: from m0127361.ppops.net (m0127361.ppops.net [127.0.0.1])
-	by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 08MFIPF6003571;
-	Tue, 22 Sep 2020 11:19:07 -0400
-Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com [159.122.73.71])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 33qjj1a9kr-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 22 Sep 2020 11:19:07 -0400
-Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
-	by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 08MFCBYk017630;
-	Tue, 22 Sep 2020 15:19:03 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
-	by ppma02fra.de.ibm.com with ESMTP id 33n9m81nnf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 22 Sep 2020 15:19:03 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com [9.149.105.60])
-	by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 08MFIweT23265540
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 22 Sep 2020 15:18:58 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3BA144203F;
-	Tue, 22 Sep 2020 15:19:00 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 81EB64204B;
-	Tue, 22 Sep 2020 15:18:59 +0000 (GMT)
-Received: from linux.fritz.box (unknown [9.145.169.80])
-	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Tue, 22 Sep 2020 15:18:59 +0000 (GMT)
-Subject: Re: [PATCH 08/14] dasd: cleanup dasd_scan_partitions
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+	with ESMTP id lV3PK7HQpr9P for <lists-other-nbd@bendel.debian.org>;
+	Wed, 23 Sep 2020 16:44:03 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pf1-x443.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 1894C20539
+	for <nbd@other.debian.org>; Wed, 23 Sep 2020 16:44:02 +0000 (UTC)
+Received: by mail-pf1-x443.google.com with SMTP id n14so15596pff.6
+        for <nbd@other.debian.org>; Wed, 23 Sep 2020 09:44:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=9kKVBm2QDcEhoI7VNH0u9uwqsgFbX84K7to4q+EvAF8=;
+        b=wo1HxCm5bKIVa9so0OH72jUPeuxpy0gBmSztrnAMX5SSm8gqDsd/uDbJD7n0nTY7Hv
+         CKJoObg/EBB1JCvStmCq+2DKeNopjuTxhY6T7yv5TlzOVOSgvtBEy4neG07it4ARoA4J
+         WHOi+7obrEMIUDmzT3kBBEHLDf0ZbrbNxMoUwtAnQnNZ4qwV/A1Mq5PJhKVbgpJ/Rod5
+         V4wdCnvNPJU0KSWHIs05KbU5DxoLhNDG93YaWxwBm6g7XccmnyHw+ixRtSpxeaSGMhwd
+         mx1/GOsS6pG7kDo6kprXjUbJ/6H+1rzHGTrQ7trw2dp1Uk7jyzCH8F6put7clvS8xmh3
+         DueQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=9kKVBm2QDcEhoI7VNH0u9uwqsgFbX84K7to4q+EvAF8=;
+        b=F6m1jR8sqV0iufGpCgknzDsNEgO7+YvV+qYt+5yTYpNhHM9/l56w8B8T5HqL/8rzb4
+         MB+jna6+JoQ/CWEUi4TcFyswIrvI5qvcfccwfSCdX7IMMomSNun/DMpU7c5spz2Vi+KG
+         rz53p1p18fFILBkwbeereZ8aXe4psrqMvJv9sXHtXnO2TUyVs5Tc6PeLbc3ralUtMw+g
+         NeY3og1PO1e/yPk23RtuBvmL4jD4Yv/gnC0hIduSY/6y0Opzo0HDfurkh3mDqgihXx6B
+         Y5ZaQ+lYpAHfY60sIzJ8OqNE6pL/GkcvrCR4SMN3k/8akjzWKYAytWrhHsjAV7NWDp6T
+         wpeQ==
+X-Gm-Message-State: AOAM5306b8yWbcDcxr4GQQqPNBu7Pn+0cy28wPrxYu9BtD5ChD9RGg7L
+	NQZfznJqcWudr251tX1o3ND1Zg==
+X-Google-Smtp-Source: ABdhPJzQnxjNRw3M1n4lJU3pDIkemY3ZCQKnOQ7VywhFrMYRm0itMgYfj3gWdktm3tes58COiW8SXA==
+X-Received: by 2002:a62:2b52:0:b029:142:2501:39e9 with SMTP id r79-20020a622b520000b0290142250139e9mr746426pfr.56.1600879439083;
+        Wed, 23 Sep 2020 09:43:59 -0700 (PDT)
+Received: from [192.168.1.30] ([65.144.74.34])
+        by smtp.gmail.com with ESMTPSA id q190sm241046pfq.99.2020.09.23.09.43.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2020 09:43:58 -0700 (PDT)
+Subject: Re: remove blkdev_get as a public API v2
+To: Christoph Hellwig <hch@lst.de>
 Cc: Josef Bacik <josef@toxicpanda.com>, Minchan Kim <minchan@kernel.org>,
-        Jan Hoeppner <hoeppner@linux.ibm.com>,
-        Joseph Qi <joseph.qi@linux.alibaba.com>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pavel Machek <pavel@ucw.cz>,
-        Len Brown <len.brown@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        linux-kernel@vger.kernel.org, nbd@other.debian.org,
-        linux-ide@vger.kernel.org, linux-s390@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, ocfs2-devel@oss.oracle.com,
-        linux-pm@vger.kernel.org, linux-mm@kvack.org,
-        linux-block@vger.kernel.org
+ Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pavel Machek <pavel@ucw.cz>,
+ Len Brown <len.brown@intel.com>, Andrew Morton <akpm@linux-foundation.org>,
+ linux-kernel@vger.kernel.org, nbd@other.debian.org,
+ linux-ide@vger.kernel.org, linux-s390@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+ linux-pm@vger.kernel.org, linux-mm@kvack.org, linux-block@vger.kernel.org
 References: <20200921071958.307589-1-hch@lst.de>
- <20200921071958.307589-9-hch@lst.de>
-From: Stefan Haberland <sth@linux.ibm.com>
-Autocrypt: addr=sth@linux.ibm.com; keydata=
- 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
- cH4TNHyhiR0KAbxE8qKx3Jc=
-Message-ID: <88ca251c-c417-cd92-3d47-653dff346d7c@linux.ibm.com>
-Date: Tue, 22 Sep 2020 17:18:59 +0200
+From: Jens Axboe <axboe@kernel.dk>
+Message-ID: <d23e5bd4-4d69-f909-eb8b-10c489b67f8b@kernel.dk>
+Date: Wed, 23 Sep 2020 10:43:57 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200921071958.307589-9-hch@lst.de>
+In-Reply-To: <20200921071958.307589-1-hch@lst.de>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
 Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
- definitions=2020-09-22_13:2020-09-21,2020-09-22 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- suspectscore=0 mlxlogscore=999 phishscore=0 impostorscore=0 adultscore=0
- clxscore=1011 spamscore=0 mlxscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2009220116
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Mv91u747_1.A.IaB.K-hafB@bendel>
+Resent-Message-ID: <is0mYiGbunG.A.M9B.Z83afB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1003
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1004
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -171,48 +107,26 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/88ca251c-c417-cd92-3d47-653dff346d7c@linux.ibm.com
-Resent-Date: Tue, 22 Sep 2020 16:00:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/d23e5bd4-4d69-f909-eb8b-10c489b67f8b@kernel.dk
+Resent-Date: Wed, 23 Sep 2020 17:00:09 +0000 (UTC)
 
-Am 21.09.20 um 09:19 schrieb Christoph Hellwig:
-> Use blkdev_get_by_dev instead of bdget_disk + blkdev_get.
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+On 9/21/20 1:19 AM, Christoph Hellwig wrote:
+> Hi Jens,
+> 
+> this series removes blkdev_get as a public API, leaving it as just an
+> implementation detail of blkdev_get_by_path and blkdev_get_by_dev.  The
+> reason for that is that blkdev_get is a very confusing API that requires
+> a struct block_device to be fed in, but then actually consumes the
+> reference.  And it turns out just using the two above mentioned APIs
+> actually significantly simplifies the code as well.
+> 
+> Changes since v1:
+>  - fix a mismerged that left a stray bdget_disk around
+>  - factour the partition scan at registration time code into a new
+>    helper.
 
-Beside what Sergei mentioned...
+Applied for 5.10, thanks.
 
-Reviewed-by: Stefan Haberland <sth@linux.ibm.com>
-
-
-> ---
->  drivers/s390/block/dasd_genhd.c | 15 ++++-----------
->  1 file changed, 4 insertions(+), 11 deletions(-)
->
-> diff --git a/drivers/s390/block/dasd_genhd.c b/drivers/s390/block/dasd_genhd.c
-> index af5b0ecb8f8923..a9698fba9b76ce 100644
-> --- a/drivers/s390/block/dasd_genhd.c
-> +++ b/drivers/s390/block/dasd_genhd.c
-> @@ -101,18 +101,11 @@ int dasd_scan_partitions(struct dasd_block *block)
->  	struct block_device *bdev;
->  	int rc;
->  
-> -	bdev = bdget_disk(block->gdp, 0);
-> -	if (!bdev) {
-> -		DBF_DEV_EVENT(DBF_ERR, block->base, "%s",
-> -			      "scan partitions error, bdget returned NULL");
-> -		return -ENODEV;
-> -	}
-> -
-> -	rc = blkdev_get(bdev, FMODE_READ, NULL);
-> -	if (rc < 0) {
-> +	bdev = blkdev_get_by_dev(disk_devt(block->gdp), FMODE_READ, NULL);
-> +	if (IS_ERR(bdev)) {
->  		DBF_DEV_EVENT(DBF_ERR, block->base,
-> -			      "scan partitions error, blkdev_get returned %d",
-> -			      rc);
-> +			      "scan partitions error, blkdev_get returned %ld",
-> +			      PTR_ERR(bdev));
->  		return -ENODEV;
->  	}
->  
+-- 
+Jens Axboe
 
