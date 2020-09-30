@@ -1,79 +1,92 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 290FB27739C
-	for <lists+nbd@lfdr.de>; Thu, 24 Sep 2020 16:09:13 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id D625D27DF13
+	for <lists+nbd@lfdr.de>; Wed, 30 Sep 2020 05:42:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 00D32206C8; Thu, 24 Sep 2020 14:09:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 24 14:09:12 2020
-Old-Return-Path: <jack@suse.cz>
+	id BAE222037C; Wed, 30 Sep 2020 03:42:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 30 03:42:08 2020
+Old-Return-Path: <houpu@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	FOURLA,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
-	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5E7EE206B9
-	for <lists-other-nbd@bendel.debian.org>; Thu, 24 Sep 2020 13:53:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 705DE203A1
+	for <lists-other-nbd@bendel.debian.org>; Wed, 30 Sep 2020 03:24:15 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.414 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DATE_IN_PAST_03_06=1.592,
-	DIGITS_LETTERS=1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id lCgwKSU3anvx for <lists-other-nbd@bendel.debian.org>;
-	Thu, 24 Sep 2020 13:53:46 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 785 seconds by postgrey-1.36 at bendel; Thu, 24 Sep 2020 13:53:46 UTC
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.suse.de", Issuer "DigiCert SHA2 High Assurance Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 71259206B6
-	for <nbd@other.debian.org>; Thu, 24 Sep 2020 13:53:46 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E5D67B0E6;
-	Thu, 24 Sep 2020 13:40:38 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
-	id A00AC1E12F3; Thu, 24 Sep 2020 10:56:33 +0200 (CEST)
-Date: Thu, 24 Sep 2020 10:56:33 +0200
-From: Jan Kara <jack@suse.cz>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>,
-	Minchan Kim <minchan@kernel.org>,
-	Stefan Haberland <sth@linux.ibm.com>,
-	Jan Hoeppner <hoeppner@linux.ibm.com>,
-	Joseph Qi <joseph.qi@linux.alibaba.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Pavel Machek <pavel@ucw.cz>, Len Brown <len.brown@intel.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-kernel@vger.kernel.org, nbd@other.debian.org,
-	linux-ide@vger.kernel.org, linux-s390@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, ocfs2-devel@oss.oracle.com,
-	linux-pm@vger.kernel.org, linux-mm@kvack.org,
-	linux-block@vger.kernel.org
-Subject: Re: [PATCH 01/14] block: move the NEED_PART_SCAN flag to struct
- gendisk
-Message-ID: <20200924085633.GD27019@quack2.suse.cz>
-References: <20200917165720.3285256-1-hch@lst.de>
- <20200917165720.3285256-2-hch@lst.de>
+	with ESMTP id Ac9dOQF8gUOn for <lists-other-nbd@bendel.debian.org>;
+	Wed, 30 Sep 2020 03:24:10 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pl1-x641.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com [IPv6:2607:f8b0:4864:20::641])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id AAF95203C2
+	for <nbd@other.debian.org>; Wed, 30 Sep 2020 03:24:09 +0000 (UTC)
+Received: by mail-pl1-x641.google.com with SMTP id t18so163896plo.1
+        for <nbd@other.debian.org>; Tue, 29 Sep 2020 20:24:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NwE7i74AuLDH0Fg4fY0Imy1bHpX3sGiN2a+2wH0x5Aw=;
+        b=lpaHpVFxeUbAycwqEq+dqDfNkNIpL8PpQ9uyAMX09hB34OpIeeoRbnH+RqatUvxJl0
+         QlrzVjh3Jji4/KVUFgpZrZOpyqm1XzHnXrBoDaFikdfaT+cHtLVNQEIWqm0FNJlVs/Zl
+         uf9oglP6DiMZFBD8NLbUjpPx2Ey7Jq9gwGQwQHF4p1Fo7GW5Q4Jemc+NXPw+m8p8W2FU
+         Odzz4yqwlf7+/BGxx/59FFuiZvPT3A2yJuzmnBzeyhxOOWfwCGilkq14X93EGT4Khe5z
+         +6RJQ72BwbZHOr4YuLF263NZXJtANc6GG2s0YOpGC/qlLIqvvTDa6gb3N6ulIkera9Yh
+         cNAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NwE7i74AuLDH0Fg4fY0Imy1bHpX3sGiN2a+2wH0x5Aw=;
+        b=cUtzYRzCIEqCqPhSGKNbMWjqlxshMIPFT3cyqbO6TAXZE/kkyokl5v/ptpR5mz9B/0
+         1mCaHkcrpjJn3FUfOSjkLtpQ0vVMhWur0Iwez9N+nNaIEtVuarPDEdzoR82v6VSu4k6F
+         DnKcHGXrwdJIUctRjIzrWn0A4PQuzV6wqeyhgc/+W0cX8aAKs7CLVVeoquvRmM5QODBt
+         BNW+xdvXITm6vDK6QW3FNIVXWRRpV9RVtMhOs72nwMJ/w476Hk8AFyG9S1mijo6ExhcN
+         v1lVm81pcqK5TB/n1jjfpqgVBdDqhCfqfsLUuEF5uEqgTY6tYp3CtN0zjmQfbMQ+/K69
+         vW3Q==
+X-Gm-Message-State: AOAM533ujcqyuyXOeGRwm2Uqst8/TbnqhhOcQD8Wz04ycff4WqIdydc5
+	/ymEOulpiWQfzqxD2pt6pF2+Gg==
+X-Google-Smtp-Source: ABdhPJxNPWswpvqpHT8Jy/8mIsOtJ790xLBWEKWe2VTaNtFgevoBAO9F7IQJ37tS9CDI0MqTjb5tqA==
+X-Received: by 2002:a17:90b:104f:: with SMTP id gq15mr607382pjb.215.1601436246107;
+        Tue, 29 Sep 2020 20:24:06 -0700 (PDT)
+Received: from box.bytedance.net ([61.120.150.78])
+        by smtp.gmail.com with ESMTPSA id w195sm226105pff.74.2020.09.29.20.24.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Sep 2020 20:24:05 -0700 (PDT)
+From: Hou Pu <houpu@bytedance.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	Hou Pu <houpu@bytedance.com>
+Subject: [PATCH v3 0/2] nbd: improve timeout handling and a fix
+Date: Wed, 30 Sep 2020 11:23:48 +0800
+Message-Id: <20200930032350.3936-1-houpu@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200917165720.3285256-2-hch@lst.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <1GMG7vnfhvH.A.pK.IiKbfB@bendel>
+Resent-Message-ID: <MYsqI-Ke_OP.A.z7H.Q6_cfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1005
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1006
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -83,177 +96,33 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20200924085633.GD27019@quack2.suse.cz
-Resent-Date: Thu, 24 Sep 2020 14:09:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20200930032350.3936-1-houpu@bytedance.com
+Resent-Date: Wed, 30 Sep 2020 03:42:08 +0000 (UTC)
 
-On Thu 17-09-20 18:57:07, Christoph Hellwig wrote:
-> We can only scan for partitions on the whole disk, so move the flag
-> from struct block_device to struct gendisk.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Patch #1 is a fix. Patch #2 is trying to improve io timeout
+handling.
 
-Makes sense. You can add:
+Thanks,
+Hou
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+v3 changes:
+* Add 'Reviewed-by: Josef Bacik <josef@toxicpanda.com>' in patch #2.
 
-								Honza
+v2 changes:
+* Add 'Reviewed-by: Josef Bacik <josef@toxicpanda.com>' in patch #1.
+* Original patch #2 is dropped.
+* Keep the behavior same as before when we don't set a .timeout
+and num_connections > 1.
+* Coding style fixes.
 
-> ---
->  block/genhd.c             | 4 ++--
->  drivers/block/nbd.c       | 8 ++++----
->  drivers/ide/ide-gd.c      | 2 +-
->  fs/block_dev.c            | 7 +++----
->  include/linux/blk_types.h | 4 +---
->  include/linux/genhd.h     | 2 ++
->  6 files changed, 13 insertions(+), 14 deletions(-)
-> 
-> diff --git a/block/genhd.c b/block/genhd.c
-> index 9d060e79eb31d8..7b56203c90a303 100644
-> --- a/block/genhd.c
-> +++ b/block/genhd.c
-> @@ -731,7 +731,7 @@ static void register_disk(struct device *parent, struct gendisk *disk,
->  	if (!bdev)
->  		goto exit;
->  
-> -	set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +	set_bit(GD_NEED_PART_SCAN, &disk->state);
->  	err = blkdev_get(bdev, FMODE_READ, NULL);
->  	if (err < 0)
->  		goto exit;
-> @@ -2112,7 +2112,7 @@ bool bdev_check_media_change(struct block_device *bdev)
->  	if (__invalidate_device(bdev, true))
->  		pr_warn("VFS: busy inodes on changed media %s\n",
->  			bdev->bd_disk->disk_name);
-> -	set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +	set_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
->  	return true;
->  }
->  EXPORT_SYMBOL(bdev_check_media_change);
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index 15eed210feeff4..2dca0aab0a9a25 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -315,7 +315,7 @@ static void nbd_size_update(struct nbd_device *nbd)
->  			bd_set_nr_sectors(bdev, nr_sectors);
->  			set_blocksize(bdev, config->blksize);
->  		} else
-> -			set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +			set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
->  		bdput(bdev);
->  	}
->  	kobject_uevent(&nbd_to_dev(nbd)->kobj, KOBJ_CHANGE);
-> @@ -1322,7 +1322,7 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *b
->  		return ret;
->  
->  	if (max_part)
-> -		set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +		set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
->  	mutex_unlock(&nbd->config_lock);
->  	ret = wait_event_interruptible(config->recv_wq,
->  					 atomic_read(&config->recv_threads) == 0);
-> @@ -1500,9 +1500,9 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
->  		refcount_set(&nbd->config_refs, 1);
->  		refcount_inc(&nbd->refs);
->  		mutex_unlock(&nbd->config_lock);
-> -		set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +		set_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
->  	} else if (nbd_disconnected(nbd->config)) {
-> -		set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +		set_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
->  	}
->  out:
->  	mutex_unlock(&nbd_index_mutex);
-> diff --git a/drivers/ide/ide-gd.c b/drivers/ide/ide-gd.c
-> index 661e2aa9c96784..e2b6c82586ce8b 100644
-> --- a/drivers/ide/ide-gd.c
-> +++ b/drivers/ide/ide-gd.c
-> @@ -230,7 +230,7 @@ static int ide_gd_open(struct block_device *bdev, fmode_t mode)
->  				bdev->bd_disk->disk_name);
->  		drive->disk_ops->get_capacity(drive);
->  		set_capacity(disk, ide_gd_capacity(drive));
-> -		set_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +		set_bit(GD_NEED_PART_SCAN, &disk->state);
->  	} else if (drive->dev_flags & IDE_DFLAG_FORMAT_IN_PROGRESS) {
->  		ret = -EBUSY;
->  		goto out_put_idkp;
-> diff --git a/fs/block_dev.c b/fs/block_dev.c
-> index 0b34955b9e360f..1a9325f4315769 100644
-> --- a/fs/block_dev.c
-> +++ b/fs/block_dev.c
-> @@ -910,7 +910,6 @@ struct block_device *bdget(dev_t dev)
->  		bdev->bd_super = NULL;
->  		bdev->bd_inode = inode;
->  		bdev->bd_part_count = 0;
-> -		bdev->bd_flags = 0;
->  		inode->i_mode = S_IFBLK;
->  		inode->i_rdev = dev;
->  		inode->i_bdev = bdev;
-> @@ -1385,7 +1384,7 @@ int bdev_disk_changed(struct block_device *bdev, bool invalidate)
->  
->  	lockdep_assert_held(&bdev->bd_mutex);
->  
-> -	clear_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags);
-> +	clear_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
->  
->  rescan:
->  	ret = blk_drop_partitions(bdev);
-> @@ -1509,7 +1508,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
->  			 * The latter is necessary to prevent ghost
->  			 * partitions on a removed medium.
->  			 */
-> -			if (test_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags) &&
-> +			if (test_bit(GD_NEED_PART_SCAN, &disk->state) &&
->  			    (!ret || ret == -ENOMEDIUM))
->  				bdev_disk_changed(bdev, ret == -ENOMEDIUM);
->  
-> @@ -1539,7 +1538,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
->  			if (bdev->bd_disk->fops->open)
->  				ret = bdev->bd_disk->fops->open(bdev, mode);
->  			/* the same as first opener case, read comment there */
-> -			if (test_bit(BDEV_NEED_PART_SCAN, &bdev->bd_flags) &&
-> +			if (test_bit(GD_NEED_PART_SCAN, &disk->state) &&
->  			    (!ret || ret == -ENOMEDIUM))
->  				bdev_disk_changed(bdev, ret == -ENOMEDIUM);
->  			if (ret)
-> diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
-> index 6ffa783e16335e..eb20e28184ab19 100644
-> --- a/include/linux/blk_types.h
-> +++ b/include/linux/blk_types.h
-> @@ -19,8 +19,6 @@ struct cgroup_subsys_state;
->  typedef void (bio_end_io_t) (struct bio *);
->  struct bio_crypt_ctx;
->  
-> -#define BDEV_NEED_PART_SCAN		0
-> -
->  struct block_device {
->  	dev_t			bd_dev;
->  	int			bd_openers;
-> @@ -39,7 +37,7 @@ struct block_device {
->  	struct hd_struct *	bd_part;
->  	/* number of times partitions within this device have been opened. */
->  	unsigned		bd_part_count;
-> -	unsigned long		bd_flags;
-> +
->  	spinlock_t		bd_size_lock; /* for bd_inode->i_size updates */
->  	struct gendisk *	bd_disk;
->  	struct backing_dev_info *bd_bdi;
-> diff --git a/include/linux/genhd.h b/include/linux/genhd.h
-> index 1c97cf84f011a7..38f23d75701379 100644
-> --- a/include/linux/genhd.h
-> +++ b/include/linux/genhd.h
-> @@ -191,6 +191,8 @@ struct gendisk {
->  	void *private_data;
->  
->  	int flags;
-> +	unsigned long state;
-> +#define GD_NEED_PART_SCAN		0
->  	struct rw_semaphore lookup_sem;
->  	struct kobject *slave_dir;
->  
-> -- 
-> 2.28.0
-> 
+Hou Pu (2):
+  nbd: return -ETIMEDOUT when NBD_DO_IT ioctl returns
+  nbd: introduce a client flag to do zero timeout handling
+
+ drivers/block/nbd.c      | 33 ++++++++++++++++++++++++++++-----
+ include/uapi/linux/nbd.h |  4 ++++
+ 2 files changed, 32 insertions(+), 5 deletions(-)
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.11.0
 
