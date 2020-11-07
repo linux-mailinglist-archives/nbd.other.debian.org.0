@@ -1,98 +1,87 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A65792A4C8B
-	for <lists+nbd@lfdr.de>; Tue,  3 Nov 2020 18:18:20 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DC852AA1EB
+	for <lists+nbd@lfdr.de>; Sat,  7 Nov 2020 01:57:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8D94A2056D; Tue,  3 Nov 2020 17:18:20 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov  3 17:18:20 2020
-Old-Return-Path: <josef@toxicpanda.com>
+	id 2527B20125; Sat,  7 Nov 2020 00:57:22 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Nov  7 00:57:22 2020
+Old-Return-Path: <song@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-2.3 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_HI autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3FBFA20509
-	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Nov 2020 17:01:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 21A582031B
+	for <lists-other-nbd@bendel.debian.org>; Sat,  7 Nov 2020 00:41:27 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.981 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.181 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Jm3iVw370-Pv for <lists-other-nbd@bendel.debian.org>;
-	Tue,  3 Nov 2020 17:01:15 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x72c.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com [IPv6:2607:f8b0:4864:20::72c])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 38C45204D2
-	for <nbd@other.debian.org>; Tue,  3 Nov 2020 17:01:14 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id r7so15337851qkf.3
-        for <nbd@other.debian.org>; Tue, 03 Nov 2020 09:01:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Nq9emdk9/VH3etoKCshVdn5b0ODJscsHUoyYM3vXRsk=;
-        b=m/Z4E4xllSTiWaEF9DMmkER2TYTqigEOfGHL8tnnebBSuZAllPym9m3FcE7VITk9zG
-         AwaALaAeoBzD0bNlgrrzTgnK3a8hCFqMekzjEunGQWg8xpQlN/n9e+3GPgwwUxkzsHKh
-         00/i0IUn9+23K+ZWY7xt1DAPoHL5odjunW4WIwkZbkQ/TMt04L+fe27+TavVv8rscymn
-         Vc1zfbXtbtVW2nn8+M0cHGSO/NBUx9km4pADBe0dlitcVuHS8Qqe+EfU3O6jJ06BrkI8
-         6C4M6X5D4h8/K9A7v3p+rTBPC0Pk94JuGNV1MiS84TrxoUHo3KDW8/fU94nOASGjstUS
-         3VFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=Nq9emdk9/VH3etoKCshVdn5b0ODJscsHUoyYM3vXRsk=;
-        b=nRpgiVzBIDjTBlLJpCWXLrgY4K90uEmArgMaFIrehlsx0alzw506bWYEG4vu34uP8r
-         loFdw7A5PxGOBZLQqkA4I9lAXkpNRzB2Gh2hPze2Dz8mxHHFLCRaf6XAV1rQZaZFz/H2
-         DpxW7+nih4xn57Q89npALfewqmZqrtyjA+yP4CpOq2pdo9Z5vP+5XB9Dq+iWMkaSSBAA
-         7r/FmJYzNGA7BOpnajuqNZC5InPOG3d2lssZSxCASRFid+rlG5p2tF4c++J6Hxwu81D8
-         oVyD6+BKEahDq0xDKQIi/HGyTZnLxtmIKZfgsTILhSiKZ2oyES3ahhzwU0M/dsbvy4qZ
-         Y7Rg==
-X-Gm-Message-State: AOAM531OJTfRc7aB18sWSeCBWzpv0xrdecC3DGvvf64wDKDvW0yAknTe
-	W9cfA+mSg0Ulnbi9JVYNGy4Dmw==
-X-Google-Smtp-Source: ABdhPJx9uvhiDJfmYjsgwJSwPH9cXkjoyHlQhyl/BtA+7OFacC/7K2DwA11+kxnIGYs16+38zj8hEA==
-X-Received: by 2002:a37:2784:: with SMTP id n126mr20725104qkn.477.1604422871347;
-        Tue, 03 Nov 2020 09:01:11 -0800 (PST)
-Received: from [192.168.1.45] (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
-        by smtp.gmail.com with ESMTPSA id h4sm10820116qkl.82.2020.11.03.09.01.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Nov 2020 09:01:10 -0800 (PST)
-Subject: Re: [PATCH v3 2/2] nbd: add comments about double lock for
- config_lock confusion
-To: xiubli@redhat.com, axboe@kernel.dk, ming.lei@redhat.com
-Cc: nbd@other.debian.org, linux-block@vger.kernel.org, jdillama@redhat.com,
- mgolub@suse.de
-References: <20201103065156.342756-1-xiubli@redhat.com>
- <20201103065156.342756-3-xiubli@redhat.com>
-From: Josef Bacik <josef@toxicpanda.com>
-Message-ID: <cfea847e-8d60-ee61-3375-7637197ab8bc@toxicpanda.com>
-Date: Tue, 3 Nov 2020 12:01:09 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.0
+	with ESMTP id KQ4JvUdGT1Gh for <lists-other-nbd@bendel.debian.org>;
+	Sat,  7 Nov 2020 00:41:22 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 9E12020318
+	for <nbd@other.debian.org>; Sat,  7 Nov 2020 00:41:22 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 6DE20221FE
+	for <nbd@other.debian.org>; Sat,  7 Nov 2020 00:32:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1604709140;
+	bh=KcpIPe+A58yFNxxgdAdaS3ugXYdHOBtuseeQrVYguHI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=O7dyOXal7YL7+3TQPR507WAWXuCRa9VXvh3tl/XZ3Wmey5p91Ew7PyDj8k/tZUsUX
+	 XY5D3+3MbK8y+gvrbaa+8QamA+h71zwFvUqQhxnEoaqEjETZ+k6/bM4uDXaudNmc1c
+	 Llst5cl3Ll69uQ67EfsvLxy48UchXaU9XWGm+pGE=
+Received: by mail-lf1-f46.google.com with SMTP id e27so4360424lfn.7
+        for <nbd@other.debian.org>; Fri, 06 Nov 2020 16:32:20 -0800 (PST)
+X-Gm-Message-State: AOAM530LOsyB+aPY/UE6LT4sc3SNwDVNq3SRKtaqKTnoYwYd9CwHNsRI
+	w8KxdXwsNj8PWVRiFMRMi78QD7bNB7D2kLZEex8=
+X-Google-Smtp-Source: ABdhPJzPKJgvb0YpcBOATticPbEhSqNhkf0gjO34lXWldMg14DmOELWQsnbdEhjrrSsS6KPE2QcSxjJkDLUT8kUmj4w=
+X-Received: by 2002:a19:ae13:: with SMTP id f19mr1682538lfc.193.1604709138508;
+ Fri, 06 Nov 2020 16:32:18 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20201103065156.342756-3-xiubli@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20201106190337.1973127-1-hch@lst.de> <20201106190337.1973127-22-hch@lst.de>
+In-Reply-To: <20201106190337.1973127-22-hch@lst.de>
+From: Song Liu <song@kernel.org>
+Date: Fri, 6 Nov 2020 16:32:07 -0800
+X-Gmail-Original-Message-ID: <CAPhsuW6GuXe_2YKnP5wRHg7ytOxjUzTQZ=fG2RKxs6woNVPFaQ@mail.gmail.com>
+Message-ID: <CAPhsuW6GuXe_2YKnP5wRHg7ytOxjUzTQZ=fG2RKxs6woNVPFaQ@mail.gmail.com>
+Subject: Re: [PATCH 21/24] md: use set_capacity_and_notify
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, 
+	Josef Bacik <josef@toxicpanda.com>, Ilya Dryomov <idryomov@gmail.com>, 
+	Jack Wang <jinpu.wang@cloud.ionos.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+	Jason Wang <jasowang@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Stefan Hajnoczi <stefanha@redhat.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Minchan Kim <minchan@kernel.org>, Mike Snitzer <snitzer@redhat.com>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, dm-devel@redhat.com, 
+	linux-block@vger.kernel.org, drbd-dev@lists.linbit.com, nbd@other.debian.org, 
+	ceph-devel@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	linux-raid <linux-raid@vger.kernel.org>, linux-nvme@lists.infradead.org, 
+	linux-scsi@vger.kernel.org, Linux-Fsdevel <linux-fsdevel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <eesW2wWGt_H.A.g_G.cDZofB@bendel>
+Resent-Message-ID: <_1PsI2UjgQM.A.BiC.yDfpfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1037
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1039
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -102,26 +91,15 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/cfea847e-8d60-ee61-3375-7637197ab8bc@toxicpanda.com
-Resent-Date: Tue,  3 Nov 2020 17:18:20 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAPhsuW6GuXe_2YKnP5wRHg7ytOxjUzTQZ=fG2RKxs6woNVPFaQ@mail.gmail.com
+Resent-Date: Sat,  7 Nov 2020 00:57:22 +0000 (UTC)
 
-On 11/3/20 1:51 AM, xiubli@redhat.com wrote:
-> From: Xiubo Li <xiubli@redhat.com>
-> 
-> When calling the ioctl(), fget() will be called on this fd, and
-> nbd_release() is only called when the fd's refcount drops to zero.
-> With this we can make sure that the nbd_release() won't be called
-> before the ioctl() finished.
-> 
-> So there won't have the double lock issue for the "config_lock",
-> which has already been held by nbd_ioctl().
-> 
-> Reviewed-by: Ming Lei <ming.lei@redhat.com>
-> Signed-off-by: Xiubo Li <xiubli@redhat.com>
+On Fri, Nov 6, 2020 at 11:04 AM Christoph Hellwig <hch@lst.de> wrote:
+>
+> Use set_capacity_and_notify to set the size of both the disk and block
+> device.  This also gets the uevent notifications for the resize for free.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Reviewed-by: Josef Bacik <josef@toxicpanda.com>
-
-Thanks,
-
-Josef
+Acked-by: Song Liu <song@kernel.org>
 
