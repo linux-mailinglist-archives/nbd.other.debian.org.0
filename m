@@ -1,46 +1,45 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2144A2AF203
-	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 14:24:30 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61E6D2AF204
+	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 14:24:40 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 096FB20384; Wed, 11 Nov 2020 13:24:30 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 13:24:30 2020
+	id 4B00820385; Wed, 11 Nov 2020 13:24:40 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 13:24:40 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.8 required=4.0 tests=CC_TOO_MANY,FOURLA,LONGWORD,
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
 	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
 	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0C99D2037D
-	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 13:07:53 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1D8D6202E5
+	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 13:08:26 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.799 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, LONGWORD=2,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.201 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=-0.01,
+	RCVD_IN_MSPIKE_WL=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id rSxOQmvAWXiF for <lists-other-nbd@bendel.debian.org>;
-	Wed, 11 Nov 2020 13:07:48 +0000 (UTC)
+	with ESMTP id Muoh6TXCPMqr for <lists-other-nbd@bendel.debian.org>;
+	Wed, 11 Nov 2020 13:08:22 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id A7B73202E5
-	for <nbd@other.debian.org>; Wed, 11 Nov 2020 13:07:48 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 01F74202AC
+	for <nbd@other.debian.org>; Wed, 11 Nov 2020 13:08:21 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 5E19FAD45;
-	Wed, 11 Nov 2020 13:07:46 +0000 (UTC)
-Subject: Re: [PATCH 05/24] block: remove the update_bdev parameter from
- set_capacity_revalidate_and_notify
+	by mx2.suse.de (Postfix) with ESMTP id ABAFFAD45;
+	Wed, 11 Nov 2020 13:08:19 +0000 (UTC)
+Subject: Re: [PATCH 06/24] block: add a return value to
+ set_capacity_and_notify
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -57,23 +56,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201111082658.3401686-1-hch@lst.de>
- <20201111082658.3401686-6-hch@lst.de>
+ <20201111082658.3401686-7-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <a8416510-e3ca-a43f-a3e6-23fb1c20c34f@suse.de>
-Date: Wed, 11 Nov 2020 14:07:43 +0100
+Message-ID: <7d892cf3-70bc-7d5d-81f0-07b87e49f6ae@suse.de>
+Date: Wed, 11 Nov 2020 14:08:17 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201111082658.3401686-6-hch@lst.de>
+In-Reply-To: <20201111082658.3401686-7-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <HsjdyYIerqM.A.oL.OY-qfB@bendel>
+Resent-Message-ID: <Km73t895WWH.A.3N.YY-qfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1059
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1060
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -83,25 +82,17 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/a8416510-e3ca-a43f-a3e6-23fb1c20c34f@suse.de
-Resent-Date: Wed, 11 Nov 2020 13:24:30 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/7d892cf3-70bc-7d5d-81f0-07b87e49f6ae@suse.de
+Resent-Date: Wed, 11 Nov 2020 13:24:40 +0000 (UTC)
 
 On 11/11/20 9:26 AM, Christoph Hellwig wrote:
-> The update_bdev argument is always set to true, so remove it.  Also
-> rename the function to the slighly less verbose set_capacity_and_notify,
-> as propagating the disk size to the block device isn't really
-> revalidation.
+> Return if the function ended up sending an uevent or not.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   block/genhd.c                | 13 +++++--------
->   drivers/block/loop.c         | 11 +++++------
->   drivers/block/virtio_blk.c   |  2 +-
->   drivers/block/xen-blkfront.c |  2 +-
->   drivers/nvme/host/core.c     |  2 +-
->   drivers/scsi/sd.c            |  5 ++---
->   include/linux/genhd.h        |  3 +--
->   7 files changed, 16 insertions(+), 22 deletions(-)
+>   block/genhd.c         | 7 +++++--
+>   include/linux/genhd.h | 2 +-
+>   2 files changed, 6 insertions(+), 3 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
