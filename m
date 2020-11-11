@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE8592AF34E
-	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 15:15:08 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 279342AF350
+	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 15:15:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id CA40D202E4; Wed, 11 Nov 2020 14:15:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 14:15:08 2020
+	id 167DF2034B; Wed, 11 Nov 2020 14:15:19 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 14:15:19 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 16C6F20305
-	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 13:57:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DE1972034B
+	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 13:59:43 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.201 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
@@ -26,19 +26,20 @@ X-Amavis-Spam-Status: No, score=-1.201 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_WL=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id IzdZorbK9YzK for <lists-other-nbd@bendel.debian.org>;
-	Wed, 11 Nov 2020 13:57:48 +0000 (UTC)
+	with ESMTP id agZNCzhs9bnT for <lists-other-nbd@bendel.debian.org>;
+	Wed, 11 Nov 2020 13:59:39 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 93FE020300
-	for <nbd@other.debian.org>; Wed, 11 Nov 2020 13:57:48 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id CD7CE20305
+	for <nbd@other.debian.org>; Wed, 11 Nov 2020 13:59:39 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E144AABD1;
-	Wed, 11 Nov 2020 13:57:45 +0000 (UTC)
-Subject: Re: [PATCH 13/24] dm: use set_capacity_and_notify
+	by mx2.suse.de (Postfix) with ESMTP id 8ABF3ABD6;
+	Wed, 11 Nov 2020 13:59:37 +0000 (UTC)
+Subject: Re: [PATCH 15/24] nvme: use set_capacity_and_notify in
+ nvme_set_queue_dying
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -55,23 +56,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201111082658.3401686-1-hch@lst.de>
- <20201111082658.3401686-14-hch@lst.de>
+ <20201111082658.3401686-16-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <1327a2b4-d912-799d-ac94-4f11bf071e15@suse.de>
-Date: Wed, 11 Nov 2020 14:57:44 +0100
+Message-ID: <878d9852-4b8d-c5a7-36d4-0fda80fd74c4@suse.de>
+Date: Wed, 11 Nov 2020 14:59:36 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201111082658.3401686-14-hch@lst.de>
+In-Reply-To: <20201111082658.3401686-16-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <5csHoc26PmG.A.1JH.sH_qfB@bendel>
+Resent-Message-ID: <WCOPliIfX2O.A.-LH.3H_qfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1061
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1062
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -81,17 +82,18 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/1327a2b4-d912-799d-ac94-4f11bf071e15@suse.de
-Resent-Date: Wed, 11 Nov 2020 14:15:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/878d9852-4b8d-c5a7-36d4-0fda80fd74c4@suse.de
+Resent-Date: Wed, 11 Nov 2020 14:15:19 +0000 (UTC)
 
 On 11/11/20 9:26 AM, Christoph Hellwig wrote:
-> Use set_capacity_and_notify to set the size of both the disk and block
-> device.  This also gets the uevent notifications for the resize for free.
+> Use the block layer helper to update both the disk and block device
+> sizes.  Contrary to the name no notification is sent in this case,
+> as a size 0 is special cased.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   drivers/md/dm.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+>   drivers/nvme/host/core.c | 13 +------------
+>   1 file changed, 1 insertion(+), 12 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
