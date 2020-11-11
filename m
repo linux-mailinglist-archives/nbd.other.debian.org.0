@@ -2,43 +2,45 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B5042AF16F
-	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 14:03:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DD2D2AF1FF
+	for <lists+nbd@lfdr.de>; Wed, 11 Nov 2020 14:24:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 32697201F9; Wed, 11 Nov 2020 13:03:20 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 13:03:20 2020
+	id 3B26820385; Wed, 11 Nov 2020 13:24:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Nov 11 13:24:09 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
+X-Spam-Level: **
+X-Spam-Status: No, score=2.8 required=4.0 tests=CC_TOO_MANY,FOURLA,LONGWORD,
 	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
 	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 38C6820344
-	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 12:47:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 9A56D2037A
+	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Nov 2020 13:06:18 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.201 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=-0.01,
-	RCVD_IN_MSPIKE_WL=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.799 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, LONGWORD=2,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id VyMLoKNDI_d8 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 11 Nov 2020 12:47:24 +0000 (UTC)
+	with ESMTP id AnL8FYwM7JFa for <lists-other-nbd@bendel.debian.org>;
+	Wed, 11 Nov 2020 13:06:16 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id E904920282
-	for <nbd@other.debian.org>; Wed, 11 Nov 2020 12:47:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 8444E201F9
+	for <nbd@other.debian.org>; Wed, 11 Nov 2020 13:06:16 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id A9D22ABD6;
-	Wed, 11 Nov 2020 12:47:22 +0000 (UTC)
-Subject: Re: [PATCH 02/24] loop: remove loop_set_size
+	by mx2.suse.de (Postfix) with ESMTP id 2B341AFC6;
+	Wed, 11 Nov 2020 13:06:14 +0000 (UTC)
+Subject: Re: [PATCH 03/24] nvme: let set_capacity_revalidate_and_notify update
+ the bdev size
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -55,23 +57,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201111082658.3401686-1-hch@lst.de>
- <20201111082658.3401686-3-hch@lst.de>
+ <20201111082658.3401686-4-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <e98e9de2-826a-6a1e-cbf4-605557e846fa@suse.de>
-Date: Wed, 11 Nov 2020 13:47:19 +0100
+Message-ID: <92fdb64d-b6b1-a934-b32b-b3ce565fadea@suse.de>
+Date: Wed, 11 Nov 2020 14:06:11 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201111082658.3401686-3-hch@lst.de>
+In-Reply-To: <20201111082658.3401686-4-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <1L4NCihSaYN.A.q0.YE-qfB@bendel>
+Resent-Message-ID: <BxUlFlnbCwH.A.vF.5X-qfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1056
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1057
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -81,18 +83,16 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/e98e9de2-826a-6a1e-cbf4-605557e846fa@suse.de
-Resent-Date: Wed, 11 Nov 2020 13:03:20 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/92fdb64d-b6b1-a934-b32b-b3ce565fadea@suse.de
+Resent-Date: Wed, 11 Nov 2020 13:24:09 +0000 (UTC)
 
 On 11/11/20 9:26 AM, Christoph Hellwig wrote:
-> Just use set_capacity_revalidate_and_notify directly, as this function
-> can update the block device size as well when the last parameter is set
-> to true.
+> There is no good reason to call revalidate_disk_size separately.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   drivers/block/loop.c | 37 +++++++------------------------------
->   1 file changed, 7 insertions(+), 30 deletions(-)
+>   drivers/nvme/host/core.c | 5 +----
+>   1 file changed, 1 insertion(+), 4 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
