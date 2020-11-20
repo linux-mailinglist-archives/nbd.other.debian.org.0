@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37E672BA40A
-	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:57:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83F522BA424
+	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 09:00:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A512220D16; Fri, 20 Nov 2020 07:57:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:57:09 2020
+	id 6B7AB20D1A; Fri, 20 Nov 2020 08:00:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 08:00:14 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DF2C720C89
-	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:41:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E235120C3D
+	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:43:09 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.179 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, FOURLA=0.1,
@@ -28,20 +28,20 @@ X-Amavis-Spam-Status: No, score=-0.179 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id mcH4mBZh0oX9 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 20 Nov 2020 07:41:21 +0000 (UTC)
+	with ESMTP id sHGuIh8KVIKo for <lists-other-nbd@bendel.debian.org>;
+	Fri, 20 Nov 2020 07:43:05 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 544BF20CB9
-	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:41:21 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 4EBA120CF8
+	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:43:05 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 0C348AC23;
-	Fri, 20 Nov 2020 07:41:19 +0000 (UTC)
-Subject: Re: [PATCH 64/78] dm: simplify flush_bio initialization in
- __send_empty_flush
+	by mx2.suse.de (Postfix) with ESMTP id E6A77AB3D;
+	Fri, 20 Nov 2020 07:43:02 +0000 (UTC)
+Subject: Re: [PATCH 65/78] dm: remove the block_device reference in struct
+ mapped_device
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -58,23 +58,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201116145809.410558-1-hch@lst.de>
- <20201116145809.410558-65-hch@lst.de>
+ <20201116145809.410558-66-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <38ac9782-a563-b7ea-595a-124159fb755d@suse.de>
-Date: Fri, 20 Nov 2020 08:41:17 +0100
+Message-ID: <310bff8b-dbda-609a-a392-619733b86bd1@suse.de>
+Date: Fri, 20 Nov 2020 08:43:01 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201116145809.410558-65-hch@lst.de>
+In-Reply-To: <20201116145809.410558-66-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <OPhjfHN_h8E.A.GdG.Vb3tfB@bendel>
+Resent-Message-ID: <v1Ozn-zKioP.A.BwD.Oe3tfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1087
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1088
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,48 +84,99 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/38ac9782-a563-b7ea-595a-124159fb755d@suse.de
-Resent-Date: Fri, 20 Nov 2020 07:57:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/310bff8b-dbda-609a-a392-619733b86bd1@suse.de
+Resent-Date: Fri, 20 Nov 2020 08:00:14 +0000 (UTC)
 
 On 11/16/20 3:57 PM, Christoph Hellwig wrote:
-> We don't really need the struct block_device to initialize a bio.  So
-> switch from using bio_set_dev to manually setting up bi_disk (bi_partno
-> will always be zero and has been cleared by bio_init already).
+> Get rid of the long-lasting struct block_device reference in
+> struct mapped_device.  The only remaining user is the freeze code,
+> where we can trivially look up the block device at freeze time
+> and release the reference at thaw time.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   drivers/md/dm.c | 12 +++---------
->   1 file changed, 3 insertions(+), 9 deletions(-)
+>   drivers/md/dm-core.h |  2 --
+>   drivers/md/dm.c      | 22 +++++++++++-----------
+>   2 files changed, 11 insertions(+), 13 deletions(-)
 > 
+> diff --git a/drivers/md/dm-core.h b/drivers/md/dm-core.h
+> index d522093cb39dda..b1b400ed76fe90 100644
+> --- a/drivers/md/dm-core.h
+> +++ b/drivers/md/dm-core.h
+> @@ -107,8 +107,6 @@ struct mapped_device {
+>   	/* kobject and completion */
+>   	struct dm_kobject_holder kobj_holder;
+>   
+> -	struct block_device *bdev;
+> -
+>   	struct dm_stats stats;
+>   
+>   	/* for blk-mq request-based DM support */
 > diff --git a/drivers/md/dm.c b/drivers/md/dm.c
-> index 54739f1b579bc8..6d7eb72d41f9ea 100644
+> index 6d7eb72d41f9ea..c789ffea2badde 100644
 > --- a/drivers/md/dm.c
 > +++ b/drivers/md/dm.c
-> @@ -1422,18 +1422,12 @@ static int __send_empty_flush(struct clone_info *ci)
->   	 */
->   	bio_init(&flush_bio, NULL, 0);
->   	flush_bio.bi_opf = REQ_OP_WRITE | REQ_PREFLUSH | REQ_SYNC;
-> +	flush_bio.bi_disk = ci->io->md->disk;
-> +	bio_associate_blkg(&flush_bio);
-> +
->   	ci->bio = &flush_bio;
->   	ci->sector_count = 0;
+> @@ -1744,11 +1744,6 @@ static void cleanup_mapped_device(struct mapped_device *md)
 >   
-> -	/*
-> -	 * Empty flush uses a statically initialized bio, as the base for
-> -	 * cloning.  However, blkg association requires that a bdev is
-> -	 * associated with a gendisk, which doesn't happen until the bdev is
-> -	 * opened.  So, blkg association is done at issue time of the flush
-> -	 * rather than when the device is created in alloc_dev().
-> -	 */
-> -	bio_set_dev(ci->bio, ci->io->md->bdev);
+>   	cleanup_srcu_struct(&md->io_barrier);
+>   
+> -	if (md->bdev) {
+> -		bdput(md->bdev);
+> -		md->bdev = NULL;
+> -	}
 > -
->   	BUG_ON(bio_has_data(ci->bio));
->   	while ((ti = dm_table_get_target(ci->map, target_nr++)))
->   		__send_duplicate_bios(ci, ti, ti->num_flush_bios, NULL);
+>   	mutex_destroy(&md->suspend_lock);
+>   	mutex_destroy(&md->type_lock);
+>   	mutex_destroy(&md->table_devices_lock);
+> @@ -1840,10 +1835,6 @@ static struct mapped_device *alloc_dev(int minor)
+>   	if (!md->wq)
+>   		goto bad;
+>   
+> -	md->bdev = bdget_disk(md->disk, 0);
+> -	if (!md->bdev)
+> -		goto bad;
+> -
+>   	dm_stats_init(&md->stats);
+>   
+>   	/* Populate the mapping, nobody knows we exist yet */
+> @@ -2384,12 +2375,17 @@ struct dm_table *dm_swap_table(struct mapped_device *md, struct dm_table *table)
+>    */
+>   static int lock_fs(struct mapped_device *md)
+>   {
+> +	struct block_device *bdev;
+>   	int r;
+>   
+>   	WARN_ON(md->frozen_sb);
+>   
+> -	md->frozen_sb = freeze_bdev(md->bdev);
+> +	bdev = bdget_disk(md->disk, 0);
+> +	if (!bdev)
+> +		return -ENOMEM;
+> +	md->frozen_sb = freeze_bdev(bdev);
+>   	if (IS_ERR(md->frozen_sb)) {
+> +		bdput(bdev);
+>   		r = PTR_ERR(md->frozen_sb);
+>   		md->frozen_sb = NULL;
+>   		return r;
+> @@ -2402,10 +2398,14 @@ static int lock_fs(struct mapped_device *md)
+>   
+>   static void unlock_fs(struct mapped_device *md)
+>   {
+> +	struct block_device *bdev;
+> +
+>   	if (!test_bit(DMF_FROZEN, &md->flags))
+>   		return;
+>   
+> -	thaw_bdev(md->bdev, md->frozen_sb);
+> +	bdev = md->frozen_sb->s_bdev;
+> +	thaw_bdev(bdev, md->frozen_sb);
+> +	bdput(bdev);
+>   	md->frozen_sb = NULL;
+>   	clear_bit(DMF_FROZEN, &md->flags);
+>   }
 > 
-Ah, thought as much. I've stumbled across this while debugging 
-blk-interposer.
+Yay. Just what I need for the blk-interposer code, where the ->bdev
+pointer is really getting in the way.
 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
