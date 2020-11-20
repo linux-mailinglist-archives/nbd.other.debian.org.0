@@ -2,46 +2,43 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6524F2BA3A5
-	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:42:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD1942BA3CA
+	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:48:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4D63A20D0B; Fri, 20 Nov 2020 07:42:36 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:42:36 2020
+	id C3F8720D0F; Fri, 20 Nov 2020 07:48:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:48:08 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	FOURLA,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CFF1020CD6
-	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:26:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 24A8F20CD6
+	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:31:57 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.179 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.179 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001,
+	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id XwFgZFee2GWA for <lists-other-nbd@bendel.debian.org>;
-	Fri, 20 Nov 2020 07:26:25 +0000 (UTC)
+	with ESMTP id Bdy5v5j7eq8m for <lists-other-nbd@bendel.debian.org>;
+	Fri, 20 Nov 2020 07:31:54 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 751F320CB2
-	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:26:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 8FD8D20CD4
+	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:31:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 2A51FAB3D;
-	Fri, 20 Nov 2020 07:26:23 +0000 (UTC)
-Subject: Re: [PATCH 55/78] block: change the hash used for looking up block
- devices
+	by mx2.suse.de (Postfix) with ESMTP id 48C4FAC23;
+	Fri, 20 Nov 2020 07:31:52 +0000 (UTC)
+Subject: Re: [PATCH 56/78] init: refactor name_to_dev_t
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -58,23 +55,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201116145809.410558-1-hch@lst.de>
- <20201116145809.410558-56-hch@lst.de>
+ <20201116145809.410558-57-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <75f4c397-ac03-2c5f-d620-0e619ad78fe8@suse.de>
-Date: Fri, 20 Nov 2020 08:26:22 +0100
+Message-ID: <a98ac74a-d1c4-776f-145f-583a1d56eed3@suse.de>
+Date: Fri, 20 Nov 2020 08:31:51 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201116145809.410558-56-hch@lst.de>
+In-Reply-To: <20201116145809.410558-57-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <GiAiVPJ8mMJ.A.uHB.sN3tfB@bendel>
+Resent-Message-ID: <W3_5XE-tUtC.A.kpG.4S3tfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1079
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1080
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,68 +81,17 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/75f4c397-ac03-2c5f-d620-0e619ad78fe8@suse.de
-Resent-Date: Fri, 20 Nov 2020 07:42:36 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/a98ac74a-d1c4-776f-145f-583a1d56eed3@suse.de
+Resent-Date: Fri, 20 Nov 2020 07:48:08 +0000 (UTC)
 
 On 11/16/20 3:57 PM, Christoph Hellwig wrote:
-> Adding the minor to the major creates tons of pointless conflicts. Just
-> use the dev_t itself, which is 32-bits and thus is guaranteed to fit
-> into ino_t.
+> Split each case into a self-contained helper.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   fs/block_dev.c | 26 ++------------------------
->   1 file changed, 2 insertions(+), 24 deletions(-)
-> 
-> diff --git a/fs/block_dev.c b/fs/block_dev.c
-> index d8664f5c1ff669..29db12c3bb501c 100644
-> --- a/fs/block_dev.c
-> +++ b/fs/block_dev.c
-> @@ -870,35 +870,12 @@ void __init bdev_cache_init(void)
->   	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
->   }
->   
-> -/*
-> - * Most likely _very_ bad one - but then it's hardly critical for small
-> - * /dev and can be fixed when somebody will need really large one.
-> - * Keep in mind that it will be fed through icache hash function too.
-> - */
-> -static inline unsigned long hash(dev_t dev)
-> -{
-> -	return MAJOR(dev)+MINOR(dev);
-> -}
-> -
-> -static int bdev_test(struct inode *inode, void *data)
-> -{
-> -	return BDEV_I(inode)->bdev.bd_dev == *(dev_t *)data;
-> -}
-> -
-> -static int bdev_set(struct inode *inode, void *data)
-> -{
-> -	BDEV_I(inode)->bdev.bd_dev = *(dev_t *)data;
-> -	return 0;
-> -}
-> -
->   static struct block_device *bdget(dev_t dev)
->   {
->   	struct block_device *bdev;
->   	struct inode *inode;
->   
-> -	inode = iget5_locked(blockdev_superblock, hash(dev),
-> -			bdev_test, bdev_set, &dev);
-> -
-> +	inode = iget_locked(blockdev_superblock, dev);
->   	if (!inode)
->   		return NULL;
->   
-> @@ -910,6 +887,7 @@ static struct block_device *bdget(dev_t dev)
->   		bdev->bd_super = NULL;
->   		bdev->bd_inode = inode;
->   		bdev->bd_part_count = 0;
-> +		bdev->bd_dev = dev;
->   		inode->i_mode = S_IFBLK;
->   		inode->i_rdev = dev;
->   		inode->i_bdev = bdev;
+>   include/linux/genhd.h |   7 +-
+>   init/do_mounts.c      | 183 +++++++++++++++++++++---------------------
+>   2 files changed, 91 insertions(+), 99 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
