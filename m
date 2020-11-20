@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id F18B72BA392
-	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:39:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 011FB2BA39E
+	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:42:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id DA64720D08; Fri, 20 Nov 2020 07:39:24 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:39:24 2020
+	id DAD8220CD1; Fri, 20 Nov 2020 07:42:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:42:09 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 99C2F20CB9
-	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:23:23 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B2BD320CDD
+	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:25:11 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.179 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, FOURLA=0.1,
@@ -28,19 +28,20 @@ X-Amavis-Spam-Status: No, score=-0.179 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id TJ6ZL7wL97jd for <lists-other-nbd@bendel.debian.org>;
-	Fri, 20 Nov 2020 07:23:19 +0000 (UTC)
+	with ESMTP id N8_hgjkJ_K5V for <lists-other-nbd@bendel.debian.org>;
+	Fri, 20 Nov 2020 07:25:07 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4912820CB2
-	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:23:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 5581820CB2
+	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:25:07 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id EDB7EAC0C;
-	Fri, 20 Nov 2020 07:23:16 +0000 (UTC)
-Subject: Re: [PATCH 34/78] block: propagate BLKROSET to all partitions
+	by mx2.suse.de (Postfix) with ESMTP id 0A558AD29;
+	Fri, 20 Nov 2020 07:25:05 +0000 (UTC)
+Subject: Re: [PATCH 53/78] blk-cgroup: fix a hd_struct leak in
+ blkcg_fill_root_iostats
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -57,23 +58,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201116145809.410558-1-hch@lst.de>
- <20201116145809.410558-35-hch@lst.de>
+ <20201116145809.410558-54-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <11ea0b89-d8e6-2d5d-59e4-90e928d54042@suse.de>
-Date: Fri, 20 Nov 2020 08:23:15 +0100
+Message-ID: <b7e7dd80-b46b-afaf-9117-8dade0e2420e@suse.de>
+Date: Fri, 20 Nov 2020 08:25:03 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201116145809.410558-35-hch@lst.de>
+In-Reply-To: <20201116145809.410558-54-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <1wNGT4Ph3lC.A._RG.sK3tfB@bendel>
+Resent-Message-ID: <KZJukzRc6eE.A.gt.RN3tfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1076
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1077
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -83,33 +84,28 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/11ea0b89-d8e6-2d5d-59e4-90e928d54042@suse.de
-Resent-Date: Fri, 20 Nov 2020 07:39:24 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/b7e7dd80-b46b-afaf-9117-8dade0e2420e@suse.de
+Resent-Date: Fri, 20 Nov 2020 07:42:09 +0000 (UTC)
 
 On 11/16/20 3:57 PM, Christoph Hellwig wrote:
-> When setting the whole device read-only (or clearing the read-only
-> state), also update the policy for all partitions.  The s390 dasd
-> driver has awlways been doing this and it makes a lot of sense.
+> disk_get_part needs to be paired with a disk_put_part.
 > 
+> Fixes: ef45fe470e1 ("blk-cgroup: show global disk stats in root cgroup io.stat")
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   block/ioctl.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
+>   block/blk-cgroup.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/block/ioctl.c b/block/ioctl.c
-> index 6b785181344fe1..22f394d118c302 100644
-> --- a/block/ioctl.c
-> +++ b/block/ioctl.c
-> @@ -354,7 +354,10 @@ static int blkdev_roset(struct block_device *bdev, fmode_t mode,
->   		if (ret)
->   			return ret;
+> diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
+> index c68bdf58c9a6e1..54fbe1e80cc41a 100644
+> --- a/block/blk-cgroup.c
+> +++ b/block/blk-cgroup.c
+> @@ -849,6 +849,7 @@ static void blkcg_fill_root_iostats(void)
+>   			blkg_iostat_set(&blkg->iostat.cur, &tmp);
+>   			u64_stats_update_end(&blkg->iostat.sync);
+>   		}
+> +		disk_put_part(part);
 >   	}
-> -	bdev->bd_part->policy = n;
-> +	if (bdev_is_partition(bdev))
-> +		bdev->bd_part->policy = n;
-> +	else
-> +		set_disk_ro(bdev->bd_disk, n);
->   	return 0;
 >   }
 >   
 > 
