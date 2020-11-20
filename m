@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD1942BA3CA
-	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:48:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DD3F2BA3D9
+	for <lists+nbd@lfdr.de>; Fri, 20 Nov 2020 08:51:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id C3F8720D0F; Fri, 20 Nov 2020 07:48:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:48:08 2020
+	id 7555F20D16; Fri, 20 Nov 2020 07:51:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov 20 07:51:09 2020
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 24A8F20CD6
-	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:31:57 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E538020CD7
+	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Nov 2020 07:33:51 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.179 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
@@ -26,19 +26,19 @@ X-Amavis-Spam-Status: No, score=-1.179 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Bdy5v5j7eq8m for <lists-other-nbd@bendel.debian.org>;
-	Fri, 20 Nov 2020 07:31:54 +0000 (UTC)
+	with ESMTP id 4ce39oORqKGs for <lists-other-nbd@bendel.debian.org>;
+	Fri, 20 Nov 2020 07:33:46 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "smtp2.suse.de", Issuer "Let's Encrypt Authority X3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 8FD8D20CD4
-	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:31:54 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id DAE5E20CD6
+	for <nbd@other.debian.org>; Fri, 20 Nov 2020 07:33:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 48C4FAC23;
-	Fri, 20 Nov 2020 07:31:52 +0000 (UTC)
-Subject: Re: [PATCH 56/78] init: refactor name_to_dev_t
+	by mx2.suse.de (Postfix) with ESMTP id 95E0EAB3D;
+	Fri, 20 Nov 2020 07:33:44 +0000 (UTC)
+Subject: Re: [PATCH 57/78] init: refactor devt_from_partuuid
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -55,23 +55,23 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201116145809.410558-1-hch@lst.de>
- <20201116145809.410558-57-hch@lst.de>
+ <20201116145809.410558-58-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <a98ac74a-d1c4-776f-145f-583a1d56eed3@suse.de>
-Date: Fri, 20 Nov 2020 08:31:51 +0100
+Message-ID: <23b99285-e2b4-45cf-017e-f93e5368bc79@suse.de>
+Date: Fri, 20 Nov 2020 08:33:42 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201116145809.410558-57-hch@lst.de>
+In-Reply-To: <20201116145809.410558-58-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <W3_5XE-tUtC.A.kpG.4S3tfB@bendel>
+Resent-Message-ID: <7ynusWNXolK.A._0.tV3tfB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1080
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1081
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -81,17 +81,17 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/a98ac74a-d1c4-776f-145f-583a1d56eed3@suse.de
-Resent-Date: Fri, 20 Nov 2020 07:48:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/23b99285-e2b4-45cf-017e-f93e5368bc79@suse.de
+Resent-Date: Fri, 20 Nov 2020 07:51:09 +0000 (UTC)
 
 On 11/16/20 3:57 PM, Christoph Hellwig wrote:
-> Split each case into a self-contained helper.
+> The code in devt_from_partuuid is very convoluted.  Refactor a bit by
+> sanitizing the goto and variable name usage.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   include/linux/genhd.h |   7 +-
->   init/do_mounts.c      | 183 +++++++++++++++++++++---------------------
->   2 files changed, 91 insertions(+), 99 deletions(-)
+>   init/do_mounts.c | 68 ++++++++++++++++++++++--------------------------
+>   1 file changed, 31 insertions(+), 37 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
