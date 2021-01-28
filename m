@@ -1,66 +1,94 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B30D3070CF
-	for <lists+nbd@lfdr.de>; Thu, 28 Jan 2021 09:15:10 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B4BA307EC3
+	for <lists+nbd@lfdr.de>; Thu, 28 Jan 2021 20:43:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 04CE120436; Thu, 28 Jan 2021 08:15:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jan 28 08:15:09 2021
-Old-Return-Path: <sunke32@huawei.com>
+	id 7007F203BE; Thu, 28 Jan 2021 19:43:23 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jan 28 19:43:23 2021
+Old-Return-Path: <Markus.Elfring@web.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
-	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-6.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,LDOSUBSCRIBER,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H4,
+	RCVD_IN_MSPIKE_WL autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5442120315
-	for <lists-other-nbd@bendel.debian.org>; Thu, 28 Jan 2021 07:57:23 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DD3CA20361
+	for <lists-other-nbd@bendel.debian.org>; Thu, 28 Jan 2021 19:43:15 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.158 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.526 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FREEMAIL_FROM=0.001, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-2.749,
+	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001,
+	RCVD_IN_MSPIKE_WL=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 5g1vDgz7m0bJ for <lists-other-nbd@bendel.debian.org>;
-	Thu, 28 Jan 2021 07:57:19 +0000 (UTC)
+	with ESMTP id NPa20yczLPsw for <lists-other-nbd@bendel.debian.org>;
+	Thu, 28 Jan 2021 19:43:11 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 998 seconds by postgrey-1.36 at bendel; Thu, 28 Jan 2021 07:57:19 UTC
-Received: from szxga07-in.huawei.com (szxga07-in.huawei.com [45.249.212.35])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mout.web.de (mout.web.de [212.227.15.14])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7AF99202FC
-	for <nbd@other.debian.org>; Thu, 28 Jan 2021 07:57:18 +0000 (UTC)
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
-	by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4DRC5y5JP5z7cFJ;
-	Thu, 28 Jan 2021 15:39:18 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by DGGEMS413-HUB.china.huawei.com
- (10.3.19.213) with Microsoft SMTP Server id 14.3.498.0; Thu, 28 Jan 2021
- 15:40:21 +0800
-From: Sun Ke <sunke32@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <sunke32@huawei.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>
-Subject: [PATCH] nbd: Fix NULL pointer in flush_workqueue
-Date: Thu, 28 Jan 2021 02:41:53 -0500
-Message-ID: <20210128074153.1633374-1-sunke32@huawei.com>
-X-Mailer: git-send-email 2.25.4
+	by bendel.debian.org (Postfix) with ESMTPS id 7DAB2201E5
+	for <nbd@other.debian.org>; Thu, 28 Jan 2021 19:43:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1611862982;
+	bh=BLlEXcZ6prRtbfJMzLzxztYtxqiy27W1CH++m67oYd0=;
+	h=X-UI-Sender-Class:To:Cc:References:From:Subject:Date:In-Reply-To;
+	b=CBh5MajTFSKS5z7rVq6aq+6jGVPzT4MmFH+etMLE9Qygsr1s6kTq1zKFiLUrJfCM/
+	 fTdgxBw3CWyMdkA7UACasGuMT4uEIdlcQz/mCZjuDpWyaPdEPTCEcF2XBKz+mirSSW
+	 NuYGCjIjxS8dheSQzMGVUKod3wHIuNt8zpivv/mE=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [192.168.1.2] ([93.135.108.249]) by smtp.web.de (mrweb004
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 0Lgb2b-1ljn9M3esP-00nux3; Thu, 28
+ Jan 2021 20:43:01 +0100
+To: Sun Ke <sunke32@huawei.com>, linux-block@vger.kernel.org,
+ nbd@other.debian.org
+Cc: linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org,
+ Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>
+References: <20210128074153.1633374-1-sunke32@huawei.com>
+From: Markus Elfring <Markus.Elfring@web.de>
+Subject: Re: [PATCH] nbd: Fix NULL pointer in flush_workqueue
+Message-ID: <1739e522-5980-f86e-cb90-19b61539a5cf@web.de>
+Date: Thu, 28 Jan 2021 20:42:51 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.101.6]
-X-CFilter-Loop: Reflected
-X-Rc-Spam: 2008-11-04_01
+In-Reply-To: <20210128074153.1633374-1-sunke32@huawei.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:1WJLBP48O9a/Itd3Td91o+hbJEb7HuRGVjthOWm7uXiej5u4Zi5
+ bLGaXUd9Is1EkoZyn7BTeGXHdeHsPMREKpEtVvO6ZAmv0pmqOCPwiQrcfXrm2nlipqvzuQd
+ b/QsP5RpsRU/FgEBtHEC3TLxDaGgv7211q01+H/3o5W5/0TzEOKAaxMCF+Z1kW76soau23G
+ yH3euPlk6n7UckpKVVY2A==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:bux+jcRMn/k=:35EI0ydbpxZ2zKFQo4Dd/y
+ Hu7nZdeppE0T8coe4le4CBBF2ALNGSB9L5T8vZwYZ95NDR2d5OpkQ9qGtVXnn+j82QCoqt2Xc
+ uw5lcL65K+rerpVsgtWPHZBT6BoyxdhyCqkyM+LtHzm4pnDmdRXz7A8c5VQkctOFsuQNdOkou
+ k4HB8gIbgLlf2GWZHgiPBjVHXJ92gU7rCFYV8Ik7HcfNZVMF73buwC8HnmocrRUj6eX70EFyL
+ R5C5/2PnhULTHr2mcZokIY7gjYiF/kqpCy94k0PR8lhBq4yeY8dZZ8jChiM4DZignXvotXhcq
+ WsHi2KRdZfQNOUnArlaW4H5nJViEhs0mIZWJNpZFPgdEft9LJdgpaKEv/3UNNDKGyN1dti6yi
+ NvRp6xZCYs5nlhRQQeTnT7jMqL4SAZ0sUitrgnqRIZ+yNH+4gOnMY4pxOoTtwnMqSe9FHeJK8
+ qwWKv4uxgA5hvD6J5oloriKA35ulLT96Sp2ODksaG3NaZ+/9vPT7CFPSbn9WMSohS1r36NBwn
+ G/o39thPBb1uXAQNSSKniBUtvFQ/tvR2LsVA8li+Ux1s4eXf9dpcrZZwWUhsQ+pZnyfBAbwRY
+ ol4VbTioqu/loekpx99T1S9Cv4ctUelAtylby7/Klex4ZNvLb6Kj8VlsaqWCZ00CLbGaCCulU
+ Y7mc0f9nBvTp7MI8i5cnw7zkwaOB4A3//MiV7uHQKwpTAlgtnghMVsbspcvmi+ErOKDrncVB1
+ Op0Sb/ws+AbBsEzDyvEMq1RPBT1qUxvLdQsUY0ZGDNxVYmEYiOfW0St2wX7WJ2OqJP6A1m+e2
+ jOW91iXPsDMvkrtO1RlR89iV3of7EMKm9N4McQsJpl24yzGR9uCbj6aEVLrP8zZBMpS20+6ww
+ tw42hmyi8crRr7HghxFw==
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <rXvjpPcTFWH.A.TkD.NKnEgB@bendel>
+Resent-Message-ID: <RfxT_OijYxN.A.QP.bPxEgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1107
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1108
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -70,91 +98,51 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210128074153.1633374-1-sunke32@huawei.com
-Resent-Date: Thu, 28 Jan 2021 08:15:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1739e522-5980-f86e-cb90-19b61539a5cf@web.de
+Resent-Date: Thu, 28 Jan 2021 19:43:23 +0000 (UTC)
 
-Open /dev/nbdX first, the config_refs will be 1 and
-the pointers in nbd_device are still null. Disconnect
-/dev/nbdX, then reference a null recv_workq. The
-protection by config_refs in nbd_genl_disconnect is useless.
+=E2=80=A6
+> +++ b/drivers/block/nbd.c
+> @@ -2011,12 +2011,20 @@ static int nbd_genl_disconnect(struct sk_buff *s=
+kb, struct genl_info *info)
+>  		       index);
+>  		return -EINVAL;
+>  	}
+> +	mutex_lock(&nbd->config_lock);
+>  	if (!refcount_inc_not_zero(&nbd->refs)) {
+>  		mutex_unlock(&nbd_index_mutex);
+> +		mutex_unlock(&nbd->config_lock);
 
-[  656.366194] BUG: kernel NULL pointer dereference, address: 0000000000000020
-[  656.368943] #PF: supervisor write access in kernel mode
-[  656.369844] #PF: error_code(0x0002) - not-present page
-[  656.370717] PGD 10cc87067 P4D 10cc87067 PUD 1074b4067 PMD 0
-[  656.371693] Oops: 0002 [#1] SMP
-[  656.372242] CPU: 5 PID: 7977 Comm: nbd-client Not tainted 5.11.0-rc5-00040-g76c057c84d28 #1
-[  656.373661] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ?-20190727_073836-buildvm-ppc64le-16.ppc.fedoraproject.org-3.fc31 04/01/2014
-[  656.375904] RIP: 0010:mutex_lock+0x29/0x60
-[  656.376627] Code: 00 0f 1f 44 00 00 55 48 89 fd 48 83 05 6f d7 fe 08 01 e8 7a c3 ff ff 48 83 05 6a d7 fe 08 01 31 c0 65 48 8b 14 25 00 6d 01 00 <f0> 48 0f b1 55 d
-[  656.378934] RSP: 0018:ffffc900005eb9b0 EFLAGS: 00010246
-[  656.379350] RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
-[  656.379915] RDX: ffff888104cf2600 RSI: ffffffffaae8f452 RDI: 0000000000000020
-[  656.380473] RBP: 0000000000000020 R08: 0000000000000000 R09: ffff88813bd6b318
-[  656.381039] R10: 00000000000000c7 R11: fefefefefefefeff R12: ffff888102710b40
-[  656.381599] R13: ffffc900005eb9e0 R14: ffffffffb2930680 R15: ffff88810770ef00
-[  656.382166] FS:  00007fdf117ebb40(0000) GS:ffff88813bd40000(0000) knlGS:0000000000000000
-[  656.382806] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  656.383261] CR2: 0000000000000020 CR3: 0000000100c84000 CR4: 00000000000006e0
-[  656.383819] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-[  656.384370] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-[  656.384927] Call Trace:
-[  656.385111]  flush_workqueue+0x92/0x6c0
-[  656.385395]  nbd_disconnect_and_put+0x81/0xd0
-[  656.385716]  nbd_genl_disconnect+0x125/0x2a0
-[  656.386034]  genl_family_rcv_msg_doit.isra.0+0x102/0x1b0
-[  656.386422]  genl_rcv_msg+0xfc/0x2b0
-[  656.386685]  ? nbd_ioctl+0x490/0x490
-[  656.386954]  ? genl_family_rcv_msg_doit.isra.0+0x1b0/0x1b0
-[  656.387354]  netlink_rcv_skb+0x62/0x180
-[  656.387638]  genl_rcv+0x34/0x60
-[  656.387874]  netlink_unicast+0x26d/0x590
-[  656.388162]  netlink_sendmsg+0x398/0x6c0
-[  656.388451]  ? netlink_rcv_skb+0x180/0x180
-[  656.388750]  ____sys_sendmsg+0x1da/0x320
-[  656.389038]  ? ____sys_recvmsg+0x130/0x220
-[  656.389334]  ___sys_sendmsg+0x8e/0xf0
-[  656.389605]  ? ___sys_recvmsg+0xa2/0xf0
-[  656.389889]  ? handle_mm_fault+0x1671/0x21d0
-[  656.390201]  __sys_sendmsg+0x6d/0xe0
-[  656.390464]  __x64_sys_sendmsg+0x23/0x30
-[  656.390751]  do_syscall_64+0x45/0x70
-[  656.391017]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+Can an other function call order become relevant for the unlocking of thes=
+e mutexes?
 
-To fix it, just add a check for a non null task_recv in
-nbd_genl_disconnect.
 
-Fixes: e9e006f5fcf2 ("nbd: fix max number of supported devs")
-Signed-off-by: Sun Ke <sunke32@huawei.com>
----
- drivers/block/nbd.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+>  		printk(KERN_ERR "nbd: device at index %d is going down\n",
+>  		       index);
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 6727358e147d..4f7885966d32 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -2011,12 +2011,20 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
- 		       index);
- 		return -EINVAL;
- 	}
-+	mutex_lock(&nbd->config_lock);
- 	if (!refcount_inc_not_zero(&nbd->refs)) {
- 		mutex_unlock(&nbd_index_mutex);
-+		mutex_unlock(&nbd->config_lock);
- 		printk(KERN_ERR "nbd: device at index %d is going down\n",
- 		       index);
- 		return -EINVAL;
- 	}
-+	if (!nbd->recv_workq) {
-+		mutex_unlock(&nbd->config_lock);
-+		mutex_unlock(&nbd_index_mutex);
-+		return -EINVAL;
-+	}
-+	mutex_unlock(&nbd->config_lock);
- 	mutex_unlock(&nbd_index_mutex);
- 	if (!refcount_inc_not_zero(&nbd->config_refs)) {
- 		nbd_put(nbd);
--- 
-2.25.4
+May such an error message be moved into the lock scope?
+
+
+>  		return -EINVAL;
+>  	}
+> +	if (!nbd->recv_workq) {
+> +		mutex_unlock(&nbd->config_lock);
+> +		mutex_unlock(&nbd_index_mutex);
+> +		return -EINVAL;
+> +	}
+
+How do you think about to connect the code from this if branch
+with a jump target like =E2=80=9Cunlock=E2=80=9D so that such statements w=
+ould be shareable
+for the desired exception handling?
+
+
+> +	mutex_unlock(&nbd->config_lock);
+>  	mutex_unlock(&nbd_index_mutex);
+>  	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+>  		nbd_put(nbd);
+
+
+Regards,
+Markus
 
