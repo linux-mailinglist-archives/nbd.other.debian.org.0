@@ -2,41 +2,41 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BEF630D7F4
-	for <lists+nbd@lfdr.de>; Wed,  3 Feb 2021 11:51:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0B1030EA4A
+	for <lists+nbd@lfdr.de>; Thu,  4 Feb 2021 03:39:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8623D2068A; Wed,  3 Feb 2021 10:51:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Feb  3 10:51:09 2021
+	id B29DD20478; Thu,  4 Feb 2021 02:39:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb  4 02:39:20 2021
 Old-Return-Path: <hdanton@sina.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
 X-Spam-Status: No, score=1.1 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FREEMAIL_FROM autolearn=no autolearn_force=no version=3.4.2
+	FREEMAIL_FROM,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E1CE2205E9
-	for <lists-other-nbd@bendel.debian.org>; Wed,  3 Feb 2021 10:34:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 897A820572
+	for <lists-other-nbd@bendel.debian.org>; Thu,  4 Feb 2021 02:22:44 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.899 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, FREEMAIL_FROM=0.001]
-	autolearn=no autolearn_force=no
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1, FREEMAIL_FROM=0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id CKhTrFIhuEev for <lists-other-nbd@bendel.debian.org>;
-	Wed,  3 Feb 2021 10:34:09 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 314 seconds by postgrey-1.36 at bendel; Wed, 03 Feb 2021 10:34:08 UTC
-Received: from r3-18.sinamail.sina.com.cn (r3-18.sinamail.sina.com.cn [202.108.3.18])
-	by bendel.debian.org (Postfix) with SMTP id AE8A4205DF
-	for <nbd@other.debian.org>; Wed,  3 Feb 2021 10:34:07 +0000 (UTC)
+	with ESMTP id 5Cnwnumls5W7 for <lists-other-nbd@bendel.debian.org>;
+	Thu,  4 Feb 2021 02:22:38 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .sina. - helo: .r3-17.sinamail.sina. - helo-domain: .sina.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from r3-17.sinamail.sina.com.cn (r3-17.sinamail.sina.com.cn [202.108.3.17])
+	by bendel.debian.org (Postfix) with SMTP id 32D4120536
+	for <nbd@other.debian.org>; Thu,  4 Feb 2021 02:22:34 +0000 (UTC)
 Received: from unknown (HELO localhost.localdomain)([103.193.190.174])
-	by sina.com (172.16.97.35) with ESMTP
-	id 601A7AD6000042C8; Wed, 3 Feb 2021 18:28:40 +0800 (CST)
+	by sina.com (172.16.97.27) with ESMTP
+	id 601B5A630002B7B8; Thu, 4 Feb 2021 10:22:28 +0800 (CST)
 X-Sender: hdanton@sina.com
 X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 31423515073525
+X-SMAIL-MID: 44315249283550
 From: Hillf Danton <hdanton@sina.com>
 To: syzbot <syzbot+f91dbbabacae745d334f@syzkaller.appspotmail.com>
 Cc: axboe@kernel.dk,
@@ -47,8 +47,8 @@ Cc: axboe@kernel.dk,
 	Hillf Danton <hdanton@sina.com>,
 	syzkaller-bugs@googlegroups.com
 Subject: Re: KASAN: use-after-free Read in recv_work
-Date: Wed,  3 Feb 2021 18:28:32 +0800
-Message-Id: <20210203102832.2186-1-hdanton@sina.com>
+Date: Thu,  4 Feb 2021 10:22:20 +0800
+Message-Id: <20210204022220.2310-1-hdanton@sina.com>
 In-Reply-To: <000000000000f296a705ba57ed59@google.com>
 References: <000000000000f296a705ba57ed59@google.com>
 MIME-Version: 1.0
@@ -56,9 +56,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <tyRUwE5-Fi.A._2D.dAoGgB@bendel>
+Resent-Message-ID: <gAfFpqC-gTH.A.FOG.Y51GgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1117
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1118
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -68,8 +68,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210203102832.2186-1-hdanton@sina.com
-Resent-Date: Wed,  3 Feb 2021 10:51:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210204022220.2310-1-hdanton@sina.com
+Resent-Date: Thu,  4 Feb 2021 02:39:20 +0000 (UTC)
 
 Tue, 02 Feb 2021 02:28:20 -0800
 > syzbot found the following issue on:
@@ -183,23 +183,32 @@ Change memory slice without parking worker.
 What is reported here is different from the uaf fixed in b98e762e3d71,
 and it is highly appreciated to add a Fixes tag.
 
-Open code the park, parkme and unpark mechanism to serialise the ioctl
-act and the kworker, based on two atomic counters, to fix the UAF.
+Add a sem for nbd to serialise dereferencing sock in the ioctl and
+kworker contexts in order to fix the UAF. This is the fix as simple as
+thought of while turning the config_lock into a sem seems another good
+option.
 
 Plus s/recv_work/nbd_recv_work/ to make it simpler to spot a Fixes tag.
 
-
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -113,6 +113,7 @@ struct nbd_device {
+@@ -36,6 +36,7 @@
+ #include <linux/types.h>
+ #include <linux/debugfs.h>
+ #include <linux/blk-mq.h>
++#include <linux/rwsem.h>
+ 
+ #include <linux/uaccess.h>
+ #include <asm/types.h>
+@@ -113,6 +114,7 @@ struct nbd_device {
  	struct mutex config_lock;
  	struct gendisk *disk;
  	struct workqueue_struct *recv_workq;
-+	atomic_t nbd_workers, nbd_recfg;
++	struct rw_semaphore sk_realloc_sem;
  
  	struct list_head list;
  	struct task_struct *task_recv;
-@@ -771,7 +772,7 @@ out:
+@@ -771,7 +773,7 @@ out:
  	return ret ? ERR_PTR(ret) : cmd;
  }
  
@@ -208,70 +217,46 @@ Plus s/recv_work/nbd_recv_work/ to make it simpler to spot a Fixes tag.
  {
  	struct recv_thread_args *args = container_of(work,
  						     struct recv_thread_args,
-@@ -780,8 +781,19 @@ static void recv_work(struct work_struct
- 	struct nbd_config *config = nbd->config;
- 	struct nbd_cmd *cmd;
- 	struct request *rq;
-+	int cut = 0;
- 
-+	atomic_inc(&nbd->nbd_workers);
+@@ -784,11 +786,16 @@ static void recv_work(struct work_struct
  	while (1) {
-+		if (atomic_read(&nbd->nbd_recfg)) {
-+			if (!cut) {
-+				cut = 1;
-+				atomic_dec(&nbd->nbd_recfg);
-+			}
-+			schedule_timeout_interruptible(1);
-+			continue;
-+		}
-+
  		cmd = nbd_read_stat(nbd, args->index);
  		if (IS_ERR(cmd)) {
- 			struct nbd_sock *nsock = config->socks[args->index];
-@@ -796,6 +808,7 @@ static void recv_work(struct work_struct
- 		if (likely(!blk_should_fake_timeout(rq->q)))
- 			blk_mq_complete_request(rq);
- 	}
-+	atomic_dec(&nbd->nbd_workers);
- 	nbd_config_put(nbd);
- 	atomic_dec(&config->recv_threads);
- 	wake_up(&config->recv_wq);
-@@ -1016,6 +1029,7 @@ static int nbd_add_socket(struct nbd_dev
- 	struct socket *sock;
- 	struct nbd_sock **socks;
- 	struct nbd_sock *nsock;
-+	int workers, acks;
- 	int err;
+-			struct nbd_sock *nsock = config->socks[args->index];
++			struct nbd_sock *nsock;
++
++			down_read(&nbd->sk_realloc_sem);
++			nsock = config->socks[args->index];
  
- 	sock = nbd_get_socket(nbd, arg, &err);
-@@ -1047,6 +1061,18 @@ static int nbd_add_socket(struct nbd_dev
+ 			mutex_lock(&nsock->tx_lock);
+ 			nbd_mark_nsock_dead(nbd, nsock, 1);
+ 			mutex_unlock(&nsock->tx_lock);
++
++			up_read(&nbd->sk_realloc_sem);
+ 			break;
+ 		}
+ 
+@@ -1046,10 +1053,12 @@ static int nbd_add_socket(struct nbd_dev
+ 		err = -ENOMEM;
  		goto put_socket;
  	}
++	down_write(&nbd->sk_realloc_sem);
  
-+	do {
-+		workers = atomic_read(&nbd->nbd_workers);
-+		acks = 1 + workers;
-+		atomic_set(&nbd->nbd_recfg, acks);
-+	} while (workers != atomic_read(&nbd->nbd_workers));
-+	do {
-+		workers = atomic_read(&nbd->nbd_workers);
-+		if (workers + 1 == acks - atomic_read(&nbd->nbd_recfg))
-+			break;
-+		schedule_timeout_interruptible(1);
-+	} while (1);
-+
  	socks = krealloc(config->socks, (config->num_connections + 1) *
  			 sizeof(struct nbd_sock *), GFP_KERNEL);
  	if (!socks) {
-@@ -1066,6 +1092,7 @@ static int nbd_add_socket(struct nbd_dev
++		up_write(&nbd->sk_realloc_sem);
+ 		kfree(nsock);
+ 		err = -ENOMEM;
+ 		goto put_socket;
+@@ -1066,6 +1075,7 @@ static int nbd_add_socket(struct nbd_dev
  	nsock->cookie = 0;
  	socks[config->num_connections++] = nsock;
  	atomic_inc(&config->live_connections);
-+	atomic_set(&nbd->nbd_recfg, 0);
++	up_write(&nbd->sk_realloc_sem);
  	blk_mq_unfreeze_queue(nbd->disk->queue);
  
  	return 0;
-@@ -1114,7 +1141,7 @@ static int nbd_reconnect_socket(struct n
+@@ -1114,7 +1124,7 @@ static int nbd_reconnect_socket(struct n
  		nsock->fallback_index = -1;
  		nsock->sock = sock;
  		nsock->dead = false;
@@ -280,7 +265,7 @@ Plus s/recv_work/nbd_recv_work/ to make it simpler to spot a Fixes tag.
  		args->index = i;
  		args->nbd = nbd;
  		nsock->cookie++;
-@@ -1123,7 +1150,7 @@ static int nbd_reconnect_socket(struct n
+@@ -1123,7 +1133,7 @@ static int nbd_reconnect_socket(struct n
  
  		clear_bit(NBD_RT_DISCONNECTED, &config->runtime_flags);
  
@@ -289,16 +274,7 @@ Plus s/recv_work/nbd_recv_work/ to make it simpler to spot a Fixes tag.
  		 * need to queue_work outside of the tx_mutex.
  		 */
  		queue_work(nbd->recv_workq, &args->work);
-@@ -1267,6 +1294,8 @@ static int nbd_start_device(struct nbd_d
- 		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
- 		return -ENOMEM;
- 	}
-+	atomic_set(&nbd->nbd_workers, 0);
-+	atomic_set(&nbd->nbd_recfg, 0);
- 
- 	blk_mq_update_nr_hw_queues(&nbd->tag_set, config->num_connections);
- 	nbd->task_recv = current;
-@@ -1305,7 +1334,7 @@ static int nbd_start_device(struct nbd_d
+@@ -1305,7 +1315,7 @@ static int nbd_start_device(struct nbd_d
  				nbd->tag_set.timeout;
  		atomic_inc(&config->recv_threads);
  		refcount_inc(&nbd->config_refs);
@@ -307,4 +283,12 @@ Plus s/recv_work/nbd_recv_work/ to make it simpler to spot a Fixes tag.
  		args->nbd = nbd;
  		args->index = i;
  		queue_work(nbd->recv_workq, &args->work);
+@@ -1728,6 +1738,7 @@ static int nbd_dev_add(int index)
+ 	disk->queue->limits.max_sectors = 256;
+ 
+ 	mutex_init(&nbd->config_lock);
++	init_rwsem(&nbd->sk_realloc_sem);
+ 	refcount_set(&nbd->config_refs, 0);
+ 	refcount_set(&nbd->refs, 1);
+ 	INIT_LIST_HEAD(&nbd->list);
 
