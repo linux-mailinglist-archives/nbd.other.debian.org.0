@@ -1,102 +1,78 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B29432126C
-	for <lists+nbd@lfdr.de>; Mon, 22 Feb 2021 09:57:10 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 242D93212F3
+	for <lists+nbd@lfdr.de>; Mon, 22 Feb 2021 10:21:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5711420589; Mon, 22 Feb 2021 08:57:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Feb 22 08:57:10 2021
-Old-Return-Path: <eric.dumazet@gmail.com>
+	id B3237205A6; Mon, 22 Feb 2021 09:21:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Feb 22 09:21:09 2021
+Old-Return-Path: <3z3MzYAkbAIw8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.4 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,
-	FVGT_m_MULTI_ODD,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,NICE_REPLY_A,
-	RCVD_IN_DNSWL_NONE,SORTED_RECIPS,TO_TOO_MANY autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FROM_LOCAL_HEX,FVGT_m_MULTI_ODD,HEADER_FROM_DIFFERENT_DOMAINS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,TO_TOO_MANY
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 8A40E20558
-	for <lists-other-nbd@bendel.debian.org>; Mon, 22 Feb 2021 08:39:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id D83E920589
+	for <lists-other-nbd@bendel.debian.org>; Mon, 22 Feb 2021 09:05:31 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.439 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FREEMAIL_FROM=0.001, FVGT_m_MULTI_ODD=0.02, MD5_SHA1_SUM=-1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	RCVD_IN_DNSWL_NONE=-0.0001, SORTED_RECIPS=2.499, TO_TOO_MANY=1]
+X-Amavis-Spam-Status: No, score=0.394 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	FROM_LOCAL_HEX=0.006, FVGT_m_MULTI_ODD=0.02,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.249, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, TO_TOO_MANY=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 2s1KfEDhLC2z for <lists-other-nbd@bendel.debian.org>;
-	Mon, 22 Feb 2021 08:39:07 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com [IPv6:2a00:1450:4864:20::42c])
+	with ESMTP id rR2L3xE1lYx0 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 22 Feb 2021 09:05:26 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-io1-f72.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-io1-f72.google.com (mail-io1-f72.google.com [209.85.166.72])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 506F820248
-	for <nbd@other.debian.org>; Mon, 22 Feb 2021 08:39:04 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id v1so18109322wrd.6
-        for <nbd@other.debian.org>; Mon, 22 Feb 2021 00:39:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=NDKFrp9F6/y1igRI90XgA2aDEor3w6tbIvsGtkSu0Qw=;
-        b=Ml3ap+cde7a/DXPl+wLsSZpYKUVb3PMyBG7IjEpl7T1w202i0/LpdYEnnbiRytkDiq
-         RBY9jjbLK+ZyeJCvcr5zaBa7q8p4PvfiCWP+pimsCMHRt8fhL1Gdafn+nDpKpqixTvrD
-         kI9oE5iypNUH+z+uTRrwh0/9tcGOMeyqY2tpt6Tkd1d7zbMlrHAT8p/hZ5t51DpYtvjF
-         gPGoAzXWFFYzxA2AU/Kd7MP0Q5AtaxLzbGLA1EncN1QQ3R2rO80KITPVPsM9A8uw8Pxk
-         vxX4RWuxY+D0Q5i3jRsF7oPfHA5b3NcbxDvBR4S5/ZOCsa0p7UK6HDLMZ3ybKvdGgaSC
-         HaEA==
+	by bendel.debian.org (Postfix) with ESMTPS id 9D58B20572
+	for <nbd@other.debian.org>; Mon, 22 Feb 2021 09:05:23 +0000 (UTC)
+Received: by mail-io1-f72.google.com with SMTP id d8so8878544ion.10
+        for <nbd@other.debian.org>; Mon, 22 Feb 2021 01:05:23 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=NDKFrp9F6/y1igRI90XgA2aDEor3w6tbIvsGtkSu0Qw=;
-        b=iNazabjhF965DFFasepfBcwMlh5lyBsQzl0Mf+pOy+jiikuqaFNVx4y1sGyVj4tJeh
-         J0HshpuBwe8Nb7CYFLumHvQIAGRT6LoLQy73x0RJEVuo/5zNaZ/h4LMytD4BGGPMziKF
-         9V7qz+V5bne8JKOOuZ7S733lbhk0WS2ea9mD0d/Xz1NFMSfC0+zgGQfJxHdkaOpfDq3x
-         ULsVDwI57nYgvj5+6q3wZJiZICWPCVbKa/LTZiIXxgd796KLgu2tNDvoXf6dBT+viufS
-         POIsQzHk2xXBGxu2Q2TnoOtzNzCOGonV9JgXdp6AuLK+YuqWZ3NzuJ5eAWauPSvi0cQt
-         OWsg==
-X-Gm-Message-State: AOAM533iSPCEymeUEwDYI8pncfjJ1yfh7Qx0ogewdAAEeSYYQEr0ZvMf
-	KIzwPJPHZMIeMN6yyKMuKx8=
-X-Google-Smtp-Source: ABdhPJxfO34MTcMJAvLxNLqx94wLOLSN5dTiAqLL4iqnOBT6MJvotoCWjDloXXXLe8WYyOc0S4X/Rw==
-X-Received: by 2002:a05:6000:1546:: with SMTP id 6mr20334564wry.398.1613983141390;
-        Mon, 22 Feb 2021 00:39:01 -0800 (PST)
-Received: from [192.168.1.101] ([37.171.239.209])
-        by smtp.gmail.com with ESMTPSA id d20sm29885090wrc.12.2021.02.22.00.39.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 22 Feb 2021 00:39:00 -0800 (PST)
-Subject: Re: KASAN: use-after-free Read in nbd_genl_connect
-To: syzbot <syzbot+429d3f82d757c211bff3@syzkaller.appspotmail.com>,
- axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org,
- linux-kernel@vger.kernel.org, nbd@other.debian.org,
- syzkaller-bugs@googlegroups.com
-References: <000000000000bda69205bbe88a09@google.com>
-From: Eric Dumazet <eric.dumazet@gmail.com>
-Message-ID: <db587e0d-816d-a0bf-feb4-b581bec3252a@gmail.com>
-Date: Mon, 22 Feb 2021 09:38:59 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+        h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
+        bh=J59NEsdnKt/7aOqTj63pAI6TpGTWhIOirl4bzlLfxDo=;
+        b=MiRdYb48GFIilbCWcz4NTAvw+2FWIjxFyIZFyhdjaiSaVrDvug4mYP/6/V3LE2umMB
+         J0dH3833gwY/LHwkg0HQRFXRcXontLg+Geh+ih20Kb73Qltc4ovOYDHnmYjyh3ZtPfmW
+         PYCuLerOW9/0/w6mrVG9tRjnMnOgyeh4djdug2sX+Nff/YN4f64JbdR8K2IigIoDEtYG
+         Cr5BqAx3bSpNVSZjo22rM8bCsdbP81hbYw73zNE7HukNRhLyL3qZfN8evRNrg3OC18Ja
+         6jM5ICZVcgpGzNTPXae5C524r0HZdgCrcLUYG+ZwPrgHOaLwLYp4pGxekdljMMeKKPic
+         5HvQ==
+X-Gm-Message-State: AOAM530oyBFS1hMLWrXy4OTGlEvJqN5h6OaTRo7r+0lpt9PZmv+Ngs0/
+	7skiU1kRcdZIOx48OODfC6Lr14Mw5JwCUUXB/Or8yeieMMOl
+X-Google-Smtp-Source: ABdhPJxy6E4FR8bHOVbu3XyDQTP6xcj/uRe69WTyb9A3ddbhdXm5Ts8P3/ACJ+lE9BlaVzpPeOJwvfeYQAMoVPLRLJjvRcvXKXa3
 MIME-Version: 1.0
-In-Reply-To: <000000000000bda69205bbe88a09@google.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-Received: by 2002:a92:cd09:: with SMTP id z9mr6763449iln.223.1613984719867;
+ Mon, 22 Feb 2021 01:05:19 -0800 (PST)
+Date: Mon, 22 Feb 2021 01:05:19 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000e692c905bbe9192c@google.com>
+Subject: general protection fault in nbd_disconnect_and_put
+From: syzbot <syzbot+db0c9917f71539bc4ad1@syzkaller.appspotmail.com>
+To: axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <LkX2hhFdRp.A.TxG.mH3MgB@bendel>
+Resent-Message-ID: <afbtJtnXoDF.A.0WG.Fe3MgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1139
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1140
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -106,182 +82,93 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/db587e0d-816d-a0bf-feb4-b581bec3252a@gmail.com
-Resent-Date: Mon, 22 Feb 2021 08:57:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/000000000000e692c905bbe9192c@google.com
+Resent-Date: Mon, 22 Feb 2021 09:21:09 +0000 (UTC)
+
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    f40ddce8 Linux 5.11
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=17494c6cd00000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=4b919ebed7b4902
+dashboard link: https://syzkaller.appspot.com/bug?extid=db0c9917f71539bc4ad1
+compiler:       Debian clang version 11.0.1-2
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12d7c8b8d00000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=15a2dd22d00000
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+db0c9917f71539bc4ad1@syzkaller.appspotmail.com
+
+block nbd0: NBD_DISCONNECT
+general protection fault, probably for non-canonical address 0xdffffc0000000027: 0000 [#1] PREEMPT SMP KASAN
+KASAN: null-ptr-deref in range [0x0000000000000138-0x000000000000013f]
+CPU: 0 PID: 8395 Comm: systemd-udevd Not tainted 5.11.0-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
+RIP: 0010:__lock_acquire+0x8a/0x5e90 kernel/locking/lockdep.c:4702
+Code: ff df 8a 04 30 84 c0 0f 85 3b 26 00 00 83 3d c0 40 58 0c 00 0f 84 b1 41 00 00 83 3d cf 7b 02 0b 00 74 2b 4c 89 f8 48 c1 e8 03 <80> 3c 30 00 74 12 4c 89 ff e8 78 ce 5f 00 48 be 00 00 00 00 00 fc
+RSP: 0018:ffffc90001a2f8f0 EFLAGS: 00010006
+RAX: 0000000000000027 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: dffffc0000000000 RDI: 0000000000000138
+RBP: ffffc90001a2faa0 R08: 0000000000000001 R09: 0000000000000000
+R10: fffffbfff1b6727e R11: 0000000000000000 R12: ffff888022c3d340
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000138
+FS:  00007fce26a608c0(0000) GS:ffff8880b9c00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffd2589efe8 CR3: 0000000013a4a000 CR4: 00000000001506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ lock_acquire+0x114/0x5e0 kernel/locking/lockdep.c:5442
+ flush_workqueue+0x120/0x1620 kernel/workqueue.c:2786
+ nbd_disconnect_and_put+0x124/0x1f0 drivers/block/nbd.c:1995
+ nbd_release+0xeb/0x120 drivers/block/nbd.c:1505
+ __blkdev_put+0x516/0x670 fs/block_dev.c:1579
+ blkdev_put+0x2cd/0x440 fs/block_dev.c:1632
+ blkdev_close+0x7a/0xa0 fs/block_dev.c:1640
+ __fput+0x34d/0x7a0 fs/file_table.c:280
+ task_work_run+0x137/0x1c0 kernel/task_work.c:140
+ tracehook_notify_resume include/linux/tracehook.h:189 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:174 [inline]
+ exit_to_user_mode_prepare+0x10b/0x1e0 kernel/entry/common.c:201
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
+ syscall_exit_to_user_mode+0x48/0x180 kernel/entry/common.c:294
+ entry_SYSCALL_64_after_hwframe+0x44/0xa9
+RIP: 0033:0x7fce25ba6270
+Code: 73 01 c3 48 8b 0d 38 7d 20 00 f7 d8 64 89 01 48 83 c8 ff c3 66 0f 1f 44 00 00 83 3d 59 c1 20 00 00 75 10 b8 03 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 31 c3 48 83 ec 08 e8 ee fb ff ff 48 89 04 24
+RSP: 002b:00007ffddcf33578 EFLAGS: 00000246
+ ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000007 RCX: 00007fce25ba6270
+RDX: 000000000aba9500 RSI: 0000000000000000 RDI: 0000000000000007
+RBP: 00007fce26a60710 R08: 000000000000004a R09: 0000000000000008
+R10: 000055ed6e37e9a8 R11: 0000000000000246 R12: 0000000000000000
+R13: 000055ed6e390fd0 R14: 0000000000000003 R15: 000000000000000e
+Modules linked in:
+
+---[ end trace aae642bbdfc14982 ]---
+RIP: 0010:__lock_acquire+0x8a/0x5e90 kernel/locking/lockdep.c:4702
+Code: ff df 8a 04 30 84 c0 0f 85 3b 26 00 00 83 3d c0 40 58 0c 00 0f 84 b1 41 00 00 83 3d cf 7b 02 0b 00 74 2b 4c 89 f8 48 c1 e8 03 <80> 3c 30 00 74 12 4c 89 ff e8 78 ce 5f 00 48 be 00 00 00 00 00 fc
+RSP: 0018:ffffc90001a2f8f0 EFLAGS: 00010006
+RAX: 0000000000000027 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: dffffc0000000000 RDI: 0000000000000138
+RBP: ffffc90001a2faa0 R08: 0000000000000001 R09: 0000000000000000
+R10: fffffbfff1b6727e R11: 0000000000000000 R12: ffff888022c3d340
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000138
+FS:  00007fce26a608c0(0000) GS:ffff8880b9c00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffd2589efe8 CR3: 0000000013a4a000 CR4: 00000000001506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
 
 
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-On 2/22/21 9:25 AM, syzbot wrote:
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    f40ddce8 Linux 5.11
-> git tree:       upstream
-> console output: https://syzkaller.appspot.com/x/log.txt?x=179e8d22d00000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=e53d04227c52a0df
-> dashboard link: https://syzkaller.appspot.com/bug?extid=429d3f82d757c211bff3
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=10d190cad00000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=13dc8a82d00000
-> 
-> Bisection is inconclusive: the issue happens on the oldest tested release.
-> 
-> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=1128ae60d00000
-> final oops:     https://syzkaller.appspot.com/x/report.txt?x=1328ae60d00000
-> console output: https://syzkaller.appspot.com/x/log.txt?x=1528ae60d00000
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+429d3f82d757c211bff3@syzkaller.appspotmail.com
-> 
-> ==================================================================
-> BUG: KASAN: use-after-free in instrument_atomic_read include/linux/instrumented.h:71 [inline]
-> BUG: KASAN: use-after-free in atomic_read include/asm-generic/atomic-instrumented.h:27 [inline]
-> BUG: KASAN: use-after-free in refcount_dec_not_one+0x71/0x1e0 lib/refcount.c:76
-> Read of size 4 at addr ffff888014ca19a0 by task syz-executor980/8540
-> 
-> CPU: 0 PID: 8540 Comm: syz-executor980 Not tainted 5.11.0-syzkaller #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-> Call Trace:
->  __dump_stack lib/dump_stack.c:79 [inline]
->  dump_stack+0x107/0x163 lib/dump_stack.c:120
->  print_address_description.constprop.0.cold+0x5b/0x2f8 mm/kasan/report.c:230
->  __kasan_report mm/kasan/report.c:396 [inline]
->  kasan_report.cold+0x79/0xd5 mm/kasan/report.c:413
->  check_memory_region_inline mm/kasan/generic.c:179 [inline]
->  check_memory_region+0x13d/0x180 mm/kasan/generic.c:185
->  instrument_atomic_read include/linux/instrumented.h:71 [inline]
->  atomic_read include/asm-generic/atomic-instrumented.h:27 [inline]
->  refcount_dec_not_one+0x71/0x1e0 lib/refcount.c:76
->  refcount_dec_and_mutex_lock+0x19/0x140 lib/refcount.c:115
->  nbd_put drivers/block/nbd.c:248 [inline]
->  nbd_genl_connect+0xee7/0x1560 drivers/block/nbd.c:1980
->  genl_family_rcv_msg_doit+0x228/0x320 net/netlink/genetlink.c:739
->  genl_family_rcv_msg net/netlink/genetlink.c:783 [inline]
->  genl_rcv_msg+0x328/0x580 net/netlink/genetlink.c:800
->  netlink_rcv_skb+0x153/0x420 net/netlink/af_netlink.c:2494
->  genl_rcv+0x24/0x40 net/netlink/genetlink.c:811
->  netlink_unicast_kernel net/netlink/af_netlink.c:1304 [inline]
->  netlink_unicast+0x533/0x7d0 net/netlink/af_netlink.c:1330
->  netlink_sendmsg+0x856/0xd90 net/netlink/af_netlink.c:1919
->  sock_sendmsg_nosec net/socket.c:652 [inline]
->  sock_sendmsg+0xcf/0x120 net/socket.c:672
->  ____sys_sendmsg+0x6e8/0x810 net/socket.c:2345
->  ___sys_sendmsg+0xf3/0x170 net/socket.c:2399
->  __sys_sendmsg+0xe5/0x1b0 net/socket.c:2432
->  do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
->  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> RIP: 0033:0x440709
-> Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 e1 14 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 c0 ff ff ff f7 d8 64 89 01 48
-> RSP: 002b:00007ffd63e9cc88 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
-> RAX: ffffffffffffffda RBX: 000000000000e3fb RCX: 0000000000440709
-> RDX: 0000000000000000 RSI: 0000000020000340 RDI: 0000000000000003
-> RBP: 0000000000000000 R08: 0000000000000000 R09: 00007ffd63e9ce28
-> R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd63e9cc9c
-> R13: 431bde82d7b634db R14: 00000000004ae018 R15: 00000000004004a0
-> 
-> Allocated by task 8536:
->  kasan_save_stack+0x1b/0x40 mm/kasan/common.c:38
->  kasan_set_track mm/kasan/common.c:46 [inline]
->  set_alloc_info mm/kasan/common.c:401 [inline]
->  ____kasan_kmalloc.constprop.0+0x82/0xa0 mm/kasan/common.c:429
->  kmalloc include/linux/slab.h:552 [inline]
->  kzalloc include/linux/slab.h:682 [inline]
->  nbd_dev_add+0x44/0x8e0 drivers/block/nbd.c:1673
->  nbd_genl_connect+0x59c/0x1560 drivers/block/nbd.c:1838
->  genl_family_rcv_msg_doit+0x228/0x320 net/netlink/genetlink.c:739
->  genl_family_rcv_msg net/netlink/genetlink.c:783 [inline]
->  genl_rcv_msg+0x328/0x580 net/netlink/genetlink.c:800
->  netlink_rcv_skb+0x153/0x420 net/netlink/af_netlink.c:2494
->  genl_rcv+0x24/0x40 net/netlink/genetlink.c:811
->  netlink_unicast_kernel net/netlink/af_netlink.c:1304 [inline]
->  netlink_unicast+0x533/0x7d0 net/netlink/af_netlink.c:1330
->  netlink_sendmsg+0x856/0xd90 net/netlink/af_netlink.c:1919
->  sock_sendmsg_nosec net/socket.c:652 [inline]
->  sock_sendmsg+0xcf/0x120 net/socket.c:672
->  ____sys_sendmsg+0x6e8/0x810 net/socket.c:2345
->  ___sys_sendmsg+0xf3/0x170 net/socket.c:2399
->  __sys_sendmsg+0xe5/0x1b0 net/socket.c:2432
->  do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
->  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> 
-> Freed by task 8540:
->  kasan_save_stack+0x1b/0x40 mm/kasan/common.c:38
->  kasan_set_track+0x1c/0x30 mm/kasan/common.c:46
->  kasan_set_free_info+0x20/0x30 mm/kasan/generic.c:356
->  ____kasan_slab_free+0xe1/0x110 mm/kasan/common.c:362
->  kasan_slab_free include/linux/kasan.h:192 [inline]
->  slab_free_hook mm/slub.c:1547 [inline]
->  slab_free_freelist_hook+0x5d/0x150 mm/slub.c:1580
->  slab_free mm/slub.c:3143 [inline]
->  kfree+0xdb/0x3b0 mm/slub.c:4139
->  nbd_dev_remove drivers/block/nbd.c:243 [inline]
->  nbd_put.part.0+0x180/0x1d0 drivers/block/nbd.c:251
->  nbd_put drivers/block/nbd.c:295 [inline]
->  nbd_config_put+0x6dd/0x8c0 drivers/block/nbd.c:1242
->  nbd_genl_connect+0xeb7/0x1560 drivers/block/nbd.c:1978
->  genl_family_rcv_msg_doit+0x228/0x320 net/netlink/genetlink.c:739
->  genl_family_rcv_msg net/netlink/genetlink.c:783 [inline]
->  genl_rcv_msg+0x328/0x580 net/netlink/genetlink.c:800
->  netlink_rcv_skb+0x153/0x420 net/netlink/af_netlink.c:2494
->  genl_rcv+0x24/0x40 net/netlink/genetlink.c:811
->  netlink_unicast_kernel net/netlink/af_netlink.c:1304 [inline]
->  netlink_unicast+0x533/0x7d0 net/netlink/af_netlink.c:1330
->  netlink_sendmsg+0x856/0xd90 net/netlink/af_netlink.c:1919
->  sock_sendmsg_nosec net/socket.c:652 [inline]
->  sock_sendmsg+0xcf/0x120 net/socket.c:672
->  ____sys_sendmsg+0x6e8/0x810 net/socket.c:2345
->  ___sys_sendmsg+0xf3/0x170 net/socket.c:2399
->  __sys_sendmsg+0xe5/0x1b0 net/socket.c:2432
->  do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
->  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> 
-> The buggy address belongs to the object at ffff888014ca1800
->  which belongs to the cache kmalloc-1k of size 1024
-> The buggy address is located 416 bytes inside of
->  1024-byte region [ffff888014ca1800, ffff888014ca1c00)
-> The buggy address belongs to the page:
-> page:0000000086766889 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x14ca0
-> head:0000000086766889 order:3 compound_mapcount:0 compound_pincount:0
-> flags: 0xfff00000010200(slab|head)
-> raw: 00fff00000010200 ffffea0000929400 0000000200000002 ffff888010c41140
-> raw: 0000000000000000 0000000000100010 00000001ffffffff 0000000000000000
-> page dumped because: kasan: bad access detected
-> 
-> Memory state around the buggy address:
->  ffff888014ca1880: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->  ffff888014ca1900: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->> ffff888014ca1980: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->                                ^
->  ffff888014ca1a00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->  ffff888014ca1a80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
-> ==================================================================
-> 
-> 
-> ---
-> This report is generated by a bot. It may contain errors.
-> See https://goo.gl/tpsmEJ for more information about syzbot.
-> syzbot engineers can be reached at syzkaller@googlegroups.com.
-> 
-> syzbot will keep track of this issue. See:
-> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-> For information about bisection process see: https://goo.gl/tpsmEJ#bisection
-> syzbot can test patches for this issue, for details see:
-> https://goo.gl/tpsmEJ#testing-patches
-> 
-
-This might be caused by :
-
-commit a2c97909f97ef32b76e856572fba4f77e1885fe6
-Author: Josef Bacik <josef@toxicpanda.com>
-Date:   Thu Apr 6 17:02:07 2017 -0400
-
-    nbd: add a flag to destroy an nbd device on disconnect
-   
-    For ease of management it would be nice for users to specify that the
-    device node for a nbd device is destroyed once it is disconnected and
-    there are no more users.  Add a client flag and enable this operation to
-    happen.
-   
-    Signed-off-by: Josef Bacik <jbacik@fb.com>
-    Signed-off-by: Jens Axboe <axboe@fb.com>
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+syzbot can test patches for this issue, for details see:
+https://goo.gl/tpsmEJ#testing-patches
 
