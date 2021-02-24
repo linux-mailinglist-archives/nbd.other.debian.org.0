@@ -2,97 +2,66 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D44D3220D5
-	for <lists+nbd@lfdr.de>; Mon, 22 Feb 2021 21:33:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F510323F69
+	for <lists+nbd@lfdr.de>; Wed, 24 Feb 2021 16:14:44 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4CFF020263; Mon, 22 Feb 2021 20:33:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Feb 22 20:33:12 2021
-Old-Return-Path: <axboe@kernel.dk>
+	id 2EDAA2033E; Wed, 24 Feb 2021 15:14:44 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Feb 24 15:14:44 2021
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.0 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,FOURLA,FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,NICE_REPLY_A,
-	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-8.9 required=4.0 tests=DIGITS_LETTERS,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,MURPHY_SCAM1,WORD_WITHOUT_VOWELS
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 83C4920385
-	for <lists-other-nbd@bendel.debian.org>; Mon, 22 Feb 2021 20:17:50 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 432BA202DB
+	for <lists-other-nbd@bendel.debian.org>; Wed, 24 Feb 2021 15:14:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.861 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, FOURLA=0.1, FVGT_m_MULTI_ODD=0.02,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.88 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, MURPHY_SCAM1=0.1, WORD_WITHOUT_VOWELS=1]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 1T2YwUK0iJbA for <lists-other-nbd@bendel.debian.org>;
-	Mon, 22 Feb 2021 20:17:45 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-io1-xd30.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 906AB20382
-	for <nbd@other.debian.org>; Mon, 22 Feb 2021 20:17:45 +0000 (UTC)
-Received: by mail-io1-xd30.google.com with SMTP id n14so14691367iog.3
-        for <nbd@other.debian.org>; Mon, 22 Feb 2021 12:17:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=4ddf66lJ+m5xONzSeCUD0kkvr/koAk3741YY+sSqL1Q=;
-        b=vIjNjzXk5dcsCX8ZOoirTk8u3Bs+mMJRcrAAHY7W9MDXo+Qec37BcW/o25VeebQunK
-         Rdl07Oxahb7hmqO2IDZ9dCbeRGCqL9ubs9U6za7cDAWetjeOmwcBhBK8T+DHe9tRMSZj
-         dhcGhpiMngBXt0aBxOyyxjO5uVZWHlOH/nay3JqnsX04uZr3tlaya9cRkH14H7I4YfHj
-         Onwridn2AUiJ3PMDOuI7Cv/7f6xy+coV2rZXRXYSqPl+G7EMWs1bGnbipMmkg29WSqd7
-         t6/SbC1F6SCV3PQ01oI1o+1ouBFK6J9Zp742U76tjSdjU/UX/c2vj82eTUR4kuHIzB22
-         /pbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=4ddf66lJ+m5xONzSeCUD0kkvr/koAk3741YY+sSqL1Q=;
-        b=Dpr5Enl8WRLJ6xb7fvypcZ3JpV39RvhKLT738sPMAhlNmlQ+iaIy+bQYhsvyQoym/D
-         EhupkIpt2h8k31gCuy2Wis+Zqwv5dXvXST+9GCNP93LMo4laj1R3WKNaOl/wHPeEr48U
-         EJO6G70fFkslgbeWc3OKm0nTQkYeWKWBEcdhA6+DCAmPo3XX/OXGH8xt3eh6DxdQQNa5
-         apq68Zky3JQX5j3iAX9y6Z3e4Z//Ykwo3xpSoasWQ73niBul/VYyqN91LHwEEVCnY1h8
-         AuuJkUpA8+syvRrke/B1DoWY7eTSq72mzSxIs3WBBHIlQG0xSKpnh4owbr0uIrug6079
-         wslA==
-X-Gm-Message-State: AOAM53199vjP3GPvqB7ltAnyWGnidpnjcXWIDr6Ctu4y9oen0qUOpmZs
-	GVC/VZ0U7pdeK+Cf+Y7eZi2Wbw==
-X-Google-Smtp-Source: ABdhPJzbRL79ndIOOgIrgfIoWOhlWVTaRtFsgpSokWvK0bGnF3IM9CTPCElj2M/UtgH7W/3d5zdVmw==
-X-Received: by 2002:a5d:9c88:: with SMTP id p8mr9094965iop.23.1614025061797;
-        Mon, 22 Feb 2021 12:17:41 -0800 (PST)
-Received: from [192.168.1.30] ([65.144.74.34])
-        by smtp.gmail.com with ESMTPSA id w3sm12209333ill.80.2021.02.22.12.17.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 22 Feb 2021 12:17:41 -0800 (PST)
-Subject: Re: [PATCH] nbd: handle device refs for DESTROY_ON_DISCONNECT
- properly
-To: Josef Bacik <josef@toxicpanda.com>, nbd@other.debian.org,
- linux-block@vger.kernel.org, kernel-team@fb.com
-Cc: syzbot+429d3f82d757c211bff3@syzkaller.appspotmail.com
-References: <9143ed7b151cbd5e7aff0301929856b9ca0a0ba4.1614024570.git.josef@toxicpanda.com>
-From: Jens Axboe <axboe@kernel.dk>
-Message-ID: <27c6f6fb-4775-2d02-9f93-a02a76ce1166@kernel.dk>
-Date: Mon, 22 Feb 2021 13:17:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	with ESMTP id 1TjRCqS8uHFS for <lists-other-nbd@bendel.debian.org>;
+	Wed, 24 Feb 2021 15:14:34 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 0C2932027E
+	for <nbd@other.debian.org>; Wed, 24 Feb 2021 15:14:33 +0000 (UTC)
+Received: from [102.39.44.20] (helo=pc181009)
+	by lounge.grep.be with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <w@uter.be>)
+	id 1lEvry-0007J6-JJ; Wed, 24 Feb 2021 16:14:30 +0100
+Received: from wouter by pc181009 with local (Exim 4.94)
+	(envelope-from <w@uter.be>)
+	id 1lEvrn-000XZX-6Z; Wed, 24 Feb 2021 17:14:19 +0200
+Date: Wed, 24 Feb 2021 17:14:18 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Graham Cobb <g.nbd@cobb.uk.net>
+Cc: nbd@other.debian.org
+Subject: Re: [PATCH] nbd-server: handle auth for v6-mapped IPv4 addresses
+Message-ID: <YDZtShHMjHw1itK/@pc181009.grep.be>
+References: <20210209000545.E95381ED558@black.home.cobb.me.uk>
+ <f6c5a911-b4d1-d47c-7731-1b4dc00246e8@cobb.uk.net>
 MIME-Version: 1.0
-In-Reply-To: <9143ed7b151cbd5e7aff0301929856b9ca0a0ba4.1614024570.git.josef@toxicpanda.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f6c5a911-b4d1-d47c-7731-1b4dc00246e8@cobb.uk.net>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <z1IQHPb6YR.A.mxD.IUBNgB@bendel>
+Resent-Message-ID: <gQ5U6O0nvfJ.A.amD.k1mNgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1146
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1147
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -102,147 +71,77 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/27c6f6fb-4775-2d02-9f93-a02a76ce1166@kernel.dk
-Resent-Date: Mon, 22 Feb 2021 20:33:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YDZtShHMjHw1itK/@pc181009.grep.be
+Resent-Date: Wed, 24 Feb 2021 15:14:44 +0000 (UTC)
 
-On 2/22/21 1:09 PM, Josef Bacik wrote:
-> There exists a race where we can be attempting to create a new nbd
-> configuration while a previous configuration is going down, both
-> configured with DESTROY_ON_DISCONNECT.  Normally devices all have a
-> reference of 1, as they won't be cleaned up until the module is torn
-> down.  However with DESTROY_ON_DISCONNECT we'll make sure that there is
-> only 1 reference (generally) on the device for the config itself, and
-> then once the config is dropped, the device is torn down.
+Hi Graham,
+
+Sorry, I didn't have time to review this earlier due to other
+commitments (I'm a member of the FOSDEM orga team).
+
+On Wed, Feb 17, 2021 at 11:03:43AM +0000, Graham Cobb wrote:
+> On 08/02/2021 23:42, Graham R. Cobb wrote:
+> > This patch adds support for using IPv4 addresses in the nbd-server auth file
+> > even if the socket provides v6-mapped addresses. It extends the comparison
+> > code in address_matches to handle the two cases where the auth file and the
+> > socket use different address families.
+> > 
+> > This fixes issue #35 in the github repository.
+> > 
+> > Signed-off-by: Graham R. Cobb <g.nbd@cobb.uk.net>
 > 
-> The race that exists looks like this
+> No comments or reviewed-by so far. I am not sure of the protocol for
+> this mailing list, but this is a gentle ping :-)
 > 
-> TASK1					TASK2
-> nbd_genl_connect()
->   idr_find()
->     refcount_inc_not_zero(nbd)
->       * count is 2 here ^^
-> 					nbd_config_put()
-> 					  nbd_put(nbd) (count is 1)
->     setup new config
->       check DESTROY_ON_DISCONNECT
-> 	put_dev = true
->     if (put_dev) nbd_put(nbd)
-> 	* free'd here ^^
-> 
-> In nbd_genl_connect() we assume that the nbd ref count will be 2,
-> however clearly that won't be true if the nbd device had been setup as
-> DESTROY_ON_DISCONNECT with its prior configuration.  Fix this by getting
-> rid of the runtime flag to check if we need to mess with the nbd device
-> refcount, and use the device NBD_DESTROY_ON_DISCONNECT flag to check if
-> we need to adjust the ref counts.  This was reported by syzkaller with
-> the following kasan dump
-> 
-> BUG: KASAN: use-after-free in instrument_atomic_read include/linux/instrumented.h:71 [inline]
-> BUG: KASAN: use-after-free in atomic_read include/asm-generic/atomic-instrumented.h:27 [inline]
-> BUG: KASAN: use-after-free in refcount_dec_not_one+0x71/0x1e0 lib/refcount.c:76
-> Read of size 4 at addr ffff888143bf71a0 by task systemd-udevd/8451
-> 
-> CPU: 0 PID: 8451 Comm: systemd-udevd Not tainted 5.11.0-rc7-syzkaller #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-> Call Trace:
->  __dump_stack lib/dump_stack.c:79 [inline]
->  dump_stack+0x107/0x163 lib/dump_stack.c:120
->  print_address_description.constprop.0.cold+0x5b/0x2f8 mm/kasan/report.c:230
->  __kasan_report mm/kasan/report.c:396 [inline]
->  kasan_report.cold+0x79/0xd5 mm/kasan/report.c:413
->  check_memory_region_inline mm/kasan/generic.c:179 [inline]
->  check_memory_region+0x13d/0x180 mm/kasan/generic.c:185
->  instrument_atomic_read include/linux/instrumented.h:71 [inline]
->  atomic_read include/asm-generic/atomic-instrumented.h:27 [inline]
->  refcount_dec_not_one+0x71/0x1e0 lib/refcount.c:76
->  refcount_dec_and_mutex_lock+0x19/0x140 lib/refcount.c:115
->  nbd_put drivers/block/nbd.c:248 [inline]
->  nbd_release+0x116/0x190 drivers/block/nbd.c:1508
->  __blkdev_put+0x548/0x800 fs/block_dev.c:1579
->  blkdev_put+0x92/0x570 fs/block_dev.c:1632
->  blkdev_close+0x8c/0xb0 fs/block_dev.c:1640
->  __fput+0x283/0x920 fs/file_table.c:280
->  task_work_run+0xdd/0x190 kernel/task_work.c:140
->  tracehook_notify_resume include/linux/tracehook.h:189 [inline]
->  exit_to_user_mode_loop kernel/entry/common.c:174 [inline]
->  exit_to_user_mode_prepare+0x249/0x250 kernel/entry/common.c:201
->  __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
->  syscall_exit_to_user_mode+0x19/0x50 kernel/entry/common.c:294
->  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> RIP: 0033:0x7fc1e92b5270
-> Code: 73 01 c3 48 8b 0d 38 7d 20 00 f7 d8 64 89 01 48 83 c8 ff c3 66 0f 1f 44 00 00 83 3d 59 c1 20 00 00 75 10 b8 03 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 31 c3 48 83 ec 08 e8 ee fb ff ff 48 89 04 24
-> RSP: 002b:00007ffe8beb2d18 EFLAGS: 00000246 ORIG_RAX: 0000000000000003
-> RAX: 0000000000000000 RBX: 0000000000000007 RCX: 00007fc1e92b5270
-> RDX: 000000000aba9500 RSI: 0000000000000000 RDI: 0000000000000007
-> RBP: 00007fc1ea16f710 R08: 000000000000004a R09: 0000000000000008
-> R10: 0000562f8cb0b2a8 R11: 0000000000000246 R12: 0000000000000000
-> R13: 0000562f8cb0afd0 R14: 0000000000000003 R15: 000000000000000e
-> 
-> Allocated by task 1:
->  kasan_save_stack+0x1b/0x40 mm/kasan/common.c:38
->  kasan_set_track mm/kasan/common.c:46 [inline]
->  set_alloc_info mm/kasan/common.c:401 [inline]
->  ____kasan_kmalloc.constprop.0+0x82/0xa0 mm/kasan/common.c:429
->  kmalloc include/linux/slab.h:552 [inline]
->  kzalloc include/linux/slab.h:682 [inline]
->  nbd_dev_add+0x44/0x8e0 drivers/block/nbd.c:1673
->  nbd_init+0x250/0x271 drivers/block/nbd.c:2394
->  do_one_initcall+0x103/0x650 init/main.c:1223
->  do_initcall_level init/main.c:1296 [inline]
->  do_initcalls init/main.c:1312 [inline]
->  do_basic_setup init/main.c:1332 [inline]
->  kernel_init_freeable+0x605/0x689 init/main.c:1533
->  kernel_init+0xd/0x1b8 init/main.c:1421
->  ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:296
-> 
-> Freed by task 8451:
->  kasan_save_stack+0x1b/0x40 mm/kasan/common.c:38
->  kasan_set_track+0x1c/0x30 mm/kasan/common.c:46
->  kasan_set_free_info+0x20/0x30 mm/kasan/generic.c:356
->  ____kasan_slab_free+0xe1/0x110 mm/kasan/common.c:362
->  kasan_slab_free include/linux/kasan.h:192 [inline]
->  slab_free_hook mm/slub.c:1547 [inline]
->  slab_free_freelist_hook+0x5d/0x150 mm/slub.c:1580
->  slab_free mm/slub.c:3143 [inline]
->  kfree+0xdb/0x3b0 mm/slub.c:4139
->  nbd_dev_remove drivers/block/nbd.c:243 [inline]
->  nbd_put.part.0+0x180/0x1d0 drivers/block/nbd.c:251
->  nbd_put drivers/block/nbd.c:295 [inline]
->  nbd_config_put+0x6dd/0x8c0 drivers/block/nbd.c:1242
->  nbd_release+0x103/0x190 drivers/block/nbd.c:1507
->  __blkdev_put+0x548/0x800 fs/block_dev.c:1579
->  blkdev_put+0x92/0x570 fs/block_dev.c:1632
->  blkdev_close+0x8c/0xb0 fs/block_dev.c:1640
->  __fput+0x283/0x920 fs/file_table.c:280
->  task_work_run+0xdd/0x190 kernel/task_work.c:140
->  tracehook_notify_resume include/linux/tracehook.h:189 [inline]
->  exit_to_user_mode_loop kernel/entry/common.c:174 [inline]
->  exit_to_user_mode_prepare+0x249/0x250 kernel/entry/common.c:201
->  __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
->  syscall_exit_to_user_mode+0x19/0x50 kernel/entry/common.c:294
->  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> 
-> The buggy address belongs to the object at ffff888143bf7000
->  which belongs to the cache kmalloc-1k of size 1024
-> The buggy address is located 416 bytes inside of
->  1024-byte region [ffff888143bf7000, ffff888143bf7400)
-> The buggy address belongs to the page:
-> page:000000005238f4ce refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x143bf0
-> head:000000005238f4ce order:3 compound_mapcount:0 compound_pincount:0
-> flags: 0x57ff00000010200(slab|head)
-> raw: 057ff00000010200 ffffea00004b1400 0000000300000003 ffff888010c41140
-> raw: 0000000000000000 0000000000100010 00000001ffffffff 0000000000000000
-> page dumped because: kasan: bad access detected
-> 
-> Memory state around the buggy address:
->  ffff888143bf7080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->  ffff888143bf7100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->> ffff888143bf7180: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->                                ^
->  ffff888143bf7200: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+> > ---
+> >  nbdsrv.c | 30 ++++++++++++++++++++++++------
+> >  1 file changed, 24 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/nbdsrv.c b/nbdsrv.c
+> > index 168d425..01ba1b2 100644
+> > --- a/nbdsrv.c
+> > +++ b/nbdsrv.c
+> > @@ -35,6 +35,9 @@ bool address_matches(const char* mask, const struct sockaddr* addr, GError** err
+> >  	char privmask[strlen(mask)+1];
+> >  	int masklen;
+> >  	int addrlen = addr->sa_family == AF_INET ? 4 : 16;
+> > +#define IPV4_MAP_PREFIX 12
+> > +	uint8_t ipv4_mapped[IPV4_MAP_PREFIX+4] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+> > +		255, 255, 0, 0, 0, 0};
+> >  
+> >  	strcpy(privmask, mask);
+> >  
+> > @@ -61,12 +64,9 @@ bool address_matches(const char* mask, const struct sockaddr* addr, GError** err
+> >  		uint8_t* byte_t;
+> >  		uint8_t mask = 0;
+> >  		int len_left = masklen;
+> > -		if(res->ai_family != addr->sa_family) {
+> > -			msg(LOG_DEBUG, "client address does not match %d/%d: address family mismatch (IPv4 vs IPv6?)",
+> > -			    (int)res->ai_family, (int)addr->sa_family);
+> > -			goto next;
+> > -		}
+> > -		switch(addr->sa_family) {
+> > +		if(res->ai_family == addr->sa_family) {
+> > +			/* Both addresses are the same address family so do a simple comparison */
+> > +			switch(addr->sa_family) {
+> >  			case AF_INET:
+> >  				byte_s = (const uint8_t*)(&(((struct sockaddr_in*)addr)->sin_addr));
+> >  				byte_t = (uint8_t*)(&(((struct sockaddr_in*)(res->ai_addr))->sin_addr));
+> > @@ -75,6 +75,24 @@ bool address_matches(const char* mask, const struct sockaddr* addr, GError** err
+> >  				byte_s = (const uint8_t*)(&(((struct sockaddr_in6*)addr)->sin6_addr));
+> >  				byte_t = (uint8_t*)(&(((struct sockaddr_in6*)(res->ai_addr))->sin6_addr));
+> >  				break;
+> > +			}
+
+You confused me a bit here because you drop the "switch" line above, but
+then change indentation rules ;-)
+
+But okay, it makes sense, now that I look at it closer.
 
 Applied, thanks.
 
 -- 
-Jens Axboe
+To the thief who stole my anti-depressants: I hope you're happy
+
+  -- seen somewhere on the Internet on a photo of a billboard
 
