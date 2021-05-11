@@ -1,66 +1,71 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F48D370E5E
-	for <lists+nbd@lfdr.de>; Sun,  2 May 2021 20:09:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B76837A0EC
+	for <lists+nbd@lfdr.de>; Tue, 11 May 2021 09:36:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 20A8B2036E; Sun,  2 May 2021 18:09:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sun May  2 18:09:10 2021
-Old-Return-Path: <raphael.ludwig@happywetter.at>
+	id 1F016202D3; Tue, 11 May 2021 07:36:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue May 11 07:36:10 2021
+Old-Return-Path: <sunke32@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.4 required=4.0 tests=FOURLA,HEXHASH_WORD,
-	HTML_MESSAGE,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H3,
-	RCVD_IN_MSPIKE_WL,WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.2 required=4.0 tests=FOURLA,HTML_MESSAGE,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B5E6F204FA
-	for <lists-other-nbd@bendel.debian.org>; Sun,  2 May 2021 17:52:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 730E9202A1
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 May 2021 07:19:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=2.922 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, FOURLA=0.1, HEXHASH_WORD=1,
-	HTML_MESSAGE=2, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.179 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, HTML_MESSAGE=2,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id QbXWhvNZkHFf for <lists-other-nbd@bendel.debian.org>;
-	Sun,  2 May 2021 17:52:06 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
-X-Greylist: delayed 900 seconds by postgrey-1.36 at bendel; Sun, 02 May 2021 17:52:06 UTC
-Received: from mx01lb.world4you.com (mx01lb.world4you.com [81.19.149.111])
+	with ESMTP id K_N-JbvUfqsP for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 May 2021 07:18:56 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 1168 seconds by postgrey-1.36 at bendel; Tue, 11 May 2021 07:18:56 UTC
+Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E546F204F4
-	for <nbd@other.debian.org>; Sun,  2 May 2021 17:52:06 +0000 (UTC)
-Received: from [194.166.54.51] (helo=[10.0.3.54])
-	by mx01lb.world4you.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94)
-	(envelope-from <raphael.ludwig@happywetter.at>)
-	id 1ldG1e-0006B1-Td
-	for nbd@other.debian.org; Sun, 02 May 2021 19:37:03 +0200
-From: Raphael Ludwig <raphael.ludwig@happywetter.at>
-To: nbd@other.debian.org
-Subject: [BUG] nbd-server: invalid length for trim requests
-Message-ID: <7416d9c6-f9f2-b899-f3aa-85eb57cb0cc6@happywetter.at>
-Date: Sun, 2 May 2021 19:37:03 +0200
+	by bendel.debian.org (Postfix) with ESMTPS id A86D320288
+	for <nbd@other.debian.org>; Tue, 11 May 2021 07:18:56 +0000 (UTC)
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
+	by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FfTHm2ycRzklXc;
+	Tue, 11 May 2021 14:57:08 +0800 (CST)
+Received: from [10.174.178.31] (10.174.178.31) by
+ DGGEMS401-HUB.china.huawei.com (10.3.19.201) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 11 May 2021 14:59:15 +0800
+Subject: Re: [PATCH v6 0/2] fix a NULL pointer bug and simplify the code
+To: Jens Axboe <axboe@kernel.dk>, <josef@toxicpanda.com>,
+	<Markus.Elfring@web.de>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>
+References: <20210218122620.228375-1-sunke32@huawei.com>
+ <6df9a13d-b876-976f-ad48-884c88815269@kernel.dk>
+From: Sun Ke <sunke32@huawei.com>
+Message-ID: <aa80f848-c895-4478-f582-10a57a1166c3@huawei.com>
+Date: Tue, 11 May 2021 14:59:14 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
+ Thunderbird/78.6.1
 MIME-Version: 1.0
+In-Reply-To: <6df9a13d-b876-976f-ad48-884c88815269@kernel.dk>
 Content-Type: multipart/alternative;
- boundary="------------4D83604B05B024506EEE0C5F"
-Content-Language: en-US
-X-AV-Do-Run: Yes
+	boundary="------------11363906A229CB693433F311"
+X-Originating-IP: [10.174.178.31]
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <V8zBvIMOFaP.A.4CH.GrujgB@bendel>
+Resent-Message-ID: <4lpMQPyN7FH.A.vKF.pPjmgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1150
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1151
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -70,138 +75,95 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/7416d9c6-f9f2-b899-f3aa-85eb57cb0cc6@happywetter.at
-Resent-Date: Sun,  2 May 2021 18:09:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/aa80f848-c895-4478-f582-10a57a1166c3@huawei.com
+Resent-Date: Tue, 11 May 2021 07:36:10 +0000 (UTC)
 
-This is a multi-part message in MIME format.
---------------4D83604B05B024506EEE0C5F
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+--------------11363906A229CB693433F311
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-V2hlbiBlbmFibGluZyBUUklNIHN1cHBvcnQgZm9yIGEgYmxvY2sgZGV2aWNlLCBhIHJlcXVl
-c3QgY2FuIHJlc3VsdCBpbiBhDQp3cml0ZSBiZXlvbmQgdGhlIGVuZCBvZiBzdWNoIGEgYmxv
-Y2sgZGV2aWNlLCBhcyBzaG93biBpbiB0aGUgZm9sbG93aW5nDQppbiB0aGUgZm9sbG93aW5n
-IGRlYnVnIG91dHB1dDoNCg0KKypoYW5kbGluZyB0cmltIHJlcXVlc3QNCsKgwqDCoCBjbGll
-bnQtPmV4cG9ydHNpemXCoCA6wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAxMzQyMTc3MjgNCsKg
-wqDCoCByZXEtPmZyb23CoMKgwqDCoMKgwqDCoMKgwqDCoCA6wqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIDY3MTA5ODg4DQrCoMKgwqAgY3VyLnN0YXJ0b2ZmwqDCoMKgwqDCoMKgwqAgOsKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDANCsKgwqDCoCByZXFvZmbC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDY3
-MTA5ODg4DQrCoMKgwqAgbmV4dC5zdGFydG9mZsKgwqDCoMKgwqDCoCA6wqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCAxMzQyMTc3MjgNCsKgwqDCoCBjdXJsZW7CoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCA6wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDY3MTA3ODQwDQrCoMKgwqAgY3Vy
-bGVuIC0gcmVxb2ZmwqDCoMKgwqAgOiAxODQ0Njc0NDA3MzcwOTU0OTU2OA0KwqDCoMKgIHJl
-cS0+bGVuwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgODM4ODYwOA0KDQpSZXF1ZXN0IHRvIHB1bmNoIGEgaG9sZSBpbiBmZD01LCBzdGFydGlu
-ZyBmcm9tIDY3MTA5ODg4LCBsZW5ndGggMTg0NDY3NDQwNzM3MDk1NDk1NjgNClBlcmZvcm1l
-ZCBUUklNIHJlcXVlc3QgZnJvbSA2NzEwOTg4OCB0byA4Mzg4NjA4DQoNCkFzIGEgcmVzdWx0
-IG9mIHN1Y2ggYSByZXF1ZXN0IHRoZSBuYmQtc2VydmVyIHByb2Nlc3Mgd2lsbCBoYW5nIHdp
-dGggMTAwJQ0KY3B1IGxvYWQgd2hpbGUgdGhlIGtlcm5lbCB3cml0ZXMgYSBsb3Qgb2Ygd2Fy
-bmluZ3MgYW5kIGNhbiBub3QgYmUga2lsbGVkDQp1bnRpbCBhbGwgcmVxdWVzdHMgYXJlIGhh
-bmRsZWQgYnkgdGhlIGtlcm5lbC4NCkkgdXNlZCB0aGUgZm9sbG93aW5nIHBhdGNoIHRvIG1p
-dGlnYXRlIHRoZSBwcm9ibGVtIGFuZCBnZXQgdHJpbS9kaXNjYXJkDQp3b3JraW5nIGZvciBh
-IHNpbXBsZSBibG9jayBkZXZpY2UgZXhwb3J0Og0KDQotLS0gbmJkc3J2LmMub2xkDQorKysg
-bmJkc3J2LmMNCkBAIC0yNjgsNiArMjY4LDcgQEANCsKgwqDCoMKgIEZJTEVfSU5GTyBjdXIg
-PSBnX2FycmF5X2luZGV4KGNsaWVudC0+ZXhwb3J0LCBGSUxFX0lORk8sIDApOw0KwqDCoMKg
-wqAgRklMRV9JTkZPIG5leHQ7DQrCoMKgwqDCoCBpbnQgaSA9IDE7DQorwqDCoMKgIHVpbnQ2
-NF90IHJlcWZyb20gPSByZXEtPmZyb207DQrCoMKgwqDCoCBkbyB7DQrCoMKgwqDCoCDCoMKg
-wqAgaWYoaTxjbGllbnQtPmV4cG9ydC0+bGVuKSB7DQrCoMKgwqDCoCDCoMKgwqAgwqDCoMKg
-IG5leHQgPSBnX2FycmF5X2luZGV4KGNsaWVudC0+ZXhwb3J0LCBGSUxFX0lORk8sIGkpOw0K
-QEAgLTI3NSwxMyArMjc2LDE0IEBADQrCoMKgwqDCoCDCoMKgwqAgwqDCoMKgIG5leHQuZmhh
-bmRsZSA9IC0xOw0KwqDCoMKgwqAgwqDCoMKgIMKgwqDCoCBuZXh0LnN0YXJ0b2ZmID0gY2xp
-ZW50LT5leHBvcnRzaXplOw0KwqDCoMKgwqAgwqDCoMKgIH0NCi3CoMKgwqAgwqDCoMKgIGlm
-KGN1ci5zdGFydG9mZiA8PSByZXEtPmZyb20gJiYgbmV4dC5zdGFydG9mZiAtIGN1ci5zdGFy
-dG9mZiA+PSByZXEtPmxlbikgew0KLcKgwqDCoCDCoMKgwqAgwqDCoMKgIG9mZl90IHJlcW9m
-ZiA9IHJlcS0+ZnJvbSAtIGN1ci5zdGFydG9mZjsNCi3CoMKgwqAgwqDCoMKgIMKgwqDCoCBv
-ZmZfdCBjdXJsZW4gPSBuZXh0LnN0YXJ0b2ZmIC0gcmVxb2ZmOw0KLcKgwqDCoCDCoMKgwqAg
-wqDCoMKgIG9mZl90IHJlcWxlbiA9IGN1cmxlbiAtIHJlcW9mZiA+IHJlcS0+bGVuID8gcmVx
-LT5sZW4gOiBjdXJsZW4gLSByZXFvZmY7DQotwqDCoMKgIMKgwqDCoCDCoMKgwqAgcHVuY2hf
-aG9sZShjdXIuZmhhbmRsZSwgcmVxb2ZmLCByZXFsZW4pOw0KK8KgwqDCoCDCoMKgwqAgaWYo
-Y3VyLnN0YXJ0b2ZmIDw9IHJlcWZyb20pIHsNCivCoMKgwqAgwqDCoMKgIMKgwqDCoCB1aW50
-NjRfdCBlbmTCoMKgID0gTUlOKHJlcS0+ZnJvbSArIHJlcS0+bGVuLCBuZXh0LnN0YXJ0b2Zm
-KSAtIGN1ci5zdGFydG9mZjsNCivCoMKgwqAgwqDCoMKgIMKgwqDCoCB1aW50NjRfdCBzdGFy
-dCA9IHJlcWZyb20gLSBjdXIuc3RhcnRvZmY7DQorwqDCoMKgIMKgwqDCoCDCoMKgwqAgdWlu
-dDY0X3QgbGVuwqDCoCA9IGVuZCAtIHN0YXJ0OyANCivCoMKgwqAgwqDCoMKgIMKgwqDCoCBw
-dW5jaF9ob2xlKGN1ci5maGFuZGxlLCBzdGFydCwgbGVuKTsNCsKgwqDCoMKgIMKgwqDCoCB9
-DQrCoMKgwqDCoCDCoMKgwqAgY3VyID0gbmV4dDsNCivCoMKgwqAgwqDCoMKgIHJlcWZyb20g
-PSBjdXIuc3RhcnRvZmY7DQrCoMKgwqDCoCDCoMKgwqAgaSsrOw0KwqDCoMKgwqAgfSB3aGls
-ZShpIDwgY2xpZW50LT5leHBvcnQtPmxlbiAmJiBjdXIuc3RhcnRvZmYgPCAocmVxLT5mcm9t
-ICsgcmVxLT5sZW4pKTsNCsKgwqDCoMKgIERFQlVHKCJQZXJmb3JtZWQgVFJJTSByZXF1ZXN0
-IGZyb20gJWxsdSB0byAlbGx1IiwgKHVuc2lnbmVkIGxvbmcgbG9uZykgcmVxLT5mcm9tLCAo
-dW5zaWduZWQgbG9uZyBsb25nKSByZXEtPmxlbik7DQoNClRoZSBwYXRjaCB3YXMgbm90IHRl
-c3RlZCBhZ2FpbnN0IG11bHRpLWZpbGUgZXhwb3J0cyBvciByZXZpZXdlZCwgYnV0IEkNCnRo
-b3VnaCBpdCBtaWdodCBoZWxwIGluIGZpeGluZyB0aGUgaXNzdWUuwqANCg0Kd2l0aCBraW5k
-IHJlZ2FyZHMNClJhcGhhZWwNCg0K
---------------4D83604B05B024506EEE0C5F
-Content-Type: text/html; charset=utf-8
+
+在 2021/2/19 9:07, Jens Axboe 写道:
+> On 2/18/21 5:26 AM, Sun Ke wrote:
+>> fix a NULL pointer bug and simplify the code
+>>
+>> v6: Just add if (nbd->recv_workq) to nbd_disconnect_and_put().
+>> v5: Adjust the title and add “Suggested-by”.
+>> v4: Share exception handling code for if branches and
+>> 	move put_nbd adjustment to a separate patch.
+>> v3: Do not use unlock and add put_nbd.
+>> v2: Use jump target unlock.
+>>
+>> Sun Ke (2):
+>>    nbd: Fix NULL pointer in flush_workqueue
+>>    nbd: share nbd_put and return by goto put_nbd
+>>
+>>   drivers/block/nbd.c | 10 +++++-----
+>>   1 file changed, 5 insertions(+), 5 deletions(-)
+> Applied for 5.12, thanks.
+
+Hi Jens,
+
+I do not see the patches merged yet, is there anything wrong?
+
+Thanks,
+Sun Ke
+
+>
+
+--------------11363906A229CB693433F311
+Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 <html>
   <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <p>When enabling TRIM support for a block device, a request can
-      result in a write beyond the end of such a block device, as shown
-      in the following in the following debug output:<br>
+    <p><br>
     </p>
-    <pre>+*handling trim request
-    client-&gt;exportsize  :            134217728
-    req-&gt;from           :             67109888
-    cur.startoff        :                    0
-    reqoff              :             67109888
-    next.startoff       :            134217728
-    curlen              :             67107840
-    curlen - reqoff     : 18446744073709549568
-    req-&gt;len            :              8388608</pre>
-    <pre>Request to punch a hole in fd=5, starting from 67109888, length 18446744073709549568
-Performed TRIM request from 67109888 to 8388608</pre>
-    <p>As a result of such a request the nbd-server process will hang
-      with 100% cpu load while the kernel writes a lot of warnings and
-      can not be killed until all requests are handled by the kernel.<br>
-      I used the following patch to mitigate the problem and get
-      trim/discard working for a simple block device export: <br>
-    </p>
-    <pre>--- nbdsrv.c.old
-+++ nbdsrv.c
-@@ -268,6 +268,7 @@
-     FILE_INFO cur = g_array_index(client-&gt;export, FILE_INFO, 0);
-     FILE_INFO next;
-     int i = 1;
-+    uint64_t reqfrom = req-&gt;from;
-     do {
-         if(i&lt;client-&gt;export-&gt;len) {
-             next = g_array_index(client-&gt;export, FILE_INFO, i);
-@@ -275,13 +276,14 @@
-             next.fhandle = -1;
-             next.startoff = client-&gt;exportsize;
-         }
--        if(cur.startoff &lt;= req-&gt;from &amp;&amp; next.startoff - cur.startoff &gt;= req-&gt;len) {
--            off_t reqoff = req-&gt;from - cur.startoff;
--            off_t curlen = next.startoff - reqoff;
--            off_t reqlen = curlen - reqoff &gt; req-&gt;len ? req-&gt;len : curlen - reqoff;
--            punch_hole(cur.fhandle, reqoff, reqlen);
-+        if(cur.startoff &lt;= reqfrom) {
-+            uint64_t end   = MIN(req-&gt;from + req-&gt;len, next.startoff) - cur.startoff;
-+            uint64_t start = reqfrom - cur.startoff;
-+            uint64_t len   = end - start; 
-+            punch_hole(cur.fhandle, start, len);
-         }
-         cur = next;
-+        reqfrom = cur.startoff;
-         i++;
-     } while(i &lt; client-&gt;export-&gt;len &amp;&amp; cur.startoff &lt; (req-&gt;from + req-&gt;len));
-     DEBUG("Performed TRIM request from %llu to %llu", (unsigned long long) req-&gt;from, (unsigned long long) req-&gt;len);
+    <div class="moz-cite-prefix">在 2021/2/19 9:07, Jens Axboe 写道:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:6df9a13d-b876-976f-ad48-884c88815269@kernel.dk">
+      <pre class="moz-quote-pre" wrap="">On 2/18/21 5:26 AM, Sun Ke wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">fix a NULL pointer bug and simplify the code
+
+v6: Just add if (nbd-&gt;recv_workq) to nbd_disconnect_and_put().
+v5: Adjust the title and add “Suggested-by”.
+v4: Share exception handling code for if branches and 
+	move put_nbd adjustment to a separate patch.
+v3: Do not use unlock and add put_nbd.
+v2: Use jump target unlock.
+
+Sun Ke (2):
+  nbd: Fix NULL pointer in flush_workqueue
+  nbd: share nbd_put and return by goto put_nbd
+
+ drivers/block/nbd.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Applied for 5.12, thanks.</pre>
+    </blockquote>
+    <pre>Hi Jens,
+
+I do not see the patches merged yet, is there anything wrong?
+
+Thanks,
+Sun Ke
+</pre>
+    <blockquote type="cite"
+      cite="mid:6df9a13d-b876-976f-ad48-884c88815269@kernel.dk">
+      <pre class="moz-quote-pre" wrap="">
 
 </pre>
-    <p>The patch was not tested against multi-file exports or reviewed,
-      but I though it might help in fixing the issue. </p>
-    <p>with kind regards<br>
-      Raphael<br>
-    </p>
+    </blockquote>
   </body>
 </html>
 
---------------4D83604B05B024506EEE0C5F--
+--------------11363906A229CB693433F311--
 
