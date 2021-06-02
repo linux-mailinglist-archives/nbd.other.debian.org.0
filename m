@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED68F398305
-	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:31:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3923398387
+	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:48:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BFC45206E2; Wed,  2 Jun 2021 07:31:18 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:31:18 2021
+	id AED03206E5; Wed,  2 Jun 2021 07:48:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:48:09 2021
 Old-Return-Path: <BATV+e38fb55258da4e18a096+6492+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.9 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4395D206C5
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:15:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E5354206C7
+	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:30:44 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.03 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
@@ -28,28 +28,28 @@ X-Amavis-Spam-Status: No, score=-0.03 tagged_above=-10000 required=5.3
 	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id csdDx6eGy7fc for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Jun 2021 07:15:30 +0000 (UTC)
+	with ESMTP id 0docezCiGaxC for <lists-other-nbd@bendel.debian.org>;
+	Wed,  2 Jun 2021 07:30:42 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 6196D20621
-	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:15:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id A8AE920680
+	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:30:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Nt6wErfubiqnYVzweXP3z8/rIFCiMtQahAHnZtmIiWQ=; b=hKOfYl8YkpHQsdsCJlgWZugO4N
-	8fA3EUPkn9+TcsNuxwOAiqb3mNj8IytqoaliRlOJGLTV2vKpHMO6rQ1hlUlt0+Mkm+c5R/1hkmkn7
-	oTHREX9ZW78opJHrkSMxB5aCt3NEqpb+8QhNRYh4/wvPcfO1Rb2/ZQR+g2Eo/Q/BlHFp+u+PN1zzV
-	pUp3mo54MUYKztGaP64TzrsyiDi6S2vcUaJtmVAkviIbIqZRFaDYaSgCXtB5+UEr/Ho31XLAOGGlI
-	c+6ImRaQZ98uKF5v5kiT9CbtO1B6knRIsPn1hDSDTVU+kF579t+oYPcuUhzdK5Z+yGE/Xb+qFY58k
-	TDv/4cKQ==;
+	bh=t0ZfpA7/b1tuSB9Qdmm+6Pkt4GtuM/+pFYP7xY239G0=; b=uyZhEjeEW990KkF+Rai7xjxEUV
+	5bWN+uUzqHopzatrtAIE4foiriDdqCyVhGFR6vrU02JeY+SQh7ATWFUZXA3UpyDJcgDYSDLhQXP9V
+	RbuXa4k+DVNm7KNjqg4cbdIBM1Va/6aZbjJtQTnqImkNPJ0qKqmBir0MJFXK6gK5PvPfEwCxj1xmD
+	dJgu840EtdLj1HHThtV37MaOh3u42wXScgCL7y9GVONAhUdX9SrS6vntka8Pn6bww45YDmPKVYARg
+	M/UkenAPSpkgf5JK1kNXiSwoq6fWJ8kR9bHE+sA5X31QgA+XlZSlp6YoKzXnGG50xif3YpnMjuZQG
+	qCj5Hh3A==;
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1loKn5-0026La-Sd; Wed, 02 Jun 2021 06:55:48 +0000
+	id 1loKnE-0026TF-Pp; Wed, 02 Jun 2021 06:55:57 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -83,9 +83,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 25/30] xen-blkfront: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:40 +0300
-Message-Id: <20210602065345.355274-26-hch@lst.de>
+Subject: [PATCH 27/30] scm_blk: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:42 +0300
+Message-Id: <20210602065345.355274-28-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -95,9 +95,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <wAXg5FSeG9L.A.eHH.GPztgB@bendel>
+Resent-Message-ID: <08GOSxekmeK.A.GQD.5eztgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1177
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1184
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -107,160 +107,77 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-26-hch@lst.de
-Resent-Date: Wed,  2 Jun 2021 07:31:18 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-28-hch@lst.de
+Resent-Date: Wed,  2 Jun 2021 07:48:09 +0000 (UTC)
 
 Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
 request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/xen-blkfront.c | 96 +++++++++++++++---------------------
- 1 file changed, 39 insertions(+), 57 deletions(-)
+ drivers/s390/block/scm_blk.c | 21 ++++++---------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index f2c1aedcdf5a..8d49f8fa98bb 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -968,48 +968,6 @@ static void blkif_set_queue_limits(struct blkfront_info *info)
- 	blk_queue_dma_alignment(rq, 511);
- }
+diff --git a/drivers/s390/block/scm_blk.c b/drivers/s390/block/scm_blk.c
+index a4f6f2e62b1d..88cba6212ee2 100644
+--- a/drivers/s390/block/scm_blk.c
++++ b/drivers/s390/block/scm_blk.c
+@@ -462,12 +462,12 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	if (ret)
+ 		goto out;
  
--static int xlvbd_init_blk_queue(struct gendisk *gd, u16 sector_size,
--				unsigned int physical_sector_size)
--{
--	struct request_queue *rq;
--	struct blkfront_info *info = gd->private_data;
--
--	memset(&info->tag_set, 0, sizeof(info->tag_set));
--	info->tag_set.ops = &blkfront_mq_ops;
--	info->tag_set.nr_hw_queues = info->nr_rings;
--	if (HAS_EXTRA_REQ && info->max_indirect_segments == 0) {
--		/*
--		 * When indirect descriptior is not supported, the I/O request
--		 * will be split between multiple request in the ring.
--		 * To avoid problems when sending the request, divide by
--		 * 2 the depth of the queue.
--		 */
--		info->tag_set.queue_depth =  BLK_RING_SIZE(info) / 2;
--	} else
--		info->tag_set.queue_depth = BLK_RING_SIZE(info);
--	info->tag_set.numa_node = NUMA_NO_NODE;
--	info->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
--	info->tag_set.cmd_size = sizeof(struct blkif_req);
--	info->tag_set.driver_data = info;
--
--	if (blk_mq_alloc_tag_set(&info->tag_set))
--		return -EINVAL;
--	rq = blk_mq_init_queue(&info->tag_set);
+-	rq = blk_mq_init_queue(&bdev->tag_set);
 -	if (IS_ERR(rq)) {
--		blk_mq_free_tag_set(&info->tag_set);
--		return PTR_ERR(rq);
+-		ret = PTR_ERR(rq);
++	bdev->gendisk = blk_mq_alloc_disk(&bdev->tag_set, scmdev);
++	if (IS_ERR(bdev->gendisk)) {
++		ret = PTR_ERR(bdev->gendisk);
+ 		goto out_tag;
+ 	}
+-	bdev->rq = rq;
++	rq = bdev->rq = bdev->gendisk->queue;
+ 	nr_max_blk = min(scmdev->nr_max_block,
+ 			 (unsigned int) (PAGE_SIZE / sizeof(struct aidaw)));
+ 
+@@ -477,17 +477,11 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	blk_queue_flag_set(QUEUE_FLAG_NONROT, rq);
+ 	blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, rq);
+ 
+-	bdev->gendisk = alloc_disk(SCM_NR_PARTS);
+-	if (!bdev->gendisk) {
+-		ret = -ENOMEM;
+-		goto out_queue;
 -	}
--
--	rq->queuedata = info;
--	info->rq = gd->queue = rq;
--	info->gd = gd;
--	info->sector_size = sector_size;
--	info->physical_sector_size = physical_sector_size;
--	blkif_set_queue_limits(info);
--
--	return 0;
--}
--
- static const char *flush_info(struct blkfront_info *info)
- {
- 	if (info->feature_flush && info->feature_fua)
-@@ -1146,12 +1104,36 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
+-	rq->queuedata = scmdev;
+ 	bdev->gendisk->private_data = scmdev;
+ 	bdev->gendisk->fops = &scm_blk_devops;
+-	bdev->gendisk->queue = rq;
+ 	bdev->gendisk->major = scm_major;
+ 	bdev->gendisk->first_minor = devindex * SCM_NR_PARTS;
++	bdev->gendisk->minors = SCM_NR_PARTS;
  
- 	err = xlbd_reserve_minors(minor, nr_minors);
- 	if (err)
--		goto out;
-+		return err;
- 	err = -ENODEV;
- 
--	gd = alloc_disk(nr_minors);
--	if (gd == NULL)
--		goto release;
-+	memset(&info->tag_set, 0, sizeof(info->tag_set));
-+	info->tag_set.ops = &blkfront_mq_ops;
-+	info->tag_set.nr_hw_queues = info->nr_rings;
-+	if (HAS_EXTRA_REQ && info->max_indirect_segments == 0) {
-+		/*
-+		 * When indirect descriptior is not supported, the I/O request
-+		 * will be split between multiple request in the ring.
-+		 * To avoid problems when sending the request, divide by
-+		 * 2 the depth of the queue.
-+		 */
-+		info->tag_set.queue_depth =  BLK_RING_SIZE(info) / 2;
-+	} else
-+		info->tag_set.queue_depth = BLK_RING_SIZE(info);
-+	info->tag_set.numa_node = NUMA_NO_NODE;
-+	info->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
-+	info->tag_set.cmd_size = sizeof(struct blkif_req);
-+	info->tag_set.driver_data = info;
-+
-+	err = blk_mq_alloc_tag_set(&info->tag_set);
-+	if (err)
-+		goto out_release_minors;
-+
-+	gd = blk_mq_alloc_disk(&info->tag_set, info);
-+	if (IS_ERR(gd)) {
-+		err = PTR_ERR(gd);
-+		goto out_free_tag_set;
-+	}
- 
- 	strcpy(gd->disk_name, DEV_NAME);
- 	ptr = encode_disk_name(gd->disk_name + sizeof(DEV_NAME) - 1, offset);
-@@ -1164,14 +1146,16 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 
- 	gd->major = XENVBD_MAJOR;
- 	gd->first_minor = minor;
-+	gd->minors = nr_minors;
- 	gd->fops = &xlvbd_block_fops;
- 	gd->private_data = info;
- 	set_capacity(gd, capacity);
- 
--	if (xlvbd_init_blk_queue(gd, sector_size, physical_sector_size)) {
--		del_gendisk(gd);
--		goto release;
--	}
-+	info->rq = gd->queue;
-+	info->gd = gd;
-+	info->sector_size = sector_size;
-+	info->physical_sector_size = physical_sector_size;
-+	blkif_set_queue_limits(info);
- 
- 	xlvbd_flush(info);
- 
-@@ -1186,9 +1170,10 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 
+ 	len = snprintf(bdev->gendisk->disk_name, DISK_NAME_LEN, "scm");
+ 	if (devindex > 25) {
+@@ -504,8 +498,6 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	device_add_disk(&scmdev->dev, bdev->gendisk, NULL);
  	return 0;
  
-- release:
-+out_free_tag_set:
-+	blk_mq_free_tag_set(&info->tag_set);
-+out_release_minors:
- 	xlbd_release_minors(minor, nr_minors);
-- out:
- 	return err;
+-out_queue:
+-	blk_cleanup_queue(rq);
+ out_tag:
+ 	blk_mq_free_tag_set(&bdev->tag_set);
+ out:
+@@ -516,9 +508,8 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ void scm_blk_dev_cleanup(struct scm_blk_dev *bdev)
+ {
+ 	del_gendisk(bdev->gendisk);
+-	blk_cleanup_queue(bdev->gendisk->queue);
++	blk_cleanup_disk(bdev->gendisk);
+ 	blk_mq_free_tag_set(&bdev->tag_set);
+-	put_disk(bdev->gendisk);
  }
  
-@@ -1217,12 +1202,9 @@ static void xlvbd_release_gendisk(struct blkfront_info *info)
- 	nr_minors = info->gd->minors;
- 	xlbd_release_minors(minor, nr_minors);
- 
--	blk_cleanup_queue(info->rq);
--	blk_mq_free_tag_set(&info->tag_set);
--	info->rq = NULL;
--
--	put_disk(info->gd);
-+	blk_cleanup_disk(info->gd);
- 	info->gd = NULL;
-+	blk_mq_free_tag_set(&info->tag_set);
- }
- 
- /* Already hold rinfo->ring_lock. */
+ void scm_blk_set_available(struct scm_blk_dev *bdev)
 -- 
 2.30.2
 
