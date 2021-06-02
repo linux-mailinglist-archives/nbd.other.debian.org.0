@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 627DB398300
-	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:30:22 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id A5EFD3982E7
+	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:27:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 47EB6206D5; Wed,  2 Jun 2021 07:30:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:30:22 2021
+	id 88E3A20680; Wed,  2 Jun 2021 07:27:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:27:09 2021
 Old-Return-Path: <BATV+e38fb55258da4e18a096+6492+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 03F3620621
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:14:44 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id D88BE206A0
+	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:11:53 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.13 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
@@ -28,28 +28,29 @@ X-Amavis-Spam-Status: No, score=-0.13 tagged_above=-10000 required=5.3
 	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id FFaFDymS5S9H for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Jun 2021 07:14:39 +0000 (UTC)
+	with ESMTP id zlF0PkIWg6se for <lists-other-nbd@bendel.debian.org>;
+	Wed,  2 Jun 2021 07:11:48 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 1042 seconds by postgrey-1.36 at bendel; Wed, 02 Jun 2021 07:11:48 UTC
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 1AB2B2060A
-	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:14:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 5F47A2060A
+	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:11:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Ay3+BGPlRqdc0EFLNjvSyNAlCXYv7F/E4ZKoFdkW+qs=; b=re781XvQTLqNz+tW0K+eeLN126
-	ZHdsuYJ2Awc6hKt5NXrxWVcF1gLtmPmqrRoYM1HI43jkn7Qf75wWP01UlBu2V2sY61J+OM/Etw42Y
-	+/Y9bV0NZSR7XSiaIB3hoA5FplO+Knn8VPNUx84Za0n+grjUeqHa7Ia2Y6hM5luzozyZJ8Is3hs5t
-	0f1bIF+gL/yS4tMtIJDr7RZZ0gaHP+N8QcEaL1x8gVuo08fsq6poeekNRuls+ivPNI9U2B65ypj48
-	yQjKdXwi7x17Mz91bhzCLHhe29vJAUjBIJ8vYze0d6zCgmUka+cbdrK9DUBsKkhmarGXEPYZxI+5z
-	n/v3EyXw==;
+	bh=dPXgPagX0YUjFpHkmb7+BJvE2rgQGNh10xmKRHSEoBw=; b=BmfFZoZgZc3og4CmFwOmdLx19i
+	QO/EHgrku+yvgdhYC17jfB1aTEH3npIjzEWzSTOP+FtfRG47SoCYsd6XDZdDvG8QFc30baslGnBO5
+	603qv1a5lD3zj6piDqc7/7HezJHswlQmBy2hQzdsqi+Pq2AqXMvtz6CZelFZP4OuEsOQ481G/g0oe
+	2D5d45xL9+Y8IhSZ0SJ7QgmfDd59y+PvwieZLqYIaXHXwCMZQBwPlFGdwrK57V7ShUrkG8V37WJ3E
+	EOpP42tJMZNBze5kjBlU3735zuT501c+A9ju4eeM4xto97GnaI9ogfZqwLOqhLmVBPmt6XU0UdEOR
+	G7vAYXaA==;
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1loKma-0025sw-BW; Wed, 02 Jun 2021 06:55:17 +0000
+	id 1loKmj-00260g-93; Wed, 02 Jun 2021 06:55:26 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -83,9 +84,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 18/30] loop: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:33 +0300
-Message-Id: <20210602065345.355274-19-hch@lst.de>
+Subject: [PATCH 20/30] nullb: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:35 +0300
+Message-Id: <20210602065345.355274-21-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -95,9 +96,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <DE-LgPsZv9F.A.I7G.OOztgB@bendel>
+Resent-Message-ID: <vBqhTrfanpI.A.JID.NLztgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1172
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1170
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -107,78 +108,40 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-19-hch@lst.de
-Resent-Date: Wed,  2 Jun 2021 07:30:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-21-hch@lst.de
+Resent-Date: Wed,  2 Jun 2021 07:27:09 +0000 (UTC)
 
 Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
 request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/loop.c | 19 ++++++-------------
- 1 file changed, 6 insertions(+), 13 deletions(-)
+ drivers/block/null_blk/main.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 95c570f5923f..3f40e673a101 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -2117,12 +2117,12 @@ static int loop_add(struct loop_device **l, int i)
- 	if (err)
- 		goto out_free_idr;
+diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
+index d8e098f1e5b5..74fb2ec63219 100644
+--- a/drivers/block/null_blk/main.c
++++ b/drivers/block/null_blk/main.c
+@@ -1851,13 +1851,12 @@ static int null_add_dev(struct nullb_device *dev)
  
--	lo->lo_queue = blk_mq_init_queue(&lo->tag_set);
--	if (IS_ERR(lo->lo_queue)) {
--		err = PTR_ERR(lo->lo_queue);
-+	disk = lo->lo_disk = blk_mq_alloc_disk(&lo->tag_set, lo);
-+	if (IS_ERR(disk)) {
-+		err = PTR_ERR(disk);
- 		goto out_cleanup_tags;
- 	}
--	lo->lo_queue->queuedata = lo;
-+	lo->lo_queue = lo->lo_disk->queue;
- 
- 	blk_queue_max_hw_sectors(lo->lo_queue, BLK_DEF_MAX_SECTORS);
- 
-@@ -2134,11 +2134,6 @@ static int loop_add(struct loop_device **l, int i)
- 	 */
- 	blk_queue_flag_set(QUEUE_FLAG_NOMERGES, lo->lo_queue);
- 
--	err = -ENOMEM;
--	disk = lo->lo_disk = alloc_disk(1 << part_shift);
--	if (!disk)
--		goto out_free_queue;
--
- 	/*
- 	 * Disable partition scanning by default. The in-kernel partition
- 	 * scanning can be requested individually per-device during its
-@@ -2166,6 +2161,7 @@ static int loop_add(struct loop_device **l, int i)
- 	spin_lock_init(&lo->lo_lock);
- 	disk->major		= LOOP_MAJOR;
- 	disk->first_minor	= i << part_shift;
-+	disk->minors		= 1 << part_shift;
- 	disk->fops		= &lo_fops;
- 	disk->private_data	= lo;
- 	disk->queue		= lo->lo_queue;
-@@ -2174,8 +2170,6 @@ static int loop_add(struct loop_device **l, int i)
- 	*l = lo;
- 	return lo->lo_number;
- 
--out_free_queue:
--	blk_cleanup_queue(lo->lo_queue);
- out_cleanup_tags:
- 	blk_mq_free_tag_set(&lo->tag_set);
- out_free_idr:
-@@ -2189,9 +2183,8 @@ static int loop_add(struct loop_device **l, int i)
- static void loop_remove(struct loop_device *lo)
- {
- 	del_gendisk(lo->lo_disk);
--	blk_cleanup_queue(lo->lo_queue);
- 	blk_mq_free_tag_set(&lo->tag_set);
--	put_disk(lo->lo_disk);
-+	blk_cleanup_disk(lo->lo_disk);
- 	mutex_destroy(&lo->lo_mutex);
- 	kfree(lo);
- }
+ 		rv = -ENOMEM;
+ 		nullb->tag_set->timeout = 5 * HZ;
+-		nullb->q = blk_mq_init_queue_data(nullb->tag_set, nullb);
+-		if (IS_ERR(nullb->q))
+-			goto out_cleanup_tags;
+-		nullb->disk = alloc_disk_node(1, nullb->dev->home_node);
+-		if (!nullb->disk)
++		nullb->disk = blk_mq_alloc_disk(nullb->tag_set, nullb);
++		if (IS_ERR(nullb->disk)) {
++			rv = PTR_ERR(nullb->disk);
+ 			goto out_cleanup_disk;
+-		nullb->disk->queue = nullb->q;
++		}
++		nullb->q = nullb->disk->queue;
+ 	} else if (dev->queue_mode == NULL_Q_BIO) {
+ 		rv = -ENOMEM;
+ 		nullb->disk = blk_alloc_disk(nullb->dev->home_node);
 -- 
 2.30.2
 
