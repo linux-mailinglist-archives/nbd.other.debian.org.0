@@ -1,55 +1,56 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id F151B398307
-	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:31:29 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F72239834F
+	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 09:42:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D8415206E4; Wed,  2 Jun 2021 07:31:29 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:31:29 2021
+	id 7794E206E6; Wed,  2 Jun 2021 07:42:21 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 07:42:21 2021
 Old-Return-Path: <BATV+e38fb55258da4e18a096+6492+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.9 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+X-Spam-Level: **
+X-Spam-Status: No, score=2.9 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,FOURLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED
-	autolearn=no autolearn_force=no version=3.4.2
+	HEADER_FROM_DIFFERENT_DOMAINS,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,
+	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A5019206CC
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:15:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E1872206C7
+	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 07:26:22 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.03 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=0.97 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
 	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
 	HEADER_FROM_DIFFERENT_DOMAINS=0.25, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
+	RCVD_IN_DNSWL_MED=-2.3, WORD_WITHOUT_VOWELS=1]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id iPmrvlwfsuby for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Jun 2021 07:15:53 +0000 (UTC)
+	with ESMTP id D56nWDQCWCWY for <lists-other-nbd@bendel.debian.org>;
+	Wed,  2 Jun 2021 07:26:20 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id DC34E206C8
-	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:15:53 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 28FD9206B9
+	for <nbd@other.debian.org>; Wed,  2 Jun 2021 07:26:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=KlBRFDn8CKBuz4Jtw5oxvJwFPJCrn3leZL7f/TB5v/I=; b=JAbKOuEt/ZwlI1Cb8jU8PIVTi0
-	rWrP2Q0oyjZ1qHxdn5YfZWmZGCE1OX7t/Z5qHClzdMNkXAAV2MvEk5MtF+zy9GIwLRfySkORmJitv
-	hBUNmjxZRc5StQgvgrScxkKXoprJTIDdzdZyS8U/8FI6Ub7l742n47gp+1BOs+WlJvaHsKwHFkDWB
-	xBui56bbOzKQ99aHIVAIpMOWuKdRjPxfD/L6mOHl825ZMYqNbqTRQR2bdCKOIAofpqO2q95xIdQCk
-	qchgx4WVGIXqbErN5FqxXen4FaqChWEu053VwmNbr8IDVXg22x1cC2laSwL86K80z+bhdU0MJo1y9
-	XRk5+uaA==;
+	bh=VrhBOXpqbc1/w6Vz4TvYYyGic8czOTYvar2owBC0Nao=; b=M0oF4rS9JAR1tnscAYGs3Ny4Aw
+	R0M734kT6ibhdEiE624YEKsyPPj2YIu9zEGz0wkFfjwV4WFPnIh+1qyKDWdZ3z8EzlkVFGAb8Dcf7
+	3V8VbExj8uNId3jTIdf48776+H/+fLIW8cknoNSzbxVEsD1AHyQD0KcKh763iNg2evMPCysdTxB14
+	ax5A/5pAgqFYu/FRgKYessRM0Gxr+BcwAdKdzvnS3J8oKCUIv74U/fN2dbR6gw8G1XrC9oJZoC90l
+	B8UJw9Kz7LkEpdXWVakEj3I01Qm/fH4nuPfSRHY69/phvcTpV74SAlSbAP7u3gkCl0yYJXtqgKgJ3
+	bYIwaHtg==;
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1loKln-0025P8-FW; Wed, 02 Jun 2021 06:54:28 +0000
+	id 1loKls-0025R4-W9; Wed, 02 Jun 2021 06:54:33 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -83,9 +84,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 07/30] ms_block: use blk_mq_alloc_disk
-Date: Wed,  2 Jun 2021 09:53:22 +0300
-Message-Id: <20210602065345.355274-8-hch@lst.de>
+Subject: [PATCH 08/30] mspro: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:23 +0300
+Message-Id: <20210602065345.355274-9-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -95,9 +96,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <jteJPtVq5ZL.A.tJH.RPztgB@bendel>
+Resent-Message-ID: <xqHArOER-rF.A.XuC.dZztgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1178
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1183
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -107,35 +108,35 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-8-hch@lst.de
-Resent-Date: Wed,  2 Jun 2021 07:31:29 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210602065345.355274-9-hch@lst.de
+Resent-Date: Wed,  2 Jun 2021 07:42:21 +0000 (UTC)
 
 Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
 allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/memstick/core/ms_block.c | 25 ++++++++++---------------
- 1 file changed, 10 insertions(+), 15 deletions(-)
+ drivers/memstick/core/mspro_block.c | 26 +++++++++++---------------
+ 1 file changed, 11 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
-index 0bacf4268f83..dac258d12aca 100644
---- a/drivers/memstick/core/ms_block.c
-+++ b/drivers/memstick/core/ms_block.c
-@@ -2110,21 +2110,17 @@ static int msb_init_disk(struct memstick_dev *card)
- 	if (msb->disk_id  < 0)
- 		return msb->disk_id;
+diff --git a/drivers/memstick/core/mspro_block.c b/drivers/memstick/core/mspro_block.c
+index cf7fe0d58ee7..22778d0e24f5 100644
+--- a/drivers/memstick/core/mspro_block.c
++++ b/drivers/memstick/core/mspro_block.c
+@@ -1205,21 +1205,17 @@ static int mspro_block_init_disk(struct memstick_dev *card)
+ 	if (disk_id < 0)
+ 		return disk_id;
  
--	msb->disk = alloc_disk(0);
+-	msb->disk = alloc_disk(1 << MSPRO_BLOCK_PART_SHIFT);
 -	if (!msb->disk) {
 -		rc = -ENOMEM;
-+	rc = blk_mq_alloc_sq_tag_set(&msb->tag_set, &msb_mq_ops, 2,
++	rc = blk_mq_alloc_sq_tag_set(&msb->tag_set, &mspro_mq_ops, 2,
 +				     BLK_MQ_F_SHOULD_MERGE);
 +	if (rc)
  		goto out_release_id;
 -	}
  
--	msb->queue = blk_mq_init_sq_queue(&msb->tag_set, &msb_mq_ops, 2,
+-	msb->queue = blk_mq_init_sq_queue(&msb->tag_set, &mspro_mq_ops, 2,
 -						BLK_MQ_F_SHOULD_MERGE);
 -	if (IS_ERR(msb->queue)) {
 -		rc = PTR_ERR(msb->queue);
@@ -150,18 +151,22 @@ index 0bacf4268f83..dac258d12aca 100644
 -	msb->queue->queuedata = card;
 +	msb->queue = msb->disk->queue;
  
- 	blk_queue_max_hw_sectors(msb->queue, MS_BLOCK_MAX_PAGES);
- 	blk_queue_max_segments(msb->queue, MS_BLOCK_MAX_SEGS);
-@@ -2135,7 +2131,6 @@ static int msb_init_disk(struct memstick_dev *card)
- 	sprintf(msb->disk->disk_name, "msblk%d", msb->disk_id);
- 	msb->disk->fops = &msb_bdops;
+ 	blk_queue_max_hw_sectors(msb->queue, MSPRO_BLOCK_MAX_PAGES);
+ 	blk_queue_max_segments(msb->queue, MSPRO_BLOCK_MAX_SEGS);
+@@ -1228,10 +1224,10 @@ static int mspro_block_init_disk(struct memstick_dev *card)
+ 
+ 	msb->disk->major = major;
+ 	msb->disk->first_minor = disk_id << MSPRO_BLOCK_PART_SHIFT;
++	msb->disk->minors = 1 << MSPRO_BLOCK_PART_SHIFT;
+ 	msb->disk->fops = &ms_block_bdops;
+ 	msb->usage_count = 1;
  	msb->disk->private_data = msb;
 -	msb->disk->queue = msb->queue;
  
- 	capacity = msb->pages_in_block * msb->logical_block_count;
- 	capacity *= (msb->page_size / 512);
-@@ -2155,8 +2150,8 @@ static int msb_init_disk(struct memstick_dev *card)
- 	dbg("Disk added");
+ 	sprintf(msb->disk->disk_name, "mspblk%d", disk_id);
+ 
+@@ -1247,8 +1243,8 @@ static int mspro_block_init_disk(struct memstick_dev *card)
+ 	msb->active = 1;
  	return 0;
  
 -out_put_disk:
@@ -169,8 +174,8 @@ index 0bacf4268f83..dac258d12aca 100644
 +out_free_tag_set:
 +	blk_mq_free_tag_set(&msb->tag_set);
  out_release_id:
- 	mutex_lock(&msb_disk_lock);
- 	idr_remove(&msb_disk_idr, msb->disk_id);
+ 	mutex_lock(&mspro_block_disk_lock);
+ 	idr_remove(&mspro_block_disk_idr, disk_id);
 -- 
 2.30.2
 
