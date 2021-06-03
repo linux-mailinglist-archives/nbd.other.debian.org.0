@@ -2,83 +2,183 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 231DB399339
-	for <lists+nbd@lfdr.de>; Wed,  2 Jun 2021 21:09:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB9143996F2
+	for <lists+nbd@lfdr.de>; Thu,  3 Jun 2021 02:30:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id CFCC820666; Wed,  2 Jun 2021 19:09:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  2 19:09:09 2021
-Old-Return-Path: <saralkho@gmail.com>
+	id BF50B20592; Thu,  3 Jun 2021 00:30:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  3 00:30:20 2021
+Old-Return-Path: <prvs=781f10532=Chaitanya.Kulkarni@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.8 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,HTML_MESSAGE,MURPHY_SCAM1,
-	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=2.4 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_MED,THREADTOPIC autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id AB6DC2068F
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jun 2021 18:52:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0FE69204AA
+	for <lists-other-nbd@bendel.debian.org>; Thu,  3 Jun 2021 00:13:41 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.901 tagged_above=-10000 required=5.3
-	tests=[DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001, HTML_MESSAGE=2,
-	MURPHY_SCAM1=0.1, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.52 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, THREADTOPIC=2] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 1GmKbQpG1pNA for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Jun 2021 18:52:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 135932067F
-	for <nbd@other.debian.org>; Wed,  2 Jun 2021 18:52:17 +0000 (UTC)
-Received: by mail-ed1-x542.google.com with SMTP id t3so4131824edc.7
-        for <nbd@other.debian.org>; Wed, 02 Jun 2021 11:52:17 -0700 (PDT)
+	with ESMTP id JOB3S2LQQZnE for <lists-other-nbd@bendel.debian.org>;
+	Thu,  3 Jun 2021 00:13:36 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 616 seconds by postgrey-1.36 at bendel; Thu, 03 Jun 2021 00:13:36 UTC
+Received: from esa2.hgst.iphmx.com (esa2.hgst.iphmx.com [68.232.143.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "Cisco ESA Certificate", Issuer "Cisco ESA Certificate" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 0B011204A9
+	for <nbd@other.debian.org>; Thu,  3 Jun 2021 00:13:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1622679236; x=1654215236;
+  h=from:to:cc:subject:date:message-id:references:
+   content-transfer-encoding:mime-version;
+  bh=o+yVEy7H2DT98ziF3VPykTWncyxjepBwGZs7YTcqT/c=;
+  b=YOKA9YDjApz6ocHA0ByEZyslB8sLbBsp7I30jwwHwgtDUNhXPH6tFlXO
+   eIbHPIBU2CnaGxKXG9tOqj9FeBPRJtUUup8+T54usyTlUeYmDYCg1oaja
+   d5IUyyatmoFxRfn0PSPGlyZX4/j3L/BjDTbYyep/baDbDLrOl4McPqPt1
+   qhqtD3U2e2Chjms3Inc7zxiRfl1nFGUtshnIM2eBgmxTJ0G7LRnl10JI+
+   9B1D8GsAIUo/OXEOOdL4F2HjRRG8l06Uy6SlBgQd+vAJ5QmoFw0xhQpOg
+   wuw9dvs7BnxDnIrMsiTSBrdB2j8VrunEjicXqPRRn7fGdv/zEgZMaHysf
+   w==;
+IronPort-SDR: LTb6lWTZrT6MpXhNb90CXDWwwbXdwgf7gnlp3B+5NpeFnl49QaTVO9d3+JGjekYbIqFJqNeky8
+ juc4HJiGdxwkVx3B4wM1UHFgwF0LrHxxv7K53bcl6FoPHgidfYHEXOuQseFdIBq7sRXaG15g/x
+ FFmf8sTaug1JzxVrcRlIVLwuuHqI/kB6FgX9fPyc/7N++MoFutfUXVVlY3W7g7WDVKoJQx2kVY
+ t4qy2LB5jXTo5H1YFdL7hIAgUZUiEEaLdVwLeUV/thdwRmAxTRqyS7wH4MZ6tqVc1WqBmygTgV
+ W0I=
+X-IronPort-AV: E=Sophos;i="5.83,244,1616428800"; 
+   d="scan'208";a="274374650"
+Received: from mail-dm6nam08lp2041.outbound.protection.outlook.com (HELO NAM04-DM6-obe.outbound.protection.outlook.com) ([104.47.73.41])
+  by ob1.hgst.iphmx.com with ESMTP; 03 Jun 2021 08:03:11 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YgDEBaXb7HbGmAbrhs9l/t6X5iZXwUbIc3vE9TT3omr41KxvJ8GfK33JFn12sOV3EAFFjssQjgYtFvAc7C8BTpwWbz3GiaP78ObZD/9UxqfeHy28jAFEAQDVl0rDy9tZ7m/BcnlSGR8WEpjPGUXUPdlYkyiXS9EL2wwplzsaKBhgKTQ+r2KaQLcPVyTgjKamYC3l6qfgb/Vhz8HxVF83PjQn5zrLufTyX8Fzkni4jgz1RmWhgTU6D4Z7twg4+4hKIUGXmOA6rP5hInxSi8kixHpC+bz9uXvbGKWgzVlfr3wb5trg+OPmmOg0vNeUgIuZ77RsWKSGly5vmtf6hW3iEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ujYjzUTvNk5lRoWbqXrQWBuQwFbs/0kVBkPupo0kRlU=;
+ b=mxiCzU3U4ch5wdnvTYx0X1rthFhvYc5UtEkmv1kX/cem7n72ZWYlrGGFUPEdeoJUJ2ALPMlDaeJ5WNx6OGrW8L9iQz8ZgI5nWDI7huqbuWAKivFyDPsGk39exKYdQf8NoXNa54jigO3Se/mww86UgLrN41FhVLiTvjVUmSPYPMpA9BfGw8I59L39q6X4Untvg5t/plJ+V1zeLeFZqof/5Q4Wv/c6bJjWFSg7Vk7pSIUhES2U6WkcNDK8d6ca7ChheAfwWwdDbKShPR8JexEEHk4RWZI0I7i3oBZRC11Vrx330RrUmo3Jc0q0gbs7flstnLNwrhfTXPc/iWr9cNi8QA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=ZhngEHPsez2pdzUhBmzCotKceqau00ChYYNR/6AuiZY=;
-        b=FxLXywgC/7y65L9retJmEbsjF5T2yBG3ZlsGcRHzAEd8/eqOkSwPjrj5+uHvcu29z2
-         fiWglqxXSPf+PX2Wia8QETWvV9Ompf0rU2J61vgk8ANP32d3kPlvGwOeWgGMLZOJpwYZ
-         vHfADd930UU5H8lA/h+thluDGKHEb1xR+ZINbqhKSF/xLmJUf7+NxiLJGJmG2ucxRVYO
-         x7nk+0/Qbj0DqTvswJ9LbR80zFcwlcnz79wJhNuhsvXzGRtuT/GLNMqaqpJRd2tpz2TL
-         o6e31/u8iIn5ICCDnjrapM30Thdoamws1EpwOHvUXqHIrpRoIkYtcbyHXWZuPgzli4Eg
-         pffw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=ZhngEHPsez2pdzUhBmzCotKceqau00ChYYNR/6AuiZY=;
-        b=kBR1JmQ+un6ztyJlSUc1VAQGBwjJulrcpIjuySiaxhKifLlD5fPyTRgfM3JHk9iIl/
-         hJ2BPd3lricXsUJXJWIdkzuQuNq14VY86YQAJxE5FpHsDVm2qCsOhzv4bBco+Q7iTwE5
-         2twxSvFU7UUVg6oddWC38CHSVU4020eI9nRP5VJno5iHi1P7XX4i/QLC71FdF7e3seON
-         RVan3Nd4K3Pl/lL+PpVfajXzUy5oMRpR6I64WlaxeMOdJw5hJENt6dUNSK33/mlYmNtR
-         eUIqoHfvUtqyVQ9HxjrOmbBdiGrMDeDrCuLTVvPiqGdhr2C2PQT4vK3490q6FP4tFLCU
-         K3KA==
-X-Gm-Message-State: AOAM532RHSGo7i0m2DMpte4A+ZjrUs5znVrJ5GAUslyk232HKuqQSsZP
-	x4KYn51NuuToKSSCwMqPdtRFyR0TSLHoJRoTwjY=
-X-Google-Smtp-Source: ABdhPJwttw3kZzkiaWnR+MKZ/6fPWvnndHwXbOw6MloseGU1GPSFUqvSdh7re5cf0IPDwqFIeGZbte+1vjZfusQqVAM=
-X-Received: by 2002:a05:6402:26d1:: with SMTP id x17mr40037518edd.14.1622659935633;
- Wed, 02 Jun 2021 11:52:15 -0700 (PDT)
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ujYjzUTvNk5lRoWbqXrQWBuQwFbs/0kVBkPupo0kRlU=;
+ b=WGZp/4FqdH6GKPOZNdLEvwYnG2t7pCklbI8rSzqu2aW+Du+B88rLNixQwKCogAX9CMHTpsIzzcBBpaikU9Aeea3dPIQWepJdvs61P8TYtTmnYpAFCdu/hvZaMpHXRtQHOfN1Y7MDupHHat4SJbRtY8DC5DMUQcF5qCTLBOfSfLs=
+Received: from BYAPR04MB4965.namprd04.prod.outlook.com (2603:10b6:a03:4d::25)
+ by BYAPR04MB4327.namprd04.prod.outlook.com (2603:10b6:a02:ff::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4173.22; Thu, 3 Jun
+ 2021 00:03:11 +0000
+Received: from BYAPR04MB4965.namprd04.prod.outlook.com
+ ([fe80::6873:3d64:8f9f:faf0]) by BYAPR04MB4965.namprd04.prod.outlook.com
+ ([fe80::6873:3d64:8f9f:faf0%7]) with mapi id 15.20.4173.034; Thu, 3 Jun 2021
+ 00:03:11 +0000
+From: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+CC: Justin Sanders <justin@coraid.com>, Denis Efremov <efremov@linux.com>,
+	Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>, Geoff
+ Levand <geoff@infradead.org>, Ilya Dryomov <idryomov@gmail.com>, "Md. Haris
+ Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, "Michael S.
+ Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Konrad Rzeszutek
+ Wilk <konrad.wilk@oracle.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>, Mike Snitzer <snitzer@redhat.com>, Maxim Levitsky
+	<maximlevitsky@gmail.com>, Alex Dubov <oakad@yahoo.com>, Miquel Raynal
+	<miquel.raynal@bootlin.com>, Richard Weinberger <richard@nod.at>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily
+ Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
+	"dm-devel@redhat.com" <dm-devel@redhat.com>, "linux-block@vger.kernel.org"
+	<linux-block@vger.kernel.org>, "nbd@other.debian.org" <nbd@other.debian.org>,
+	"linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+	"ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, "linux-mmc@vger.kernel.org"
+	<linux-mmc@vger.kernel.org>, "linux-mtd@lists.infradead.org"
+	<linux-mtd@lists.infradead.org>, "linux-s390@vger.kernel.org"
+	<linux-s390@vger.kernel.org>
+Subject: Re: [PATCH 03/30] blk-mq: add the blk_mq_alloc_disk APIs
+Thread-Topic: [PATCH 03/30] blk-mq: add the blk_mq_alloc_disk APIs
+Thread-Index: AQHXV3wpg+GpGHxRB0OZy0BgL2WPKw==
+Date: Thu, 3 Jun 2021 00:03:11 +0000
+Message-ID:
+ <BYAPR04MB49653D1B88ADA8EDEAA88F82863C9@BYAPR04MB4965.namprd04.prod.outlook.com>
+References: <20210602065345.355274-1-hch@lst.de>
+ <20210602065345.355274-4-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: lst.de; dkim=none (message not signed)
+ header.d=none;lst.de; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [199.255.45.62]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a35b10a6-7fc6-40a1-0ea7-08d92622f9fc
+x-ms-traffictypediagnostic: BYAPR04MB4327:
+x-microsoft-antispam-prvs:
+ <BYAPR04MB43277DCC98ED185FAD050823863C9@BYAPR04MB4327.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:6430;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ KUrktxVP+HJoyFo+Xhee5NaJZPcQWKKjnb74IsZAcSkgfCH6+h+NTgHgkMgXC+hwOuSG/i1IhPYyYKCsv77QSzV9Hhxn7pe0x68SgN+2AzX3rRjWTDe9DRIvSVanF8X2xHqtALAvdDy2ycNLQAQoEkxScFxhheG3qy2xYatcVn6IbXsDKKAIG5ch3PISks8XZ49m15svn5lR1L6k0UcaE0ycDI0tDr91fCMwL+cPaxDOeJN/vwOHF2ADWiJKkoY8c5CBW/PWmwsBeBB0VkYtMlLQQ1hmkLTPjrtDolAW6VfrTCTDF2yt4ozSc8pKBlk/zi/Rh8Duc7FPDk5ZnwFGOcWpoEY9n6EOaOUGel8w8s3sl6uLcHqUsE7U0x1awfu146GXHfAOXix9XA4Ve7vp3YoNmEOcFHKlnNutlWKIeC+QaMcQCbCeWWqsTdYr6gCst4hOWYrX5P6gHlnSOKMSL0IFN4Yhk4jyqWIJJQ5rCFeQsOY9CyxnpmXPC8mOPTbs5r38pDAUOey+TbzObDC/i5Tvq5iaasgO1B3U6i91LO49JWmhUV1c5QVDRHx9b7qQiQFSjbyDtMcJj4BWIjcfbnE8Chv2pWlZYEXBqq5W2tI=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR04MB4965.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(396003)(376002)(366004)(136003)(346002)(33656002)(5660300002)(4326008)(4744005)(76116006)(71200400001)(478600001)(26005)(54906003)(110136005)(7696005)(86362001)(83380400001)(6506007)(53546011)(316002)(66446008)(66946007)(8676002)(7416002)(2906002)(8936002)(55016002)(38100700002)(9686003)(52536014)(186003)(66476007)(64756008)(122000001)(7406005)(66556008);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata:
+ =?iso-8859-1?Q?ynVliGDQxRvrJcMGRyYPK/j4RBDB/47O8t3S1ZBmmqi+OJl5cSFj36BpMo?=
+ =?iso-8859-1?Q?duRdXwb92TxF9zCA2J+P5WyYYWJRZ7m7yKAAdRJ3hNHdIUhx62prWbAllO?=
+ =?iso-8859-1?Q?5RzOYlHsmxLJg+MygW/Kw2A/GTRNKk77DPVvAMNbZV8oZOyETasQ16Od6c?=
+ =?iso-8859-1?Q?4ZCVwGDu8x2CQ3QzJNsJLqvcxCM0cPdTuqouzX4I1Pio3tR5HNBGqfPCNR?=
+ =?iso-8859-1?Q?Z+IgWO+M5NixkHMYNj0aKB1Dc/wY/3iHguuMp3vnUD+EAHjKVDTyCfVw8l?=
+ =?iso-8859-1?Q?wrJw0rM7eSMFx+/cl0Bkb3op9EgyVU8L7sB2nBNpzGNCPPbsQijJxXnh2q?=
+ =?iso-8859-1?Q?xCV6e9qqdx9fqomwbQ7OALpxqS5/3BHu+fm9/8AtX5rxpM5ppAz6YMr6x9?=
+ =?iso-8859-1?Q?YVJwy2YhgSW9FovzjveHt+0+Mlerhknec+EHSa+YIc592uuH55NgadlSg6?=
+ =?iso-8859-1?Q?xwMh7eU5Ye4bQO6LgA29iZQcfT5UWTnWwhmwGcN2RQ4QMSsZP3lOWoE2Lw?=
+ =?iso-8859-1?Q?/oa0c0LbzbVy+oZJZrQXC214a+1pSfA3J/oukxkCCVZy+ZJjIE24lzGvyl?=
+ =?iso-8859-1?Q?NKMLX+J7hK0iRFLrla9gI3Y9pdma9MEQuOZjUGslMsZCMLvkeokcK5UexK?=
+ =?iso-8859-1?Q?vhSvLlBfi0dzJ2fVNY7C9WtwNxgkrP9y4aEikHYXl/ex0027ccidERsazY?=
+ =?iso-8859-1?Q?XmMV+SNP8XyGnSLmFS2Uoo1HZWXGa2Rp53DCkghI0cqmLT3ALHSlq/pWhr?=
+ =?iso-8859-1?Q?edbuRICh9T840Rmq44qk0cphIGz6/CNJ0h5MGwL9m21dInIDnfM65GjhOG?=
+ =?iso-8859-1?Q?hRprIHCj84jMb+2kEGnQnfyOJbRqCXxwVniBHSTsP+rcSl2hfOxYUupLcZ?=
+ =?iso-8859-1?Q?yiZ3S2b91z8+tiP2Tx+o9UIeLNQdZuQyfl4Ki58ul5h8b4mWJ83xDPA8Dg?=
+ =?iso-8859-1?Q?jgRQ8ivpRJWPx87Q54ZWRmVBanO8sRxhLtaWy/VAO4bP/1IEe3p2kjK8cI?=
+ =?iso-8859-1?Q?N7eFSdRP+VZQsvFktJr/tEQhuHJZqIEy4hUZlMhxFBtj5rlHIGECM7zVi3?=
+ =?iso-8859-1?Q?oYmOUS/rKmsGB53BS/h4yKaiTBh1hr/33nwKz88puhi8PIoJBHQwjgdbUY?=
+ =?iso-8859-1?Q?jW8L/RcihUjfKP25UQVcyfUMWzVkZ5Wn6pd8QTiS4VyzI+V2/yRo8RSb+S?=
+ =?iso-8859-1?Q?XEjy3TiONhDX9jH4u8CaJ37mbvIQsX+cnTOK5EgtJgH/gNotsknqrTZOtG?=
+ =?iso-8859-1?Q?6vMjFlI+n66XU3uCAnAj+od+U/vfHAsUXH+K15iPWW8g+f9xg5MbrhK37J?=
+ =?iso-8859-1?Q?OCpDLLKwXs4bpDw1i/lgQtxo5+UN2h7coueAuN0AcEhHfMP7bayfzpAEpr?=
+ =?iso-8859-1?Q?XUuyds4AE6?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Reply-To: nlsonbile@gmail.com
-From: Nelson Bile <nlsonbile@gmail.com>
-Date: Wed, 2 Jun 2021 18:52:07 +0000
-Message-ID: <CAOSR_pTm6KRmETumyg1-mBr_sf=EdkZeG5FhEgRS7mNjxPxGEA@mail.gmail.com>
-Subject: Read & reply
-To: undisclosed-recipients:;
-Content-Type: multipart/alternative; boundary="0000000000000e05da05c3ccf566"
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR04MB4965.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a35b10a6-7fc6-40a1-0ea7-08d92622f9fc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2021 00:03:11.2016
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RDjWAyq6BnuphswWhaa7UCiHTzD/aNrldhcDCrmF+sKsMkcPX6G37kEVI5ch879ou5meUtnrLy6SEuld6NLqkNrrCFzCbDYRgIMVPMUYv2k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4327
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <W72IY9gn27B.A.dbG.Vd9tgB@bendel>
+Resent-Message-ID: <HnGiIX1AuKD.A.w1C.cKCugB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1202
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1206
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,33 +188,23 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAOSR_pTm6KRmETumyg1-mBr_sf=EdkZeG5FhEgRS7mNjxPxGEA@mail.gmail.com
-Resent-Date: Wed,  2 Jun 2021 19:09:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/BYAPR04MB49653D1B88ADA8EDEAA88F82863C9@BYAPR04MB4965.namprd04.prod.outlook.com
+Resent-Date: Thu,  3 Jun 2021 00:30:20 +0000 (UTC)
 
---0000000000000e05da05c3ccf566
-Content-Type: text/plain; charset="UTF-8"
-
-Greetings  my good friend,
-
-I am Mr.Nelson Bile, Please confirm to me the receipt of this message.I
-have sent you this message many times but couldn't hear your
-response.Please get back to me very important for more details.
-
-Hon.Barrister Nelson Bile,Esq
-Bile & Advocate
-Office Address: 603,Rue De Ibis Bp.13364,Lome-Togo
-Lome Togo, West Africa,
-
---0000000000000e05da05c3ccf566
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Greetings =C2=A0my good friend,<br><br>I am Mr.Nelson Bile=
-, Please confirm to me the receipt of this message.I have sent you this mes=
-sage many times but couldn&#39;t hear your response.Please get back to me v=
-ery important for more details.<br><br>Hon.Barrister Nelson Bile,Esq<br>Bil=
-e &amp; Advocate<br>Office Address: 603,Rue De Ibis Bp.13364,Lome-Togo<br>L=
-ome Togo, West Africa,=C2=A0=C2=A0<br></div>
-
---0000000000000e05da05c3ccf566--
+On 6/1/21 23:54, Christoph Hellwig wrote:=0A=
+> Add a new API to allocate a gendisk including the request_queue for use=
+=0A=
+> with blk-mq based drivers.  This is to avoid boilerplate code in drivers.=
+=0A=
+>=0A=
+> Signed-off-by: Christoph Hellwig <hch@lst.de>=0A=
+=0A=
+This would be a nice API to get rid of the couple initialization=0A=
+calls and respective error handling in each blk-mq based drivers.=0A=
+=0A=
+Looks good.=0A=
+=0A=
+Reviewed-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>=0A=
+=0A=
+=0A=
 
