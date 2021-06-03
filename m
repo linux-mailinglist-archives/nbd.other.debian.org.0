@@ -1,185 +1,102 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BA293996EA
-	for <lists+nbd@lfdr.de>; Thu,  3 Jun 2021 02:27:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55D4E39A509
+	for <lists+nbd@lfdr.de>; Thu,  3 Jun 2021 17:54:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 677E1205B8; Thu,  3 Jun 2021 00:27:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  3 00:27:10 2021
-Old-Return-Path: <prvs=781f10532=Chaitanya.Kulkarni@wdc.com>
+	id 1289A2058A; Thu,  3 Jun 2021 15:54:20 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  3 15:54:20 2021
+Old-Return-Path: <ulf.hansson@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: ***
-X-Spam-Status: No, score=3.4 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED,THREADTOPIC autolearn=no autolearn_force=no
+X-Spam-Status: No, score=3.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9704920638
-	for <lists-other-nbd@bendel.debian.org>; Thu,  3 Jun 2021 00:11:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 4AEF020532
+	for <lists-other-nbd@bendel.debian.org>; Thu,  3 Jun 2021 15:37:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.52 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=1.92 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3, THREADTOPIC=2]
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id zWvr8D1SAgji for <lists-other-nbd@bendel.debian.org>;
-	Thu,  3 Jun 2021 00:11:29 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 329 seconds by postgrey-1.36 at bendel; Thu, 03 Jun 2021 00:11:28 UTC
-Received: from esa5.hgst.iphmx.com (esa5.hgst.iphmx.com [216.71.153.144])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "Cisco ESA Certificate", Issuer "Cisco ESA Certificate" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 912AD2063D
-	for <nbd@other.debian.org>; Thu,  3 Jun 2021 00:11:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1622679088; x=1654215088;
-  h=from:to:cc:subject:date:message-id:references:
-   content-transfer-encoding:mime-version;
-  bh=wST4v/KFEgsD+AHxp1B4bWyFrtO8jdP6tx0B6ojMsIk=;
-  b=MkMj3YPmbj94O7DJK1v5Jj2FoN+IMjRLYOs5BLOIPH6atFfm1fLHAaGm
-   nId0yDveiwxz+YLC2Dx4klQYzLecJE0CV7L90cor6FYm5w8wqjRPuBXrn
-   u0yNJsiU4tG2L2ygq0cJ3jQTLKAU+Z89lfThq89o+vKhEeiap25tBdMWM
-   42diC0Y9jSmEQNJmA2OwUjl7Ny1LDh8H2DibzFPSJTPAAjxcUZXQM3tKX
-   UyXpzLazWd5EsmXx5c3qyitKHrofLMzCLG0M9zDZ62DjUbhx4IpEhjXFV
-   vQq29W0py0pxd/5D1e4V/OpBhMWtIdR/PwQmLYV5mglegdGSlDG9DAD4s
-   g==;
-IronPort-SDR: ZmknQuXoCnqDkfa8f/gIpbwcqsW3uxFIdkG6PulXIRgvre/V1WSuqDOxsKpr7HB12BBnz5bTJF
- dpg6fDUUhyjirRV+af+X4alFqYTr5oUWRrXWqVj5ekEdtvmwVj+iPCU5w8TuqpEHShe0SuLgiL
- quXXMMlt2JVZSIA7aAtVVNAi8tyYF+2kfYxk/N6iv7SP/zPHjRDhX0CIr4+aYsc1qKQWQ2lLfF
- 1pwuG0X1Xj5/5yCDRAXWwP39oIHSazLjYk9RroQcS6fksS9XrRo0mCaN9h0b4MGo5ClYyMYoxw
- /BM=
-X-IronPort-AV: E=Sophos;i="5.83,244,1616428800"; 
-   d="scan'208";a="170510803"
-Received: from mail-co1nam11lp2176.outbound.protection.outlook.com (HELO NAM11-CO1-obe.outbound.protection.outlook.com) ([104.47.56.176])
-  by ob1.hgst.iphmx.com with ESMTP; 03 Jun 2021 08:10:11 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cZLkwwoAD3gpyISBgdewagHua+umfTEXtt8fAoIQQxNtn3TUom7xGUlGVNuipekFI0LrGCtbcCOV6ybf7lgaQdxpzQZR7FVbCDUnIbEpwTImjwvqO023nPEx8LkjaRijDWaljEKaXFOI89FOGmhTA1ygVl97J+abx4sdYDQy420hpP9+vDjvGyTPwXanYpLR0hZXd9vvDvSATaLjkEu8cVVSuhNewa1/xZkA9X79wGbXzFcqw7097MX0VwzkbSAZekKsjiqEIxKXEcqBecIiFNnG3hTuRkfpOoLt8e2lK42q47i2H47OOOqTv3q0niqmFkO4WW5SeUHAE3ZC+SGdtw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pzWP3cG7e/e70cUAy0yiqwnLhD+NXwUwEN+x14H9+cw=;
- b=Y1+gV6oRpNBiL21Ns+WNrmpjHEagZm1EmHeba536kJYVWO5YSDDjpQIWIuLpb/3RvlQI9ysc82/v+EAZfxTla36zoWNGankQMBKMakzWzWLF8qF7Bun2UCq2wwVPc6rREOtUZmR7z/cUzttOUByKjIb8I5fernx5zRfxxA0bNHO9j9ueuOUG3qC5VaPB9CUJsQkNOKC0NOJw7DMV3X4v7VciGfv1irqIiISjpB70d4Kn94PTHhXF418Z75v06CxeAaguvL+ehlq4PJPP+jZmTlpeiW+8JGSTZTQTl3IYrSNZ/Uzx8MRTX8va8QvEquSLHkjRJY3Z6dJX1QWjQp+bAA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+	with ESMTP id IBb8_qQBt3PN for <lists-other-nbd@bendel.debian.org>;
+	Thu,  3 Jun 2021 15:37:25 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .linaro. - helo: .mail-vs1-xe29.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com [IPv6:2607:f8b0:4864:20::e29])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id BF65620585
+	for <nbd@other.debian.org>; Thu,  3 Jun 2021 15:37:22 +0000 (UTC)
+Received: by mail-vs1-xe29.google.com with SMTP id z15so3208940vsn.13
+        for <nbd@other.debian.org>; Thu, 03 Jun 2021 08:37:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pzWP3cG7e/e70cUAy0yiqwnLhD+NXwUwEN+x14H9+cw=;
- b=KgmidU1Fw+7vpB9Uzsgux34KRcjT0kIms8M8fzVN0CdXWWJ12qjVA20G/kSPLgv3NQ7/mFf9/CEh7zLOM35fNA87mB0+qfmluO0klyMoHw+EtkWs6uJNOr7IH6rYQcWAMIBIdNmK16NxQlvi8bCPYnuCbqX9TTBnDgMXkIhqF6Y=
-Received: from BYAPR04MB4965.namprd04.prod.outlook.com (52.135.233.89) by
- BYAPR04MB3861.namprd04.prod.outlook.com (52.135.214.33) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4173.24; Thu, 3 Jun 2021 00:10:09 +0000
-Received: from BYAPR04MB4965.namprd04.prod.outlook.com
- ([fe80::6873:3d64:8f9f:faf0]) by BYAPR04MB4965.namprd04.prod.outlook.com
- ([fe80::6873:3d64:8f9f:faf0%7]) with mapi id 15.20.4173.034; Thu, 3 Jun 2021
- 00:10:09 +0000
-From: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>
-To: Christoph Hellwig <hch@lst.de>
-CC: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, Denis
- Efremov <efremov@linux.com>, Josef Bacik <josef@toxicpanda.com>, Tim Waugh
-	<tim@cyberelk.net>, Geoff Levand <geoff@infradead.org>, Ilya Dryomov
-	<idryomov@gmail.com>, "Md. Haris Iqbal" <haris.iqbal@ionos.com>, Jack Wang
-	<jinpu.wang@ionos.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang
-	<jasowang@redhat.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Mike Snitzer
-	<snitzer@redhat.com>, Maxim Levitsky <maximlevitsky@gmail.com>, Alex Dubov
-	<oakad@yahoo.com>, Miquel Raynal <miquel.raynal@bootlin.com>, Richard
- Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Heiko
- Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Christian
- Borntraeger <borntraeger@de.ibm.com>, "dm-devel@redhat.com"
-	<dm-devel@redhat.com>, "linux-block@vger.kernel.org"
-	<linux-block@vger.kernel.org>, "nbd@other.debian.org" <nbd@other.debian.org>,
-	"linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
-	"ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "linux-mmc@vger.kernel.org"
-	<linux-mmc@vger.kernel.org>, "linux-mtd@lists.infradead.org"
-	<linux-mtd@lists.infradead.org>, "linux-s390@vger.kernel.org"
-	<linux-s390@vger.kernel.org>
-Subject: Re: [PATCH 20/30] nullb: use blk_mq_alloc_disk
-Thread-Topic: [PATCH 20/30] nullb: use blk_mq_alloc_disk
-Thread-Index: AQHXV3xgq8Qh2KPeAkCUNVGDF6BX9g==
-Date: Thu, 3 Jun 2021 00:10:09 +0000
-Message-ID:
- <BYAPR04MB4965DDD0F4479F5B492A30D2863C9@BYAPR04MB4965.namprd04.prod.outlook.com>
-References: <20210602065345.355274-1-hch@lst.de>
- <20210602065345.355274-21-hch@lst.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: lst.de; dkim=none (message not signed)
- header.d=none;lst.de; dmarc=none action=none header.from=wdc.com;
-x-originating-ip: [199.255.45.62]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 410c689a-bed7-4693-4767-08d92623f325
-x-ms-traffictypediagnostic: BYAPR04MB3861:
-x-microsoft-antispam-prvs:
- <BYAPR04MB3861AC0DB66ED1C3B922E6C3863C9@BYAPR04MB3861.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:431;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info:
- aSCUd3+tO2dW2W0V3W+l+z6iJa3IoJNFdybg9gYTu9cedQ5lLVvPpm91O+dgVW8ql8UgQUxU6WWy+SnXx4hkRSkEbO+Bh9nDVmSGwmMOGkQ1nHjaRH0AmmcUwOEgU8PZj0bie3HHe1HkTiR9t6S8uH0KYFxKuxPIpGACKfziR9SdgoJQgLBMsLpbcl/XMriIfz/BZePIx+YXeYb0iTZg1zQtisRQ8BHOzvcW9ojTtcViOSd0wEtiPtkPj9ECItd8k4g/tUkuJBZ4Atf6k6pkELhctJZ8WJ42PKiGHu8LVUlUFVPDN2VXhagXLymt7dDZFFWHppkOKUONGWiIdwRpSsODUHoao48cLNskAR6ZEXegvXyqzYYouET3Q0OIYmUwslAg8gnSfVyx+RA2Rzpr2haw1NRfeR8epVcIitoaVUWk4+eJMy/yHTuFQy6ansUVygucOFjq4n5CAbUDWG6Ze00DEqPbx1sGyplv+rZCuJ3RE45DyM89gvL+b6fQ1xcV3jiGTFdg5yKmctnZmapwoPLqBzlIAqKUQandH72F1kQ2EMY5/mqgVQY/NPHh71VFoA/EQHV29oPgt9v0n+SjOM12CltqYJUFiycBsklsHDQ=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR04MB4965.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(39860400002)(396003)(376002)(136003)(6916009)(55016002)(9686003)(86362001)(52536014)(54906003)(8936002)(316002)(26005)(33656002)(122000001)(83380400001)(6506007)(7406005)(5660300002)(2906002)(66946007)(71200400001)(76116006)(4326008)(66556008)(66476007)(66446008)(64756008)(38100700002)(8676002)(7416002)(186003)(478600001)(7696005)(53546011);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata:
- =?iso-8859-1?Q?tOMRmQzBu9HBrmE54pFYwQCAZwjNFQViLIYp42OXhgbm6VKfnHeKq6ibJR?=
- =?iso-8859-1?Q?XVtDPmSP9FYrKIi5HErHCnz8ZolVYTOTq88vxqGNp5E8WT++gvcDXHWzfQ?=
- =?iso-8859-1?Q?7F22uB4d6Y7jZld1kooNlgaZuhcOZcWVK5jZsiQX+Vnu5A/I0GM6g6pXG/?=
- =?iso-8859-1?Q?fANsvMtPVZl4OWLL2+zaMRzi0z4pS0r4jQpoJHOglAaZtuCNoz9bScDYZd?=
- =?iso-8859-1?Q?AEvlPDPcaU86D30vRAfxCysnlB1/4/Jt1MXUWHSmp8VPpBXRNLlDGEqQxm?=
- =?iso-8859-1?Q?yjCAb9tCYwQfYIz6bHAigje3Yd7B2eiHgPvxT0MqDL2+eflNzyXrCr3o6r?=
- =?iso-8859-1?Q?8UyJSz27O4zzS/20AtH04M+SPYCu8ZwG+hkW9ykY/xrisflV8VjyxJNEKP?=
- =?iso-8859-1?Q?syxQYvDaTwngygKAaCnYFDz2soLqZOyR3u63/D5w2gGDjyoVdakYkl5JrT?=
- =?iso-8859-1?Q?9Vs+HX399Av3uvglcvTgN0NDHBSxG2r2hLTZQIlfUdcTJgqbjEEbTzHh6i?=
- =?iso-8859-1?Q?f5IcKkyHFjcXOS8rdDFlqyJhhOXgloM0oDOXQcVVqLJJYYU8BsOfyIdyIu?=
- =?iso-8859-1?Q?pUOu2kZO3V6uNs6z5PMGZkekzt+S0uxCreJuGgQrKkBZMs48NO+3sbdnsU?=
- =?iso-8859-1?Q?4c6IMFPVWUid+K4P+Y26m0ZmGTZvgHW7EkcU3dFejhLkpHrBxNr4AXEZ2R?=
- =?iso-8859-1?Q?4TZn363tV9qBc7iYebk3NLvLRw3CV5c7IR84da+AVEFOGpO1yX+IYrvoJb?=
- =?iso-8859-1?Q?t7O3F27g+Q5KnNOqFYGbyqb35w7zFyF8QHTbKK8sldGZ2gqzSOBQY3lCLE?=
- =?iso-8859-1?Q?apO2p5Ip0z38niJbY5R/NGjElnkFYxnVQfDKaCjVIIGmhZWgLnu4hiOqzo?=
- =?iso-8859-1?Q?L8+IQB2+pqtlGfnUlBmSIzDBc3+49PFeL2MsQlwM5E9n1hY9qPOUyqbmET?=
- =?iso-8859-1?Q?rpcgr9YIpy7KXg0uR2TRn+2BeJzIBgIqtRJywgwZgA+B8CJ3RwFWYeL1n/?=
- =?iso-8859-1?Q?hY7Q7ycu4z8lPJyJAlsshldtZCy3E1sv89KZsNPETY4AQEr3vHlaaun+xd?=
- =?iso-8859-1?Q?vgyqfQ9WCG1L8tMRnzKsqh3RlrakY3XIEVU8StpIxjZlCsJpMf83zURXip?=
- =?iso-8859-1?Q?9D/f68Z33Hy6P74gkVsgSBM+9qbr+SvWM25poIJijA7qHdhsegGFjmiBA1?=
- =?iso-8859-1?Q?lGWdWKKQOqEX8dKOfdNFEOHYdtB9duMlsdbxaXtMAssT2AMavt2G7XtQ6I?=
- =?iso-8859-1?Q?isoClhWwp/3vVg6ae+fZei/Sg1PoAPAHoD6EWQaKtiyFmWRy4+3YFr/Q13?=
- =?iso-8859-1?Q?HTATyFL9dJB3hIn1M5qIgz0y2yIG8dpT5nMVQTnH8b/gBTJhn1ETaotnmi?=
- =?iso-8859-1?Q?ckYH8Sgs2Z?=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=+W0QahdA5jm5lLp4qGqziVkevJrOYYIsAeli4hbSoMY=;
+        b=Sczm7Uhat9CAttKCKONsBvTvpdWX5VANaO58Cd0mJFcJ+A28Gj9YspGmhSWIpVtNS9
+         gufvY+CGT5FXDIQfjOQ4ExwQIrmSjUqzpGxTG/ZkK/nXRMIOjYsW6gd0+0ljDlvbLbq6
+         AyHgMcG1V7VrDrAancwHixbwlfPPPcOtQ/Us++pps4NpXbaz33l8+avCCapAkCFya/10
+         FcaqevmvQJz8RurkVjboQlMdJ4KLmCFgJ9aWml7eHxoV4e7eWIKwWiCmbJjrhvsDE5K2
+         PLLnqagHSU8ORkIhfE1C9Sx6ZNkln7FGogf+yyT7tKXsIRL7oAHDTXDC0cZ4GcZV2dc7
+         4ZRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=+W0QahdA5jm5lLp4qGqziVkevJrOYYIsAeli4hbSoMY=;
+        b=o86bF6VoH3Xl4MXOJfHcbDc0Xin9aH0uZG3+55AoYFF4pGli+s1/of1CdMcIKzLlUD
+         T2JaRRfOPxYvlMC+Ft1ttu1p/w9STAibVEGDSz6s5qAtOycC2k+ucs/6+OfgoU87TEXT
+         AXSnFqvvydv+ZfBkQeVbOtWjhz6FK+Eb1QAszTo5c4M14z/GlDYlz2+BfkabgBvDZ9u4
+         44rYoY7VgG7EBnf07UV95S4KPpefUtWKUr6fpzN6ccq2qf2DYXrQxl4JTomiHGYcXGfV
+         dG5hpv53h0YMjMqq+t7WqwX28F9nppgwD/hDblKy7WS0i/sT5zP5C0msK4wwvugjkUC3
+         +HJQ==
+X-Gm-Message-State: AOAM531CJZ6CYBOjAFgrvLHt8cLyOf9PAZt2JA78kF/EIhXjDIk5EPs8
+	bNXaPUNLyXw038cYVZgxE2dLMYj0A5zHFsJeqARsBA==
+X-Google-Smtp-Source: ABdhPJzM3LSrPJI4FkB0laodTTeEei+m50SowhpqaGtsNgUdvieHcvbYUQloJUD/a79xzNmd816023E4d1PORKHhPJg=
+X-Received: by 2002:a05:6102:3023:: with SMTP id v3mr756919vsa.19.1622734639015;
+ Thu, 03 Jun 2021 08:37:19 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR04MB4965.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 410c689a-bed7-4693-4767-08d92623f325
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2021 00:10:09.2084
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: csvqD0vw659M62vyGjnjyxGD18c3A93cKZHc7kill9AefsspYbo6IxhVdXG3I88JuR8UAroB3qRvmH2ffepP66pf7ZnPFJxPeY8tuhTHcyk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB3861
+References: <20210602065345.355274-1-hch@lst.de> <20210602065345.355274-8-hch@lst.de>
+In-Reply-To: <20210602065345.355274-8-hch@lst.de>
+From: Ulf Hansson <ulf.hansson@linaro.org>
+Date: Thu, 3 Jun 2021 17:36:42 +0200
+Message-ID: <CAPDyKFoJssCnHv5tmG4vJJ9m0Zj5HkMEVYvnsjamvyemusZaUg@mail.gmail.com>
+Subject: Re: [PATCH 07/30] ms_block: use blk_mq_alloc_disk
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, 
+	Denis Efremov <efremov@linux.com>, Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>, 
+	Geoff Levand <geoff@infradead.org>, Ilya Dryomov <idryomov@gmail.com>, 
+	"Md. Haris Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, 
+	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Mike Snitzer <snitzer@redhat.com>, Maxim Levitsky <maximlevitsky@gmail.com>, 
+	Alex Dubov <oakad@yahoo.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Heiko Carstens <hca@linux.ibm.com>, 
+	Vasily Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, dm-devel@redhat.com, 
+	linux-block <linux-block@vger.kernel.org>, nbd@other.debian.org, 
+	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, ceph-devel@vger.kernel.org, 
+	virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org, 
+	linux-mmc <linux-mmc@vger.kernel.org>, linux-mtd@lists.infradead.org, 
+	linux-s390@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <MNCBrtWs0oJ.A.gMB.eHCugB@bendel>
+Resent-Message-ID: <0UKPO79qPJB.A.8hH.ssPugB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1203
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1207
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -189,45 +106,80 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/BYAPR04MB4965DDD0F4479F5B492A30D2863C9@BYAPR04MB4965.namprd04.prod.outlook.com
-Resent-Date: Thu,  3 Jun 2021 00:27:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAPDyKFoJssCnHv5tmG4vJJ9m0Zj5HkMEVYvnsjamvyemusZaUg@mail.gmail.com
+Resent-Date: Thu,  3 Jun 2021 15:54:20 +0000 (UTC)
 
-On 6/1/21 23:56, Christoph Hellwig wrote:=0A=
-> Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and=0A=
-> request_queue allocation.=0A=
->=0A=
-> Signed-off-by: Christoph Hellwig <hch@lst.de>=0A=
-> ---=0A=
->  drivers/block/null_blk/main.c | 11 +++++------=0A=
->  1 file changed, 5 insertions(+), 6 deletions(-)=0A=
->=0A=
-> diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.=
-c=0A=
-> index d8e098f1e5b5..74fb2ec63219 100644=0A=
-> --- a/drivers/block/null_blk/main.c=0A=
-> +++ b/drivers/block/null_blk/main.c=0A=
-> @@ -1851,13 +1851,12 @@ static int null_add_dev(struct nullb_device *dev)=
-=0A=
->  =0A=
->  		rv =3D -ENOMEM;=0A=
-=0A=
-Is above initialization needed ?=0A=
-=0A=
->  		nullb->tag_set->timeout =3D 5 * HZ;=0A=
-> -		nullb->q =3D blk_mq_init_queue_data(nullb->tag_set, nullb);=0A=
-> -		if (IS_ERR(nullb->q))=0A=
-> -			goto out_cleanup_tags;=0A=
-> -		nullb->disk =3D alloc_disk_node(1, nullb->dev->home_node);=0A=
-> -		if (!nullb->disk)=0A=
-> +		nullb->disk =3D blk_mq_alloc_disk(nullb->tag_set, nullb);=0A=
-> +		if (IS_ERR(nullb->disk)) {=0A=
-> +			rv =3D PTR_ERR(nullb->disk);=0A=
->  			goto out_cleanup_disk;=0A=
-> -		nullb->disk->queue =3D nullb->q;=0A=
-> +		}=0A=
-> +		nullb->q =3D nullb->disk->queue;=0A=
->  	} else if (dev->queue_mode =3D=3D NULL_Q_BIO) {=0A=
->  		rv =3D -ENOMEM;=0A=
->  		nullb->disk =3D blk_alloc_disk(nullb->dev->home_node);=0A=
-=0A=
+On Wed, 2 Jun 2021 at 08:54, Christoph Hellwig <hch@lst.de> wrote:
+>
+> Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
+> allocation.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+
+Acked-by: Ulf Hansson <ulf.hansson@linaro.org>
+
+Kind regards
+Uffe
+
+
+> ---
+>  drivers/memstick/core/ms_block.c | 25 ++++++++++---------------
+>  1 file changed, 10 insertions(+), 15 deletions(-)
+>
+> diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
+> index 0bacf4268f83..dac258d12aca 100644
+> --- a/drivers/memstick/core/ms_block.c
+> +++ b/drivers/memstick/core/ms_block.c
+> @@ -2110,21 +2110,17 @@ static int msb_init_disk(struct memstick_dev *card)
+>         if (msb->disk_id  < 0)
+>                 return msb->disk_id;
+>
+> -       msb->disk = alloc_disk(0);
+> -       if (!msb->disk) {
+> -               rc = -ENOMEM;
+> +       rc = blk_mq_alloc_sq_tag_set(&msb->tag_set, &msb_mq_ops, 2,
+> +                                    BLK_MQ_F_SHOULD_MERGE);
+> +       if (rc)
+>                 goto out_release_id;
+> -       }
+>
+> -       msb->queue = blk_mq_init_sq_queue(&msb->tag_set, &msb_mq_ops, 2,
+> -                                               BLK_MQ_F_SHOULD_MERGE);
+> -       if (IS_ERR(msb->queue)) {
+> -               rc = PTR_ERR(msb->queue);
+> -               msb->queue = NULL;
+> -               goto out_put_disk;
+> +       msb->disk = blk_mq_alloc_disk(&msb->tag_set, card);
+> +       if (IS_ERR(msb->disk)) {
+> +               rc = PTR_ERR(msb->disk);
+> +               goto out_free_tag_set;
+>         }
+> -
+> -       msb->queue->queuedata = card;
+> +       msb->queue = msb->disk->queue;
+>
+>         blk_queue_max_hw_sectors(msb->queue, MS_BLOCK_MAX_PAGES);
+>         blk_queue_max_segments(msb->queue, MS_BLOCK_MAX_SEGS);
+> @@ -2135,7 +2131,6 @@ static int msb_init_disk(struct memstick_dev *card)
+>         sprintf(msb->disk->disk_name, "msblk%d", msb->disk_id);
+>         msb->disk->fops = &msb_bdops;
+>         msb->disk->private_data = msb;
+> -       msb->disk->queue = msb->queue;
+>
+>         capacity = msb->pages_in_block * msb->logical_block_count;
+>         capacity *= (msb->page_size / 512);
+> @@ -2155,8 +2150,8 @@ static int msb_init_disk(struct memstick_dev *card)
+>         dbg("Disk added");
+>         return 0;
+>
+> -out_put_disk:
+> -       put_disk(msb->disk);
+> +out_free_tag_set:
+> +       blk_mq_free_tag_set(&msb->tag_set);
+>  out_release_id:
+>         mutex_lock(&msb_disk_lock);
+>         idr_remove(&msb_disk_idr, msb->disk_id);
+> --
+> 2.30.2
+>
 
