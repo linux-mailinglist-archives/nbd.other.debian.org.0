@@ -2,83 +2,83 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2481339E2D6
-	for <lists+nbd@lfdr.de>; Mon,  7 Jun 2021 18:21:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 024743A1FA8
+	for <lists+nbd@lfdr.de>; Thu, 10 Jun 2021 00:03:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 75CB72025F; Mon,  7 Jun 2021 16:21:49 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun  7 16:21:49 2021
-Old-Return-Path: <rjones@redhat.com>
+	id B3F70202C6; Wed,  9 Jun 2021 22:03:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun  9 22:03:09 2021
+Old-Return-Path: <stsllc22@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-12.1 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL autolearn=unavailable
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.5 required=4.0 tests=CAPINIT,DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
+	FREEMAIL_REPLY,HTML_MESSAGE,RCVD_IN_DNSWL_NONE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BFBB12029E
-	for <lists-other-nbd@bendel.debian.org>; Mon,  7 Jun 2021 16:21:40 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A6DDE2022E
+	for <lists-other-nbd@bendel.debian.org>; Wed,  9 Jun 2021 21:46:53 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-8.132 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.374, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=2.051 tagged_above=-10000 required=5.3
+	tests=[BAYES_05=-1.5, CAPINIT=0.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+	FREEMAIL_REPLY=1, HTML_MESSAGE=2, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id nG70LDGrNzZ1 for <lists-other-nbd@bendel.debian.org>;
-	Mon,  7 Jun 2021 16:21:37 +0000 (UTC)
+	with ESMTP id MUniye3gRCH4 for <lists-other-nbd@bendel.debian.org>;
+	Wed,  9 Jun 2021 21:46:49 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 376 seconds by postgrey-1.36 at bendel; Mon, 07 Jun 2021 16:21:36 UTC
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [216.205.24.124])
-	by bendel.debian.org (Postfix) with ESMTP id B79A820298
-	for <nbd@other.debian.org>; Mon,  7 Jun 2021 16:21:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1623082891;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=hlb3YJojX7k6HlqZ8hHto0cP6uHh96yy4kvGbzW4hnQ=;
-	b=XWd1fNIzbJM/IhLaTco49+g27uzkDJ3g0ZNypmzT7A8Mx8x16KyXUCfHE42A5GS3yW/vZV
-	tiqCoXY8wOWF5z26raGqAbhOeSwJ2QwjioIX8NrnNy8wpUvxgdjv2275NDBcdsSYY4dLut
-	HLYIqPzZY4SMaAR0NrHuB9wPKI+7HT8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-339-6-WWC4NGPCCjrCev_pbTfw-1; Mon, 07 Jun 2021 12:15:10 -0400
-X-MC-Unique: 6-WWC4NGPCCjrCev_pbTfw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 94E008ABA42
-	for <nbd@other.debian.org>; Mon,  7 Jun 2021 16:15:09 +0000 (UTC)
-Received: from localhost (ovpn-114-133.ams2.redhat.com [10.36.114.133])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3650B620DE;
-	Mon,  7 Jun 2021 16:14:59 +0000 (UTC)
-Date: Mon, 7 Jun 2021 17:14:59 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: libguestfs@redhat.com, virt-tools-list@redhat.com, nbd@other.debian.org
-Subject: ANNOUNCE: libnbd 1.8 and nbdkit 1.26 - high performance network
- block device client and server
-Message-ID: <20210607161459.GP30099@redhat.com>
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com [IPv6:2a00:1450:4864:20::62f])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 150FC20132
+	for <nbd@other.debian.org>; Wed,  9 Jun 2021 21:46:45 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id g20so40682960ejt.0
+        for <nbd@other.debian.org>; Wed, 09 Jun 2021 14:46:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=tTverhXSiAT73XOa0//0lWilJ0DVqpGrVTkVuq7a4NI=;
+        b=CpGPd9K/X/++/TxIW0UKMLJaOtrj1ajCuQZyb5DKfABi8Q+g+LIgNS198uyKSXNMSF
+         KgZE0s4iM/bVfJZKWA1OnUOxYGkIfQvrrnYIhc5tzta40J+hZoodLB56iYqBNWhptQET
+         MohuyTI26SCPdKbUhbAsx9t/8Lw+nHhmn2Y+r8MRcar/f2LbHxe3DVaas0HuwW8noiut
+         lH1JJtGbvxAKSRMh2MH7QUCLrKVxP2xaEsuCcmaUjfIcmRK0Af/j8eGUWDENPPUm/4Ro
+         TAtzfiGZQab0R3Cr+VFojTizJN334b4tFoQAXh5U1X5k8rm4PRyq4qgRc+ZLJnqHC5uh
+         PPHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=tTverhXSiAT73XOa0//0lWilJ0DVqpGrVTkVuq7a4NI=;
+        b=NcfFDgB3jZ/gb90jZwJAmRVCQeeQeTGOhU0Q90hFnJpiZ4dcZMILPLnJ0dX7Q3X0V1
+         TQ09f35inva+bR7QOCLYkmKLZjADOasPo6oMpBaWLyitDfNYyle80xf6XdJETN+V3sB6
+         HKHCsVuVvUf7VDR3wZ6/LSwqkBXUv0ODLuIlPqTIqOBVFQ9MqjBjT39qQTSZ82faGR/V
+         gQNkDEZDxoqBrIlcdBv/LuyoP6xkSMfBB7maH0DQMEd1utOKfiJzKwSPqIrnyPRAjduL
+         56Jxc3/oTdqJifED36H0uK3kkQ+mphmNGwDhx4cU9pA0hB8RdcXnjhF5+nS+V8Wv34Jv
+         QzDA==
+X-Gm-Message-State: AOAM530OVTz+5bjh/cKZi44EQGolGdWqB/M5sSaxlhrU62nsCC0Pp6iR
+	TEWyQAE6r1v6W4euFmSQ8nMdQHb5SrRCj9uEAbE=
+X-Google-Smtp-Source: ABdhPJwfXq5GhRjB+FOEZobgrHvG9uQa7RSYHjI0EvNKOG0X1Z3nB66CCRlxXbp58r6n1gCM4hZLIcmSwneyhy4nhGc=
+X-Received: by 2002:a17:906:340d:: with SMTP id c13mr1623724ejb.457.1623275203048;
+ Wed, 09 Jun 2021 14:46:43 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=rjones@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+From: Kelly James Schaffer <jk203030@gmail.com>
+Date: Wed, 9 Jun 2021 22:46:29 +0100
+Message-ID: <CAFrK_hhodA-TbsRfbbmoZ6wBL0=bPyi38R57=mpY4VaiObghnA@mail.gmail.com>
+Subject: Investment Opportunities
+To: jk203030@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000d9b73d05c45c35b1"
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <3LkbSZPhsW.A.B3E.dekvgB@bendel>
+Resent-Message-ID: <WYTjocyhv1L.A.PXB.dqTwgB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1210
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1211
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,334 +88,59 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210607161459.GP30099@redhat.com
-Resent-Date: Mon,  7 Jun 2021 16:21:49 +0000 (UTC)
-
-I'm pleased to announce the release of nbdkit 1.26, a high performance
-plugin-based Network Block Device (NBD) server, and libnbd 1.8, a high
-performance client library.
-
-https://en.wikipedia.org/wiki/Network_block_device
-
-You can get these from:
-
-tarballs: https://download.libguestfs.org/nbdkit/
-          https://download.libguestfs.org/libnbd/
-git:      https://gitlab.com/nbdkit
-
-Key features of nbdkit:
-
- * Multithreaded NBD server written in C with good performance.
- * Minimal dependencies for the basic server.
- * Liberal license (BSD) allows nbdkit to be linked to proprietary
-   libraries or included in proprietary code.
- * Well-documented, simple plugin API with a stable ABI guarantee.
-   Lets you export “unconventional” block devices easily.
- * You can write plugins in C, Go, Lua, Perl, Python, OCaml, Ruby,
-   Rust, shell script or Tcl.
- * Filters can be stacked in front of plugins to transform the output.
-
-Key features of libnbd:
-
- * Synchronous API for ease of use.
- * Asynchronous API for writing non-blocking, multithreaded clients.
-   You can mix both APIs freely.
- * High performance.
- * Minimal dependencies for the basic library.
- * Well-documented, stable API.
- * Bindings in several programming languages.
- * Shell (nbdsh) for command line and scripting.
- * Copying tool (nbdcopy) for high performance copying and streaming.
- * Query tool (nbdinfo) to query NBD servers.
- * FUSE support (nbdfuse) to mount NBD in the local filesystem.
-
-Release notes for nbdkit 1.26
-
-       nbdkit is now hosted on gitlab:
-       https://listman.redhat.com/archives/libguestfs/2021-February/msg00021.html
-
-   Security
-       There were no security issues found.  All past security issues and
-       information about how to report new ones can be found in
-       nbdkit-security(1).
-
-   Plugins
-       nbdkit-gzip-plugin and nbdkit-tar-plugin have been removed.  They were
-       deprecated in nbdkit 1.22.  The functionality has been replaced by
-       nbdkit-gzip-filter(1) and nbdkit-tar-filter(1) respectively.
-
-       nbdkit-streaming-plugin(1) has been deprecated and will be removed in
-       nbdkit 1.30.  You can use nbdcopy(1) instead.
-
-       nbdkit-curl-plugin(1) adds these features: "followlocation=false" to
-       disable following redirects.  "cookiefile" and "cookiejar" to control
-       saving cookies.
-
-       nbdkit-ssh-plugin(1) now advertises multi-conn if the server is
-       OpenSSH, improving performance (Eric Blake).
-
-       nbdkit-ondemand-plugin(1) has a new "wait=true" flag allowing you to
-       choose between clients waiting for an export to become free or being
-       immediately rejected.
-
-       nbdkit-sparse-random-plugin(1) now does not generate fully random data
-       within each block.  Using perf we observed that the plugin was spending
-       34% of the total time during benchmarks just doing this.  You can
-       enable the old behaviour using "random-content=true".
-
-       nbdkit-file-plugin(1) now checks if the file is read-only and exports a
-       read-only NBD connection in this case (Eric Blake).
-
-       nbdkit-vddk-plugin(1) has been tested with VDDK 7.0.2.
-
-   Filters
-       There is a new API for use by filters to manage "contexts".  Instead of
-       the previous 1-1 relationship between filter connections and plugin
-       connections, filters can now open more than one context into the
-       backend from a single connection, or share contexts between connections
-       (Eric Blake).
-
-       New nbdkit-multi-conn-filter(1) which allows you to add multi-conn
-       support to plugins which don't support it (although the emulation is
-       expensive), or change whether multi-conn is advertised to clients (Eric
-       Blake).
-
-       nbdkit-cow-filter(1) now ignores flush/FUA requests (which are not
-       useful for a temporary overlay).  The filter now implements extents and
-       efficient trimming.  Fine-grained locking is used around shared
-       structures, greatly improving parallel performance.  Added support for
-       multi-conn.
-
-       nbdkit-cache-filter(1) advertises multi-conn when possible (Eric
-       Blake).
-
-       nbdkit-cache-filter and nbdkit-cow-filter can now handle arbitrary
-       sized disks, instead of rounding the disk size down.
-
-       nbdkit-blocksize-filter(1) supports parallel requests (Eric Blake).
-
-       nbdkit-checkwrite-filter(1) supports multi-conn (Eric Blake).
-
-       nbdkit-ext2-filter(1) no longer supports multi-conn.  The filter is
-       single-threaded so it does not matter, but it was not safe.  Fix trim,
-       zero and flush support (Eric Blake).
-
-       nbdkit-readahead-filter(1) fixes multi-conn support (Eric Blake).
-
-       nbdkit-gzip-filter(1) and nbdkit-xz-filter(1) now both support multi-
-       conn (Eric Blake).
-
-   Language bindings
-       nbdkit-python-plugin(3) supports the following new features:
-       "after_fork" and "preconnect" methods.  "nbdkit.shutdown()" binding.
-
-       nbdkit-rust-plugin(3) updated for newer Rust compiler versions (Alan
-       Somers).
-
-       nbdkit-golang-plugin(3) now uses and requires golang modules.  Golang ≥
-       1.13 must be used.
-
-   API
-       New ".cleanup" callback for plugins and filters.  This is called
-       shortly before ".unload", but unlike ".unload" it is guaranteed that no
-       plugin or filter code has been dlclosed (Eric Blake).
-
-       New "nbdkit_extents_full" is a helper function for filters which can be
-       used to read all extents from a plugin covering a region.
-
-   Tests
-       Old plugins that we use for testing were rebuilt so they no longer
-       depend on libselinux (thanks Thomas Weißschuh).
-
-       nbdkit-ssh-plugin(1) can still be built even if ssh-keygen is
-       unavailable for testing it (thanks Thomas Weißschuh).
-
-       Improve tests/test-captive.sh to avoid crashes during testing.
-
-       Test coverage on FreeBSD has been improved, fewer tests should skip
-       unnecessarily.
-
-   Build
-       nbdkit and plugins can now be built with "-fvisibility=hidden", which
-       allows the compiler to make some optimizations.
-
-       Add a dependency so nbdkit is relinked if the linker script
-       (nbdkit.syms) changes (Eric Blake).
-
-       xorriso is now preferred over genisoimage or mkisofs (see
-       https://wiki.debian.org/genisoimage).
-
-       It is now possible to compile nbdkit with clang with warnings enabled.
-       Several warnings have been suppressed or fixed.
-
-       "MALLOC_CHECK_" and "MALLOC_PERTURB_" are only enabled when running the
-       tests, not when running nbdkit from the build directory.  This makes it
-       easier to do benchmarks.
-
-       "nbdkit_peer_*" implemented on OpenBSD.
-
-   Internals
-       When fuzzing nbdkit we now recommend using the "-t 1" flag (which
-       disables threads).  This improves the fuzz-stability of nbdkit.
-
-AUTHORS
-       Authors of nbdkit 1.26:
-
-       •   Alan Somers
-
-       •   Eric Blake
-
-       •   Michael Ablassmeier
-
-       •   Richard W.M. Jones
-
-       •   Timm Bäder
-
-
-Release notes for libnbd 1.8
-
-       libnbd is now hosted on gitlab:
-       https://listman.redhat.com/archives/libguestfs/2021-February/msg00021.html
-
-   Security
-       If you find a security issue, please read SECURITY in the source
-       (online here: https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY).
-       To find out about previous security issues in libnbd, see
-       libnbd-security(3).
-
-       There was one security bug found in libnbd during this release cycle.
-
-       CVE-2021-20286 denial of service when using nbd_set_opt_mode(3)
-
-       See the full announcement here:
-       https://listman.redhat.com/archives/libguestfs/2021-March/msg00092.html
-       (Found and fixed by Eric Blake).
-
-   New APIs
-       nbd_get_private_data(3)
-       nbd_set_private_data(3)
-           These calls allow you to store either an unsigned integer or a
-           pointer in the handle for the application to use for its own
-           purposes.
-
-       nbd_get_uri(3)
-           This call constructs an NBD URI which can be used to connect back
-           to the same server (using nbd_connect_uri(3) or from other tools
-           that support the NBD URI standard).
-
-   Enhancements to existing APIs
-       Numeric IPv6 URIs (like "nbd://[::1]/") are now supported.
-
-       libnbd gives a better error message if the server backlog overflows
-       (thanks Xin Long, Lukas Doktor, Eric Blake, Martin Kletzander).
-
-   New features
-       Continuous integration (CI) tests now run on every commit and merge
-       request to the upstream repository (Martin Kletzander).
-
-   Tools
-       A great deal of work has been done to improve the performance of
-       nbdcopy(1) (Nir Soffer, Eric Blake).
-
-       On Linux, nbdcopy now uses readahead when reading from files, and takes
-       steps to preserve the host page cache.
-
-       nbdcopy new --request-size option to allow controlling the size of
-       requests made to NBD servers.  Adjusting this can affect performance
-       (Nir Soffer).
-
-       nbdcopy now supports "null:" pseudo-target, where it discards the
-       output.  This is useful for benchmarking.
-
-       nbdcopy new -v flag to enable libnbd and other debugging.
-
-       nbdinfo(1) --list (which lists all exports of a server) no longer exits
-       early if one of the exports is inaccessible or there is a recoverable
-       error (Eric Blake).
-
-       nbdinfo now prints the URI of each export in the output making it
-       easier to connect back to each export.
-
-       nbdfuse(1) is now multithreaded and supports issuing parallel NBD
-       commands on a single connection as well as multi-conn, and other
-       enhancements have been made.  This resulted in around 50% performance
-       improvement when tested with fio.
-
-       nbdfuse now supports nbdcopy-style "[ CMD ]", eg:
-        nbdfuse dir/ramdisk [ nbdkit memory 1G ]
-
-       nbdfuse now supports trimming.  Also it supports fast zeroing, but this
-       requires a forthcoming kernel patch before it will work.
-
-       nbdfuse sets the virtual file permissions appropriately if the NBD
-       export is read-only.
-
-       nbdfuse new -v flag to enable libnbd and other debugging.
-
-   Tests
-       Added a test of interoperability with qemu-storage-daemon(1).  Note
-       that qemu-storage-daemon was broken in qemu 6.0.0 so this test can fail
-       unless you update to a fixed version (thanks Stefan Hajnoczi, Daniel
-       Berrangé).
-
-       Added a test of nbdcopy with TLS which was previously untested.
-
-       Python code style tests are now opt-in using
-        ./configure --enable-python-code-style
-
-       More tests should now run on FreeBSD and not be skipped.
-
-       nbdfuse tests now ensure that errors from NBD are transmitted through
-       FUSE back to the local client.
-
-       "MALLOC_CHECK_" and "MALLOC_PERTURB_" are only enabled when running the
-       tests, not when running libnbd programs from the build directory.  This
-       makes it easier to do benchmarks.
-
-   Other improvements and bug fixes
-       The minimum C compiler is now ISO C99 (previously ANSI C90).
-
-       FUSE 3 (instead of FUSE 2) is now required to build nbdfuse.
-
-       The library tries harder not to leak thread-local storage memory on
-       dlclose or exit.  (Because of the design of Linux it is not always
-       possible to avoid this, especially in multithreaded programs.)
-
-       Fix the progress bar in nbdcopy(1).
-
-       UTF-8 export names are now processed and displayed properly by
-       nbdinfo(1).
-
-       The --help output of nbdcopy, nbdfuse and nbdinfo now displays a brief
-       summary of all options and has some examples.
-
-       The generator now only requires ocamlc, not ocamlfind (Abhay Raj
-       Singh).
-
-       Golang bindings now use and require golang modules.
-
-   Documentation
-       Document using libnbd with the Meson build system.
-
-       Added Python examples.
-
-       Add example of how to integrate libnbd with libev (Nir Soffer).
-
-AUTHORS
-       Eric Blake
-
-       Richard W.M. Jones
-
-       Martin Kletzander
-
-       Nir Soffer
-
-
-
--- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-Fedora Windows cross-compiler. Compile Windows programs, test, and
-build Windows installers. Over 100 libraries supported.
-http://fedoraproject.org/wiki/MinGW
+List-Archive: https://lists.debian.org/msgid-search/CAFrK_hhodA-TbsRfbbmoZ6wBL0=bPyi38R57=mpY4VaiObghnA@mail.gmail.com
+Resent-Date: Wed,  9 Jun 2021 22:03:09 +0000 (UTC)
+
+--000000000000d9b73d05c45c35b1
+Content-Type: text/plain; charset="UTF-8"
+
+We seek investment partnership in your country and will offer funds and if
+you have interest, please call me or Phone Number +447440968712 or email to
+us at kellys.schaffer@yahoo.com
+
+--000000000000d9b73d05c45c35b1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><p class=3D"MsoNormal" style=3D"margin:0in 0in 10pt;line-h=
+eight:115%;font-size:12pt;font-family:&quot;Lucida Console&quot;"><span sty=
+le=3D"font-family:&quot;Times New Roman&quot;,serif;color:rgb(38,40,42)">We=
+ seek investment
+partnership in your country and will offer funds and if you have interest,<=
+/span><span style=3D"font-family:&quot;Times New Roman&quot;,serif;color:rg=
+b(93,93,93);background-image:initial;background-position:initial;background=
+-size:initial;background-repeat:initial;background-origin:initial;backgroun=
+d-clip:initial"> </span><span style=3D"font-family:&quot;Times New Roman&qu=
+ot;,serif;color:rgb(32,33,36)">please call me or Phone
+Number +447440968712 or email to us at </span><span style=3D"font-family:&q=
+uot;Times New Roman&quot;,serif"><a href=3D"mailto:kellys.schaffer@yahoo.co=
+m">kellys.schaffer@yahoo.com</a></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 10pt;line-height:115%;font-s=
+ize:12pt;font-family:&quot;Lucida Console&quot;"><span style=3D"font-family=
+:&quot;Times New Roman&quot;,serif;color:rgb(32,33,36)">=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 10pt;line-height:115%;font-s=
+ize:12pt;font-family:&quot;Lucida Console&quot;"><span style=3D"font-family=
+:&quot;Times New Roman&quot;,serif;color:rgb(29,34,40)">=C2=A0</span></p>
+
+<p style=3D"margin:0in 0in 0.25in;background-image:initial;background-posit=
+ion:initial;background-size:initial;background-repeat:initial;background-or=
+igin:initial;background-clip:initial;vertical-align:baseline;font-size:12pt=
+;font-family:&quot;Times New Roman&quot;,serif"><span style=3D"color:rgb(29=
+,34,40)"> </span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:12pt;font=
+-family:&quot;Lucida Console&quot;"><span style=3D"font-family:&quot;Times =
+New Roman&quot;,serif">=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:12pt;font=
+-family:&quot;Lucida Console&quot;"><span style=3D"font-family:&quot;Times =
+New Roman&quot;,serif">=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:12pt;font=
+-family:&quot;Lucida Console&quot;"><span style=3D"font-family:&quot;Times =
+New Roman&quot;,serif"></span></p></div>
+
+--000000000000d9b73d05c45c35b1--
 
