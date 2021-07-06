@@ -1,75 +1,76 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 782843BBA82
-	for <lists+nbd@lfdr.de>; Mon,  5 Jul 2021 11:51:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id D396B3BC4F1
+	for <lists+nbd@lfdr.de>; Tue,  6 Jul 2021 04:57:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5BA9520220; Mon,  5 Jul 2021 09:51:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jul  5 09:51:10 2021
-Old-Return-Path: <wangqing@vivo.com>
+	id BC299203FA; Tue,  6 Jul 2021 02:57:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jul  6 02:57:09 2021
+Old-Return-Path: <guoqing.jiang@linux.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.1 required=4.0 tests=DIGITS_LETTERS,DKIM_INVALID,
-	DKIM_SIGNED,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-	TO_TOO_MANY autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,TO_TOO_MANY autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D797720205
-	for <lists-other-nbd@bendel.debian.org>; Mon,  5 Jul 2021 09:34:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A163720226
+	for <lists-other-nbd@bendel.debian.org>; Tue,  6 Jul 2021 02:41:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.219 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_INVALID=0.1,
-	DKIM_SIGNED=0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H2=-0.001, TO_TOO_MANY=1]
+X-Amavis-Spam-Status: No, score=0.322 tagged_above=-10000 required=5.3
+	tests=[BAYES_05=-1.5, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_MSPIKE_H4=0.001,
+	RCVD_IN_MSPIKE_WL=0.001, TO_TOO_MANY=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id VRUOxrYeVAtI for <lists-other-nbd@bendel.debian.org>;
-	Mon,  5 Jul 2021 09:34:05 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
-X-Greylist: delayed 473 seconds by postgrey-1.36 at bendel; Mon, 05 Jul 2021 09:34:05 UTC
-Received: from mail-m17639.qiye.163.com (mail-m17639.qiye.163.com [59.111.176.39])
+	with ESMTP id Ms7DIr9h4NzE for <lists-other-nbd@bendel.debian.org>;
+	Tue,  6 Jul 2021 02:41:32 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .linux. - helo: .out2.migadu. - helo-domain: .migadu.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from out2.migadu.com (out2.migadu.com [188.165.223.204])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 60EBE201E0
-	for <nbd@other.debian.org>; Mon,  5 Jul 2021 09:34:05 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
-	b=Z6H+7hA3o20CEwBP/O/hdFZVeJf50Q6E569FxTNQqZh9Rev+kxHRD9/hWIbZG2rD27Mv6TD24+VdKEeJ1xHVfLVStFIW/kVVlaog6F9kpfUsg38z2Ig/dzxhO9pNuETywyZHe7B4ADeR2x8ekraIu85mA++djy667Wh9MZXKKak=;
-	s=default; c=relaxed/relaxed; d=vivo.com; v=1;
-	bh=AiGdhOxKK5jbqL2QYbvZgZZtHQzK5itW0Kp8ooht490=;
-	h=date:mime-version:subject:message-id:from;
-Received: from vivo-HP-ProDesk-680-G4-PCI-MT.vivo.xyz (unknown [58.251.74.232])
-	by mail-m17639.qiye.163.com (Hmail) with ESMTPA id AB2DE380510;
-	Mon,  5 Jul 2021 17:26:01 +0800 (CST)
-From: Wang Qing <wangqing@vivo.com>
-To: Josef Bacik <josef@toxicpanda.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	linux-kernel@vger.kernel.org
-Cc: Wang Qing <wangqing@vivo.com>,
-	Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
-Subject: [PATCH] block: nbd: fix order of cleaning up the queue and freeing the tagset
-Date: Mon,  5 Jul 2021 17:25:43 +0800
-Message-Id: <1625477143-18716-1-git-send-email-wangqing@vivo.com>
-X-Mailer: git-send-email 2.7.4
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
-	oVCBIfWUFZQkgaGVZNGB8fS0xCT0NOQktVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
-	hKQ1VLWQY+
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ohg6Lgw5Fj9OHBkrKAoDDhUW
-	ExwKFBNVSlVKTUlOT0xMSk1JSE9IVTMWGhIXVQwaFRwKEhUcOw0SDRRVGBQWRVlXWRILWUFZTkNV
-	SU5KVUxPVUlISVlXWQgBWUFKQ0lLNwY+
-X-HM-Tid: 0a7a75fd23ebd994kuwsab2de380510
+	by bendel.debian.org (Postfix) with ESMTPS id 730FD201A0
+	for <nbd@other.debian.org>; Tue,  6 Jul 2021 02:41:32 +0000 (UTC)
+Subject: Re: [PATCH] block: nbd: fix order of cleaning up the queue and
+ freeing the tagset
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1625539261;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=3F9gcIMfbZAZugjl+Gc1dc/E0wEPvESxt0ZR11S8uhk=;
+	b=HFf+xWY7B6EYQJc8kOMC5nz/SISJnttX8PNc6OLaDzVEF2cKHzRpwNK17mw6pDnnKITUUl
+	G1Ew1Bozw2yvSHU+JMS9I6csi/0Vk7OFoPN5uKx1a0uwuir0Sb8ms3jURtahdkQ9jkRDQY
+	9DgXZa42F1C1eajXyxfJCjwES0xrBcg=
+To: Wang Qing <wangqing@vivo.com>, Josef Bacik <josef@toxicpanda.com>,
+ Jens Axboe <axboe@kernel.dk>, Chaitanya Kulkarni
+ <chaitanya.kulkarni@wdc.com>, linux-block@vger.kernel.org,
+ nbd@other.debian.org, linux-kernel@vger.kernel.org
+References: <1625477143-18716-1-git-send-email-wangqing@vivo.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Guoqing Jiang <guoqing.jiang@linux.dev>
+Message-ID: <d32f0c7c-4cbc-d754-817b-1c3f58a3e776@linux.dev>
+Date: Tue, 6 Jul 2021 10:40:54 +0800
+MIME-Version: 1.0
+In-Reply-To: <1625477143-18716-1-git-send-email-wangqing@vivo.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-Migadu-Flow: FLOW_OUT
+X-Migadu-Auth-User: guoqing.jiang@linux.dev
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <73gXzsD1L0D.A.0-F.OYt4gB@bendel>
+Resent-Message-ID: <FgSauzLNDAM.A.DNF.Fa84gB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1217
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1218
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -79,33 +80,23 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/1625477143-18716-1-git-send-email-wangqing@vivo.com
-Resent-Date: Mon,  5 Jul 2021 09:51:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/d32f0c7c-4cbc-d754-817b-1c3f58a3e776@linux.dev
+Resent-Date: Tue,  6 Jul 2021 02:57:09 +0000 (UTC)
 
-Must release the queue before freeing the tagset.
 
-Fixes: 1c99502fae35 ("loop: use blk_mq_alloc_disk and blk_cleanup_disk")
-Reported-and-tested-by: syzbot+9ca43ff47167c0ee3466@syzkaller.appspotmail.com
-Signed-off-by: Wang Qing <wangqing@vivo.com>
-Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
----
- drivers/block/nbd.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index b7d6637..c383179
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -239,8 +239,8 @@ static void nbd_dev_remove(struct nbd_device *nbd)
- 
- 	if (disk) {
- 		del_gendisk(disk);
--		blk_mq_free_tag_set(&nbd->tag_set);
- 		blk_cleanup_disk(disk);
-+		blk_mq_free_tag_set(&nbd->tag_set);
- 	}
- 
- 	/*
--- 
-2.7.4
+On 7/5/21 5:25 PM, Wang Qing wrote:
+> Must release the queue before freeing the tagset.
+>
+> Fixes: 1c99502fae35 ("loop: use blk_mq_alloc_disk and blk_cleanup_disk")
+> Reported-and-tested-by: syzbot+9ca43ff47167c0ee3466@syzkaller.appspotmail.com
+
+Did syzbot actually test the change?
+
+> Signed-off-by: Wang Qing <wangqing@vivo.com>
+> Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+
+I don't mind you sent it quickly, but pls remove my outdated mail account.
+
+Guoqing
 
