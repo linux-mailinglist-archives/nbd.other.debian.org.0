@@ -2,80 +2,75 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 731BC3E952A
-	for <lists+nbd@lfdr.de>; Wed, 11 Aug 2021 17:57:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 467413E9C26
+	for <lists+nbd@lfdr.de>; Thu, 12 Aug 2021 04:12:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 00C9A203A3; Wed, 11 Aug 2021 15:57:39 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Aug 11 15:57:39 2021
-Old-Return-Path: <eblake@redhat.com>
+	id 88F5E2033D; Thu, 12 Aug 2021 02:12:07 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Aug 12 02:12:07 2021
+Old-Return-Path: <libaokun1@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.7 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 29AB620398
-	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Aug 2021 15:57:32 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6B53620227
+	for <lists-other-nbd@bendel.debian.org>; Thu, 12 Aug 2021 01:55:53 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-9.355 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-1.474, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.262 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MIME_CHARSET_FARAWAY=0.02,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WE-o8evSY-9G for <lists-other-nbd@bendel.debian.org>;
-	Wed, 11 Aug 2021 15:57:27 +0000 (UTC)
+	with ESMTP id r-F-aJdSk0hn for <lists-other-nbd@bendel.debian.org>;
+	Thu, 12 Aug 2021 01:55:47 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [216.205.24.124])
-	by bendel.debian.org (Postfix) with ESMTP id 5964A2038A
-	for <nbd@other.debian.org>; Wed, 11 Aug 2021 15:57:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1628697441;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=mvyHhawaRzRMFx4I0d/1C6dsA+Cy0FuldCgc1kqA1Cw=;
-	b=AjZvTjV0ybrxR2WLOBLWXutpG7zLEmgQv9sygFmo2VBa6Dz/PD/xWN3sPAOgzP/hvSGLCz
-	aBxriu+AFjzN8TGnQY4/PFYRfmVm0jBBcQg/7q6JlRXmEaBSYnTJNV4M48tz1ZJn74FcKv
-	mOpZldmOCM1bg9b9H2kLxSpQhxcQT00=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-37-O_R_k4HJOziua5LqGKLZMw-1; Wed, 11 Aug 2021 11:57:17 -0400
-X-MC-Unique: O_R_k4HJOziua5LqGKLZMw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E0C471853028;
-	Wed, 11 Aug 2021 15:57:15 +0000 (UTC)
-Received: from redhat.com (ovpn-112-138.phx2.redhat.com [10.3.112.138])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 5A57B77701;
-	Wed, 11 Aug 2021 15:57:15 +0000 (UTC)
-Date: Wed, 11 Aug 2021 10:57:13 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org, nbd@other.debian.org,
-	Hou Tao <houtao1@huawei.com>
-Subject: Re: [PATCH 6/6] nbd: reduce the nbd_index_mutex scope
-Message-ID: <20210811155713.ym4duw4va7vo3yrc@redhat.com>
-References: <20210811124428.2368491-1-hch@lst.de>
- <20210811124428.2368491-7-hch@lst.de>
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 16C3520222
+	for <nbd@other.debian.org>; Thu, 12 Aug 2021 01:55:46 +0000 (UTC)
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.55])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4GlV6m3sPQzdZWr;
+	Thu, 12 Aug 2021 09:52:00 +0800 (CST)
+Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Thu, 12 Aug 2021 09:55:34 +0800
+Received: from [10.174.177.174] (10.174.177.174) by
+ dggpeml500020.china.huawei.com (7.185.36.88) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Thu, 12 Aug 2021 09:55:33 +0800
+Subject: Re: [PATCH -next v3] nbd: add the check to prevent overflow in
+ __nbd_ioctl()
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
+	<nbd@other.debian.org>, <linux-kernel@vger.kernel.org>
+CC: <patchwork@huawei.com>, <yukuai3@huawei.com>, Hulk Robot
+	<hulkci@huawei.com>
+References: <20210804021212.990223-1-libaokun1@huawei.com>
+From: "libaokun (A)" <libaokun1@huawei.com>
+Message-ID: <572832a1-818e-1309-08f5-4a3dc2b03999@huawei.com>
+Date: Thu, 12 Aug 2021 09:55:33 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210811124428.2368491-7-hch@lst.de>
-User-Agent: NeoMutt/20210205-687-0ed190
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+In-Reply-To: <20210804021212.990223-1-libaokun1@huawei.com>
+Content-Type: text/plain; charset="gbk"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.177.174]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ dggpeml500020.china.huawei.com (7.185.36.88)
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <qhaXH9UDIeB.A.Y5B.zN_EhB@bendel>
+Resent-Message-ID: <ZNCTGqnUhFK.A.nUB.3NIFhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1271
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1272
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,26 +80,68 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210811155713.ym4duw4va7vo3yrc@redhat.com
-Resent-Date: Wed, 11 Aug 2021 15:57:39 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/572832a1-818e-1309-08f5-4a3dc2b03999@huawei.com
+Resent-Date: Thu, 12 Aug 2021 02:12:07 +0000 (UTC)
 
-On Wed, Aug 11, 2021 at 02:44:28PM +0200, Christoph Hellwig wrote:
-> nbd_index_mutex is currently held over add_disk and inside ->open, which
-> leads to lock order reversals.  Refactor the device creation code path
-> so that nbd_dev_add is called without nbd_index_mutex lock held and
-> only takes it for the IDR insertation.
-
-insertion
-
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+ÔÚ 2021/8/4 10:12, Baokun Li Ð´µÀ:
+> If user specify a large enough value of NBD blocks option, it may trigger
+> signed integer overflow which may lead to nbd->config->bytesize becomes a
+> large or small value, zero in particular.
+>
+> UBSAN: Undefined behaviour in drivers/block/nbd.c:325:31
+> signed integer overflow:
+> 1024 * 4611686155866341414 cannot be represented in type 'long long int'
+> [...]
+> Call trace:
+> [...]
+>   handle_overflow+0x188/0x1dc lib/ubsan.c:192
+>   __ubsan_handle_mul_overflow+0x34/0x44 lib/ubsan.c:213
+>   nbd_size_set drivers/block/nbd.c:325 [inline]
+>   __nbd_ioctl drivers/block/nbd.c:1342 [inline]
+>   nbd_ioctl+0x998/0xa10 drivers/block/nbd.c:1395
+>   __blkdev_driver_ioctl block/ioctl.c:311 [inline]
+> [...]
+>
+> Although it is not a big deal, still silence the UBSAN by limit
+> the input value.
+>
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Baokun Li <libaokun1@huawei.com>
 > ---
->  drivers/block/nbd.c | 55 +++++++++++++++++++++++----------------------
->  1 file changed, 28 insertions(+), 27 deletions(-)
-> 
+> V1->V2:
+> 	Use check_mul_overflow().
+> V2->V3:
+> 	The check_mul_overflow function requires the same input parameter type.
+>
+>   drivers/block/nbd.c | 8 ++++++--
+>   1 file changed, 6 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index c38317979f74..5a42b838d26c 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -1384,6 +1384,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+>   		       unsigned int cmd, unsigned long arg)
+>   {
+>   	struct nbd_config *config = nbd->config;
+> +	loff_t bytesize;
+>   
+>   	switch (cmd) {
+>   	case NBD_DISCONNECT:
+> @@ -1398,8 +1399,11 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+>   	case NBD_SET_SIZE:
+>   		return nbd_set_size(nbd, arg, config->blksize);
+>   	case NBD_SET_SIZE_BLOCKS:
+> -		return nbd_set_size(nbd, arg * config->blksize,
+> -				    config->blksize);
+> +		if (unlikely(check_mul_overflow((loff_t)arg,
+> +						config->blksize,
+> +						&bytesize)))
+> +			return -EINVAL;
+> +		return nbd_set_size(nbd, bytesize, config->blksize);
+>   	case NBD_SET_TIMEOUT:
+>   		nbd_set_cmd_timeout(nbd, arg);
+>   		return 0;
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+ping
 
