@@ -2,57 +2,57 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCA8F3F6007
-	for <lists+nbd@lfdr.de>; Tue, 24 Aug 2021 16:18:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC4763F600E
+	for <lists+nbd@lfdr.de>; Tue, 24 Aug 2021 16:19:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 38AF42055D; Tue, 24 Aug 2021 14:18:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug 24 14:18:10 2021
+	id 788D3206E9; Tue, 24 Aug 2021 14:19:04 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug 24 14:19:04 2021
 Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
 	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2 autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BC15C20724
-	for <lists-other-nbd@bendel.debian.org>; Tue, 24 Aug 2021 14:02:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A2F18205E9
+	for <lists-other-nbd@bendel.debian.org>; Tue, 24 Aug 2021 14:02:25 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.181 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.281 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WoPxplwA3IUy for <lists-other-nbd@bendel.debian.org>;
-	Tue, 24 Aug 2021 14:02:15 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	with ESMTP id 2QIYscskfH6E for <lists-other-nbd@bendel.debian.org>;
+	Tue, 24 Aug 2021 14:02:20 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5EFE720716
+	by bendel.debian.org (Postfix) with ESMTPS id C69282071F
 	for <nbd@other.debian.org>; Tue, 24 Aug 2021 14:02:15 +0000 (UTC)
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.55])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Gv9fw1YDcz8tnd;
-	Tue, 24 Aug 2021 21:58:00 +0800 (CST)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.54])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Gv9l43xPCzYt81;
+	Tue, 24 Aug 2021 22:01:36 +0800 (CST)
 Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
  15.1.2176.2; Tue, 24 Aug 2021 22:02:08 +0800
 Received: from huawei.com (10.175.127.227) by dggema762-chm.china.huawei.com
  (10.1.198.204) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 24
- Aug 2021 22:02:07 +0800
+ Aug 2021 22:02:08 +0800
 From: Yu Kuai <yukuai3@huawei.com>
 To: <axboe@kernel.dk>, <josef@toxicpanda.com>, <ming.lei@redhat.com>,
 	<bvanassche@acm.org>
 CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
 	<nbd@other.debian.org>, <yukuai3@huawei.com>, <yi.zhang@huawei.com>
-Subject: [PATCH v3 1/5] blk-mq: add a new interface to get request by tag
-Date: Tue, 24 Aug 2021 22:12:23 +0800
-Message-ID: <20210824141227.808340-2-yukuai3@huawei.com>
+Subject: [PATCH v3 2/5] nbd: convert to use blk_mq_get_rq_by_tag()
+Date: Tue, 24 Aug 2021 22:12:24 +0800
+Message-ID: <20210824141227.808340-3-yukuai3@huawei.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210824141227.808340-1-yukuai3@huawei.com>
 References: <20210824141227.808340-1-yukuai3@huawei.com>
@@ -66,9 +66,9 @@ X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <cppVtmkfMmP.A.QCG.i-PJhB@bendel>
+Resent-Message-ID: <zsYNEKSZIX.A.xXG.Y_PJhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1318
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1323
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -78,115 +78,68 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210824141227.808340-2-yukuai3@huawei.com
-Resent-Date: Tue, 24 Aug 2021 14:18:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210824141227.808340-3-yukuai3@huawei.com
+Resent-Date: Tue, 24 Aug 2021 14:19:04 +0000 (UTC)
 
-Ming Lei had fixed the request uaf while iterating tags in
-commit bd63141d585b ("blk-mq: clear stale request in tags->rq[] before
-freeing one request pool").
+blk_mq_tag_to_rq() can only ensure to return valid request in
+following situation:
 
-However, hctx->tags->rq[] will point to hctx->sched_tags->static_rq[]
-in blk_mq_get_driver_tag(), and blk_mq_tag_to_rq() can access such
-request in some drivers. Generally it won't be a problem if the
-driver can make sure to get drivet tag before calling
-blk_mq_tag_to_rq(). However, nbd will do such thing once it receive
-a reply message from server, and there isn't any mechanism to
-protect that it won't handle the reply message without a corresponding
-request message.
+1) client send request message to server first
+submit_bio
+...
+ blk_mq_get_tag
+ ...
+ blk_mq_get_driver_tag
+ ...
+ nbd_queue_rq
+  nbd_handle_cmd
+   nbd_send_cmd
 
-Thus add new interface to make sure it won't return a freed request,
-and then nbd can check if it had sent the corresponding request message.
+2) client receive respond message from server
+recv_work
+ nbd_read_stat
+  blk_mq_tag_to_rq
+
+If step 1) is missing, blk_mq_tag_to_rq() will return a stale
+request, which might be freed. Thus convert to use
+blk_mq_get_rq_by_tag() to make sure the returned request is not
+freed. However, there are still some problems if the request is
+started, and this will be fixed in later patches.
 
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- block/blk-mq-tag.c     | 37 +++++++++++++++++++++++++++++++++++++
- block/blk-mq.c         |  1 +
- block/blk-mq.h         |  1 -
- include/linux/blk-mq.h |  4 ++++
- 4 files changed, 42 insertions(+), 1 deletion(-)
+ drivers/block/nbd.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/block/blk-mq-tag.c b/block/blk-mq-tag.c
-index 86f87346232a..ddb159414661 100644
---- a/block/blk-mq-tag.c
-+++ b/block/blk-mq-tag.c
-@@ -652,3 +652,40 @@ u32 blk_mq_unique_tag(struct request *rq)
- 		(rq->tag & BLK_MQ_UNIQUE_TAG_MASK);
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 76983185a9a5..ca54a0736090 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -733,11 +733,10 @@ static struct nbd_cmd *nbd_read_stat(struct nbd_device *nbd, int index)
+ 	tag = nbd_handle_to_tag(handle);
+ 	hwq = blk_mq_unique_tag_to_hwq(tag);
+ 	if (hwq < nbd->tag_set.nr_hw_queues)
+-		req = blk_mq_tag_to_rq(nbd->tag_set.tags[hwq],
+-				       blk_mq_unique_tag_to_tag(tag));
+-	if (!req || !blk_mq_request_started(req)) {
+-		dev_err(disk_to_dev(nbd->disk), "Unexpected reply (%d) %p\n",
+-			tag, req);
++		req = blk_mq_get_rq_by_tag(nbd->tag_set.tags[hwq],
++					   blk_mq_unique_tag_to_tag(tag));
++	if (!req) {
++		dev_err(disk_to_dev(nbd->disk), "Unexpected reply %d\n", tag);
+ 		return ERR_PTR(-ENOENT);
+ 	}
+ 	trace_nbd_header_received(req, handle);
+@@ -799,6 +798,8 @@ static struct nbd_cmd *nbd_read_stat(struct nbd_device *nbd, int index)
+ 	}
+ out:
+ 	trace_nbd_payload_received(req, handle);
++	if (req)
++		blk_mq_put_rq_ref(req);
+ 	mutex_unlock(&cmd->lock);
+ 	return ret ? ERR_PTR(ret) : cmd;
  }
- EXPORT_SYMBOL(blk_mq_unique_tag);
-+
-+
-+/**
-+ * blk_mq_get_rq_by_tag - if the request that is represented by the tag is
-+ * not idle, increment it's reference and then return it. Otherwise return
-+ * NULL.
-+ *
-+ * @tags: the tags we are looking from
-+ * @tag: the tag that represents the request
-+ */
-+struct request *blk_mq_get_rq_by_tag(struct blk_mq_tags *tags,
-+				     unsigned int tag)
-+{
-+	unsigned long flags;
-+	struct request *rq;
-+
-+	/* hold lock to prevent accessing freed request by tag */
-+	spin_lock_irqsave(&tags->lock, flags);
-+	rq = blk_mq_tag_to_rq(tags, tag);
-+	if (!rq)
-+		goto out_unlock;
-+
-+	if (!refcount_inc_not_zero(&rq->ref)) {
-+		rq = NULL;
-+		goto out_unlock;
-+	}
-+
-+	if (!blk_mq_request_started(rq)) {
-+		blk_mq_put_rq_ref(rq);
-+		rq = NULL;
-+	}
-+
-+out_unlock:
-+	spin_unlock_irqrestore(&tags->lock, flags);
-+	return rq;
-+}
-+EXPORT_SYMBOL(blk_mq_get_rq_by_tag);
-diff --git a/block/blk-mq.c b/block/blk-mq.c
-index 0b3d3e2acb6a..c756a26ed92d 100644
---- a/block/blk-mq.c
-+++ b/block/blk-mq.c
-@@ -916,6 +916,7 @@ void blk_mq_put_rq_ref(struct request *rq)
- 	else if (refcount_dec_and_test(&rq->ref))
- 		__blk_mq_free_request(rq);
- }
-+EXPORT_SYMBOL_GPL(blk_mq_put_rq_ref);
- 
- static bool blk_mq_check_expired(struct blk_mq_hw_ctx *hctx,
- 		struct request *rq, void *priv, bool reserved)
-diff --git a/block/blk-mq.h b/block/blk-mq.h
-index d08779f77a26..20ef743a3ff6 100644
---- a/block/blk-mq.h
-+++ b/block/blk-mq.h
-@@ -47,7 +47,6 @@ void blk_mq_add_to_requeue_list(struct request *rq, bool at_head,
- void blk_mq_flush_busy_ctxs(struct blk_mq_hw_ctx *hctx, struct list_head *list);
- struct request *blk_mq_dequeue_from_ctx(struct blk_mq_hw_ctx *hctx,
- 					struct blk_mq_ctx *start);
--void blk_mq_put_rq_ref(struct request *rq);
- 
- /*
-  * Internal helpers for allocating/freeing the request map
-diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
-index 22215db36122..ccd8fc4a0bdb 100644
---- a/include/linux/blk-mq.h
-+++ b/include/linux/blk-mq.h
-@@ -641,4 +641,8 @@ blk_qc_t blk_mq_submit_bio(struct bio *bio);
- void blk_mq_hctx_set_fq_lock_class(struct blk_mq_hw_ctx *hctx,
- 		struct lock_class_key *key);
- 
-+struct request *blk_mq_get_rq_by_tag(struct blk_mq_tags *tags,
-+		unsigned int tag);
-+void blk_mq_put_rq_ref(struct request *rq);
-+
- #endif
 -- 
 2.31.1
 
