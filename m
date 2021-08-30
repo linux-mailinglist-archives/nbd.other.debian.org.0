@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id C55553FBDCD
-	for <lists+nbd@lfdr.de>; Mon, 30 Aug 2021 23:00:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C959B3FBE06
+	for <lists+nbd@lfdr.de>; Mon, 30 Aug 2021 23:18:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9B0A620451; Mon, 30 Aug 2021 21:00:28 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 30 21:00:28 2021
+	id 7F78F2043C; Mon, 30 Aug 2021 21:18:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug 30 21:18:09 2021
 Old-Return-Path: <mcgrof@infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: **
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=2.0 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DBBB0203D2
-	for <lists-other-nbd@bendel.debian.org>; Mon, 30 Aug 2021 20:42:53 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 77663203CA
+	for <lists-other-nbd@bendel.debian.org>; Mon, 30 Aug 2021 21:01:34 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.337 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -28,28 +28,28 @@ X-Amavis-Spam-Status: No, score=-0.337 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id h0NW6OtWuweW for <lists-other-nbd@bendel.debian.org>;
-	Mon, 30 Aug 2021 20:42:48 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
+	with ESMTP id syZ1cyFz4dtd for <lists-other-nbd@bendel.debian.org>;
+	Mon, 30 Aug 2021 21:01:32 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from bombadil.infradead.org (unknown [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 27EA920433
-	for <nbd@other.debian.org>; Mon, 30 Aug 2021 20:42:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 07E4820394
+	for <nbd@other.debian.org>; Mon, 30 Aug 2021 21:01:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
 	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=s8sN/nm91BxBuEePx1oK1Ip0xK3fNhEwWe4+zuk6ceg=; b=4v7ISjCjGyaDn8TkXmebdJ4hKv
-	PYx8skNRQRgbxfe4rRQMsvdVqvz6VsOfG9X+ROPMHVGQ4OJA5hAo5lE2j0lBIGhBMuJO1IOmg+FTW
-	Baz+6nCnSYe3ZmhnuxdkpAmokYK10l/Ya7AG5MqiR+lD1nmC8JOlQ969ZzIpbc1fur6demSAe5MMr
-	C2BQu/AgInu/iK6+i6nB3CZiOREMoI+7P48WwQrSYGGvuhP+V5R6VnsWpAN/CQqgW38xrJ61oM8JV
-	aPng4azQlAs9WpIqkFSGrCtxrK/b3zVILCxHQ9PBfuLp0BPIxBCinyxszKB9hpiE2mepEls2HYCFQ
-	4ovZX2pA==;
+	bh=YLeyIh36W9KZ0EdnGoneLXaI1P2Sf43R5mGsowkdW0g=; b=rHUGs8PC9SNCLr8+68pmjJ6j+O
+	LtaWTZh9Q5B1+nQ2hrTGPF1fcfbSR3Bc4MaZvFu5VphNn3uzQki+n35xkL0bVrh1LapvtJXCTf9x2
+	aX8wRYUgYbB46/sh+IyauBD/d0v+EUJxIYc5tPiQ59XAdDbtIw4Bl5TuloVoTzanjLZH6B4zEyu9Z
+	cJfxaSEUPDqzy73KINJtfXG3JQEC+OVcdV8NY+mlstsLgVUnda0SZf0UpWRWmmrSNYHh6ccI4qX6Q
+	jujgcYNbGhmMrYwBPve3x8mENOXlAOUdzlGIdtNTAxg2GKSXah81G/vdsWSHpKSkvVupm5BhcGwQl
+	0RhmffIA==;
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1mKo6Z-000Wv2-7h; Mon, 30 Aug 2021 20:42:07 +0000
-Date: Mon, 30 Aug 2021 13:42:07 -0700
+	id 1mKoOo-000ZII-6j; Mon, 30 Aug 2021 21:00:58 +0000
+Date: Mon, 30 Aug 2021 14:00:58 -0700
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: Christoph Hellwig <hch@infradead.org>
 Cc: axboe@kernel.dk, martin.petersen@oracle.com, jejb@linux.ibm.com,
@@ -61,25 +61,24 @@ Cc: axboe@kernel.dk, martin.petersen@oracle.com, jejb@linux.ibm.com,
 	linux-nvme@lists.infradead.org, linux-mmc@vger.kernel.org,
 	dm-devel@redhat.com, nbd@other.debian.org,
 	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 06/10] mmc/core/block: add error handling support for
- add_disk()
-Message-ID: <YS1Cn6yMbpQGFOYe@bombadil.infradead.org>
+Subject: Re: [PATCH 08/10] dm: add add_disk() error handling
+Message-ID: <YS1HCgP/XdWmMtFN@bombadil.infradead.org>
 References: <20210823202930.137278-1-mcgrof@kernel.org>
- <20210823202930.137278-7-mcgrof@kernel.org>
- <YSSN+eac2aCFXTAA@infradead.org>
- <YSkyHINtV/djFEej@bombadil.infradead.org>
- <YSnme1mfHS/HCguW@infradead.org>
+ <20210823202930.137278-9-mcgrof@kernel.org>
+ <YSSP6ujNQttGN2sZ@infradead.org>
+ <YSk1EhUIr9OjIoVv@bombadil.infradead.org>
+ <YSnnXdKLvxEY8yay@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <YSnme1mfHS/HCguW@infradead.org>
+In-Reply-To: <YSnnXdKLvxEY8yay@infradead.org>
 Sender: Luis Chamberlain <mcgrof@infradead.org>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <R5rKjc97pTF.A.e6D.sbULhB@bendel>
+Resent-Message-ID: <mu-1Aa0Z8i.A.IuF.RsULhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1357
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1358
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,27 +88,25 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YS1Cn6yMbpQGFOYe@bombadil.infradead.org
-Resent-Date: Mon, 30 Aug 2021 21:00:28 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YS1HCgP/XdWmMtFN@bombadil.infradead.org
+Resent-Date: Mon, 30 Aug 2021 21:18:09 +0000 (UTC)
 
-On Sat, Aug 28, 2021 at 08:32:11AM +0100, Christoph Hellwig wrote:
-> On Fri, Aug 27, 2021 at 11:42:36AM -0700, Luis Chamberlain wrote:
-> > > >  	if (area_type == MMC_BLK_DATA_AREA_MAIN)
-> > > >  		dev_set_drvdata(&card->dev, md);
-> > > > -	device_add_disk(md->parent, md->disk, mmc_disk_attr_groups);
-> > > > +	ret = device_add_disk(md->parent, md->disk, mmc_disk_attr_groups);
-> > > > +	if (ret)
-> > > > +		goto out;
-> > > 
-> > > This needs to do a blk_cleanup_queue and also te kfree of md.
+On Sat, Aug 28, 2021 at 08:35:57AM +0100, Christoph Hellwig wrote:
+> On Fri, Aug 27, 2021 at 11:55:14AM -0700, Luis Chamberlain wrote:
+> > > I think the add_disk should just return r.  If you look at the
+> > > callers they eventualy end up in dm_table_destroy, which does
+> > > this cleanup.
 > > 
-> > If mmc_blk_alloc_parts() fails mmc_blk_remove_req() is called which
-> > does both for us?
+> > I don't see it. What part of dm_table_destroy() does this?
 > 
-> Yes, but only for the main gendisk, and those parts already added to
-> the list which happens after device_add_disk succeeded.
+> Sorry, dm_destroy, not dm_table_destroy.  For dm_early_create it's
+> trivial as that calls both dm_table_destroy and dm_destroy in the error
+> path.  The normal table_load case is a separate ioctl, but if that
+> fails userspace needs to call the DM_DEV_REMOVE_CMD to cleanup
+> the state - similar to any other failure.
 
-Ah yes I see that now. Will fix up. The tag also needs to be cleaned up.
+I see, ok sure I'll document this on the commit log as its not so
+obvious.
 
   Luis
 
