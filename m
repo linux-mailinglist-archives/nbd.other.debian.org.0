@@ -2,80 +2,77 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CFDF3FF31C
-	for <lists+nbd@lfdr.de>; Thu,  2 Sep 2021 20:18:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6784D3FF378
+	for <lists+nbd@lfdr.de>; Thu,  2 Sep 2021 20:52:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3E64E20790; Thu,  2 Sep 2021 18:18:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  2 18:18:09 2021
+	id EEB2820686; Thu,  2 Sep 2021 18:52:38 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  2 18:52:38 2021
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DIGITS_LETTERS,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_MSPIKE_H2 autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-12.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4BA09205CE
-	for <lists-other-nbd@bendel.debian.org>; Thu,  2 Sep 2021 18:18:01 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 24AF920625
+	for <lists-other-nbd@bendel.debian.org>; Thu,  2 Sep 2021 18:52:30 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.528 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.747,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
+X-Amavis-Spam-Status: No, score=-8.528 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.747, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
 	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id bxC3uFtRXV61 for <lists-other-nbd@bendel.debian.org>;
-	Thu,  2 Sep 2021 18:17:59 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id EE99B20503
-	for <nbd@other.debian.org>; Thu,  2 Sep 2021 18:17:58 +0000 (UTC)
+	with ESMTP id tlJidciQxbls for <lists-other-nbd@bendel.debian.org>;
+	Thu,  2 Sep 2021 18:52:24 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+	by bendel.debian.org (Postfix) with ESMTP id 5F1482062F
+	for <nbd@other.debian.org>; Thu,  2 Sep 2021 18:52:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1630606674;
+	s=mimecast20190719; t=1630608738;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=cdzuLlEmIiMA5Gw2Eb9nXFFSFX73a5G6Tde6F6tiv5Q=;
-	b=WmOzAUIkg3HyQ6AR89H5vDFKcLUD5hPRd+/gp4d9sjpHVxeUtZL9dgdFg4CY8XkwTdjWja
-	JrQ9prBFKuJTb5CXjUdTIgU6kocKjTCG/cckpAM9tW/liJ1lvsviSNaes+MaOqu+66lvbE
-	bA42dYh5DYOSK/2jRBH7crTmUF3a6Ic=
+	bh=lO0jMx5w1pWgFi2pDrnyaVQYj3TxU4MrokEAbJ+IgRU=;
+	b=JB/12rHx4RgHWo1hYo0AKClh8dnwPP7Gx4YF16xT7EdLQqoW9/wfLhcCjpOyjlkehRMphp
+	gyagX+MK/d42CixXPXSAZei5jMhi4D+y74w1LQYT5TQ3GoBC8SCP0UmMRmBzC+DL3F0Wgw
+	N4IW1Xr7AiOvyBfXL58G+C/umvjWsC0=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-570-Nfq-aIU7N4aXDhcbZk5aLQ-1; Thu, 02 Sep 2021 14:17:47 -0400
-X-MC-Unique: Nfq-aIU7N4aXDhcbZk5aLQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
+ us-mta-101-aG6Nz5ATPUGAl5gIburVKA-1; Thu, 02 Sep 2021 14:52:08 -0400
+X-MC-Unique: aG6Nz5ATPUGAl5gIburVKA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0F4E11006C92;
-	Thu,  2 Sep 2021 18:17:47 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D183B1006C96
+	for <nbd@other.debian.org>; Thu,  2 Sep 2021 18:52:07 +0000 (UTC)
 Received: from blue.redhat.com (ovpn-113-81.phx2.redhat.com [10.3.113.81])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C52126B541;
-	Thu,  2 Sep 2021 18:17:46 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 9EF7F5C23A
+	for <nbd@other.debian.org>; Thu,  2 Sep 2021 18:52:07 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: nbd@other.debian.org
-Cc: Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH] maint: Nicer warning if autoconf-archive not available
-Date: Thu,  2 Sep 2021 13:17:43 -0500
-Message-Id: <20210902181743.935724-1-eblake@redhat.com>
+Subject: [PATCH] server: Avoid deprecated g_memdup
+Date: Thu,  2 Sep 2021 13:52:07 -0500
+Message-Id: <20210902185207.959912-1-eblake@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <iPTzRBwYdEL.A.JOF.hVRMhB@bendel>
+Resent-Message-ID: <1_1HqQrgxOH.A.0yB.21RMhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1360
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1361
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,48 +82,85 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210902181743.935724-1-eblake@redhat.com
-Resent-Date: Thu,  2 Sep 2021 18:18:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210902185207.959912-1-eblake@redhat.com
+Resent-Date: Thu,  2 Sep 2021 18:52:38 +0000 (UTC)
 
-Prior to this patch, failure to install autoconf-archives prior to
-running 'autoreconf' produces the confusing:
+glib now recommends that we use g_memdup2() to avoid accidental 32-bit
+truncation bugs on platforms where g_size is larger than guint:
 
-Makefile.am: error: Yacc source seen but 'YACC' is undefined
-Makefile.am:   The usual way to define 'YACC' is to add 'AC_PROG_YACC'
-Makefile.am:   to 'configure.ac' and run 'autoconf' again.
+https://discourse.gnome.org/t/port-your-module-from-g-memdup-to-g-memdup2-now/5538
 
-With this change, the error changes to:
+and failure to do so causes noisy compilation due to deprecation
+warnings with glib 2.68:
 
-configure.ac:117: error: possibly undefined macro: AX_PROG_BISON
-      If this token and others are legitimate, please use m4_pattern_allow.
-      See the Autoconf documentation.
+nbd-server.c: In function ‘parse_cfile’:
+nbd-server.c:1010:25: warning: ‘g_memdup’ is deprecated: Use 'g_memdup2' instead [-Wdeprecated-declarations]
+ 1010 |                         SERVER *srv = serve_inc_ref(g_memdup(&s, sizeof(SERVER)));
+      |                         ^~~~~~
+In file included from /usr/include/glib-2.0/glib.h:82,
+                 from nbd-server.c:117:
+/usr/include/glib-2.0/glib/gstrfuncs.h:257:23: note: declared here
+  257 | gpointer              g_memdup         (gconstpointer mem,
+      |                       ^~~~~~~~
 
-which is still not a direct finger pointing to missing
-autoconf-archives, but at least provides more relevant hits in a
-google search for how to resolve it (compared to recommended remedies
-for the first message).
-
-Reported-by: Luis Chamberlain <mcgrof@kernel.org>
-Signed-off-by: Eric Blake <eblake@redhat.com>
+Of course, we still want to build on platforms with older glib that
+lack g_memdup2().  Thankfully, it's easy enough to audit that all our
+current uses of g_memdup() do not overflow 32 bits.
 ---
- configure.ac | 4 ++++
- 1 file changed, 4 insertions(+)
+ configure.ac | 5 +++++
+ nbd-server.c | 7 ++++++-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index c71e7c7..48ba507 100644
+index 48ba507..9504899 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -107,6 +107,10 @@ AC_ARG_ENABLE(
-   [ENABLE_GZNBD=no]
- )
+@@ -292,7 +292,9 @@ AC_CHECK_HEADERS([arpa/inet.h fcntl.h netdb.h netinet/in.h sys/ioctl.h sys/socke
+ PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.26.0 gthread-2.0 >= 2.26.0], [HAVE_GLIB=yes], AC_MSG_ERROR([Missing glib]))
 
-+dnl We require autoconf-archive to be installed. Warn about undefined macros
-+dnl with a uniform message if autoconf could not find those macros.
-+m4_pattern_forbid([^AX_])
+ my_save_cflags="$CFLAGS"
++my_save_libs="$LIBS"
+ CFLAGS="-Wdeprecated-declarations -Werror $GLIB_CFLAGS"
++LIBS="$GLIB_LIBS"
+ AC_MSG_CHECKING([if we are using an old glib 2.0 library])
+ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+ 	[[#include <glib.h>]],
+@@ -306,7 +308,10 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+ 		AC_DEFINE(HAVE_OLD_GLIB, 0, [Define to 1 if you have an old glib library])
+ 	]
+ )
++dnl g_memdup2 added in glib-2.68
++AC_CHECK_FUNCS([g_memdup2])
+ CFLAGS="$my_save_cflags"
++LIBS="$my_save_libs"
+
+ AC_MSG_CHECKING([whether _BSD_SOURCE needs to be defined for DT_* macros])
+ AC_PREPROC_IFELSE(
+diff --git a/nbd-server.c b/nbd-server.c
+index 0b32bcd..1eff99d 100644
+--- a/nbd-server.c
++++ b/nbd-server.c
+@@ -154,6 +154,11 @@
+ #include <gnutls/x509.h>
+ #endif
+
++#ifndef HAVE_G_MEMDUP2
++/* Our uses of g_memdup2 below are safe from g_memdup's 32-bit overflow */
++#define g_memdup2 g_memdup
++#endif
 +
- AC_PROG_CC_C99
- AC_PROG_CPP
- AC_PROG_INSTALL
+ /** Where our config file actually is */
+ gchar* config_file_pos;
+
+@@ -1007,7 +1012,7 @@ GArray* parse_cfile(gchar* f, struct generic_conf *const genconf, bool expect_ge
+ 		if(i>0 || !expect_generic) {
+ 			s.servename = groups[i];
+
+-			SERVER *srv = serve_inc_ref(g_memdup(&s, sizeof(SERVER)));
++			SERVER *srv = serve_inc_ref(g_memdup2(&s, sizeof(SERVER)));
+ 			g_array_append_val(retval, srv);
+ 		}
+ #ifndef WITH_SDP
 -- 
 2.31.1
 
