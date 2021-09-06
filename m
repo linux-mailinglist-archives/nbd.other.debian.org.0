@@ -2,73 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8E00400B57
-	for <lists+nbd@lfdr.de>; Sat,  4 Sep 2021 14:30:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DA074014D2
+	for <lists+nbd@lfdr.de>; Mon,  6 Sep 2021 03:42:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 76CB320D89; Sat,  4 Sep 2021 12:30:44 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Sep  4 12:30:44 2021
-Old-Return-Path: <houtao1@huawei.com>
+	id 35D002128A; Mon,  6 Sep 2021 01:42:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep  6 01:42:09 2021
+Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
-	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-10.7 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 64A5220453
-	for <lists-other-nbd@bendel.debian.org>; Sat,  4 Sep 2021 12:12:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id D038F21289
+	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Sep 2021 01:26:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.158 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-12.927 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.747,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 15j3jH8Ofprr for <lists-other-nbd@bendel.debian.org>;
-	Sat,  4 Sep 2021 12:12:42 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga08-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+	with ESMTP id EffhYSxPAnBF for <lists-other-nbd@bendel.debian.org>;
+	Mon,  6 Sep 2021 01:26:00 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 343 seconds by postgrey-1.36 at bendel; Mon, 06 Sep 2021 01:26:00 UTC
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 48EDF20D3F
-	for <nbd@other.debian.org>; Sat,  4 Sep 2021 12:12:40 +0000 (UTC)
-Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.54])
-	by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4H1tnK4hCwz1DDrN;
-	Sat,  4 Sep 2021 20:11:49 +0800 (CST)
-Received: from dggpeml500025.china.huawei.com (7.185.36.35) by
- dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Sat, 4 Sep 2021 20:12:35 +0800
-Received: from huawei.com (10.175.124.27) by dggpeml500025.china.huawei.com
- (7.185.36.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Sat, 4 Sep 2021
- 20:12:35 +0800
-From: Hou Tao <houtao1@huawei.com>
-To: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
-	<linux-block@vger.kernel.org>
-CC: <nbd@other.debian.org>, <hch@lst.de>, <houtao1@huawei.com>
-Subject: [PATCH v2 3/3] nbd: fix race between nbd_alloc_config() and module removal
-Date: Sat, 4 Sep 2021 20:25:19 +0800
-Message-ID: <20210904122519.1963983-4-houtao1@huawei.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210904122519.1963983-1-houtao1@huawei.com>
-References: <20210904122519.1963983-1-houtao1@huawei.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 9DD5621200
+	for <nbd@other.debian.org>; Mon,  6 Sep 2021 01:26:00 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E12CA6108E;
+	Mon,  6 Sep 2021 01:20:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1630891213;
+	bh=mABDKOQrNOYmohIEZGbu+NdedYH3RHu/VM8TY9sq2bI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=aGXpONY9NGBiLz4IqcKjkJsOMnhBSlomI8IcdCMPvGobasPM8d4/IJNOVg9dHfaUC
+	 kGHguuB28U5Xvxu21j8HbktJ+nk4RdEkArtylbknJQLMI3hBbRCcl5XU8a0i5XEiF4
+	 j8ZFiimTJUjT+gYeaH430psDGWyJJQq+SBhPH+K4Mad1ehlZZgpbsTvcjnk9E+8It/
+	 baYl1p/h2Kudkr7mmL0zK5xiKRYFhOpWG6ip+VWk5spCz4inWawRuZG793aU6Lc4A6
+	 i44Ue8Z7N+M010EnR29xz2DVtwwohIQKV9AAiRmNrMYHXFM3/9K+W2A13aRGhtrWjV
+	 VWdlHMbLomwuw==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Baokun Li <libaokun1@huawei.com>,
+	Hulk Robot <hulkci@huawei.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Sasha Levin <sashal@kernel.org>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: [PATCH AUTOSEL 5.14 18/47] nbd: add the check to prevent overflow in __nbd_ioctl()
+Date: Sun,  5 Sep 2021 21:19:22 -0400
+Message-Id: <20210906011951.928679-18-sashal@kernel.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210906011951.928679-1-sashal@kernel.org>
+References: <20210906011951.928679-1-sashal@kernel.org>
 MIME-Version: 1.0
+X-stable: review
+X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.124.27]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpeml500025.china.huawei.com (7.185.36.35)
-X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nvNdHB7paTB.A.6cD.0b2MhB@bendel>
+Resent-Message-ID: <YFovr29SnyP.A.Sa.xHXNhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1377
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1378
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -78,116 +85,69 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210904122519.1963983-4-houtao1@huawei.com
-Resent-Date: Sat,  4 Sep 2021 12:30:44 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210906011951.928679-18-sashal@kernel.org
+Resent-Date: Mon,  6 Sep 2021 01:42:09 +0000 (UTC)
 
-When nbd module is being removing, nbd_alloc_config() may be
-called concurrently by nbd_genl_connect(), although try_module_get()
-will return false, but nbd_alloc_config() doesn't handle it.
+From: Baokun Li <libaokun1@huawei.com>
 
-The race may lead to the leak of nbd_config and its related
-resources (e.g, recv_workq) and oops in nbd_read_stat() due
-to the unload of nbd module as shown below:
+[ Upstream commit fad7cd3310db3099f95dd34312c77740fbc455e5 ]
 
-  BUG: kernel NULL pointer dereference, address: 0000000000000040
-  Oops: 0000 [#1] SMP PTI
-  CPU: 5 PID: 13840 Comm: kworker/u17:33 Not tainted 5.14.0+ #1
-  Hardware name: QEMU Standard PC (i440FX + PIIX, 1996)
-  Workqueue: knbd16-recv recv_work [nbd]
-  RIP: 0010:nbd_read_stat.cold+0x130/0x1a4 [nbd]
-  Call Trace:
-   recv_work+0x3b/0xb0 [nbd]
-   process_one_work+0x1ed/0x390
-   worker_thread+0x4a/0x3d0
-   kthread+0x12a/0x150
-   ret_from_fork+0x22/0x30
+If user specify a large enough value of NBD blocks option, it may trigger
+signed integer overflow which may lead to nbd->config->bytesize becomes a
+large or small value, zero in particular.
 
-Fixing it by checking the return value of try_module_get()
-in nbd_alloc_config(). As nbd_alloc_config() may return ERR_PTR(-ENODEV),
-assign nbd->config only when nbd_alloc_config() succeeds to ensure
-the value of nbd->config is binary (valid or NULL).
+UBSAN: Undefined behaviour in drivers/block/nbd.c:325:31
+signed integer overflow:
+1024 * 4611686155866341414 cannot be represented in type 'long long int'
+[...]
+Call trace:
+[...]
+ handle_overflow+0x188/0x1dc lib/ubsan.c:192
+ __ubsan_handle_mul_overflow+0x34/0x44 lib/ubsan.c:213
+ nbd_size_set drivers/block/nbd.c:325 [inline]
+ __nbd_ioctl drivers/block/nbd.c:1342 [inline]
+ nbd_ioctl+0x998/0xa10 drivers/block/nbd.c:1395
+ __blkdev_driver_ioctl block/ioctl.c:311 [inline]
+[...]
 
-Also adding a debug message to check the reference counter
-of nbd_config during module removal.
+Although it is not a big deal, still silence the UBSAN by limit
+the input value.
 
-Signed-off-by: Hou Tao <houtao1@huawei.com>
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Baokun Li <libaokun1@huawei.com>
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
+Link: https://lore.kernel.org/r/20210804021212.990223-1-libaokun1@huawei.com
+[axboe: dropped unlikely()]
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/block/nbd.c | 28 +++++++++++++++++++---------
- 1 file changed, 19 insertions(+), 9 deletions(-)
+ drivers/block/nbd.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index cedd3648e1a7..fa6c069b79dc 100644
+index 19f5d5a8b16a..acf3f85bf3c7 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1473,15 +1473,20 @@ static struct nbd_config *nbd_alloc_config(void)
+@@ -1388,6 +1388,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+ 		       unsigned int cmd, unsigned long arg)
  {
- 	struct nbd_config *config;
+ 	struct nbd_config *config = nbd->config;
++	loff_t bytesize;
  
-+	if (!try_module_get(THIS_MODULE))
-+		return ERR_PTR(-ENODEV);
-+
- 	config = kzalloc(sizeof(struct nbd_config), GFP_NOFS);
--	if (!config)
--		return NULL;
-+	if (!config) {
-+		module_put(THIS_MODULE);
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
- 	atomic_set(&config->recv_threads, 0);
- 	init_waitqueue_head(&config->recv_wq);
- 	init_waitqueue_head(&config->conn_wait);
- 	config->blksize = NBD_DEF_BLKSIZE;
- 	atomic_set(&config->live_connections, 0);
--	try_module_get(THIS_MODULE);
- 	return config;
- }
- 
-@@ -1508,12 +1513,13 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
- 			mutex_unlock(&nbd->config_lock);
- 			goto out;
- 		}
--		config = nbd->config = nbd_alloc_config();
--		if (!config) {
--			ret = -ENOMEM;
-+		config = nbd_alloc_config();
-+		if (IS_ERR(config)) {
-+			ret = PTR_ERR(config);
- 			mutex_unlock(&nbd->config_lock);
- 			goto out;
- 		}
-+		nbd->config = config;
- 		refcount_set(&nbd->config_refs, 1);
- 		refcount_inc(&nbd->refs);
- 		mutex_unlock(&nbd->config_lock);
-@@ -1905,13 +1911,14 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 		nbd_put(nbd);
- 		return -EINVAL;
- 	}
--	config = nbd->config = nbd_alloc_config();
--	if (!nbd->config) {
-+	config = nbd_alloc_config();
-+	if (IS_ERR(config)) {
- 		mutex_unlock(&nbd->config_lock);
- 		nbd_put(nbd);
- 		pr_err("nbd: couldn't allocate config\n");
--		return -ENOMEM;
-+		return PTR_ERR(config);
- 	}
-+	nbd->config = config;
- 	refcount_set(&nbd->config_refs, 1);
- 	set_bit(NBD_RT_BOUND, &config->runtime_flags);
- 
-@@ -2486,6 +2493,9 @@ static void __exit nbd_cleanup(void)
- 	while (!list_empty(&del_list)) {
- 		nbd = list_first_entry(&del_list, struct nbd_device, list);
- 		list_del_init(&nbd->list);
-+		if (refcount_read(&nbd->config_refs))
-+			pr_err("possibly leaking nbd_config (ref %d)\n",
-+			       refcount_read(&nbd->config_refs));
- 		if (refcount_read(&nbd->refs) != 1)
- 			pr_err("possibly leaking a device\n");
- 		nbd_put(nbd);
+ 	switch (cmd) {
+ 	case NBD_DISCONNECT:
+@@ -1402,8 +1403,9 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+ 	case NBD_SET_SIZE:
+ 		return nbd_set_size(nbd, arg, config->blksize);
+ 	case NBD_SET_SIZE_BLOCKS:
+-		return nbd_set_size(nbd, arg * config->blksize,
+-				    config->blksize);
++		if (check_mul_overflow((loff_t)arg, config->blksize, &bytesize))
++			return -EINVAL;
++		return nbd_set_size(nbd, bytesize, config->blksize);
+ 	case NBD_SET_TIMEOUT:
+ 		nbd_set_cmd_timeout(nbd, arg);
+ 		return 0;
 -- 
-2.29.2
+2.30.2
 
