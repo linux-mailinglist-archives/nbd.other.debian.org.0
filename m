@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DA074014D2
-	for <lists+nbd@lfdr.de>; Mon,  6 Sep 2021 03:42:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46D834014D7
+	for <lists+nbd@lfdr.de>; Mon,  6 Sep 2021 03:48:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 35D002128A; Mon,  6 Sep 2021 01:42:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep  6 01:42:09 2021
+	id E283221295; Mon,  6 Sep 2021 01:48:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep  6 01:48:09 2021
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-10.7 required=4.0 tests=DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D038F21289
-	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Sep 2021 01:26:05 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0BF7F21289
+	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Sep 2021 01:31:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-12.927 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.747,
@@ -29,27 +29,26 @@ X-Amavis-Spam-Status: No, score=-12.927 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id EffhYSxPAnBF for <lists-other-nbd@bendel.debian.org>;
-	Mon,  6 Sep 2021 01:26:00 +0000 (UTC)
+	with ESMTP id pGQrsOy-UlTT for <lists-other-nbd@bendel.debian.org>;
+	Mon,  6 Sep 2021 01:31:00 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 343 seconds by postgrey-1.36 at bendel; Mon, 06 Sep 2021 01:26:00 UTC
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 9DD5621200
-	for <nbd@other.debian.org>; Mon,  6 Sep 2021 01:26:00 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E12CA6108E;
-	Mon,  6 Sep 2021 01:20:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 936C021261
+	for <nbd@other.debian.org>; Mon,  6 Sep 2021 01:31:00 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 04772610FF;
+	Mon,  6 Sep 2021 01:21:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1630891213;
-	bh=mABDKOQrNOYmohIEZGbu+NdedYH3RHu/VM8TY9sq2bI=;
+	s=k20201202; t=1630891275;
+	bh=2N0noRVgp/X4pfLYlCFS6gIxkh55PkKkiJe25n3MQaQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=aGXpONY9NGBiLz4IqcKjkJsOMnhBSlomI8IcdCMPvGobasPM8d4/IJNOVg9dHfaUC
-	 kGHguuB28U5Xvxu21j8HbktJ+nk4RdEkArtylbknJQLMI3hBbRCcl5XU8a0i5XEiF4
-	 j8ZFiimTJUjT+gYeaH430psDGWyJJQq+SBhPH+K4Mad1ehlZZgpbsTvcjnk9E+8It/
-	 baYl1p/h2Kudkr7mmL0zK5xiKRYFhOpWG6ip+VWk5spCz4inWawRuZG793aU6Lc4A6
-	 i44Ue8Z7N+M010EnR29xz2DVtwwohIQKV9AAiRmNrMYHXFM3/9K+W2A13aRGhtrWjV
-	 VWdlHMbLomwuw==
+	b=V9+GWw8c2i0M8IfmsIvOZoF3R7o2jt0xK1ga02WLeMGiW31FWzbig/KB5MoV2svvf
+	 K2njAdDCnDAm+T1PEK/vm0Z7Wt6zH0VK/66TKAmRAe4iKuFouRPV19pPrl02lUiBpD
+	 sljFMDDlKvGbELRadzrsgrV30s0NtX8Lr6XOcouidHYvDaO6s9Kh6ZHJ/gIIAiEiiI
+	 kysFoESVHdHL138T80clvQmBU11dIBclDEkjXwGJZbOBTBr/bexq0NT/Di0LKJRBky
+	 oVsGVh3WFkbR42QDBN/3stwq1MoWBdQ+jTrh5iTAVbRa7DBPe14sCymcPSrLUs54P7
+	 +rQ+/LUmRRpHg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -60,12 +59,12 @@ Cc: Baokun Li <libaokun1@huawei.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 5.14 18/47] nbd: add the check to prevent overflow in __nbd_ioctl()
-Date: Sun,  5 Sep 2021 21:19:22 -0400
-Message-Id: <20210906011951.928679-18-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.13 18/46] nbd: add the check to prevent overflow in __nbd_ioctl()
+Date: Sun,  5 Sep 2021 21:20:23 -0400
+Message-Id: <20210906012052.929174-18-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210906011951.928679-1-sashal@kernel.org>
-References: <20210906011951.928679-1-sashal@kernel.org>
+In-Reply-To: <20210906012052.929174-1-sashal@kernel.org>
+References: <20210906012052.929174-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -73,9 +72,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <YFovr29SnyP.A.Sa.xHXNhB@bendel>
+Resent-Message-ID: <EiYPyGT5ylF.A.TFD.ZNXNhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1378
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1379
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,8 +84,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210906011951.928679-18-sashal@kernel.org
-Resent-Date: Mon,  6 Sep 2021 01:42:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210906012052.929174-18-sashal@kernel.org
+Resent-Date: Mon,  6 Sep 2021 01:48:09 +0000 (UTC)
 
 From: Baokun Li <libaokun1@huawei.com>
 
@@ -125,10 +124,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 19f5d5a8b16a..acf3f85bf3c7 100644
+index 1061894a55df..7384058c24d0 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1388,6 +1388,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+@@ -1369,6 +1369,7 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
  		       unsigned int cmd, unsigned long arg)
  {
  	struct nbd_config *config = nbd->config;
@@ -136,7 +135,7 @@ index 19f5d5a8b16a..acf3f85bf3c7 100644
  
  	switch (cmd) {
  	case NBD_DISCONNECT:
-@@ -1402,8 +1403,9 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+@@ -1383,8 +1384,9 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
  	case NBD_SET_SIZE:
  		return nbd_set_size(nbd, arg, config->blksize);
  	case NBD_SET_SIZE_BLOCKS:
