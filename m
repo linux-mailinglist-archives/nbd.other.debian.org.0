@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D4DC40166A
-	for <lists+nbd@lfdr.de>; Mon,  6 Sep 2021 08:36:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B57740166B
+	for <lists+nbd@lfdr.de>; Mon,  6 Sep 2021 08:36:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id EBDAF2124A; Mon,  6 Sep 2021 06:36:19 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep  6 06:36:19 2021
+	id D62A721250; Mon,  6 Sep 2021 06:36:30 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep  6 06:36:30 2021
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=0.7 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 64CBB212E8
-	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Sep 2021 06:19:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 36EF7212EA
+	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Sep 2021 06:20:09 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=1.315 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -28,50 +28,50 @@ X-Amavis-Spam-Status: No, score=1.315 tagged_above=-10000 required=5.3
 	TO_TOO_MANY=1, TO_WAY_TOO_MANY=3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id k6ADSm4U28xU for <lists-other-nbd@bendel.debian.org>;
-	Mon,  6 Sep 2021 06:19:32 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .suse. - helo: .smtp-out1.suse. - helo-domain: .suse.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	with ESMTP id 9NEU1RnV4_cf for <lists-other-nbd@bendel.debian.org>;
+	Mon,  6 Sep 2021 06:20:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D4435212E3
-	for <nbd@other.debian.org>; Mon,  6 Sep 2021 06:19:32 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 13428212E8
+	for <nbd@other.debian.org>; Mon,  6 Sep 2021 06:20:04 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 072DC220F3;
-	Mon,  6 Sep 2021 06:19:30 +0000 (UTC)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id E9D1220081;
+	Mon,  6 Sep 2021 06:20:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1630909170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1630909201; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ey7lpaW6fvpR3/j8rd1yAmZ1YpH4O35hvNfgLdJlM6Y=;
-	b=DixJoh3XE0j7jlmKZxZwgKeRN5Oo9Jl30NJ1a2Wjhj5G4w3lcYs0djv7wOJquiwI9YjW+A
-	AyHAk7Ap+WkAzlUK8GwYGZtBlEDKQ1t7khU/Xnms6NPQCa8GBdTOx+AGWPolkexCOG5Vd9
-	Z3FLqfdGBF2MLBE1jxfuUdD7xpNgOT0=
+	bh=WnsfEm24FiY97oUuBVkQpzIL/MgLM8SuyHc8JYLAsNY=;
+	b=G6amEv4Aay3hAY1inpj2Md8h3+uttQfDibLAnOOGzrFy7lJFDkhx0sztzAGTNR4GVkCW3K
+	F+pHfwSAtaz0uYFnubD+DSFHs9IZ0gkxYd+inQcBdPn4wIAycTdrdrccikfoGrKbpQwYZZ
+	LJHWr1hWGeoIjmdFG8aMhkRuEhvPVkA=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1630909170;
+	s=susede2_ed25519; t=1630909201;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ey7lpaW6fvpR3/j8rd1yAmZ1YpH4O35hvNfgLdJlM6Y=;
-	b=1gncyHDzT+otaETlCzLKqGBKWt9Gy7JhU4EqqlvPduGwM2DIDR1MwtRYJF5c2T2h8RVei8
-	ky/EK3RdKqL5+qDQ==
+	bh=WnsfEm24FiY97oUuBVkQpzIL/MgLM8SuyHc8JYLAsNY=;
+	b=oO5/PbjMxF/qs8tYulSXPGwu3sVi3uFKYQ3zil56qMsvk3vDb3FfUXHhz6Js3n0SXvqvlr
+	rHuRJBcLLrpd09Ag==
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 5FEBE13299;
-	Mon,  6 Sep 2021 06:19:28 +0000 (UTC)
+	by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 1A4BB13299;
+	Mon,  6 Sep 2021 06:20:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
 	by imap1.suse-dmz.suse.de with ESMTPSA
-	id n4IVFfCyNWG0TwAAGKfGzw
-	(envelope-from <hare@suse.de>); Mon, 06 Sep 2021 06:19:28 +0000
-Subject: Re: [PATCH v3 7/8] loop: add error handling support for add_disk()
+	id u9eHAxGzNWHKTwAAGKfGzw
+	(envelope-from <hare@suse.de>); Mon, 06 Sep 2021 06:20:01 +0000
+Subject: Re: [PATCH v3 8/8] nbd: add error handling support for add_disk()
 To: Luis Chamberlain <mcgrof@kernel.org>, axboe@kernel.dk,
  martin.petersen@oracle.com, jejb@linux.ibm.com, kbusch@kernel.org,
  sagi@grimberg.me, adrian.hunter@intel.com, beanhuo@micron.com,
@@ -83,23 +83,23 @@ Cc: hch@infradead.org, bvanassche@acm.org, ming.lei@redhat.com,
  linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
  Christoph Hellwig <hch@lst.de>
 References: <20210830212538.148729-1-mcgrof@kernel.org>
- <20210830212538.148729-8-mcgrof@kernel.org>
+ <20210830212538.148729-9-mcgrof@kernel.org>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <ab8045fd-5b30-1a4a-3d75-6eaa4a42894a@suse.de>
-Date: Mon, 6 Sep 2021 08:19:32 +0200
+Message-ID: <bd2ed860-89c5-36d8-3bf6-29c677d70c40@suse.de>
+Date: Mon, 6 Sep 2021 08:20:05 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <20210830212538.148729-8-mcgrof@kernel.org>
+In-Reply-To: <20210830212538.148729-9-mcgrof@kernel.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <DvtMgNBleSI.A.wIF.jbbNhB@bendel>
+Resent-Message-ID: <NYu7aztCFxK.A.ILF.ubbNhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1381
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1382
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -109,8 +109,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ab8045fd-5b30-1a4a-3d75-6eaa4a42894a@suse.de
-Resent-Date: Mon,  6 Sep 2021 06:36:19 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/bd2ed860-89c5-36d8-3bf6-29c677d70c40@suse.de
+Resent-Date: Mon,  6 Sep 2021 06:36:30 +0000 (UTC)
 
 On 8/30/21 11:25 PM, Luis Chamberlain wrote:
 > We never checked for errors on add_disk() as this function
@@ -120,8 +120,8 @@ On 8/30/21 11:25 PM, Luis Chamberlain wrote:
 > Reviewed-by: Christoph Hellwig <hch@lst.de>
 > Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 > ---
->   drivers/block/loop.c | 9 ++++++++-
->   1 file changed, 8 insertions(+), 1 deletion(-)
+>   drivers/block/nbd.c | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
