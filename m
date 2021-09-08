@@ -1,81 +1,80 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73B7B4039AF
-	for <lists+nbd@lfdr.de>; Wed,  8 Sep 2021 14:24:42 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 477A6403A7E
+	for <lists+nbd@lfdr.de>; Wed,  8 Sep 2021 15:21:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 172A920877; Wed,  8 Sep 2021 12:24:42 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  8 12:24:42 2021
-Old-Return-Path: <w@uter.be>
+	id CFF12207EF; Wed,  8 Sep 2021 13:21:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  8 13:21:09 2021
+Old-Return-Path: <houtao1@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-3.2 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5AF8220831
-	for <lists-other-nbd@bendel.debian.org>; Wed,  8 Sep 2021 12:24:33 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6453F20802
+	for <lists-other-nbd@bendel.debian.org>; Wed,  8 Sep 2021 13:03:40 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.08 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.086 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.305, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id lpEhEPJFy6oN for <lists-other-nbd@bendel.debian.org>;
-	Wed,  8 Sep 2021 12:24:24 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	with ESMTP id 9A7s5Y8pRNtO for <lists-other-nbd@bendel.debian.org>;
+	Wed,  8 Sep 2021 13:03:34 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 044802081A
-	for <nbd@other.debian.org>; Wed,  8 Sep 2021 12:24:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=tN+x6ieH1oAnvbZ5AbIV4XrNONI8s450tShPRkQojQg=; b=miT7SNwqE73rdCEUyMGI0yP8Ff
-	mzxuptFFRl/Orgz1VGemXj1BIIX6dNqDPk+mUeM3dMhi61xxpTrlXUG8a5sHBCy1I1MNGTkFKaWF+
-	n8BwzEdVeMm+BeW0diKpfT91K6QxGBuESRY2MFPDErFdGGdhoCDDNNcm5C227uN+fuDlbKX80kxgV
-	NgptE8iTltk0qpFyBR+KNU1ArgoPME/bPDT/tTackyM0hb4PYBBNbnW4RgruyQtf9ZNmwpdmWeW3P
-	9+pTSZD3gTj+0uzY7A7wra7+pJNDJnFwlyvsc6U4gvggbR8VpdEeUTFmVXzdPD8LijhAyroQLQilQ
-	hJPv4GuQ==;
-Received: from [102.39.151.73] (helo=pc181009)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <w@uter.be>)
-	id 1mNwcj-00Gybb-3w; Wed, 08 Sep 2021 14:24:17 +0200
-Received: from wouter by pc181009 with local (Exim 4.95-RC2)
-	(envelope-from <w@uter.be>)
-	id 1mNwcZ-0002Bs-Cz;
-	Wed, 08 Sep 2021 14:24:07 +0200
-Date: Wed, 8 Sep 2021 14:24:07 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Eric Blake <eblake@redhat.com>
-Cc: Josh Triplett <josh@joshtriplett.org>, nbd@other.debian.org
-Subject: Re: Linux kernel NBD driver support for structured replies?
-Message-ID: <YTirZ88kN13gqqfp@pc181009.grep.be>
-References: <YTfXZDs4YHrxHYJe@localhost>
- <20210907213513.aq5qxd3d6v3ss676@redhat.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 6B7A9207F6
+	for <nbd@other.debian.org>; Wed,  8 Sep 2021 13:03:34 +0000 (UTC)
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.56])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4H4Mf43gTQz8yLR;
+	Wed,  8 Sep 2021 20:59:08 +0800 (CST)
+Received: from dggpeml500025.china.huawei.com (7.185.36.35) by
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.8; Wed, 8 Sep 2021 21:03:29 +0800
+Received: from [10.174.176.117] (10.174.176.117) by
+ dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.8; Wed, 8 Sep 2021 21:03:28 +0800
+Subject: Re: [PATCH v2 3/3] nbd: fix race between nbd_alloc_config() and
+ module removal
+From: Hou Tao <houtao1@huawei.com>
+To: Christoph Hellwig <hch@lst.de>
+CC: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
+	<linux-block@vger.kernel.org>, <nbd@other.debian.org>
+References: <20210904122519.1963983-1-houtao1@huawei.com>
+ <20210904122519.1963983-4-houtao1@huawei.com> <20210906093051.GC30790@lst.de>
+ <ce3e1ea8-ebda-4372-42ce-e8a4b2d12514@huawei.com>
+ <20210906102521.GA3082@lst.de>
+ <730dae5e-5af8-3554-18bf-e22ff576e2b1@huawei.com>
+Message-ID: <319b5ef6-3d73-8795-e252-3c35fbe1b5bc@huawei.com>
+Date: Wed, 8 Sep 2021 21:03:28 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210907213513.aq5qxd3d6v3ss676@redhat.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
+In-Reply-To: <730dae5e-5af8-3554-18bf-e22ff576e2b1@huawei.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Originating-IP: [10.174.176.117]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggpeml500025.china.huawei.com (7.185.36.35)
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <D0JYQL2rHJF.A.RdE.KuKOhB@bendel>
+Resent-Message-ID: <IcNzOm8Y9CK.A.Uv.FjLOhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1417
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1418
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,49 +84,121 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YTirZ88kN13gqqfp@pc181009.grep.be
-Resent-Date: Wed,  8 Sep 2021 12:24:42 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/319b5ef6-3d73-8795-e252-3c35fbe1b5bc@huawei.com
+Resent-Date: Wed,  8 Sep 2021 13:21:09 +0000 (UTC)
 
-On Tue, Sep 07, 2021 at 04:35:13PM -0500, Eric Blake wrote:
-> On Tue, Sep 07, 2021 at 02:19:32PM -0700, Josh Triplett wrote:
-> > Does that seem reasonable to add to the kernel driver? I wanted to check
-> > before considering development of a patch.
-> 
-> I'm not aware of anyone else doing it yet (I haven't yet been brave
-> enough to dive into implementing this in the kernel, although I have
-> implemented it in user space in both qemu and libnbd).  I'm certainly
-> happy to help with integration testing, or give you tips on how to
-> test it.
+Hi Christoph,
 
-It's been on my low-priority TODO list since essentially when we
-hammered down the spec, and even had a half-baked preliminary patch at
-one point, but other things just keep being more urgent than that. I
-won't complain if you implement it instead of me :)
+Any comments for this patch ?
 
-Some thoughts you'll want to consider:
-
-The kernel doesn't do the negotiation phase, only the transmission
-phase; the negotiation phase is done in user space. This means the
-client needs to figure out whether the currently-running kernel even
-supports structured replies before it can negotiate them (otherwise the
-kernel will be horribly confused). My half-baked patch would create a
-driver sysfs attribute called "features" which just shows
-"structured_replies" if they are supported by this kernel (the idea
-being that the file could be extended in the future to also show
-"metadata" if that ends up being supported, etc).
-
-I was thinking it might also make sense to have an initial version of
-structured replies set the "don't fragment" bit unconditionally, to keep
-the accounting easier. Not sure whether that's worth it, though (never
-got that far).
-
-Obviously the server currently doesn't implement structured replies, and
-implementing that properly could end up being somewhat complicated. I've
-started working on that part of the equation recently, however.
-
-Regards,
-
--- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
+On 9/7/2021 11:04 AM, Hou Tao wrote:
+> Hi,
+>
+> On 9/6/2021 6:25 PM, Christoph Hellwig wrote:
+>> On Mon, Sep 06, 2021 at 06:08:54PM +0800, Hou Tao wrote:
+>>>>> +	if (!try_module_get(THIS_MODULE))
+>>>>> +		return ERR_PTR(-ENODEV);
+>>>> try_module_get(THIS_MODULE) is an indicator for an unsafe pattern.  If
+>>>> we don't already have a reference it could never close the race.
+>>>>
+>>>> Looking at the callers:
+>>>>
+>>>>  - nbd_open like all block device operations must have a reference
+>>>>    already.
+>>> Yes. nbd_open() has already taken a reference in dentry_open().
+>>>>  - for nbd_genl_connect I'm not an expert, but given that struct
+>>>>    nbd_genl_family has a module member I suspect the networkinh
+>>>>    code already takes a reference.
+>>> That was my original though, but the fact is netlink code doesn't take a module reference
+>>>
+>>> in genl_family_rcv_msg_doit() and netlink uses genl_lock_all() to serialize between module removal
+>>>
+>>> and nbd_connect_genl_ops calling, so I think use try_module_get() is OK here.
+>> How it this going to work?  If there was a race you just shortened it,
+>> but it can still happen before you call try_module_get.  So I think we
+>> need to look into how the netlink calling conventions are supposed to
+>> look and understand the issues there first.
+>> .
+> Let me explain first. The reason it works is due to genl_lock_all() in netlink code.
+>
+> If the module removal happens before calling try_module_get(), nbd_cleanup() will
+>
+> call genl_unregister_family() first, and then genl_lock_all(). genl_lock_all() will
+>
+> prevent ops in nbd_connect_genl_ops() from being called, because the calling
+>
+> of nbd ops happens in genl_rcv() which needs to acquire cb_lock first.
+>
+>
+> process A                                       process B
+>
+> module removal
+>
+> genl_unregister_family()
+>
+>   genl_lock_all()
+>
+>     down_write(&cb_lock)
+>
+>                                                 receive a new netlink message
+>
+>                                                 genl_rcv()
+>
+>                                                    // will wait for the removal of nbd ops
+>
+>                                                    down_read(&cb_lock)
+>
+> If nbd_alloc_config() happens before the module removal, genl_rcv() must
+>
+> have been acquired cb_lock & genl_mutex, so nbd_cleanup() will block in
+>
+> genl_unregister_family(). When nbd_alloc_config() calls try_module_get(),
+>
+> it will find out the module is dying, so fail nbd_genl_connect().
+>
+>
+> process A                                     process B
+>
+> a new netlink message
+>
+> genl_rcv()
+>
+>   down_read(&cb_lock)
+>
+>     mutex_lock(&genl_mutex)
+>
+>       nbd_genl_connect()
+>
+>         nbd_alloc_config()
+>
+>                                                module removal
+>
+>                                                genl_unregister_family
+>
+>           // module is dying, so fail
+>
+>           try_module_get()
+>
+>                                                  genl_lock_all()
+>
+>                                                    // wait for the completion of nbd ops
+>
+>                                                    down_write(&cb_lock)
+>
+> I have checked multiple genl_ops, it seems that the reason why these genl_ops
+>
+> don't need try_module_get() is that these ops don't create new object through
+>
+> genl_ops and just control it. However genl_family_rcv_msg_dumpit() will try to
+>
+> call try_module_get(), but according to the history (6dc878a8ca39 "netlink: add reference of module in netlink_dump_start"),
+>
+> it is because inet_diag_handler_cmd() will call __netlink_dump_start().
+>
+> Regards,
+>
+> Tao
+>
+>
+> .
 
