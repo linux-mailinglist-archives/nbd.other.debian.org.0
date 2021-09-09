@@ -1,87 +1,72 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13C9E405355
-	for <lists+nbd@lfdr.de>; Thu,  9 Sep 2021 14:51:54 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9ED44058E1
+	for <lists+nbd@lfdr.de>; Thu,  9 Sep 2021 16:21:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 701352082F; Thu,  9 Sep 2021 12:51:53 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  9 12:51:53 2021
-Old-Return-Path: <xieyongji@bytedance.com>
+	id 85C612068B; Thu,  9 Sep 2021 14:21:42 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  9 14:21:42 2021
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BC8EF2072F
-	for <lists-other-nbd@bendel.debian.org>; Thu,  9 Sep 2021 12:34:28 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2F5F620773
+	for <lists-other-nbd@bendel.debian.org>; Thu,  9 Sep 2021 14:03:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.261 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FVGT_m_MULTI_ODD=0.02,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8Ay3WEccIF3P for <lists-other-nbd@bendel.debian.org>;
-	Thu,  9 Sep 2021 12:34:23 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-ed1-x530.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 9ED8520720
-	for <nbd@other.debian.org>; Thu,  9 Sep 2021 12:34:22 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id v5so2445971edc.2
-        for <nbd@other.debian.org>; Thu, 09 Sep 2021 05:34:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=oX4Dj9ZXgOv8yaBPcUaPEk5dnnNEO7xIQcrdkFjSHKA=;
-        b=E7uWS8yDE751Ij1pZzX4IMB9dvJ8U1MM4xw6zcVfKZ+vmEXQwWzK5ANY3O7DpaV969
-         5zRN8Y35JaFlIJmo13bnSJICIDtbZiqChEzk3N5yyKzSFdMn4uxT/kkgRJPQeg7jHEVY
-         GdQYjardLGHClo9/FL6L5+ufQJontEEcX/CPh3BwgEDcKrcIHSkK60b9h4xs0rGZjZ44
-         026ldb7eMP5hqAuaYydZ5NJEHeREsSq1EIYb1GL4wmO0nNuloxVxoxFuAapM7lBYY2zn
-         Gj4/HaP2E6vGv73PJjI4bzKtwfwSY5LyQy/tBbORi+jgZsWx1wDJxDiFylCOlPkE/RFy
-         1mNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=oX4Dj9ZXgOv8yaBPcUaPEk5dnnNEO7xIQcrdkFjSHKA=;
-        b=j1D5xp+pUvoJSYPsxwi8H740oanw39tRrrY1T6eXGWgnchulkgX/zHDrLPTbaoyR8k
-         /7Orppnj/mlcRdZzDuRAk3ySvjrU8VhKCxqWMwQUXpkpRsJLq6plqGmueWu3zWvr6LR0
-         DXtaDGdQuEy3OSXDVPdzNudQhLJTwoG8ofm2EY53NG/vdPpAiINzy5epDQIO9a4uR79z
-         YuMgWjNPwE5UqTWF3U2NbwoJfZekrC1rhf9fFO+p3L37nBgxf+Ikq1oQDl1EIOdExn3V
-         Ml/4kLtCy6wzsEpPYTrD73SEeUD3BCMq9YhTyHmQUixP2u0CumnJenk4IZathWp4LUxq
-         hESQ==
-X-Gm-Message-State: AOAM533WZyxZQzz66HxZRSupV1kOjYQ/XvOCb+h/UI9fXBH/pPUxe00q
-	m6jsZ3f5O1PSVkx+9O9ClUEfcvuRBUXsvL6fl/w3
-X-Google-Smtp-Source: ABdhPJz7R5rWq5PdHrd+/9R7VKFyY4khAyM8rWwNp9zT3ExKuPkyRb2KXZ0SObAbCNjw/gtpQznwZm9lJDmQ8UkOjRo=
-X-Received: by 2002:a05:6402:4247:: with SMTP id g7mr2925993edb.287.1631190859581;
- Thu, 09 Sep 2021 05:34:19 -0700 (PDT)
+	with ESMTP id JUXKGQXCODOH for <lists-other-nbd@bendel.debian.org>;
+	Thu,  9 Sep 2021 14:03:01 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 6D94B2076C
+	for <nbd@other.debian.org>; Thu,  9 Sep 2021 14:03:01 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.57])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4H510B2NZMzVn2G;
+	Thu,  9 Sep 2021 22:02:02 +0800 (CST)
+Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2308.8; Thu, 9 Sep 2021 22:02:55 +0800
+Received: from huawei.com (10.175.127.227) by dggema762-chm.china.huawei.com
+ (10.1.198.204) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.8; Thu, 9 Sep
+ 2021 22:02:54 +0800
+From: Yu Kuai <yukuai3@huawei.com>
+To: <axboe@kernel.dk>, <josef@toxicpanda.com>, <ming.lei@redhat.com>,
+	<hch@infradead.org>
+CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nbd@other.debian.org>, <yukuai3@huawei.com>, <yi.zhang@huawei.com>
+Subject: [PATCH v5 0/6] handle unexpected message from server
+Date: Thu, 9 Sep 2021 22:12:50 +0800
+Message-ID: <20210909141256.2606682-1-yukuai3@huawei.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-References: <20210907121425.91-1-xieyongji@bytedance.com> <YTmqJHd7YWAQ2lZ7@infradead.org>
-In-Reply-To: <YTmqJHd7YWAQ2lZ7@infradead.org>
-From: Yongji Xie <xieyongji@bytedance.com>
-Date: Thu, 9 Sep 2021 20:34:12 +0800
-Message-ID: <CACycT3vHrN3tgeH91gdzr08DXd8KCXyAuxUb5k-HcwB7coi4iA@mail.gmail.com>
-Subject: Re: [PATCH] nbd: clear wb_err in bd_inode on disconnect
-To: Christoph Hellwig <hch@infradead.org>
-Cc: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org, 
-	nbd@other.debian.org, yixingchen@bytedance.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.175.127.227]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggema762-chm.china.huawei.com (10.1.198.204)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <8oP1vdeNy9G.A.XqD.pNgOhB@bendel>
+Resent-Message-ID: <Mbz9tt9jlyJ.A.aqD.2hhOhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1423
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1427
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,25 +76,94 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CACycT3vHrN3tgeH91gdzr08DXd8KCXyAuxUb5k-HcwB7coi4iA@mail.gmail.com
-Resent-Date: Thu,  9 Sep 2021 12:51:53 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210909141256.2606682-1-yukuai3@huawei.com
+Resent-Date: Thu,  9 Sep 2021 14:21:42 +0000 (UTC)
 
-On Thu, Sep 9, 2021 at 2:31 PM Christoph Hellwig <hch@infradead.org> wrote:
->
-> On Tue, Sep 07, 2021 at 08:14:25PM +0800, Xie Yongji wrote:
-> > When a nbd device encounters a writeback error, that error will
-> > get propagated to the bd_inode's wb_err field. Then if this nbd
-> > device's backend is disconnected and another is attached, we will
-> > get back the previous writeback error on fsync, which is unexpected.
-> > To fix it, let's clear out the wb_err on disconnect.
->
-> I really do not like how internals of the implementation like into
-> drivers here.  Can you add a block layer helper to clear any state
-> instead? This should incude e.g. the size just cleared above and should
-> also be used by the loop driver as well.
+This patch set tries to fix that client might oops if nbd server send
+unexpected message to client, for example, our syzkaller report a uaf
+in nbd_read_stat():
 
-Sure, will do it.
+Call trace:
+ dump_backtrace+0x0/0x310 arch/arm64/kernel/time.c:78
+ show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x144/0x1b4 lib/dump_stack.c:118
+ print_address_description+0x68/0x2d0 mm/kasan/report.c:253
+ kasan_report_error mm/kasan/report.c:351 [inline]
+ kasan_report+0x134/0x2f0 mm/kasan/report.c:409
+ check_memory_region_inline mm/kasan/kasan.c:260 [inline]
+ __asan_load4+0x88/0xb0 mm/kasan/kasan.c:699
+ __read_once_size include/linux/compiler.h:193 [inline]
+ blk_mq_rq_state block/blk-mq.h:106 [inline]
+ blk_mq_request_started+0x24/0x40 block/blk-mq.c:644
+ nbd_read_stat drivers/block/nbd.c:670 [inline]
+ recv_work+0x1bc/0x890 drivers/block/nbd.c:749
+ process_one_work+0x3ec/0x9e0 kernel/workqueue.c:2147
+ worker_thread+0x80/0x9d0 kernel/workqueue.c:2302
+ kthread+0x1d8/0x1e0 kernel/kthread.c:255
+ ret_from_fork+0x10/0x18 arch/arm64/kernel/entry.S:1174
 
-Thanks,
-Yongji
+1) At first, a normal io is submitted and completed with scheduler:
+
+internel_tag = blk_mq_get_tag -> get tag from sched_tags
+ blk_mq_rq_ctx_init
+  sched_tags->rq[internel_tag] = sched_tag->static_rq[internel_tag]
+...
+blk_mq_get_driver_tag
+ __blk_mq_get_driver_tag -> get tag from tags
+ tags->rq[tag] = sched_tag->static_rq[internel_tag]
+
+So, both tags->rq[tag] and sched_tags->rq[internel_tag] are pointing
+to the request: sched_tags->static_rq[internal_tag]. Even if the
+io is finished.
+
+2) nbd server send a reply with random tag directly:
+
+recv_work
+ nbd_read_stat
+  blk_mq_tag_to_rq(tags, tag)
+   rq = tags->rq[tag]
+
+3) if the sched_tags->static_rq is freed:
+
+blk_mq_sched_free_requests
+ blk_mq_free_rqs(q->tag_set, hctx->sched_tags, i)
+  -> step 2) access rq before clearing rq mapping
+  blk_mq_clear_rq_mapping(set, tags, hctx_idx);
+  __free_pages() -> rq is freed here
+
+4) Then, nbd continue to use the freed request in nbd_read_stat()
+
+Changes in v5:
+ - move patch 1 & 2 in v4 (patch 4 & 5 in v5) behind
+ - add some comment in patch 5
+Changes in v4:
+ - change the name of the patchset, since uaf is not the only problem
+ if server send unexpected reply message.
+ - instead of adding new interface, use blk_mq_find_and_get_req().
+ - add patch 5 to this series
+Changes in v3:
+ - v2 can't fix the problem thoroughly, add patch 3-4 to this series.
+ - modify descriptions.
+ - patch 5 is just a cleanup
+Changes in v2:
+ - as Bart suggested, add a new helper function for drivers to get
+ request by tag.
+
+Yu Kuai (6):
+  nbd: don't handle response without a corresponding request message
+  nbd: make sure request completion won't concurrent
+  nbd: check sock index in nbd_read_stat()
+  blk-mq: export two symbols to get request by tag
+  nbd: convert to use blk_mq_find_and_get_req()
+  nbd: don't start request if nbd_queue_rq() failed
+
+ block/blk-mq-tag.c     |  5 +++--
+ block/blk-mq.c         |  1 +
+ drivers/block/nbd.c    | 51 ++++++++++++++++++++++++++++++++++++------
+ include/linux/blk-mq.h |  3 +++
+ 4 files changed, 51 insertions(+), 9 deletions(-)
+
+-- 
+2.31.1
 
