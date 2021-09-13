@@ -2,105 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF28E405F15
-	for <lists+nbd@lfdr.de>; Thu,  9 Sep 2021 23:52:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C19C1408399
+	for <lists+nbd@lfdr.de>; Mon, 13 Sep 2021 06:48:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A9A44206EC; Thu,  9 Sep 2021 21:52:06 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  9 21:52:06 2021
-Old-Return-Path: <josh@joshtriplett.org>
+	id 7100F2088A; Mon, 13 Sep 2021 04:48:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 13 04:48:14 2021
+Old-Return-Path: <houtao1@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H3,
-	RCVD_IN_MSPIKE_WL autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-4.9 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D2C8B206E6
-	for <lists-other-nbd@bendel.debian.org>; Thu,  9 Sep 2021 21:51:57 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 9F52A2057F
+	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Sep 2021 04:32:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.778 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.256 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-1.975, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id gVyu-BRf41jk for <lists-other-nbd@bendel.debian.org>;
-	Thu,  9 Sep 2021 21:51:51 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	with ESMTP id 3E-xz5XGdeS7 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 13 Sep 2021 04:32:47 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga01-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id DAEE5206A8
-	for <nbd@other.debian.org>; Thu,  9 Sep 2021 21:51:51 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
-	by mailout.nyi.internal (Postfix) with ESMTP id D330F5C00BA;
-	Thu,  9 Sep 2021 17:51:47 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute2.internal (MEProxy); Thu, 09 Sep 2021 17:51:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	joshtriplett.org; h=date:from:to:cc:subject:message-id
-	:references:mime-version:content-type:in-reply-to; s=fm1; bh=8W0
-	4FtwcTHl64a71SfZ3bsHGoLC2nrHY1tu9T8gUBqU=; b=MKOHu3r0r+qTnHb1R0S
-	4JWTLTV/GU/RA4D+TKYQN9ox1MzI75NTqm+f19u6cnXLycT34BiONvKCmp4mZOwh
-	Cd+G8e5aAT+ZHoMeVKoWauEOR1j9SElrRv3HMHQwx7RoEyzjBQSPxaOJjOSNFt10
-	QoVT5RzHZU1vzNE8l1CeEEfiFT+iEPAe/Rm/P8qZfy9IiwZK0w3bhQ+H7kbSY9Q+
-	U+IpYqc9txW8tBZJgY+3ysVB7ghO/R6zDQPw4ECPa/eN4xiLQ/fVXSwUVcrdeUUT
-	7FxNHCbXTIYJmxxtmn2bSY7M2dK+EtUjaiQ+NX/3SBAog7V+wdoNXcd6KqYUhR2I
-	3nA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=8W04Ft
-	wcTHl64a71SfZ3bsHGoLC2nrHY1tu9T8gUBqU=; b=o6v3Kc5wnlXEkHY/p7Bank
-	90Y8jv+/+XoNOtwlQ4+T/Usjb/Gj8f5vFYLk8aM2mjRZzhDaP23MDdCNCQtEQl48
-	4w4UOTrEdlqN2WmfUeL5HgdMk/x9pDJd+dYwaS/RTMnY3zW8IrL1K4ziFVZ/YjwY
-	FLo7nF/7OLtHT0zMw5C9E9sBVokDZ4rjfA74bVgTWiNuavAuEleztKWrS7Q8DxzS
-	OHQoLqQZx1L+4Cl9AEum+kX7c788oy96s1gmW7GMAw6fBf8HHpYZaEC4tKcqctaO
-	G3wUlQpJQvxopWOxm26axKGZJ7bS6oYWPdYtSMJoo8A2OKT55F+N8hrk4sQ86QRQ
-	==
-X-ME-Sender: <xms:84E6YTo6v65gYdF7PSIqQblKjdNGTZjf9wzxkjaaWQDh4uZBU50M0w>
-    <xme:84E6YdoCKneeu1sj9j6ESwZMvZZM8ppDU_E7r4lLSX95aOdLSTZLnKRnpEP6_7zsi
-    vtCWxFiLNStGZfLWqw>
-X-ME-Received: <xmr:84E6YQNryx9jLrIemgwWV_zrOglw_T1vAGgaQygdpp-siZuFKnvVC4JDM_M>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudegtddgtdduucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvffukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeflohhshhcu
-    vfhrihhplhgvthhtuceojhhoshhhsehjohhshhhtrhhiphhlvghtthdrohhrgheqnecugg
-    ftrfgrthhtvghrnhepgedtgfefgefhveeglefgfeeigeduueehkeektdeuueetgfehffev
-    geeuieetheetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
-    homhepjhhoshhhsehjohhshhhtrhhiphhlvghtthdrohhrgh
-X-ME-Proxy: <xmx:84E6YW6uaNG_N9Jcf3L7SvvcBvyPrMNkU9pubzUV92_SsLRwudET5w>
-    <xmx:84E6YS7d9KMdxMozcc-qG6jxsLgQE5iaKcIe0eih3y2xXa8yid3HSA>
-    <xmx:84E6YegcSBlwTr3kyPOOmUJNfoUF9_rY5wtP40xBglAY7-XMN9n1Sg>
-    <xmx:84E6YYTZEaYfEKeEDZTq0ByYKqnxBc0eXyRIHHXd-KEyqBZev2mJgw>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 9 Sep 2021 17:51:46 -0400 (EDT)
-Date: Thu, 9 Sep 2021 14:51:45 -0700
-From: Josh Triplett <josh@joshtriplett.org>
-To: Wouter Verhelst <w@uter.be>
-Cc: Eric Blake <eblake@redhat.com>, nbd@other.debian.org
-Subject: Re: Linux kernel NBD driver support for structured replies?
-Message-ID: <YTqB8SBd5VautXk3@localhost>
-References: <YTfXZDs4YHrxHYJe@localhost>
- <20210907213513.aq5qxd3d6v3ss676@redhat.com>
- <YTirZ88kN13gqqfp@pc181009.grep.be>
+	by bendel.debian.org (Postfix) with ESMTPS id 543BD2056C
+	for <nbd@other.debian.org>; Mon, 13 Sep 2021 04:32:44 +0000 (UTC)
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.54])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4H7D4f10s3zbmLl;
+	Mon, 13 Sep 2021 12:28:34 +0800 (CST)
+Received: from dggpeml500025.china.huawei.com (7.185.36.35) by
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.8; Mon, 13 Sep 2021 12:32:38 +0800
+Received: from [10.174.176.117] (10.174.176.117) by
+ dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.8; Mon, 13 Sep 2021 12:32:38 +0800
+Subject: Re: [PATCH v2 3/3] nbd: fix race between nbd_alloc_config() and
+ module removal
+To: Christoph Hellwig <hch@lst.de>
+CC: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
+	<linux-block@vger.kernel.org>, <nbd@other.debian.org>
+References: <20210904122519.1963983-1-houtao1@huawei.com>
+ <20210904122519.1963983-4-houtao1@huawei.com> <20210906093051.GC30790@lst.de>
+ <ce3e1ea8-ebda-4372-42ce-e8a4b2d12514@huawei.com>
+ <20210906102521.GA3082@lst.de>
+ <730dae5e-5af8-3554-18bf-e22ff576e2b1@huawei.com>
+ <20210909064035.GA26290@lst.de>
+From: Hou Tao <houtao1@huawei.com>
+Message-ID: <6434d4e8-984d-97df-34e5-b86a0e69cf58@huawei.com>
+Date: Mon, 13 Sep 2021 12:32:37 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YTirZ88kN13gqqfp@pc181009.grep.be>
+In-Reply-To: <20210909064035.GA26290@lst.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-Originating-IP: [10.174.176.117]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpeml500025.china.huawei.com (7.185.36.35)
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <AbQDG3J5NlD.A.UyB.GIoOhB@bendel>
+Resent-Message-ID: <C9oR1QfomJG.A.hBF.OgtPhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1432
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1433
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -110,34 +85,57 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YTqB8SBd5VautXk3@localhost
-Resent-Date: Thu,  9 Sep 2021 21:52:06 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6434d4e8-984d-97df-34e5-b86a0e69cf58@huawei.com
+Resent-Date: Mon, 13 Sep 2021 04:48:14 +0000 (UTC)
 
-On Wed, Sep 08, 2021 at 02:24:07PM +0200, Wouter Verhelst wrote:
-> It's been on my low-priority TODO list since essentially when we
-> hammered down the spec, and even had a half-baked preliminary patch at
-> one point, but other things just keep being more urgent than that. I
-> won't complain if you implement it instead of me :)
+Hi Christoph,
 
-:)
+On 9/9/2021 2:40 PM, Christoph Hellwig wrote:
+> On Tue, Sep 07, 2021 at 11:04:16AM +0800, Hou Tao wrote:
+>> Let me explain first. The reason it works is due to genl_lock_all() in netlink code.
+> Btw, please properly format your mail.  These overly long lines are really
+> hard to read.
+Thanks for reminding.
+>> If the module removal happens before calling try_module_get(), nbd_cleanup() will
+>>
+>> call genl_unregister_family() first, and then genl_lock_all(). genl_lock_all() will
+>>
+>> prevent ops in nbd_connect_genl_ops() from being called, because the calling
+>>
+>> of nbd ops happens in genl_rcv() which needs to acquire cb_lock first.
+> Good.
+>
+>> I have checked multiple genl_ops, it seems that the reason why these genl_ops
+>>
+>> don't need try_module_get() is that these ops don't create new object through
+>>
+>> genl_ops and just control it. However genl_family_rcv_msg_dumpit() will try to
+>>
+>> call try_module_get(), but according to the history (6dc878a8ca39 "netlink: add reference of module in netlink_dump_start"),
+>>
+>> it is because inet_diag_handler_cmd() will call __netlink_dump_start().
+> And now taking a step back:  Why do we even need this extra module
+> reference?  For the case where nbd_alloc_config is called from nbd_open
+> we obviously don't need it.  In the case where it is called from
+> nbd_genl_connect that prevents unloading nbd when there is a configured
+> but not actually nbd device.  Which isn't reallyed need and counter to
+> how other drivers work.
+Yes, the purpose of module ref-counting in nbd_alloc_config() is to force
+the user to disconnect the nbd device manually before module removal.
+And loop device works in the same way. If a file is attached to a loop device,
+an extra module reference will be taken in loop_configure() and the removal
+of loop module will fail. The only difference is that loop driver takes the
+extra ref-count by ioctl, and nbd does it through netlink.
+>
+> Did you try just removing the extra module refcounting?
+Yes, removing the module refcounting in nbd_alloc_config() and cleaning
+the nbd_config in nbd_cleanup() also work, but not sure whether or not
+it will break some nbd user-case which depends on the extra module
+reference count. I prefer to keep the extra module refcounting considering
+that loop driver does it as well, so what is your suggestion ?
 
-> Some thoughts you'll want to consider:
-> 
-> The kernel doesn't do the negotiation phase, only the transmission
-> phase; the negotiation phase is done in user space. This means the
-> client needs to figure out whether the currently-running kernel even
-> supports structured replies before it can negotiate them (otherwise the
-> kernel will be horribly confused). My half-baked patch would create a
-> driver sysfs attribute called "features" which just shows
-> "structured_replies" if they are supported by this kernel (the idea
-> being that the file could be extended in the future to also show
-> "metadata" if that ends up being supported, etc).
+Regards,
+Tao
 
-There's precedent for something similar: /sys/fs/ext4/features/ , a
-directory with a file for each supported ext4 feature. I think a
-comparable approach for nbd would be more convenient than doing text
-parsing, and more consistent with the general sysfs philosophy (one file
-per value).
-
-- Josh Triplett
+> .
 
