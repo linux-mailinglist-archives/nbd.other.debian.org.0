@@ -2,80 +2,92 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id C19C1408399
-	for <lists+nbd@lfdr.de>; Mon, 13 Sep 2021 06:48:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D6CC408A74
+	for <lists+nbd@lfdr.de>; Mon, 13 Sep 2021 13:42:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7100F2088A; Mon, 13 Sep 2021 04:48:14 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 13 04:48:14 2021
-Old-Return-Path: <houtao1@huawei.com>
+	id EAD53203AD; Mon, 13 Sep 2021 11:42:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 13 11:42:10 2021
+Old-Return-Path: <xieyongji@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.9 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9F52A2057F
-	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Sep 2021 04:32:52 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id AA7992037F
+	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Sep 2021 11:26:47 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.256 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-1.975, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 3E-xz5XGdeS7 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 13 Sep 2021 04:32:47 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga01-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 543BD2056C
-	for <nbd@other.debian.org>; Mon, 13 Sep 2021 04:32:44 +0000 (UTC)
-Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.54])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4H7D4f10s3zbmLl;
-	Mon, 13 Sep 2021 12:28:34 +0800 (CST)
-Received: from dggpeml500025.china.huawei.com (7.185.36.35) by
- dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.8; Mon, 13 Sep 2021 12:32:38 +0800
-Received: from [10.174.176.117] (10.174.176.117) by
- dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.8; Mon, 13 Sep 2021 12:32:38 +0800
-Subject: Re: [PATCH v2 3/3] nbd: fix race between nbd_alloc_config() and
- module removal
-To: Christoph Hellwig <hch@lst.de>
-CC: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
-	<linux-block@vger.kernel.org>, <nbd@other.debian.org>
-References: <20210904122519.1963983-1-houtao1@huawei.com>
- <20210904122519.1963983-4-houtao1@huawei.com> <20210906093051.GC30790@lst.de>
- <ce3e1ea8-ebda-4372-42ce-e8a4b2d12514@huawei.com>
- <20210906102521.GA3082@lst.de>
- <730dae5e-5af8-3554-18bf-e22ff576e2b1@huawei.com>
- <20210909064035.GA26290@lst.de>
-From: Hou Tao <houtao1@huawei.com>
-Message-ID: <6434d4e8-984d-97df-34e5-b86a0e69cf58@huawei.com>
-Date: Mon, 13 Sep 2021 12:32:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+	with ESMTP id AzrznyFpIifb for <lists-other-nbd@bendel.debian.org>;
+	Mon, 13 Sep 2021 11:26:42 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pg1-x52c.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com [IPv6:2607:f8b0:4864:20::52c])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 5E50520371
+	for <nbd@other.debian.org>; Mon, 13 Sep 2021 11:26:41 +0000 (UTC)
+Received: by mail-pg1-x52c.google.com with SMTP id f129so9159572pgc.1
+        for <nbd@other.debian.org>; Mon, 13 Sep 2021 04:26:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Rz/6XvgdNoOIdVbvI4mwKeVZY1sVrkUVZ3EnU4pT4rU=;
+        b=Xk6Azf+YawiKfB5FY+ef0aHr4lcGmXzfcSyku4T4sJF73uZuN7SuifATbWcVwyFU5S
+         LMimQVl/YGeEa/gZorRlhViYpISoiOl59jeoMWzkB1QVz4UQ6LXg9arGIWWbhP33CbB4
+         FUof3AjR9QK9p9KxbJbTw6mQ81lbfAR0U4mX3Y0T8smzt3OjfE2KS7kYd+eoM8WcAanX
+         C3HnXx8iWpORlaiK0l6G6V4W1d+DR2vzboZ1PH2Gy3Iws1cMzfp/r3wwJaGYuaRPPCAJ
+         Pe/gLNl1O6FewaFSGs8FULYW/e+qk1EI/LEf7vsshPkZKLAL/AiuH6tmqWaSIuX/z/wZ
+         GhXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Rz/6XvgdNoOIdVbvI4mwKeVZY1sVrkUVZ3EnU4pT4rU=;
+        b=TWcRRrJ+zr9APyaCm5cmqC2wa8Wrwp7jnLkowSKblwGXt88fxlMnEvkMywMFOPEggh
+         5Y4pHzSRqwNpSPnDE+TsThx4wU0QDAx8yArEgjODnwag78cJzx2IFEH+TobBXx+VVWFi
+         SI1Rc+TpVdY90U1eOGpQEPZQMuMaAYqcgiLg4r2Lulyl6zw1LtpYazUiwvHVRGusZ72m
+         K8pk0nO76tScGx+JX88B/ei6ujkTrxj2c25fxXz/Y0gUcJSD8fTnH2WjMZqQ6fMJckVZ
+         +4VYa6fZ84cEjbCPY3yYMxOCAesGUXy9bgUkUVqHRLiaIyRCosFBxRkpmNhGmObyc5rd
+         GJGw==
+X-Gm-Message-State: AOAM531tpfq2gUpykg01KmLoVWuA7Z1Y2N+b/aeI3UnbexZe5DWaRfKs
+	aIprWTUJ4FOesBa2ZOQV6X8oWqacKCMNXMA=
+X-Google-Smtp-Source: ABdhPJxgADjQmayK/fwksa0871G2vOcC21wpaydwkHKLFWhnke6wadGoJpZKsE7E0mYF9wrc4AnAyw==
+X-Received: by 2002:a62:1c96:0:b0:3f5:e01a:e47 with SMTP id c144-20020a621c96000000b003f5e01a0e47mr10705481pfc.76.1631532397740;
+        Mon, 13 Sep 2021 04:26:37 -0700 (PDT)
+Received: from localhost ([139.177.225.255])
+        by smtp.gmail.com with ESMTPSA id w188sm6726703pfd.32.2021.09.13.04.26.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Sep 2021 04:26:37 -0700 (PDT)
+From: Xie Yongji <xieyongji@bytedance.com>
+To: axboe@kernel.dk,
+	josef@toxicpanda.com,
+	hch@infradead.org
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	yixingchen@bytedance.com
+Subject: [PATCH 0/3] Add invalidate_gendisk() helper for drivers to invalidate the gendisk
+Date: Mon, 13 Sep 2021 19:25:54 +0800
+Message-Id: <20210913112557.191-1-xieyongji@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210909064035.GA26290@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-Originating-IP: [10.174.176.117]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpeml500025.china.huawei.com (7.185.36.35)
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <C9oR1QfomJG.A.hBF.OgtPhB@bendel>
+Resent-Message-ID: <jo8v08VEJJF.A.L6C.SkzPhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1433
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1434
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,57 +97,30 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6434d4e8-984d-97df-34e5-b86a0e69cf58@huawei.com
-Resent-Date: Mon, 13 Sep 2021 04:48:14 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210913112557.191-1-xieyongji@bytedance.com
+Resent-Date: Mon, 13 Sep 2021 11:42:10 +0000 (UTC)
 
-Hi Christoph,
+This series comes from Christoph Hellwig's suggestion [1]. Some block
+device drivers such as loop driver and nbd driver need to invalidate
+the gendisk when the backend is detached so that the gendisk can be
+reused by the new backend. Now the invalidation is done in device
+driver with their own ways. To avoid code duplication and hide
+some internals of the implementation, this series adds a block layer
+helper and makes both loop driver and nbd driver use it.
 
-On 9/9/2021 2:40 PM, Christoph Hellwig wrote:
-> On Tue, Sep 07, 2021 at 11:04:16AM +0800, Hou Tao wrote:
->> Let me explain first. The reason it works is due to genl_lock_all() in netlink code.
-> Btw, please properly format your mail.  These overly long lines are really
-> hard to read.
-Thanks for reminding.
->> If the module removal happens before calling try_module_get(), nbd_cleanup() will
->>
->> call genl_unregister_family() first, and then genl_lock_all(). genl_lock_all() will
->>
->> prevent ops in nbd_connect_genl_ops() from being called, because the calling
->>
->> of nbd ops happens in genl_rcv() which needs to acquire cb_lock first.
-> Good.
->
->> I have checked multiple genl_ops, it seems that the reason why these genl_ops
->>
->> don't need try_module_get() is that these ops don't create new object through
->>
->> genl_ops and just control it. However genl_family_rcv_msg_dumpit() will try to
->>
->> call try_module_get(), but according to the history (6dc878a8ca39 "netlink: add reference of module in netlink_dump_start"),
->>
->> it is because inet_diag_handler_cmd() will call __netlink_dump_start().
-> And now taking a step back:  Why do we even need this extra module
-> reference?  For the case where nbd_alloc_config is called from nbd_open
-> we obviously don't need it.  In the case where it is called from
-> nbd_genl_connect that prevents unloading nbd when there is a configured
-> but not actually nbd device.  Which isn't reallyed need and counter to
-> how other drivers work.
-Yes, the purpose of module ref-counting in nbd_alloc_config() is to force
-the user to disconnect the nbd device manually before module removal.
-And loop device works in the same way. If a file is attached to a loop device,
-an extra module reference will be taken in loop_configure() and the removal
-of loop module will fail. The only difference is that loop driver takes the
-extra ref-count by ioctl, and nbd does it through netlink.
->
-> Did you try just removing the extra module refcounting?
-Yes, removing the module refcounting in nbd_alloc_config() and cleaning
-the nbd_config in nbd_cleanup() also work, but not sure whether or not
-it will break some nbd user-case which depends on the extra module
-reference count. I prefer to keep the extra module refcounting considering
-that loop driver does it as well, so what is your suggestion ?
+[1] https://lore.kernel.org/all/YTmqJHd7YWAQ2lZ7@infradead.org/
 
-Regards,
-Tao
+Xie Yongji (3):
+  block: Add invalidate_gendisk() helper to invalidate the gendisk
+  loop: Use invalidate_gendisk() helper to invalidate gendisk
+  nbd: Use invalidate_gendisk() helper on disconnect
 
-> .
+ block/genhd.c         | 21 +++++++++++++++++++++
+ drivers/block/loop.c  |  6 +-----
+ drivers/block/nbd.c   | 12 +++---------
+ include/linux/genhd.h |  1 +
+ 4 files changed, 26 insertions(+), 14 deletions(-)
+
+-- 
+2.11.0
 
