@@ -1,76 +1,83 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A204340A681
-	for <lists+nbd@lfdr.de>; Tue, 14 Sep 2021 08:12:23 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id F224740A6FC
+	for <lists+nbd@lfdr.de>; Tue, 14 Sep 2021 09:00:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 71DE8203FB; Tue, 14 Sep 2021 06:12:23 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep 14 06:12:23 2021
-Old-Return-Path: <yukuai3@huawei.com>
+	id 0B2C620454; Tue, 14 Sep 2021 07:00:18 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep 14 07:00:17 2021
+Old-Return-Path: <ming.lei@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=4.0 tests=DIGITS_LETTERS,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.4 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0DAD220342
-	for <lists-other-nbd@bendel.debian.org>; Tue, 14 Sep 2021 05:56:15 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0685220271
+	for <lists-other-nbd@bendel.debian.org>; Tue, 14 Sep 2021 06:45:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.23 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FVGT_m_MULTI_ODD=0.02,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.969, RCVD_IN_DNSWL_MED=-2.3,
+X-Amavis-Spam-Status: No, score=-3.279 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
 	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id mR-JOS4NA-ay for <lists-other-nbd@bendel.debian.org>;
-	Tue, 14 Sep 2021 05:56:12 +0000 (UTC)
+	with ESMTP id wbBgERbscCJ6 for <lists-other-nbd@bendel.debian.org>;
+	Tue, 14 Sep 2021 06:45:02 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 83C6C202E9
-	for <nbd@other.debian.org>; Tue, 14 Sep 2021 05:56:12 +0000 (UTC)
-Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.56])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4H7pDg4ZNPz8ySQ;
-	Tue, 14 Sep 2021 11:07:31 +0800 (CST)
-Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
- dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.1.2308.8; Tue, 14 Sep 2021 11:11:57 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- dggema762-chm.china.huawei.com (10.1.198.204) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2308.8; Tue, 14 Sep 2021 11:11:56 +0800
-Subject: Re: [PATCH v5 2/6] nbd: make sure request completion won't concurrent
-To: Ming Lei <ming.lei@redhat.com>
-CC: <axboe@kernel.dk>, <josef@toxicpanda.com>, <hch@infradead.org>,
-	<linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<nbd@other.debian.org>, <yi.zhang@huawei.com>
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by bendel.debian.org (Postfix) with ESMTP id 2FAFC201F8
+	for <nbd@other.debian.org>; Tue, 14 Sep 2021 06:45:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1631601896;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fYK5sEmID0j5qcEt2Vje6PqJTkmVq5tCDNx2hY9LSLA=;
+	b=jInGc9wIYxrTG3x9f5d6mgql0puuwwbrxK/529rsADtoEpnEyKac1zkWmT8qPiSYT2WzEb
+	X8xjbTRod8Vg4Vy+5DX7WyfgTrbzBsbjYAgOx2DFECDsi7Pe2WY7YfUMDcoDTuwFEyjwWw
+	0fi6kXc3Qm2BhqWi/qOmLe8EuU8CdDI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-256-h85728iKOd6eWWcC3sOHSA-1; Tue, 14 Sep 2021 02:44:52 -0400
+X-MC-Unique: h85728iKOd6eWWcC3sOHSA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C2524835DE0;
+	Tue, 14 Sep 2021 06:44:50 +0000 (UTC)
+Received: from T590 (ovpn-13-174.pek2.redhat.com [10.72.13.174])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id BD6EB10016F5;
+	Tue, 14 Sep 2021 06:44:42 +0000 (UTC)
+Date: Tue, 14 Sep 2021 14:44:48 +0800
+From: Ming Lei <ming.lei@redhat.com>
+To: "yukuai (C)" <yukuai3@huawei.com>
+Cc: axboe@kernel.dk, josef@toxicpanda.com, hch@infradead.org,
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+	nbd@other.debian.org, yi.zhang@huawei.com
+Subject: Re: [PATCH v5 5/6] nbd: convert to use blk_mq_find_and_get_req()
+Message-ID: <YUBE4BJ7+kN1c4l8@T590>
 References: <20210909141256.2606682-1-yukuai3@huawei.com>
- <20210909141256.2606682-3-yukuai3@huawei.com> <YT/zkdoXG+awaVbm@T590>
-From: "yukuai (C)" <yukuai3@huawei.com>
-Message-ID: <74f3f2d9-fd85-f1d8-1f40-5319e247c5e1@huawei.com>
-Date: Tue, 14 Sep 2021 11:11:56 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <20210909141256.2606682-6-yukuai3@huawei.com>
+ <YT/2z4PSeW5oJWMq@T590>
+ <c6af73a2-f12d-eeef-616e-ae0cdb4f6f2d@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <YT/zkdoXG+awaVbm@T590>
-Content-Type: text/plain; charset="gbk"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggema762-chm.china.huawei.com (10.1.198.204)
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c6af73a2-f12d-eeef-616e-ae0cdb4f6f2d@huawei.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <2XE_xvQ1uKC.A.-QF.H1DQhB@bendel>
+Resent-Message-ID: <Jebxt2vOoqL.A.r1B.BiEQhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1449
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1453
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -80,82 +87,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/74f3f2d9-fd85-f1d8-1f40-5319e247c5e1@huawei.com
-Resent-Date: Tue, 14 Sep 2021 06:12:23 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YUBE4BJ7+kN1c4l8@T590
+Resent-Date: Tue, 14 Sep 2021 07:00:18 +0000 (UTC)
 
-On 2021/09/14 8:57, Ming Lei wrote:
-> On Thu, Sep 09, 2021 at 10:12:52PM +0800, Yu Kuai wrote:
->> commit cddce0116058 ("nbd: Aovid double completion of a request")
->> try to fix that nbd_clear_que() and recv_work() can complete a
->> request concurrently. However, the problem still exists:
->>
->> t1                    t2                     t3
->>
->> nbd_disconnect_and_put
->>   flush_workqueue
->>                        recv_work
->>                         blk_mq_complete_request
->>                          blk_mq_complete_request_remote -> this is true
->>                           WRITE_ONCE(rq->state, MQ_RQ_COMPLETE)
->>                            blk_mq_raise_softirq
->>                                               blk_done_softirq
->>                                                blk_complete_reqs
->>                                                 nbd_complete_rq
->>                                                  blk_mq_end_request
->>                                                   blk_mq_free_request
->>                                                    WRITE_ONCE(rq->state, MQ_RQ_IDLE)
->>    nbd_clear_que
->>     blk_mq_tagset_busy_iter
->>      nbd_clear_req
->>                                                     __blk_mq_free_request
->>                                                      blk_mq_put_tag
->>       blk_mq_complete_request -> complete again
->>
->> There are three places where request can be completed in nbd:
->> recv_work(), nbd_clear_que() and nbd_xmit_timeout(). Since they
->> all hold cmd->lock before completing the request, it's easy to
->> avoid the problem by setting and checking a cmd flag.
->>
->> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
->> ---
->>   drivers/block/nbd.c | 11 +++++++++--
->>   1 file changed, 9 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->> index 04861b585b62..550c8dc438ac 100644
->> --- a/drivers/block/nbd.c
->> +++ b/drivers/block/nbd.c
->> @@ -406,7 +406,11 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
->>   	if (!mutex_trylock(&cmd->lock))
->>   		return BLK_EH_RESET_TIMER;
->>   
->> -	__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
->> +	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->> +		mutex_unlock(&cmd->lock);
->> +		return BLK_EH_DONE;
->> +	}
->> +
->>   	if (!refcount_inc_not_zero(&nbd->config_refs)) {
->>   		cmd->status = BLK_STS_TIMEOUT;
->>   		mutex_unlock(&cmd->lock);
->> @@ -842,7 +846,10 @@ static bool nbd_clear_req(struct request *req, void *data, bool reserved)
->>   
->>   	mutex_lock(&cmd->lock);
->>   	cmd->status = BLK_STS_IOERR;
->> -	__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
->> +	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->> +		mutex_unlock(&cmd->lock);
->> +		return true;
->> +	}
->>   	mutex_unlock(&cmd->lock);
+On Tue, Sep 14, 2021 at 11:11:06AM +0800, yukuai (C) wrote:
+> On 2021/09/14 9:11, Ming Lei wrote:
+> > On Thu, Sep 09, 2021 at 10:12:55PM +0800, Yu Kuai wrote:
+> > > blk_mq_tag_to_rq() can only ensure to return valid request in
+> > > following situation:
+> > > 
+> > > 1) client send request message to server first
+> > > submit_bio
+> > > ...
+> > >   blk_mq_get_tag
+> > >   ...
+> > >   blk_mq_get_driver_tag
+> > >   ...
+> > >   nbd_queue_rq
+> > >    nbd_handle_cmd
+> > >     nbd_send_cmd
+> > > 
+> > > 2) client receive respond message from server
+> > > recv_work
+> > >   nbd_read_stat
+> > >    blk_mq_tag_to_rq
+> > > 
+> > > If step 1) is missing, blk_mq_tag_to_rq() will return a stale
+> > > request, which might be freed. Thus convert to use
+> > > blk_mq_find_and_get_req() to make sure the returned request is not
+> > > freed.
+> > 
+> > But NBD_CMD_INFLIGHT has been added for checking if the reply is
+> > expected, do we still need blk_mq_find_and_get_req() for covering
+> > this issue? BTW, request and its payload is pre-allocated, so there
+> > isn't real use-after-free.
 > 
-> If this request has completed from other code paths, ->status shouldn't be
-> updated here, maybe it is done successfully.
+> Hi, Ming
+> 
+> Checking NBD_CMD_INFLIGHT relied on the request founded by tag is valid,
+> not the other way round.
+> 
+> nbd_read_stat
+>  req = blk_mq_tag_to_rq()
+>  cmd = blk_mq_rq_to_pdu(req)
+>  mutex_lock(cmd->lock)
+>  checking NBD_CMD_INFLIGHT
 
-Hi, Ming
+Request and its payload is pre-allocated, and either req->ref or cmd->lock can
+serve the same purpose here. Once cmd->lock is held, you can check if the cmd is
+inflight or not. If it isn't inflight, just return -ENOENT. Is there any
+problem to handle in this way?
 
-Will change this in next iteration.
 
 Thanks,
-Kuai
+Ming
 
