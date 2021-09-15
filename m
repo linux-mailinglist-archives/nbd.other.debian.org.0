@@ -1,91 +1,72 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 120D540BEB4
-	for <lists+nbd@lfdr.de>; Wed, 15 Sep 2021 06:03:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ADD240C18E
+	for <lists+nbd@lfdr.de>; Wed, 15 Sep 2021 10:21:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BC629206EE; Wed, 15 Sep 2021 04:03:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 15 04:03:09 2021
-Old-Return-Path: <ming.lei@redhat.com>
+	id 474CD205CD; Wed, 15 Sep 2021 08:21:21 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 15 08:21:21 2021
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id EF58C20586
-	for <lists-other-nbd@bendel.debian.org>; Wed, 15 Sep 2021 03:46:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0DB0820781
+	for <lists-other-nbd@bendel.debian.org>; Wed, 15 Sep 2021 08:05:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.279 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.398,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
+X-Amavis-Spam-Status: No, score=-3.261 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FVGT_m_MULTI_ODD=0.02,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
 	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id PL3vDj_t-wGs for <lists-other-nbd@bendel.debian.org>;
-	Wed, 15 Sep 2021 03:46:26 +0000 (UTC)
+	with ESMTP id 9kqWap60kxj7 for <lists-other-nbd@bendel.debian.org>;
+	Wed, 15 Sep 2021 08:05:51 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 0B86C20322
-	for <nbd@other.debian.org>; Wed, 15 Sep 2021 03:46:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1631677581;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=laMJBZMfAA5GFR18gmCaz0BRGaBhHTinBYyhHApQWKQ=;
-	b=h/tmFKgqr2JwNOUvSJXOZEtCY07s09ST+DYx8hx1sG/me9UGH7NBNHKQDuEMc5UqsAuMzi
-	BQRpu2KYY4XCWfppQqmPRK3pTBffelcA7lYGmQejAFZxV0YYGD3L/f5EjKq9+YJs+eVaYG
-	a6VHvULLBoPPW/PIZcclB2BiazHe1co=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-560-ZiTgKBd1PpyNzJ0dXKzqDA-1; Tue, 14 Sep 2021 23:46:19 -0400
-X-MC-Unique: ZiTgKBd1PpyNzJ0dXKzqDA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 898F8101796D;
-	Wed, 15 Sep 2021 03:46:18 +0000 (UTC)
-Received: from T590 (ovpn-12-59.pek2.redhat.com [10.72.12.59])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id E493E78433;
-	Wed, 15 Sep 2021 03:46:10 +0000 (UTC)
-Date: Wed, 15 Sep 2021 11:46:21 +0800
-From: Ming Lei <ming.lei@redhat.com>
-To: "yukuai (C)" <yukuai3@huawei.com>
-Cc: axboe@kernel.dk, josef@toxicpanda.com, hch@infradead.org,
-	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-	nbd@other.debian.org, yi.zhang@huawei.com
-Subject: Re: [PATCH v5 5/6] nbd: convert to use blk_mq_find_and_get_req()
-Message-ID: <YUFsja+cIxhFY7c0@T590>
-References: <YT/2z4PSeW5oJWMq@T590>
- <c6af73a2-f12d-eeef-616e-ae0cdb4f6f2d@huawei.com>
- <YUBE4BJ7+kN1c4l8@T590>
- <374c6b37-b4b2-fe01-66be-ca2dbbc283e9@huawei.com>
- <YUBTVBioqJ7qas2R@T590>
- <b8301834-5541-76ee-13a9-0fa565fce7e3@huawei.com>
- <YUCzr2ysb+vJ1x0W@T590>
- <8f1849a3-6bf2-6b14-7ef9-4969a9a5425b@huawei.com>
- <YUFldgfRYrJyxFtz@T590>
- <60f68f6b-5fff-6a39-b77b-4bbb86f1c87e@huawei.com>
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 9747620776
+	for <nbd@other.debian.org>; Wed, 15 Sep 2021 08:05:50 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.57])
+	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4H8Xnc0K2Mz8t3B;
+	Wed, 15 Sep 2021 16:05:08 +0800 (CST)
+Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2308.8; Wed, 15 Sep 2021 16:05:45 +0800
+Received: from huawei.com (10.175.127.227) by dggema762-chm.china.huawei.com
+ (10.1.198.204) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.8; Wed, 15
+ Sep 2021 16:05:44 +0800
+From: Yu Kuai <yukuai3@huawei.com>
+To: <axboe@kernel.dk>, <josef@toxicpanda.com>, <ming.lei@redhat.com>,
+	<hch@infradead.org>
+CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nbd@other.debian.org>, <yukuai3@huawei.com>, <yi.zhang@huawei.com>
+Subject: [PATCH v6 0/6] handle unexpected message from server
+Date: Wed, 15 Sep 2021 16:15:31 +0800
+Message-ID: <20210915081537.1684327-1-yukuai3@huawei.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <60f68f6b-5fff-6a39-b77b-4bbb86f1c87e@huawei.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Type: text/plain
+X-Originating-IP: [10.175.127.227]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ dggema762-chm.china.huawei.com (10.1.198.204)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <MzKvwVMP9-C.A._uC.9BXQhB@bendel>
+Resent-Message-ID: <u1cM-a8A4BO.A.K5C.B0aQhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1465
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1466
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -95,80 +76,98 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YUFsja+cIxhFY7c0@T590
-Resent-Date: Wed, 15 Sep 2021 04:03:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210915081537.1684327-1-yukuai3@huawei.com
+Resent-Date: Wed, 15 Sep 2021 08:21:21 +0000 (UTC)
 
-On Wed, Sep 15, 2021 at 11:36:47AM +0800, yukuai (C) wrote:
-> On 2021/09/15 11:16, Ming Lei wrote:
-> > On Wed, Sep 15, 2021 at 09:54:09AM +0800, yukuai (C) wrote:
-> > > On 2021/09/14 22:37, Ming Lei wrote:
-> > > > On Tue, Sep 14, 2021 at 05:19:31PM +0800, yukuai (C) wrote:
-> > > > > On 在 2021/09/14 15:46, Ming Lei wrote:
-> > > > > 
-> > > > > > If the above can happen, blk_mq_find_and_get_req() may not fix it too, just
-> > > > > > wondering why not take the following simpler way for avoiding the UAF?
-> > > > > > 
-> > > > > > diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> > > > > > index 5170a630778d..dfa5cce71f66 100644
-> > > > > > --- a/drivers/block/nbd.c
-> > > > > > +++ b/drivers/block/nbd.c
-> > > > > > @@ -795,9 +795,13 @@ static void recv_work(struct work_struct *work)
-> > > > > >     						     work);
-> > > > > >     	struct nbd_device *nbd = args->nbd;
-> > > > > >     	struct nbd_config *config = nbd->config;
-> > > > > > +	struct request_queue *q = nbd->disk->queue;
-> > > > > >     	struct nbd_cmd *cmd;
-> > > > > >     	struct request *rq;
-> > > > > > +	if (!percpu_ref_tryget(&q->q_usage_counter))
-> > > > > > +                return;
-> > > > > > +
-> > > > > >     	while (1) {
-> > > > > >     		cmd = nbd_read_stat(nbd, args->index);
-> > > > > >     		if (IS_ERR(cmd)) {
-> > > > > > @@ -813,6 +817,7 @@ static void recv_work(struct work_struct *work)
-> > > > > >     		if (likely(!blk_should_fake_timeout(rq->q)))
-> > > > > >     			blk_mq_complete_request(rq);
-> > > > > >     	}
-> > > > > > +	blk_queue_exit(q);
-> > > > > >     	nbd_config_put(nbd);
-> > > > > >     	atomic_dec(&config->recv_threads);
-> > > > > >     	wake_up(&config->recv_wq);
-> > > > > > 
-> > > > > 
-> > > > > Hi, Ming
-> > > > > 
-> > > > > This apporch is wrong.
-> > > > > 
-> > > > > If blk_mq_freeze_queue() is called, and nbd is waiting for all
-> > > > > request to complete. percpu_ref_tryget() will fail here, and deadlock
-> > > > > will occur because request can't complete in recv_work().
-> > > > 
-> > > > No, percpu_ref_tryget() won't fail until ->q_usage_counter is zero, when
-> > > > it is perfectly fine to do nothing in recv_work().
-> > > > 
-> > > 
-> > > Hi Ming
-> > > 
-> > > This apporch is a good idea, however we should not get q_usage_counter
-> > > in reccv_work(), because It will block freeze queue.
-> > > 
-> > > How about get q_usage_counter in nbd_read_stat(), and put in error path
-> > > or after request completion?
-> > 
-> > OK, looks I missed that nbd_read_stat() needs to wait for incoming reply
-> > first, so how about the following change by partitioning nbd_read_stat()
-> > into nbd_read_reply() and nbd_handle_reply()?
-> 
-> Hi, Ming
-> 
-> The change looks good to me.
-> 
-> Do you want to send a patch to fix this?
+This patch set tries to fix that client might oops if nbd server send
+unexpected message to client, for example, our syzkaller report a uaf
+in nbd_read_stat():
 
-I guess you may add inflight check or sort of change in nbd_read_stat(), so feel
-free to fold it into your series.
+Call trace:
+ dump_backtrace+0x0/0x310 arch/arm64/kernel/time.c:78
+ show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x144/0x1b4 lib/dump_stack.c:118
+ print_address_description+0x68/0x2d0 mm/kasan/report.c:253
+ kasan_report_error mm/kasan/report.c:351 [inline]
+ kasan_report+0x134/0x2f0 mm/kasan/report.c:409
+ check_memory_region_inline mm/kasan/kasan.c:260 [inline]
+ __asan_load4+0x88/0xb0 mm/kasan/kasan.c:699
+ __read_once_size include/linux/compiler.h:193 [inline]
+ blk_mq_rq_state block/blk-mq.h:106 [inline]
+ blk_mq_request_started+0x24/0x40 block/blk-mq.c:644
+ nbd_read_stat drivers/block/nbd.c:670 [inline]
+ recv_work+0x1bc/0x890 drivers/block/nbd.c:749
+ process_one_work+0x3ec/0x9e0 kernel/workqueue.c:2147
+ worker_thread+0x80/0x9d0 kernel/workqueue.c:2302
+ kthread+0x1d8/0x1e0 kernel/kthread.c:255
+ ret_from_fork+0x10/0x18 arch/arm64/kernel/entry.S:1174
 
+1) At first, a normal io is submitted and completed with scheduler:
 
-Thanks,
-Ming
+internel_tag = blk_mq_get_tag -> get tag from sched_tags
+ blk_mq_rq_ctx_init
+  sched_tags->rq[internel_tag] = sched_tag->static_rq[internel_tag]
+...
+blk_mq_get_driver_tag
+ __blk_mq_get_driver_tag -> get tag from tags
+ tags->rq[tag] = sched_tag->static_rq[internel_tag]
+
+So, both tags->rq[tag] and sched_tags->rq[internel_tag] are pointing
+to the request: sched_tags->static_rq[internal_tag]. Even if the
+io is finished.
+
+2) nbd server send a reply with random tag directly:
+
+recv_work
+ nbd_read_stat
+  blk_mq_tag_to_rq(tags, tag)
+   rq = tags->rq[tag]
+
+3) if the sched_tags->static_rq is freed:
+
+blk_mq_sched_free_requests
+ blk_mq_free_rqs(q->tag_set, hctx->sched_tags, i)
+  -> step 2) access rq before clearing rq mapping
+  blk_mq_clear_rq_mapping(set, tags, hctx_idx);
+  __free_pages() -> rq is freed here
+
+4) Then, nbd continue to use the freed request in nbd_read_stat()
+
+Changes in v6:
+ - don't set cmd->status to error if request is completed before
+ nbd_clear_req().
+ - get 'q_usage_counter' to prevent accessing freed request through
+ blk_mq_tag_to_rq(), instead of using blk_mq_find_and_get_req().
+Changes in v5:
+ - move patch 1 & 2 in v4 (patch 4 & 5 in v5) behind
+ - add some comment in patch 5
+Changes in v4:
+ - change the name of the patchset, since uaf is not the only problem
+ if server send unexpected reply message.
+ - instead of adding new interface, use blk_mq_find_and_get_req().
+ - add patch 5 to this series
+Changes in v3:
+ - v2 can't fix the problem thoroughly, add patch 3-4 to this series.
+ - modify descriptions.
+ - patch 5 is just a cleanup
+Changes in v2:
+ - as Bart suggested, add a new helper function for drivers to get
+ request by tag.
+
+Yu Kuai (6):
+  nbd: don't handle response without a corresponding request message
+  nbd: make sure request completion won't concurrent
+  nbd: check sock index in nbd_read_stat()
+  nbd: don't start request if nbd_queue_rq() failed
+  nbd: partition nbd_read_stat() into nbd_read_reply() and
+    nbd_handle_reply()
+  nbd: fix uaf in nbd_handle_reply()
+
+ block/blk-core.c    |   1 +
+ drivers/block/nbd.c | 127 ++++++++++++++++++++++++++++++++------------
+ 2 files changed, 94 insertions(+), 34 deletions(-)
+
+-- 
+2.31.1
 
