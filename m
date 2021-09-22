@@ -2,83 +2,76 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCB0C41488D
-	for <lists+nbd@lfdr.de>; Wed, 22 Sep 2021 14:14:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7456A41491B
+	for <lists+nbd@lfdr.de>; Wed, 22 Sep 2021 14:39:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3FD9E20B70; Wed, 22 Sep 2021 12:14:19 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 22 12:14:19 2021
-Old-Return-Path: <eblake@redhat.com>
+	id 2EFB720BD9; Wed, 22 Sep 2021 12:39:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 22 12:39:10 2021
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.5 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4594020B6E
-	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Sep 2021 12:14:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 7BA7620BA8
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Sep 2021 12:21:48 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-8.279 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.25 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-1.969, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Bzl8PqZOcn7c for <lists-other-nbd@bendel.debian.org>;
-	Wed, 22 Sep 2021 12:14:08 +0000 (UTC)
+	with ESMTP id sfZxCx2VvHbS for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Sep 2021 12:21:43 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [216.205.24.124])
-	by bendel.debian.org (Postfix) with ESMTP id 550E720B6B
-	for <nbd@other.debian.org>; Wed, 22 Sep 2021 12:14:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1632312843;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=+xSsbPHQKOwQ9OmkdFU3DkicOwCTWlOdhjf2gURoAqY=;
-	b=Bu77QR3vPbgknYyFXVvzux510MTyLCnXFOEwnCfakr/Y8xZ9Dtr/FMv3YPp5c0ClRb3Y3j
-	7dIlo7Ei8Ayt1YKQPsl+kdpVj263L5ONhFjtvBOE0OCa7U6N4Ug+FZHtnlrgMOWXT8joHj
-	kfK4IQVOZ00oYXg2nCz+m893rrkDnd8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-33-wM_WK9WsNt-yQlVxCkaXgg-1; Wed, 22 Sep 2021 08:12:06 -0400
-X-MC-Unique: wM_WK9WsNt-yQlVxCkaXgg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7EE5E101F000;
-	Wed, 22 Sep 2021 12:12:04 +0000 (UTC)
-Received: from redhat.com (ovpn-115-8.phx2.redhat.com [10.3.115.8])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 2A18E12D4A;
-	Wed, 22 Sep 2021 12:12:03 +0000 (UTC)
-Date: Wed, 22 Sep 2021 07:12:01 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Ming Lei <ming.lei@redhat.com>
-Cc: "yukuai (C)" <yukuai3@huawei.com>, josef@toxicpanda.com,
-	axboe@kernel.dk, hch@infradead.org, linux-block@vger.kernel.org,
-	nbd@other.debian.org, linux-kernel@vger.kernel.org,
-	yi.zhang@huawei.com
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 74E0820B80
+	for <nbd@other.debian.org>; Wed, 22 Sep 2021 12:21:43 +0000 (UTC)
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.56])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4HDy701J3MzWCST;
+	Wed, 22 Sep 2021 20:20:28 +0800 (CST)
+Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2308.8; Wed, 22 Sep 2021 20:21:27 +0800
+Received: from [10.174.176.73] (10.174.176.73) by
+ dggema762-chm.china.huawei.com (10.1.198.204) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2308.8; Wed, 22 Sep 2021 20:21:26 +0800
 Subject: Re: [patch v8 3/7] nbd: check sock index in nbd_read_stat()
-Message-ID: <20210922121201.neskyaenjh64wmyb@redhat.com>
+To: Ming Lei <ming.lei@redhat.com>
+CC: <josef@toxicpanda.com>, <axboe@kernel.dk>, <hch@infradead.org>,
+	<linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
 References: <20210916093350.1410403-1-yukuai3@huawei.com>
  <20210916093350.1410403-4-yukuai3@huawei.com>
- <7e2913ca-1089-9ab7-cfdb-5e8837d36034@huawei.com>
- <YUr1v8zylPOFFXTO@T590>
+ <7e2913ca-1089-9ab7-cfdb-5e8837d36034@huawei.com> <YUr1v8zylPOFFXTO@T590>
+From: "yukuai (C)" <yukuai3@huawei.com>
+Message-ID: <3bfd595e-20a6-c4ab-b041-9bca28a4584f@huawei.com>
+Date: Wed, 22 Sep 2021 20:21:26 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <YUr1v8zylPOFFXTO@T590>
-User-Agent: NeoMutt/20210205-772-2b4c52
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Content-Type: text/plain; charset="gbk"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.174.176.73]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggema762-chm.china.huawei.com (10.1.198.204)
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nvs1jzakVxJ.A.3U.b4xShB@bendel>
+Resent-Message-ID: <FOPwblyGGcJ.A.XDF.uPyShB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1517
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1518
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,27 +81,55 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20210922121201.neskyaenjh64wmyb@redhat.com
-Resent-Date: Wed, 22 Sep 2021 12:14:19 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/3bfd595e-20a6-c4ab-b041-9bca28a4584f@huawei.com
+Resent-Date: Wed, 22 Sep 2021 12:39:10 +0000 (UTC)
 
-On Wed, Sep 22, 2021 at 05:22:07PM +0800, Ming Lei wrote:
+On 2021/09/22 17:22, Ming Lei wrote:
+> On Sun, Sep 19, 2021 at 06:34:28PM +0800, yukuai (C) wrote:
+>> On 2021/09/16 17:33, Yu Kuai wrote:
+>>> The sock that clent send request in nbd_send_cmd() and receive reply
+>>> in nbd_read_stat() should be the same.
+>>>
+>>> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
+>>> ---
+>>>    drivers/block/nbd.c | 4 ++++
+>>>    1 file changed, 4 insertions(+)
+>>>
+>>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>>> index 614c6ab2b8fe..c724a5bd7fa4 100644
+>>> --- a/drivers/block/nbd.c
+>>> +++ b/drivers/block/nbd.c
+>>> @@ -746,6 +746,10 @@ static struct nbd_cmd *nbd_read_stat(struct nbd_device *nbd, int index)
+>>>    		ret = -ENOENT;
+>>>    		goto out;
+>>>    	}
+>>> +	if (cmd->index != index) {
+>>> +		dev_err(disk_to_dev(nbd->disk), "Unexpected reply %d from different sock %d (expected %d)",
+>>> +			tag, index, cmd->index);
+>>> +	}
+>>>    	if (cmd->cmd_cookie != nbd_handle_to_cookie(handle)) {
+>>>    		dev_err(disk_to_dev(nbd->disk), "Double reply on req %p, cmd_cookie %u, handle cookie %u\n",
+>>>    			req, cmd->cmd_cookie, nbd_handle_to_cookie(handle));
+>>>
+>>
+>> Hi, Ming
+>>
+>> Any suggestions about this patch?
 > 
 > I think this one relies on nbd protocol between server and client, and
 > does the protocol require both request and reply xmitted via same
 > socket?
+> 
 
-Yes, a reply must be transmitted on the same socket as the request
-came over.  This is because independent sockets are not required to
-use distinct 64-bit handles, and there is no way for a server to tell
-if independent clients are related to one another; sending a reply on
-the wrong socket is thus not guaranteed to reach the intended client.
-Thus, a compliant server will never send a reply over a different
-socket than the original request, and if a client ever gets a reply
-with a handle it was not expecting, then the server is buggy or
-malicious.
+I searched nbd-server source code, and found that socket_read() and
+send_reply->socket_write() are always come in pares and using the same
+socket.
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+BTW, if server reply a read request from a unexpected sock, then
+nbd_read_stat() might stuck in receiving the read data. And for worse,
+nbd_read_stat() can mistake the normal reply message for the read data
+afterwards and corrupt client.
+
+Thanks,
+Kuai
 
