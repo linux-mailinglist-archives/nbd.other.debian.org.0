@@ -2,76 +2,92 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7456A41491B
-	for <lists+nbd@lfdr.de>; Wed, 22 Sep 2021 14:39:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26FB54149C9
+	for <lists+nbd@lfdr.de>; Wed, 22 Sep 2021 14:54:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2EFB720BD9; Wed, 22 Sep 2021 12:39:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 22 12:39:10 2021
-Old-Return-Path: <yukuai3@huawei.com>
+	id E9F4720C6F; Wed, 22 Sep 2021 12:54:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 22 12:54:10 2021
+Old-Return-Path: <xieyongji@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7BA7620BA8
-	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Sep 2021 12:21:48 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 367B320BD2
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Sep 2021 12:37:58 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.25 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-1.969, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id sfZxCx2VvHbS for <lists-other-nbd@bendel.debian.org>;
-	Wed, 22 Sep 2021 12:21:43 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 74E0820B80
-	for <nbd@other.debian.org>; Wed, 22 Sep 2021 12:21:43 +0000 (UTC)
-Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.56])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4HDy701J3MzWCST;
-	Wed, 22 Sep 2021 20:20:28 +0800 (CST)
-Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
- dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.1.2308.8; Wed, 22 Sep 2021 20:21:27 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- dggema762-chm.china.huawei.com (10.1.198.204) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2308.8; Wed, 22 Sep 2021 20:21:26 +0800
-Subject: Re: [patch v8 3/7] nbd: check sock index in nbd_read_stat()
-To: Ming Lei <ming.lei@redhat.com>
-CC: <josef@toxicpanda.com>, <axboe@kernel.dk>, <hch@infradead.org>,
-	<linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-References: <20210916093350.1410403-1-yukuai3@huawei.com>
- <20210916093350.1410403-4-yukuai3@huawei.com>
- <7e2913ca-1089-9ab7-cfdb-5e8837d36034@huawei.com> <YUr1v8zylPOFFXTO@T590>
-From: "yukuai (C)" <yukuai3@huawei.com>
-Message-ID: <3bfd595e-20a6-c4ab-b041-9bca28a4584f@huawei.com>
-Date: Wed, 22 Sep 2021 20:21:26 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	with ESMTP id DdTSv_Ytzt_2 for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Sep 2021 12:37:53 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pg1-x534.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com [IPv6:2607:f8b0:4864:20::534])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 251AF20BCB
+	for <nbd@other.debian.org>; Wed, 22 Sep 2021 12:37:52 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id e7so2529172pgk.2
+        for <nbd@other.debian.org>; Wed, 22 Sep 2021 05:37:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4r5hHsLSqFPjFI5wR4N7KCh9k5AlpvO2LM7FCfFcAxI=;
+        b=hNagVhUiKO3N7yS2MkYebkvw28gd9fBFAbzhqf7VH2GBGjGxL/qe5rIoy1eduDkHFD
+         SfLuyUuwoWQ8asyw3ItuYiLoP/UX6vp1x6FfvGGTwr6+8oFkzMeoNPR/6Yjojx6H8fqn
+         W4+fj962NmO2LoUf5aSppXon2aGSwlQrgZFyQbQjlymg38riwZhg1ZdUMIoGXsLQ7Am4
+         TelQVCzx8ePx8Scxa1bxFt95UagzdOcEoneMTo4rAplvxbNVER9/UfZQLd+Dtc1B9Cbq
+         IfLP6dsDY9QCdDihlxlKUfHsCbQe2YRlTWNCBrnJaHhtltNCWcBXeVJxtTyCHuKtjkkC
+         SSdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4r5hHsLSqFPjFI5wR4N7KCh9k5AlpvO2LM7FCfFcAxI=;
+        b=t7y35V541UCn0jCixwdA68rV7dODksZ2vUjZK6VSQFRWgEXbE8UhmLyHc8TRr2RtUg
+         D8ZH42OqvEoMwWd3qGsE/mpV5WEgk9dmYR9OTA3eVCqzhDYZZ6XtZsry6f02s/X/VdOt
+         +tkoBoQ6UwfLHAfhDVW+Z0EnbbO01j2YQ3U8gNc/HTPRP1RpqDpr2Q3slDeKjzHQ5NZZ
+         d8H7i+LjQ0eg/jbwJ40POH/PsBMuHUrn3jjUSUpyGKMUEUqvVxPDZi04jhYfwIyFP2pl
+         F52Z/6bRWrof/GNXKPehA3LQ8CysMdqJKTNXfCK38G/qMXRDmP28Mojat+yTRG/1dH04
+         TI5w==
+X-Gm-Message-State: AOAM533AYWWxr7bOoU4DAh8mFTQcr60zfdL9kWsAvmKrpHc2+JwpmdpC
+	O/cbJoQ1upTTChEZeARPB+d6
+X-Google-Smtp-Source: ABdhPJzNKppc244/mgKdjew5hR8qxaVzd/w+KiEBaHXaLnfD5kjRtFp/Ve/yoTpNrqiQWoO1x1/Mkg==
+X-Received: by 2002:a62:6587:0:b0:445:824:58f2 with SMTP id z129-20020a626587000000b00445082458f2mr26165014pfb.82.1632314268225;
+        Wed, 22 Sep 2021 05:37:48 -0700 (PDT)
+Received: from localhost ([139.177.225.253])
+        by smtp.gmail.com with ESMTPSA id fr17sm2268552pjb.17.2021.09.22.05.37.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Sep 2021 05:37:46 -0700 (PDT)
+From: Xie Yongji <xieyongji@bytedance.com>
+To: axboe@kernel.dk,
+	josef@toxicpanda.com,
+	hch@infradead.org
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	yixingchen@bytedance.com
+Subject: [PATCH v2 0/4] Add invalidate_disk() helper for drivers to invalidate the gendisk
+Date: Wed, 22 Sep 2021 20:37:07 +0800
+Message-Id: <20210922123711.187-1-xieyongji@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <YUr1v8zylPOFFXTO@T590>
-Content-Type: text/plain; charset="gbk"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- dggema762-chm.china.huawei.com (10.1.198.204)
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <FOPwblyGGcJ.A.XDF.uPyShB@bendel>
+Resent-Message-ID: <q1UlAAvS7TP.A.hJ.ydyShB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1518
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1519
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -81,55 +97,35 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/3bfd595e-20a6-c4ab-b041-9bca28a4584f@huawei.com
-Resent-Date: Wed, 22 Sep 2021 12:39:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20210922123711.187-1-xieyongji@bytedance.com
+Resent-Date: Wed, 22 Sep 2021 12:54:10 +0000 (UTC)
 
-On 2021/09/22 17:22, Ming Lei wrote:
-> On Sun, Sep 19, 2021 at 06:34:28PM +0800, yukuai (C) wrote:
->> On 2021/09/16 17:33, Yu Kuai wrote:
->>> The sock that clent send request in nbd_send_cmd() and receive reply
->>> in nbd_read_stat() should be the same.
->>>
->>> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
->>> ---
->>>    drivers/block/nbd.c | 4 ++++
->>>    1 file changed, 4 insertions(+)
->>>
->>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->>> index 614c6ab2b8fe..c724a5bd7fa4 100644
->>> --- a/drivers/block/nbd.c
->>> +++ b/drivers/block/nbd.c
->>> @@ -746,6 +746,10 @@ static struct nbd_cmd *nbd_read_stat(struct nbd_device *nbd, int index)
->>>    		ret = -ENOENT;
->>>    		goto out;
->>>    	}
->>> +	if (cmd->index != index) {
->>> +		dev_err(disk_to_dev(nbd->disk), "Unexpected reply %d from different sock %d (expected %d)",
->>> +			tag, index, cmd->index);
->>> +	}
->>>    	if (cmd->cmd_cookie != nbd_handle_to_cookie(handle)) {
->>>    		dev_err(disk_to_dev(nbd->disk), "Double reply on req %p, cmd_cookie %u, handle cookie %u\n",
->>>    			req, cmd->cmd_cookie, nbd_handle_to_cookie(handle));
->>>
->>
->> Hi, Ming
->>
->> Any suggestions about this patch?
-> 
-> I think this one relies on nbd protocol between server and client, and
-> does the protocol require both request and reply xmitted via same
-> socket?
-> 
+This series comes from Christoph Hellwig's suggestion [1]. Some block
+device drivers such as loop driver and nbd driver need to invalidate
+the gendisk when the backend is detached so that the gendisk can be
+reused by the new backend. Now the invalidation is done in device
+driver with their own ways. To avoid code duplication and hide
+some internals of the implementation, this series adds a block layer
+helper and makes both loop driver and nbd driver use it.
 
-I searched nbd-server source code, and found that socket_read() and
-send_reply->socket_write() are always come in pares and using the same
-socket.
+[1] https://lore.kernel.org/all/YTmqJHd7YWAQ2lZ7@infradead.org/
 
-BTW, if server reply a read request from a unexpected sock, then
-nbd_read_stat() might stuck in receiving the read data. And for worse,
-nbd_read_stat() can mistake the normal reply message for the read data
-afterwards and corrupt client.
+V1 to V2:
+- Rename invalidate_gendisk() to invalidate_disk()
+- Add a cleanup patch to remove bdev checks and bdev variable in __loop_clr_fd()
 
-Thanks,
-Kuai
+Xie Yongji (4):
+  block: Add invalidate_disk() helper to invalidate the gendisk
+  loop: Use invalidate_disk() helper to invalidate gendisk
+  loop: Remove the unnecessary bdev checks and unused bdev variable
+  nbd: Use invalidate_disk() helper on disconnect
+
+ block/genhd.c         | 20 ++++++++++++++++++++
+ drivers/block/loop.c  | 15 ++++-----------
+ drivers/block/nbd.c   | 12 +++---------
+ include/linux/genhd.h |  2 ++
+ 4 files changed, 29 insertions(+), 20 deletions(-)
+
+-- 
+2.11.0
 
