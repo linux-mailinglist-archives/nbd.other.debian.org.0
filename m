@@ -1,78 +1,95 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FCE041CD55
-	for <lists+nbd@lfdr.de>; Wed, 29 Sep 2021 22:22:56 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72B7841CD7F
+	for <lists+nbd@lfdr.de>; Wed, 29 Sep 2021 22:39:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1C76F20389; Wed, 29 Sep 2021 20:22:56 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 29 20:22:56 2021
-Old-Return-Path: <yukuai3@huawei.com>
+	id 5CCA8207D8; Wed, 29 Sep 2021 20:39:31 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep 29 20:39:31 2021
+Old-Return-Path: <ndesaulniers@google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=4.0 tests=DIGITS_LETTERS,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H2 autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-4.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIMWL_WL_MED,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	FVGT_m_MULTI_ODD,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
+	USER_IN_DEF_DKIM_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0D8DE20440
-	for <lists-other-nbd@bendel.debian.org>; Wed, 29 Sep 2021 12:55:05 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 4AFE2207AE
+	for <lists-other-nbd@bendel.debian.org>; Wed, 29 Sep 2021 20:16:40 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.791 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.03,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-6.661 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1,
+	DKIMWL_WL_MED=-0.001, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FVGT_m_MULTI_ODD=0.02,
+	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	USER_IN_DEF_DKIM_WL=-7.5] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 3wBYQ8NcoEM3 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 29 Sep 2021 12:54:59 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga03-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 6654120464
-	for <nbd@other.debian.org>; Wed, 29 Sep 2021 12:54:55 +0000 (UTC)
-Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.53])
-	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4HKGXP4W3Jz8tV5;
-	Wed, 29 Sep 2021 20:53:57 +0800 (CST)
-Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
- dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.1.2308.8; Wed, 29 Sep 2021 20:54:49 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- dggema762-chm.china.huawei.com (10.1.198.204) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2308.8; Wed, 29 Sep 2021 20:54:49 +0800
-Subject: Re: [patch v8 0/7] handle unexpected message from server
-From: "yukuai (C)" <yukuai3@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <ming.lei@redhat.com>,
-	<hch@infradead.org>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-References: <20210916093350.1410403-1-yukuai3@huawei.com>
- <f56cc608-ac55-0eee-f3d0-19ba1a8c22ef@huawei.com>
-Message-ID: <37b222c1-d6b0-3e46-248a-2557db40ae92@huawei.com>
-Date: Wed, 29 Sep 2021 20:54:48 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	with ESMTP id RSo_7ZOwE00W for <lists-other-nbd@bendel.debian.org>;
+	Wed, 29 Sep 2021 20:16:34 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-lf1-x12d.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com [IPv6:2a00:1450:4864:20::12d])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 81639207AD
+	for <nbd@other.debian.org>; Wed, 29 Sep 2021 20:16:31 +0000 (UTC)
+Received: by mail-lf1-x12d.google.com with SMTP id x27so15807206lfu.5
+        for <nbd@other.debian.org>; Wed, 29 Sep 2021 13:16:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dXMsl02ir9gZe15hXtiBjL0oNEGYPzQSwMubAcb7BYw=;
+        b=hLqJUzWkLdIyKSt44xdZNe3K6Z8zqSML/DRC5qqOOA9zb2RVFgywUZrsfgfdCnwar7
+         jy6xYOZfutwWImpkURGChQ/P+HVK7hu799iFnnPC6yzVRDHmC6SuIiLkYe2cp89Itan+
+         /4JXq6/566+QDWiPUga8/i8OxBdjDp+KWTEfG2dG46azCn3zeB53IM9oGfNCcVQgilME
+         jRbz9eGlMfrx1RI2SkO6EWQ01jdq2no5Z571SYgeHYEq1VuZuRaMQWmYVrO5F6HuVE0n
+         /kyf38nTBojYdxulniLlbSR6zo5Ob/GzZvZXVC4x/WCpCdqpSCydIN5CHQvdc75P+f5r
+         7HuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dXMsl02ir9gZe15hXtiBjL0oNEGYPzQSwMubAcb7BYw=;
+        b=MAgjdFKBR80gLv6Aie12trLQTp9LzPujXkdVO4cR40aedXZ4SDBQbp0nktm5JI6m9M
+         AEt+GTEWzgzbzTydek/zkWibFF5e5oouqTd8V0LgKVLGmrAgHsLLBPll3Gmo0p0N0QEX
+         /q0CfOiOiDh5SaMxi+j1jUgeE+l19nZpSavd6hL6oMGIn9Y0yWQjc0fjZkgFrcPO0NgS
+         pICxF4bE+l9UO97d6Tpdm53zz5wuREGq7iPjDZQLUpzSFEiYPq7SWKMMYy1dA0JfSbth
+         zu6yQLkJIM/OT7eCC7bpMjdajQtPFv5VT+wEAOf5znsZ4wg/TRsbwZb1Mrm8G4VZFZos
+         mFhQ==
+X-Gm-Message-State: AOAM530IhhOhPAtK76TRyjMgFg0xtyfb+E3CDZtiHO7wRz8hD1XKCwvx
+	x/ZI9gPVY5m7xzm7QHoxfam2XbWIG1f57q2bUoFiRg==
+X-Google-Smtp-Source: ABdhPJyMCijvghXPMHxRTIkwCi5TSR0fl4vAeXD5GcOIlYdzZ658wKRP3E/Q9D6+tLnC0Q3tZSSI+o1OBxmgLLmrvvg=
+X-Received: by 2002:a2e:b892:: with SMTP id r18mr1992643ljp.220.1632946588318;
+ Wed, 29 Sep 2021 13:16:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <f56cc608-ac55-0eee-f3d0-19ba1a8c22ef@huawei.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggema762-chm.china.huawei.com (10.1.198.204)
-X-CFilter-Loop: Reflected
+References: <20210920232533.4092046-1-ndesaulniers@google.com>
+In-Reply-To: <20210920232533.4092046-1-ndesaulniers@google.com>
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Wed, 29 Sep 2021 13:16:16 -0700
+Message-ID: <CAKwvOdkkwOB3v34Tx_8akVR3BSR_R7eD8BDBPbJyH=74wLB3dw@mail.gmail.com>
+Subject: Re: [PATCH] nbd: use shifts rather than multiplies
+To: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>, 
+	Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org, 
+	Arnd Bergmann <arnd@kernel.org>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+	Naresh Kamboju <naresh.kamboju@linaro.org>, Nathan Chancellor <nathan@kernel.org>, 
+	Stephen Rothwell <sfr@canb.auug.org.au>, Kees Cook <keescook@chromium.org>, 
+	Pavel Machek <pavel@ucw.cz>, linux-block@vger.kernel.org, nbd@other.debian.org, 
+	linux-kernel@vger.kernel.org, llvm@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <5lRyNMHiOfN.A.x6C.gsMVhB@bendel>
+Resent-Message-ID: <XIUB6Ja00QM.A.KcC.D8MVhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1532
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1533
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -82,114 +99,198 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/37b222c1-d6b0-3e46-248a-2557db40ae92@huawei.com
-Resent-Date: Wed, 29 Sep 2021 20:22:56 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAKwvOdkkwOB3v34Tx_8akVR3BSR_R7eD8BDBPbJyH=74wLB3dw@mail.gmail.com
+Resent-Date: Wed, 29 Sep 2021 20:39:31 +0000 (UTC)
 
-On 2021/09/23 21:33, yukuai (C) wrote:
-> On 2021/09/16 17:33, Yu Kuai wrote:
-> 
-> Hi, jens
-> 
-> Any interest to apply this series?
+On Mon, Sep 20, 2021 at 4:25 PM Nick Desaulniers
+<ndesaulniers@google.com> wrote:
+>
+> commit fad7cd3310db ("nbd: add the check to prevent overflow in
+> __nbd_ioctl()") raised an issue from the fallback helpers added in
+> commit f0907827a8a9 ("compiler.h: enable builtin overflow checkers and
+> add fallback code")
+>
+> ERROR: modpost: "__divdi3" [drivers/block/nbd.ko] undefined!
+>
+> As Stephen Rothwell notes:
+>   The added check_mul_overflow() call is being passed 64 bit values.
+>   COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW is not set for this build (see
+>   include/linux/overflow.h).
+>
+> Specifically, the helpers for checking whether the results of a
+> multiplication overflowed (__unsigned_mul_overflow,
+> __signed_add_overflow) use the division operator when
+> !COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW.  This is problematic for 64b
+> operands on 32b hosts.
+>
+> This was fixed upstream by
+> commit 76ae847497bc ("Documentation: raise minimum supported version of
+> GCC to 5.1")
+> which is not suitable to be backported to stable.
+>
+> Further, __builtin_mul_overflow() would emit a libcall to a
+> compiler-rt-only symbol when compiling with clang < 14 for 32b targets.
+>
+> ld.lld: error: undefined symbol: __mulodi4
+>
+> In order to keep stable buildable with GCC 4.9 and clang < 14, modify
+> struct nbd_config to instead track the number of bits of the block size;
+> reconstructing the block size using runtime checked shifts that are not
+> problematic for those compilers and in a ways that can be backported to
+> stable.
+>
+> In nbd_set_size, we do validate that the value of blksize must be a
+> power of two (POT) and is in the range of [512, PAGE_SIZE] (both
+> inclusive).
+>
+> This does modify the debugfs interface.
+>
+> Cc: stable@vger.kernel.org
+> Cc: Arnd Bergmann <arnd@kernel.org>
+> Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+> Link: https://github.com/ClangBuiltLinux/linux/issues/1438
+> Link: https://lore.kernel.org/all/20210909182525.372ee687@canb.auug.org.au/
+> Link: https://lore.kernel.org/stable/CAHk-=whiQBofgis_rkniz8GBP9wZtSZdcDEffgSLO62BUGV3gg@mail.gmail.com/
+> Reported-by: Naresh Kamboju <naresh.kamboju@linaro.org>
+> Reported-by: Nathan Chancellor <nathan@kernel.org>
+> Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
+> Suggested-by: Kees Cook <keescook@chromium.org>
+> Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
+> Suggested-by: Pavel Machek <pavel@ucw.cz>
+> Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
 
-friendly ping ...
-> 
-> Thanks,
-> Kuai
->> This patch set tries to fix that client might oops if nbd server send
->> unexpected message to client, for example, our syzkaller report a uaf
->> in nbd_read_stat():
->>
->> Call trace:
->>   dump_backtrace+0x0/0x310 arch/arm64/kernel/time.c:78
->>   show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
->>   __dump_stack lib/dump_stack.c:77 [inline]
->>   dump_stack+0x144/0x1b4 lib/dump_stack.c:118
->>   print_address_description+0x68/0x2d0 mm/kasan/report.c:253
->>   kasan_report_error mm/kasan/report.c:351 [inline]
->>   kasan_report+0x134/0x2f0 mm/kasan/report.c:409
->>   check_memory_region_inline mm/kasan/kasan.c:260 [inline]
->>   __asan_load4+0x88/0xb0 mm/kasan/kasan.c:699
->>   __read_once_size include/linux/compiler.h:193 [inline]
->>   blk_mq_rq_state block/blk-mq.h:106 [inline]
->>   blk_mq_request_started+0x24/0x40 block/blk-mq.c:644
->>   nbd_read_stat drivers/block/nbd.c:670 [inline]
->>   recv_work+0x1bc/0x890 drivers/block/nbd.c:749
->>   process_one_work+0x3ec/0x9e0 kernel/workqueue.c:2147
->>   worker_thread+0x80/0x9d0 kernel/workqueue.c:2302
->>   kthread+0x1d8/0x1e0 kernel/kthread.c:255
->>   ret_from_fork+0x10/0x18 arch/arm64/kernel/entry.S:1174
->>
->> 1) At first, a normal io is submitted and completed with scheduler:
->>
->> internel_tag = blk_mq_get_tag -> get tag from sched_tags
->>   blk_mq_rq_ctx_init
->>    sched_tags->rq[internel_tag] = sched_tag->static_rq[internel_tag]
->> ...
->> blk_mq_get_driver_tag
->>   __blk_mq_get_driver_tag -> get tag from tags
->>   tags->rq[tag] = sched_tag->static_rq[internel_tag]
->>
->> So, both tags->rq[tag] and sched_tags->rq[internel_tag] are pointing
->> to the request: sched_tags->static_rq[internal_tag]. Even if the
->> io is finished.
->>
->> 2) nbd server send a reply with random tag directly:
->>
->> recv_work
->>   nbd_read_stat
->>    blk_mq_tag_to_rq(tags, tag)
->>     rq = tags->rq[tag]
->>
->> 3) if the sched_tags->static_rq is freed:
->>
->> blk_mq_sched_free_requests
->>   blk_mq_free_rqs(q->tag_set, hctx->sched_tags, i)
->>    -> step 2) access rq before clearing rq mapping
->>    blk_mq_clear_rq_mapping(set, tags, hctx_idx);
->>    __free_pages() -> rq is freed here
->>
->> 4) Then, nbd continue to use the freed request in nbd_read_stat()
->>
->> Changes in v8:
->>   - add patch 5 to this series.
->>   - modify some words.
->> Changes in v7:
->>   - instead of exposing blk_queue_exit(), using percpu_ref_put()
->>   directly.
->>   - drop the ref right after nbd_handle_reply().
->> Changes in v6:
->>   - don't set cmd->status to error if request is completed before
->>   nbd_clear_req().
->>   - get 'q_usage_counter' to prevent accessing freed request through
->>   blk_mq_tag_to_rq(), instead of using blk_mq_find_and_get_req().
->> Changes in v5:
->>   - move patch 1 & 2 in v4 (patch 4 & 5 in v5) behind
->>   - add some comment in patch 5
->> Changes in v4:
->>   - change the name of the patchset, since uaf is not the only problem
->>   if server send unexpected reply message.
->>   - instead of adding new interface, use blk_mq_find_and_get_req().
->>   - add patch 5 to this series
->> Changes in v3:
->>   - v2 can't fix the problem thoroughly, add patch 3-4 to this series.
->>   - modify descriptions.
->>   - patch 5 is just a cleanup
->> Changes in v2:
->>   - as Bart suggested, add a new helper function for drivers to get
->>   request by tag.
->>
->> Yu Kuai (7):
->>    nbd: don't handle response without a corresponding request message
->>    nbd: make sure request completion won't concurrent
->>    nbd: check sock index in nbd_read_stat()
->>    nbd: don't start request if nbd_queue_rq() failed
->>    nbd: clean up return value checking of sock_xmit()
->>    nbd: partition nbd_read_stat() into nbd_read_reply() and
->>      nbd_handle_reply()
->>    nbd: fix uaf in nbd_handle_reply()
->>
->>   drivers/block/nbd.c | 135 +++++++++++++++++++++++++++++++-------------
->>   1 file changed, 96 insertions(+), 39 deletions(-)
->>
+Hi Josef,
+Do you have cycles to review this patch, or is this something I should
+ask Jens or Linus about picking up?
+
+> ---
+> This patch is kind of a v3 for solving this problem.
+> v2: https://lore.kernel.org/stable/20210914002318.2298583-1-ndesaulniers@google.com/
+> v1: https://lore.kernel.org/stable/20210913203201.1844253-1-ndesaulniers@google.com/
+> But is quite different in approach. Instead of trying to fix up the
+> overflow routines in stable, we amend the code in nbd.c as per Linus
+> (against mainline) with fixes from Kees to use the named overflow
+> checker.
+>
+>  drivers/block/nbd.c | 29 +++++++++++++++++------------
+>  1 file changed, 17 insertions(+), 12 deletions(-)
+>
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 5170a630778d..1183f7872b71 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -97,13 +97,18 @@ struct nbd_config {
+>
+>         atomic_t recv_threads;
+>         wait_queue_head_t recv_wq;
+> -       loff_t blksize;
+> +       unsigned int blksize_bits;
+>         loff_t bytesize;
+>  #if IS_ENABLED(CONFIG_DEBUG_FS)
+>         struct dentry *dbg_dir;
+>  #endif
+>  };
+>
+> +static inline unsigned int nbd_blksize(struct nbd_config *config)
+> +{
+> +       return 1u << config->blksize_bits;
+> +}
+> +
+>  struct nbd_device {
+>         struct blk_mq_tag_set tag_set;
+>
+> @@ -146,7 +151,7 @@ static struct dentry *nbd_dbg_dir;
+>
+>  #define NBD_MAGIC 0x68797548
+>
+> -#define NBD_DEF_BLKSIZE 1024
+> +#define NBD_DEF_BLKSIZE_BITS 10
+>
+>  static unsigned int nbds_max = 16;
+>  static int max_part = 16;
+> @@ -317,12 +322,12 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+>                 loff_t blksize)
+>  {
+>         if (!blksize)
+> -               blksize = NBD_DEF_BLKSIZE;
+> +               blksize = 1u << NBD_DEF_BLKSIZE_BITS;
+>         if (blksize < 512 || blksize > PAGE_SIZE || !is_power_of_2(blksize))
+>                 return -EINVAL;
+>
+>         nbd->config->bytesize = bytesize;
+> -       nbd->config->blksize = blksize;
+> +       nbd->config->blksize_bits = __ffs(blksize);
+>
+>         if (!nbd->task_recv)
+>                 return 0;
+> @@ -1337,7 +1342,7 @@ static int nbd_start_device(struct nbd_device *nbd)
+>                 args->index = i;
+>                 queue_work(nbd->recv_workq, &args->work);
+>         }
+> -       return nbd_set_size(nbd, config->bytesize, config->blksize);
+> +       return nbd_set_size(nbd, config->bytesize, nbd_blksize(config));
+>  }
+>
+>  static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *bdev)
+> @@ -1406,11 +1411,11 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
+>         case NBD_SET_BLKSIZE:
+>                 return nbd_set_size(nbd, config->bytesize, arg);
+>         case NBD_SET_SIZE:
+> -               return nbd_set_size(nbd, arg, config->blksize);
+> +               return nbd_set_size(nbd, arg, nbd_blksize(config));
+>         case NBD_SET_SIZE_BLOCKS:
+> -               if (check_mul_overflow((loff_t)arg, config->blksize, &bytesize))
+> +               if (check_shl_overflow(arg, config->blksize_bits, &bytesize))
+>                         return -EINVAL;
+> -               return nbd_set_size(nbd, bytesize, config->blksize);
+> +               return nbd_set_size(nbd, bytesize, nbd_blksize(config));
+>         case NBD_SET_TIMEOUT:
+>                 nbd_set_cmd_timeout(nbd, arg);
+>                 return 0;
+> @@ -1476,7 +1481,7 @@ static struct nbd_config *nbd_alloc_config(void)
+>         atomic_set(&config->recv_threads, 0);
+>         init_waitqueue_head(&config->recv_wq);
+>         init_waitqueue_head(&config->conn_wait);
+> -       config->blksize = NBD_DEF_BLKSIZE;
+> +       config->blksize_bits = NBD_DEF_BLKSIZE_BITS;
+>         atomic_set(&config->live_connections, 0);
+>         try_module_get(THIS_MODULE);
+>         return config;
+> @@ -1604,7 +1609,7 @@ static int nbd_dev_dbg_init(struct nbd_device *nbd)
+>         debugfs_create_file("tasks", 0444, dir, nbd, &nbd_dbg_tasks_fops);
+>         debugfs_create_u64("size_bytes", 0444, dir, &config->bytesize);
+>         debugfs_create_u32("timeout", 0444, dir, &nbd->tag_set.timeout);
+> -       debugfs_create_u64("blocksize", 0444, dir, &config->blksize);
+> +       debugfs_create_u32("blocksize_bits", 0444, dir, &config->blksize_bits);
+>         debugfs_create_file("flags", 0444, dir, nbd, &nbd_dbg_flags_fops);
+>
+>         return 0;
+> @@ -1826,7 +1831,7 @@ nbd_device_policy[NBD_DEVICE_ATTR_MAX + 1] = {
+>  static int nbd_genl_size_set(struct genl_info *info, struct nbd_device *nbd)
+>  {
+>         struct nbd_config *config = nbd->config;
+> -       u64 bsize = config->blksize;
+> +       u64 bsize = nbd_blksize(config);
+>         u64 bytes = config->bytesize;
+>
+>         if (info->attrs[NBD_ATTR_SIZE_BYTES])
+> @@ -1835,7 +1840,7 @@ static int nbd_genl_size_set(struct genl_info *info, struct nbd_device *nbd)
+>         if (info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES])
+>                 bsize = nla_get_u64(info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES]);
+>
+> -       if (bytes != config->bytesize || bsize != config->blksize)
+> +       if (bytes != config->bytesize || bsize != nbd_blksize(config))
+>                 return nbd_set_size(nbd, bytes, bsize);
+>         return 0;
+>  }
+>
+> base-commit: 4c17ca27923c16fd73bbb9ad033c7d749c3bcfcc
+> --
+> 2.33.0.464.g1972c5931b-goog
+>
+
+
+-- 
+Thanks,
+~Nick Desaulniers
 
