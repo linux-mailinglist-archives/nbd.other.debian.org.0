@@ -1,93 +1,99 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C4D342F80C
-	for <lists+nbd@lfdr.de>; Fri, 15 Oct 2021 18:24:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id C5A1443095C
+	for <lists+nbd@lfdr.de>; Sun, 17 Oct 2021 15:27:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1F6782048D; Fri, 15 Oct 2021 16:24:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Oct 15 16:24:09 2021
-Old-Return-Path: <josef@toxicpanda.com>
+	id C1A9C20703; Sun, 17 Oct 2021 13:27:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Oct 17 13:27:09 2021
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
 	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 2429A20412
-	for <lists-other-nbd@bendel.debian.org>; Fri, 15 Oct 2021 16:08:40 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3A63E206F0
+	for <lists-other-nbd@bendel.debian.org>; Sun, 17 Oct 2021 13:09:29 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.96 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02,
+	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
 	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ofY5vUYX7L10 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 15 Oct 2021 16:08:37 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qv1-xf29.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com [IPv6:2607:f8b0:4864:20::f29])
+	with ESMTP id yPtDVTMh_k7j for <lists-other-nbd@bendel.debian.org>;
+	Sun, 17 Oct 2021 13:09:24 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-il1-x12e.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com [IPv6:2607:f8b0:4864:20::12e])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 946332047F
-	for <nbd@other.debian.org>; Fri, 15 Oct 2021 16:08:37 +0000 (UTC)
-Received: by mail-qv1-xf29.google.com with SMTP id v10so6009757qvb.10
-        for <nbd@other.debian.org>; Fri, 15 Oct 2021 09:08:37 -0700 (PDT)
+	by bendel.debian.org (Postfix) with ESMTPS id 07353206EC
+	for <nbd@other.debian.org>; Sun, 17 Oct 2021 13:09:23 +0000 (UTC)
+Received: by mail-il1-x12e.google.com with SMTP id g2so12173781ild.1
+        for <nbd@other.debian.org>; Sun, 17 Oct 2021 06:09:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=GAdQFrAQZCehdH1e2kq48dvufJAnUqGBfZzJlv3CVek=;
-        b=GP9ebmzC++RxkBJA1tgf6fl3zHixx8sXUIdhiuTWKf+1h1IqjeLYjqcCXFgdSLxHN5
-         qeGMokeltZ5OFlVNuMTUFnJgphwqEgNNhyqBwMs1aWA4rdS1lRKlSt0ayS6v1U+b6lUV
-         8xKEFWpfeiX3vyFjFqFI8uRYAsZ3ThhGI8OA4Qhwl6tsXjn4pF3IIvEoIhQNiNrtGJNR
-         SxXkVwiwTo9peC8qHDnQYpYRdBi4O9TT+YJBwaRQ4ECBjGonnGDR96wltNeJYK9VeX4C
-         N+W0ZjEbAGrPg0V/3Z18PLiiInXE9wvRzcMNUvJmi+d11SJ9eo2EFkmxLXtvkasyCcra
-         ga7g==
+        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=5bsYD8Em0D7Z3gYVmo2trDqgQl0aMsvKApwpq9ahAcU=;
+        b=xV4hT0T6CA4y0A3k3ANvNHqG8G3/93XCm9r4UjDQnqMmbGbDZ8BcV9MX2rnHPAZTlC
+         Mf9dfxvuRNdx2l4UcAh+s6/Wa7lkYJhtg8iEaon8cIwWGsQMgLpgABbC1J7TX9C3Laxu
+         4pcnpprCAH+lu1slTXQo7eY4eqEbQRTSsELPI1oKPf06TPHkAN4bo9122FuiyxMxeXzA
+         KbEJb0HEhoNaL5bkPBX+qngyGrktcVkhboWlHk/rRzuHnNMuJVpVKOwZ8bJDh5ZP66m8
+         473ZoVnE7xV7Kn2s7ml+js/dPTeDdc9L363liKEkmxxy/YjDhjx+LBq0lzkKGGo52/RD
+         Pg/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=GAdQFrAQZCehdH1e2kq48dvufJAnUqGBfZzJlv3CVek=;
-        b=WjqmKawDduAwdv+y8VFUOb+98JdxRfx3gX+4hMiHnd0PwNyXN1sCnbwOqvYI7oEM5q
-         tpocOR86LBdOUolImQE0dhvBKVy/hDhITIzLy1OpIfj/D0pEW/Q6VwPtODSQxx08Vc3b
-         lUWle4QozdgbtznC9sobN4G+1dno6D4Xgddn9uXlLYXnl9+P60SwiScJcMml0rpRWyDH
-         cItaiPJR0N6OfWCxg0hTkfRmftlWw/seqGQNLIrxhVavU3aUdOJS762YCC7qHlag3yq+
-         1kPFxrv52x/EZNQ1++Cjo6CuhI2QmotWeSSa3d91nM6fNQO1x0vnwjvYLxKNEtF+FIby
-         iW7Q==
-X-Gm-Message-State: AOAM532jUnaICT/hXQ+PmsGh5MbmEpy5ESdb7tEWAlJ7IETX5kFbaCB7
-	HpKx/yAkkna6V1qPTD47T7SzhA==
-X-Google-Smtp-Source: ABdhPJz+3YfnV4LNGhTTV9nx5gmdn7QGabe/ydxIfs3HIqfUefe9yrbpYgBC0LUC/sCCpRB2UAd9pw==
-X-Received: by 2002:a0c:e1d0:: with SMTP id v16mr11989800qvl.32.1634314113678;
-        Fri, 15 Oct 2021 09:08:33 -0700 (PDT)
-Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
-        by smtp.gmail.com with ESMTPSA id c26sm2829953qtm.21.2021.10.15.09.08.32
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=5bsYD8Em0D7Z3gYVmo2trDqgQl0aMsvKApwpq9ahAcU=;
+        b=1CqWmC78Bo01qSOM7PZMX3KowCxqAoJsmPBoebNQ+3xA+opuFtvswAXG7huPyDBXwo
+         SaOle5vAj9LWyWK/jBdQuSPNU8bUmhKVVkz0IEkh9egJxy1u9/J6LOMvfjglhivxaQ03
+         aucUHoqcGTvqTzVbg/crTpWk19E+Y0wMHdN2M7cnlT86DcdO8FQFs62GjxjsBE8k8jAK
+         v9VeqjTPKsRlDG7evDNw6VDxxx2z9bgJuXuRJnZ7D9zrp3bKyflVUo/IS0LuB8pjxICo
+         nQNKLiZlGl3rQEq8lEQPbERnGwF0eaondmYROJu5OjDEQt//CNlUZS5OJ5HC1FKuCtzU
+         Sd7A==
+X-Gm-Message-State: AOAM531066fQCH/PkveN+PwSN+QszqR5rDKC56/BMQ9dgAzv9HgYkcBG
+	vBzWbTAcbfRiJ0bb6IcTpCDY3w==
+X-Google-Smtp-Source: ABdhPJzMjZuszotY3Z5QEy3aD5WIuRw83kUGxnkiQsViN8asi/AEYugAnFvKiE2DVcKl3Zpcj2wg9Q==
+X-Received: by 2002:a05:6e02:6c2:: with SMTP id p2mr10732481ils.104.1634476160121;
+        Sun, 17 Oct 2021 06:09:20 -0700 (PDT)
+Received: from localhost.localdomain ([66.219.217.159])
+        by smtp.gmail.com with ESMTPSA id h5sm2543282ili.12.2021.10.17.06.09.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 09:08:32 -0700 (PDT)
-Date: Fri, 15 Oct 2021 12:08:31 -0400
-From: Josef Bacik <josef@toxicpanda.com>
-To: Yu Kuai <yukuai3@huawei.com>
-Cc: axboe@kernel.dk, ming.lei@redhat.com, hch@infradead.org,
-	linux-block@vger.kernel.org, nbd@other.debian.org,
-	linux-kernel@vger.kernel.org, yi.zhang@huawei.com
+        Sun, 17 Oct 2021 06:09:19 -0700 (PDT)
+From: Jens Axboe <axboe@kernel.dk>
+To: hch@infradead.org,
+	ming.lei@redhat.com,
+	Yu Kuai <yukuai3@huawei.com>,
+	josef@toxicpanda.com
+Cc: Jens Axboe <axboe@kernel.dk>,
+	nbd@other.debian.org,
+	yi.zhang@huawei.com,
+	linux-kernel@vger.kernel.org,
+	linux-block@vger.kernel.org
 Subject: Re: [patch v8 0/7] handle unexpected message from server
-Message-ID: <YWmnf58kSPykulbR@localhost.localdomain>
+Date: Sun, 17 Oct 2021 07:09:15 -0600
+Message-Id: <163447615283.94076.10393742236297251525.b4-ty@kernel.dk>
+X-Mailer: git-send-email 2.33.1
+In-Reply-To: <20210916093350.1410403-1-yukuai3@huawei.com>
 References: <20210916093350.1410403-1-yukuai3@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210916093350.1410403-1-yukuai3@huawei.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <dW4Mod_wgRB.A.-EH.psaahB@bendel>
+Resent-Message-ID: <rcUBsSg9J_B.A.XGE.tSCbhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1540
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1541
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -97,10 +103,10 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YWmnf58kSPykulbR@localhost.localdomain
-Resent-Date: Fri, 15 Oct 2021 16:24:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/163447615283.94076.10393742236297251525.b4-ty@kernel.dk
+Resent-Date: Sun, 17 Oct 2021 13:27:09 +0000 (UTC)
 
-On Thu, Sep 16, 2021 at 05:33:43PM +0800, Yu Kuai wrote:
+On Thu, 16 Sep 2021 17:33:43 +0800, Yu Kuai wrote:
 > This patch set tries to fix that client might oops if nbd server send
 > unexpected message to client, for example, our syzkaller report a uaf
 > in nbd_read_stat():
@@ -125,71 +131,27 @@ On Thu, Sep 16, 2021 at 05:33:43PM +0800, Yu Kuai wrote:
 >  kthread+0x1d8/0x1e0 kernel/kthread.c:255
 >  ret_from_fork+0x10/0x18 arch/arm64/kernel/entry.S:1174
 > 
-> 1) At first, a normal io is submitted and completed with scheduler:
-> 
-> internel_tag = blk_mq_get_tag -> get tag from sched_tags
->  blk_mq_rq_ctx_init
->   sched_tags->rq[internel_tag] = sched_tag->static_rq[internel_tag]
-> ...
-> blk_mq_get_driver_tag
->  __blk_mq_get_driver_tag -> get tag from tags
->  tags->rq[tag] = sched_tag->static_rq[internel_tag]
-> 
-> So, both tags->rq[tag] and sched_tags->rq[internel_tag] are pointing
-> to the request: sched_tags->static_rq[internal_tag]. Even if the
-> io is finished.
-> 
-> 2) nbd server send a reply with random tag directly:
-> 
-> recv_work
->  nbd_read_stat
->   blk_mq_tag_to_rq(tags, tag)
->    rq = tags->rq[tag]
-> 
-> 3) if the sched_tags->static_rq is freed:
-> 
-> blk_mq_sched_free_requests
->  blk_mq_free_rqs(q->tag_set, hctx->sched_tags, i)
->   -> step 2) access rq before clearing rq mapping
->   blk_mq_clear_rq_mapping(set, tags, hctx_idx);
->   __free_pages() -> rq is freed here
-> 
-> 4) Then, nbd continue to use the freed request in nbd_read_stat()
-> 
-> Changes in v8:
->  - add patch 5 to this series.
->  - modify some words.
-> Changes in v7:
->  - instead of exposing blk_queue_exit(), using percpu_ref_put()
->  directly.
->  - drop the ref right after nbd_handle_reply().
-> Changes in v6:
->  - don't set cmd->status to error if request is completed before
->  nbd_clear_req().
->  - get 'q_usage_counter' to prevent accessing freed request through
->  blk_mq_tag_to_rq(), instead of using blk_mq_find_and_get_req().
-> Changes in v5:
->  - move patch 1 & 2 in v4 (patch 4 & 5 in v5) behind
->  - add some comment in patch 5
-> Changes in v4:
->  - change the name of the patchset, since uaf is not the only problem
->  if server send unexpected reply message.
->  - instead of adding new interface, use blk_mq_find_and_get_req().
->  - add patch 5 to this series
-> Changes in v3:
->  - v2 can't fix the problem thoroughly, add patch 3-4 to this series.
->  - modify descriptions.
->  - patch 5 is just a cleanup
-> Changes in v2:
->  - as Bart suggested, add a new helper function for drivers to get
->  request by tag.
-> 
+> [...]
 
-You can add
+Applied, thanks!
 
-Reviewed-by: Josef Bacik <josef@toxicpanda.com>
+[1/7] nbd: don't handle response without a corresponding request message
+      commit: b5644a3a79bf3be5f1238db1b2f241374b27b0f0
+[2/7] nbd: make sure request completion won't concurrent
+      commit: d14b304f558f8c8f53da3a8d0c0b671f14a9c2f4
+[3/7] nbd: check sock index in nbd_read_stat()
+      commit: dbd73178da676945d8bbcf6afe731623f683ce0a
+[4/7] nbd: don't start request if nbd_queue_rq() failed
+      commit: a83fdc85365586dc5c0f3ff91680e18e37a66f19
+[5/7] nbd: clean up return value checking of sock_xmit()
+      commit: 6157a8f489909db00151a4e361903b9099b03b75
+[6/7] nbd: partition nbd_read_stat() into nbd_read_reply() and nbd_handle_reply()
+      commit: 961e9f50be9bb47835b0ac7e08d55d2d0a45e493
+[7/7] nbd: fix uaf in nbd_handle_reply()
+      commit: 52c90e0184f67eecb00b53b79bfdf75e0274f8fd
 
-to the series.  Sorry Jens, this one slipped through the cracks.  Thanks,
+Best regards,
+-- 
+Jens Axboe
 
-Josef
 
