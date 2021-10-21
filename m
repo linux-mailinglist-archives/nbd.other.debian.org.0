@@ -1,72 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE02C434E14
-	for <lists+nbd@lfdr.de>; Wed, 20 Oct 2021 16:39:20 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21632435996
+	for <lists+nbd@lfdr.de>; Thu, 21 Oct 2021 05:57:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D5A152034D; Wed, 20 Oct 2021 14:39:20 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct 20 14:39:20 2021
-Old-Return-Path: <yebin10@huawei.com>
+	id E254420326; Thu, 21 Oct 2021 03:57:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Oct 21 03:57:13 2021
+Old-Return-Path: <xieyongji@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 351852037E
-	for <lists-other-nbd@bendel.debian.org>; Wed, 20 Oct 2021 14:23:57 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 53A30202E9
+	for <lists-other-nbd@bendel.debian.org>; Thu, 21 Oct 2021 03:41:39 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.162 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id OF6vyH3jLPrC for <lists-other-nbd@bendel.debian.org>;
-	Wed, 20 Oct 2021 14:23:52 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B6D592037D
-	for <nbd@other.debian.org>; Wed, 20 Oct 2021 14:23:51 +0000 (UTC)
-Received: from dggeme754-chm.china.huawei.com (unknown [172.30.72.55])
-	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4HZCVv52JDz8tjk;
-	Wed, 20 Oct 2021 22:22:31 +0800 (CST)
-Received: from [10.174.178.185] (10.174.178.185) by
- dggeme754-chm.china.huawei.com (10.3.19.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2308.15; Wed, 20 Oct 2021 22:23:45 +0800
-Subject: Re: [PATCH -next] nbd: Fix hungtask when nbd_config_put
-To: Josef Bacik <josef@toxicpanda.com>
-References: <20211020094830.3056325-1-yebin10@huawei.com>
- <YXAh7tWFbpukMi6+@localhost.localdomain>
-CC: <axboe@kernel.dk>, <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>
-From: yebin <yebin10@huawei.com>
-Message-ID: <61702671.6050807@huawei.com>
-Date: Wed, 20 Oct 2021 22:23:45 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101
- Thunderbird/38.1.0
+	with ESMTP id NLbh6KWkFvvo for <lists-other-nbd@bendel.debian.org>;
+	Thu, 21 Oct 2021 03:41:34 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-ed1-x52e.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com [IPv6:2a00:1450:4864:20::52e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 017EC20305
+	for <nbd@other.debian.org>; Thu, 21 Oct 2021 03:41:33 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id y12so2236618eda.4
+        for <nbd@other.debian.org>; Wed, 20 Oct 2021 20:41:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=McvdtKIiqbJKho9tX4x87O/fd2EXpjSgFzXvW6u0Imc=;
+        b=DMtGEjuhV5m6n2YMBOXwrOkGqgqFrOZCW9dqXDwK9rwlr8fxcR//1xWg1sanyHoU0n
+         rXgszI8g49Br9or2aGYe/BdvLdL/7bUNkIDBYSQ3vSAl3Rtf9X87npwugqj45YX3PKrB
+         W6sRs5MSeFGvPY2SqcPveMSVWSTYmv3AS/Axx9M7fuS1YYbRAj7WbO2CJ/P0Ce4OSGMe
+         x98vWiux0ToM7D+bq+fDOoc3qgfmIC/GJG+nr/I/SXGmId/MdX5MnGhYGmMbQLvNVbGF
+         /iCKFVs+83YZB3+XH2Dj3Q3t93ld+Xhi9+VknhTEBMwwq426TBbj0ZZr8Wu7+U3tLaAg
+         qoiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=McvdtKIiqbJKho9tX4x87O/fd2EXpjSgFzXvW6u0Imc=;
+        b=1MCtAlrI6gAOGHtp889nHbR0rNkN45t4Ey+VLEdFUwTdkKfn92eh1KVpnMlOa9DVZL
+         wsGib12iDAt4sZdnCUoS3DpULObo8p3fmD60D/h6b+BQDwgIQ7d4Ht1Xg6uecQhn5QmQ
+         Krv1lTh9GI5nJCPvF8H1dF6LrCpgXUg2Yeeg6FlZLYHx6RNm+/T/hadYNRGWfrLmANcr
+         ZttgOxAGgjRpDrKypbmDDN0IeXxLoTbJjMzfN3WAZ2PdcVfR9ajgaMe+FaXdQAv0kL2r
+         lWs++B7tYNEakBGHID5kxcLOEsOMhDiAqdKyHuqdO3eRaP4DCKKMnVGJgjvZUOTvO6V8
+         gzxA==
+X-Gm-Message-State: AOAM531d5iJFXvHdigaf7FOtM6a95vFdQskBJfY+AS5U0jdb6+ZJadjC
+	sz42+aa28fWPK2m4IxIAGxl2ooshaOI8Q3t8NIwZ
+X-Google-Smtp-Source: ABdhPJwwycD3BOlgLRwtbfdeQIFF8lCnZ3zK2U2WgdBwXKurxRrTdhXlcGLLGO9LX//giL1PYizPX0wbHcMe8ukay9s=
+X-Received: by 2002:a05:6402:5113:: with SMTP id m19mr4241359edd.231.1634787689973;
+ Wed, 20 Oct 2021 20:41:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <YXAh7tWFbpukMi6+@localhost.localdomain>
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.178.185]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- dggeme754-chm.china.huawei.com (10.3.19.100)
-X-CFilter-Loop: Reflected
+References: <20210922123711.187-1-xieyongji@bytedance.com>
+In-Reply-To: <20210922123711.187-1-xieyongji@bytedance.com>
+From: Yongji Xie <xieyongji@bytedance.com>
+Date: Thu, 21 Oct 2021 11:41:19 +0800
+Message-ID: <CACycT3u3gr2+4AZGbuTEmH1hDkQArCFLgJ38XzJR-dWXy3ddUw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] Add invalidate_disk() helper for drivers to
+ invalidate the gendisk
+To: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>, 
+	Christoph Hellwig <hch@infradead.org>
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org, 
+	yixingchen@bytedance.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <YL82ihm16EM.A.MHF.YoCchB@bendel>
+Resent-Message-ID: <EpXkRBjGhpF.A.UWH.ZUOchB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1548
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1549
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -76,83 +93,40 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/61702671.6050807@huawei.com
-Resent-Date: Wed, 20 Oct 2021 14:39:20 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CACycT3u3gr2+4AZGbuTEmH1hDkQArCFLgJ38XzJR-dWXy3ddUw@mail.gmail.com
+Resent-Date: Thu, 21 Oct 2021 03:57:13 +0000 (UTC)
 
+Ping
 
-
-On 2021/10/20 22:04, Josef Bacik wrote:
-> On Wed, Oct 20, 2021 at 05:48:30PM +0800, Ye Bin wrote:
->> I got follow issue:
->> [  247.381177] INFO: task kworker/u10:0:47 blocked for more than 120 seconds.
->> [  247.382644]       Not tainted 4.19.90-dirty #140
->> [  247.383502] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
->> [  247.385027] Call Trace:
->> [  247.388384]  schedule+0xb8/0x3c0
->> [  247.388966]  schedule_timeout+0x2b4/0x380
->> [  247.392815]  wait_for_completion+0x367/0x510
->> [  247.397713]  flush_workqueue+0x32b/0x1340
->> [  247.402700]  drain_workqueue+0xda/0x3c0
->> [  247.403442]  destroy_workqueue+0x7b/0x690
->> [  247.405014]  nbd_config_put.cold+0x2f9/0x5b6
->> [  247.405823]  recv_work+0x1fd/0x2b0
->> [  247.406485]  process_one_work+0x70b/0x1610
->> [  247.407262]  worker_thread+0x5a9/0x1060
->> [  247.408699]  kthread+0x35e/0x430
->> [  247.410918]  ret_from_fork+0x1f/0x30
->>
->> We can reprodeuce issue as follows:
->> 1. Inject memory fault in nbd_start_device
->> @@ -1244,10 +1248,18 @@ static int nbd_start_device(struct nbd_device *nbd)
->>          nbd_dev_dbg_init(nbd);
->>          for (i = 0; i < num_connections; i++) {
->>                  struct recv_thread_args *args;
->> -
->> -               args = kzalloc(sizeof(*args), GFP_KERNEL);
->> +
->> +               if (i == 1) {
->> +                       args = NULL;
->> +                       printk("%s: inject malloc error\n", __func__);
->> +               }
->> +               else
->> +                       args = kzalloc(sizeof(*args), GFP_KERNEL);
->> 2. Inject delay in recv_work
->> @@ -757,6 +760,8 @@ static void recv_work(struct work_struct *work)
->>
->>                  blk_mq_complete_request(blk_mq_rq_from_pdu(cmd));
->>          }
->> +       printk("%s: comm=%s pid=%d\n", __func__, current->comm, current->pid);
->> +       mdelay(5 * 1000);
->>          nbd_config_put(nbd);
->>          atomic_dec(&config->recv_threads);
->>          wake_up(&config->recv_wq);
->> 3. Create nbd server
->> nbd-server 8000 /tmp/disk
->> 4. Create nbd client
->> nbd-client localhost 8000 /dev/nbd1
->> Then will trigger above issue.
->>
->> Reason is when add delay in recv_work, lead to relase the last reference
->> of 'nbd->config_refs'. nbd_config_put will call flush_workqueue to make
->> all work finish. Obviously, it will lead to deadloop.
->> To solve this issue, we must ensure 'recv_work' all exit before release
->> the last 'nbd->config_refs' reference count.
->>
->> Signed-off-by: Ye Bin <yebin10@huawei.com>
-> This isn't the way to fix this.  The crux of the problem is the fact that we
-> destroy the recv_workq at config time anyway, since it is tied to the nbd
-> device.
+On Wed, Sep 22, 2021 at 8:37 PM Xie Yongji <xieyongji@bytedance.com> wrote:
 >
-> Fix this instead by getting rid of that, and have the nbd device teardown the
-> recv_workq when we destory the nbd device.  Alloc it on device allocation and
-> stop alloc'ing it with the config.  That way we don't have this weird thing
-> where we need recv threads to drop their config before the last thing.
+> This series comes from Christoph Hellwig's suggestion [1]. Some block
+> device drivers such as loop driver and nbd driver need to invalidate
+> the gendisk when the backend is detached so that the gendisk can be
+> reused by the new backend. Now the invalidation is done in device
+> driver with their own ways. To avoid code duplication and hide
+> some internals of the implementation, this series adds a block layer
+> helper and makes both loop driver and nbd driver use it.
 >
-> And while you're at it would you fix recv_work() so it doesn't modify config
-> after it drops it's reference?  Thanks,
+> [1] https://lore.kernel.org/all/YTmqJHd7YWAQ2lZ7@infradead.org/
 >
-> Josef
-> .
-Thank you for your reply, I'll make another patch according to your 
-suggestion.
+> V1 to V2:
+> - Rename invalidate_gendisk() to invalidate_disk()
+> - Add a cleanup patch to remove bdev checks and bdev variable in __loop_clr_fd()
+>
+> Xie Yongji (4):
+>   block: Add invalidate_disk() helper to invalidate the gendisk
+>   loop: Use invalidate_disk() helper to invalidate gendisk
+>   loop: Remove the unnecessary bdev checks and unused bdev variable
+>   nbd: Use invalidate_disk() helper on disconnect
+>
+>  block/genhd.c         | 20 ++++++++++++++++++++
+>  drivers/block/loop.c  | 15 ++++-----------
+>  drivers/block/nbd.c   | 12 +++---------
+>  include/linux/genhd.h |  2 ++
+>  4 files changed, 29 insertions(+), 20 deletions(-)
+>
+> --
+> 2.11.0
+>
 
