@@ -2,98 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A993043934F
-	for <lists+nbd@lfdr.de>; Mon, 25 Oct 2021 12:03:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D28094397F2
+	for <lists+nbd@lfdr.de>; Mon, 25 Oct 2021 15:57:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 910BC20549; Mon, 25 Oct 2021 10:03:42 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 25 10:03:42 2021
-Old-Return-Path: <xieyongji@bytedance.com>
+	id BA41F205F8; Mon, 25 Oct 2021 13:57:45 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 25 13:57:45 2021
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,TO_TOO_MANY
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.0 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
+	RCVD_IN_MSPIKE_WL autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CDA4720522
-	for <lists-other-nbd@bendel.debian.org>; Mon, 25 Oct 2021 09:46:02 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5832D205DF
+	for <lists-other-nbd@bendel.debian.org>; Mon, 25 Oct 2021 13:42:10 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.02 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	TO_TOO_MANY=1] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.179 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id fHB0rv3FIeXi for <lists-other-nbd@bendel.debian.org>;
-	Mon, 25 Oct 2021 09:45:59 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pl1-x62d.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id C0C7320463
-	for <nbd@other.debian.org>; Mon, 25 Oct 2021 09:45:59 +0000 (UTC)
-Received: by mail-pl1-x62d.google.com with SMTP id s24so3536544plp.0
-        for <nbd@other.debian.org>; Mon, 25 Oct 2021 02:45:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=av0r/rjVqFrB/l7qERXJM+4hS0XcNVLfoNKN5vMbJNg=;
-        b=xOAqkrP0HrjsX48+je+o53PG2YVd8dM2nPjkvA1GW931f3/u7jXAHVCpoirZqe/36e
-         0c6Ip65FUEezJbZXUhHsUzj7F0JGLaN4ZicNmtyiwJ2XjoQLaqHWtvZqyLm1ZKPFDh8x
-         BTqcsT9KpbdcR7+ciDxVM2Ozoo5HpLIqiINTiDwMtVjySAEdH3tnObnRRyGJKaK7moQd
-         wONL20McEcBXVnYZEq/zpPPd8SO0P7nLHHiRDXcKywelGZVbnTkdC6oV12p2hi4LsrCs
-         NRFJct9KJnUoD0ImCkW+qfum8v/iHMrh6jxRBWTqDVtogoK+K9v4/XJrltN2HyBxfWuT
-         fypw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=av0r/rjVqFrB/l7qERXJM+4hS0XcNVLfoNKN5vMbJNg=;
-        b=A8vyJOnYi1FVmOhbHNRy2f9TDsOVr0BAzdQqrGLpW5BxqhAcegOhwEIIi+4uFIXwDG
-         c0sucl0PutateIeAMxja+d9OkK6ND40icUXMYAKbDKb8bpBAokIbkaqZzkXXBB2PtTY3
-         EHbmhEhjGB4M3+s3abI6NVcVzlNnaaVTK9nHE7oWCEmH2C7QuhWwb7CQJtk4rmxe0p7p
-         9N80O+80hknZne2T/1/LJvfg2tQsMRyV2Zl3RtU0OPtxn2EUSA0N9/g4+CP8VLKDrKXl
-         1Fw0hYRFdBQH5UPmsSX9dJeZPg9NYvFKd2dypmVnXlOjXLKiKTlc1KDgO3Ij60K59D/s
-         zCYA==
-X-Gm-Message-State: AOAM531qUnfcVmfxSIEoIIkY/tRYNSvN57P7zln0tEDI4fnwiPx9oIHN
-	VXb38WPviR+LmHnTgM2wL7p9
-X-Google-Smtp-Source: ABdhPJy6XTgail4CfgzGrXE97eq+6+UO+3FgXOYxCk4f+rRZvdp0T/8Yqnm08YBSmOhKEQoi7f/JyA==
-X-Received: by 2002:a17:90b:1d08:: with SMTP id on8mr34553738pjb.25.1635155156410;
-        Mon, 25 Oct 2021 02:45:56 -0700 (PDT)
-Received: from localhost ([139.177.225.237])
-        by smtp.gmail.com with ESMTPSA id oj5sm7404319pjb.45.2021.10.25.02.45.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Oct 2021 02:45:56 -0700 (PDT)
-From: Xie Yongji <xieyongji@bytedance.com>
-To: axboe@kernel.dk,
-	hch@lst.de,
-	josef@toxicpanda.com,
-	mst@redhat.com,
-	jasowang@redhat.com,
-	stefanha@redhat.com,
-	kwolf@redhat.com
-Cc: linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	virtualization@lists.linux-foundation.org
-Subject: [PATCH 3/4] loop: Use blk_validate_block_size() to validate block size
-Date: Mon, 25 Oct 2021 17:43:05 +0800
-Message-Id: <20211025094306.97-4-xieyongji@bytedance.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211025094306.97-1-xieyongji@bytedance.com>
-References: <20211025094306.97-1-xieyongji@bytedance.com>
+	with ESMTP id nA8axqki-vOn for <lists-other-nbd@bendel.debian.org>;
+	Mon, 25 Oct 2021 13:42:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 73B82205D7
+	for <nbd@other.debian.org>; Mon, 25 Oct 2021 13:42:04 +0000 (UTC)
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.56])
+	by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4HdGKd30LQz1DHsD;
+	Mon, 25 Oct 2021 21:40:05 +0800 (CST)
+Received: from dggema762-chm.china.huawei.com (10.1.198.204) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2308.15; Mon, 25 Oct 2021 21:41:58 +0800
+Received: from [10.174.176.73] (10.174.176.73) by
+ dggema762-chm.china.huawei.com (10.1.198.204) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2308.15; Mon, 25 Oct 2021 21:41:57 +0800
+Subject: Re: [PATCH 0/2] nbd: fix sanity check for first_minor
+From: "yukuai (C)" <yukuai3@huawei.com>
+To: Pavel Skripkin <paskripkin@gmail.com>, <josef@toxicpanda.com>,
+	<axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>,
+	<luomeng12@huawei.com>, Christoph Hellwig <hch@lst.de>
+References: <20211021122936.758221-1-yukuai3@huawei.com>
+ <72fb140d-609b-c035-bdd6-d2b8639c116b@gmail.com>
+ <17182476-e5bf-f493-9d9b-fedb2d9c8e1a@huawei.com>
+ <92d9f001-f77b-8263-53a6-aab83daccef9@huawei.com>
+Message-ID: <9199b0a5-8286-024f-1343-ea386140c206@huawei.com>
+Date: Mon, 25 Oct 2021 21:41:57 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <92d9f001-f77b-8263-53a6-aab83daccef9@huawei.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.176.73]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ dggema762-chm.china.huawei.com (10.1.198.204)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <lwFjGh_Y5WC.A.6TB.-DodhB@bendel>
+Resent-Message-ID: <vaNFvVdRgtH.A.U_.ZfrdhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1564
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1565
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -103,59 +85,152 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211025094306.97-4-xieyongji@bytedance.com
-Resent-Date: Mon, 25 Oct 2021 10:03:42 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/9199b0a5-8286-024f-1343-ea386140c206@huawei.com
+Resent-Date: Mon, 25 Oct 2021 13:57:45 +0000 (UTC)
 
-Remove loop_validate_block_size() and use the block layer helper
-to validate block size.
+On 2021/10/21 21:37, yukuai (C) wrote:
+> On 2021/10/21 21:13, yukuai (C) wrote:
+>> On 2021/10/21 20:35, Pavel Skripkin wrote:
+>>> On 10/21/21 15:29, Yu Kuai wrote:
+>>>> Yu Kuai (2):
+>>>>    nbd: fix max value for 'first_minor'
+>>>>    nbd: fix possible overflow for 'first_minor' in nbd_dev_add()
+>>>>
+>>>>   drivers/block/nbd.c | 6 +++---
+>>>>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>>>
+>>>
+>>> Hi, Yu!
+>>>
+>>> Thank you for the fix, but this wrong check should be just removed, 
+>>> since root case of wrong sysfs file creation was fixed, as Christoph 
+>>> said [1]
+> 
+> Hi, Christoph
+> 
+> By the way, if we remove the checking, there will be two kernel warnings
+> when the problem happens. Maybe keeping the checking is better?
 
-Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
----
- drivers/block/loop.c | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
-
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 7bf4686af774..dfc72a1f6500 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -273,19 +273,6 @@ static void __loop_update_dio(struct loop_device *lo, bool dio)
- }
- 
- /**
-- * loop_validate_block_size() - validates the passed in block size
-- * @bsize: size to validate
-- */
--static int
--loop_validate_block_size(unsigned short bsize)
--{
--	if (bsize < 512 || bsize > PAGE_SIZE || !is_power_of_2(bsize))
--		return -EINVAL;
--
--	return 0;
--}
--
--/**
-  * loop_set_size() - sets device size and notifies userspace
-  * @lo: struct loop_device to set the size for
-  * @size: new size of the loop device
-@@ -1236,7 +1223,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
- 	}
- 
- 	if (config->block_size) {
--		error = loop_validate_block_size(config->block_size);
-+		error = blk_validate_block_size(config->block_size);
- 		if (error)
- 			goto out_unlock;
- 	}
-@@ -1759,7 +1746,7 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- 	if (lo->lo_state != Lo_bound)
- 		return -ENXIO;
- 
--	err = loop_validate_block_size(arg);
-+	err = blk_validate_block_size(arg);
- 	if (err)
- 		return err;
- 
--- 
-2.11.0
+friendly ping ...
+> 
+> [   19.860640] sysfs: cannot create duplicate filename '/dev/block/43:0'
+> [   19.861659] CPU: 1 PID: 872 Comm: modprobe Not tainted 
+> 5.15.0-rc6-next-20211020-00001-g2f1
+> [   19.863175] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+> BIOS ?-20190727_0738364
+> [   19.865183] Call Trace:
+> [   19.866512]  <TASK>
+> [   19.866863]  ? dump_stack_lvl+0x73/0x9f
+> [   19.867941]  ? dump_stack+0x13/0x1b
+> [   19.868475]  ? sysfs_warn_dup.cold+0x27/0x45
+> [   19.869075]  ? sysfs_do_create_link_sd.isra.0+0x131/0x150
+> [   19.869818]  ? sysfs_create_link+0x29/0x60
+> [   19.870459]  ? device_add+0xbd6/0xf60
+> [   19.871032]  ? _printk+0x5f/0x7d
+> [   19.871518]  ? device_add_disk+0x153/0x5d0
+> [   19.872160]  ? nbd_dev_add+0x30e/0x470 [nbd]
+> [   19.872828]  ? 0xffffffffc0060000
+> [   19.873332]  ? nbd_init+0x1dc/0x1000 [nbd]
+> [   19.873924]  ? do_one_initcall+0x71/0x3a0
+> [   19.874534]  ? gcov_event+0x70/0x690
+> [   19.875058]  ? do_init_module+0xa6/0x350
+> [   19.875587]  ? load_module+0x2587/0x2720
+> [   19.876130]  ? kernel_read+0x31/0xb0
+> [   19.876638]  ? kernel_read_file+0x15a/0x360
+> [   19.877271]  ? __do_sys_finit_module+0xe5/0x190
+> [   19.877951]  ? __do_sys_finit_module+0xe5/0x190
+> [   19.878563]  ? __x64_sys_finit_module+0x1e/0x30
+> [   19.879182]  ? do_syscall_64+0x35/0x80
+> [   19.879700]  ? entry_SYSCALL_64_after_hwframe+0x44/0xae
+> [   19.880413]  </TASK>
+> [   19.880806] ------------[ cut here ]------------
+> [   19.881502] WARNING: CPU: 1 PID: 872 at block/genhd.c:543 
+> device_add_disk+0x2af/0x5d0
+> [   19.882695] Modules linked in: nbd(+)
+> [   19.883290] CPU: 1 PID: 872 Comm: modprobe Not tainted 
+> 5.15.0-rc6-next-20211020-00001-g2f1
+> [   19.884823] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+> BIOS ?-20190727_0738364
+> [   19.886866] RIP: 0010:device_add_disk+0x2af/0x5d0
+> [   19.887606] Code: 6e f2 f2 0b 01 49 8b 76 48 48 8b 3d db 03 f3 0b e8 
+> f6 ec a9 ff 48 83 050
+> [   19.890456] RSP: 0018:ffffc90000e47c70 EFLAGS: 00010202
+> [   19.891293] RAX: 0000000000000000 RBX: 0000000000000000 RCX: 
+> 00000000000ae001
+> [   19.892274] RDX: 00000000000ac001 RSI: ffffffff91b5906b RDI: 
+> 0000000000000000
+> [   19.893318] RBP: ffff8881034ad600 R08: 0000000000000000 R09: 
+> ffffffff915e2e69
+> [   19.894425] R10: 0000000000000014 R11: 0000000000000001 R12: 
+> 00000000ffffffef
+> [   19.895544] R13: 0000000000000000 R14: ffff88817d720600 R15: 
+> ffff88817d720648
+> [   19.896652] FS:  00007fc08c7a7040(0000) GS:ffff88882f640000(0000) 
+> knlGS:0000000000000000
+> [   19.897902] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [   19.898768] CR2: 00007fc08bcf0395 CR3: 000000017c467000 CR4: 
+> 00000000000006e0
+> [   19.899754] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 
+> 0000000000000000
+> [   19.900856] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 
+> 0000000000000400
+> [   19.901989] Call Trace:
+> [   19.902387]  <TASK>
+> [   19.902732]  nbd_dev_add+0x30e/0x470 [nbd]
+> [   19.903395]  ? 0xffffffffc0060000
+> [   19.903917]  nbd_init+0x1dc/0x1000 [nbd]
+> [   19.904536]  do_one_initcall+0x71/0x3a0
+> [   19.905166]  ? gcov_event+0x70/0x690
+> [   19.905745]  do_init_module+0xa6/0x350
+> [   19.906351]  load_module+0x2587/0x2720
+> [   19.906932]  ? kernel_read+0x31/0xb0
+> [   19.907509]  ? kernel_read_file+0x15a/0x360
+> [   19.908195]  ? __do_sys_finit_module+0xe5/0x190
+> [   19.908894]  __do_sys_finit_module+0xe5/0x190
+> [   19.909591]  __x64_sys_finit_module+0x1e/0x30
+> [   19.910289]  do_syscall_64+0x35/0x80
+> [   19.910855]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+> [   19.911652] RIP: 0033:0x7fc08bc7a4e9
+> [   19.912231] Code: 00 f3 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 
+> 48 89 f8 48 89 f7 488
+> [   19.915026] RSP: 002b:00007fff0ddf6fd8 EFLAGS: 00000246 ORIG_RAX: 
+> 0000000000000139
+> [   19.916080] RAX: ffffffffffffffda RBX: 00005596400853e0 RCX: 
+> 00007fc08bc7a4e9
+> [   19.917180] RDX: 0000000000000000 RSI: 000055963fe1bc26 RDI: 
+> 0000000000000003
+> [   19.918302] RBP: 000055963fe1bc26 R08: 0000000000000000 R09: 
+> 0000000000000000
+> [   19.919412] R10: 0000000000000003 R11: 0000000000000246 R12: 
+> 0000000000000000
+> [   19.920524] R13: 00005596400854f0 R14: 0000000000040000 R15: 
+> 00005596400853e0
+> [   19.921629]  </TASK>
+> [   19.922005] ---[ end trace e09ecf130812479d ]---
+> 
+> Thanks,
+> Kuai
+>>
+>> Hi, Pavel
+>>
+>> Thanks for your response, with the root cause fixed, patch 1 is not
+>> needed anymore. However, the overflow case in patch 2 is still
+>> possible.
+>>
+>> Does anyone plan to remove the checking?
+>>
+>> Thanks,
+>> Kuai
+>>>
+>>>
+>>>
+>>>
+>>> [1] https://lore.kernel.org/lkml/20211011073556.GA10735@lst.de/
+>>>
+>>>
+>>>
+>>> With regards,
+>>> Pavel Skripkin
+>>> .
+>>>
 
