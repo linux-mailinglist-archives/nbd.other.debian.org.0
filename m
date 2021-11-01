@@ -1,70 +1,81 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF2ED4413C5
-	for <lists+nbd@lfdr.de>; Mon,  1 Nov 2021 07:33:13 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BE95441540
+	for <lists+nbd@lfdr.de>; Mon,  1 Nov 2021 09:24:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id AB55F20307; Mon,  1 Nov 2021 06:33:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov  1 06:33:13 2021
-Old-Return-Path: <yebin10@huawei.com>
+	id 844302030A; Mon,  1 Nov 2021 08:24:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov  1 08:24:10 2021
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.3 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,PHONENUMBER,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-2.3 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H4,
+	RCVD_IN_MSPIKE_WL autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CE62D202E3
-	for <lists-other-nbd@bendel.debian.org>; Mon,  1 Nov 2021 06:17:31 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0CC7D202FF
+	for <lists-other-nbd@bendel.debian.org>; Mon,  1 Nov 2021 08:06:30 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.661 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-3.179 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, PHONENUMBER=1.5,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 18mIcLIX3TqJ for <lists-other-nbd@bendel.debian.org>;
-	Mon,  1 Nov 2021 06:17:25 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	with ESMTP id y-5FXhsXo6XI for <lists-other-nbd@bendel.debian.org>;
+	Mon,  1 Nov 2021 08:06:24 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7424720150
-	for <nbd@other.debian.org>; Mon,  1 Nov 2021 06:17:24 +0000 (UTC)
-Received: from dggeme754-chm.china.huawei.com (unknown [172.30.72.55])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4HjN9M36dkz90g3;
-	Mon,  1 Nov 2021 14:17:11 +0800 (CST)
-Received: from huawei.com (10.175.127.227) by dggeme754-chm.china.huawei.com
- (10.3.19.100) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.15; Mon, 1
- Nov 2021 14:17:09 +0800
-From: Ye Bin <yebin10@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
-	<nbd@other.debian.org>
-CC: <linux-kernel@vger.kernel.org>, Ye Bin <yebin10@huawei.com>
-Subject: [PATCH -next v3 2/2] nbd: Fix hungtask when nbd_config_put
-Date: Mon, 1 Nov 2021 14:29:56 +0800
-Message-ID: <20211101062956.791573-3-yebin10@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20211101062956.791573-1-yebin10@huawei.com>
-References: <20211101062956.791573-1-yebin10@huawei.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 1A05A20231
+	for <nbd@other.debian.org>; Mon,  1 Nov 2021 08:06:23 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.54])
+	by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4HjQXs1cxxz1DHxH;
+	Mon,  1 Nov 2021 16:04:13 +0800 (CST)
+Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Mon, 1 Nov 2021 16:06:12 +0800
+Received: from [10.174.176.73] (10.174.176.73) by
+ kwepemm600009.china.huawei.com (7.193.23.164) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Mon, 1 Nov 2021 16:06:11 +0800
+Subject: Re: [PATCH 0/2] nbd: fix sanity check for first_minor
+From: "yukuai (C)" <yukuai3@huawei.com>
+To: Pavel Skripkin <paskripkin@gmail.com>, <josef@toxicpanda.com>,
+	<axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>,
+	<luomeng12@huawei.com>, Christoph Hellwig <hch@lst.de>
+References: <20211021122936.758221-1-yukuai3@huawei.com>
+ <72fb140d-609b-c035-bdd6-d2b8639c116b@gmail.com>
+ <17182476-e5bf-f493-9d9b-fedb2d9c8e1a@huawei.com>
+ <92d9f001-f77b-8263-53a6-aab83daccef9@huawei.com>
+ <9199b0a5-8286-024f-1343-ea386140c206@huawei.com>
+Message-ID: <7f899408-a01c-6300-9296-b5335ab259aa@huawei.com>
+Date: Mon, 1 Nov 2021 16:06:10 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <9199b0a5-8286-024f-1343-ea386140c206@huawei.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggeme754-chm.china.huawei.com (10.3.19.100)
+X-Originating-IP: [10.174.176.73]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ kwepemm600009.china.huawei.com (7.193.23.164)
 X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <SLeN8VTjxbL.A.5VG.po4fhB@bendel>
+Resent-Message-ID: <rX-Ds8HGSbI.A.QHC.qQ6fhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1593
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1596
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,168 +85,154 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211101062956.791573-3-yebin10@huawei.com
-Resent-Date: Mon,  1 Nov 2021 06:33:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/7f899408-a01c-6300-9296-b5335ab259aa@huawei.com
+Resent-Date: Mon,  1 Nov 2021 08:24:10 +0000 (UTC)
 
-I got follow issue:
-[  247.381177] INFO: task kworker/u10:0:47 blocked for more than 120 seconds.
-[  247.382644]       Not tainted 4.19.90-dirty #140
-[  247.383502] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-[  247.385027] Call Trace:
-[  247.388384]  schedule+0xb8/0x3c0
-[  247.388966]  schedule_timeout+0x2b4/0x380
-[  247.392815]  wait_for_completion+0x367/0x510
-[  247.397713]  flush_workqueue+0x32b/0x1340
-[  247.402700]  drain_workqueue+0xda/0x3c0
-[  247.403442]  destroy_workqueue+0x7b/0x690
-[  247.405014]  nbd_config_put.cold+0x2f9/0x5b6
-[  247.405823]  recv_work+0x1fd/0x2b0
-[  247.406485]  process_one_work+0x70b/0x1610
-[  247.407262]  worker_thread+0x5a9/0x1060
-[  247.408699]  kthread+0x35e/0x430
-[  247.410918]  ret_from_fork+0x1f/0x30
-
-We can reproduce issue as follows:
-1. Inject memory fault in nbd_start_device
--1244,10 +1248,18 @@ static int nbd_start_device(struct nbd_device *nbd)
-        nbd_dev_dbg_init(nbd);
-        for (i = 0; i < num_connections; i++) {
-                struct recv_thread_args *args;
--
--               args = kzalloc(sizeof(*args), GFP_KERNEL);
-+
-+               if (i == 1) {
-+                       args = NULL;
-+                       printk("%s: inject malloc error\n", __func__);
-+               }
-+               else
-+                       args = kzalloc(sizeof(*args), GFP_KERNEL);
-2. Inject delay in recv_work
--757,6 +760,8 @@ static void recv_work(struct work_struct *work)
-
-                blk_mq_complete_request(blk_mq_rq_from_pdu(cmd));
-        }
-+       printk("%s: comm=%s pid=%d\n", __func__, current->comm, current->pid);
-+       mdelay(5 * 1000);
-        nbd_config_put(nbd);
-        atomic_dec(&config->recv_threads);
-        wake_up(&config->recv_wq);
-3. Create nbd server
-nbd-server 8000 /tmp/disk
-4. Create nbd client
-nbd-client localhost 8000 /dev/nbd1
-Then will trigger above issue.
-
-Reason is when add delay in recv_work, lead to release the last reference
-of 'nbd->config_refs'. nbd_config_put will call flush_workqueue to make
-all work finish. Obviously, it will lead to deadloop.
-To solve this issue, according to Josef's suggestion move 'recv_work'
-init from start device to nbd_dev_add, then destroy 'recv_work'when
-nbd device teardown.
-
-Signed-off-by: Ye Bin <yebin10@huawei.com>
----
- drivers/block/nbd.c | 36 ++++++++++++++++--------------------
- 1 file changed, 16 insertions(+), 20 deletions(-)
-
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 096883ab9b76..7a8d1b71e038 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -260,7 +260,7 @@ static void nbd_dev_remove(struct nbd_device *nbd)
- 	mutex_lock(&nbd_index_mutex);
- 	idr_remove(&nbd_index_idr, nbd->index);
- 	mutex_unlock(&nbd_index_mutex);
--
-+	destroy_workqueue(nbd->recv_workq);
- 	kfree(nbd);
- }
- 
-@@ -1314,10 +1314,6 @@ static void nbd_config_put(struct nbd_device *nbd)
- 		kfree(nbd->config);
- 		nbd->config = NULL;
- 
--		if (nbd->recv_workq)
--			destroy_workqueue(nbd->recv_workq);
--		nbd->recv_workq = NULL;
--
- 		nbd->tag_set.timeout = 0;
- 		nbd->disk->queue->limits.discard_granularity = 0;
- 		nbd->disk->queue->limits.discard_alignment = 0;
-@@ -1346,14 +1342,6 @@ static int nbd_start_device(struct nbd_device *nbd)
- 		return -EINVAL;
- 	}
- 
--	nbd->recv_workq = alloc_workqueue("knbd%d-recv",
--					  WQ_MEM_RECLAIM | WQ_HIGHPRI |
--					  WQ_UNBOUND, 0, nbd->index);
--	if (!nbd->recv_workq) {
--		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
--		return -ENOMEM;
--	}
--
- 	blk_mq_update_nr_hw_queues(&nbd->tag_set, config->num_connections);
- 	nbd->pid = task_pid_nr(current);
- 
-@@ -1779,6 +1767,15 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	}
- 	nbd->disk = disk;
- 
-+	nbd->recv_workq = alloc_workqueue("nbd%d-recv",
-+					  WQ_MEM_RECLAIM | WQ_HIGHPRI |
-+					  WQ_UNBOUND, 0, nbd->index);
-+	if (!nbd->recv_workq) {
-+		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
-+		err = -ENOMEM;
-+		goto out_err_disk;
-+	}
-+
- 	/*
- 	 * Tell the block layer that we are not a rotational device
- 	 */
-@@ -1809,7 +1806,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	disk->first_minor = index << part_shift;
- 	if (disk->first_minor > 0xff) {
- 		err = -EINVAL;
--		goto out_err_disk;
-+		goto out_free_work;
- 	}
- 
- 	disk->minors = 1 << part_shift;
-@@ -1818,7 +1815,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	sprintf(disk->disk_name, "nbd%d", index);
- 	err = add_disk(disk);
- 	if (err)
--		goto out_err_disk;
-+		goto out_free_work;
- 
- 	/*
- 	 * Now publish the device.
-@@ -1827,6 +1824,8 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	nbd_total_devices++;
- 	return nbd;
- 
-+out_free_work:
-+	destroy_workqueue(nbd->recv_workq);
- out_err_disk:
- 	blk_cleanup_disk(disk);
- out_free_idr:
-@@ -2082,13 +2081,10 @@ static void nbd_disconnect_and_put(struct nbd_device *nbd)
- 	nbd_disconnect(nbd);
- 	sock_shutdown(nbd);
- 	/*
--	 * Make sure recv thread has finished, so it does not drop the last
--	 * config ref and try to destroy the workqueue from inside the work
--	 * queue. And this also ensure that we can safely call nbd_clear_que()
-+	 * Make sure recv thread has finished, we can safely call nbd_clear_que()
- 	 * to cancel the inflight I/Os.
- 	 */
--	if (nbd->recv_workq)
--		flush_workqueue(nbd->recv_workq);
-+	flush_workqueue(nbd->recv_workq);
- 	nbd_clear_que(nbd);
- 	nbd->task_setup = NULL;
- 	mutex_unlock(&nbd->config_lock);
--- 
-2.31.1
+On 2021/10/25 21:41, yukuai (C) wrote:
+> On 2021/10/21 21:37, yukuai (C) wrote:
+>> On 2021/10/21 21:13, yukuai (C) wrote:
+>>> On 2021/10/21 20:35, Pavel Skripkin wrote:
+>>>> On 10/21/21 15:29, Yu Kuai wrote:
+>>>>> Yu Kuai (2):
+>>>>>    nbd: fix max value for 'first_minor'
+>>>>>    nbd: fix possible overflow for 'first_minor' in nbd_dev_add()
+>>>>>
+>>>>>   drivers/block/nbd.c | 6 +++---
+>>>>>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>>>>
+>>>>
+>>>> Hi, Yu!
+>>>>
+>>>> Thank you for the fix, but this wrong check should be just removed, 
+>>>> since root case of wrong sysfs file creation was fixed, as Christoph 
+>>>> said [1]
+>>
+>> Hi, Christoph
+>>
+>> By the way, if we remove the checking, there will be two kernel warnings
+>> when the problem happens. Maybe keeping the checking is better?
+> 
+> friendly ping ...
+friendly ping ...
+>>
+>> [   19.860640] sysfs: cannot create duplicate filename '/dev/block/43:0'
+>> [   19.861659] CPU: 1 PID: 872 Comm: modprobe Not tainted 
+>> 5.15.0-rc6-next-20211020-00001-g2f1
+>> [   19.863175] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+>> BIOS ?-20190727_0738364
+>> [   19.865183] Call Trace:
+>> [   19.866512]  <TASK>
+>> [   19.866863]  ? dump_stack_lvl+0x73/0x9f
+>> [   19.867941]  ? dump_stack+0x13/0x1b
+>> [   19.868475]  ? sysfs_warn_dup.cold+0x27/0x45
+>> [   19.869075]  ? sysfs_do_create_link_sd.isra.0+0x131/0x150
+>> [   19.869818]  ? sysfs_create_link+0x29/0x60
+>> [   19.870459]  ? device_add+0xbd6/0xf60
+>> [   19.871032]  ? _printk+0x5f/0x7d
+>> [   19.871518]  ? device_add_disk+0x153/0x5d0
+>> [   19.872160]  ? nbd_dev_add+0x30e/0x470 [nbd]
+>> [   19.872828]  ? 0xffffffffc0060000
+>> [   19.873332]  ? nbd_init+0x1dc/0x1000 [nbd]
+>> [   19.873924]  ? do_one_initcall+0x71/0x3a0
+>> [   19.874534]  ? gcov_event+0x70/0x690
+>> [   19.875058]  ? do_init_module+0xa6/0x350
+>> [   19.875587]  ? load_module+0x2587/0x2720
+>> [   19.876130]  ? kernel_read+0x31/0xb0
+>> [   19.876638]  ? kernel_read_file+0x15a/0x360
+>> [   19.877271]  ? __do_sys_finit_module+0xe5/0x190
+>> [   19.877951]  ? __do_sys_finit_module+0xe5/0x190
+>> [   19.878563]  ? __x64_sys_finit_module+0x1e/0x30
+>> [   19.879182]  ? do_syscall_64+0x35/0x80
+>> [   19.879700]  ? entry_SYSCALL_64_after_hwframe+0x44/0xae
+>> [   19.880413]  </TASK>
+>> [   19.880806] ------------[ cut here ]------------
+>> [   19.881502] WARNING: CPU: 1 PID: 872 at block/genhd.c:543 
+>> device_add_disk+0x2af/0x5d0
+>> [   19.882695] Modules linked in: nbd(+)
+>> [   19.883290] CPU: 1 PID: 872 Comm: modprobe Not tainted 
+>> 5.15.0-rc6-next-20211020-00001-g2f1
+>> [   19.884823] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+>> BIOS ?-20190727_0738364
+>> [   19.886866] RIP: 0010:device_add_disk+0x2af/0x5d0
+>> [   19.887606] Code: 6e f2 f2 0b 01 49 8b 76 48 48 8b 3d db 03 f3 0b 
+>> e8 f6 ec a9 ff 48 83 050
+>> [   19.890456] RSP: 0018:ffffc90000e47c70 EFLAGS: 00010202
+>> [   19.891293] RAX: 0000000000000000 RBX: 0000000000000000 RCX: 
+>> 00000000000ae001
+>> [   19.892274] RDX: 00000000000ac001 RSI: ffffffff91b5906b RDI: 
+>> 0000000000000000
+>> [   19.893318] RBP: ffff8881034ad600 R08: 0000000000000000 R09: 
+>> ffffffff915e2e69
+>> [   19.894425] R10: 0000000000000014 R11: 0000000000000001 R12: 
+>> 00000000ffffffef
+>> [   19.895544] R13: 0000000000000000 R14: ffff88817d720600 R15: 
+>> ffff88817d720648
+>> [   19.896652] FS:  00007fc08c7a7040(0000) GS:ffff88882f640000(0000) 
+>> knlGS:0000000000000000
+>> [   19.897902] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+>> [   19.898768] CR2: 00007fc08bcf0395 CR3: 000000017c467000 CR4: 
+>> 00000000000006e0
+>> [   19.899754] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 
+>> 0000000000000000
+>> [   19.900856] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 
+>> 0000000000000400
+>> [   19.901989] Call Trace:
+>> [   19.902387]  <TASK>
+>> [   19.902732]  nbd_dev_add+0x30e/0x470 [nbd]
+>> [   19.903395]  ? 0xffffffffc0060000
+>> [   19.903917]  nbd_init+0x1dc/0x1000 [nbd]
+>> [   19.904536]  do_one_initcall+0x71/0x3a0
+>> [   19.905166]  ? gcov_event+0x70/0x690
+>> [   19.905745]  do_init_module+0xa6/0x350
+>> [   19.906351]  load_module+0x2587/0x2720
+>> [   19.906932]  ? kernel_read+0x31/0xb0
+>> [   19.907509]  ? kernel_read_file+0x15a/0x360
+>> [   19.908195]  ? __do_sys_finit_module+0xe5/0x190
+>> [   19.908894]  __do_sys_finit_module+0xe5/0x190
+>> [   19.909591]  __x64_sys_finit_module+0x1e/0x30
+>> [   19.910289]  do_syscall_64+0x35/0x80
+>> [   19.910855]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+>> [   19.911652] RIP: 0033:0x7fc08bc7a4e9
+>> [   19.912231] Code: 00 f3 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 
+>> 00 48 89 f8 48 89 f7 488
+>> [   19.915026] RSP: 002b:00007fff0ddf6fd8 EFLAGS: 00000246 ORIG_RAX: 
+>> 0000000000000139
+>> [   19.916080] RAX: ffffffffffffffda RBX: 00005596400853e0 RCX: 
+>> 00007fc08bc7a4e9
+>> [   19.917180] RDX: 0000000000000000 RSI: 000055963fe1bc26 RDI: 
+>> 0000000000000003
+>> [   19.918302] RBP: 000055963fe1bc26 R08: 0000000000000000 R09: 
+>> 0000000000000000
+>> [   19.919412] R10: 0000000000000003 R11: 0000000000000246 R12: 
+>> 0000000000000000
+>> [   19.920524] R13: 00005596400854f0 R14: 0000000000040000 R15: 
+>> 00005596400853e0
+>> [   19.921629]  </TASK>
+>> [   19.922005] ---[ end trace e09ecf130812479d ]---
+>>
+>> Thanks,
+>> Kuai
+>>>
+>>> Hi, Pavel
+>>>
+>>> Thanks for your response, with the root cause fixed, patch 1 is not
+>>> needed anymore. However, the overflow case in patch 2 is still
+>>> possible.
+>>>
+>>> Does anyone plan to remove the checking?
+>>>
+>>> Thanks,
+>>> Kuai
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> [1] https://lore.kernel.org/lkml/20211011073556.GA10735@lst.de/
+>>>>
+>>>>
+>>>>
+>>>> With regards,
+>>>> Pavel Skripkin
+>>>> .
+>>>>
 
