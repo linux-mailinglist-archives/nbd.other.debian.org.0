@@ -2,69 +2,92 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2D25442564
-	for <lists+nbd@lfdr.de>; Tue,  2 Nov 2021 02:57:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51B9C442F06
+	for <lists+nbd@lfdr.de>; Tue,  2 Nov 2021 14:21:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BAB6520422; Tue,  2 Nov 2021 01:57:54 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov  2 01:57:54 2021
-Old-Return-Path: <yebin10@huawei.com>
+	id DBBCD204A1; Tue,  2 Nov 2021 13:21:21 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov  2 13:21:21 2021
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.3 required=4.0 tests=DIGITS_LETTERS,FOURLA,
-	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,PHONENUMBER,RCVD_IN_DNSWL_MED,
-	RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 85C58203EC
-	for <lists-other-nbd@bendel.debian.org>; Tue,  2 Nov 2021 01:40:04 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 33306204A2
+	for <lists-other-nbd@bendel.debian.org>; Tue,  2 Nov 2021 13:04:29 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.661 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, PHONENUMBER=1.5,
-	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id DgUPmTHYK39t for <lists-other-nbd@bendel.debian.org>;
-	Tue,  2 Nov 2021 01:39:57 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7ABFA2041A
-	for <nbd@other.debian.org>; Tue,  2 Nov 2021 01:39:57 +0000 (UTC)
-Received: from dggeme754-chm.china.huawei.com (unknown [172.30.72.53])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4HjssV03cmzcb2L;
-	Tue,  2 Nov 2021 09:35:10 +0800 (CST)
-Received: from huawei.com (10.175.127.227) by dggeme754-chm.china.huawei.com
- (10.3.19.100) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.15; Tue, 2
- Nov 2021 09:39:52 +0800
-From: Ye Bin <yebin10@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
-	<nbd@other.debian.org>
-CC: <linux-kernel@vger.kernel.org>, Ye Bin <yebin10@huawei.com>
-Subject: [PATCH -next v4 4/4] nbd: Fix hungtask when nbd_config_put
-Date: Tue, 2 Nov 2021 09:52:37 +0800
-Message-ID: <20211102015237.2309763-5-yebin10@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20211102015237.2309763-1-yebin10@huawei.com>
+	with ESMTP id yT-GwK71L5u6 for <lists-other-nbd@bendel.debian.org>;
+	Tue,  2 Nov 2021 13:04:23 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x734.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com [IPv6:2607:f8b0:4864:20::734])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id DBC6D204A0
+	for <nbd@other.debian.org>; Tue,  2 Nov 2021 13:04:22 +0000 (UTC)
+Received: by mail-qk1-x734.google.com with SMTP id az8so8325744qkb.2
+        for <nbd@other.debian.org>; Tue, 02 Nov 2021 06:04:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=Dn4BqaMm8E/Ym9b6CTx4iFhLLdRskhG8/BnMWQZMYiA=;
+        b=CV7GUn5h7t+R98AniHQ+e3FbXFOMEsvZSd1hvuNMLgjeEftTO6nejnTl8CX3JEks84
+         BrapEDNZbfWvf92QCz0OUemnwTATzFp37+VH//NuzccwImZ92esGMPDXXoqCuNIynyNX
+         nyo3+OojZlZreduNyWOMdGQjy6xy2QhhQBbv10q8vmkX0R6az/sP1MXcB89v7TeiMEss
+         2cKH6f+rR5UqoGtizvM0KK/8l1nLerqgDl2QbZ6ozhAF9GREznf2k99QroLvyvq7si5W
+         kzi7SJOc/AObDiez/X8TwMNpd05WjseQc8SLwlzFMBH1kqlL3Z6P6cqVkzIuVl56U+of
+         AzWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=Dn4BqaMm8E/Ym9b6CTx4iFhLLdRskhG8/BnMWQZMYiA=;
+        b=X7Cq8/V5KdTcUjboa/YTyy6L0xrO6vVDWVC7C92WWsP6MgAANSHcrtjAKqkvN77m8o
+         NQU0EBcYy6/myCfPoA6ZXwjHhch8H5skK7W0iWEEgnlNxLEeRKcEji+pRxAw93UD+eme
+         vNB7wYaFj+gulLnbMIwtRZgfj7RFa81+M8AvEnOoIxeQ0Sw4jOLIZCRXUjatIDf1qLzg
+         9c/PiIxI/dbWX2xuMnLLsksGSpG8StatTTv8VsKbCFXgcDVC0976wYUUBk11mxTF5SeO
+         ekqlDjGaongt555lteA6UDquGvmXru1Q4qNkd1GdpGb8Rs4xaYZsqLBNgoQsSPiaN2LR
+         XT3A==
+X-Gm-Message-State: AOAM531Z5s2ccgqglN1WBj9W3T9m3XKjziy+8elm0L+n/5Rs3wfkKuaY
+	l8rSSDE45w9NF2qiiylbrGc5xA==
+X-Google-Smtp-Source: ABdhPJwM+zF/tlJ4BLYeH2ZKxc5LHh/BOCcEJcjNkHrZZDYjDhcr8F0U+JBW/PrHDJZEppOhOYYJqg==
+X-Received: by 2002:a05:620a:4015:: with SMTP id h21mr28584785qko.300.1635858259569;
+        Tue, 02 Nov 2021 06:04:19 -0700 (PDT)
+Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
+        by smtp.gmail.com with ESMTPSA id u185sm11980615qkd.48.2021.11.02.06.04.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Nov 2021 06:04:19 -0700 (PDT)
+Date: Tue, 2 Nov 2021 09:04:16 -0400
+From: Josef Bacik <josef@toxicpanda.com>
+To: Ye Bin <yebin10@huawei.com>
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org, nbd@other.debian.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH -next v4 0/4] Fix hungtask when nbd_config_put and sanity
+ check for first_minor
+Message-ID: <YYE3UK//36MbVzC3@localhost.localdomain>
 References: <20211102015237.2309763-1-yebin10@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggeme754-chm.china.huawei.com (10.3.19.100)
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211102015237.2309763-1-yebin10@huawei.com>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <z9RN7U2FKXI.A.nJE.isJghB@bendel>
+Resent-Message-ID: <1AubCahpdAH.A.2IB.RtTghB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1604
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1605
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,168 +97,36 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211102015237.2309763-5-yebin10@huawei.com
-Resent-Date: Tue,  2 Nov 2021 01:57:54 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YYE3UK//36MbVzC3@localhost.localdomain
+Resent-Date: Tue,  2 Nov 2021 13:21:21 +0000 (UTC)
 
-I got follow issue:
-[  247.381177] INFO: task kworker/u10:0:47 blocked for more than 120 seconds.
-[  247.382644]       Not tainted 4.19.90-dirty #140
-[  247.383502] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-[  247.385027] Call Trace:
-[  247.388384]  schedule+0xb8/0x3c0
-[  247.388966]  schedule_timeout+0x2b4/0x380
-[  247.392815]  wait_for_completion+0x367/0x510
-[  247.397713]  flush_workqueue+0x32b/0x1340
-[  247.402700]  drain_workqueue+0xda/0x3c0
-[  247.403442]  destroy_workqueue+0x7b/0x690
-[  247.405014]  nbd_config_put.cold+0x2f9/0x5b6
-[  247.405823]  recv_work+0x1fd/0x2b0
-[  247.406485]  process_one_work+0x70b/0x1610
-[  247.407262]  worker_thread+0x5a9/0x1060
-[  247.408699]  kthread+0x35e/0x430
-[  247.410918]  ret_from_fork+0x1f/0x30
+On Tue, Nov 02, 2021 at 09:52:33AM +0800, Ye Bin wrote:
+> This patchset include two patchsets as follows:
+> 1. Fix hungtask when nbd_config_put
+> https://patchwork.kernel.org/project/linux-block/list/?series=573381
+> 2. nbd: fix sanity check for first_minor
+> https://lore.kernel.org/linux-block/20211021122936.758221-1-yukuai3@huawei.com/
+> 
+> I have consulted with Yu Kuai, and his modification has also been confirmed by him.
+> 
+> Ye Bin (2):
+>   nbd: Fix incorrect error handle when first_minor is illegal in
+>     nbd_dev_add
+>   nbd: Fix hungtask when nbd_config_put
+> 
+> Yu Kuai (2):
+>   nbd: fix max value for 'first_minor'
+>   nbd: fix possible overflow for 'first_minor' in nbd_dev_add()
+> 
+>  drivers/block/nbd.c | 42 +++++++++++++++++++-----------------------
+>  1 file changed, 19 insertions(+), 23 deletions(-)
+> 
 
-We can reproduce issue as follows:
-1. Inject memory fault in nbd_start_device
--1244,10 +1248,18 @@ static int nbd_start_device(struct nbd_device *nbd)
-        nbd_dev_dbg_init(nbd);
-        for (i = 0; i < num_connections; i++) {
-                struct recv_thread_args *args;
--
--               args = kzalloc(sizeof(*args), GFP_KERNEL);
-+
-+               if (i == 1) {
-+                       args = NULL;
-+                       printk("%s: inject malloc error\n", __func__);
-+               }
-+               else
-+                       args = kzalloc(sizeof(*args), GFP_KERNEL);
-2. Inject delay in recv_work
--757,6 +760,8 @@ static void recv_work(struct work_struct *work)
+Perfect, thanks guys, you can add
 
-                blk_mq_complete_request(blk_mq_rq_from_pdu(cmd));
-        }
-+       printk("%s: comm=%s pid=%d\n", __func__, current->comm, current->pid);
-+       mdelay(5 * 1000);
-        nbd_config_put(nbd);
-        atomic_dec(&config->recv_threads);
-        wake_up(&config->recv_wq);
-3. Create nbd server
-nbd-server 8000 /tmp/disk
-4. Create nbd client
-nbd-client localhost 8000 /dev/nbd1
-Then will trigger above issue.
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
 
-Reason is when add delay in recv_work, lead to release the last reference
-of 'nbd->config_refs'. nbd_config_put will call flush_workqueue to make
-all work finish. Obviously, it will lead to deadloop.
-To solve this issue, according to Josef's suggestion move 'recv_work'
-init from start device to nbd_dev_add, then destroy 'recv_work'when
-nbd device teardown.
+to the series,
 
-Signed-off-by: Ye Bin <yebin10@huawei.com>
----
- drivers/block/nbd.c | 36 ++++++++++++++++--------------------
- 1 file changed, 16 insertions(+), 20 deletions(-)
-
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 88dc0c49631c..ef31f81d7b31 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -260,7 +260,7 @@ static void nbd_dev_remove(struct nbd_device *nbd)
- 	mutex_lock(&nbd_index_mutex);
- 	idr_remove(&nbd_index_idr, nbd->index);
- 	mutex_unlock(&nbd_index_mutex);
--
-+	destroy_workqueue(nbd->recv_workq);
- 	kfree(nbd);
- }
- 
-@@ -1314,10 +1314,6 @@ static void nbd_config_put(struct nbd_device *nbd)
- 		kfree(nbd->config);
- 		nbd->config = NULL;
- 
--		if (nbd->recv_workq)
--			destroy_workqueue(nbd->recv_workq);
--		nbd->recv_workq = NULL;
--
- 		nbd->tag_set.timeout = 0;
- 		nbd->disk->queue->limits.discard_granularity = 0;
- 		nbd->disk->queue->limits.discard_alignment = 0;
-@@ -1346,14 +1342,6 @@ static int nbd_start_device(struct nbd_device *nbd)
- 		return -EINVAL;
- 	}
- 
--	nbd->recv_workq = alloc_workqueue("knbd%d-recv",
--					  WQ_MEM_RECLAIM | WQ_HIGHPRI |
--					  WQ_UNBOUND, 0, nbd->index);
--	if (!nbd->recv_workq) {
--		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
--		return -ENOMEM;
--	}
--
- 	blk_mq_update_nr_hw_queues(&nbd->tag_set, config->num_connections);
- 	nbd->pid = task_pid_nr(current);
- 
-@@ -1779,6 +1767,15 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	}
- 	nbd->disk = disk;
- 
-+	nbd->recv_workq = alloc_workqueue("nbd%d-recv",
-+					  WQ_MEM_RECLAIM | WQ_HIGHPRI |
-+					  WQ_UNBOUND, 0, nbd->index);
-+	if (!nbd->recv_workq) {
-+		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
-+		err = -ENOMEM;
-+		goto out_err_disk;
-+	}
-+
- 	/*
- 	 * Tell the block layer that we are not a rotational device
- 	 */
-@@ -1809,7 +1806,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	disk->first_minor = index << part_shift;
- 	if (disk->first_minor < index || disk->first_minor > MINORMASK) {
- 		err = -EINVAL;
--		goto out_err_disk;
-+		goto out_free_work;
- 	}
- 
- 	disk->minors = 1 << part_shift;
-@@ -1818,7 +1815,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	sprintf(disk->disk_name, "nbd%d", index);
- 	err = add_disk(disk);
- 	if (err)
--		goto out_err_disk;
-+		goto out_free_work;
- 
- 	/*
- 	 * Now publish the device.
-@@ -1827,6 +1824,8 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	nbd_total_devices++;
- 	return nbd;
- 
-+out_free_work:
-+	destroy_workqueue(nbd->recv_workq);
- out_err_disk:
- 	blk_cleanup_disk(disk);
- out_free_idr:
-@@ -2082,13 +2081,10 @@ static void nbd_disconnect_and_put(struct nbd_device *nbd)
- 	nbd_disconnect(nbd);
- 	sock_shutdown(nbd);
- 	/*
--	 * Make sure recv thread has finished, so it does not drop the last
--	 * config ref and try to destroy the workqueue from inside the work
--	 * queue. And this also ensure that we can safely call nbd_clear_que()
-+	 * Make sure recv thread has finished, we can safely call nbd_clear_que()
- 	 * to cancel the inflight I/Os.
- 	 */
--	if (nbd->recv_workq)
--		flush_workqueue(nbd->recv_workq);
-+	flush_workqueue(nbd->recv_workq);
- 	nbd_clear_que(nbd);
- 	nbd->task_setup = NULL;
- 	mutex_unlock(&nbd->config_lock);
--- 
-2.31.1
+Josef
 
