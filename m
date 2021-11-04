@@ -2,90 +2,69 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 862DC44379A
-	for <lists+nbd@lfdr.de>; Tue,  2 Nov 2021 22:00:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DB29444DF7
+	for <lists+nbd@lfdr.de>; Thu,  4 Nov 2021 05:39:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6A4A22043D; Tue,  2 Nov 2021 21:00:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov  2 21:00:13 2021
-Old-Return-Path: <axboe@kernel.dk>
+	id F167E2060A; Thu,  4 Nov 2021 04:39:23 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Nov  4 04:39:23 2021
+Old-Return-Path: <wubo40@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2 autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 808FD204BE
-	for <lists-other-nbd@bendel.debian.org>; Tue,  2 Nov 2021 20:42:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6817720605
+	for <lists-other-nbd@bendel.debian.org>; Thu,  4 Nov 2021 04:23:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.281 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id YS6XioVCWpeT for <lists-other-nbd@bendel.debian.org>;
-	Tue,  2 Nov 2021 20:42:52 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-io1-xd30.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 1F796204D5
-	for <nbd@other.debian.org>; Tue,  2 Nov 2021 20:42:51 +0000 (UTC)
-Received: by mail-io1-xd30.google.com with SMTP id e144so252443iof.3
-        for <nbd@other.debian.org>; Tue, 02 Nov 2021 13:42:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:in-reply-to:references:subject:message-id:date
-         :mime-version:content-transfer-encoding;
-        bh=K/fqbzKS7d7M3R+dtjsJkzxyoCQ0qXkQ3ZMxTQROrjY=;
-        b=0jOnt+d6rkjr0xYYasEo/Cma/n2fhTr9QJnbA/Dl6G6MGmPUSK5+5R2eLkwDRV1k7U
-         sBzxiL42a6mqjwsXausPbWMjLIzjKxpjYwyJ5RwlsOcoPaT6X6p/UfKxYOtHtqyC6GU7
-         ugH3ygUqUOXgNZzKTne4c4ffQ42OzTL7p3xZ0IHMHerTc5oCKis+UAZPqMtiaMo6vnPK
-         0izcH3MXVr187f2PCLw4kyNhDOBm1INviqGtyNz1Afr1kzgkmepYbcT1LdDFCeR8OOnW
-         757T3j+hhV6QIPMDLWCjeCSOp/jTZ7Sc6M0jUC/lqnAic7kKpQEdsrWbcJTcFiRXj/3K
-         BaHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:in-reply-to:references:subject
-         :message-id:date:mime-version:content-transfer-encoding;
-        bh=K/fqbzKS7d7M3R+dtjsJkzxyoCQ0qXkQ3ZMxTQROrjY=;
-        b=qM1Utbr5eqyjWUbe1iB3sI5r/Lj7Ng3ifzRHyQFc/k8GB6ejAPFM1VcUORYkMrdwQ4
-         ZhjmZQ3tjYyOdlU/roxHVlbPLMFlu0Bp/fYscrtzKt5TM/L0T6DQEuNxdqBy4RnWJBBm
-         nf05NwJeJuUDodMV8Pfw4Yqb5CGq7UJdEIYypfaJMX8HV0PD55yk0+WC9EJCg3Dw8qXK
-         ogBzX5Pb4SUh8F6MGcJEqMXxew6YTKzh+Rs2KYrmaVKYDBIqzjIlMjNIzGeZmxF+/ae4
-         V1nMnlce1wxwBHGry6Epnt73J0rdcBQLEgIga/lpnOA5yGtvF8NlJPkRmikWRATuZk1z
-         kEyw==
-X-Gm-Message-State: AOAM5326zOJSkG3b5Olw8D3enTzy3SXBzQFu9gToJCW5xV7xJ6JJArhc
-	rXUb8NQbZ0EwV9o1EM/z5wFQ+w==
-X-Google-Smtp-Source: ABdhPJz3m9eBOhDC5NdhELv5Gcmquw7Vd2ye9VvFsUfeC26PRRr6aNPvdUP7IEkS1SlWnuJobt6JKw==
-X-Received: by 2002:a5d:8242:: with SMTP id n2mr27354163ioo.170.1635885768482;
-        Tue, 02 Nov 2021 13:42:48 -0700 (PDT)
-Received: from [127.0.1.1] ([207.135.234.126])
-        by smtp.gmail.com with ESMTPSA id n4sm84359ili.10.2021.11.02.13.42.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Nov 2021 13:42:48 -0700 (PDT)
-From: Jens Axboe <axboe@kernel.dk>
-To: josef@toxicpanda.com, Yu Kuai <yukuai3@huawei.com>
-Cc: yi.zhang@huawei.com, linux-block@vger.kernel.org, nbd@other.debian.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20211101092538.1155842-1-yukuai3@huawei.com>
-References: <20211101092538.1155842-1-yukuai3@huawei.com>
-Subject: Re: [PATCH] nbd: error out if socket index doesn't match in nbd_handle_reply()
-Message-Id: <163588576788.463006.5186111103177394887.b4-ty@kernel.dk>
-Date: Tue, 02 Nov 2021 14:42:47 -0600
+	with ESMTP id 9XrtYVgBRb1l for <lists-other-nbd@bendel.debian.org>;
+	Thu,  4 Nov 2021 04:23:00 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 747542059A
+	for <nbd@other.debian.org>; Thu,  4 Nov 2021 04:23:00 +0000 (UTC)
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.53])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Hl8x04JDJzbhXG;
+	Thu,  4 Nov 2021 11:57:40 +0800 (CST)
+Received: from dggpeml500019.china.huawei.com (7.185.36.137) by
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Thu, 4 Nov 2021 12:02:25 +0800
+Received: from huawei.com (10.175.124.27) by dggpeml500019.china.huawei.com
+ (7.185.36.137) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.15; Thu, 4 Nov
+ 2021 12:02:25 +0800
+From: Wu Bo <wubo40@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
+	<linux-kernel@vger.kernel.org>, <linfeilong@huawei.com>, <wubo40@huawei.com>
+Subject: [PATCH] nbd: code clean for kiocb_done()
+Date: Thu, 4 Nov 2021 12:34:32 +0800
+Message-ID: <1636000472-3092-1-git-send-email-wubo40@huawei.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.175.124.27]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ dggpeml500019.china.huawei.com (7.185.36.137)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <x-v6KzeHxjI.A.FUH.dbaghB@bendel>
+Resent-Message-ID: <mzZtYc0nvdH.A.2jD.7P2ghB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1607
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1609
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -95,24 +74,53 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/163588576788.463006.5186111103177394887.b4-ty@kernel.dk
-Resent-Date: Tue,  2 Nov 2021 21:00:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1636000472-3092-1-git-send-email-wubo40@huawei.com
+Resent-Date: Thu,  4 Nov 2021 04:39:23 +0000 (UTC)
 
-On Mon, 1 Nov 2021 17:25:38 +0800, Yu Kuai wrote:
-> commit fcf3d633d8e1 ("nbd: check sock index in nbd_read_stat()") just
-> add error message when socket index doesn't match. Since the request
-> and reply must be transmitted over the same socket, it's ok to error
-> out in such situation.
-> 
-> 
+A simple code clean for nbd_genl_status()
 
-Applied, thanks!
+Signed-off-by: Wu Bo <wubo40@huawei.com>
+---
+ drivers/block/nbd.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-[1/1] nbd: error out if socket index doesn't match in nbd_handle_reply()
-      commit: 494dbee341e7a02529ce776ee9a5e0b7733ca280
-
-Best regards,
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index b47b2a8..175ea97 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -2375,7 +2375,6 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
+ 	reply_head = genlmsg_put_reply(reply, info, &nbd_genl_family, 0,
+ 				       NBD_CMD_STATUS);
+ 	if (!reply_head) {
+-		nlmsg_free(reply);
+ 		goto out;
+ 	}
+ 
+@@ -2383,7 +2382,6 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
+ 	if (index == -1) {
+ 		ret = idr_for_each(&nbd_index_idr, &status_cb, reply);
+ 		if (ret) {
+-			nlmsg_free(reply);
+ 			goto out;
+ 		}
+ 	} else {
+@@ -2392,7 +2390,6 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
+ 		if (nbd) {
+ 			ret = populate_nbd_status(nbd, reply);
+ 			if (ret) {
+-				nlmsg_free(reply);
+ 				goto out;
+ 			}
+ 		}
+@@ -2401,6 +2398,8 @@ static int nbd_genl_status(struct sk_buff *skb, struct genl_info *info)
+ 	genlmsg_end(reply, reply_head);
+ 	ret = genlmsg_reply(reply, info);
+ out:
++	if (reply)
++		nlmsg_free(reply);
+ 	mutex_unlock(&nbd_index_mutex);
+ 	return ret;
+ }
 -- 
-Jens Axboe
-
+1.8.3.1
 
