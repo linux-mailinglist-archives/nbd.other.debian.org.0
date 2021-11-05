@@ -2,72 +2,76 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id E96FE445136
-	for <lists+nbd@lfdr.de>; Thu,  4 Nov 2021 10:33:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FB80445DC2
+	for <lists+nbd@lfdr.de>; Fri,  5 Nov 2021 03:03:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D3A5920657; Thu,  4 Nov 2021 09:33:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Nov  4 09:33:09 2021
-Old-Return-Path: <BATV+9229d5203ea008eac577+6647+infradead.org+hch@bombadil.srs.infradead.org>
+	id 0DCEE206E2; Fri,  5 Nov 2021 02:03:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Nov  5 02:03:10 2021
+Old-Return-Path: <wubo40@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-4.4 required=4.0 tests=MURPHY_DRUGS_REL8,
+	NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H2 autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CCD682064C
-	for <lists-other-nbd@bendel.debian.org>; Thu,  4 Nov 2021 09:16:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 61EAB206DB
+	for <lists-other-nbd@bendel.debian.org>; Fri,  5 Nov 2021 01:46:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.48 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.282 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
+	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id e4otbI2g9dcg for <lists-other-nbd@bendel.debian.org>;
-	Thu,  4 Nov 2021 09:16:22 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 1658 seconds by postgrey-1.36 at bendel; Thu, 04 Nov 2021 09:16:22 UTC
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	with ESMTP id v5LkTB3IUMS0 for <lists-other-nbd@bendel.debian.org>;
+	Fri,  5 Nov 2021 01:46:26 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id C1E41205E5
-	for <nbd@other.debian.org>; Thu,  4 Nov 2021 09:16:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=9gP1LH3zvKAxABcAWtH7DhuMpE09FrjJbNcq52Qoyns=; b=VEicMkJmVu4TUtSAdkL2uU9Y1M
-	H49HBUXnvi/DvDCoWd2Bd520qo68O1PxCcfwpkPK8V1OZBn3DAMPjLdnNNfzYszLjIIl884Gu65tH
-	54kHzCy2KT/2YdrTfGoLtU7i395huQI/fJoyYmvnr1JB11gzEyX++ziBAoulmwMnKmbOIpiT9NB4L
-	gOXmYWFIpL6GuLs/y/UG2imcsSste6LVP52vrRWdvjCDWNJZXgGd3kgS9GAByKChjdoO0enzxetoB
-	4reePckn/6fVC10fXbfpWTciKYnyD0tnXUEsTi6bLyyI6BMqtkV6s1RQ8Y/G2N7o025+Y4pIKFTyY
-	7z8VUWKg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1miYQF-008MKw-9T; Thu, 04 Nov 2021 08:48:35 +0000
-Date: Thu, 4 Nov 2021 01:48:35 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Wu Bo <wubo40@huawei.com>
-Cc: josef@toxicpanda.com, axboe@kernel.dk, linux-block@vger.kernel.org,
-	nbd@other.debian.org, linux-kernel@vger.kernel.org,
-	linfeilong@huawei.com
+	by bendel.debian.org (Postfix) with ESMTPS id 4BCAB206D6
+	for <nbd@other.debian.org>; Fri,  5 Nov 2021 01:46:26 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.54])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Hljyp0lktz90VB;
+	Fri,  5 Nov 2021 09:46:10 +0800 (CST)
+Received: from dggpeml500019.china.huawei.com (7.185.36.137) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Fri, 5 Nov 2021 09:46:19 +0800
+Received: from [10.174.179.189] (10.174.179.189) by
+ dggpeml500019.china.huawei.com (7.185.36.137) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Fri, 5 Nov 2021 09:46:18 +0800
 Subject: Re: [PATCH RESEND] nbd: code clean for nbd_genl_status()
-Message-ID: <YYOeYwPlLnn7JR+W@infradead.org>
+To: Christoph Hellwig <hch@infradead.org>
+CC: <josef@toxicpanda.com>, <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
+	<nbd@other.debian.org>, <linux-kernel@vger.kernel.org>,
+	<linfeilong@huawei.com>
 References: <1636000703-13217-1-git-send-email-wubo40@huawei.com>
+ <YYOeYwPlLnn7JR+W@infradead.org>
+From: Wu Bo <wubo40@huawei.com>
+Message-ID: <6cdbd618-918a-3674-122f-039180ea316b@huawei.com>
+Date: Fri, 5 Nov 2021 09:46:18 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.2.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1636000703-13217-1-git-send-email-wubo40@huawei.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <YYOeYwPlLnn7JR+W@infradead.org>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.174.179.189]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpeml500019.china.huawei.com (7.185.36.137)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <pqTw-NscHLB.A.Xs.Vj6ghB@bendel>
+Resent-Message-ID: <3QqvrA2OXcG.A.bvH.eDJhhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1610
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1611
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -77,21 +81,29 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YYOeYwPlLnn7JR+W@infradead.org
-Resent-Date: Thu,  4 Nov 2021 09:33:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6cdbd618-918a-3674-122f-039180ea316b@huawei.com
+Resent-Date: Fri,  5 Nov 2021 02:03:10 +0000 (UTC)
 
-On Thu, Nov 04, 2021 at 12:38:23PM +0800, Wu Bo wrote:
->  	if (!reply_head) {
-> -		nlmsg_free(reply);
->  		goto out;
->  	}
+On 2021/11/4 16:48, Christoph Hellwig wrote:
+> On Thu, Nov 04, 2021 at 12:38:23PM +0800, Wu Bo wrote:
+>>   	if (!reply_head) {
+>> -		nlmsg_free(reply);
+>>   		goto out;
+>>   	}
+> 
+> Please also drop the now pointless braces.
+> 
+ok. Will do in v2.
+>>   out:
+>> +	if (reply)
+>> +		nlmsg_free(reply);
+> 
+> Please just use a different label for just unlocking vs also freeing
+> the reply.
+> .
+ok. Will do in v2.
 
-Please also drop the now pointless braces.
+Thanks.
 
->  out:
-> +	if (reply)
-> +		nlmsg_free(reply);
-
-Please just use a different label for just unlocking vs also freeing
-the reply.
+Wu Bo
 
