@@ -1,64 +1,64 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3CB3468069
-	for <lists+nbd@lfdr.de>; Sat,  4 Dec 2021 00:31:59 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8002468072
+	for <lists+nbd@lfdr.de>; Sat,  4 Dec 2021 00:32:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9C54D2015F; Fri,  3 Dec 2021 23:31:59 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  3 23:31:59 2021
+	id 7ABA820154; Fri,  3 Dec 2021 23:32:41 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  3 23:32:41 2021
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.2 required=4.0 tests=DIGITS_LETTERS,
+X-Spam-Status: No, score=-11.7 required=4.0 tests=DIGITS_LETTERS,
 	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,PHONENUMBER,
-	RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=unavailable
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
+	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3745C20153
-	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Dec 2021 23:31:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 35AAC2015F
+	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Dec 2021 23:32:23 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.43 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-6.927 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.049,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
 	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	PHONENUMBER=1.5, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001]
-	autolearn=no autolearn_force=no
+	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001,
+	RCVD_IN_MSPIKE_WL=0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 41QdMpy7C9DM for <lists-other-nbd@bendel.debian.org>;
-	Fri,  3 Dec 2021 23:31:47 +0000 (UTC)
+	with ESMTP id 9IOhCtXOdZ0d for <lists-other-nbd@bendel.debian.org>;
+	Fri,  3 Dec 2021 23:32:17 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 9B3F72016C
-	for <nbd@other.debian.org>; Fri,  3 Dec 2021 23:31:47 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id 5021920153
+	for <nbd@other.debian.org>; Fri,  3 Dec 2021 23:32:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1638574302;
+	s=mimecast20190719; t=1638574332;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XaDVs2WNSNjepM2A0DQuO940MO4WbUd6KdFQbYivIR8=;
-	b=dwYXQKSoHFQ5hlE+lL/E1jwk6PPtZDXhmCHSK1EnCnEEW5kOwWJ0JX1SPWx6zhieMJ5dh0
-	np+AenelAvXMkWWTWlW/73e5OkmdFEKH4faR/0J8uVFYZXtpf8vyP7QqXwyGeiPmbjtYuv
-	sBBl2wDNKofeCgfkH0JOQsgIT0puC9w=
+	bh=XL3xf0GX+E6TSHDfhlS+aVqXH9zLrccK26EofTKa6aY=;
+	b=US04h8dl9ZG84vg3H4s9MGLHJVVCZzmpDRL1hXSTYGMGiAVda0lNc5ooViR5//ebBYihBr
+	T1uhiW31gctcQLCESe3EF5wxsi4/WtQGyi6dNr68ja0F69/F3RqDGWLC6Pwdk8eTpKZFX1
+	papuB9FCXAokETH6vVcvtzzZnzqMoWQ=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-213-1F6oKMxpM2G_9PydWp8vrw-1; Fri, 03 Dec 2021 18:16:21 -0500
-X-MC-Unique: 1F6oKMxpM2G_9PydWp8vrw-1
+ us-mta-427-0wQoYguXOw2bcK6K2EqpDg-1; Fri, 03 Dec 2021 18:16:26 -0500
+X-MC-Unique: 0wQoYguXOw2bcK6K2EqpDg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6472C190A7A0;
-	Fri,  3 Dec 2021 23:16:20 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7C5DC80402F;
+	Fri,  3 Dec 2021 23:16:25 +0000 (UTC)
 Received: from blue.redhat.com (unknown [10.2.16.22])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 814AC5D9D5;
-	Fri,  3 Dec 2021 23:16:10 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id A977C5D9D5;
+	Fri,  3 Dec 2021 23:16:20 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: nbd@other.debian.org,
@@ -66,9 +66,9 @@ Cc: nbd@other.debian.org,
 	vsementsov@virtuozzo.com,
 	libguestfs@redhat.com,
 	nsoffer@redhat.com
-Subject: [PATCH 08/14] nbd/server: Initial support for extended headers
-Date: Fri,  3 Dec 2021 17:15:33 -0600
-Message-Id: <20211203231539.3900865-9-eblake@redhat.com>
+Subject: [PATCH 09/14] nbd/server: Support 64-bit block status
+Date: Fri,  3 Dec 2021 17:15:34 -0600
+Message-Id: <20211203231539.3900865-10-eblake@redhat.com>
 In-Reply-To: <20211203231539.3900865-1-eblake@redhat.com>
 References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
  <20211203231539.3900865-1-eblake@redhat.com>
@@ -82,9 +82,9 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <eIy7vE4Ld4O.A.o9C.vjqqhB@bendel>
+Resent-Message-ID: <RqLlv6SU29.A.5ID.ZkqqhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1623
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1630
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -94,211 +94,223 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211203231539.3900865-9-eblake@redhat.com
-Resent-Date: Fri,  3 Dec 2021 23:31:59 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20211203231539.3900865-10-eblake@redhat.com
+Resent-Date: Fri,  3 Dec 2021 23:32:41 +0000 (UTC)
 
-We have no reason to send NBD_REPLY_TYPE_OFFSET_HOLE_EXT since we
-already cap NBD_CMD_READ to 32M.  For NBD_CMD_WRITE_ZEROES and
-NBD_CMD_TRIM, the block layer already supports 64-bit operations
-without any effort on our part.  For NBD_CMD_BLOCK_STATUS, the
-client's length is a hint; the easiest approach is to truncate our
-answer back to 32 bits, letting us delay the effort of implementing
-NBD_REPLY_TYPE_BLOCK_STATUS_EXT to a separate patch.
+The previous patch handled extended headers by truncating large block
+status requests from the client back to 32 bits.  But this is not
+ideal; for cases where we can truly determine the status of the entire
+image quickly (for example, when reporting the entire image as
+non-sparse because we lack the ability to probe for holes), this
+causes more network traffic for the client to iterate through 4G
+chunks than for us to just report the entire image at once.  For ease
+of implementation, if extended headers were negotiated, then we always
+reply with 64-bit block status replies, even when the result could
+have fit in the older 32-bit block status chunk (clients supporting
+extended headers have to be prepared for either chunk type, so
+temporarily reverting this patch proves whether a client is
+compliant).
+
+Note that we previously had some interesting size-juggling on call
+chains, such as:
+
+nbd_co_send_block_status(uint32_t length)
+-> blockstatus_to_extends(uint32_t bytes)
+  -> bdrv_block_status_above(bytes, &uint64_t num)
+  -> nbd_extent_array_add(uint64_t num)
+    -> store num in 32-bit length
+
+But we were lucky that it never overflowed: bdrv_block_status_above
+never sets num larger than bytes, and we had previously been capping
+'bytes' at 32 bits (either by the protocol, or in the previous patch
+with an explicit truncation).  This patch adds some assertions that
+ensure we continue to avoid overflowing 32 bits for a narrow client,
+while fully utilizing 64-bits all the way through when the client
+understands that.
 
 Signed-off-by: Eric Blake <eblake@redhat.com>
 ---
- nbd/nbd-internal.h |   5 ++-
- nbd/server.c       | 106 ++++++++++++++++++++++++++++++++++-----------
- 2 files changed, 85 insertions(+), 26 deletions(-)
+ nbd/server.c | 72 ++++++++++++++++++++++++++++++++++------------------
+ 1 file changed, 48 insertions(+), 24 deletions(-)
 
-diff --git a/nbd/nbd-internal.h b/nbd/nbd-internal.h
-index 0016793ff4b1..875b6204c28c 100644
---- a/nbd/nbd-internal.h
-+++ b/nbd/nbd-internal.h
-@@ -35,8 +35,11 @@
-  * https://github.com/yoe/nbd/blob/master/doc/proto.md
-  */
-
--/* Size of all NBD_OPT_*, without payload */
-+/* Size of all compact NBD_CMD_*, without payload */
- #define NBD_REQUEST_SIZE            (4 + 2 + 2 + 8 + 8 + 4)
-+/* Size of all extended NBD_CMD_*, without payload */
-+#define NBD_REQUEST_EXT_SIZE        (4 + 2 + 2 + 8 + 8 + 8)
-+
- /* Size of all NBD_REP_* sent in answer to most NBD_OPT_*, without payload */
- #define NBD_REPLY_SIZE              (4 + 4 + 8)
- /* Size of reply to NBD_OPT_EXPORT_NAME */
 diff --git a/nbd/server.c b/nbd/server.c
-index 4306fa7b426c..0e496f60ffbd 100644
+index 0e496f60ffbd..7e6140350797 100644
 --- a/nbd/server.c
 +++ b/nbd/server.c
-@@ -142,6 +142,7 @@ struct NBDClient {
-     uint32_t check_align; /* If non-zero, check for aligned client requests */
+@@ -2106,20 +2106,26 @@ static int coroutine_fn nbd_co_send_sparse_read(NBDClient *client,
+ }
 
-     bool structured_reply;
-+    bool extended_headers;
-     NBDExportMetaContexts export_meta;
+ typedef struct NBDExtentArray {
+-    NBDExtent *extents;
++    union {
++        NBDExtent *narrow;
++        NBDExtentExt *extents;
++    };
+     unsigned int nb_alloc;
+     unsigned int count;
+     uint64_t total_length;
++    bool extended; /* Whether 64-bit extents are allowed */
+     bool can_add;
+     bool converted_to_be;
+ } NBDExtentArray;
 
-     uint32_t opt; /* Current option being negotiated */
-@@ -1275,6 +1276,19 @@ static int nbd_negotiate_options(NBDClient *client, Error **errp)
-                                                  errp);
-                 break;
-
-+            case NBD_OPT_EXTENDED_HEADERS:
-+                if (length) {
-+                    ret = nbd_reject_length(client, false, errp);
-+                } else if (client->extended_headers) {
-+                    ret = nbd_negotiate_send_rep_err(
-+                        client, NBD_REP_ERR_INVALID, errp,
-+                        "extended headers already negotiated");
-+                } else {
-+                    ret = nbd_negotiate_send_rep(client, NBD_REP_ACK, errp);
-+                    client->extended_headers = true;
-+                }
-+                break;
-+
-             default:
-                 ret = nbd_opt_drop(client, NBD_REP_ERR_UNSUP, errp,
-                                    "Unsupported option %" PRIu32 " (%s)",
-@@ -1410,11 +1424,13 @@ nbd_read_eof(NBDClient *client, void *buffer, size_t size, Error **errp)
- static int nbd_receive_request(NBDClient *client, NBDRequest *request,
-                                Error **errp)
+-static NBDExtentArray *nbd_extent_array_new(unsigned int nb_alloc)
++static NBDExtentArray *nbd_extent_array_new(unsigned int nb_alloc,
++                                            bool extended)
  {
--    uint8_t buf[NBD_REQUEST_SIZE];
--    uint32_t magic;
-+    uint8_t buf[NBD_REQUEST_EXT_SIZE];
-+    uint32_t magic, expect;
+     NBDExtentArray *ea = g_new0(NBDExtentArray, 1);
+
+     ea->nb_alloc = nb_alloc;
+-    ea->extents = g_new(NBDExtent, nb_alloc);
++    ea->extents = g_new(NBDExtentExt, nb_alloc);
++    ea->extended = extended;
+     ea->can_add = true;
+
+     return ea;
+@@ -2133,17 +2139,31 @@ static void nbd_extent_array_free(NBDExtentArray *ea)
+ G_DEFINE_AUTOPTR_CLEANUP_FUNC(NBDExtentArray, nbd_extent_array_free);
+
+ /* Further modifications of the array after conversion are abandoned */
+-static void nbd_extent_array_convert_to_be(NBDExtentArray *ea)
++static void nbd_extent_array_convert_to_be(NBDExtentArray *ea,
++                                           struct iovec *iov)
+ {
+     int i;
+
+     assert(!ea->converted_to_be);
++    assert(iov->iov_base == ea->extents);
+     ea->can_add = false;
+     ea->converted_to_be = true;
+
+-    for (i = 0; i < ea->count; i++) {
+-        ea->extents[i].flags = cpu_to_be32(ea->extents[i].flags);
+-        ea->extents[i].length = cpu_to_be32(ea->extents[i].length);
++    if (ea->extended) {
++        for (i = 0; i < ea->count; i++) {
++            ea->extents[i].length = cpu_to_be64(ea->extents[i].length);
++            ea->extents[i].flags = cpu_to_be32(ea->extents[i].flags);
++            assert(ea->extents[i]._pad == 0);
++        }
++        iov->iov_len = ea->count * sizeof(ea->extents[0]);
++    } else {
++        /* Conversion reduces memory usage, order of iteration matters */
++        for (i = 0; i < ea->count; i++) {
++            assert(ea->extents[i].length <= UINT32_MAX);
++            ea->narrow[i].length = cpu_to_be32(ea->extents[i].length);
++            ea->narrow[i].flags = cpu_to_be32(ea->extents[i].flags);
++        }
++        iov->iov_len = ea->count * sizeof(ea->narrow[0]);
+     }
+ }
+
+@@ -2157,19 +2177,23 @@ static void nbd_extent_array_convert_to_be(NBDExtentArray *ea)
+  * would result in an incorrect range reported to the client)
+  */
+ static int nbd_extent_array_add(NBDExtentArray *ea,
+-                                uint32_t length, uint32_t flags)
++                                uint64_t length, uint32_t flags)
+ {
+     assert(ea->can_add);
+
+     if (!length) {
+         return 0;
+     }
++    if (!ea->extended) {
++        assert(length <= UINT32_MAX);
++    }
+
+     /* Extend previous extent if flags are the same */
+     if (ea->count > 0 && flags == ea->extents[ea->count - 1].flags) {
+-        uint64_t sum = (uint64_t)length + ea->extents[ea->count - 1].length;
++        uint64_t sum = length + ea->extents[ea->count - 1].length;
+
+-        if (sum <= UINT32_MAX) {
++        assert(sum >= length);
++        if (sum <= UINT32_MAX || ea->extended) {
+             ea->extents[ea->count - 1].length = sum;
+             ea->total_length += length;
+             return 0;
+@@ -2182,7 +2206,7 @@ static int nbd_extent_array_add(NBDExtentArray *ea,
+     }
+
+     ea->total_length += length;
+-    ea->extents[ea->count] = (NBDExtent) {.length = length, .flags = flags};
++    ea->extents[ea->count] = (NBDExtentExt) {.length = length, .flags = flags};
+     ea->count++;
+
+     return 0;
+@@ -2253,15 +2277,16 @@ static int nbd_co_send_extents(NBDClient *client, uint64_t handle,
+     struct iovec iov[] = {
+         {.iov_base = &hdr},
+         {.iov_base = &chunk, .iov_len = sizeof(chunk)},
+-        {.iov_base = ea->extents, .iov_len = ea->count * sizeof(ea->extents[0])}
++        {.iov_base = ea->extents}
+     };
+
+-    nbd_extent_array_convert_to_be(ea);
++    nbd_extent_array_convert_to_be(ea, &iov[2]);
+
+     trace_nbd_co_send_extents(handle, ea->count, context_id, ea->total_length,
+                               last);
+     set_be_chunk(client, &iov[0], last ? NBD_REPLY_FLAG_DONE : 0,
+-                 NBD_REPLY_TYPE_BLOCK_STATUS,
++                 client->extended_headers ? NBD_REPLY_TYPE_BLOCK_STATUS_EXT
++                 : NBD_REPLY_TYPE_BLOCK_STATUS,
+                  handle, iov[1].iov_len + iov[2].iov_len);
+     stl_be_p(&chunk.context_id, context_id);
+
+@@ -2271,13 +2296,14 @@ static int nbd_co_send_extents(NBDClient *client, uint64_t handle,
+ /* Get block status from the exported device and send it to the client */
+ static int nbd_co_send_block_status(NBDClient *client, uint64_t handle,
+                                     BlockDriverState *bs, uint64_t offset,
+-                                    uint32_t length, bool dont_fragment,
++                                    uint64_t length, bool dont_fragment,
+                                     bool last, uint32_t context_id,
+                                     Error **errp)
+ {
      int ret;
-+    size_t size = client->extended_headers ? NBD_REQUEST_EXT_SIZE
-+        : NBD_REQUEST_SIZE;
+     unsigned int nb_extents = dont_fragment ? 1 : NBD_MAX_BLOCK_STATUS_EXTENTS;
+-    g_autoptr(NBDExtentArray) ea = nbd_extent_array_new(nb_extents);
++    g_autoptr(NBDExtentArray) ea =
++        nbd_extent_array_new(nb_extents, client->extended_headers);
 
--    ret = nbd_read_eof(client, buf, sizeof(buf), errp);
-+    ret = nbd_read_eof(client, buf, size, errp);
-     if (ret < 0) {
-         return ret;
-     }
-@@ -1422,13 +1438,21 @@ static int nbd_receive_request(NBDClient *client, NBDRequest *request,
-         return -EIO;
-     }
+     if (context_id == NBD_META_ID_BASE_ALLOCATION) {
+         ret = blockstatus_to_extents(bs, offset, length, ea);
+@@ -2304,7 +2330,8 @@ static void bitmap_to_extents(BdrvDirtyBitmap *bitmap,
+     bdrv_dirty_bitmap_lock(bitmap);
 
--    /* Request
--       [ 0 ..  3]   magic   (NBD_REQUEST_MAGIC)
--       [ 4 ..  5]   flags   (NBD_CMD_FLAG_FUA, ...)
--       [ 6 ..  7]   type    (NBD_CMD_READ, ...)
--       [ 8 .. 15]   handle
--       [16 .. 23]   from
--       [24 .. 27]   len
-+    /*
-+     * Compact request
-+     *  [ 0 ..  3]   magic   (NBD_REQUEST_MAGIC)
-+     *  [ 4 ..  5]   flags   (NBD_CMD_FLAG_FUA, ...)
-+     *  [ 6 ..  7]   type    (NBD_CMD_READ, ...)
-+     *  [ 8 .. 15]   handle
-+     *  [16 .. 23]   from
-+     *  [24 .. 27]   len
-+     * Extended request
-+     *  [ 0 ..  3]   magic   (NBD_REQUEST_EXT_MAGIC)
-+     *  [ 4 ..  5]   flags   (NBD_CMD_FLAG_FUA, ...)
-+     *  [ 6 ..  7]   type    (NBD_CMD_READ, ...)
-+     *  [ 8 .. 15]   handle
-+     *  [16 .. 23]   from
-+     *  [24 .. 31]   len
-      */
+     for (start = offset;
+-         bdrv_dirty_bitmap_next_dirty_area(bitmap, start, end, INT32_MAX,
++         bdrv_dirty_bitmap_next_dirty_area(bitmap, start, end,
++                                           es->extended ? INT64_MAX : INT32_MAX,
+                                            &dirty_start, &dirty_count);
+          start = dirty_start + dirty_count)
+     {
+@@ -2326,11 +2353,12 @@ static void bitmap_to_extents(BdrvDirtyBitmap *bitmap,
 
-     magic = ldl_be_p(buf);
-@@ -1436,12 +1460,18 @@ static int nbd_receive_request(NBDClient *client, NBDRequest *request,
-     request->type   = lduw_be_p(buf + 6);
-     request->handle = ldq_be_p(buf + 8);
-     request->from   = ldq_be_p(buf + 16);
--    request->len    = ldl_be_p(buf + 24); /* widen 32 to 64 bits */
-+    if (client->extended_headers) {
-+        request->len = ldq_be_p(buf + 24);
-+        expect = NBD_REQUEST_EXT_MAGIC;
-+    } else {
-+        request->len = ldl_be_p(buf + 24); /* widen 32 to 64 bits */
-+        expect = NBD_REQUEST_MAGIC;
-+    }
-
-     trace_nbd_receive_request(magic, request->flags, request->type,
-                               request->from, request->len);
-
--    if (magic != NBD_REQUEST_MAGIC) {
-+    if (magic != expect) {
-         error_setg(errp, "invalid magic (got 0x%" PRIx32 ")", magic);
-         return -EINVAL;
-     }
-@@ -1872,12 +1902,22 @@ static int coroutine_fn nbd_co_send_iov(NBDClient *client, struct iovec *iov,
- static inline void set_be_simple_reply(NBDClient *client, struct iovec *iov,
-                                        uint64_t error, uint64_t handle)
+ static int nbd_co_send_bitmap(NBDClient *client, uint64_t handle,
+                               BdrvDirtyBitmap *bitmap, uint64_t offset,
+-                              uint32_t length, bool dont_fragment, bool last,
++                              uint64_t length, bool dont_fragment, bool last,
+                               uint32_t context_id, Error **errp)
  {
--    NBDSimpleReply *reply = iov->iov_base;
-+    if (client->extended_headers) {
-+        NBDSimpleReplyExt *reply = iov->iov_base;
+     unsigned int nb_extents = dont_fragment ? 1 : NBD_MAX_BLOCK_STATUS_EXTENTS;
+-    g_autoptr(NBDExtentArray) ea = nbd_extent_array_new(nb_extents);
++    g_autoptr(NBDExtentArray) ea =
++        nbd_extent_array_new(nb_extents, client->extended_headers);
 
--    iov->iov_len = sizeof(*reply);
--    stl_be_p(&reply->magic, NBD_SIMPLE_REPLY_MAGIC);
--    stl_be_p(&reply->error, error);
--    stq_be_p(&reply->handle, handle);
-+        iov->iov_len = sizeof(*reply);
-+        stl_be_p(&reply->magic, NBD_SIMPLE_REPLY_EXT_MAGIC);
-+        stl_be_p(&reply->error, error);
-+        stq_be_p(&reply->handle, handle);
-+        reply->_pad1 = reply->_pad2 = 0;
-+    } else {
-+        NBDSimpleReply *reply = iov->iov_base;
-+
-+        iov->iov_len = sizeof(*reply);
-+        stl_be_p(&reply->magic, NBD_SIMPLE_REPLY_MAGIC);
-+        stl_be_p(&reply->error, error);
-+        stq_be_p(&reply->handle, handle);
-+    }
- }
+     bitmap_to_extents(bitmap, offset, length, ea);
 
- static int nbd_co_send_simple_reply(NBDClient *client,
-@@ -1905,14 +1945,26 @@ static inline void set_be_chunk(NBDClient *client, struct iovec *iov,
-                                 uint16_t flags, uint16_t type,
-                                 uint64_t handle, uint32_t length)
- {
--    NBDStructuredReplyChunk *chunk = iov->iov_base;
-+    if (client->extended_headers) {
-+        NBDStructuredReplyChunkExt *chunk = iov->iov_base;
-
--    iov->iov_len = sizeof(*chunk);
--    stl_be_p(&chunk->magic, NBD_STRUCTURED_REPLY_MAGIC);
--    stw_be_p(&chunk->flags, flags);
--    stw_be_p(&chunk->type, type);
--    stq_be_p(&chunk->handle, handle);
--    stl_be_p(&chunk->length, length);
-+        iov->iov_len = sizeof(*chunk);
-+        stl_be_p(&chunk->magic, NBD_STRUCTURED_REPLY_EXT_MAGIC);
-+        stw_be_p(&chunk->flags, flags);
-+        stw_be_p(&chunk->type, type);
-+        stq_be_p(&chunk->handle, handle);
-+        stq_be_p(&chunk->length, length);
-+        chunk->_pad = 0;
-+    } else {
-+        NBDStructuredReplyChunk *chunk = iov->iov_base;
-+
-+        iov->iov_len = sizeof(*chunk);
-+        stl_be_p(&chunk->magic, NBD_STRUCTURED_REPLY_MAGIC);
-+        stw_be_p(&chunk->flags, flags);
-+        stw_be_p(&chunk->type, type);
-+        stq_be_p(&chunk->handle, handle);
-+        stl_be_p(&chunk->length, length);
-+    }
- }
-
- static int coroutine_fn nbd_co_send_structured_done(NBDClient *client,
-@@ -2555,7 +2607,11 @@ static coroutine_fn int nbd_handle_request(NBDClient *client,
+@@ -2607,11 +2635,7 @@ static coroutine_fn int nbd_handle_request(NBDClient *client,
              return nbd_send_generic_reply(client, request->handle, -EINVAL,
                                            "need non-zero length", errp);
          }
--        assert(request->len <= UINT32_MAX);
-+        if (request->len > UINT32_MAX) {
-+            /* For now, truncate our response to a 32 bit window */
-+            request->len = QEMU_ALIGN_DOWN(BDRV_REQUEST_MAX_BYTES,
-+                                           client->check_align ?: 1);
-+        }
+-        if (request->len > UINT32_MAX) {
+-            /* For now, truncate our response to a 32 bit window */
+-            request->len = QEMU_ALIGN_DOWN(BDRV_REQUEST_MAX_BYTES,
+-                                           client->check_align ?: 1);
+-        }
++        assert(client->extended_headers || request->len <= UINT32_MAX);
          if (client->export_meta.count) {
              bool dont_fragment = request->flags & NBD_CMD_FLAG_REQ_ONE;
              int contexts_remaining = client->export_meta.count;
