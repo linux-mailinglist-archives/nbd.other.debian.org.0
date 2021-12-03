@@ -1,40 +1,40 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 535D446806F
-	for <lists+nbd@lfdr.de>; Sat,  4 Dec 2021 00:32:33 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FBFA46806D
+	for <lists+nbd@lfdr.de>; Sat,  4 Dec 2021 00:32:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 27C3D20166; Fri,  3 Dec 2021 23:32:33 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  3 23:32:33 2021
+	id 47FD120166; Fri,  3 Dec 2021 23:32:25 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  3 23:32:25 2021
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-11.7 required=4.0 tests=DIGITS_LETTERS,
 	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL autolearn=unavailable
-	autolearn_force=no version=3.4.2
+	RCVD_IN_MSPIKE_H2 autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D22E920154
-	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Dec 2021 23:32:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 088B42016C
+	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Dec 2021 23:32:17 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.927 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-6.93 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.049,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
 	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001] autolearn=ham autolearn_force=no
+	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id uX7mSfkf72Yu for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id Sr6MAIwFd2fY for <lists-other-nbd@bendel.debian.org>;
 	Fri,  3 Dec 2021 23:32:14 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 9FF30200E5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by bendel.debian.org (Postfix) with ESMTP id AB62020153
 	for <nbd@other.debian.org>; Fri,  3 Dec 2021 23:32:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1638574329;
@@ -42,33 +42,35 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XPqO+0QHBfaom4pEhnAk5AqXR/f6poXPR218L1xFEEU=;
-	b=fiBLI2jS10aiRw0L4aQQt3ieSEZrt12DxYejxToTeoX2/8Xixw2wLi5JBcmjvnpCJ0pP21
-	mo1GCnA1N5UvJsIm5gCai93fhkK0QmIz1aAn5A1+YIhPUCPgA059Oir7IJCpvSaTY5gqiW
-	y4qWJBAE0id5S7NcGHMMlvuHy12mlqo=
+	bh=TjYgrIAEtIty4X+aptzEXKj4wdU3TPHUuNxJCtjWAdU=;
+	b=hd4FWrrZVNSv1M/QUC69tf4xNrFRbk8u/gtPXyLGGz8Mbn1nFpykprz99l1ATADECMDXDF
+	VUwUpB6g65pLOF++WXYYgDZ1VXsuhhi+WiG1mdpKrhw1eVQnpWIo/zORe6/Y8xnv/QbLti
+	RIm7vIQW156C00Ac2sBakcvvPD5zG4M=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-149-Wu5-ZOztPPmUtYSDDt4rjg-1; Fri, 03 Dec 2021 18:15:53 -0500
-X-MC-Unique: Wu5-ZOztPPmUtYSDDt4rjg-1
+ us-mta-402-ImXpeQSlP8yuRF2XULVQ-Q-1; Fri, 03 Dec 2021 18:15:59 -0500
+X-MC-Unique: ImXpeQSlP8yuRF2XULVQ-Q-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0924585EE61;
-	Fri,  3 Dec 2021 23:15:52 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 20F8F801B01;
+	Fri,  3 Dec 2021 23:15:58 +0000 (UTC)
 Received: from blue.redhat.com (unknown [10.2.16.22])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 209255D9D5;
-	Fri,  3 Dec 2021 23:15:51 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 061D95D9D5;
+	Fri,  3 Dec 2021 23:15:56 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: nbd@other.debian.org,
 	qemu-block@nongnu.org,
 	vsementsov@virtuozzo.com,
 	libguestfs@redhat.com,
-	nsoffer@redhat.com
-Subject: [PATCH 01/14] nbd/server: Minor cleanups
-Date: Fri,  3 Dec 2021 17:15:26 -0600
-Message-Id: <20211203231539.3900865-2-eblake@redhat.com>
+	nsoffer@redhat.com,
+	Kevin Wolf <kwolf@redhat.com>,
+	Hanna Reitz <hreitz@redhat.com>
+Subject: [PATCH 02/14] qemu-io: Utilize 64-bit status during map
+Date: Fri,  3 Dec 2021 17:15:27 -0600
+Message-Id: <20211203231539.3900865-3-eblake@redhat.com>
 In-Reply-To: <20211203231539.3900865-1-eblake@redhat.com>
 References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
  <20211203231539.3900865-1-eblake@redhat.com>
@@ -82,9 +84,9 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <0JuZPKczbsI.A.rGD.RkqqhB@bendel>
+Resent-Message-ID: <TwN-vsrPG8O.A.6DD.JkqqhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1628
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1626
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -94,55 +96,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211203231539.3900865-2-eblake@redhat.com
-Resent-Date: Fri,  3 Dec 2021 23:32:33 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20211203231539.3900865-3-eblake@redhat.com
+Resent-Date: Fri,  3 Dec 2021 23:32:25 +0000 (UTC)
 
-Spelling fixes, grammar improvements and consistent spacing, noticed
-while preparing other patches in this file.
+The block layer has supported 64-bit block status from drivers since
+commit 86a3d5c688 ("block: Add .bdrv_co_block_status() callback",
+v2.12) and friends, with individual driver callbacks responsible for
+capping things where necessary.  Artificially capping things below 2G
+in the qemu-io 'map' command, added in commit d6a644bbfe ("block: Make
+bdrv_is_allocated() byte-based", v2.10) is thus no longer necessary.
+
+One way to test this is with qemu-nbd as server on a raw file larger
+than 4G (the entire file should show as allocated), plus 'qemu-io -f
+raw -c map nbd://localhost --trace=nbd_\*' as client.  Prior to this
+patch, the NBD_CMD_BLOCK_STATUS requests are fragmented at 0x7ffffe00
+distances; with this patch, the fragmenting changes to 0x7fffffff
+(since the NBD protocol is currently still limited to 32-bit
+transactions - see block/nbd.c:nbd_client_co_block_status).  Then in
+later patches, once I add an NBD extension for a 64-bit block status,
+the same map command completes with just one NBD_CMD_BLOCK_STATUS.
 
 Signed-off-by: Eric Blake <eblake@redhat.com>
 ---
- nbd/server.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ qemu-io-cmds.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/nbd/server.c b/nbd/server.c
-index 4630dd732250..f302e1cbb03e 100644
---- a/nbd/server.c
-+++ b/nbd/server.c
-@@ -2085,11 +2085,10 @@ static void nbd_extent_array_convert_to_be(NBDExtentArray *ea)
-  * Add extent to NBDExtentArray. If extent can't be added (no available space),
-  * return -1.
-  * For safety, when returning -1 for the first time, .can_add is set to false,
-- * further call to nbd_extent_array_add() will crash.
-- * (to avoid the situation, when after failing to add an extent (returned -1),
-- * user miss this failure and add another extent, which is successfully added
-- * (array is full, but new extent may be squashed into the last one), then we
-- * have invalid array with skipped extent)
-+ * and further calls to nbd_extent_array_add() will crash.
-+ * (this avoids the situation where a caller ignores failure to add one extent,
-+ * where adding another extent that would squash into the last array entry
-+ * would result in an incorrect range reported to the client)
-  */
- static int nbd_extent_array_add(NBDExtentArray *ea,
-                                 uint32_t length, uint32_t flags)
-@@ -2288,7 +2287,7 @@ static int nbd_co_receive_request(NBDRequestData *req, NBDRequest *request,
-     assert(client->recv_coroutine == qemu_coroutine_self());
-     ret = nbd_receive_request(client, request, errp);
+diff --git a/qemu-io-cmds.c b/qemu-io-cmds.c
+index 46593d632d8f..954955c12fb9 100644
+--- a/qemu-io-cmds.c
++++ b/qemu-io-cmds.c
+@@ -1993,11 +1993,9 @@ static int map_is_allocated(BlockDriverState *bs, int64_t offset,
+                             int64_t bytes, int64_t *pnum)
+ {
+     int64_t num;
+-    int num_checked;
+     int ret, firstret;
+
+-    num_checked = MIN(bytes, BDRV_REQUEST_MAX_BYTES);
+-    ret = bdrv_is_allocated(bs, offset, num_checked, &num);
++    ret = bdrv_is_allocated(bs, offset, bytes, &num);
      if (ret < 0) {
--        return  ret;
-+        return ret;
+         return ret;
      }
+@@ -2009,8 +2007,7 @@ static int map_is_allocated(BlockDriverState *bs, int64_t offset,
+         offset += num;
+         bytes -= num;
 
-     trace_nbd_co_receive_request_decode_type(request->handle, request->type,
-@@ -2648,7 +2647,7 @@ static coroutine_fn void nbd_trip(void *opaque)
-     }
-
-     if (ret < 0) {
--        /* It wans't -EIO, so, according to nbd_co_receive_request()
-+        /* It wasn't -EIO, so, according to nbd_co_receive_request()
-          * semantics, we should return the error to the client. */
-         Error *export_err = local_err;
-
+-        num_checked = MIN(bytes, BDRV_REQUEST_MAX_BYTES);
+-        ret = bdrv_is_allocated(bs, offset, num_checked, &num);
++        ret = bdrv_is_allocated(bs, offset, bytes, &num);
+         if (ret == firstret && num) {
+             *pnum += num;
+         } else {
 -- 
 2.33.1
 
