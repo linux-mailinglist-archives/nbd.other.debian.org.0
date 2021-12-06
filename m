@@ -1,91 +1,159 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CB7C46808B
-	for <lists+nbd@lfdr.de>; Sat,  4 Dec 2021 00:34:27 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AB2F469708
+	for <lists+nbd@lfdr.de>; Mon,  6 Dec 2021 14:30:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5C6492016C; Fri,  3 Dec 2021 23:34:27 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  3 23:34:27 2021
-Old-Return-Path: <eblake@redhat.com>
+	id D20CC20908; Mon,  6 Dec 2021 13:30:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Dec  6 13:30:10 2021
+Old-Return-Path: <vsementsov@virtuozzo.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-10.6 required=4.0 tests=DIGITS_LETTERS,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_MSPIKE_H2,WORD_WITHOUT_VOWELS autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MSGID_FROM_MTA_HEADER,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9FD6320153
-	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Dec 2021 23:34:17 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1BD4B208FE
+	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Dec 2021 13:13:39 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.83 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.049,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001, WORD_WITHOUT_VOWELS=1]
+X-Amavis-Spam-Status: No, score=1.918 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MSGID_FROM_MTA_HEADER=3, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ZE0tilmwytD4 for <lists-other-nbd@bendel.debian.org>;
-	Fri,  3 Dec 2021 23:34:14 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id C640A20160
-	for <nbd@other.debian.org>; Fri,  3 Dec 2021 23:34:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1638574449;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=TFgXKW9oEdKP/ZLEwprdG47z68l0oNeQStZo0s1LTZE=;
-	b=UrOdXRhixBZTB+rq0PxGs5zAxHe1JUbUE+HnyLqpJpE5u8mSmv8/bpDKQJXadR2ykpFh8t
-	+56SfVV4vxNbme2yNBvh+xn1b06FgGZjl5E3IP9fIWEbHnE67MaVZDkLn2lZj8dMTBtG6T
-	KCqQFu5ctUAi0YyqlsJ4KFuT3oe0IUk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-567-ETISjXYPPjq6m_plOZWwIg-1; Fri, 03 Dec 2021 18:18:08 -0500
-X-MC-Unique: ETISjXYPPjq6m_plOZWwIg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 863128042F6;
-	Fri,  3 Dec 2021 23:18:07 +0000 (UTC)
-Received: from blue.redhat.com (unknown [10.2.16.22])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 9F83F5DF2B;
-	Fri,  3 Dec 2021 23:18:06 +0000 (UTC)
-From: Eric Blake <eblake@redhat.com>
-To: libguestfs@redhat.com
-Cc: nbd@other.debian.org,
-	qemu-devel@nongnu.org,
-	qemu-block@nongnu.org,
-	vsementsov@virtuozzo.com,
-	nsoffer@redhat.com
-Subject: [libnbd PATCH 13/13] interop: Add test of 64-bit block status
-Date: Fri,  3 Dec 2021 17:17:41 -0600
-Message-Id: <20211203231741.3901263-14-eblake@redhat.com>
-In-Reply-To: <20211203231741.3901263-1-eblake@redhat.com>
+	with ESMTP id QAvde_kFzF1a for <lists-other-nbd@bendel.debian.org>;
+	Mon,  6 Dec 2021 13:13:33 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -1.25
+X-Greylist: delayed 3562 seconds by postgrey-1.36 at bendel; Mon, 06 Dec 2021 13:13:33 UTC
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com (mail-eopbgr00101.outbound.protection.outlook.com [40.107.0.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 4E336205DF
+	for <nbd@other.debian.org>; Mon,  6 Dec 2021 13:13:33 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=e+i0wbZaWHufdz4bLVd45KKU+ZP0knwguPL22YAPFKRBPN9jijubJvq87/ReU64CFFpiZYAJLj8eBq+W3/Pqp0eqaw8H8J0ZMtZgJwPwrfAbw5RevgB7sSzizbovx5Mb4TtAFpn8iOOMjZQfytl+oHtz7VhLMTbrH/z7Gb9DfAB274fOol8Yy+e6Rs2THLfZ5x67d/bD1SCWCEy507ob/AQSXB0dUpPu9g/Y0sHk8RR4AksWdPRJx4Jg3M4XX6NfdfsJ6t3IRT+MOo3LU/xhjpEPVfdQpxJWVLh+y+SyR6Hk7BWpD8E/vulkYBH+BNYh80qQJzRSHlr1e/0XQQzj2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FDsLTH92tKiqKEWwkSqwIfu1z3eqXy6Dn6Tt2TIEMng=;
+ b=k1dsEzn4CNbe9+6FoWHSowyX4yxwE3xc5iBl1bOJNrF7jwQBuOO3lzes+g5KVVEboAyQg33P0jYwy9W0IY2xm1uNuvHCeImXWHpNCLf7SlP6ptfkSbwqYccWrILUtEi0+6X/hWqrvrX6q/tZP0O6KggAR9ZQGwcPgkx60GPFjRc4An8kg5ONjSVYvv1/JyATaizODJ5/C+Qn/K5PAvro6WKhQunmESbCnBg/RY9hSN7N9o0/eELN17pUFS5rdV2Yv8Lv8T3r9FacdKXcEOUOJ2XkxWEmUxvqDHm26+tcksbmcn46/rixggEpGwhrymTmWZgZJeqxRq5mbSgaJrddkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FDsLTH92tKiqKEWwkSqwIfu1z3eqXy6Dn6Tt2TIEMng=;
+ b=ni/S9ifEFARkXNeYX/8pQ6fFUSxKbdHQqFeLue8C+yPjjNwqZfJ9PKetKRW/EOcRiwUtkC3wQq+S5JIYpwKdn0VYKxX4woA+aYdaMwZRjYqzAx2z0FA4zLfpMjEFJx8jknCkDNhsijLMYnpV3etpJQ3Yn++2y50/b0M9qBosYuo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=virtuozzo.com;
+Received: from AM9PR08MB6737.eurprd08.prod.outlook.com (2603:10a6:20b:304::18)
+ by AM8PR08MB6401.eurprd08.prod.outlook.com (2603:10a6:20b:361::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.16; Mon, 6 Dec
+ 2021 11:40:48 +0000
+Received: from AM9PR08MB6737.eurprd08.prod.outlook.com
+ ([fe80::2078:5a2:1898:d83a]) by AM9PR08MB6737.eurprd08.prod.outlook.com
+ ([fe80::2078:5a2:1898:d83a%7]) with mapi id 15.20.4669.024; Mon, 6 Dec 2021
+ 11:40:48 +0000
+Message-ID: <f05c680a-73c3-b0d2-dbdf-c0bcf1ca3530@virtuozzo.com>
+Date: Mon, 6 Dec 2021 14:40:45 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] spec: Add NBD_OPT_EXTENDED_HEADERS
+Content-Language: en-US
+To: Eric Blake <eblake@redhat.com>, nbd@other.debian.org
+Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, libguestfs@redhat.com,
+ nsoffer@redhat.com
 References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
- <20211203231741.3901263-1-eblake@redhat.com>
+ <20211203231434.3900824-1-eblake@redhat.com>
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+In-Reply-To: <20211203231434.3900824-1-eblake@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS8PR04CA0135.eurprd04.prod.outlook.com
+ (2603:10a6:20b:127::20) To AM9PR08MB6737.eurprd08.prod.outlook.com
+ (2603:10a6:20b:304::18)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"
+Received: from [192.168.28.1] (31.173.87.183) by AS8PR04CA0135.eurprd04.prod.outlook.com (2603:10a6:20b:127::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.14 via Frontend Transport; Mon, 6 Dec 2021 11:40:47 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 16bd4197-5f0e-47bd-042c-08d9b8ad3f6e
+X-MS-TrafficTypeDiagnostic: AM8PR08MB6401:EE_
+X-Microsoft-Antispam-PRVS:
+	<AM8PR08MB6401F8B60B6984BAF93C1364C16D9@AM8PR08MB6401.eurprd08.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	U+nXkDJk3rnxVKdbF3Xqa/Lfo2DHW4GgU6N45XoAJu0OCHIqpy26o9DsDXrczxbUDP4QSxpyICRWYlEsrqbqjaWbGiZEbUaOl/qwpOBf+acGlIGEPI46jJPVfDV6U9KrfkPb6oWZjvC0FRZLY24NixJIPqG0XCqswilb7JEUO3Oxpze04w/NOBXDoPonmU7prfJFfrn2oszMUZnbw9TIm7NmM+BRuYcmUH3kizZ8hM6MiGvPT/tvCZBCuXtfVYdaW9OeofTs8KEL7j44zIRbMtpprrkhBX5UYWBFEMbhwTeE4GFQfsndaGgyjpVyfQnHaiH3wGRe3Zbca/pqIv5E37Kq031eDfz4uU5z04hLE97cJXg6Kqqh+jL1tiTVaSHYukRQocIGM9NxEsAoOmsSUKYHQJpHjixY+EsG9YqCmkJIjLFq0Fm28jxr1AAQu0XctbNdOhgBBCv2Avord+60rykPu0RwI5EoikcEForhBAZPlYqhon6C3aoM93ABilfofvE0hL5msQtG8Yl8PKLk11kVTVT9eUlgOS+ljUX8fCJ4gl2XC1aVUW03pAr7Hkru7nsby5m1gL1ztK2V8IdpMAhLxno+s2DiXoVnTbZrpKSXkmq4LcrMK9TrJJTmeul/VLKuOYE9dLPev2Vq6WuUJcklnokLwEFbGzbeHy899n9llxG42OLgySOWfEg42SydF3qFVwn9Rs7P63TYgwyRUh5O7nFDf2hjKVLw0q7WkVPGbUpPLkHkqVcmTtbUEGBhSJH4ZGMUAITeg0cjWohkYgn3fo5my2K0cvEmx2Dx3qFvsFiXIEumhQL83dAYp/1z4LtoWy+rQr8ErQqWmoXHeg==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6737.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(52116002)(16576012)(966005)(508600001)(38350700002)(956004)(316002)(4326008)(8676002)(5660300002)(38100700002)(36756003)(26005)(186003)(2906002)(31686004)(2616005)(83380400001)(66476007)(66556008)(66946007)(31696002)(8936002)(86362001)(6486002)(30864003)(43740500002)(45980500001);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZFVsTXpGUDBQYmI1ekJuVnNLaTlYaW03dGNKYnhmSlkrY3hMSlc0YWdEVE9L?=
+ =?utf-8?B?b0F2eWdKUlQ4UWxXTHpNOWNxeitucG1GeXh6Wk1ENVl1RWJ2QkNVeUlxcHox?=
+ =?utf-8?B?a3lLYWJFZXFEMEl1akdwL1lITm52alJGWWRPblpzbUQ5QWJsRFIrYTJLdkg4?=
+ =?utf-8?B?eXBBUS90djlONXgvSndtT1FhUHhJYmU0bmMwOTdaZjFJTE5wWm5rOGwwSk5O?=
+ =?utf-8?B?a1RudlNXSUxNRXdlTmNueW03RWRLbEFaN2FTSUVRQysyKyswQklxRVhZZ0dv?=
+ =?utf-8?B?MnVRN0YxWndIdzlPVzFoTitIZzZYYi9lNjh6U0pxdm0xak1oeS9Qa2M3eW5z?=
+ =?utf-8?B?cW82RkhGaGFtcXdGK3FueW4zNEZ5eW9hN05nQmJ1enhkWVhPbFVtaFlLeFhy?=
+ =?utf-8?B?V3lYOGRtMTRSeEFKSHpGNHFZSEZxenRYK3pvZkdzM0ZLWHc3WVFFYjZPL1Br?=
+ =?utf-8?B?YVpudEdpb2hIcWxuRTN6ZTBpbERUa3ZDOGFMUllMZEMwNkNNZGFPMlVSVlRC?=
+ =?utf-8?B?MUpmSXpCSnNwcllkZEtyT2Q1OXAvbjY5QmJIZW5QekN4c2ZNVmVCZm1oRWR1?=
+ =?utf-8?B?RkY0czBmak1TNnYyL0tXSWpwN2pCMEtSUVY0d001N1huT2JWTzJGL0h5Tzg4?=
+ =?utf-8?B?QkxsTnhoZDRtK1BlbEw3dTZPbTlnQVQ4SlZkT2REUEM5MnpBTk1jd3dtcndI?=
+ =?utf-8?B?Q2VnZjBIWERRczR6VVFLaXR0VDN2NmxnYXNhZENucVhteUNWWjVoMnMrcGlm?=
+ =?utf-8?B?dWlYbGx2aktXZk1FVGNDRER6YThhRzFsV0NJRXU0K2Y0eDlsSTNVS0JOWnJk?=
+ =?utf-8?B?WE1PQmcrcEVhU1A3dWlyQXlSZUZNS0ErbFVYWDdhSVQ5bFFadkFTNEpTaUJZ?=
+ =?utf-8?B?MHpwbXh0WjB4U2JOVDVBZEFvaVNLcE9WUkNFeVM0M2dpVWtDbWZUY1B4RUJB?=
+ =?utf-8?B?WStib0EwcGwzKy9va0lDT1BiOGd4Ulh4UGx1VmhRc1ZWNkZTZ0RDTXhQdFVa?=
+ =?utf-8?B?SThPSlgzVWVYKzIrdFFjVE9veVFvZG1GMkJtNWFHOUFLbFhtcmFaTE9QaXRo?=
+ =?utf-8?B?S0xzYkhCNlN0UlpEL2ZoVWNLZ2dEb21SdnJROWFmMUV2eGkra2k1UXNtbDhN?=
+ =?utf-8?B?MmFOS21vWithTlU0bU1pV09SVGQ2bjEwRnlsVnZyQ3dnakhWaTFybDIvbzZ3?=
+ =?utf-8?B?YjJGeHBReEZFcEhpVW92eFEwSFhpVzI3anR1NExic3g1RDM4ZDJWaDBremww?=
+ =?utf-8?B?d0RvYUVlQkl4bU94aE1hMVluUkZXTDgzSERER1E1TUg2Z3hhVENHdHM5ZXoy?=
+ =?utf-8?B?QVBJbXY0TVZKV2lXcG9OOHlId0k4SHl4VEdMd25rbUVDRC9mSUNtS3BXRUZy?=
+ =?utf-8?B?T0JYZi9BTnBFa3U4T2VVb0RYRUE1MHZZeTNEWDJiaHpBbU9KOEN2NDNvdDhK?=
+ =?utf-8?B?VXd4NytxZFpkQTc3c3A5Q1gwL3ZyMU13djRFTXpLSExzNERRc25yNXZoVGpE?=
+ =?utf-8?B?eXp3bXJuMGJPd1JDVzhzb2ZYSGIxME1paC83Zi83M3hxMUpQZ0xQS1BYaG5w?=
+ =?utf-8?B?SWlTN0xYdlB1bVdlcXBXS3lOMk5NYWhTS0dhRDlmY1JSRUhBWDVwNHNqK3hi?=
+ =?utf-8?B?RGROdGxEa2RoN21hWUMwQ2NUcXM2emdmZk1sVUptRjFUSWlnQlZKcDk4THE2?=
+ =?utf-8?B?dTBSMU9yLzFrdkZZVlkrOWxRR1RML2U0UytBbWtld2Z3U2d1WnlOWlNFOXo1?=
+ =?utf-8?B?Z1hPTVEvQVdHV0xtRHZXQ1QvVEZQUEVVSWZveDBZY0l3Z2NWWVlvOWQzdHVT?=
+ =?utf-8?B?MEcvanVjZ0FBUU5SSW1IS3pGd3hLaEg5Mnl6b0J2OEZDaGJkak5odWVtS2pC?=
+ =?utf-8?B?ZEp2Y3I1UnpyMzQxa3p6K0E5VGtvbDVmUk84UWtiWG1kd2xhMEcwZEszc1RF?=
+ =?utf-8?B?ckFBK09UWHVWdGU4b2hOaHgweWJnbGJGbEp6ZVMwa0pSdWhhd1dKMGdpMmMv?=
+ =?utf-8?B?R0hzZU1ZREtjY1RlZ1NONUdoZFo3UVRvQ0VSem1xRlJRanJ5d2I5aTFTWTBX?=
+ =?utf-8?B?K1BaWmE1UW9ac1lQT0llRmNacEtkU1pDQVJObFNYZEdqRkhQM0hhV2sxQmRJ?=
+ =?utf-8?B?L09Wa3FlYW5aZzY5VDdKZ0xWbVVtYXZrcTFoWkZBcU9SR3UyTWpPVGxRTDZ1?=
+ =?utf-8?B?SERVR3dMMXlpVEUvWlkvNHlBK3YvcWxsT2RWRlptUHNhQW1HQUhrWGhZQWNt?=
+ =?utf-8?B?Nyt5SHRxemQzaTlYV2s2VFhkbnV3PT0=?=
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16bd4197-5f0e-47bd-042c-08d9b8ad3f6e
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR08MB6737.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2021 11:40:48.6018
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D0IZgRKoqJbwZx8A5thEurnBor0BMtXkcoeDnnuaTjCUuol4zY/CPWEyaOjrypv+bvV7bZHPaqnguFIhon9jpJU94X/f5ZMRper8dHuhNPM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6401
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <tYhcz5ahqdN.A.PnD.DmqqhB@bendel>
+Resent-Message-ID: <s-fsUHdsYCH.A.ScE.iBhrhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1641
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1650
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -95,319 +163,457 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20211203231741.3901263-14-eblake@redhat.com
-Resent-Date: Fri,  3 Dec 2021 23:34:27 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f05c680a-73c3-b0d2-dbdf-c0bcf1ca3530@virtuozzo.com
+Resent-Date: Mon,  6 Dec 2021 13:30:10 +0000 (UTC)
 
-Prove that we can round-trip a block status request larger than 4G
-through a new-enough qemu-nbd.  Also serves as a unit test of our shim
-for converting internal 64-bit representation back to the older 32-bit
-nbd_block_status callback interface.
----
- interop/Makefile.am     |   6 ++
- interop/large-status.c  | 186 ++++++++++++++++++++++++++++++++++++++++
- interop/large-status.sh |  49 +++++++++++
- .gitignore              |   1 +
- 4 files changed, 242 insertions(+)
- create mode 100644 interop/large-status.c
- create mode 100755 interop/large-status.sh
+04.12.2021 02:14, Eric Blake wrote:
+> Add a new negotiation feature where the client and server agree to use
+> larger packet headers on every packet sent during transmission phase.
+> This has two purposes: first, it makes it possible to perform
+> operations like trim, write zeroes, and block status on more than 2^32
+> bytes in a single command; this in turn requires that some structured
+> replies from the server also be extended to match.  The wording chosen
+> here is careful to permit a server to use either flavor in its reply
+> (that is, a request less than 32-bits can trigger an extended reply,
+> and conversely a request larger than 32-bits can trigger a compact
+> reply).
+> 
+> Second, when structured replies are active, clients have to deal with
+> the difference between 16- and 20-byte headers of simple
+> vs. structured replies, which impacts performance if the client must
+> perform multiple syscalls to first read the magic before knowing how
+> many additional bytes to read.  In extended header mode, all headers
+> are the same width, so the client can read a full header before
+> deciding whether the header describes a simple or structured reply.
+> Similarly, by having extended mode use a power-of-2 sizing, it becomes
+> easier to manipulate headers within a single cache line, even if it
+> requires padding bytes sent over the wire.  However, note that this
+> change only affects the headers; as data payloads can still be
+> unaligned (for example, a client performing 1-byte reads or writes),
+> we would need to negotiate yet another extension if we wanted to
+> ensure that all NBD transmission packets started on an 8-byte boundary
+> after option haggling has completed.
+> 
+> This spec addition was done in parallel with a proof of concept
+> implementation in qemu (server and client) and libnbd (client), and I
+> also have plans to implement it in nbdkit (server).
+> 
+> Signed-off-by: Eric Blake <eblake@redhat.com>
+> ---
+> 
+> Available at https://repo.or.cz/nbd/ericb.git/shortlog/refs/tags/exthdr-v1
+> 
+>   doc/proto.md | 218 +++++++++++++++++++++++++++++++++++++++++----------
+>   1 file changed, 177 insertions(+), 41 deletions(-)
+> 
+> diff --git a/doc/proto.md b/doc/proto.md
+> index 3a877a9..46560b6 100644
+> --- a/doc/proto.md
+> +++ b/doc/proto.md
+> @@ -295,6 +295,21 @@ reply is also problematic for error handling of the `NBD_CMD_READ`
+>   request.  Therefore, structured replies can be used to create a
+>   a context-free server stream; see below.
+> 
+> +The results of client negotiation also determine whether the client
+> +and server will utilize only compact requests and replies, or whether
+> +both sides will use only extended packets.  Compact messages are the
+> +default, but inherently limit single transactions to a 32-bit window
+> +starting at a 64-bit offset.  Extended messages make it possible to
+> +perform 64-bit transactions (although typically only for commands that
+> +do not include a data payload).  Furthermore, when structured replies
+> +have been negotiated, compact messages require the client to perform
+> +partial reads to determine which reply packet style (simple or
+> +structured) is on the wire before knowing the length of the rest of
+> +the reply, which can reduce client performance.  With extended
+> +messages, all packet headers have a fixed length of 32 bytes, and
+> +although this results in more traffic over the network due to padding,
+> +the resulting layout is friendlier for performance.
+> +
+>   Replies need not be sent in the same order as requests (i.e., requests
+>   may be handled by the server asynchronously), and structured reply
+>   chunks from one request may be interleaved with reply messages from
+> @@ -343,7 +358,9 @@ may be useful.
+> 
+>   #### Request message
+> 
+> -The request message, sent by the client, looks as follows:
+> +The compact request message, sent by the client when extended
+> +transactions are not negotiated using `NBD_OPT_EXTENDED_HEADERS`,
+> +looks as follows:
+> 
+>   C: 32 bits, 0x25609513, magic (`NBD_REQUEST_MAGIC`)
+>   C: 16 bits, command flags
+> @@ -353,14 +370,26 @@ C: 64 bits, offset (unsigned)
+>   C: 32 bits, length (unsigned)
+>   C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)
+> 
+> +If negotiation agreed on extended transactions with
+> +`NBD_OPT_EXTENDED_HEADERS`, the client instead uses extended requests:
+> +
+> +C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)
+> +C: 16 bits, command flags
+> +C: 16 bits, type
+> +C: 64 bits, handle
+> +C: 64 bits, offset (unsigned)
+> +C: 64 bits, length (unsigned)
+> +C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)
+> +
+>   #### Simple reply message
+> 
+>   The simple reply message MUST be sent by the server in response to all
+>   requests if structured replies have not been negotiated using
+> -`NBD_OPT_STRUCTURED_REPLY`. If structured replies have been negotiated, a simple
+> -reply MAY be used as a reply to any request other than `NBD_CMD_READ`,
+> -but only if the reply has no data payload.  The message looks as
+> -follows:
+> +`NBD_OPT_STRUCTURED_REPLY`. If structured replies have been
+> +negotiated, a simple reply MAY be used as a reply to any request other
+> +than `NBD_CMD_READ`, but only if the reply has no data payload.  If
+> +extended headers were not negotiated using `NBD_OPT_EXTENDED_HEADERS`,
+> +the message looks as follows:
+> 
+>   S: 32 bits, 0x67446698, magic (`NBD_SIMPLE_REPLY_MAGIC`; used to be
+>      `NBD_REPLY_MAGIC`)
+> @@ -369,6 +398,16 @@ S: 64 bits, handle
+>   S: (*length* bytes of data if the request is of type `NBD_CMD_READ` and
+>       *error* is zero)
+> 
+> +If extended headers were negotiated using `NBD_OPT_EXTENDED_HEADERS`,
+> +the message looks like:
+> +
+> +S: 32 bits, 0x60d12fd6, magic (`NBD_SIMPLE_REPLY_EXT_MAGIC`)
+> +S: 32 bits, error (MAY be zero)
+> +S: 64 bits, handle
+> +S: 128 bits, padding (MUST be zero)
+> +S: (*length* bytes of data if the request is of type `NBD_CMD_READ` and
+> +    *error* is zero)
+> +
 
-diff --git a/interop/Makefile.am b/interop/Makefile.am
-index 3a8d5677..96c0a0f6 100644
---- a/interop/Makefile.am
-+++ b/interop/Makefile.am
-@@ -20,6 +20,7 @@ include $(top_srcdir)/subdir-rules.mk
- EXTRA_DIST = \
- 	dirty-bitmap.sh \
- 	interop-qemu-storage-daemon.sh \
-+	large-status.sh \
- 	list-exports-nbd-config \
- 	list-exports-test-dir/disk1 \
- 	list-exports-test-dir/disk2 \
-@@ -129,6 +130,7 @@ check_PROGRAMS += \
- 	list-exports-qemu-nbd \
- 	socket-activation-qemu-nbd \
- 	dirty-bitmap \
-+	large-status \
- 	structured-read \
- 	$(NULL)
- TESTS += \
-@@ -138,6 +140,7 @@ TESTS += \
- 	list-exports-qemu-nbd \
- 	socket-activation-qemu-nbd \
- 	dirty-bitmap.sh \
-+	large-status.sh \
- 	structured-read.sh \
- 	$(NULL)
+If we go this way, let's put payload length into padding: it will help to make the protocol context-independent and less error-prone.
 
-@@ -227,6 +230,9 @@ socket_activation_qemu_nbd_LDADD = $(top_builddir)/lib/libnbd.la
- dirty_bitmap_SOURCES = dirty-bitmap.c
- dirty_bitmap_LDADD = $(top_builddir)/lib/libnbd.la
+Or, the otherway, may be just forbid the payload for simple-64bit ? What's the reason to allow 64bit requests without structured reply negotiation?
 
-+large_status_SOURCES = large-status.c
-+large_status_LDADD = $(top_builddir)/lib/libnbd.la
-+
- structured_read_SOURCES = structured-read.c
- structured_read_LDADD = $(top_builddir)/lib/libnbd.la
+>   #### Structured reply chunk message
+> 
+>   Some of the major downsides of the default simple reply to
+> @@ -410,7 +449,9 @@ considered successful only if it did not contain any error chunks,
+>   although the client MAY be able to determine partial success based
+>   on the chunks received.
+> 
+> -A structured reply chunk message looks as follows:
+> +If extended headers were not negotiated using
+> +`NBD_OPT_EXTENDED_HEADERS`, a structured reply chunk message looks as
+> +follows:
+> 
+>   S: 32 bits, 0x668e33ef, magic (`NBD_STRUCTURED_REPLY_MAGIC`)
+>   S: 16 bits, flags
+> @@ -423,6 +464,17 @@ The use of *length* in the reply allows context-free division of
+>   the overall server traffic into individual reply messages; the
+>   *type* field describes how to further interpret the payload.
+> 
+> +If extended headers were negotiated using `NBD_OPT_EXTENDED_HEADERS`,
+> +the message looks like:
+> +
+> +S: 32 bits, 0x6e8a278c, magic (`NBD_STRUCTURED_REPLY_EXT_MAGIC`)
+> +S: 16 bits, flags
+> +S: 16 bits, type
+> +S: 64 bits, handle
+> +S: 64 bits, length of payload (unsigned)
 
-diff --git a/interop/large-status.c b/interop/large-status.c
-new file mode 100644
-index 00000000..3cc040fe
---- /dev/null
-+++ b/interop/large-status.c
-@@ -0,0 +1,186 @@
-+/* NBD client library in userspace
-+ * Copyright (C) 2013-2021 Red Hat Inc.
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2 of the License, or (at your option) any later version.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; if not, write to the Free Software
-+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-+ */
-+
-+/* Test 64-bit block status with qemu. */
-+
-+#include <config.h>
-+
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <unistd.h>
-+#include <assert.h>
-+#include <stdbool.h>
-+#include <errno.h>
-+
-+#include <libnbd.h>
-+
-+static const char *bitmap;
-+
-+struct data {
-+  bool req_one;    /* input: true if req_one was passed to request */
-+  int count;       /* input: count of expected remaining calls */
-+  bool seen_base;  /* output: true if base:allocation encountered */
-+  bool seen_dirty; /* output: true if qemu:dirty-bitmap encountered */
-+};
-+
-+static int
-+cb32 (void *opaque, const char *metacontext, uint64_t offset,
-+      uint32_t *entries, size_t len, int *error)
-+{
-+  struct data *data = opaque;
-+
-+  assert (offset == 0);
-+  assert (data->count-- > 0);
-+
-+  if (strcmp (metacontext, LIBNBD_CONTEXT_BASE_ALLOCATION) == 0) {
-+    assert (!data->seen_base);
-+    data->seen_base = true;
-+
-+    /* Data block offset 0 size 64k, remainder is hole */
-+    assert (len == 4);
-+    assert (entries[0] == 65536);
-+    assert (entries[1] == 0);
-+    /* libnbd had to truncate qemu's >4G answer */
-+    assert (entries[2] == 4227858432);
-+    assert (entries[3] == (LIBNBD_STATE_HOLE|LIBNBD_STATE_ZERO));
-+  }
-+  else if (strcmp (metacontext, bitmap) == 0) {
-+    assert (!data->seen_dirty);
-+    data->seen_dirty = true;
-+
-+    /* Dirty block at offset 5G-64k, remainder is clean */
-+    /* libnbd had to truncate qemu's >4G answer */
-+    assert (len == 2);
-+    assert (entries[0] == 4227858432);
-+    assert (entries[1] == 0);
-+  }
-+  else {
-+    fprintf (stderr, "unexpected context %s\n", metacontext);
-+    exit (EXIT_FAILURE);
-+  }
-+  return 0;
-+}
-+
-+static int
-+cb64 (void *opaque, const char *metacontext, uint64_t offset,
-+      nbd_extent *entries, size_t len, int *error)
-+{
-+  struct data *data = opaque;
-+
-+  assert (offset == 0);
-+  assert (data->count-- > 0);
-+
-+  if (strcmp (metacontext, LIBNBD_CONTEXT_BASE_ALLOCATION) == 0) {
-+    assert (!data->seen_base);
-+    data->seen_base = true;
-+
-+    /* Data block offset 0 size 64k, remainder is hole */
-+    assert (len == 2);
-+    assert (entries[0].length == 65536);
-+    assert (entries[0].flags == 0);
-+    assert (entries[1].length == 5368643584ULL);
-+    assert (entries[1].flags == (LIBNBD_STATE_HOLE|LIBNBD_STATE_ZERO));
-+  }
-+  else if (strcmp (metacontext, bitmap) == 0) {
-+    assert (!data->seen_dirty);
-+    data->seen_dirty = true;
-+
-+    /* Dirty block at offset 5G-64k, remainder is clean */
-+    assert (len == 2);
-+    assert (entries[0].length == 5368643584ULL);
-+    assert (entries[0].flags == 0);
-+    assert (entries[1].length == 65536);
-+    assert (entries[1].flags == 1);
-+  }
-+  else {
-+    fprintf (stderr, "unexpected context %s\n", metacontext);
-+    exit (EXIT_FAILURE);
-+  }
-+  return 0;
-+}
-+
-+int
-+main (int argc, char *argv[])
-+{
-+  struct nbd_handle *nbd;
-+  int64_t exportsize;
-+  struct data data;
-+
-+  if (argc < 3) {
-+    fprintf (stderr, "%s bitmap qemu-nbd [args ...]\n", argv[0]);
-+    exit (EXIT_FAILURE);
-+  }
-+  bitmap = argv[1];
-+
-+  nbd = nbd_create ();
-+  if (nbd == NULL) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+
-+  nbd_add_meta_context (nbd, LIBNBD_CONTEXT_BASE_ALLOCATION);
-+  nbd_add_meta_context (nbd, bitmap);
-+
-+  if (nbd_connect_systemd_socket_activation (nbd, &argv[2]) == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+
-+  exportsize = nbd_get_size (nbd);
-+  if (exportsize == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+
-+  if (nbd_get_extended_headers_negotiated (nbd) != 1) {
-+    fprintf (stderr, "skipping: qemu-nbd lacks extended headers\n");
-+    exit (77);
-+  }
-+
-+  /* Prove that we can round-trip a >4G block status request */
-+  data = (struct data) { .count = 2, };
-+  if (nbd_block_status_64 (nbd, exportsize, 0,
-+                           (nbd_extent64_callback) { .callback = cb64,
-+                             .user_data = &data },
-+                           0) == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+  assert (data.seen_base && data.seen_dirty);
-+
-+  /* Check libnbd's handling of a >4G response through older interface  */
-+  data = (struct data) { .count = 2, };
-+  if (nbd_block_status (nbd, exportsize, 0,
-+                        (nbd_extent_callback) { .callback = cb32,
-+                          .user_data = &data },
-+                        0) == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+  assert (data.seen_base && data.seen_dirty);
-+
-+  if (nbd_shutdown (nbd, 0) == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+
-+  nbd_close (nbd);
-+
-+  exit (EXIT_SUCCESS);
-+}
-diff --git a/interop/large-status.sh b/interop/large-status.sh
-new file mode 100755
-index 00000000..58fbdd36
---- /dev/null
-+++ b/interop/large-status.sh
-@@ -0,0 +1,49 @@
-+#!/usr/bin/env bash
-+# nbd client library in userspace
-+# Copyright (C) 2019-2021 Red Hat Inc.
-+#
-+# This library is free software; you can redistribute it and/or
-+# modify it under the terms of the GNU Lesser General Public
-+# License as published by the Free Software Foundation; either
-+# version 2 of the License, or (at your option) any later version.
-+#
-+# This library is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+# Lesser General Public License for more details.
-+#
-+# You should have received a copy of the GNU Lesser General Public
-+# License along with this library; if not, write to the Free Software
-+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-+
-+# Test reading qemu dirty-bitmap.
-+
-+source ../tests/functions.sh
-+set -e
-+set -x
-+
-+requires qemu-img bitmap --help
-+requires qemu-nbd --version
-+
-+# This test uses the qemu-nbd -B option.
-+if ! qemu-nbd --help | grep -sq -- -B; then
-+    echo "$0: skipping because qemu-nbd does not support the -B option"
-+    exit 77
-+fi
-+
-+files="large-status.qcow2"
-+rm -f $files
-+cleanup_fn rm -f $files
-+
-+# Create mostly-sparse file with intentionally different data vs. dirty areas
-+# (64k data, 5G-64k hole,zero; 5G-64k clean, 64k dirty)
-+qemu-img create -f qcow2 large-status.qcow2 5G
-+qemu-img bitmap --add --enable -f qcow2 large-status.qcow2 bitmap0
-+qemu-io -f qcow2 -c "w -z $((5*1024*1024*1024 - 64*1024)) 64k" \
-+        large-status.qcow2
-+qemu-img bitmap --disable -f qcow2 large-status.qcow2 bitmap0
-+qemu-io -f qcow2 -c 'w 0 64k' large-status.qcow2
-+
-+# Run the test.
-+$VG ./large-status qemu:dirty-bitmap:bitmap0 \
-+    qemu-nbd -f qcow2 -B bitmap0 large-status.qcow2
-diff --git a/.gitignore b/.gitignore
-index 3ecdceaf..cbc5b88d 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -100,6 +100,7 @@ Makefile.in
- /interop/interop-qemu-nbd
- /interop/interop-qemu-nbd-tls-certs
- /interop/interop-qemu-nbd-tls-psk
-+/interop/large-status
- /interop/list-exports-nbd-server
- /interop/list-exports-nbdkit
- /interop/list-exports-qemu-nbd
+Maybe, 64bits is too much for payload. But who knows. And it's good that it's symmetric to 64bit length in request.
+
+> +S: 64 bits, padding (MUST be zero)
+
+Hmm. Extra 8 bytes to be power-of-2. Does 32 bytes really perform better than 24 bytes?
+
+> +S: *length* bytes of payload data (if *length* is nonzero)
+
+Hmm2: we probably may move "handle" to the start of payload. This way we can keep 16bytes header for simple reply and 16bytes header for structured. So structured are read in two shots: 1. the header, 2. handle + payload.. But that means deeper restructuring of the client code.. So seems not worth it.
+
+
+> +
+>   #### Terminating the transmission phase
+> 
+>   There are two methods of terminating the transmission phase:
+> @@ -870,15 +922,19 @@ The procedure works as follows:
+>     server supports.
+>   - During transmission, a client can then indicate interest in metadata
+>     for a given region by way of the `NBD_CMD_BLOCK_STATUS` command,
+> -  where *offset* and *length* indicate the area of interest. The
+> -  server MUST then respond with the requested information, for all
+> +  where *offset* and *length* indicate the area of interest.
+> +- The server MUST then respond with the requested information, for all
+>     contexts which were selected during negotiation. For every metadata
+> -  context, the server sends one set of extent chunks, where the sizes
+> -  of the extents MUST be less than or equal to the length as specified
+> -  in the request.
+
+I'm not sure we can simply drop this requirement.. It seems like an incompatible change, isn't it? May be, we should allow any size of extent only for 64bit mode?
+
+> Each extent comes with a *flags* field, the
+> -  semantics of which are defined by the metadata context.
+> -- A server MUST reply to `NBD_CMD_BLOCK_STATUS` with a structured
+> -  reply of type `NBD_REPLY_TYPE_BLOCK_STATUS`.
+> +  context, the server sends one set of extent chunks, using
+> +  `NBD_REPLY_TYPE_BLOCK_STATUS` or `NBD_REPLY_TYPE_BLOCK_STATUS_EXT`
+> +  (the latter is only possible if the client also negotiated
+> +  `NBD_OPT_EXTENDED_HEADERS`).  Each extent comes with a *flags*
+> +  field, the semantics of which are defined by the metadata context.
+> +
+> +The client's requested *size* is only a hint to the server, so the
+> +summed size of extents in the server's reply may be shorter, or in
+> +some cases longer, than the original request, and may even differ
+> +between contexts when multiple metadata contexts were negotiated.
+> 
+>   A client MUST NOT use `NBD_CMD_BLOCK_STATUS` unless it selected a
+>   nonzero number of metadata contexts during negotiation, and used the
+> @@ -1179,10 +1235,10 @@ of the newstyle negotiation.
+> 
+>       When this command succeeds, the server MUST NOT preserve any
+>       negotiation state (such as a request for
+> -    `NBD_OPT_STRUCTURED_REPLY`, or metadata contexts from
+> -    `NBD_OPT_SET_META_CONTEXT`) issued before this command.  A client
+> -    SHOULD defer all stateful option requests until after it
+> -    determines whether encryption is available.
+> +    `NBD_OPT_STRUCTURED_REPLY` or `NBD_OPT_EXTENDED_HEADERS`, or
+> +    metadata contexts from `NBD_OPT_SET_META_CONTEXT`) issued before
+> +    this command.  A client SHOULD defer all stateful option requests
+> +    until after it determines whether encryption is available.
+> 
+>       See the section on TLS above for further details.
+> 
+> @@ -1460,6 +1516,26 @@ of the newstyle negotiation.
+>       option does not select any metadata context, provided the client
+>       then does not attempt to issue `NBD_CMD_BLOCK_STATUS` commands.
+> 
+> +* `NBD_OPT_EXTENDED_HEADERS` (11)
+> +
+> +    The client wishes to use extended headers during the transmission
+> +    phase.  The client MUST NOT send any additional data with the
+> +    option, and the server SHOULD reject a request that includes data
+> +    with `NBD_REP_ERR_INVALID`.
+> +
+> +    The server replies with the following, or with an error permitted
+> +    elsewhere in this document:
+> +
+> +    - `NBD_REP_ACK`: Extended headers have been negotiated; the client
+> +      MUST use the 32-byte extended request header, and the server
+> +      MUST use the 32-byte extended reply header.
+> +    - For backwards compatibility, clients SHOULD be prepared to also
+> +      handle `NBD_REP_ERR_UNSUP`; in this case, only the compact
+> +      transmission headers will be used.
+> +
+> +    If the client requests `NBD_OPT_STARTTLS` after this option, it
+> +    MUST renegotiate extended headers.
+> +
+>   #### Option reply types
+> 
+>   These values are used in the "reply type" field, sent by the server
+> @@ -1713,12 +1789,12 @@ unrecognized flags.
+> 
+>   #### Structured reply types
+> 
+> -These values are used in the "type" field of a structured reply.
+> -Some chunk types can additionally be categorized by role, such as
+> -*error chunks* or *content chunks*.  Each type determines how to
+> -interpret the "length" bytes of payload.  If the client receives
+> -an unknown or unexpected type, other than an *error chunk*, it
+> -MUST initiate a hard disconnect.
+> +These values are used in the "type" field of a structured reply.  Some
+> +chunk types can additionally be categorized by role, such as *error
+> +chunks*, *content chunks*, or *status chunks*.  Each type determines
+> +how to interpret the "length" bytes of payload.  If the client
+> +receives an unknown or unexpected type, other than an *error chunk*,
+> +it MUST initiate a hard disconnect.
+
+Just add "status chunks" to the list. Seems unrelated, better be in a separate patch.
+
+> 
+>   * `NBD_REPLY_TYPE_NONE` (0)
+> 
+> @@ -1761,13 +1837,34 @@ MUST initiate a hard disconnect.
+>     64 bits: offset (unsigned)
+>     32 bits: hole size (unsigned, MUST be nonzero)
+> 
+> +* `NBD_REPLY_TYPE_OFFSET_HOLE_EXT` (3)
+> +
+> +  This chunk type is in the content chunk category.  *length* MUST be
+> +  exactly 16.  The semantics of this chunk mirror those of
+> +  `NBD_REPLY_TYPE_OFFSET_HOLE`, other than the use of a larger *hole
+> +  size* field.  This chunk type MUST NOT be used unless extended
+> +  headers were negotiated with `NBD_OPT_EXTENDED_HEADERS`.
+
+Why do you call all such things _EXT, not _64 ? _64 seems more informative.
+
+> +
+> +  The payload is structured as:
+> +
+> +  64 bits: offset (unsigned)
+> +  64 bits: hole size (unsigned, MUST be nonzero)
+> +
+> +  Note that even when extended headers are in use, a server may
+> +  enforce a maximum block size that is smaller than 32 bits, in which
+> +  case no valid `NBD_CMD_READ` will have a *length* large enough to
+s/nc/no/ ? But hard to read any way, as sounds very similar to "not valid", which breaks the meaning.
+
+may be just "in which case valid NBD_CMD_READ will not have"
+
+> +  require the use of this chunk type.  However, a client using
+> +  extended headers MUST be prepared for the server to use either the
+> +  compact or extended chunk type.
+> +
+>   * `NBD_REPLY_TYPE_BLOCK_STATUS` (5)
+> 
+> -  *length* MUST be 4 + (a positive integer multiple of 8).  This reply
+> -  represents a series of consecutive block descriptors where the sum
+> -  of the length fields within the descriptors is subject to further
+> -  constraints documented below. This chunk type MUST appear
+> -  exactly once per metadata ID in a structured reply.
+> +  This chunk type is in the status chunk category.  *length* MUST be
+> +  4 + (a positive integer multiple of 8).  This reply represents a
+> +  series of consecutive block descriptors where the sum of the length
+> +  fields within the descriptors is subject to further constraints
+> +  documented below.  Each negotiated metadata ID must have exactly one
+> +  status chunk in the overall structured reply.
+
+just rewording, no semantic changes, yes?
+
+> 
+>     The payload starts with:
+> 
+> @@ -1796,9 +1893,36 @@ MUST initiate a hard disconnect.
+>     information to the client, if looking up the information would be
+>     too resource-intensive for the server, so long as at least one
+>     extent is returned. Servers should however be aware that most
+> -  clients implementations will then simply ask for the next extent
+> +  client implementations will then simply ask for the next extent
+>     instead.
+
+So you keep all restrictions about NBD_CMD_FLAG_REQ_ONE and about sum of lenghts of extents as is here..
+
+> 
+> +* `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` (6)
+> +
+> +  This chunk type is in the status chunk category.  *length* MUST be
+> +  4 + (a positive multiple of 16).  The semantics of this chunk mirror
+> +  those of `NBD_REPLY_TYPE_BLOCK_STATUS`, other than the use of a
+> +  larger *extent length* field, as well as added padding to ease
+> +  alignment.
+
+But what about restrictions on chunk lengths and cumulative chunk length?
+
+> +  This chunk type MUST NOT be used unless extended headers
+> +  were negotiated with `NBD_OPT_EXTENDED_HEADERS`.
+> +
+> +  The payload starts with:
+> +
+> +  32 bits, metadata context ID
+> +
+> +  and is followed by a list of one or more descriptors, each with this
+> +  layout:
+> +
+> +  64 bits, length of the extent to which the status below
+> +     applies (unsigned, MUST be nonzero)
+> +  32 bits, status flags
+> +  32 bits, padding (MUST be zero)
+> +
+> +  Note that even when extended headers are in use, the client MUST be
+> +  prepared for the server to use either the compact or extended chunk
+> +  type, regardless of whether the client's hinted length was more or
+> +  less than 32 bits, but the server MUST use exactly one of the two
+> +  chunk types per negotiated metacontext ID.
+
+But we have anyway one chunk per ID in a reply.. Or you mean that the type of reply for the ID should be selected once for the whole session?
+
+> +
+>   All error chunk types have bit 15 set, and begin with the same
+>   *error*, *message length*, and optional *message* fields as
+>   `NBD_REPLY_TYPE_ERROR`.  If nonzero, *message length* indicates
+> @@ -1812,7 +1936,10 @@ remaining structured fields at the end.
+>     be at least 6.  This chunk represents that an error occurred,
+>     and the client MAY NOT make any assumptions about partial
+>     success. This type SHOULD NOT be used more than once in a
+> -  structured reply.  Valid as a reply to any request.
+> +  structured reply.  Valid as a reply to any request.  Note that
+> +  *message length* MUST NOT exceed the 4096 bytes string length limit,
+> +  and therefore there is no need for a counterpart extended-length
+> +  error chunk type.
+> 
+>     The payload is structured as:
+> 
+> @@ -1867,7 +1994,8 @@ The following request types exist:
+> 
+>       If structured replies were not negotiated, then a read request
+>       MUST always be answered by a simple reply, as documented above
+> -    (using magic 0x67446698 `NBD_SIMPLE_REPLY_MAGIC`, and containing
+> +    (using `NBD_SIMPLE_REPLY_MAGIC` or `NBD_SIMPLE_REPLY_EXT_MAGIC`
+> +    according to whether extended headers are in use, and containing
+>       length bytes of data according to the client's request).
+> 
+>       If an error occurs, the server SHOULD set the appropriate error code
+> @@ -1883,7 +2011,8 @@ The following request types exist:
+> 
+>       If structured replies are negotiated, then a read request MUST
+>       result in a structured reply with one or more chunks (each using
+> -    magic 0x668e33ef `NBD_STRUCTURED_REPLY_MAGIC`), where the final
+> +    `NBD_STRUCTURED_REPLY_MAGIC` or `NBD_STRUCTURED_REPLY_EXT_MAGIC`
+> +    according to whether extended headers are in use), where the final
+>       chunk has the flag `NBD_REPLY_FLAG_DONE`, and with the following
+>       additional constraints.
+> 
+> @@ -1897,13 +2026,14 @@ The following request types exist:
+>       chunks that describe data outside the offset and length of the
+>       request, but MAY send the content chunks in any order (the client
+>       MUST reassemble content chunks into the correct order), and MAY
+> -    send additional content chunks even after reporting an error chunk.
+> -    Note that a request for more than 2^32 - 8 bytes MUST be split
+> -    into at least two chunks, so as not to overflow the length field
+> -    of a reply while still allowing space for the offset of each
+> -    chunk.  When no error is detected, the server MUST send enough
+> -    data chunks to cover the entire region described by the offset and
+> -    length of the client's request.
+> +    send additional content chunks even after reporting an error
+> +    chunk.  Note that if extended headers are not in use, a request
+> +    for more than 2^32 - 8 bytes MUST be split into at least two
+> +    chunks, so as not to overflow the length field of a reply while
+> +    still allowing space for the offset of each chunk.  When no error
+> +    is detected, the server MUST send enough data chunks to cover the
+> +    entire region described by the offset and length of the client's
+> +    request.
+> 
+>       To minimize traffic, the server MAY use a content or error chunk
+>       as the final chunk by setting the `NBD_REPLY_FLAG_DONE` flag, but
+> @@ -2136,13 +2266,19 @@ The following request types exist:
+>       server returned at least one metadata context without an error.
+>       This in turn requires the client to first negotiate structured
+>       replies. For a successful return, the server MUST use a structured
+> -    reply, containing exactly one chunk of type
+> +    reply, containing exactly one status chunk of type
+>       `NBD_REPLY_TYPE_BLOCK_STATUS` per selected context id, where the
+>       status field of each descriptor is determined by the flags field
+>       as defined by the metadata context.  The server MAY send chunks in
+>       a different order than the context ids were assigned in reply to
+>       `NBD_OPT_SET_META_CONTEXT`.
+> 
+> +    If extended headers were negotiated via
+> +    `NBD_OPT_EXTENDED_HEADERS`, the server may use
+> +    `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` instead of
+> +    `NBD_REPLY_TYPE_BLOCK_STATUS` as the reply chunk for a metacontext
+> +    id.
+> +
+>       The list of block status descriptors within the
+>       `NBD_REPLY_TYPE_BLOCK_STATUS` chunk represent consecutive portions
+>       of the file starting from specified *offset*.  If the client used
+> 
+
+Overall, seems good to me.
+
+1. Could we move some fixes / rewordings to a preaparation patch?
+
+2. I see you want also to overcome unpleasant restrictions we had around lengths / cumulative lengths of BLOCK_STATUS replies. I like the idea. But I think, it should be clarified that without 64bit extension negotiated all stay as is. And with 64bit extension negotiated, BLOCK_STATUS works in a slighter new way, so it may return what server wants, and original "length" is simply a hint. Or, at least that new behavior is only about NBD_REPLY_TYPE_BLOCK_STATUS_EXT.. Also, some clarifications may need around NBD_CMD_FLAG_REQ_ONE flag, what changes for it? You don't mention it at all in new version of BLOCK_STATUS reply.
+
+
 -- 
-2.33.1
+Best regards,
+Vladimir
 
