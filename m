@@ -1,88 +1,161 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECED646FD4D
-	for <lists+nbd@lfdr.de>; Fri, 10 Dec 2021 10:03:11 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AA694708FD
+	for <lists+nbd@lfdr.de>; Fri, 10 Dec 2021 19:39:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A1AF820488; Fri, 10 Dec 2021 09:03:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 10 09:03:10 2021
-Old-Return-Path: <lersek@redhat.com>
+	id 1F786204C3; Fri, 10 Dec 2021 18:39:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 10 18:39:10 2021
+Old-Return-Path: <vsementsov@virtuozzo.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MSGID_FROM_MTA_HEADER,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 2D10B20499
-	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Dec 2021 08:47:26 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 14E842049D
+	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Dec 2021 18:21:18 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.93 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.049, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.918 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MSGID_FROM_MTA_HEADER=3, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id jo0qVZ1byAJj for <lists-other-nbd@bendel.debian.org>;
-	Fri, 10 Dec 2021 08:47:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id D57E120498
-	for <nbd@other.debian.org>; Fri, 10 Dec 2021 08:47:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1639126035;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BtVKI6bTUkHVwXDC+LLV0tCgs1vUuOx16hxfyLsVNaI=;
-	b=bzEtRH4yRzvmU2dBUKqrCOu+J47ZC0ePxJHCwsFV2fl6Va2EeHfRq5fKE+RB47o+QVUyb1
-	lDkeG/tfiV9pQEONQ0Ie+tzNbJq9gkCPPfEYHZgbx3z8NVdJnij1+HpjRQZnLYatW7Q0vE
-	snZPQ4vMY/QYbOkUL+fCDql96bc7Aro=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-221-19xnA-cSN1Oto6Ij-zpsZQ-1; Fri, 10 Dec 2021 03:16:27 -0500
-X-MC-Unique: 19xnA-cSN1Oto6Ij-zpsZQ-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9EE98802CBB;
-	Fri, 10 Dec 2021 08:16:26 +0000 (UTC)
-Received: from lacos-laptop-7.usersys.redhat.com (unknown [10.39.192.165])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id EACB71000180;
-	Fri, 10 Dec 2021 08:16:04 +0000 (UTC)
-Subject: Re: [Libguestfs] [libnbd PATCH 00/13] libnbd patches for
- NBD_OPT_EXTENDED_HEADERS
-To: Eric Blake <eblake@redhat.com>, libguestfs@redhat.com
-Cc: vsementsov@virtuozzo.com, qemu-devel@nongnu.org, qemu-block@nongnu.org,
- nbd@other.debian.org
-References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
- <20211203231741.3901263-1-eblake@redhat.com>
-From: Laszlo Ersek <lersek@redhat.com>
-Message-ID: <81612544-c1ce-8fc7-5446-c6205b99680b@redhat.com>
-Date: Fri, 10 Dec 2021 09:16:02 +0100
-MIME-Version: 1.0
-In-Reply-To: <20211203231741.3901263-1-eblake@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lersek@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+	with ESMTP id kT5zJvs7PIt3 for <lists-other-nbd@bendel.debian.org>;
+	Fri, 10 Dec 2021 18:21:11 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .virtuozzo. - helo: .eur05-db8-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (mail-db8eur05on2130.outbound.protection.outlook.com [40.107.20.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 38B52204CF
+	for <nbd@other.debian.org>; Fri, 10 Dec 2021 18:21:10 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YyWmiQXN+qAe3uOhdrNFgZ79LaS6OJ870FCkhAipDwEZXnKr20/crUrOyemtfiaa+Ucgm8PodqrsamSIZ8hYA3ytmCc9Y1/luZq0nWEDx+lEi4g8MRDgPJ9zC42jf4DmmZC4BDY07+Xtv7RMQTRn2tgTPd6oaHchKnhSwqQBLeF+DJ0I3skHC5cQFueghXxJ0qw+oFzB13prTbM4yvElmKkDVzbCthQeSk0Hy433N/RKA5usCtmrtnAwxqq22mS+KJWUQdpj+P3I+TD03er+jVq8D8IHaZ/nYAHR2UHL5IDOc5unNI9kyTpM5eeIzolX/QXNJ5ejpLGgW/GkL2+iCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=y+PtdjNg5XYdR0hWOR+aDTQEmj+cH6X9sz8kC/kW3GM=;
+ b=mnsDyRCI4GlzwqJSKzkF73r+qBWxGAnO2IwvpdIlLiB2KCzXbmcjJkZ8IooxwBjme75BEq2a0Cu7WIjrusbwH5WCrDM4XFVNk0dZRj4XHmqSju9+Hw2vBwqUzrYjcW5GYqjeGB0zJaNetTirY1uMo6EIYcEG0Hj4pghr6R5+YztQgyihYuqirVCNOJqU87tD0E20HdLSvFkIqrUxn9gd3udqw9pSN4fCXCByjkot6bzLee/yPhg8uW/HzUYaPW1blw0kDQfS4sWK3ZSv1MV4h95wWGRsOjVzlO+iWmimCvQz/E/OxG1anX+z/1IhyNSTlSbI3ql4cghyNDF5XsC5ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y+PtdjNg5XYdR0hWOR+aDTQEmj+cH6X9sz8kC/kW3GM=;
+ b=WzVoggJsBRdjN6CjtinfaB4KmbntZ9h8uHFUSYse82lXfNL3sfo+Vi1KMLo2fwiUs73QptZ5sRhGzUGmq9FvwCZbFJvXJBWYreIVU806UGb7rucQOuZltDAtVq8Dz29NcwZMOCXS+WlASvXE/gi0rCs4zBK17icXCmITUdciFq8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=virtuozzo.com;
+Received: from AM9PR08MB6737.eurprd08.prod.outlook.com (2603:10a6:20b:304::18)
+ by AM0PR08MB3812.eurprd08.prod.outlook.com (2603:10a6:208:fd::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.16; Fri, 10 Dec
+ 2021 18:05:21 +0000
+Received: from AM9PR08MB6737.eurprd08.prod.outlook.com
+ ([fe80::2078:5a2:1898:d83a]) by AM9PR08MB6737.eurprd08.prod.outlook.com
+ ([fe80::2078:5a2:1898:d83a%7]) with mapi id 15.20.4669.024; Fri, 10 Dec 2021
+ 18:05:21 +0000
+Message-ID: <8035e971-b668-d4b7-2caf-62601dd46b19@virtuozzo.com>
+Date: Fri, 10 Dec 2021 21:05:18 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] spec: Add NBD_OPT_EXTENDED_HEADERS
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Eric Blake <eblake@redhat.com>
+Cc: nbd@other.debian.org, qemu-devel@nongnu.org, qemu-block@nongnu.org,
+ libguestfs@redhat.com, nsoffer@redhat.com
+References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
+ <20211203231434.3900824-1-eblake@redhat.com>
+ <f05c680a-73c3-b0d2-dbdf-c0bcf1ca3530@virtuozzo.com>
+ <20211206230047.q5xc5enodbicf3gw@redhat.com>
+ <45f22ac7-a36a-0c40-7198-267a2f46e71a@virtuozzo.com>
+In-Reply-To: <45f22ac7-a36a-0c40-7198-267a2f46e71a@virtuozzo.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR3P281CA0071.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4b::7) To AM9PR08MB6737.eurprd08.prod.outlook.com
+ (2603:10a6:20b:304::18)
+MIME-Version: 1.0
+Received: from [192.168.100.10] (185.215.60.230) by FR3P281CA0071.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:4b::7) with Microsoft SMTP Server (version=TLS1_2, cipher=) via Frontend Transport; Fri, 10 Dec 2021 18:05:20 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c8b0f636-e097-40c9-c0bd-08d9bc07a17a
+X-MS-TrafficTypeDiagnostic: AM0PR08MB3812:EE_
+X-Microsoft-Antispam-PRVS:
+	<AM0PR08MB38124A3F21FF9CE4904E10C7C1719@AM0PR08MB3812.eurprd08.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	K9FFZNxWHTiLW7DSnf496dPD+9CYcTvfXDt2A94AsfAOPVcmfjP2Zt1w6I6U9QKJMm6mM/jYyJdn04BA/xSlbTxZPFWnzJZf3Ucgqhn8NsTn7R5Dmn0YIqv/JkJhPoQa7cl0n++RGwJs+qp/O1eU9310LGjtEbMVjB4q4MhCiYIzryzgZOqBqBAd//p1BLCI9F2Lh5r6od3QYzxzzK6M3h+g3WKzp1IGTzXxJUtMDF8o1WZxkS+WTQmCfDNsDq66b0yQcGAEj9h+dsGc2ThrJXajsmzMlyDHcSCCNkHaxRSpwrBxE+3rCDBn0xdP5uHbYFZxNYe3iP/1C0qGPVTlf9rQ4gmFP/SH+gxZDgJTvn9GP0ZzrPgqynQiY3zjUttEhzkziw5ZHJ2tRoyAWNMgTd5p6J2a0EcsG4F1NrsgLr55Gln9Qncz5xE5f5MD+owDCQHlWiR+asK6A+nPaTxtwi/KL6wnr8vxF6JpprNUIi3fFwGooUI+/waDPoZ8ULDVpyshc5B1Mlkpun/gi/qyvFHwjxEGWlkb9WbPAdP9u+g3pbuW25EjlFyhPzYZ6SeWMh4fQkOmR8xOucuRZrD5xpk/gWjy+UxPoLHk3jmjXQsAFApG1FQFQpnVN+WkOtpa1GyoJjOyUHi25IjuXS29sOUishXK6znKJHm2AMtmNkMqpNCTCIHbmJjQHIaxtHkjdcWj0En6LeCHUesg2yMzib15RptzYQRFfT0v71OXx+0KEWtoNDzRNMUBfW+t1PTGxkKM+Lw9VqbvF8r1FASBMQ==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6737.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(2616005)(508600001)(6916009)(52116002)(956004)(36756003)(5660300002)(2906002)(86362001)(4326008)(8676002)(16576012)(66946007)(8936002)(316002)(186003)(26005)(83380400001)(38100700002)(38350700002)(6486002)(31696002)(31686004)(66476007)(66556008)(43740500002)(45980500001);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?KzVRWTVaM3lNekl1OUErTU52SkdmcURtNVVvVkRBcHE3YjFYWi9kcmhlek01?=
+ =?utf-8?B?a05rc0RGOVRUamQ0ZDJ6UFBXTHgwNU5LQkRPSmh6WGJpZHEva2NaQlFObVdw?=
+ =?utf-8?B?cXpzMlBZQWZ2M29UMHdnQVJxTXZpd3BKWjRiQ1Nra3dwdnFsMEZOVDZZTi9D?=
+ =?utf-8?B?aENuVHB6cURxK3dnVU1iVVNQY0tHdUozMDFzd1pxY0FDYnFSWDZGL2krWnE1?=
+ =?utf-8?B?SkE2c2pPb3hwNjFvQzZ2MWNHNzV3OGtxREI2dkxuM0orUDV6V3RRbjQwTDkx?=
+ =?utf-8?B?RWFCMmt3VTl0Rnl0K1BDR2NraS9hNzUxNG9jeHB5NzV4YVZWYXY0M3IrSllG?=
+ =?utf-8?B?eWJqM2lEZ2s5ak8weHg5VUxQcFJiNkFjem1FZXFENEE5dVN5OGtpY0lzMGhK?=
+ =?utf-8?B?Y3lXb0JBMXVYcjlEZHdyM0NsOTNvRFp3a1NuTHZ4ZTNTeFBaVUU5eDBTSEM1?=
+ =?utf-8?B?R1pzTzAwOW04a1I2RjFvajY0N3JsRFhlWjcwdHBicEJ5NVVPUGlZL3hNanJC?=
+ =?utf-8?B?K3VxaDFhR2xPd09jbkRvb295b01iUVJxRm5WM0kxRVdJOSt4ekpXVEhROUtV?=
+ =?utf-8?B?eTczUnk5MUxReXpZajJXNmtXUlRjcVIyeWxITGpHa1lWWUtqeWdIazdHbEVz?=
+ =?utf-8?B?emJLa3R3M1ZSVXNxeG9lTVJNbkxiSWtJdGRkQ2t0L1pTak1jcjJnV3JVK3dL?=
+ =?utf-8?B?N21XNjNkUVhUWGdLZCtEdzBqY3dKV1N4SEozdmx4SEszMWtyVitzTWM4dHhR?=
+ =?utf-8?B?eDJpSHk2cFJLU1FXUzE0dk55SHlUZGpzOFZRcmF4M0NRQTRlZ0pEWEdyTWpq?=
+ =?utf-8?B?TFRub3k1T1ZKc3dGUVRTNDZFaXFvS3Vua0x2U3B5M0c4dEtyRktpM1YwYmkv?=
+ =?utf-8?B?bFlyZVcvQ3A5bkpEQy9nekV3aExDWmFpZ1hUdW1uMWNTSXkvMko4VnBxMVE1?=
+ =?utf-8?B?cjJZL1M0RDAxalF0bnVxbUZhQkhsVkFkcGdscnYyV2U5UVArSHlDaTRjRVdQ?=
+ =?utf-8?B?WGQ3NnNLODdrdFR4ZXN0SFI1QUpkRjduS0laUkl4S1g1L0UzcDJvd3J0OHIv?=
+ =?utf-8?B?SWE3Q2dlY2d4ZG1JUVdONGhhejk0bE1OVTFSR0NMY0dqNWFBVExPcUtxaFBZ?=
+ =?utf-8?B?VzkyRHE5WENGQkJvZDNNbm9Uc2RHTlZaRjJoc0RzOFd4ZGZBWnVNUjVSZHVs?=
+ =?utf-8?B?Rkg5YTY0V1BobGY2OVBvZmMxUEIyV1loYVpaZ3R4NitOeHBZKzIwUzFmQm1P?=
+ =?utf-8?B?anF5cmI3TzU5QmtPMG80cXZwVnFyRXl6Z0dRWThrVml2eHZQZC9NUFMwanhB?=
+ =?utf-8?B?UHVjYjFSdFZnOGxuVkdWbDI2cXRJQlZqeCs2WXpKVnJUSTdoNCtHTFFSZ09U?=
+ =?utf-8?B?T2pzWVdrNWFmZU9Oa3U1a3V2YnB6K09RQ3d3anU2QStLQzJzT1orbU5uL2lh?=
+ =?utf-8?B?VjFFTVJjSERSVktLeGdhUFJrM2Q3bU9TT1JkTlE3eGprU0poY1hnWk5kUWEw?=
+ =?utf-8?B?OEVRSFFTNWxlTGorNXBWV3J0TUZWVWdkV1Q0WGh1WGZOQWFkcHowTnVLVFhJ?=
+ =?utf-8?B?YVRMQW1yTUsxcUJrclhEWEJaUEE0d3hMcTZOOHNWNzFYUkNLSlR5enFUaU5D?=
+ =?utf-8?B?eW9GSkxUMFM5cmJHcTNyWXUxS1krY3JKZTlzcWlhZGxPdGU5eGtaalFHZmt5?=
+ =?utf-8?B?c1lJUUJaajVHaG0yekVjd3NpUGlOR092YjZDU2VpYytRYVVJdUQrb1hUWlYv?=
+ =?utf-8?B?bGJxNUVDSU8wVDIvMzZkeGZoM3N5UnhURmZ4eVk3VmxRVnJxbk5ka1RGdFlN?=
+ =?utf-8?B?Wk90WGpRc1gzdmViRlZPYzc4dWhSVFMzQ3ZTbkhYNG80Nlpaa1ZCYkRRc0o4?=
+ =?utf-8?B?QlVicDEzOGY3QkZxcWRmVkg0RzBIU1htNUIrNitjdHVLZ2t2bHJoUFFCV3R2?=
+ =?utf-8?B?QXhzdHA4UDB0SW0yZmVwenRUeWNya2w0SFF2TFhHQnp1N05hODhpaVdrUjI3?=
+ =?utf-8?B?OW9TWWU0N0hrU0dDUVNLU0UwR2REOTJYbzZRbmNsRUpJK1pvbDkyMll0c1Jy?=
+ =?utf-8?B?bEhXTDIxN2k5dzZNVmI3VlBrQ0NuengyZjBzZVlXOXdISUx5N1lkUEFyUU1O?=
+ =?utf-8?B?dGVNWGQ3dUQ3N2N1aTJWSkdPdkdWWnFWamUxMXloZ2hIN2VCVTEwMG5MeG5G?=
+ =?utf-8?B?emtsRmJuZjNGOGcwRzk0OE8zcGlCeWJYYzdScjRZa290MFRETFlLOHRnRjcz?=
+ =?utf-8?B?OE13Mi9DenNDSmJEVEdWdXM5MnR3PT0=?=
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8b0f636-e097-40c9-c0bd-08d9bc07a17a
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR08MB6737.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2021 18:05:21.2841
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5hvZIA5Pyn3pTSPs1SJJQi2liWfrowOp4W01VwZD8pMgaGbzQuzPu5VQTTASH4ausA/rmqSpd2viwLU5SorGUjrfAegperOFo+ONRJgAyrA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB3812
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <7LfmOv5IS9K.A.m3C.OfxshB@bendel>
+Resent-Message-ID: <dDpPSb4higF.A.LQ.O75shB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1656
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1657
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,88 +165,45 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/81612544-c1ce-8fc7-5446-c6205b99680b@redhat.com
-Resent-Date: Fri, 10 Dec 2021 09:03:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/8035e971-b668-d4b7-2caf-62601dd46b19@virtuozzo.com
+Resent-Date: Fri, 10 Dec 2021 18:39:10 +0000 (UTC)
 
-On 12/04/21 00:17, Eric Blake wrote:
-> Available here: https://repo.or.cz/libnbd/ericb.git/shortlog/refs/tags/exthdr-v1
-> 
-> I also want to do followup patches to teach 'nbdinfo --map' and
-> 'nbdcopy' to utilize 64-bit extents.
-> 
-> Eric Blake (13):
->   golang: Simplify nbd_block_status callback array copy
->   block_status: Refactor array storage
->   protocol: Add definitions for extended headers
->   protocol: Prepare to send 64-bit requests
->   protocol: Prepare to receive 64-bit replies
->   protocol: Accept 64-bit holes during pread
->   generator: Add struct nbd_extent in prep for 64-bit extents
->   block_status: Track 64-bit extents internally
->   block_status: Accept 64-bit extents during block status
->   api: Add [aio_]nbd_block_status_64
->   api: Add three functions for controlling extended headers
->   generator: Actually request extended headers
->   interop: Add test of 64-bit block status
-> 
->  lib/internal.h                                |  31 ++-
->  lib/nbd-protocol.h                            |  61 ++++-
->  generator/API.ml                              | 237 ++++++++++++++++--
->  generator/API.mli                             |   3 +-
->  generator/C.ml                                |  24 +-
->  generator/GoLang.ml                           |  35 ++-
->  generator/Makefile.am                         |   3 +-
->  generator/OCaml.ml                            |  20 +-
->  generator/Python.ml                           |  29 ++-
->  generator/state_machine.ml                    |  52 +++-
->  generator/states-issue-command.c              |  31 ++-
->  .../states-newstyle-opt-extended-headers.c    |  90 +++++++
->  generator/states-newstyle-opt-starttls.c      |  10 +-
->  generator/states-reply-structured.c           | 220 ++++++++++++----
->  generator/states-reply.c                      |  31 ++-
->  lib/handle.c                                  |  27 +-
->  lib/rw.c                                      | 105 +++++++-
->  python/t/110-defaults.py                      |   3 +-
->  python/t/120-set-non-defaults.py              |   4 +-
->  python/t/465-block-status-64.py               |  56 +++++
->  ocaml/helpers.c                               |  22 +-
->  ocaml/nbd-c.h                                 |   3 +-
->  ocaml/tests/Makefile.am                       |   5 +-
->  ocaml/tests/test_110_defaults.ml              |   4 +-
->  ocaml/tests/test_120_set_non_defaults.ml      |   5 +-
->  ocaml/tests/test_465_block_status_64.ml       |  58 +++++
->  tests/meta-base-allocation.c                  | 111 +++++++-
->  interop/Makefile.am                           |   6 +
->  interop/large-status.c                        | 186 ++++++++++++++
->  interop/large-status.sh                       |  49 ++++
->  .gitignore                                    |   1 +
->  golang/Makefile.am                            |   3 +-
->  golang/handle.go                              |   6 +
->  golang/libnbd_110_defaults_test.go            |   8 +
->  golang/libnbd_120_set_non_defaults_test.go    |  12 +
->  golang/libnbd_465_block_status_64_test.go     | 119 +++++++++
->  36 files changed, 1511 insertions(+), 159 deletions(-)
->  create mode 100644 generator/states-newstyle-opt-extended-headers.c
->  create mode 100644 python/t/465-block-status-64.py
->  create mode 100644 ocaml/tests/test_465_block_status_64.ml
->  create mode 100644 interop/large-status.c
->  create mode 100755 interop/large-status.sh
->  create mode 100644 golang/libnbd_465_block_status_64_test.go
-> 
+07.12.2021 12:08, Vladimir Sementsov-Ogievskiy wrote:
+> 07.12.2021 02:00, Eric Blake wrote:
+>> On Mon, Dec 06, 2021 at 02:40:45PM +0300, Vladimir Sementsov-Ogievskiy wrote:
 
-I figured I should slowly / gradually review this series, and as a
-*pre-requisite* for it, first apply the spec patch, and then read
-through the spec with something like
+[..]
 
-$ git show --color -U1000
+>>>
+>>>> +S: 64 bits, padding (MUST be zero)
+>>>
+>>> Hmm. Extra 8 bytes to be power-of-2. Does 32 bytes really perform better than 24 bytes?
+>>
+>> Consider:
+>> struct header[100];
+>>
+>> if sizeof(header[0]) is a power of 2 <= the cache line size (and the
+>> compiler prefers to start arrays aligned to the cache line) then we
+>> are guaranteed that all array members each reside in a single cache
+>> line.  But if it is not a power of 2, some of the array members
+>> straddle two cache lines.
+>>
+>> Will there be code that wants to create an array of headers?  Perhaps
+>> so, because that is a logical way (along with scatter/gather to
+>> combine the header with variable-sized payloads) of tracking the
+>> headers for multiple commands issued in parallel.
+>>
+>> Do I have actual performance numbers?  No. But there's plenty of
+>> google hits for why sizing structs to a power of 2 is a good idea.
 
-In other words, read the whole spec, just highlight the new additions.
+I have a thought:
 
-Now, I see Vladimir has made several comments on the spec patch; will
-those comments necessitate a respin of the libnbd series? If so, how
-intrusive are the changes going to be? I'm hesitant to start my review
-if significant changes are already foreseen.
+If client stores headers in separate, nothing prevents make this padding in RAM. So you can define header struct with padding. But what a reason to make the padding in the stream? You can have and array of good-aligned structures, but fill only part of header structure reading from the socket. Note, that you can read only one header in one read() call anyway, as you have to analyze, does it have payload or not.
 
-Thanks,
-Laszlo
+So, if we want to improve performance by padding the structures in RAM, it's not a reason for padding them in the wire, keeping in mind that we can't read more then one structure at once.
+
+
+-- 
+Best regards,
+Vladimir
 
