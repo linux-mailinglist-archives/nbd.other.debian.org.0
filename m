@@ -1,158 +1,93 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DF7E470E62
-	for <lists+nbd@lfdr.de>; Sat, 11 Dec 2021 00:06:12 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC6C847A9C7
+	for <lists+nbd@lfdr.de>; Mon, 20 Dec 2021 13:39:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2EFC8204CF; Fri, 10 Dec 2021 23:06:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 10 23:06:12 2021
-Old-Return-Path: <vsementsov@virtuozzo.com>
+	id A9776202E4; Mon, 20 Dec 2021 12:39:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Dec 20 12:39:10 2021
+Old-Return-Path: <xieyongji@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: **
-X-Spam-Status: No, score=2.4 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,MSGID_FROM_MTA_HEADER,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=2.5 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,FOURLA,FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,PHONENUMBER,
+	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 97FC120407
-	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Dec 2021 22:50:04 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 67C5F202CD
+	for <lists-other-nbd@bendel.debian.org>; Mon, 20 Dec 2021 12:23:23 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.818 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MSGID_FROM_MTA_HEADER=3,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=0.64 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, FOURLA=0.1, FVGT_m_MULTI_ODD=0.02,
+	MURPHY_DRUGS_REL8=0.02, PHONENUMBER=1.5, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id KjjIUmZNHNNY for <lists-other-nbd@bendel.debian.org>;
-	Fri, 10 Dec 2021 22:49:59 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .virtuozzo. - helo: .eur05-am6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (mail-am6eur05on2100.outbound.protection.outlook.com [40.107.22.100])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id D040D203D9
-	for <nbd@other.debian.org>; Fri, 10 Dec 2021 22:49:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mF0TilI2y9TSr4XSG2fYTW7gvJRMSr7tLt2LkdWbLq/gtSGIZuG8sHZXNiB85eMutA+ZqcTxo99aH5hjEyacyOWwd2pjFMiltU9LueVsWCEhC1cgOmu4xZCM1K/bE66SXQbIwDXvUzwdLbisTX8xVecuVIg95qOKESP0Ek9apmxCf8FvJVgXMydk+wWNxZeLmKNaSqloY7XXbzvS0qFJYNi0JYJ1JlExaB+qn1EQYj+wnEHHgHi4Q/YEM+TKdIo3k1FzWU+AMJk4aKmAls1pmCsbq4gu0BkBl+bOdx7CW6G/SVds7xYvh0aAXjm+2dmDHGhPqiUTZd0cX0I314vzng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0s27WwMiZPa1DcRdgansxFpf02TQ2FgtS0UwSjX+sVY=;
- b=gZXVsesJsE89L/HlxChU+jt4V17owKoeh3kWi85FfNmPzpydM60JwfXfaDpErtOc9lhOxqzQjWAQ5KExDzLd18yOfCZEm3U+JRW0VRwkih3sz+HCUix9K4p3pl1nyi8aBJQd2cumjFNd1kmFIOT/SdPk7zLpTJSW3JH83qHRNnph+dDJo1dB9txTb3685mtoSCCtctA6YTvGUb0rZKN9uvDYLCOXzqQVzg/ht/pXVx/XAC9AIa+0RFPu/+jkjMa4MS10UTuT227tatdg4+pnwGk5NXPPQTWQvm2bA7aZx3oCo33UH+ELy1IwKzz21ZHQOlMiJZWP32Pyoh1J3HJbhQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
- header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0s27WwMiZPa1DcRdgansxFpf02TQ2FgtS0UwSjX+sVY=;
- b=O1eVGsJRUrsNncqqgGqMmpytZsAlai/RCMXzVh8qHf/QN/smVolyQ+K2oJT3XqqPHW1BFvTgolDQczOeJKNxkCVZrArsGqf4PgV4yr0G0BgnQNVCT0OroM4fbWjhFze/SiPlsk9i/32FLs9Vz7d19BzQfGnVl7R4wR5AEgUvSm4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=virtuozzo.com;
-Received: from AM9PR08MB6737.eurprd08.prod.outlook.com (2603:10a6:20b:304::18)
- by AM0PR08MB4962.eurprd08.prod.outlook.com (2603:10a6:208:15a::31) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4778.13; Fri, 10 Dec
- 2021 18:16:14 +0000
-Received: from AM9PR08MB6737.eurprd08.prod.outlook.com
- ([fe80::2078:5a2:1898:d83a]) by AM9PR08MB6737.eurprd08.prod.outlook.com
- ([fe80::2078:5a2:1898:d83a%7]) with mapi id 15.20.4669.024; Fri, 10 Dec 2021
- 18:16:14 +0000
-Message-ID: <60a56a8d-87fc-dbaf-0ebf-cd551ce13f14@virtuozzo.com>
-Date: Fri, 10 Dec 2021 21:16:12 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] spec: Add NBD_OPT_EXTENDED_HEADERS
-Content-Language: en-US
-To: Eric Blake <eblake@redhat.com>, nbd@other.debian.org
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, libguestfs@redhat.com,
- nsoffer@redhat.com
-References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
- <20211203231434.3900824-1-eblake@redhat.com>
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-In-Reply-To: <20211203231434.3900824-1-eblake@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0085.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1e::9) To AM9PR08MB6737.eurprd08.prod.outlook.com
- (2603:10a6:20b:304::18)
+	with ESMTP id XZw65XZqZYNF for <lists-other-nbd@bendel.debian.org>;
+	Mon, 20 Dec 2021 12:23:18 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-pj1-x1035.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 47AC2202C3
+	for <nbd@other.debian.org>; Mon, 20 Dec 2021 12:23:14 +0000 (UTC)
+Received: by mail-pj1-x1035.google.com with SMTP id n15-20020a17090a160f00b001a75089daa3so12712137pja.1
+        for <nbd@other.debian.org>; Mon, 20 Dec 2021 04:23:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lsgIL1tDtOBFrpOspcS2K2I6OHy7UCaW1Rph+orChAs=;
+        b=GXO6ig5L1U27xWqp0VUQcsmGEsk1G6nBK9/KrDH8zpUWvR3CW7T0qExr2heJCnrv1t
+         jScBMnJKJJ2/C6tYDb8SGcwXPvpsSGJw8gxyr7+3dQhQsbcq+p7Xzs4lpxbSH4sijvjS
+         R/PFxmtcMKd+wWEo2Abytjo5M+aSqSHLE8zuwshbmsMyzyWLS7veie4rECCRN6ghCS6K
+         V5o8ogAULtggJ451Y+vTfVj9MsraxHGhQj0DQzNPHva2kJ9Q85g6ISvo+IosDkciaNJr
+         KEuc6Jv1lIOHHo0XJ9sRYkyhjLDdBn88p1e5nXBrfOKWX8hjdcX8f6GF2ygSSwMHj53P
+         YP4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lsgIL1tDtOBFrpOspcS2K2I6OHy7UCaW1Rph+orChAs=;
+        b=3dWNTif0U/NVso62nx1ZdBGPWIfFoPatHSWqZm5YaIDZV2pjdc7rQLAgo9vIDVcLOj
+         llAI66dALGymNHFhPAOaCFo4WiV80TzKGt6WPjskN4/K/feMV711BvPduSA6uSVhEFCG
+         VJhJgGrlnIyLa6BEgoWzY6sboEaSCYKpsOE8nl325eT8lgfVDseO+sqf0aBAF+3Fe5fy
+         XYPJcP/QNXXuHbs/vEsowzH9fJENd1zotoGfH97SaFpY7ju6JU3oBlX9XwxWHQxdLy/x
+         t0bH95Fr67sBmb26wJgnz2Fw6jqbG/TXfN/fatAmdJj4qD1DPpi9D335dG7MOejys1hk
+         ZImA==
+X-Gm-Message-State: AOAM530/dVDz1CRXEFR0PWHLdrNUQG2ZJsYva5AoqHECs2K0js1+KMrj
+	JJ0ljlvZ4+Lw161NGhmtwBXs
+X-Google-Smtp-Source: ABdhPJzHl5RE3y85EcZXnrvWRI5P8OiaYQAkte8wCBy6l7L9SzAGXn28+KrNbDnNbqw7JaJIOr7zSw==
+X-Received: by 2002:a17:902:c60b:b0:149:2afe:489f with SMTP id r11-20020a170902c60b00b001492afe489fmr109271plr.104.1640002991024;
+        Mon, 20 Dec 2021 04:23:11 -0800 (PST)
+Received: from localhost ([139.177.225.237])
+        by smtp.gmail.com with ESMTPSA id s4sm12994731pjg.54.2021.12.20.04.23.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Dec 2021 04:23:10 -0800 (PST)
+From: Xie Yongji <xieyongji@bytedance.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] nbd: Don't use workqueue to handle recv work
+Date: Mon, 20 Dec 2021 20:22:41 +0800
+Message-Id: <20211220122241.150-1-xieyongji@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Received: from [192.168.100.10] (185.215.60.230) by FR0P281CA0085.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:1e::9) with Microsoft SMTP Server (version=TLS1_2, cipher=) via Frontend Transport; Fri, 10 Dec 2021 18:16:14 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b67101db-9bf0-40f7-8af6-08d9bc092719
-X-MS-TrafficTypeDiagnostic: AM0PR08MB4962:EE_
-X-Microsoft-Antispam-PRVS:
-	<AM0PR08MB4962D3707FCCFB0CD72A18FEC1719@AM0PR08MB4962.eurprd08.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	nTNEmKJnyd/Dl56QCSicQcGYAWwrGykiCVCPkZHm1iR1Q4HW3h9OC2EYNebtTjxa7IUQqZMfbnvBnsr6WRi5z26ov8HyL5oBRnp5QaJkSniGkLKW3Z4QTi4c7Bv+WToHiXPRQj3QH8T9O2c+6r7R4XI18lAMfkxDA7YKKhUTzjN8WDRO4fbi/DUrMxHbaUY0tEg26ado3hdIyL+nJ+NboUbfoIHhlgvTOBxs82J575DdGG2oNLHY1dxbbOOnqWvnZ6BokUpTj55l+aAlwdDnMbADv8sHs4Wnmg3aMYW/xFw0ZsuScsFdXs3ZtGFGDD1r6rLAGr2QOn7Om8TRoy3pThOqCavwOjhEv5Nme62TfeFoQz3XDzc+68mq96uzu1EbzR+KHwv7ycZ3ImOxa7Z7krFEHd4lb6sdM8siYmSMnSaClQqj5wFfsHOuW9baGqFmR4S4Z4kwfBDy/hMaAd3oFYCjIp7Wd0hhTo3vZpcyTSIzJVH//vfftgV64wwcdd1CR+zqAiPcmpeqfSELiHGqclAlY11idOmWaZfeunn4e9NF9fFgFkHZJt8rWj/8Q75jXTaaVWnWYlcs8p/3Pt5jRTmMpyFZljjCJu7AZPokpdLyztfACShy0EsgLaFrZNQyt5wmyl0Und9phAzcbcIuht3Sx+7tISn9Ead7TVyEHUyv0HNlj9gaaZ8yKJS4QmdKuf7EEq1kqwbZWhUILrOwIR1ZXC81dfgONBRYHhn+3LKVyFZguJcKxd0/hOfPW5Uc4ldSAyQ4q6MYV4hDl9nLhA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6737.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(16576012)(316002)(83380400001)(4326008)(31686004)(38100700002)(38350700002)(2906002)(66556008)(66476007)(508600001)(36756003)(6486002)(5660300002)(52116002)(8936002)(2616005)(956004)(8676002)(31696002)(66946007)(26005)(86362001)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VjZHVFEvMmlrdjVBT2Q4aTBPZTQ2ckZNUm5IZ3dVdCtpd1VMV1Z3aWJobDNJ?=
- =?utf-8?B?aCsvekpnb21WNmNLNlAvZWs2dG1XOG56RTRmM0cvUVROSkIvNURnUXVtdUxI?=
- =?utf-8?B?MktFellQV0lMM29zeDB5d3JGK1UzckZ2RlkxdTk0VmM5SlR4UCt0MytQaXpO?=
- =?utf-8?B?TDNrOTdRQm14YzRIZXJzZHVHbVl5bGlmTDBqVzhXUlRiOU0wTUNOOWJSbUpW?=
- =?utf-8?B?NmVvRVZvWTR0SGg2SEI4cGtZSklOMmtXREZva09pYnIyY3Jpcm5FWmV4SXQy?=
- =?utf-8?B?SWM4MGljbmNRYkxpTlZtc3AxOUlJRHVzRkZwSTVCL3E5THllejNja3hEOThN?=
- =?utf-8?B?SWU2OTRPeW92ajFDeExoN2s4a2d2L1ZkQllJRHB2OTJBb29tQXdtU3hES3Nk?=
- =?utf-8?B?UUNUOGZqcEdSK3hMVFV5Qlo1amsvaXByWU9rL0ppallGNmNqVGJ5NVlFQmVr?=
- =?utf-8?B?QmVFZXdDdXI4WmZCQnFFQWNLSFJySkJHNzRlZDVVbVFTYkFWRFg4MzBHRHlj?=
- =?utf-8?B?cWhBVUo2S1BTclA1azBXZ1VuV3VNVWU0QWdKTDBHRUUyajk1dzlLU2gxekdG?=
- =?utf-8?B?amc1NEp3N1YxRDI4MnRLR0xoZGZ0R0JTditpRkMxREc3QmZaZ3J3eTEvMGN1?=
- =?utf-8?B?YkJuWUFWa1g4VENQVDV6ZG9SM0h1eHFiZE9RRVZKZjBndENWZlF0YXFySkxx?=
- =?utf-8?B?clRJTzZhV3h2RHB4SWFoeFRKdHhnTVQ4MTdmbVB0WTkrdXU2a05RSjZFUkdY?=
- =?utf-8?B?YnV3R0lhN1Nqa2t4SFl2aDM0K2s2NVJWMlNnbSt0UFRqZTJqaG4xQkxnRVIr?=
- =?utf-8?B?clBoYjRPcnVQUmxqUm4rU3VLUEVMK3lheEZ2cGd2NDlXSUhiY1hBUlV3OU42?=
- =?utf-8?B?cGxSL3BicmJsMThVMU9RZGhMcVFMK2grUWllTWs1ZVVWMkdxTVlkQ2pWU1pE?=
- =?utf-8?B?RW5hazVRYkZNdTFORHp0dGdBWkt2T3ZOWlVPU3hvZVloMmdFTEFieEc2L1pL?=
- =?utf-8?B?Wko3K2JFNW1zOXl1T29oM1R4cWRkOEdIYjlNRldMSjdqaXBBNys1TUpEY2I5?=
- =?utf-8?B?RzBvZWVpSHlWcjdvR3NueHZiM25YMng1OGEvY05kam9mUE02SjVrTUQwcm1Q?=
- =?utf-8?B?c1lud3FTazRlZHFMMW4zRFltVjVwR2FMdTdoY0NQUVA0elRzN3dEYm0wQUM2?=
- =?utf-8?B?bDY0SkpKSGtTMHNnR0NQc201RHF1ZlhVM1NqekdFd2ZmT0xBUEpmUWZGdzBE?=
- =?utf-8?B?ZGJnOXovYmgzSm9RYTZYSEdvOURRajZUcXpTZmR1aWpjbldxR3lmUGtwQ205?=
- =?utf-8?B?bFZ1OWNpOHQwOXNrL3R4Y2Vuc1hxeEVNblpHV0VDNjRFNi9EbjduU003UlpR?=
- =?utf-8?B?V3U0L040QzMwQzVtSGl1VVhrZk9USFpDRkV0Y2dvcUhmN2hwczJMeUc3VXp6?=
- =?utf-8?B?ck9QRnZReWV4VWRNcHdEbEFORUk4NHNnRzE0aWV3S0k4WHNMM01pZFYxOHFs?=
- =?utf-8?B?UlJmelBCNW1vRWhKZVhJVEZkbFVUT1VBekMvK3grN1F1ekd1cGxmc2t5cko4?=
- =?utf-8?B?TU9KSkwyanVJT05mMmdqS2d1c3haeEFKUDdPMy9ac0VicFo5Lzh0VXJNZmxs?=
- =?utf-8?B?VWxPWW16Z0wxL2I5Tlk5NldFZldsNFJyY3p6MHM1TFhlRERRZGZSS1hFNXcw?=
- =?utf-8?B?TjVsU0xEeEVCS2xHUGlGOHpWeWdKa2M4QU5BSkd0VURERlZwTnl0REZtWjA1?=
- =?utf-8?B?b0FPQjQwUFJqMC9vYWxjZ0tSUHhhNml4KzJuSGZBM3d3dUNtMHFuRlJML0Mv?=
- =?utf-8?B?c3JtQ0l5dkVnTG90ZnNDc1hVa3RkQlhnbjhlWGthcFdZMG5ZWFltaEQ1YkVP?=
- =?utf-8?B?ZjlxTnRSWGtNNDRsQkNhc25TbXBDZ3lxdHNTSVpidzVyNEtFbXAyY0VoMUFv?=
- =?utf-8?B?MW8wcGN0bHVHZkRIdENvd0NCZlM5amhLVXBGb0JtS3FSZ3QwWW96dkxIMFFn?=
- =?utf-8?B?OStrTGNDWGdocW0rZkVqZ1pjTDJjNjBseHhFcVBRNDQ1SnRpL2N5cW5OdzJZ?=
- =?utf-8?B?S0lRNEs1ODdDZ3hRZVdYL2VqTkcxa2xCYzBXdXB4WFJZKzVncFJMaXlGNnpv?=
- =?utf-8?B?U0Z5VWNoc3UyRkdGR20waDlkYVZ4dExHSnMvdFF5Y3Q3NUpCeVVJYjluK1Bt?=
- =?utf-8?B?bjY5R1ZMb3ozbmpnR2lMT2pHQ01HTTRGN09WU0hXNmZJT25kUWY4TmhGTWtq?=
- =?utf-8?Q?1rVt6rG2EcvLBrcZYWQQ7bjeOC/tH9/4Zcj8jLm/kU=3D?=
-X-OriginatorOrg: virtuozzo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b67101db-9bf0-40f7-8af6-08d9bc092719
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR08MB6737.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2021 18:16:14.7125
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lQqOoNJ3o1UnwLoqaMI/2acyIe7DnBX8N6kOreeYu834qBKJImuSXRT6X/XKv1BmFn2ZSr2G2PHXyK2vZ5tpNRVP32vaThym7ZT+slNQFok=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB4962
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <UO2zbHmkXRP.A.xOH.k19shB@bendel>
+Resent-Message-ID: <rp3djlMA8oI.A.VNG.ulHwhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1658
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1659
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -162,30 +97,264 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/60a56a8d-87fc-dbaf-0ebf-cd551ce13f14@virtuozzo.com
-Resent-Date: Fri, 10 Dec 2021 23:06:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20211220122241.150-1-xieyongji@bytedance.com
+Resent-Date: Mon, 20 Dec 2021 12:39:10 +0000 (UTC)
 
-04.12.2021 02:14, Eric Blake wrote:
-> Add a new negotiation feature where the client and server agree to use
-> larger packet headers on every packet sent during transmission phase.
-> This has two purposes: first, it makes it possible to perform
-> operations like trim, write zeroes, and block status on more than 2^32
-> bytes in a single command; this in turn requires that some structured
-> replies from the server also be extended to match.  The wording chosen
-> here is careful to permit a server to use either flavor in its reply
-> (that is, a request less than 32-bits can trigger an extended reply,
-> and conversely a request larger than 32-bits can trigger a compact
-> reply).
+The rescuer thread might take over the works queued on
+the workqueue when the worker thread creation timed out.
+If this happens, we have no chance to create multiple
+recv threads which causes I/O hung on this nbd device.
 
+To fix it, this tries to create kthreads directly to
+handle the recv work instead of using workqueue.
 
-About this.. Isn't it too permissive?
+Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
+---
+ drivers/block/nbd.c | 95 +++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 56 insertions(+), 39 deletions(-)
 
-I think that actually having to very similar ways to do the same thing is usually a bad design. I think we don't want someone implement the logic, which tries to send 32bit commands/replies for small requests and 64bit command/replies for larger ones? Moreover, you don't allow doing it for commands. So, for symmetry, it may be good to be strict with replies too: in 64bit mode only 64bit replies.
-
-Now we of course have to support old 32bit commands and new 64bit commands. But, may be, we'll want to deprecate 32bit commands at some moment? I'm not sure we can deprecate them in protocol, but we can deprecate them in Qemu at least. And several years later we'll drop old code, keeping only support for 64bit commands. Less code paths, less similar structures, simpler code, I think it worth it.
-
-
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 5a1f98494ddd..e572d1dc20b4 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -63,7 +63,6 @@ struct nbd_sock {
+ };
+ 
+ struct recv_thread_args {
+-	struct work_struct work;
+ 	struct nbd_device *nbd;
+ 	int index;
+ };
+@@ -97,6 +96,7 @@ struct nbd_config {
+ 
+ 	atomic_t recv_threads;
+ 	wait_queue_head_t recv_wq;
++	spinlock_t recv_lock;
+ 	unsigned int blksize_bits;
+ 	loff_t bytesize;
+ #if IS_ENABLED(CONFIG_DEBUG_FS)
+@@ -118,7 +118,6 @@ struct nbd_device {
+ 	struct nbd_config *config;
+ 	struct mutex config_lock;
+ 	struct gendisk *disk;
+-	struct workqueue_struct *recv_workq;
+ 	struct work_struct remove_work;
+ 
+ 	struct list_head list;
+@@ -260,7 +259,6 @@ static void nbd_dev_remove(struct nbd_device *nbd)
+ 	mutex_lock(&nbd_index_mutex);
+ 	idr_remove(&nbd_index_idr, nbd->index);
+ 	mutex_unlock(&nbd_index_mutex);
+-	destroy_workqueue(nbd->recv_workq);
+ 	kfree(nbd);
+ }
+ 
+@@ -818,11 +816,19 @@ static struct nbd_cmd *nbd_handle_reply(struct nbd_device *nbd, int index,
+ 	return ret ? ERR_PTR(ret) : cmd;
+ }
+ 
+-static void recv_work(struct work_struct *work)
++static void flush_recv_works(struct nbd_device *nbd)
+ {
+-	struct recv_thread_args *args = container_of(work,
+-						     struct recv_thread_args,
+-						     work);
++	wait_event(nbd->config->recv_wq,
++		   atomic_read(&nbd->config->recv_threads) == 0);
++
++	/* Make sure recv threads have no reference to nbd->config */
++	spin_lock(&nbd->config->recv_lock);
++	spin_unlock(&nbd->config->recv_lock);
++}
++
++static int recv_work(void *data)
++{
++	struct recv_thread_args *args = (struct recv_thread_args *)data;
+ 	struct nbd_device *nbd = args->nbd;
+ 	struct nbd_config *config = nbd->config;
+ 	struct request_queue *q = nbd->disk->queue;
+@@ -866,9 +872,14 @@ static void recv_work(struct work_struct *work)
+ 	mutex_unlock(&nsock->tx_lock);
+ 
+ 	nbd_config_put(nbd);
++
++	spin_lock(&config->recv_lock);
+ 	atomic_dec(&config->recv_threads);
+ 	wake_up(&config->recv_wq);
++	spin_unlock(&config->recv_lock);
+ 	kfree(args);
++
++	return 0;
+ }
+ 
+ static bool nbd_clear_req(struct request *req, void *data, bool reserved)
+@@ -1176,6 +1187,7 @@ static int nbd_reconnect_socket(struct nbd_device *nbd, unsigned long arg)
+ 
+ 	for (i = 0; i < config->num_connections; i++) {
+ 		struct nbd_sock *nsock = config->socks[i];
++		struct task_struct *worker;
+ 
+ 		if (!nsock->dead)
+ 			continue;
+@@ -1185,6 +1197,14 @@ static int nbd_reconnect_socket(struct nbd_device *nbd, unsigned long arg)
+ 			mutex_unlock(&nsock->tx_lock);
+ 			continue;
+ 		}
++		worker = kthread_create(recv_work, args, "knbd%d.%d-recv",
++					nbd->index, i);
++		if (!worker) {
++			sockfd_put(sock);
++			kfree(args);
++			return -ENOMEM;
++		}
++
+ 		sk_set_memalloc(sock->sk);
+ 		if (nbd->tag_set.timeout)
+ 			sock->sk->sk_sndtimeo = nbd->tag_set.timeout;
+@@ -1194,7 +1214,6 @@ static int nbd_reconnect_socket(struct nbd_device *nbd, unsigned long arg)
+ 		nsock->fallback_index = -1;
+ 		nsock->sock = sock;
+ 		nsock->dead = false;
+-		INIT_WORK(&args->work, recv_work);
+ 		args->index = i;
+ 		args->nbd = nbd;
+ 		nsock->cookie++;
+@@ -1206,7 +1225,7 @@ static int nbd_reconnect_socket(struct nbd_device *nbd, unsigned long arg)
+ 		/* We take the tx_mutex in an error path in the recv_work, so we
+ 		 * need to queue_work outside of the tx_mutex.
+ 		 */
+-		queue_work(nbd->recv_workq, &args->work);
++		wake_up_process(worker);
+ 
+ 		atomic_inc(&config->live_connections);
+ 		wake_up(&config->conn_wait);
+@@ -1359,34 +1378,42 @@ static int nbd_start_device(struct nbd_device *nbd)
+ 	nbd_dev_dbg_init(nbd);
+ 	for (i = 0; i < num_connections; i++) {
+ 		struct recv_thread_args *args;
++		struct task_struct *worker;
+ 
+ 		args = kzalloc(sizeof(*args), GFP_KERNEL);
+-		if (!args) {
+-			sock_shutdown(nbd);
+-			/*
+-			 * If num_connections is m (2 < m),
+-			 * and NO.1 ~ NO.n(1 < n < m) kzallocs are successful.
+-			 * But NO.(n + 1) failed. We still have n recv threads.
+-			 * So, add flush_workqueue here to prevent recv threads
+-			 * dropping the last config_refs and trying to destroy
+-			 * the workqueue from inside the workqueue.
+-			 */
+-			if (i)
+-				flush_workqueue(nbd->recv_workq);
+-			return -ENOMEM;
++		if (!args)
++			goto err;
++
++		worker = kthread_create(recv_work, args, "knbd%d.%d-recv",
++					nbd->index, i);
++		if (!worker) {
++			kfree(args);
++			goto err;
+ 		}
++
+ 		sk_set_memalloc(config->socks[i]->sock->sk);
+ 		if (nbd->tag_set.timeout)
+ 			config->socks[i]->sock->sk->sk_sndtimeo =
+ 				nbd->tag_set.timeout;
+ 		atomic_inc(&config->recv_threads);
+ 		refcount_inc(&nbd->config_refs);
+-		INIT_WORK(&args->work, recv_work);
+ 		args->nbd = nbd;
+ 		args->index = i;
+-		queue_work(nbd->recv_workq, &args->work);
++		wake_up_process(worker);
+ 	}
+ 	return nbd_set_size(nbd, config->bytesize, nbd_blksize(config));
++err:
++	sock_shutdown(nbd);
++	/*
++	 * If num_connections is m (2 < m),
++	 * and NO.1 ~ NO.n(1 < n < m) connections are successful.
++	 * But NO.(n + 1) failed. We still have n recv threads.
++	 * So, add flush_recv_works here to prevent recv threads
++	 * dropping the last config_refs.
++	 */
++	flush_recv_works(nbd);
++
++	return -ENOMEM;
+ }
+ 
+ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *bdev)
+@@ -1405,7 +1432,7 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *b
+ 					 atomic_read(&config->recv_threads) == 0);
+ 	if (ret)
+ 		sock_shutdown(nbd);
+-	flush_workqueue(nbd->recv_workq);
++	flush_recv_works(nbd);
+ 
+ 	mutex_lock(&nbd->config_lock);
+ 	nbd_bdev_reset(bdev);
+@@ -1525,6 +1552,7 @@ static struct nbd_config *nbd_alloc_config(void)
+ 	atomic_set(&config->recv_threads, 0);
+ 	init_waitqueue_head(&config->recv_wq);
+ 	init_waitqueue_head(&config->conn_wait);
++	spin_lock_init(&config->recv_lock);
+ 	config->blksize_bits = NBD_DEF_BLKSIZE_BITS;
+ 	atomic_set(&config->live_connections, 0);
+ 	try_module_get(THIS_MODULE);
+@@ -1769,15 +1797,6 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
+ 	}
+ 	nbd->disk = disk;
+ 
+-	nbd->recv_workq = alloc_workqueue("nbd%d-recv",
+-					  WQ_MEM_RECLAIM | WQ_HIGHPRI |
+-					  WQ_UNBOUND, 0, nbd->index);
+-	if (!nbd->recv_workq) {
+-		dev_err(disk_to_dev(nbd->disk), "Could not allocate knbd recv work queue.\n");
+-		err = -ENOMEM;
+-		goto out_err_disk;
+-	}
+-
+ 	/*
+ 	 * Tell the block layer that we are not a rotational device
+ 	 */
+@@ -1808,7 +1827,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
+ 	disk->first_minor = index << part_shift;
+ 	if (disk->first_minor < index || disk->first_minor > MINORMASK) {
+ 		err = -EINVAL;
+-		goto out_free_work;
++		goto out_err_disk;
+ 	}
+ 
+ 	disk->minors = 1 << part_shift;
+@@ -1817,7 +1836,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
+ 	sprintf(disk->disk_name, "nbd%d", index);
+ 	err = add_disk(disk);
+ 	if (err)
+-		goto out_free_work;
++		goto out_err_disk;
+ 
+ 	/*
+ 	 * Now publish the device.
+@@ -1826,8 +1845,6 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
+ 	nbd_total_devices++;
+ 	return nbd;
+ 
+-out_free_work:
+-	destroy_workqueue(nbd->recv_workq);
+ out_err_disk:
+ 	blk_cleanup_disk(disk);
+ out_free_idr:
+@@ -2086,7 +2103,7 @@ static void nbd_disconnect_and_put(struct nbd_device *nbd)
+ 	 * Make sure recv thread has finished, we can safely call nbd_clear_que()
+ 	 * to cancel the inflight I/Os.
+ 	 */
+-	flush_workqueue(nbd->recv_workq);
++	flush_recv_works(nbd);
+ 	nbd_clear_que(nbd);
+ 	nbd->task_setup = NULL;
+ 	mutex_unlock(&nbd->config_lock);
 -- 
-Best regards,
-Vladimir
+2.11.0
 
