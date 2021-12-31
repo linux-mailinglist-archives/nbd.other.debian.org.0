@@ -2,87 +2,79 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0649481947
-	for <lists+nbd@lfdr.de>; Thu, 30 Dec 2021 05:18:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1517482398
+	for <lists+nbd@lfdr.de>; Fri, 31 Dec 2021 12:15:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9702B20235; Thu, 30 Dec 2021 04:18:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Dec 30 04:18:10 2021
-Old-Return-Path: <xieyongji@bytedance.com>
+	id BE8F3201EC; Fri, 31 Dec 2021 11:15:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 31 11:15:10 2021
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3BB972021F
-	for <lists-other-nbd@bendel.debian.org>; Thu, 30 Dec 2021 04:01:43 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 895C720178
+	for <lists-other-nbd@bendel.debian.org>; Fri, 31 Dec 2021 11:15:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-7.08 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 96Fd5v8Id5Sw for <lists-other-nbd@bendel.debian.org>;
-	Thu, 30 Dec 2021 04:01:37 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-ed1-x530.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 47F1220220
-	for <nbd@other.debian.org>; Thu, 30 Dec 2021 04:01:36 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id m21so94524028edc.0
-        for <nbd@other.debian.org>; Wed, 29 Dec 2021 20:01:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+5onrs9lSEaHmvYpP7Y+ZzwiLXT0++XAWXsdC8ftsfM=;
-        b=eW8aWt+e/Eht2JXn+QcRsIlGQtn13L3SfDZa2aeBH8mDWXtdnt2EgOaMcRpNeTwfGM
-         yCUCa+G1GvDUVT4PVoj1pGmKAVJoo5l90f6aXco45+KpucB0PH+REvGR2xN1Sv8/Ea3R
-         qQ09TbK7wJZlfB1OZiVe3hgujFPHps6dHCuK1JGj6lwffiLoUmk76/jC8cpWrRyq5Xdq
-         wsju7O1itCrafDBBgLymyovaQhoHmuIja931eeS0Mz9431kFwhXpUefcP37ekmp5rIRy
-         7q2+7/BRfLJCseYWogIM9zKab3izoKfvSUlFTPKo4xXgdZWboqOR56J+zabEc51fXwuO
-         +YoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+5onrs9lSEaHmvYpP7Y+ZzwiLXT0++XAWXsdC8ftsfM=;
-        b=J20Rh/DGHlpTvWHyM2i9ZSE/+15fviRZp043TyWsdiWGDpfvrUFugGMBT0Q0PmbiWs
-         7V/b88X9DJcstD6e7yvtI5ALXl14y15Do8FnKldiNbDTg07ccsO6Z2VUqaDuRId6lF5H
-         6yeGZ/J7N5Cxmc3QJoZDu9aMHkK5cU4MEKB0ApPYJm+n33Jl8m88UvhFb/d8QtEix3NS
-         zawXrcoJfxCoc6XbIevwsi2G3HRQ/y6PY5+i9IJZWGxY/Lu2R74KRgTte9XiPPfShBIj
-         gkFRK/4hUeVnNmD2UWTxdGdorSK4PbyZlHNhlcGXj5jFgLdMEGfCz0apsOvRLYchgY/f
-         FZeA==
-X-Gm-Message-State: AOAM532QPshwd4DXUYg5X9Rc3WwZ+wkEU38dFzXyLba5T1eY+sf+6VP+
-	zIDCxn7cwuV4YCL/zW/qBut3kuVDj4/nivZLgEF1haWIirWL
-X-Google-Smtp-Source: ABdhPJwwN4Iso2fFaoeNHAASddkpjxDEcW4ydhjnGSeZ7ramQSBfNRtaYA2Ye43/a6HNM5+6L9P2K7DemHTdE1iYWZo=
-X-Received: by 2002:a17:907:1c9c:: with SMTP id nb28mr25007879ejc.452.1640836893881;
- Wed, 29 Dec 2021 20:01:33 -0800 (PST)
+	with ESMTP id Kprt7KWvvCEA for <lists-other-nbd@bendel.debian.org>;
+	Fri, 31 Dec 2021 11:14:57 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 8321520166
+	for <nbd@other.debian.org>; Fri, 31 Dec 2021 11:14:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=qRqQ5tSM/Xr11wd4y/0i4Hhmbz+H70rccp1exAQCW5s=; b=eV4TP1AiZKTpfhfeH2I3MzLp1k
+	2KnaFO/G541Kc2y85JJ2y+DN6/NtePbWmoXtvOsEkkfISlMuhBNhC2LkRz0xF6gBJ1tYlz5Lmd8dk
+	280IwL6c4CZGogy5Pta5mdeWTB7wCTniSGMmIzVw8bXUdCn99ShQU9vt9mIpT1iaJPEvEAjrUd1As
+	ayUAaL3MALZabWiExkGISZ8HqdU+/zz+8594V08/w69TXfgzizxfU9c2AICqHXZM0by6G09eNU3Hg
+	MWi1kgqHURo8+GyrmbR3nTSV1kV8erdvBZJjsVaYeZxFnuoFF0LDmw0knt7aR6BzthZPn/vPry+3t
+	TzAzkdVA==;
+Received: from [209.203.16.11] (helo=pc181009)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <w@uter.be>)
+	id 1n3Fs4-003yof-NF; Fri, 31 Dec 2021 12:14:52 +0100
+Received: from wouter by pc181009 with local (Exim 4.95)
+	(envelope-from <w@uter.be>)
+	id 1n3Frv-0005UE-NA;
+	Fri, 31 Dec 2021 13:14:43 +0200
+Date: Fri, 31 Dec 2021 13:14:43 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Manfred Spraul <manfred@colorfullife.com>
+Cc: nbd@other.debian.org
+Subject: Re: datalog including written data?
+Message-ID: <Yc7mIwx/k0/TS/1q@pc181009.grep.be>
+References: <fe55642d-be5c-5800-88a2-6fb13c2d2004@colorfullife.com>
 MIME-Version: 1.0
-References: <20211227091241.103-1-xieyongji@bytedance.com> <Ycycda8w/zHWGw9c@infradead.org>
-In-Reply-To: <Ycycda8w/zHWGw9c@infradead.org>
-From: Yongji Xie <xieyongji@bytedance.com>
-Date: Thu, 30 Dec 2021 12:01:23 +0800
-Message-ID: <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
-Subject: Re: [PATCH v2] nbd: Don't use workqueue to handle recv work
-To: Christoph Hellwig <hch@infradead.org>
-Cc: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>, 
-	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org, nbd@other.debian.org, 
-	linux-kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <fe55642d-be5c-5800-88a2-6fb13c2d2004@colorfullife.com>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <V35T84RSQYC.A.33G.CMTzhB@bendel>
+Resent-Message-ID: <2FS6UfJvnKL.A.syG.-YuzhB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1665
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1666
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,40 +84,52 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com
-Resent-Date: Thu, 30 Dec 2021 04:18:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/Yc7mIwx/k0/TS/1q@pc181009.grep.be
+Resent-Date: Fri, 31 Dec 2021 11:15:10 +0000 (UTC)
 
-On Thu, Dec 30, 2021 at 1:35 AM Christoph Hellwig <hch@infradead.org> wrote:
->
-> On Mon, Dec 27, 2021 at 05:12:41PM +0800, Xie Yongji wrote:
-> > The rescuer thread might take over the works queued on
-> > the workqueue when the worker thread creation timed out.
-> > If this happens, we have no chance to create multiple
-> > recv threads which causes I/O hung on this nbd device.
->
-> If a workqueue is used there aren't really 'receive threads'.
-> What is the deadlock here?
+Hi Manfred,
 
-We might have multiple recv works, and those recv works won't quit
-unless the socket is closed. If the rescuer thread takes over those
-works, only the first recv work can run. The I/O needed to be handled
-in other recv works would be hung since no thread can handle them.
+On Mon, Dec 20, 2021 at 05:48:35PM +0100, Manfred Spraul wrote:
+> Hello together,
+> 
+> for a stress test application, I would like to extend the datalog to include
+> the actual written data.
+> 
+> The use case is to replay parts of the log, similar to what I wrote for a
+> NAND driver a few years ago:
+> 
+> https://patchwork.ozlabs.org/project/linux-mtd/cover/20171206085039.27164-1-dirk.behme@de.bosch.com/
+> 
+> a) Has anyone done that before?
 
-In that case, we can see below stacks in rescuer thread:
+Not me.
 
-__schedule
-  schedule
-    scheule_timeout
-      unix_stream_read_generic
-        unix_stream_recvmsg
-          sock_xmit
-            nbd_read_stat
-              recv_work
-                process_one_work
-                  rescuer_thread
-                    kthread
-                      ret_from_fork
+> b) As first observation:
+> 
+> https://github.com/NetworkBlockDevice/nbd/blob/master/nbd-server.c#L294
+> 
+> The server supports
+> 
+> NBD_CMD_READ, NBD_CMD_WRITE, NBD_CMD_DISC, NBD_CMD_FLUSH, NBD_CMD_TRIM,
+> NBD_CMD_WRITE_ZEROES
+> 
+> https://github.com/NetworkBlockDevice/nbd/blob/master/nbd-trdump.c#L71
+> 
+> The trace dump utility supports
+> 
+> NBD_CMD_READ, NBD_CMD_WRITE, NBD_CMD_DISC, NBD_CMD_FLUSH
+> 
+> -> TRIM and WRITE_ZEROES is missing.
+> 
+> 
+> Should I create a patch that adds TRIM and WRITE_ZEROES to nbd-trdump?
 
-Thanks,
-Yongji
+Yes, that might be nice. nbd-trdump hasn't been looked at in a while,
+which is why TRIM and WRITE_ZEROES haven't been added to it yet.
+
+Thanks for your effort,
+
+-- 
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
 
