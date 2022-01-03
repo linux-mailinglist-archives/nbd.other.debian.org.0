@@ -1,80 +1,95 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1517482398
-	for <lists+nbd@lfdr.de>; Fri, 31 Dec 2021 12:15:10 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id C6F7B4834BF
+	for <lists+nbd@lfdr.de>; Mon,  3 Jan 2022 17:27:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id BE8F3201EC; Fri, 31 Dec 2021 11:15:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 31 11:15:10 2021
-Old-Return-Path: <w@uter.be>
+	id 89429202C2; Mon,  3 Jan 2022 16:27:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan  3 16:27:09 2022
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 895C720178
-	for <lists-other-nbd@bendel.debian.org>; Fri, 31 Dec 2021 11:15:02 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 493EC202C8
+	for <lists-other-nbd@bendel.debian.org>; Mon,  3 Jan 2022 16:11:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.08 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Kprt7KWvvCEA for <lists-other-nbd@bendel.debian.org>;
-	Fri, 31 Dec 2021 11:14:57 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8321520166
-	for <nbd@other.debian.org>; Fri, 31 Dec 2021 11:14:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=qRqQ5tSM/Xr11wd4y/0i4Hhmbz+H70rccp1exAQCW5s=; b=eV4TP1AiZKTpfhfeH2I3MzLp1k
-	2KnaFO/G541Kc2y85JJ2y+DN6/NtePbWmoXtvOsEkkfISlMuhBNhC2LkRz0xF6gBJ1tYlz5Lmd8dk
-	280IwL6c4CZGogy5Pta5mdeWTB7wCTniSGMmIzVw8bXUdCn99ShQU9vt9mIpT1iaJPEvEAjrUd1As
-	ayUAaL3MALZabWiExkGISZ8HqdU+/zz+8594V08/w69TXfgzizxfU9c2AICqHXZM0by6G09eNU3Hg
-	MWi1kgqHURo8+GyrmbR3nTSV1kV8erdvBZJjsVaYeZxFnuoFF0LDmw0knt7aR6BzthZPn/vPry+3t
-	TzAzkdVA==;
-Received: from [209.203.16.11] (helo=pc181009)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <w@uter.be>)
-	id 1n3Fs4-003yof-NF; Fri, 31 Dec 2021 12:14:52 +0100
-Received: from wouter by pc181009 with local (Exim 4.95)
-	(envelope-from <w@uter.be>)
-	id 1n3Frv-0005UE-NA;
-	Fri, 31 Dec 2021 13:14:43 +0200
-Date: Fri, 31 Dec 2021 13:14:43 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Manfred Spraul <manfred@colorfullife.com>
-Cc: nbd@other.debian.org
-Subject: Re: datalog including written data?
-Message-ID: <Yc7mIwx/k0/TS/1q@pc181009.grep.be>
-References: <fe55642d-be5c-5800-88a2-6fb13c2d2004@colorfullife.com>
+	with ESMTP id LSga1csnuEdD for <lists-other-nbd@bendel.debian.org>;
+	Mon,  3 Jan 2022 16:10:57 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x72e.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com [IPv6:2607:f8b0:4864:20::72e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 7F0C6201EC
+	for <nbd@other.debian.org>; Mon,  3 Jan 2022 16:10:54 +0000 (UTC)
+Received: by mail-qk1-x72e.google.com with SMTP id f138so31678224qke.10
+        for <nbd@other.debian.org>; Mon, 03 Jan 2022 08:10:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=D1Q3J6juiePL27oWBkNOxTw2Gj9XV99OOInUYuxJbFA=;
+        b=K83wNLSqiOi8vkX/rso4uTib9WyUzG+hZKEYcqDcieuwvx8rSQoSi+KaIrxQ1OzQog
+         TDzNbj//gaIPz6hc/czb1VUjZFifljsuefa5lRfEZSS2joeL3jairu9nvrFTo7aLcA8+
+         chTKfTi35f+mA3a4VvuMf9g6B9+OXAwwU5B4BKT2GDtkgDlWySSFk97KAhhz5ZaV52YD
+         OthaIbhPUP2OpIqopyIvOlDeaGPXNXl73+sYrfKfLQ/TGkBxSKmKr/waFZQAdAX956Hr
+         Rxi/QHTYWUp1YAzfrxuuEFUez1Ljxin7TlA6P99aKoLlRTig2ys9lKYRIsgrj3BdCmun
+         NmMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=D1Q3J6juiePL27oWBkNOxTw2Gj9XV99OOInUYuxJbFA=;
+        b=RPDzm/ZhVOV1+kXg5bVYgESE0MsnTuYGzglVBXjxY90l5jGpoRyk2SdtMne8IvNQlx
+         OnA5ZsVtmmf2k3oZ3+n5MD8pSKbVXqCBXiaBgNaidHiSwB4ncYoxbxmAs1fTINrEbp5o
+         QILxUDRQYpEkDCXuRoYQkFAIzL09doZT3sjij3nqFAIzQ5YuJrz8PHvrbHOEKD9tn/4M
+         Fek9IKF/i7uYuiRfzBcQEKws+h6p9Hjg4465RerRoRZE1gzEKryDHWfF8xYsM9geYni0
+         LTg8Pu4u+0Ajv0EapdN5sMWgZ63FT2ZleF5N7TugqEhQombPJF20YGF4AEBEDT+//iCh
+         cXeg==
+X-Gm-Message-State: AOAM530P/59p9Zj8qFCzQTOocs3KyVRfmdfm/VaDO14ZcqVKGLVfHalI
+	Nez0eL/VeqNG/VeDaE8R/JWZvQ==
+X-Google-Smtp-Source: ABdhPJyNV5rHobiq6J8ocNRs9MB2USBw2xmYNfVt1+XhSMp1T2zlbT9BAc0HnGfPjpPYBlHq18KNyg==
+X-Received: by 2002:a05:620a:85e:: with SMTP id u30mr32185499qku.765.1641226250755;
+        Mon, 03 Jan 2022 08:10:50 -0800 (PST)
+Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
+        by smtp.gmail.com with ESMTPSA id o10sm30540976qtx.33.2022.01.03.08.10.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Jan 2022 08:10:50 -0800 (PST)
+Date: Mon, 3 Jan 2022 11:10:49 -0500
+From: Josef Bacik <josef@toxicpanda.com>
+To: Yongji Xie <xieyongji@bytedance.com>
+Cc: Christoph Hellwig <hch@infradead.org>, Jens Axboe <axboe@kernel.dk>,
+	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org,
+	nbd@other.debian.org, linux-kernel <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v2] nbd: Don't use workqueue to handle recv work
+Message-ID: <YdMgCS1RMcb5V2RJ@localhost.localdomain>
+References: <20211227091241.103-1-xieyongji@bytedance.com>
+ <Ycycda8w/zHWGw9c@infradead.org>
+ <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <fe55642d-be5c-5800-88a2-6fb13c2d2004@colorfullife.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
+In-Reply-To: <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <2FS6UfJvnKL.A.syG.-YuzhB@bendel>
+Resent-Message-ID: <t6ytLl6toyL.A.pAB.dPy0hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1666
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1667
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,52 +99,48 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Yc7mIwx/k0/TS/1q@pc181009.grep.be
-Resent-Date: Fri, 31 Dec 2021 11:15:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YdMgCS1RMcb5V2RJ@localhost.localdomain
+Resent-Date: Mon,  3 Jan 2022 16:27:09 +0000 (UTC)
 
-Hi Manfred,
+On Thu, Dec 30, 2021 at 12:01:23PM +0800, Yongji Xie wrote:
+> On Thu, Dec 30, 2021 at 1:35 AM Christoph Hellwig <hch@infradead.org> wrote:
+> >
+> > On Mon, Dec 27, 2021 at 05:12:41PM +0800, Xie Yongji wrote:
+> > > The rescuer thread might take over the works queued on
+> > > the workqueue when the worker thread creation timed out.
+> > > If this happens, we have no chance to create multiple
+> > > recv threads which causes I/O hung on this nbd device.
+> >
+> > If a workqueue is used there aren't really 'receive threads'.
+> > What is the deadlock here?
+> 
+> We might have multiple recv works, and those recv works won't quit
+> unless the socket is closed. If the rescuer thread takes over those
+> works, only the first recv work can run. The I/O needed to be handled
+> in other recv works would be hung since no thread can handle them.
+> 
 
-On Mon, Dec 20, 2021 at 05:48:35PM +0100, Manfred Spraul wrote:
-> Hello together,
-> 
-> for a stress test application, I would like to extend the datalog to include
-> the actual written data.
-> 
-> The use case is to replay parts of the log, similar to what I wrote for a
-> NAND driver a few years ago:
-> 
-> https://patchwork.ozlabs.org/project/linux-mtd/cover/20171206085039.27164-1-dirk.behme@de.bosch.com/
-> 
-> a) Has anyone done that before?
+I'm not following this explanation.  What is the rescuer thread you're talking
+about?  If there's an error we close the socket which will error out the recvmsg
+which will make the recv workqueue close down.
 
-Not me.
+> In that case, we can see below stacks in rescuer thread:
+> 
+> __schedule
+>   schedule
+>     scheule_timeout
+>       unix_stream_read_generic
+>         unix_stream_recvmsg
+>           sock_xmit
+>             nbd_read_stat
+>               recv_work
+>                 process_one_work
+>                   rescuer_thread
+>                     kthread
+>                       ret_from_fork
 
-> b) As first observation:
-> 
-> https://github.com/NetworkBlockDevice/nbd/blob/master/nbd-server.c#L294
-> 
-> The server supports
-> 
-> NBD_CMD_READ, NBD_CMD_WRITE, NBD_CMD_DISC, NBD_CMD_FLUSH, NBD_CMD_TRIM,
-> NBD_CMD_WRITE_ZEROES
-> 
-> https://github.com/NetworkBlockDevice/nbd/blob/master/nbd-trdump.c#L71
-> 
-> The trace dump utility supports
-> 
-> NBD_CMD_READ, NBD_CMD_WRITE, NBD_CMD_DISC, NBD_CMD_FLUSH
-> 
-> -> TRIM and WRITE_ZEROES is missing.
-> 
-> 
-> Should I create a patch that adds TRIM and WRITE_ZEROES to nbd-trdump?
+This is just the thing hanging waiting for an incoming request, so this doesn't
+tell me anything.  Thanks,
 
-Yes, that might be nice. nbd-trdump hasn't been looked at in a while,
-which is why TRIM and WRITE_ZEROES haven't been added to it yet.
-
-Thanks for your effort,
-
--- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
+Josef
 
