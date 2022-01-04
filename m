@@ -2,13 +2,13 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6F7B4834BF
-	for <lists+nbd@lfdr.de>; Mon,  3 Jan 2022 17:27:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A3F8483BC0
+	for <lists+nbd@lfdr.de>; Tue,  4 Jan 2022 06:48:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 89429202C2; Mon,  3 Jan 2022 16:27:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan  3 16:27:09 2022
-Old-Return-Path: <josef@toxicpanda.com>
+	id E2DC32040E; Tue,  4 Jan 2022 05:48:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jan  4 05:48:09 2022
+Old-Return-Path: <xieyongji@bytedance.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 493EC202C8
-	for <lists-other-nbd@bendel.debian.org>; Mon,  3 Jan 2022 16:11:02 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 43DCD20404
+	for <lists-other-nbd@bendel.debian.org>; Tue,  4 Jan 2022 05:32:08 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -26,70 +26,64 @@ X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id LSga1csnuEdD for <lists-other-nbd@bendel.debian.org>;
-	Mon,  3 Jan 2022 16:10:57 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x72e.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com [IPv6:2607:f8b0:4864:20::72e])
+	with ESMTP id jzLgb0JSS8xP for <lists-other-nbd@bendel.debian.org>;
+	Tue,  4 Jan 2022 05:32:02 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-ed1-x531.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com [IPv6:2a00:1450:4864:20::531])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 7F0C6201EC
-	for <nbd@other.debian.org>; Mon,  3 Jan 2022 16:10:54 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id f138so31678224qke.10
-        for <nbd@other.debian.org>; Mon, 03 Jan 2022 08:10:54 -0800 (PST)
+	by bendel.debian.org (Postfix) with ESMTPS id 62B8E2012A
+	for <nbd@other.debian.org>; Tue,  4 Jan 2022 05:32:00 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id o6so143939082edc.4
+        for <nbd@other.debian.org>; Mon, 03 Jan 2022 21:32:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=D1Q3J6juiePL27oWBkNOxTw2Gj9XV99OOInUYuxJbFA=;
-        b=K83wNLSqiOi8vkX/rso4uTib9WyUzG+hZKEYcqDcieuwvx8rSQoSi+KaIrxQ1OzQog
-         TDzNbj//gaIPz6hc/czb1VUjZFifljsuefa5lRfEZSS2joeL3jairu9nvrFTo7aLcA8+
-         chTKfTi35f+mA3a4VvuMf9g6B9+OXAwwU5B4BKT2GDtkgDlWySSFk97KAhhz5ZaV52YD
-         OthaIbhPUP2OpIqopyIvOlDeaGPXNXl73+sYrfKfLQ/TGkBxSKmKr/waFZQAdAX956Hr
-         Rxi/QHTYWUp1YAzfrxuuEFUez1Ljxin7TlA6P99aKoLlRTig2ys9lKYRIsgrj3BdCmun
-         NmMA==
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=GNLlKNJwh8yDutcgTSNh3rJ5e/XoBEFDQk6XXJo2O/I=;
+        b=orxNeTfTE2OzEWokfk2Wh8DVYaqFMPwA1c+9b77lYcTuW6hbwkykKmkk7cSbeiqEsC
+         pvf1eThjSWeQ360rDEfrIO+xStpX7Bc9tS8aHMzcN8CHOWOV7CDW9P7LDw0IqqUXo2XA
+         u+yRsLAjnZ7KaizfhC6K/euSCNQhEAM5jliWYJljeNRZjegwPtQKhrCWurC5pKXIkhLy
+         LEYbahcrfGS1BSgokeclMoh18wDTkTtoDr/BdwzMhCugoaDD95JsMw0KIS1S/FP1kGNf
+         Fne5WM6AKOrhZjcdKBRmKxYnG2iBpNLpoGmzagQw4D9mh3g/oAcVG0Hm0J2f2eqYLLB3
+         m5gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=D1Q3J6juiePL27oWBkNOxTw2Gj9XV99OOInUYuxJbFA=;
-        b=RPDzm/ZhVOV1+kXg5bVYgESE0MsnTuYGzglVBXjxY90l5jGpoRyk2SdtMne8IvNQlx
-         OnA5ZsVtmmf2k3oZ3+n5MD8pSKbVXqCBXiaBgNaidHiSwB4ncYoxbxmAs1fTINrEbp5o
-         QILxUDRQYpEkDCXuRoYQkFAIzL09doZT3sjij3nqFAIzQ5YuJrz8PHvrbHOEKD9tn/4M
-         Fek9IKF/i7uYuiRfzBcQEKws+h6p9Hjg4465RerRoRZE1gzEKryDHWfF8xYsM9geYni0
-         LTg8Pu4u+0Ajv0EapdN5sMWgZ63FT2ZleF5N7TugqEhQombPJF20YGF4AEBEDT+//iCh
-         cXeg==
-X-Gm-Message-State: AOAM530P/59p9Zj8qFCzQTOocs3KyVRfmdfm/VaDO14ZcqVKGLVfHalI
-	Nez0eL/VeqNG/VeDaE8R/JWZvQ==
-X-Google-Smtp-Source: ABdhPJyNV5rHobiq6J8ocNRs9MB2USBw2xmYNfVt1+XhSMp1T2zlbT9BAc0HnGfPjpPYBlHq18KNyg==
-X-Received: by 2002:a05:620a:85e:: with SMTP id u30mr32185499qku.765.1641226250755;
-        Mon, 03 Jan 2022 08:10:50 -0800 (PST)
-Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
-        by smtp.gmail.com with ESMTPSA id o10sm30540976qtx.33.2022.01.03.08.10.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Jan 2022 08:10:50 -0800 (PST)
-Date: Mon, 3 Jan 2022 11:10:49 -0500
-From: Josef Bacik <josef@toxicpanda.com>
-To: Yongji Xie <xieyongji@bytedance.com>
-Cc: Christoph Hellwig <hch@infradead.org>, Jens Axboe <axboe@kernel.dk>,
-	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org,
-	nbd@other.debian.org, linux-kernel <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v2] nbd: Don't use workqueue to handle recv work
-Message-ID: <YdMgCS1RMcb5V2RJ@localhost.localdomain>
-References: <20211227091241.103-1-xieyongji@bytedance.com>
- <Ycycda8w/zHWGw9c@infradead.org>
- <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GNLlKNJwh8yDutcgTSNh3rJ5e/XoBEFDQk6XXJo2O/I=;
+        b=li9TaCAOkjUH5xjzJ6huIXTpA1driiI2GpkJMWzyj7kl8qwOBtHv5teO66BN5wwTNi
+         BHiqdqNDJ7KMyYzGhQ1maX+UgD9ElX4R6DSEP7XD6WGZZRSvbQgAuT8pbTRaliSiaWeq
+         rTtTo1emofrPcoPXQTPfCDjqeyd63Q4tR9iqkYssGEDaOBrUKdix4W/xbikRdmTZXswJ
+         7I4kcEUfKQ2ZlHMthTAYN49LDN2VOskS2yJ0PmicdNIIhkKq4QoQ33ouvEdJZ+Sj0RFH
+         9s6FsH1CRTbcFkx/nkgih2ad/C2sDTrAxwIWS1fub8byxcE5vssMNkZRs3Gmu70xfKwR
+         s2Lw==
+X-Gm-Message-State: AOAM533N6XDZ1TKiuKyiGx8BCEbZKS/P77V6QHIP1Q/XXRs2w/ItR+wy
+	ycYp/ne9r9EfJ6mRqkQTFAA/Dlnq3WVnsVX5uD2Q5xb6ww==
+X-Google-Smtp-Source: ABdhPJz4dWu/xStNE8Cp7gQF0Nk8Dd7RPTLq2p8D7/HOHBRr/cDSTbtPSjh/GJNQrR2ul1NA8DHUoRiaAuKq1ZJ6tkM=
+X-Received: by 2002:a17:906:6a0d:: with SMTP id qw13mr40748060ejc.490.1641274318122;
+ Mon, 03 Jan 2022 21:31:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
+References: <20211227091241.103-1-xieyongji@bytedance.com> <Ycycda8w/zHWGw9c@infradead.org>
+ <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com> <YdMgCS1RMcb5V2RJ@localhost.localdomain>
+In-Reply-To: <YdMgCS1RMcb5V2RJ@localhost.localdomain>
+From: Yongji Xie <xieyongji@bytedance.com>
+Date: Tue, 4 Jan 2022 13:31:47 +0800
+Message-ID: <CACycT3vYt0XNV2GdjKjDS1iyWieY_OV4h=W1qqk_AAAahRZowA@mail.gmail.com>
+Subject: Re: [PATCH v2] nbd: Don't use workqueue to handle recv work
+To: Josef Bacik <josef@toxicpanda.com>
+Cc: Christoph Hellwig <hch@infradead.org>, Jens Axboe <axboe@kernel.dk>, 
+	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org, nbd@other.debian.org, 
+	linux-kernel <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <t6ytLl6toyL.A.pAB.dPy0hB@bendel>
+Resent-Message-ID: <2AvoWzXBSsN.A.0oF.Z-90hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1667
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1668
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -99,48 +93,75 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/YdMgCS1RMcb5V2RJ@localhost.localdomain
-Resent-Date: Mon,  3 Jan 2022 16:27:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CACycT3vYt0XNV2GdjKjDS1iyWieY_OV4h=W1qqk_AAAahRZowA@mail.gmail.com
+Resent-Date: Tue,  4 Jan 2022 05:48:09 +0000 (UTC)
 
-On Thu, Dec 30, 2021 at 12:01:23PM +0800, Yongji Xie wrote:
-> On Thu, Dec 30, 2021 at 1:35 AM Christoph Hellwig <hch@infradead.org> wrote:
+On Tue, Jan 4, 2022 at 12:10 AM Josef Bacik <josef@toxicpanda.com> wrote:
+>
+> On Thu, Dec 30, 2021 at 12:01:23PM +0800, Yongji Xie wrote:
+> > On Thu, Dec 30, 2021 at 1:35 AM Christoph Hellwig <hch@infradead.org> wrote:
+> > >
+> > > On Mon, Dec 27, 2021 at 05:12:41PM +0800, Xie Yongji wrote:
+> > > > The rescuer thread might take over the works queued on
+> > > > the workqueue when the worker thread creation timed out.
+> > > > If this happens, we have no chance to create multiple
+> > > > recv threads which causes I/O hung on this nbd device.
+> > >
+> > > If a workqueue is used there aren't really 'receive threads'.
+> > > What is the deadlock here?
 > >
-> > On Mon, Dec 27, 2021 at 05:12:41PM +0800, Xie Yongji wrote:
-> > > The rescuer thread might take over the works queued on
-> > > the workqueue when the worker thread creation timed out.
-> > > If this happens, we have no chance to create multiple
-> > > recv threads which causes I/O hung on this nbd device.
+> > We might have multiple recv works, and those recv works won't quit
+> > unless the socket is closed. If the rescuer thread takes over those
+> > works, only the first recv work can run. The I/O needed to be handled
+> > in other recv works would be hung since no thread can handle them.
 > >
-> > If a workqueue is used there aren't really 'receive threads'.
-> > What is the deadlock here?
-> 
-> We might have multiple recv works, and those recv works won't quit
-> unless the socket is closed. If the rescuer thread takes over those
-> works, only the first recv work can run. The I/O needed to be handled
-> in other recv works would be hung since no thread can handle them.
-> 
+>
+> I'm not following this explanation.  What is the rescuer thread you're talking
 
-I'm not following this explanation.  What is the rescuer thread you're talking
-about?  If there's an error we close the socket which will error out the recvmsg
-which will make the recv workqueue close down.
+https://www.kernel.org/doc/html/latest/core-api/workqueue.html#c.rescuer_thread
 
-> In that case, we can see below stacks in rescuer thread:
-> 
-> __schedule
->   schedule
->     scheule_timeout
->       unix_stream_read_generic
->         unix_stream_recvmsg
->           sock_xmit
->             nbd_read_stat
->               recv_work
->                 process_one_work
->                   rescuer_thread
->                     kthread
->                       ret_from_fork
+> about?  If there's an error we close the socket which will error out the recvmsg
+> which will make the recv workqueue close down.
 
-This is just the thing hanging waiting for an incoming request, so this doesn't
-tell me anything.  Thanks,
+When to close the socket? The nbd daemon doesn't know what happens in
+the kernel.
 
-Josef
+>
+> > In that case, we can see below stacks in rescuer thread:
+> >
+> > __schedule
+> >   schedule
+> >     scheule_timeout
+> >       unix_stream_read_generic
+> >         unix_stream_recvmsg
+> >           sock_xmit
+> >             nbd_read_stat
+> >               recv_work
+> >                 process_one_work
+> >                   rescuer_thread
+> >                     kthread
+> >                       ret_from_fork
+>
+> This is just the thing hanging waiting for an incoming request, so this doesn't
+> tell me anything.  Thanks,
+>
+
+The point is the *recv_work* is handled in the *rescuer_thread*.
+Normally it should be handled in *work_thread* like:
+
+__schedule
+   schedule
+     scheule_timeout
+       unix_stream_read_generic
+         unix_stream_recvmsg
+           sock_xmit
+             nbd_read_stat
+               recv_work
+                 process_one_work
+                   *work_thread*
+                     kthread
+                       ret_from_fork
+
+Thanks,
+Yongji
 
