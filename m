@@ -2,94 +2,90 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F7A148EAAE
-	for <lists+nbd@lfdr.de>; Fri, 14 Jan 2022 14:29:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 295BF48EEFC
+	for <lists+nbd@lfdr.de>; Fri, 14 Jan 2022 18:06:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4198A2038D; Fri, 14 Jan 2022 13:29:49 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 14 13:29:49 2022
+	id E86002024F; Fri, 14 Jan 2022 17:06:00 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 14 17:06:00 2022
 Old-Return-Path: <manfred@colorfullife.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.0 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,WORD_WITHOUT_VOWELS autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B7924204F8
-	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Jan 2022 13:29:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C7AA320227
+	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Jan 2022 17:05:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, FOURLA=0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, WORD_WITHOUT_VOWELS=1]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-6.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id fbtY1211p8M8 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 14 Jan 2022 13:29:30 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-wr1-x432.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com [IPv6:2a00:1450:4864:20::432])
+	with ESMTP id uhTtN25oajVz for <lists-other-nbd@bendel.debian.org>;
+	Fri, 14 Jan 2022 17:05:47 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com [IPv6:2a00:1450:4864:20::336])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id AF11F204FA
-	for <nbd@other.debian.org>; Fri, 14 Jan 2022 13:29:30 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id t20so8163999wrb.4
-        for <nbd@other.debian.org>; Fri, 14 Jan 2022 05:29:30 -0800 (PST)
+	by bendel.debian.org (Postfix) with ESMTPS id 841EC201FC
+	for <nbd@other.debian.org>; Fri, 14 Jan 2022 17:05:47 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id 25-20020a05600c231900b003497473a9c4so8466872wmo.5
+        for <nbd@other.debian.org>; Fri, 14 Jan 2022 09:05:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6ySJWqlUJiT+vrVkUn/z3DcyJWaGQzsG5NFSM7QRci0=;
-        b=g6h+0dSx4pXuW/wjRG09pPKCbA5ud2PIBYTntdC3xm1aoqPbFj2+RfYWzgrJb6N0Ta
-         hkBtTlG+LBwmL6iJmU+INp4/MqasnTHgs38Wibljhei+QnxvWcHex+fsNJAC7CWA/kGc
-         yAd2nRnadOi/5MQ4hBXMNRyFx5LFxL/toCAuuqk8V2t7rc2QmawN6lIDrwect02qDaiv
-         /nSP7+wQoq+ThNUTYhWatzFKP8CrduBdrbUB/HwpvcgqnKhCyW0Ph4WYPWjl6NLjiPTK
-         bcXFzuVM6pyOdkwVQE/iDwalf3IW1nx7yra4/iVZpZJnS21kw5x5BpL4gN/iEGYpXHaX
-         DC9g==
+        h=message-id:date:mime-version:user-agent:content-language:to:from
+         :subject:content-transfer-encoding;
+        bh=Oi/sccizMMux3skA0N3TzagjaFYSgV4TjzVapq+TuHI=;
+        b=0hZkBfS+GfTMpJJEUrBkQ7FBLCNDmbgCa9mPkhSPYmQIqtCCfuVS5l585y54mybF9t
+         zy3rYFG2r9MQKvMd6uqEWdvPgAiaOaEhW7DTxkTz3hGqQqL/SrMsbHWhPGE6C6ePF5Fc
+         ZkspvZxlrZc+7KQ/+GjJ0ym1/XhcA8dAKVtMtiqdw5Wutidi7wok9CfU5J2TskNOIl+Z
+         O9D+ysthMr0IQq2q7F1D4h1T1L34W9e7S1KpnNZu2eTQLCpAEQH0x9c/5uEAO46d9bDl
+         HUzmhs0cPJE8SoyWDpMxYAzk3RnSMQMhevdDdQCqn8bCvZlB9q2FLbwZ4sFPXOPkghZO
+         BtvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6ySJWqlUJiT+vrVkUn/z3DcyJWaGQzsG5NFSM7QRci0=;
-        b=qkDAh31MYbQ8nyis/FstJgqjCJPx/2LHzr5lW4+ePrqkgoJLBB/W9nszHudO6XKBMb
-         SCLMbw1It+gWilx+6GgXwFZLIJeAY6v7avwQeJfwyRnW2A/t/3LOf0IoW1YhA/tdMIvw
-         glcJA+4Mxf+u8DZzJBWEMiNDwwwJ+nxf/zC/DHRM6TF2ZWOgXhb+EddO37t4alUAyxZt
-         73WgA1/oS+oQg4Pkusk0YJJDqMJAda2y3RPZm2JRo7x0O72SneTBjy7sS0HLstAymj64
-         Niv3+q3UyiRmh0jDXgR/OFiXzypFi3Fo3SfvV70SaXgG0PkiY23fInMI2CX0jydR79qS
-         uJ0Q==
-X-Gm-Message-State: AOAM5321IC1eb0lI1dqV4x+v+/mBRfZmSJe3V8kRLVO9KLaYX2cNANXV
-	04pVou5YeWK9SyZzcB5Ra+c3h7yNlpDUuA==
-X-Google-Smtp-Source: ABdhPJyyR1SU63G4lGhNGwQYj/zDj2Xy1tc11SGgKFPm75keMeQ5VP6+o3C0y8h4+AwmKp/x0+wvcQ==
-X-Received: by 2002:a05:6000:1845:: with SMTP id c5mr1778285wri.350.1642166967983;
-        Fri, 14 Jan 2022 05:29:27 -0800 (PST)
-Received: from localhost.localdomain (p200300d997095700d6b9b73ae78d7d87.dip0.t-ipconnect.de. [2003:d9:9709:5700:d6b9:b73a:e78d:7d87])
-        by smtp.googlemail.com with ESMTPSA id r132sm5711291wma.34.2022.01.14.05.29.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jan 2022 05:29:27 -0800 (PST)
-From: Manfred Spraul <manfred@colorfullife.com>
-To: nbd@other.debian.org
-Cc: Wouter Verhelst <w@uter.be>,
-	Eric Blake <eblake@redhat.com>,
-	Manfred Spraul <manfred@colorfullife.com>,
-	Manfred Spraul <manfred.spraul@de.bosch.com>
-Subject: [PATCH 2/2] nbd-server, nbd-trdump: Add support for logging actual data
-Date: Fri, 14 Jan 2022 14:29:23 +0100
-Message-Id: <20220114132923.15528-3-manfred@colorfullife.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20220114132923.15528-1-manfred@colorfullife.com>
-References: <20220114132923.15528-1-manfred@colorfullife.com>
+        h=x-gm-message-state:message-id:date:mime-version:user-agent
+         :content-language:to:from:subject:content-transfer-encoding;
+        bh=Oi/sccizMMux3skA0N3TzagjaFYSgV4TjzVapq+TuHI=;
+        b=hH1yhBLs6RLKvNtlxR1mPtaAW/WEWgeR3396OGmKCtn6QRea4wlnM0IgFPJqcDHUJe
+         ksBXL7+SHtkYZ5XbIGfJvLt1q8OcxHmvmfy42aSoq6zuuWitloBYbzMRwaxdCrpItPgm
+         TNvirW+xQ9ET4Jnfc9AY9Zfr1gbVcV5eYZyockMd7ddl0WS2Of/lloSUE+MNziI6TDCL
+         VZ+yj1TUw0lqaG8YF8Zn9ylkQJVtIEC1CrXC/3Aq3YHXp3Ct+53JOiTAqj6GzXKNTjx+
+         /5/T5eA7mTLNgraZPoUHgwiZzG3LigNUaWYmUM6ZF5OCyIQT1rq6eiGihUpx8c1aTvKV
+         5Nzw==
+X-Gm-Message-State: AOAM530+yDwTj3MFRU7PhL9x3eVfGqlwITkvQaB7Ho1s/j40+chg4aNk
+	z6a2MRkH+H98MCe989vnwOTe94u68qnoxQ==
+X-Google-Smtp-Source: ABdhPJx67yWEqB8JIrHCGYE1hLnj8O9Irzy563iOk6CpBiG2dZZ87WJBIMw98vyoV1+9D8EbM5/jUA==
+X-Received: by 2002:adf:f791:: with SMTP id q17mr9318595wrp.311.1642179944551;
+        Fri, 14 Jan 2022 09:05:44 -0800 (PST)
+Received: from ?IPV6:2003:d9:9709:5700:d6b9:b73a:e78d:7d87? (p200300d997095700d6b9b73ae78d7d87.dip0.t-ipconnect.de. [2003:d9:9709:5700:d6b9:b73a:e78d:7d87])
+        by smtp.googlemail.com with ESMTPSA id a3sm7344011wri.89.2022.01.14.09.05.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Jan 2022 09:05:44 -0800 (PST)
+Message-ID: <4327e77e-4f65-0b2d-f1d4-039a728a3958@colorfullife.com>
+Date: Fri, 14 Jan 2022 18:05:43 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Content-Language: en-US
+To: nbd@other.debian.org, Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org
+From: Manfred Spraul <manfred@colorfullife.com>
+Subject: Magics 0x12560953 and 0x96744668 for nbd.h
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <G8sb1FvIoZN.A.NxE.NrX4hB@bendel>
+Resent-Message-ID: <AYAFTuXYx0O.A.5YC.41a4hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1688
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1689
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -99,313 +95,37 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220114132923.15528-3-manfred@colorfullife.com
-Resent-Date: Fri, 14 Jan 2022 13:29:49 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/4327e77e-4f65-0b2d-f1d4-039a728a3958@colorfullife.com
+Resent-Date: Fri, 14 Jan 2022 17:06:00 +0000 (UTC)
 
-The datalog generated by nbd-server contains only the requests
-received by the server, not the actual data to be written.
+Hi,
 
-This patch adds support to write the actual data.
+I've tried to figure out details about the "do *not* use" magic values 
+for nbd.
 
-As details:
-- It is configurable, the default behavior is not changed.
-- It defines a new magic that is only used for the log file, and uses
-  an entry with that magic to store the information that the actual
-  data is stored in the trace file.
-- It is an incompatible change: Current nbd-trdump utilities will
-  just fail/produce bad output when called with a new log file,
-  without a proper error message.
-- nbd-trdump supports to dump also the messages sent by the
-  server. Unfortunately, the current server does not log
-  the sent messages. This change does not fix this.
+They are referenced from the documentation in the current linux kernel!
 
-Open:
-Should nbd-trdump abort when it sees an unknown new log config
-option? Right now, it is only printed out as "UNKNOWN", but the
-tool tries to continue anyways.
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/magic-number.rst?h=v5.16#n99
 
-Known bugs:
-Locking is missing. If multiple clients connect, then the data log
-will be unusable.
+ > NBD_REQUEST_MAGIC 0x12560953 nbd_request ``include/linux/nbd.h``
 
-Plan: Use a named posix semaphore (sem_open()).
-Given the multi-process, multi-thread model, with a single fd shared
-by everyone, this is probably simpler than trying to find a reliable
-flock()/fcntl()/pthread_mutex_lock() combination.
-Alternative: shm_open()+a shared pthread_mutex.
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/magic-number.rst?h=v5.16#n137
 
-Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
----
- nbd-helper.h | 31 +++++++++++++++++++++++
- nbd-server.c | 70 ++++++++++++++++++++++++++++++++++++++++++++--------
- nbd-trdump.c | 46 ++++++++++++++++++++++++++++++++++
- nbd.h        |  4 +++
- nbdsrv.h     |  1 +
- 5 files changed, 142 insertions(+), 10 deletions(-)
+> NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/linux/nbd.h``
 
-diff --git a/nbd-helper.h b/nbd-helper.h
-index 06644b0..f144501 100644
---- a/nbd-helper.h
-+++ b/nbd-helper.h
-@@ -3,6 +3,22 @@
- 
- #include "nbd.h"
- 
-+/* Constants and macros */
-+
-+/*
-+ * Constants for nbd_request.magic == NBD_TRACELOG_MAGIC
-+ */
-+/* 1) stored in nbd_req.type */
-+enum {
-+	/* enable/disable logging actual data.
-+	 * nbd_request.len is the new value (true/false)
-+	 */
-+	NBD_TRACELOG_SET_DATALOG = 1
-+};
-+
-+/* 2) Must be in nbd_req.from */
-+#define NBD_TRACELOG_FROM_MAGIC	0x4A93BA39A54F31B6ULL
-+
- /* Functions */
- 
- /**
-@@ -26,6 +42,21 @@ static inline const char * getcommandname(uint32_t command) {
- 		return "UNKNOWN";
- 	}
- }
-+
-+/**
-+ * Translate a tracelog parameter name into human readable form
-+ *
-+ * @type tracelog parameter number from struct nbd_req.type
-+ * @return pointer to the name
-+ **/
-+static inline const char * gettracelogname(uint32_t type) {
-+	switch (type) {
-+	ENUM2STR(NBD_TRACELOG_SET_DATALOG);
-+	default:
-+		return "UNKNOWN";
-+	}
-+}
-+
- #undef ENUM2STR
- 
- #endif //NBD_HELPER_H
-diff --git a/nbd-server.c b/nbd-server.c
-index 3c3589e..dbb4e74 100644
---- a/nbd-server.c
-+++ b/nbd-server.c
-@@ -786,6 +786,7 @@ GArray* parse_cfile(gchar* f, struct generic_conf *const genconf, bool expect_ge
- 		{ "rotational",	FALSE,  PARAM_BOOL,	&(s.flags),		F_ROTATIONAL },
- 		{ "temporary",	FALSE,  PARAM_BOOL,	&(s.flags),		F_TEMPORARY },
- 		{ "trim",	FALSE,  PARAM_BOOL,	&(s.flags),		F_TRIM },
-+		{ "datalog",	FALSE,  PARAM_BOOL,	&(s.flags),		F_DATALOG },
- 		{ "listenaddr", FALSE,  PARAM_STRING,   &(s.listenaddr),	0 },
- 		{ "maxconnections", FALSE, PARAM_INT,	&(s.max_connections),	0 },
- 		{ "force_tls",	FALSE,	PARAM_BOOL,	&(s.flags),		F_FORCEDTLS },
-@@ -982,6 +983,15 @@ GArray* parse_cfile(gchar* f, struct generic_conf *const genconf, bool expect_ge
- 			g_key_file_free(cfile);
- 			return NULL;
- 		}
-+		/* We can't mix datalog and splice. */
-+		if ((s.flags & F_DATALOG) && (s.flags & F_SPLICE)) {
-+			g_set_error(e, NBDS_ERR, NBDS_ERR_CFILE_INVALID_SPLICE,
-+				    "Cannot mix datalog with splice for an export in group %s",
-+				    groups[i]);
-+			g_array_free(retval, TRUE);
-+			g_key_file_free(cfile);
-+			return NULL;
-+		}
- 		/* Don't need to free this, it's not our string */
- 		virtstyle=NULL;
- 		/* Don't append values for the [generic] group */
-@@ -1980,6 +1990,49 @@ void send_export_info(CLIENT* client, SERVER* server, bool maybe_zeroes) {
- 	}
- }
- 
-+/**
-+  * Setup the transaction log
-+  *
-+  * The function does all things required for the transaction log:
-+  * - Create a new log file.
-+  * - Report if a log file already exists.
-+  * - If needed add a header to the log.
-+  *
-+  * If something goes wrong, logging is disabled.
-+  *
-+  * @param client the CLIENT structure with .server and .net members set
-+  * up correctly
-+  */
-+static void setup_transactionlog(CLIENT *client) {
-+
-+	if((client->transactionlogfd =
-+				open(client->server->transactionlog,
-+					O_WRONLY | O_CREAT,
-+					S_IRUSR | S_IWUSR)) ==
-+			-1) {
-+		msg(LOG_INFO, "Could not open transactionlog %s, moving on without it",
-+				client->server->transactionlog);
-+	}
-+	if (client->server->flags & F_DATALOG) {
-+		struct nbd_request req;
-+		int ret;
-+
-+		req.magic = htonl(NBD_TRACELOG_MAGIC);
-+		req.type = htonl(NBD_TRACELOG_SET_DATALOG);
-+		memset(req.handle, 0, sizeof(req.handle));
-+		req.from = htonll(NBD_TRACELOG_FROM_MAGIC);
-+		req.len = htonl(TRUE);
-+
-+		ret = writeit(client->transactionlogfd, &req, sizeof(struct nbd_request));
-+		if (ret < 0) {
-+			msg(LOG_INFO, "Could not write to transactionlog %s, moving on without it",
-+				client->server->transactionlog);
-+			close(client->transactionlogfd);
-+			client->transactionlogfd = -1;
-+		}
-+	}
-+}
-+
- /**
-   * Commit to exporting the chosen export
-   *
-@@ -2043,16 +2096,8 @@ static bool commit_client(CLIENT* client, SERVER* server) {
-         }
- 
- 	/* Set up the transactionlog, if we need one */
--	if (client->server->transactionlog && (client->transactionlogfd == -1)) {
--		if((client->transactionlogfd =
--					open(client->server->transactionlog,
--						O_WRONLY | O_CREAT,
--						S_IRUSR | S_IWUSR)) ==
--				-1) {
--			msg(LOG_INFO, "Could not open transactionlog %s, moving on without it",
--					client->server->transactionlog);
--		}
--	}
-+	if (client->server->transactionlog && (client->transactionlogfd == -1))
-+		setup_transactionlog(client);
- 
- 	/* Run any pre scripts that we may need */
- 	if (do_run(client->server->prerun, client->exportname)) {
-@@ -2786,6 +2831,11 @@ static int mainloop_threaded(CLIENT* client) {
- 			else
- #endif
- 				socket_read(client, pkg->data, req->len);
-+
-+			if ((client->server->flags & F_DATALOG) &&
-+					!(client->server->flags & F_SPLICE)) {
-+				writeit(client->transactionlogfd, pkg->data, req->len);
-+			}
- 		}
- 		if(req->type == NBD_CMD_DISC) {
- 			finalize_client(client);
-diff --git a/nbd-trdump.c b/nbd-trdump.c
-index d9c2ae5..98b6a45 100644
---- a/nbd-trdump.c
-+++ b/nbd-trdump.c
-@@ -11,6 +11,7 @@
- #include <sys/time.h>
- #include <sys/types.h>
- #include <stdint.h>
-+#include <stdbool.h>
- #include <unistd.h>
- #include "config.h"
- /* We don't want to do syslog output in this program */
-@@ -19,6 +20,11 @@
- #include "nbd.h"
- #include "nbd-helper.h"
- 
-+#define BUFSIZE	131072
-+static char tmpbuf[BUFSIZE];
-+
-+static bool g_with_datalog = false;
-+
- static inline void doread(int f, void *buf, size_t len) {
-         ssize_t res;
- 
-@@ -78,6 +84,17 @@ int main(int argc, char**argv) {
- 			       (command & NBD_CMD_FLAG_FUA)?"FUA":"NONE",
- 			       (long long unsigned int) offset,
- 			       len);
-+			if (((command & NBD_CMD_MASK_COMMAND) == NBD_CMD_WRITE) &&
-+					g_with_datalog) {
-+				while (len > 0) {
-+					uint32_t tmplen = len;
-+
-+					if (tmplen > BUFSIZE)
-+						tmplen = BUFSIZE;
-+					doread(readfd, tmpbuf, tmplen);
-+					len -= tmplen;
-+				}
-+			}
- 			
- 			break;
- 		case NBD_REPLY_MAGIC:
-@@ -90,6 +107,35 @@ int main(int argc, char**argv) {
- 			       error);
- 			break;
- 			
-+		case NBD_TRACELOG_MAGIC:
-+			doread(readfd, sizeof(magic)+(char *)(&req), sizeof(struct nbd_request)-sizeof(magic));
-+			handle = ntohll(*((long long int *)(req.handle)));
-+			offset = ntohll(req.from);
-+			len = ntohl(req.len);
-+			command = ntohl(req.type);
-+
-+			ctext = gettracelogname(command);
-+
-+			printf("TRACE_OPTION C=0x%08x (%23s) O=%016llx L=%08x\n",
-+			       command,
-+			       ctext,
-+			       (long long unsigned int) offset,
-+			       len);
-+			if (offset == NBD_TRACELOG_FROM_MAGIC) {
-+
-+				switch (command) {
-+				case NBD_TRACELOG_SET_DATALOG:
-+					g_with_datalog = !!len;
-+					printf("TRACE_OPTION DATALOG set to %d.\n", (int)g_with_datalog);
-+					break;
-+				default:
-+					printf("TRACE_OPTION ? Unknown type\n");
-+				}
-+			} else {
-+				printf("TRACE_OPTION ? Unknown FROM_MAGIC\n");
-+			}
-+			break;
-+
- 		default:
- 			printf("? Unknown transaction type %08x\n",magic);
- 			break;
-diff --git a/nbd.h b/nbd.h
-index 1e57b3e..31462aa 100644
---- a/nbd.h
-+++ b/nbd.h
-@@ -64,6 +64,10 @@ enum {
- 
- #define NBD_REQUEST_MAGIC 0x25609513
- #define NBD_REPLY_MAGIC 0x67446698
-+#define NBD_STRUCTURED_REPLY_MAGIC 0x668e33ef
-+
-+/* for the trace log, not part of the protocol, not sent over the wire */
-+#define NBD_TRACELOG_MAGIC 0x25609514
- /* Do *not* use magics: 0x12560953 0x96744668. */
- 
- #define NBD_OPT_REPLY_MAGIC 0x3e889045565a9LL
-diff --git a/nbdsrv.h b/nbdsrv.h
-index 6a20c9b..b84e26a 100644
---- a/nbdsrv.h
-+++ b/nbdsrv.h
-@@ -155,6 +155,7 @@ typedef enum {
- #define F_FORCEDTLS 16384 /**< TLS is required, either for the server as a whole or for a given export */
- #define F_SPLICE 32768	  /**< flag to tell us to use splice for read/write operations */
- #define F_WAIT 65536      /**< flag to tell us to wait for file creation */
-+#define F_DATALOG 131072  /**< flag to tell us that the transaction log shall contain the written data */
- 
- /* Functions */
- 
--- 
-2.33.1
+
+That is stale, correct?
+
+Still in use:
+https://elixir.bootlin.com/linux/2.1.116pre2/source/include/linux/nbd.h
+
+Not used anymore, replaced with new values
+https://elixir.bootlin.com/linux/2.1.116/source/include/linux/nbd.h
+
+Thus a bit outdated.
+Should I send a patch to update it?
+And: The translations are manually maintained, correct? Thus all files need to be updated.
+
+--
+	Manfred
 
