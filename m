@@ -1,91 +1,94 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 134D748EAAC
-	for <lists+nbd@lfdr.de>; Fri, 14 Jan 2022 14:29:41 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id E604A48EAAD
+	for <lists+nbd@lfdr.de>; Fri, 14 Jan 2022 14:29:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B71F7204FA; Fri, 14 Jan 2022 13:29:40 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 14 13:29:40 2022
+	id B91DA204FB; Fri, 14 Jan 2022 13:29:42 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 14 13:29:42 2022
 Old-Return-Path: <manfred@colorfullife.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
+X-Spam-Status: No, score=-10.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
 	RCVD_IN_DNSWL_NONE autolearn=unavailable autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C4BB5204FB
-	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Jan 2022 13:29:32 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id D39A1204F5
+	for <lists-other-nbd@bendel.debian.org>; Fri, 14 Jan 2022 13:29:34 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, FOURLA=0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ztgIHeDuXtxe for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id 6-1nFXpjUS5A for <lists-other-nbd@bendel.debian.org>;
 	Fri, 14 Jan 2022 13:29:29 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-wr1-x42c.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com [IPv6:2a00:1450:4864:20::42c])
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-wr1-x436.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com [IPv6:2a00:1450:4864:20::436])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id ACFC9204F5
+	by bendel.debian.org (Postfix) with ESMTPS id DA807204F8
 	for <nbd@other.debian.org>; Fri, 14 Jan 2022 13:29:29 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id q8so15573041wra.12
+Received: by mail-wr1-x436.google.com with SMTP id k30so15596157wrd.9
         for <nbd@other.debian.org>; Fri, 14 Jan 2022 05:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2GNJuHsy7u3F46/qVjZBkPH9R/jHMVFS6VBcqGzUIX4=;
-        b=bJS8zs1gjxPDB7XetR8aCtWQsGzGOZ5DjT4352UD1ucnuyzf6UEcMa7WlduvtoSV20
-         dLU6tVmloolsU0BQmgbsSVy6z3XCwOOaAG629Yt8vFDmIZW6QHVClT3IWBwBoLPHbKPH
-         dEnkLKQSpsHtsKn3+O3+5ZSKrAP81o0If03CSTP/OWca6nsh+/YFjNl+Mi2wMdjxSmeJ
-         h0F3wNbM17OKKwzK2QJ+nBejZzV69ryIhgKHlG9Qqk/2ftGYFCPEu4YpPA6w3oysIa+z
-         rtwAYxN8C4aBJRE/kxGF0H6phHpVyO1VlVBSl/VHFzyJgVOyBwOTVdTSKicklQ/YGwB7
-         r9Xg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=neTq31/5ZYmblJ8XPFg8i+f9PDQdnTUUDv2sqk1hwz8=;
+        b=sWaJ+k8i0NEkkCJwPbpZN77aD3hNF7C8Ui+HODsKCT1w1AUTMACxa8OWiKGRM+nXND
+         TY+Ypa7pbhZ2ZvxzhYGj6QUKdHnY/VPczmIIK+LBYzCaC6IYkUwf2RM8+v160kyRTDwA
+         vT9MZehJkN0bIPsE7IiIZFiUm91+dEtwJRFXfRznWxZP5uzW1YxHZlMbYQm10yrlUtJy
+         2Nqy+Slbkt5he1jJqjecvJwwVbFFl6bGwBR0+7hIDgwV6vvf2O4uNyPIhVKTNskPG3QA
+         2dVYD9ywvlOctYQhpqIj1i0iN2+F8t5PsCT92BFktTznlQ9ya49266YPM2LVRFf6GDXZ
+         K+Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2GNJuHsy7u3F46/qVjZBkPH9R/jHMVFS6VBcqGzUIX4=;
-        b=KFORG1fI7xRxBWlyRkgrQ2xX8vWEWV+mbEr6Fnxa8RMlFnbXLEfsC6BMgJtI8CTHhv
-         dwhuY9+nLyZMJUmv6ZfdBiYpKpaXHfP4BguBaOeBX2IthF5OPwmbtuWidFMX/gTgJp9r
-         vyH/ME5ts3CNG033mqjzTUeHirKYFXAWvaOA19kk0pmkIIZ2rWGuB8GkWhk21ccP2jj9
-         gWBC8Q5TcF/ydAObB0mUA9Df9lZN0pi7ilwCp0AZqYqW3g+D8vJdGXnS2aPv1bc8IFIb
-         wU97GoamWw3ikWsfZvF6/muY6ER5XPdHKkAyz0fR6GTh2in5FvSHY+HUH09i9lotxeYr
-         qsYg==
-X-Gm-Message-State: AOAM532zLL7RxNU7E+4kbNZg602N9OEYsje7obbfCd7r4wqFbHZ4/fAB
-	A8JOmvSg5wvbUxeUGxWsorS/BpKAqbBYrA==
-X-Google-Smtp-Source: ABdhPJx8qrBYCcztkdAwZClllsdp3bLMhhuydb71mqwH2Y7lDr291wfiK0evGwMcZWYU9WQO9lTqNQ==
-X-Received: by 2002:adf:fc45:: with SMTP id e5mr6591767wrs.248.1642166966566;
-        Fri, 14 Jan 2022 05:29:26 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=neTq31/5ZYmblJ8XPFg8i+f9PDQdnTUUDv2sqk1hwz8=;
+        b=XOHhJpq/DRrIqoouvmQwb4cY8OyIrrcX33OTHBUZ2kbM4UP8tpo165qjRIBsCQhgiu
+         n2xlZqbNUEkTlKt6OwfjUpGMYlZE3zK/ciRaqzlXhLSHvMqFgtR/9u8QXEQDccPe//qP
+         sMw5bP+nXtFRppEWzgL2fWC226v2z2e7Dubos1C54Qfc4YydUF1cu/ocu+EMZdlTsz6J
+         MJD2GPSyUSRC1Kmi1PbF4Az1FkBQxbSbEOWDD4tDE6NmdYSM1pwJEs1Oi48ZWDKw2Q+Z
+         eqDcQz3P1NAF04eP+AJoe7scm4kdskQJf4fqtO0pltoVukzpVetY9VifUbFm/pm/gGbp
+         vqRA==
+X-Gm-Message-State: AOAM530g7aLgaZBu9GTfAXN/mPJUhQMmsngglQP1VkKQOiSYcBtxDipH
+	X4Ms3HrzC58vAQRPQzf92Yw7mXgeMTmanA==
+X-Google-Smtp-Source: ABdhPJwao9zxTGfxthkZ9PYqlwOYY0fReMzpWmKn+593JnGt44i/hS9gNbYEXJiOe+dVybZ5xJQ5xw==
+X-Received: by 2002:adf:ce03:: with SMTP id p3mr8504691wrn.674.1642166967243;
+        Fri, 14 Jan 2022 05:29:27 -0800 (PST)
 Received: from localhost.localdomain (p200300d997095700d6b9b73ae78d7d87.dip0.t-ipconnect.de. [2003:d9:9709:5700:d6b9:b73a:e78d:7d87])
-        by smtp.googlemail.com with ESMTPSA id r132sm5711291wma.34.2022.01.14.05.29.25
+        by smtp.googlemail.com with ESMTPSA id r132sm5711291wma.34.2022.01.14.05.29.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jan 2022 05:29:25 -0800 (PST)
+        Fri, 14 Jan 2022 05:29:27 -0800 (PST)
 From: Manfred Spraul <manfred@colorfullife.com>
 To: nbd@other.debian.org
 Cc: Wouter Verhelst <w@uter.be>,
 	Eric Blake <eblake@redhat.com>,
-	Manfred Spraul <manfred@colorfullife.com>
-Subject: [PATCH 0/2] Add data to datalog, add replay tool, V02
-Date: Fri, 14 Jan 2022 14:29:21 +0100
-Message-Id: <20220114132923.15528-1-manfred@colorfullife.com>
+	Manfred Spraul <manfred@colorfullife.com>,
+	Manfred Spraul <manfred.spraul@de.bosch.com>
+Subject: [PATCH 1/2] nbd-trdump: Add support for all commands
+Date: Fri, 14 Jan 2022 14:29:22 +0100
+Message-Id: <20220114132923.15528-2-manfred@colorfullife.com>
 X-Mailer: git-send-email 2.33.1
+In-Reply-To: <20220114132923.15528-1-manfred@colorfullife.com>
+References: <20220114132923.15528-1-manfred@colorfullife.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <mSlLAkHhjwJ.A.NuE.ErX4hB@bendel>
+Resent-Message-ID: <Jj1Csszk63H.A.6vE.GrX4hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1686
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1687
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -95,39 +98,177 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220114132923.15528-1-manfred@colorfullife.com
-Resent-Date: Fri, 14 Jan 2022 13:29:40 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220114132923.15528-2-manfred@colorfullife.com
+Resent-Date: Fri, 14 Jan 2022 13:29:42 +0000 (UTC)
 
-Hi,
+Support for pretty-printing NBD_CMD_TRIM and NBD_CMD_WRITE_ZEROES is
+missing in nbd-trdump.
+In addition, only the commands right now implemented in nbd-server
+are supported, instead of all commands defined in the protocol.
 
-Updated series. For now, only 2 changes, I'll update the rest
-after review.
+Thus:
+- move the existing getcommandname() helper function into a new
+  nbd-helper.h header file.
+- use the helper function in nbd-trdump
+- add all commands from proto.md.
+- in nbd-trdump: change ctest from "char *" to "const char *"
+  and increase number of characters in printf statement.
 
-Patch 1: Add support for pretty-printing WRITE_ZEROS and TRIM to
-        nbd-trdump. I've added a 'static inline' helper function to a
-        new header file.
-Changes:
-	- Support added for all commands mentioned in proto.md,
-	  even the experimental commands.
-	- use #param to reduce copy/paste.
+Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
+---
+ nbd-helper.h | 31 +++++++++++++++++++++++++++++++
+ nbd-server.c | 26 +-------------------------
+ nbd-trdump.c | 24 +++++-------------------
+ nbd.h        |  5 ++++-
+ 4 files changed, 41 insertions(+), 45 deletions(-)
+ create mode 100644 nbd-helper.h
 
-Patch 2: Add actual data logging to nbd-server
-	I've defined a new magic for a new request type to indicate
-	the new contents of the log.
-
-Changes:
-	- Introduction of a new magic, and use that for a header
-	  of the log file.
-
-Questions:
-	- Should I update proto.md and declare the magic as reserved?
-	- I have reused the existing struct nbd_req. Is that ok, or
-	  should I define a new structure with exactly the needed
-	  fields?
-	- Should nbd-trdump abort when it encounters an unknown
-	  flag? I would say no: It is a development tool, thus
-	  the human reader can/must interpret the output anyways.
-
---
-	Manfred
+diff --git a/nbd-helper.h b/nbd-helper.h
+new file mode 100644
+index 0000000..06644b0
+--- /dev/null
++++ b/nbd-helper.h
+@@ -0,0 +1,31 @@
++#ifndef NBD_HELPER_H
++#define NBD_HELPER_H
++
++#include "nbd.h"
++
++/* Functions */
++
++/**
++ * Translate a command name into human readable form
++ *
++ * @param command The command number (after applying NBD_CMD_MASK_COMMAND)
++ * @return pointer to the command name
++ **/
++#define ENUM2STR(x)	case x: return #x
++static inline const char * getcommandname(uint32_t command) {
++	switch (command) {
++	ENUM2STR(NBD_CMD_READ);
++	ENUM2STR(NBD_CMD_WRITE);
++	ENUM2STR(NBD_CMD_DISC);
++	ENUM2STR(NBD_CMD_FLUSH);
++	ENUM2STR(NBD_CMD_TRIM);
++	ENUM2STR(NBD_CMD_WRITE_ZEROES);
++	ENUM2STR(NBD_CMD_BLOCK_STATUS);
++	ENUM2STR(NBD_CMD_RESIZE);
++	default:
++		return "UNKNOWN";
++	}
++}
++#undef ENUM2STR
++
++#endif //NBD_HELPER_H
+diff --git a/nbd-server.c b/nbd-server.c
+index 1eff99d..3c3589e 100644
+--- a/nbd-server.c
++++ b/nbd-server.c
+@@ -129,6 +129,7 @@
+ #include "netdb-compat.h"
+ #include "backend.h"
+ #include "treefiles.h"
++#include "nbd-helper.h"
+ 
+ #ifdef WITH_SDP
+ #include <sdp_inet.h>
+@@ -285,31 +286,6 @@ struct generic_conf {
+ 	gint threads;		/**< maximum number of parallel threads we want to run */
+ };
+ 
+-/**
+- * Translate a command name into human readable form
+- *
+- * @param command The command number (after applying NBD_CMD_MASK_COMMAND)
+- * @return pointer to the command name
+- **/
+-static inline const char * getcommandname(uint64_t command) {
+-	switch (command) {
+-	case NBD_CMD_READ:
+-		return "NBD_CMD_READ";
+-	case NBD_CMD_WRITE:
+-		return "NBD_CMD_WRITE";
+-	case NBD_CMD_DISC:
+-		return "NBD_CMD_DISC";
+-	case NBD_CMD_FLUSH:
+-		return "NBD_CMD_FLUSH";
+-	case NBD_CMD_TRIM:
+-		return "NBD_CMD_TRIM";
+-	case NBD_CMD_WRITE_ZEROES:
+-		return "NBD_CMD_WRITE_ZEROES";
+-	default:
+-		return "UNKNOWN";
+-	}
+-}
+-
+ #if HAVE_GNUTLS
+ static int writeit_tls(gnutls_session_t s, void *buf, size_t len) {
+ 	ssize_t res;
+diff --git a/nbd-trdump.c b/nbd-trdump.c
+index 1185224..d9c2ae5 100644
+--- a/nbd-trdump.c
++++ b/nbd-trdump.c
+@@ -17,6 +17,7 @@
+ #undef ISSERVER
+ #include "cliserv.h"
+ #include "nbd.h"
++#include "nbd-helper.h"
+ 
+ static inline void doread(int f, void *buf, size_t len) {
+         ssize_t res;
+@@ -42,7 +43,7 @@ int main(int argc, char**argv) {
+ 	uint32_t command;
+ 	uint32_t len;
+ 	uint64_t offset;
+-	char * ctext;
++	const char * ctext;
+ 	int readfd = 0; /* stdin */
+ 
+ 	if(argc > 1) {
+@@ -68,24 +69,9 @@ int main(int argc, char**argv) {
+ 			len = ntohl(req.len);
+ 			command = ntohl(req.type);
+ 			
+-			switch (command & NBD_CMD_MASK_COMMAND) {
+-			case NBD_CMD_READ:
+-				ctext="NBD_CMD_READ";
+-				break;
+-			case NBD_CMD_WRITE:
+-				ctext="NBD_CMD_WRITE";
+-				break;
+-			case NBD_CMD_DISC:
+-				ctext="NBD_CMD_DISC";
+-				break;
+-			case NBD_CMD_FLUSH:
+-				ctext="NBD_CMD_FLUSH";
+-				break;
+-			default:
+-				ctext="UNKNOWN";
+-				break;
+-			}
+-			printf("> H=%016llx C=0x%08x (%13s+%4s) O=%016llx L=%08x\n",
++			ctext = getcommandname(command & NBD_CMD_MASK_COMMAND);
++
++			printf("> H=%016llx C=0x%08x (%20s+%4s) O=%016llx L=%08x\n",
+ 			       (long long unsigned int) handle,
+ 			       command,
+ 			       ctext,
+diff --git a/nbd.h b/nbd.h
+index 6326b6e..1e57b3e 100644
+--- a/nbd.h
++++ b/nbd.h
+@@ -35,7 +35,10 @@ enum {
+ 	NBD_CMD_DISC = 2,
+ 	NBD_CMD_FLUSH = 3,
+ 	NBD_CMD_TRIM = 4,
+-	NBD_CMD_WRITE_ZEROES = 6
++	NBD_CMD_CACHE = 5,
++	NBD_CMD_WRITE_ZEROES = 6,
++	NBD_CMD_BLOCK_STATUS = 7,
++	NBD_CMD_RESIZE = 8
+ };
+ 
+ #define NBD_CMD_MASK_COMMAND 0x0000ffff
+-- 
+2.33.1
 
