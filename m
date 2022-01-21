@@ -1,83 +1,84 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B43A4964AB
-	for <lists+nbd@lfdr.de>; Fri, 21 Jan 2022 18:58:23 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id B970F4964A7
+	for <lists+nbd@lfdr.de>; Fri, 21 Jan 2022 18:58:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id EF1EB20513; Fri, 21 Jan 2022 17:58:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 21 17:58:22 2022
+	id 9F0F0204EB; Fri, 21 Jan 2022 17:58:06 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 21 17:58:06 2022
 Old-Return-Path: <manfred@colorfullife.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
+X-Spam-Status: No, score=-9.5 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,FOURLA,GENDER,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
 	RCVD_IN_DNSWL_NONE autolearn=unavailable autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0A4F320519
-	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Jan 2022 17:57:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2466720518
+	for <lists-other-nbd@bendel.debian.org>; Fri, 21 Jan 2022 17:57:37 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.88 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, FOURLA=0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.38 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, FOURLA=0.1, GENDER=0.5, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id p2smXebm0lmk for <lists-other-nbd@bendel.debian.org>;
-	Fri, 21 Jan 2022 17:57:32 +0000 (UTC)
+	with ESMTP id F8IavFFYSk8r for <lists-other-nbd@bendel.debian.org>;
+	Fri, 21 Jan 2022 17:57:33 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com [IPv6:2a00:1450:4864:20::42a])
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com [IPv6:2a00:1450:4864:20::436])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 2DAA220506
+	by bendel.debian.org (Postfix) with ESMTPS id 0D51F20508
 	for <nbd@other.debian.org>; Fri, 21 Jan 2022 17:57:32 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id f17so1083950wrx.1
+Received: by mail-wr1-x436.google.com with SMTP id s4so176215wrb.0
         for <nbd@other.debian.org>; Fri, 21 Jan 2022 09:57:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=vlkk0pMppbxF3YPVtshnOt3xKDFM9atPM5l+LLmGAEE=;
-        b=uZgJyLLpZnNEhDnBTlbE2Cmt155WAGutmQEAzvR9P8N52XujMkouwIt1CtHsrCHYfc
-         PZNH9ItodtD+jMu8KqavH8ua6peowTWY8no/S3FrjPVNQO38hmMKyAV3itam55/eDZFE
-         K5XrAiPJx2GFEYtn+aCSgwf5JptsEyp9vU5J6RqDS8jkLLmy9zaoEzZQvk5gLMHqIFdg
-         YjTH30rLKiOHRFWn9xPQCeauAPMUdal5aOzn78YHXaKzy6gM14bAgbdFL4Y9vmVeCYpH
-         VH/if2xtE9dbeCIKQILBrwbjxaehPlEL9ntohoPlbR9kho1cdjKBzV1EVByio1oQJ/AH
-         CFzQ==
+        bh=mNHuL48Vk6wYnrwy8zygBw5ylxywCYMTHCbl6hi+tHI=;
+        b=SDt7l3CVPjh+elURzwsM2SlDCCayN6Ctq7hOaVAHfDKMPVGDLXvX5jgnQ8il4PHW0n
+         O0ABo/1T1O6L6cB8qTfRQivP18wPLOaIz8lUWeYKo/CNKW2Xq9S3k6uXMipVtYHiTT0a
+         uUfrcfwUf0M/zOZqe7Vt70Jz47paBXQJEekEIX6LPSm3T7Eotnd1JlxcR+TT6XXIn1dN
+         H+UOMkCgVliafff2GnFzffDLqsKeiHycW9241A4TD6opueN/lhPrfNT3lJ5F2V4Tf6l9
+         EvOLdA2gcRVYnExXiW0SoM9XhrEHSzq+slNS+qlP/L8XTVgNKmzc7v+yF9H4scVyxs4f
+         BmuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=vlkk0pMppbxF3YPVtshnOt3xKDFM9atPM5l+LLmGAEE=;
-        b=K4u6smVGBF9Y/OyF+PpoHLQwIvbI/0R9/Fzlrz4VElzBQuBmbLkDOLKEbnxor8Sn+H
-         ZhxZaf6vonfjMDRmiW0y4joDysYG4oZeev/7AgJZHlNtrKltCRfLv+vLqAtB8E2dLkZs
-         BdbJ2jXnBDjGNw8cQdAMFl80WP0R7QgsAPA3TRnSbw9dQ/4LdLRVMxe759TWSD93yFYf
-         hZkCF0dqkX8OdIscPj/EmCvtguMgOXhntn2OeloiuL5mmtzVJ0RPMLh2MuBFiqKxYngJ
-         BJHvX96A2p3RUCgDxPcsl9moxTEzjrXjwNUE9oVym8BMBIEzuPUxiS4QBJne2KJ6FZLC
-         tX5Q==
-X-Gm-Message-State: AOAM533Hmg1q0lQ/tZZ1UKuAbsCSpU1wzVpdlHtSvpzebgKWr4tfAOgT
-	Wgw77E7WnClfYUwyxDj28+aHQNGWeA0mIOcx
-X-Google-Smtp-Source: ABdhPJxKgf3i6gk6+jJVYkLC1S5YqtzwMh3yidieCX/UvTmwvNYsY40uhXpBYGxh3LdMwYM01a6IKw==
-X-Received: by 2002:a05:6000:3cf:: with SMTP id b15mr4689035wrg.425.1642787849564;
-        Fri, 21 Jan 2022 09:57:29 -0800 (PST)
+        bh=mNHuL48Vk6wYnrwy8zygBw5ylxywCYMTHCbl6hi+tHI=;
+        b=QwtfYfEo6pEFh65XS2a3bMSljBLCNPCWYVbLb1wM72LXJULV3qqVi9sWwxorFd+OZl
+         hosYQ1SMYP9snlUQorv1qU0XBsaKbZ4llqGa23xkTdwJ1fk5KMi41vinT0DTWMxi2gcD
+         uwqXgChkyVhFiMXk5OipvjgX1rsbV5Og7l6AGp5BORT5DLKqWylDttSzfIYD6AzZF/Zm
+         /jGPX3RBc8glYlHxMkcZOGdo4wqYPhfblqR0HRYFnRGntxQWMrsPMITYTqz7UjZ0yONb
+         8vdP7fg3+rP5uxQWiBHzXPAFyDIzb4bArwVMnB634Ldfzk/J4S1TVX6YmOX/pXJsH7HS
+         ammA==
+X-Gm-Message-State: AOAM531xn5F9wLeeUC/adCvwhAuS6UGNggmICOq3VuSd1mJfwW9qakhv
+	QXpojf9X02FgBKtp7t3doi7+l9fI0cIsMYpw
+X-Google-Smtp-Source: ABdhPJwOPtTeqq7KFoXbB84NqSc4yG74Gvjvdc7g86sHkV1ZOgKKKYmhuG5+Bc2cNT71zOypaCrJpg==
+X-Received: by 2002:a5d:68c6:: with SMTP id p6mr4731354wrw.701.1642787850319;
+        Fri, 21 Jan 2022 09:57:30 -0800 (PST)
 Received: from localhost.localdomain (p200300d997063800e3418724bb165e30.dip0.t-ipconnect.de. [2003:d9:9706:3800:e341:8724:bb16:5e30])
-        by smtp.googlemail.com with ESMTPSA id g4sm7166329wrd.12.2022.01.21.09.57.28
+        by smtp.googlemail.com with ESMTPSA id g4sm7166329wrd.12.2022.01.21.09.57.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jan 2022 09:57:29 -0800 (PST)
+        Fri, 21 Jan 2022 09:57:30 -0800 (PST)
 From: Manfred Spraul <manfred@colorfullife.com>
 To: nbd@other.debian.org
 Cc: Wouter Verhelst <w@uter.be>,
 	Eric Blake <eblake@redhat.com>,
 	Manfred Spraul <manfred.spraul@de.bosch.com>
-Subject: [PATCH 8/9] nbd-trplay: 1st usable version
-Date: Fri, 21 Jan 2022 18:57:10 +0100
-Message-Id: <20220121175711.5083-9-manfred@colorfullife.com>
+Subject: [PATCH 9/9] Initial man page for nbd-trplay.
+Date: Fri, 21 Jan 2022 18:57:11 +0100
+Message-Id: <20220121175711.5083-10-manfred@colorfullife.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220121175711.5083-1-manfred@colorfullife.com>
 References: <20220121175711.5083-1-manfred@colorfullife.com>
@@ -85,9 +86,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <y91cyMmOk6O.A.EuC.-Qv6hB@bendel>
+Resent-Message-ID: <UDQ9uKo8crM.A.MpC.uQv6hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1702
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1699
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -97,264 +98,209 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220121175711.5083-9-manfred@colorfullife.com
-Resent-Date: Fri, 21 Jan 2022 17:58:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220121175711.5083-10-manfred@colorfullife.com
+Resent-Date: Fri, 21 Jan 2022 17:58:06 +0000 (UTC)
 
 From: Manfred Spraul <manfred.spraul@de.bosch.com>
 
-Initial version.
+Just as a starting point, especially:
+The command line parameters must be added to the man page.
+
+Questions:
+- Did I update the right files?
+- Is the .in.sgml file written manually or are there tools that
+  should be used?
 
 Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
 ---
- nbd-trplay.c | 158 ++++++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 125 insertions(+), 33 deletions(-)
+ autogen.sh               |  2 +-
+ configure.ac             |  2 +
+ man/Makefile.am          |  8 ++--
+ man/mans.mk              |  8 ++++
+ man/nbd-trplay.1.in.sgml | 99 ++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 114 insertions(+), 5 deletions(-)
+ create mode 100644 man/nbd-trplay.1.in.sgml
 
-diff --git a/nbd-trplay.c b/nbd-trplay.c
-index 19c7edf..143d8cb 100644
---- a/nbd-trplay.c
-+++ b/nbd-trplay.c
-@@ -26,7 +26,7 @@
- #include "nbd-helper.h"
+diff --git a/autogen.sh b/autogen.sh
+index 49e5a27..a518857 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -1,5 +1,5 @@
+ #!/bin/sh
+ set -ex
+-make -C man -f mans.mk nbd-server.1.sh.in nbd-server.5.sh.in nbd-client.8.sh.in nbd-trdump.1.sh.in nbdtab.5.sh.in
++make -C man -f mans.mk nbd-server.1.sh.in nbd-server.5.sh.in nbd-client.8.sh.in nbd-trdump.1.sh.in nbd-trplay.1.sh.in nbdtab.5.sh.in
+ make -C systemd -f Makefile.am nbd@.service.sh.in
+ exec autoreconf -f -i
+diff --git a/configure.ac b/configure.ac
+index 0c960b4..8f58fb6 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -354,6 +354,7 @@ AS_IF([test "x$enable_manpages" != "xno"], [
+ 		man/nbd-server.5.sh \
+ 		man/nbd-server.1.sh \
+ 		man/nbd-trdump.1.sh \
++		man/nbd-trplay.1.sh \
+ 		man/nbdtab.5.sh \
+ 		"])
+ 	])
+@@ -381,6 +382,7 @@ AC_CONFIG_FILES([Makefile
+                  man/nbd-server.5.sh
+                  man/nbd-server.1.sh
+                  man/nbd-trdump.1.sh
++                 man/nbd-trplay.1.sh
+                  man/nbdtab.5.sh
+ 		 systemd/Makefile
+ 		 systemd/nbd@.service.sh
+diff --git a/man/Makefile.am b/man/Makefile.am
+index c800bd1..1e543ae 100644
+--- a/man/Makefile.am
++++ b/man/Makefile.am
+@@ -1,9 +1,9 @@
+ if MANPAGES
+-man_MANS = nbd-server.1 nbd-server.5 nbd-client.8 nbd-trdump.1 nbdtab.5
++man_MANS = nbd-server.1 nbd-server.5 nbd-client.8 nbd-trdump.1 nbd-trplay.1 nbdtab.5
+ CLEANFILES = manpage.links manpage.refs
+-DISTCLEANFILES = nbd-server.1 nbd-client.8 nbd-server.5 nbd-trdump.1 nbdtab.5
+-MAINTAINERCLEANFILES = nbd-server.1.sh.in nbd-client.8.sh.in nbd-server.5.sh.in nbd-trdump.1.sh.in nbdtab.5.sh.in
+-EXTRA_DIST = nbd-server.1.in.sgml nbd-client.8.in.sgml nbd-server.5.in.sgml nbd-trdump.1.in.sgml nbdtab.5.in.sgml nbd-server.1.sh.in nbd-server.5.sh.in nbd-client.8.sh.in nbd-trdump.1.sh.in nbdtab.5.sh.in sh.tmpl
++DISTCLEANFILES = nbd-server.1 nbd-client.8 nbd-server.5 nbd-trdump.1 nbd-trplay.1 nbdtab.5
++MAINTAINERCLEANFILES = nbd-server.1.sh.in nbd-client.8.sh.in nbd-server.5.sh.in nbd-trdump.1.sh.in nbd-trplay.1.sh.in nbdtab.5.sh.in
++EXTRA_DIST = nbd-server.1.in.sgml nbd-client.8.in.sgml nbd-server.5.in.sgml nbd-trdump.1.in.sgml nbd-trplay.1.in.sgml nbdtab.5.in.sgml nbd-server.1.sh.in nbd-server.5.sh.in nbd-client.8.sh.in nbd-trdump.1.sh.in nbd-trdump.1.sh.in nbdtab.5.sh.in sh.tmpl
  
- #define BUFSIZE	131072
--static char tmpbuf[BUFSIZE];
-+static char g_tmpbuf[BUFSIZE];
- 
- static bool g_with_datalog = false;
- 
-@@ -38,15 +38,20 @@ static bool g_with_datalog = false;
- int g_verbose = 0;
- 
- unsigned long g_blocksize = 512;
-+unsigned long long g_cur_blocks = 0;
- unsigned long long g_max_blocks = ULLONG_MAX;
- 
--static inline void doread(int f, void *buf, size_t len) {
-+static inline void doread(int f, char *buf, size_t len) {
-         ssize_t res;
- 
-         while(len>0) {
-                 if((res=read(f, buf, len)) <=0) {
--                        if (!res)
-+                        if (!res) {
-+				/* normal exit, end of transaction log. */
-+				printf("End of transaction log, total %llu blocks written.\n",
-+					(unsigned long long) g_cur_blocks);
- 				exit(0);
-+			}
- 			perror ("Error reading transactions");
- 			exit(1);
-                 }
-@@ -55,6 +60,91 @@ static inline void doread(int f, void *buf, size_t len) {
-         }
- }
- 
-+static inline void dowriteimage(int imagefd, const char *buf, size_t len, off_t offset) {
-+	ssize_t res;
+ include $(srcdir)/mans.mk
+ endif
+diff --git a/man/mans.mk b/man/mans.mk
+index fdfc266..e22c9c1 100644
+--- a/man/mans.mk
++++ b/man/mans.mk
+@@ -6,6 +6,8 @@ nbd-client.8: nbd-client.8.sh
+ 	sh nbd-client.8.sh > nbd-client.8
+ nbd-trdump.1: nbd-trdump.1.sh
+ 	sh nbd-trdump.1.sh > nbd-trdump.1
++nbd-trplay.1: nbd-trplay.1.sh
++	sh nbd-trplay.1.sh > nbd-trplay.1
+ nbdtab.5: nbdtab.5.sh
+ 	sh nbdtab.5.sh > nbdtab.5
+ nbd-server.1.sh.in: nbd-server.1.in.sgml sh.tmpl
+@@ -32,6 +34,12 @@ nbd-trdump.1.sh.in: nbd-trdump.1.in.sgml sh.tmpl
+ 	cat NBD-TRDUMP.1 >> nbd-trdump.1.sh.in
+ 	echo "EOF" >> nbd-trdump.1.sh.in
+ 	rm NBD-TRDUMP.1
++nbd-trplay.1.sh.in: nbd-trplay.1.in.sgml sh.tmpl
++	LC_ALL=C docbook2man nbd-trplay.1.in.sgml
++	cat sh.tmpl > nbd-trplay.1.sh.in
++	cat NBD-TRPLAY.1 >> nbd-trplay.1.sh.in
++	echo "EOF" >> nbd-trplay.1.sh.in
++	rm NBD-TRPLAY.1
+ nbdtab.5.sh.in: nbdtab.5.in.sgml sh.tmpl
+ 	LC_ALL=C docbook2man nbdtab.5.in.sgml
+ 	cat sh.tmpl > nbdtab.5.sh.in
+diff --git a/man/nbd-trplay.1.in.sgml b/man/nbd-trplay.1.in.sgml
+new file mode 100644
+index 0000000..f713131
+--- /dev/null
++++ b/man/nbd-trplay.1.in.sgml
+@@ -0,0 +1,99 @@
++<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN" [
 +
-+	if (g_verbose >= VERBOSE_DETAILS) {
-+		printf("block %llu (0x%llx): writing to offset %lld (0x%llx), len %lld (0x%llx).\n",
-+			g_cur_blocks, g_cur_blocks,
-+			(long long)offset, (long long) offset,
-+			(long long) len, (long long) len);
-+	}
++<!-- Process this file with docbook-to-man to generate an nroff manual
++     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
++     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
++     less'.  A typical entry in a Makefile or Makefile.am is:
 +
-+	while(len>0) {
-+		if((res=pwrite(imagefd, buf, len, offset)) <=0) {
-+			if (!res)
-+				exit(0);
-+			perror ("Error writing to image file");
-+			exit(1);
-+		}
-+		len-=res;
-+		buf+=res;
-+		offset+=res;
-+	}
-+}
++manpage.1: manpage.sgml
++	docbook-to-man $< > $@
++  -->
 +
++  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
++  <!ENTITY dhfirstname "<firstname>Manfred</firstname>">
++  <!ENTITY dhsurname   "<surname>Spraul</surname>">
++  <!-- Please adjust the date whenever revising the manpage. -->
++  <!ENTITY dhdate      "<date>$Date$</date>">
++  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
++       allowed: see man(7), man(1). -->
++  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
++  <!ENTITY dhemail     "<email>manfred@de.bosch.com</email>">
++  <!ENTITY dhusername  "Manfred Spraul">
++  <!ENTITY dhucpackage "<refentrytitle>NBD-TRPLAY</refentrytitle>">
++  <!ENTITY dhpackage   "nbd-trplay">
 +
-+void process_command(uint32_t command, uint64_t offset, uint32_t len, int logfd, int imagefd)
-+{
-+	if (offset % g_blocksize != 0) {
-+		printf("  Got offset %llu (0x%llx), not a multiple of the block size %ld (0x%lx).\n",
-+				(unsigned long long)offset, (unsigned long long)offset, g_blocksize, g_blocksize);
-+		exit(1);
-+	}
-+	if (len % g_blocksize != 0) {
-+		printf("  Got len %lu (0x%lx), not a multiple of the block size %ld (0x%lx).\n",
-+				(unsigned long) len, (unsigned long) len, g_blocksize, g_blocksize);
-+		exit(1);
-+	}
++  <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
++  <!ENTITY gnu         "<acronym>GNU</acronym>">
++]>
 +
-+	switch (command & NBD_CMD_MASK_COMMAND) {
-+	case NBD_CMD_READ:
-+	case NBD_CMD_DISC:
-+	case NBD_CMD_FLUSH:
-+		/* READ, DISCONNECT, FLUSH: nothing to do */
-+		break;
-+	case NBD_CMD_WRITE:
-+		if (!g_with_datalog) {
-+			printf("  NBD_CMD_WRITE without data log, replay impossible.\n");
-+			exit(1);
-+		}
-+		while (len > 0) {
-+			doread(logfd, g_tmpbuf, g_blocksize);
-+			dowriteimage(imagefd, g_tmpbuf, g_blocksize, offset);
++<refentry>
++  <refentryinfo>
++    <address>
++      &dhemail;
++    </address>
++    <author>
++      &dhfirstname;
++      &dhsurname;
++    </author>
++    <copyright>
++      <year>2001</year>
++      <holder>&dhusername;</holder>
++    </copyright>
++    &dhdate;
++  </refentryinfo>
++  <refmeta>
++    &dhucpackage;
 +
-+			offset+=g_blocksize;
-+			len-=g_blocksize;
-+			g_cur_blocks++;
++    &dhsection;
++  </refmeta>
++  <refnamediv>
++    <refname>&dhpackage;</refname>
 +
-+			if (g_cur_blocks == g_max_blocks) {
-+				printf("g_max_blocks (%llu, 0x%llx) reached!.\n", g_max_blocks, g_max_blocks);
-+				exit(0);
-+			}
-+		}
-+		break;
-+	case NBD_CMD_TRIM:
-+	case NBD_CMD_WRITE_ZEROES:
-+		while (len > 0) {
-+			memset(g_tmpbuf, 0, g_blocksize);
-+			dowriteimage(imagefd, g_tmpbuf, g_blocksize, offset);
++    <refpurpose>replay all or parts of an nbd transaction log</refpurpose>
++  </refnamediv>
++  <refsynopsisdiv>
++    <cmdsynopsis>
++      <command>&dhpackage;</command>
++    </cmdsynopsis>
++  </refsynopsisdiv>
++  <refsect1>
++    <title>DESCRIPTION</title>
 +
-+			offset+=g_blocksize;
-+			len-=g_blocksize;
-+			g_cur_blocks++;
++    <para><command>&dhpackage;</command> replays all or parts of
++    a transaction log produced by <command>nbd-server</command>
++    (specifically by the <command>transactionlog</command>
++    configuration directive with the option <command>datalog
++    </command>).</para>
 +
-+			if (g_cur_blocks == g_max_blocks) {
-+				printf("g_max_blocks (%llu, 0x%llx) reached!.\n", g_max_blocks, g_max_blocks);
-+				exit(0);
-+			}
-+		}
-+		break;
-+	default:
-+		printf("  Unexpected command %d (0x%x), replay impossible.\n",
-+			(unsigned int) command, (unsigned int) command);
-+		exit(1);
-+	}
-+}
++    <para>See nbd-trplay --help for the command line parameters.
++    </para>
++  </refsect1>
++  <refsect1>
++    <title>OUTPUT</title>
 +
- int main_loop(int logfd, int imagefd) {
- 	struct nbd_request req;
- 	struct nbd_reply rep;
-@@ -68,7 +158,7 @@ int main_loop(int logfd, int imagefd) {
- 
- 	while (1) {
- 		/* Read a request or reply from the transaction file */
--		doread(logfd, &magic, sizeof(magic));
-+		doread(logfd, (char*) &magic, sizeof(magic));
- 		magic = ntohl(magic);
- 		switch (magic) {
- 		case NBD_REQUEST_MAGIC:
-@@ -80,34 +170,29 @@ int main_loop(int logfd, int imagefd) {
- 
- 			ctext = getcommandname(command & NBD_CMD_MASK_COMMAND);
- 
--			printf("> H=%016llx C=0x%08x (%20s+%4s) O=%016llx L=%08x\n",
--			       (long long unsigned int) handle,
--			       command,
--			       ctext,
--			       (command & NBD_CMD_FLAG_FUA)?"FUA":"NONE",
--			       (long long unsigned int) offset,
--			       len);
--			if (((command & NBD_CMD_MASK_COMMAND) == NBD_CMD_WRITE) &&
--					g_with_datalog) {
--				while (len > 0) {
--					uint32_t tmplen = len;
--
--					if (tmplen > BUFSIZE)
--						tmplen = BUFSIZE;
--					doread(logfd, tmpbuf, tmplen);
--					len -= tmplen;
--				}
-+			if (g_verbose >= VERBOSE_NORMAL) {
-+				printf("> H=%016llx C=0x%08x (%13s+%4s) O=%016llx L=%08x\n",
-+				       (long long unsigned int) handle,
-+				       command,
-+				       ctext,
-+				       (command & NBD_CMD_FLAG_FUA)?"FUA":"NONE",
-+				       (long long unsigned int) offset,
-+				       len);
- 			}
-+			process_command(command, offset, len, logfd, imagefd);
- 
- 			break;
++    <para>The file updates the image provided via -i.</para>
 +
- 		case NBD_REPLY_MAGIC:
- 			doread(logfd, sizeof(magic)+(char *)(&rep), sizeof(struct nbd_reply)-sizeof(magic));
- 			handle = ntohll(*((long long int *)(rep.handle)));
- 			error = ntohl(rep.error);
- 
--			printf("< H=%016llx E=0x%08x\n",
--			       (long long unsigned int) handle,
--			       error);
-+			if (g_verbose >= VERBOSE_NORMAL) {
-+				printf("< H=%016llx E=0x%08x\n",
-+				       (long long unsigned int) handle,
-+				       error);
-+			}
- 			break;
- 
- 		case NBD_TRACELOG_MAGIC:
-@@ -119,17 +204,20 @@ int main_loop(int logfd, int imagefd) {
- 
- 			ctext = gettracelogname(command);
- 
--			printf("TRACE_OPTION C=0x%08x (%23s) O=%016llx L=%08x\n",
--			       command,
--			       ctext,
--			       (long long unsigned int) offset,
--			       len);
-+			if (g_verbose >= VERBOSE_NORMAL) {
-+				printf("TRACE_OPTION C=0x%08x (%23s) O=%016llx L=%08x\n",
-+				       command,
-+				       ctext,
-+				       (long long unsigned int) offset,
-+				       len);
-+			}
- 			if (offset == NBD_TRACELOG_FROM_MAGIC) {
- 
- 				switch (command) {
- 				case NBD_TRACELOG_SET_DATALOG:
- 					g_with_datalog = !!len;
--					printf("TRACE_OPTION DATALOG set to %d.\n", (int)g_with_datalog);
-+					if (g_verbose >= VERBOSE_NORMAL)
-+						printf("TRACE_OPTION DATALOG set to %d.\n", (int)g_with_datalog);
- 					break;
- 				default:
- 					printf("TRACE_OPTION ? Unknown type\n");
-@@ -139,9 +227,10 @@ int main_loop(int logfd, int imagefd) {
- 			}
- 			break;
- 
++  </refsect1>
++  <refsect1>
++    <title>SEE ALSO</title>
 +
- 		default:
--			printf("? Unknown transaction type %08x\n",magic);
--			break;
-+			printf("? Unknown transaction type %08x, replay impossible.\n", magic);
-+			exit(1);
- 		}
- 
- 	}
-@@ -172,6 +261,9 @@ int main(int argc, char **argv) {
- 	printf("%s -i <image> -l <log> [-m <max blocks>] [-b <block size]\n", argv[0]);
- 
- 	while ((opt = getopt(argc, argv, "i:l:m:b:hv")) != -1) {
-+		if (g_verbose >= VERBOSE_DEBUG) {
-+			printf("getopt: opt %c, optarg %s.\n", (char)opt, optarg);
-+		}
- 		switch(opt) {
- 		case 'v':
- 			g_verbose++;
-@@ -227,7 +319,7 @@ int main(int argc, char **argv) {
- 
- 	if (g_verbose >= VERBOSE_NORMAL) {
- 		printf(" block size: %ld bytes (0x%lx bytes).\n", g_blocksize, g_blocksize);
--		printf(" max blocks to apply: %llx.\n", g_max_blocks);
-+		printf(" max blocks to apply: %llu (0x%llx).\n", g_max_blocks, g_max_blocks);
- 	}
- 	main_loop(logfd, imagefd);
- 
++    <para>nbd-server (1).</para>
++
++  </refsect1>
++  <refsect1>
++    <title>AUTHOR</title>
++    <para>The NBD kernel module and the NBD tools have been written by
++    Pavel Macheck (pavel@ucw.cz).</para>
++
++    <para>The kernel module is now maintained by Paul Clements
++    (Paul.Clements@steeleye.com), while the userland tools are maintained by
++    Wouter Verhelst (wouter@debian.org)</para>
++
++    <para>This manual page was written by &dhusername; (&dhemail;) for
++    the &debian; system (but may be used by others).  Permission is
++    granted to copy, distribute and/or modify this document under the
++    terms of the <acronym>GNU</acronym> General Public License,
++    version 2, as published by the Free Software Foundation.</para>
++
++  </refsect1>
++</refentry>
 -- 
 2.34.1
 
