@@ -1,96 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98BAB4978CB
-	for <lists+nbd@lfdr.de>; Mon, 24 Jan 2022 07:08:57 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2E1E49BD5E
+	for <lists+nbd@lfdr.de>; Tue, 25 Jan 2022 21:44:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7721A205E9; Mon, 24 Jan 2022 06:08:57 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 24 06:08:57 2022
-Old-Return-Path: <manfred@colorfullife.com>
+	id 6F6E62066B; Tue, 25 Jan 2022 20:44:43 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jan 25 20:44:43 2022
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,NICE_REPLY_A,
-	RCVD_IN_DNSWL_NONE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-11.0 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
+	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DDF01205E6
-	for <lists-other-nbd@bendel.debian.org>; Mon, 24 Jan 2022 06:08:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B521820407
+	for <lists-other-nbd@bendel.debian.org>; Tue, 25 Jan 2022 20:44:34 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.501 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
-	NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001]
+X-Amavis-Spam-Status: No, score=-6.827 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.049,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001]
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 0orpS9k5FBMw for <lists-other-nbd@bendel.debian.org>;
-	Mon, 24 Jan 2022 06:08:44 +0000 (UTC)
+	with ESMTP id 1vxid_J8dA5U for <lists-other-nbd@bendel.debian.org>;
+	Tue, 25 Jan 2022 20:44:32 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com [IPv6:2a00:1450:4864:20::433])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4ED1A205C9
-	for <nbd@other.debian.org>; Mon, 24 Jan 2022 06:08:44 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id i2so11490749wrb.12
-        for <nbd@other.debian.org>; Sun, 23 Jan 2022 22:08:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=OGa1PT0bn5LLAzPE/rMH5bKugf+iLqpj40IhlVONKMI=;
-        b=PAVtJyxjpPspeoGkPXxX9imLN8L3QoTTt7zHh/5QdW2s3ZjpTQB0iYtMAZ/mGyazFo
-         mQyi7cQnUN/akz+Lzeta4mpbsh3XJ7MiGgJGhnVmTiDm7301npJabeEKw2KrgpgG4AEJ
-         oSk5g2SvqMN8hKlRqmlBsPp3m0iyoek8Un4613jBMai57E3r36QVGRq1Bmu8N4MgM+/c
-         +fq+UJ2vCwmN29zS3HHt3Kh2woP5MGlVXv3vCcNnnJsOjXEnDtYIxrxhV7nB8eZQ9pYF
-         /J/wfhGN0wur/M1VGXrgvv6LefuaF1+sQ37ELMWH1ymS9gQfpisN3jpS658+xArxh/aK
-         S32g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=OGa1PT0bn5LLAzPE/rMH5bKugf+iLqpj40IhlVONKMI=;
-        b=6Z6G88vlJ5SgmPZi63UAQl2Z61Ib+zHBNYN/lfSDJDAXHK/4V4SpYdiiN4Yh2cG7Aj
-         wyV7ywJwNwcL/qHxphsv1d8cD5L3zu52q/SUT/7jBK7238PL+M1kS1WhigfJu+JD8oeh
-         nkCZKGmMG28FfFXk3gASQSIbLxTp8jM7fa4T80BMWtOwKBLh2cgnxFfpCxXK3kblQjNz
-         hJzjkaV07QJ3ihlfVynG+avSOxmItX3bAuzJVG6UNwwBaHRUa1WVyqspbiu+tNkqYYiv
-         8HOdnt1H48lzbpSTRzugF15WRmmi7zW3Vwq9ThFwKRKtBSO3JbmhXjDbeCpP33GVNYVB
-         3MDw==
-X-Gm-Message-State: AOAM5313MtZKpFoSNtdw9/xl5ptKvj/xYKP67K7FET5hpBlMjyDx/PTG
-	KaQFR1NY0BFpcebtgHaysveC4Lem4Bi1NA==
-X-Google-Smtp-Source: ABdhPJwM6hcjsnsfZZag4P7MM7t4CKMFAzFMuJUcBzyRJllIYHdU1N1/C6cZvTzjpOHYAPPTAmq2zQ==
-X-Received: by 2002:adf:ef4f:: with SMTP id c15mr8003424wrp.63.1643004521168;
-        Sun, 23 Jan 2022 22:08:41 -0800 (PST)
-Received: from ?IPV6:2003:d9:9706:c900:437b:2364:740d:b3ae? (p200300d99706c900437b2364740db3ae.dip0.t-ipconnect.de. [2003:d9:9706:c900:437b:2364:740d:b3ae])
-        by smtp.googlemail.com with ESMTPSA id k12sm6687442wrd.110.2022.01.23.22.08.40
-        for <nbd@other.debian.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 23 Jan 2022 22:08:40 -0800 (PST)
-Message-ID: <d9df9c1f-e9ec-1aa5-0baf-3004b24be5d6@colorfullife.com>
-Date: Mon, 24 Jan 2022 07:08:40 +0100
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id F0B3920475
+	for <nbd@other.debian.org>; Tue, 25 Jan 2022 20:44:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1643143466;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HrWn0Cc9f3AcEWnZkLEJ/mD5OTXsWc/hBnT8ujCg5lg=;
+	b=AISgVBDhVBr2wzLXMLoBOwyzMj/WFUOooC/pBtSooU68lVkr7c7WNg0GF9KatFpsUpQrWI
+	bPrEe/u0hGFJKqbfvH+3ryj3wveqQKp39TN62c642LvcA8b9NGNp3FpNUtG79cOy+tuUN5
+	plfXTApdrTdODNLlwmxcHjHDBZlTc3o=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-643-ORixtBiuPdODIDrGqzoPFQ-1; Tue, 25 Jan 2022 15:44:19 -0500
+X-MC-Unique: ORixtBiuPdODIDrGqzoPFQ-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6BB021800DB7;
+	Tue, 25 Jan 2022 20:44:18 +0000 (UTC)
+Received: from redhat.com (unknown [10.22.35.126])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 5CE50B18B8;
+	Tue, 25 Jan 2022 20:44:17 +0000 (UTC)
+Date: Tue, 25 Jan 2022 14:44:15 -0600
+From: Eric Blake <eblake@redhat.com>
+To: Manfred Spraul <manfred@colorfullife.com>
+Cc: nbd@other.debian.org, Wouter Verhelst <w@uter.be>,
+	Manfred Spraul <manfred.spraul@de.bosch.com>
+Subject: Re: [PATCH 4/9] proto.md: Document historic values for magics,
+ reserve new value
+Message-ID: <20220125204415.23j534ozbfinoswg@redhat.com>
+References: <20220121175711.5083-1-manfred@colorfullife.com>
+ <20220121175711.5083-5-manfred@colorfullife.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Subject: Re: report security problem of nbd
-Content-Language: en-US
-To: nbd@other.debian.org
-References: <CAFfU0HAYyuiuvVDe622zP7OLXDYRftrYzvYjeRxgLaKoq2E0+A@mail.gmail.com>
-From: Manfred Spraul <manfred@colorfullife.com>
-In-Reply-To: <CAFfU0HAYyuiuvVDe622zP7OLXDYRftrYzvYjeRxgLaKoq2E0+A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220121175711.5083-5-manfred@colorfullife.com>
+User-Agent: NeoMutt/20211029-229-9693dc
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <FdxMh0OMjBK.A.OQD.5Jk7hB@bendel>
+Resent-Message-ID: <YA-hwZkgOgL.A.00D.7EG8hB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1705
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1706
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -100,67 +93,57 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/d9df9c1f-e9ec-1aa5-0baf-3004b24be5d6@colorfullife.com
-Resent-Date: Mon, 24 Jan 2022 06:08:57 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220125204415.23j534ozbfinoswg@redhat.com
+Resent-Date: Tue, 25 Jan 2022 20:44:43 +0000 (UTC)
 
-Hi Wangduo,
-
-On 1/24/22 05:10, 王多 wrote:
-> 1.stack overflow
-> In nbd-server.c, function handle_info have a stack overflow
->
-> https://github.com/NetworkBlockDevice/nbd/blob/5750003711b8050bad3ddaf5196201ef419ce15d/nbd-server.c#L2299
->
-> len can be controlled by an attacker, the buf size is 1024, when `len 
-> - sizeof(namelen) > 1024` the buf overflow.
->
-[...]
-
-Would something like this be a suitable fix?
-
-<<<
-
-> --- a/nbd-server.c
-> +++ b/nbd-server.c
-> @@ -2356,6 +2356,12 @@static bool handle_info(CLIENT* client, uint32_t 
-> opt, GArray* servers, uint32_t
->
->        socket_read(client, &len, sizeof(len));
->        len = htonl(len);
-> +if (len > sizeof(buf)) {
-> +consume(client, len, buf, sizeof(buf));
+On Fri, Jan 21, 2022 at 06:57:06PM +0100, Manfred Spraul wrote:
+> From: Manfred Spraul <manfred.spraul@de.bosch.com>
+> 
+> Right now:
+> - The historic values for NBD_REQUEST_MAGIC and NBD_REPLY_MAGIC are
+>   just documented in nbd.h, without any background.
+> - The new value that is now used for internal use by nbd-server is
+>   not documented at all.
+> 
+> Resolve that:
+> - Add all required information to proto.md.
+> - Remove the reserved magic values from nbd.h: proto.md is the
+>   authorative source, double storage doesn't help.
+> 
+> Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
+> ---
+>  doc/proto.md | 12 ++++++++++++
+>  nbd.h        |  1 -
+>  2 files changed, 12 insertions(+), 1 deletion(-)
+> 
+> diff --git a/doc/proto.md b/doc/proto.md
+> index 3a877a9..81ac755 100644
+> --- a/doc/proto.md
+> +++ b/doc/proto.md
+> @@ -458,6 +458,18 @@ SHOULD wait until there are no inflight requests first.
+>  The client and the server MUST NOT initiate any form
+>  of disconnect other than in one of the above circumstances.
+>  
+> +#### Reserved Magic values
 > +
-> +send_reply(client, opt, NBD_REP_ERR_POLICY, -1, "Access denied by 
-> server configuration");
-> +return false;
-> +}
->        socket_read(client, &namelen, sizeof(namelen));
->        namelen = htonl(namelen);
->        if(namelen > (len - 6)) {
->
-(untested, and obviously the error message is wrong)
+> +The following magic values are reserved and must not be used
+> +for future protocol extentions:
 
- >>>
+extensions
 
->
-> 2.heap overflow
-> In nbd-server.c, function handle_info and handle_export_name have a 
-> heap overflow
->
-> https://github.com/NetworkBlockDevice/nbd/blob/5750003711b8050bad3ddaf5196201ef419ce15d/nbd-server.c#L2302
-> https://github.com/NetworkBlockDevice/nbd/blob/5750003711b8050bad3ddaf5196201ef419ce15d/nbd-server.c#L2117
->
-> namelen can be controlled by an attacker, when `namelen = -1`,  malloc 
-> will allocate a very small buffer, but socket_read will read a 
-> 0xffffffff, thus causing a heap overflow
->
-The pattern is identical: Should we consume the user sent data, and then 
-fail?
+> +
+> +0x12560953 - Historic value for NBD_REQUEST_MAGIC, used
+> +	     until Linux 2.1.116pre2.
+> +0x96744668 - Historic value for NBD_REPLY_MAGIC, used
+> +	     until Linux 2.1.116pre2.
+> +0x25609514 - Used by nbd-server to store data log flags in the
+> +	     transaction log. Never sent from/to a client.
+> +
 
-Or should we perform a hard disconnect the connection if namelen is e.g. 
- > INT_MAX?
+Seems reasonable to me.
 
---
-
-     Manfred
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3266
+Virtualization:  qemu.org | libvirt.org
 
