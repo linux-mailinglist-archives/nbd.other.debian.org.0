@@ -2,13 +2,13 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E284B6D83
-	for <lists+nbd@lfdr.de>; Tue, 15 Feb 2022 14:33:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D104BBC4C
+	for <lists+nbd@lfdr.de>; Fri, 18 Feb 2022 16:39:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id ECFA4203F4; Tue, 15 Feb 2022 13:33:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 15 13:33:12 2022
-Old-Return-Path: <xieyongji@bytedance.com>
+	id 91B2E203C0; Fri, 18 Feb 2022 15:39:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 18 15:39:09 2022
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4816420339
-	for <lists-other-nbd@bendel.debian.org>; Tue, 15 Feb 2022 13:17:57 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 70A53201CC
+	for <lists-other-nbd@bendel.debian.org>; Fri, 18 Feb 2022 15:21:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.99 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -26,67 +26,76 @@ X-Amavis-Spam-Status: No, score=-1.99 tagged_above=-10000 required=5.3
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id eGQqRxFnBxJj for <lists-other-nbd@bendel.debian.org>;
-	Tue, 15 Feb 2022 13:17:51 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .bytedance. - helo: .mail-ej1-x62a.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com [IPv6:2a00:1450:4864:20::62a])
+	with ESMTP id XKFL7V76UMuF for <lists-other-nbd@bendel.debian.org>;
+	Fri, 18 Feb 2022 15:21:07 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x734.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com [IPv6:2607:f8b0:4864:20::734])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id AAC50203CB
-	for <nbd@other.debian.org>; Tue, 15 Feb 2022 13:17:50 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id qx21so4387310ejb.13
-        for <nbd@other.debian.org>; Tue, 15 Feb 2022 05:17:50 -0800 (PST)
+	by bendel.debian.org (Postfix) with ESMTPS id CAEA02016A
+	for <nbd@other.debian.org>; Fri, 18 Feb 2022 15:21:04 +0000 (UTC)
+Received: by mail-qk1-x734.google.com with SMTP id q4so6923060qki.11
+        for <nbd@other.debian.org>; Fri, 18 Feb 2022 07:21:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=fsJbGaa3SFcG2KERbDvW9xmJviCwqG46K8qkid7fn6c=;
-        b=7XgS7fALQBQuwbclAnMxqO2wqnc/+bGyhHE6lujXNJouj8037qr9Ue3xmlYhI+AFsM
-         f03sdWv+Ujf9RTFJyoBv7idlnbP7CFOaazsTBbodwXnN05FoLL135oSZZxVmGFnnwP88
-         WH3bxdDxRsdRjGcjNZZO48JYgmAldIWUGcGXbXsjnGnIh9ZihL3KqC9/M1MbHs3GoBne
-         zE83wH/HodNhR31zL6+Hqvc1xTPXqI9cJkDGWbw0rx6TjkaZPKZQOq6w46mlcAExg6az
-         +Ec+2vyvtnJq1nDHQ82gJCkdM7D0dK0xKB5ba5B4yaS+xrvLCTuuVhVUZzMWRcV3I5k/
-         IEhQ==
+        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=dFva2jphudu5nNQOtFetMtWWxY8U+kSkf6ymT6sVouY=;
+        b=6cqBgFFBOvizHU93Po+Zmf3Phx4g1oVC0Ve/zIfQpn7TkYyMnMeR1iI8Mrx1PpICf5
+         Z5UAmE86htGVfvf1UDCIY/gPeDwGJ0+h9FXY1kU/AAR2Ampat4gzDgpi4r3f4XZd4ZoJ
+         LMgccAH3CuN9komOtrImQ3Yg/wGl/H+D1cr3lgu089ljtPtZnIntdsk7MuAyu19rn9E+
+         AVz3ae3PKLAZi1oWAXIqAO/2pVAymh7igvT2Ai0dWGeuibDwrJIRa1IlOrGy73y1b8iC
+         /IOIDsgS7LoRfkVysGHJZgK2O5fBJCqRe0w3cmOqXc5d8Z1CEXkD7DgDm1wGZ1cdAes0
+         oVhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=fsJbGaa3SFcG2KERbDvW9xmJviCwqG46K8qkid7fn6c=;
-        b=KyU2CwW/3zio2QRRjSzmCWG1ldIMpbV3cW2qtFUB1Tg+yRgCTO3DK68rqVleBqClNl
-         iYHNoxvLMlznASUwnVtKhwELUYO+hFWNEJvRoCQiKOCSfOR7tnkqWCUoQLJAkmw4Jo0k
-         1jrFwjwdEqCIra7Ca0aGoZv0CNoPl5WU6xUqf0wMCYfE53W5bDHG0/jZSkRwPssMhSzZ
-         hsmCeXn3XwbKfwcnqWTNa9ZgQEgm9aTwwXUgcmCsu3Aqb5mm3BvB1eQ1qLfx2syAptCM
-         vwMAWjcVAlr/x0E4NNeira7llfp2E8g9zTOgRPY0PB+nL8KBI8aEoBF/nAYqr6SA/djm
-         fuDA==
-X-Gm-Message-State: AOAM532BZgp74RHujtRFKEwJnKO5LeZDsbjrLphCO07E4UmOZsbWwYNl
-	HrPR76oljq7dgRDQtt8epqy3o2yqCNdwy9KI3hjn
-X-Google-Smtp-Source: ABdhPJzGcLJvBPy+H95ps/k6isFv1SA3/3aRTr93ZAojJyrKa1HFzpIz9t7VDfN9wQ5IPOeOZTgAe28YX895rwe8htA=
-X-Received: by 2002:a17:907:9605:: with SMTP id gb5mr3161841ejc.490.1644931068478;
- Tue, 15 Feb 2022 05:17:48 -0800 (PST)
-MIME-Version: 1.0
-References: <20211227091241.103-1-xieyongji@bytedance.com> <Ycycda8w/zHWGw9c@infradead.org>
- <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
- <YdMgCS1RMcb5V2RJ@localhost.localdomain> <CACycT3vYt0XNV2GdjKjDS1iyWieY_OV4h=W1qqk_AAAahRZowA@mail.gmail.com>
- <YdSMqKXv0PUkAwfl@localhost.localdomain> <CACycT3tPZOSkCXPz-oYCXRJ_EOBs3dC0+Juv=FYsa6qRS0GVCw@mail.gmail.com>
- <CACycT3tTKBpS_B5vVJ8MZ1iuaF2bf-01=9+tAdxUddziF2DQ-g@mail.gmail.com>
-In-Reply-To: <CACycT3tTKBpS_B5vVJ8MZ1iuaF2bf-01=9+tAdxUddziF2DQ-g@mail.gmail.com>
-From: Yongji Xie <xieyongji@bytedance.com>
-Date: Tue, 15 Feb 2022 21:17:37 +0800
-Message-ID: <CACycT3thVwb466u2JR-oDRHLY5j_uxAx5uXXGmaoCZL5vs__mQ@mail.gmail.com>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=dFva2jphudu5nNQOtFetMtWWxY8U+kSkf6ymT6sVouY=;
+        b=LukSQO0ZLTETs73WXmBqy0wsPeVrUzBcp/N9+zH76bZrsieYFRibUSyAdTztcyZFQT
+         +mcJd3UZSD6xPx/goS7jJS1AV1C4Jiv1nZvUQuRcxx7ck35vEGC+O1GU/mq5RO46O/bj
+         WDLsPrfS4NPgEmqNIkSBXbc2+AnxPP1K4U6iOUy68fogDUBx9cxt0+68MayRy4vm1YDp
+         EqtauiZos2dv8gmGzfl+2qA0OvPWTVYvoSJDQ7X8Lto+UOShBoI1Z6Zh7yE2bSc7l7WB
+         qwxEXo/kgnsU1H1DKbpRAiG9HUJ+bvtkimADUR3rvCEo/I9KvD+7Aekf9WDvy1Kdoj2X
+         oOcA==
+X-Gm-Message-State: AOAM530AEVP/E5jVMS1Zjv4nj/AfWo/Cnska9IEp95XhGbza0pSOdFNY
+	PpYs1ifnA8nSORs9ZeWLmqBsmw==
+X-Google-Smtp-Source: ABdhPJyGNUkWSTWwJo7nhA780UyQwUX+LwX0Q7tqbWJWKYGoikX/fIia26lFPmjFrxCM1vj2GlgaqA==
+X-Received: by 2002:a37:c442:0:b0:60d:da8a:1c6 with SMTP id h2-20020a37c442000000b0060dda8a01c6mr4606180qkm.162.1645197661178;
+        Fri, 18 Feb 2022 07:21:01 -0800 (PST)
+Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
+        by smtp.gmail.com with ESMTPSA id o5sm6282400qtp.48.2022.02.18.07.21.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Feb 2022 07:21:00 -0800 (PST)
+Date: Fri, 18 Feb 2022 10:20:59 -0500
+From: Josef Bacik <josef@toxicpanda.com>
+To: Yongji Xie <xieyongji@bytedance.com>
+Cc: Christoph Hellwig <hch@infradead.org>, Jens Axboe <axboe@kernel.dk>,
+	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org,
+	nbd@other.debian.org, linux-kernel <linux-kernel@vger.kernel.org>
 Subject: Re: [PATCH v2] nbd: Don't use workqueue to handle recv work
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: Christoph Hellwig <hch@infradead.org>, Jens Axboe <axboe@kernel.dk>, 
-	Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org, nbd@other.debian.org, 
-	linux-kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <Yg+5Wytvc2eG8uLD@localhost.localdomain>
+References: <20211227091241.103-1-xieyongji@bytedance.com>
+ <Ycycda8w/zHWGw9c@infradead.org>
+ <CACycT3usfTdzmK=gOsBf3=-0e8HZ3_0ZiBJqkWb_r7nki7xzYA@mail.gmail.com>
+ <YdMgCS1RMcb5V2RJ@localhost.localdomain>
+ <CACycT3vYt0XNV2GdjKjDS1iyWieY_OV4h=W1qqk_AAAahRZowA@mail.gmail.com>
+ <YdSMqKXv0PUkAwfl@localhost.localdomain>
+ <CACycT3tPZOSkCXPz-oYCXRJ_EOBs3dC0+Juv=FYsa6qRS0GVCw@mail.gmail.com>
+ <CACycT3tTKBpS_B5vVJ8MZ1iuaF2bf-01=9+tAdxUddziF2DQ-g@mail.gmail.com>
+ <CACycT3thVwb466u2JR-oDRHLY5j_uxAx5uXXGmaoCZL5vs__mQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACycT3thVwb466u2JR-oDRHLY5j_uxAx5uXXGmaoCZL5vs__mQ@mail.gmail.com>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <etzb1ZmEoNC.A.WlF.Yu6CiB@bendel>
+Resent-Message-ID: <6eJNAbjuOoE.A.zmD.d27DiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1714
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1715
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,76 +105,17 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CACycT3thVwb466u2JR-oDRHLY5j_uxAx5uXXGmaoCZL5vs__mQ@mail.gmail.com
-Resent-Date: Tue, 15 Feb 2022 13:33:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/Yg+5Wytvc2eG8uLD@localhost.localdomain
+Resent-Date: Fri, 18 Feb 2022 15:39:09 +0000 (UTC)
 
-Ping again.
+On Tue, Feb 15, 2022 at 09:17:37PM +0800, Yongji Xie wrote:
+> Ping again.
+> 
+> Hi Josef, could you take a look?
 
-Hi Josef, could you take a look?
+Sorry Yongji this got lost.  Again in the reconnect case we're still setting up
+a long running thread, so it's not like it'll happen during a normal reclaim
+path thing, it'll be acted upon by userspace.  Thanks,
 
-On Fri, Jan 21, 2022 at 4:34 PM Yongji Xie <xieyongji@bytedance.com> wrote:
->
-> Ping.
->
-> On Wed, Jan 5, 2022 at 1:36 PM Yongji Xie <xieyongji@bytedance.com> wrote:
-> >
-> > On Wed, Jan 5, 2022 at 2:06 AM Josef Bacik <josef@toxicpanda.com> wrote:
-> > >
-> > > On Tue, Jan 04, 2022 at 01:31:47PM +0800, Yongji Xie wrote:
-> > > > On Tue, Jan 4, 2022 at 12:10 AM Josef Bacik <josef@toxicpanda.com> wrote:
-> > > > >
-> > > > > On Thu, Dec 30, 2021 at 12:01:23PM +0800, Yongji Xie wrote:
-> > > > > > On Thu, Dec 30, 2021 at 1:35 AM Christoph Hellwig <hch@infradead.org> wrote:
-> > > > > > >
-> > > > > > > On Mon, Dec 27, 2021 at 05:12:41PM +0800, Xie Yongji wrote:
-> > > > > > > > The rescuer thread might take over the works queued on
-> > > > > > > > the workqueue when the worker thread creation timed out.
-> > > > > > > > If this happens, we have no chance to create multiple
-> > > > > > > > recv threads which causes I/O hung on this nbd device.
-> > > > > > >
-> > > > > > > If a workqueue is used there aren't really 'receive threads'.
-> > > > > > > What is the deadlock here?
-> > > > > >
-> > > > > > We might have multiple recv works, and those recv works won't quit
-> > > > > > unless the socket is closed. If the rescuer thread takes over those
-> > > > > > works, only the first recv work can run. The I/O needed to be handled
-> > > > > > in other recv works would be hung since no thread can handle them.
-> > > > > >
-> > > > >
-> > > > > I'm not following this explanation.  What is the rescuer thread you're talking
-> > > >
-> > > > https://www.kernel.org/doc/html/latest/core-api/workqueue.html#c.rescuer_thread
-> > > >
-> > >
-> > > Ahhh ok now I see, thanks, I didn't know this is how this worked.
-> > >
-> > > So what happens is we do the queue_work(), this needs to do a GFP_KERNEL
-> > > allocation internally, we are unable to satisfy this, and thus the work gets
-> > > pushed onto the rescuer thread.
-> > >
-> > > Then the rescuer thread can't be used in the future because it's doing this long
-> > > running thing.
-> > >
-> >
-> > Yes.
-> >
-> > > I think the correct thing to do here is simply drop the WQ_MEM_RECLAIM bit.  It
-> > > makes sense for workqueue's that are handling the work of short lived works that
-> > > are in the memory reclaim path.  That's not what these workers are doing, yes
-> > > they are in the reclaim path, but they run the entire time the device is up.
-> > > The actual work happens as they process incoming requests.  AFAICT
-> > > WQ_MEM_RECLAIM doesn't affect the actual allocations that the worker thread
-> > > needs to do, which is what I think the intention was in using WQ_MEM_RECLAIM,
-> > > which isn't really what it's used for.
-> > >
-> > > tl;dr, just remove thee WQ_MEM_RECLAIM flag completely and I think that's good
-> > > enough?  Thanks,
-> > >
-> >
-> > In the reconnect case, we still need to call queue_work() while the
-> > device is running. So it looks like we can't simply remove the
-> > WQ_MEM_RECLAIM flag.
-> >
-> > Thanks,
-> > Yongji
+Josef
 
