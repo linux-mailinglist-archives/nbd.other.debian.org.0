@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6754DE7CA
+	by mail.lfdr.de (Postfix) with ESMTPS id DADDD4DE7CB
 	for <lists+nbd@lfdr.de>; Sat, 19 Mar 2022 13:12:57 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 31A05204DC; Sat, 19 Mar 2022 12:12:57 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Mar 19 12:12:49 2022
+	id B474520527; Sat, 19 Mar 2022 12:12:57 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Mar 19 12:12:57 2022
 Old-Return-Path: <manfred@colorfullife.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,7 +18,7 @@ X-Spam-Status: No, score=-10.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 52A3920527
+	by bendel.debian.org (Postfix) with ESMTP id C06932050D
 	for <lists-other-nbd@bendel.debian.org>; Sat, 19 Mar 2022 12:12:40 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-5.99 tagged_above=-10000 required=5.3
@@ -28,57 +28,56 @@ X-Amavis-Spam-Status: No, score=-5.99 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id JFcVv-WxiTI3 for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id bqV40a_tUWET for <lists-other-nbd@bendel.debian.org>;
 	Sat, 19 Mar 2022 12:12:35 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-ej1-x631.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com [IPv6:2a00:1450:4864:20::631])
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-ej1-x635.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com [IPv6:2a00:1450:4864:20::635])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 35A25204DC
-	for <nbd@other.debian.org>; Sat, 19 Mar 2022 12:12:34 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id p15so21573945ejc.7
-        for <nbd@other.debian.org>; Sat, 19 Mar 2022 05:12:34 -0700 (PDT)
+	by bendel.debian.org (Postfix) with ESMTPS id 36BBE20519
+	for <nbd@other.debian.org>; Sat, 19 Mar 2022 12:12:35 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id p15so21573982ejc.7
+        for <nbd@other.debian.org>; Sat, 19 Mar 2022 05:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=azpYTNfYt3XZRKfU1LsX0PZe9LSxMpW94SDuNTRlKoE=;
-        b=Z9C+yF4nVb0ez0Z5OFQuU+hoevpQsUUBMfaxyl94UYY7pi2KctUlum3HL5MH4Q2BVb
-         WnJePfbTKU2rkLwSiAOOWzzGEAibSR7+fzAAwznfmFcV4eo83jrkpgTz8DiOFUbMw5gv
-         Jm+yvIXpX6GLMUAOhjBvUsN8X2jclF99nJM4J8J/fDjnZtqQbZYBNMVaNXIQYqHS3Mt0
-         y+K5wKoSn1g1nU8FZclwNgTSFXmhpf0+LrlZamRgz2w2ZNHELjCV3U7XmplDN3axZpQj
-         yrVlx34HNMFD8JZnZ7qGnI5QBZl5vG6Q+qBhMJ9gJZ03Cjl1xbQd8HfvuFGcUoslgh0u
-         61ww==
+        bh=zg58nzO2lG7CEDiIs7UuAg4KJu6/XoZWk+D4YVr6TEE=;
+        b=wfmrTOd9TyTOgPwykPyueVty8992qEdUcjAcHZJiB4kdoxiCZiH4VggnkGSBEK/Oz2
+         Zz7p2Xry9jHNz3CGaambMePpOhXOvTmWQWJoh61OBvhWaGOpur3VX9WXtzSYyFvKHK5/
+         KPM2//KOnuDVNm3SNAkIV5J27aF2LAlg9ZchOUOXVg0NHRcW4xFluCr85gYgt6urCv8k
+         PK+XwBs/7f8nLQCNGhU6SKYxg/hRAkbBJo1uNi7DIjtRTtbegyefL+GK9m9QqiCEP/kV
+         i9aBmU/lR+wXnNQG7Din6juNllp3WtCU2CFUjor9JwgUe1I557HgA2sKzuAgIu56+yb4
+         Zb9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=azpYTNfYt3XZRKfU1LsX0PZe9LSxMpW94SDuNTRlKoE=;
-        b=FXPYE2DJrc0YiF7Eq94a9xbTm+ybO3jWvtEMt+XkaxUTzL6UfCRLHTo9iZk2z+dY8u
-         3OJpcfaqotCUKzHlfpnRG/SOCz08qks/LWUHc4grKDPmOtS92tBmHxTmso6ZST9i23+F
-         XYnIx0keQcGzDs+Kln2SKBI4pSBzcvaL/r7N+A6+HJVViop9JWF8THSEiyxyM3oCuFX1
-         rX9aF4pi5u+edgXx7sIrIUi+zSpexyhkVo6S2hlvq1zqvfAaEQeLMMwahqJHTv0zxjpe
-         i6j4iKzu6/rLKS8LGN7a3VoO2N+ldJJn0ONmNg2LqKsYF49sHMCnlmSi5NbbiLF5rXUd
-         PmjA==
-X-Gm-Message-State: AOAM5329Xfn5/BoB9Cqfxi4Ecz6AR9B0KHnrmGicLOcNeDpCTUnYhcOJ
-	fy/LDuURPL1yJH4UrV75EU8EXiZPmyrPeg==
-X-Google-Smtp-Source: ABdhPJxJuRydVxgWtIj6peDDnXBVByMsKnJR+eKIUe7oN6ccQbN5+pN4x+GkeB3vdJaOIYIbGrpqeA==
-X-Received: by 2002:a17:907:6e8f:b0:6da:8e96:95f2 with SMTP id sh15-20020a1709076e8f00b006da8e9695f2mr13394473ejc.489.1647691951673;
-        Sat, 19 Mar 2022 05:12:31 -0700 (PDT)
+        bh=zg58nzO2lG7CEDiIs7UuAg4KJu6/XoZWk+D4YVr6TEE=;
+        b=6DUeEL+2brom+7eqdFkuXZROLlMAnFkb1LCtuKnkpRgrRPeXt0xRwvh2PGR/GgYmEG
+         Wq4SraGOUT1tVfOTPJepW2/LdF9E2+g8tIgHW+82T3nIeSPxLHPs3XIBaUStSwSv+uPF
+         drBP7ocYoGesm0lIuY3RWPaLQsn7hk9mKOlowhfvH3ILXjl8n27TU34mBM9hzDbCcdst
+         BkmgHfBvPQLQhfj4EZFwEdmzpVA0D1TbBTXUiA3euSPq04+5mq0NrKfaFx2VR/X5/j19
+         akhhWDiFipYkMxDwn9r8l0404fK5BXp7Bp/j7DSkqVXXnShJ8T8tFaUMAm/Nzdan2APF
+         3Ofg==
+X-Gm-Message-State: AOAM530MfleiSUk3gut22qwEw41CnOUcGkf2ZWXcDs8mG51s7RM/ZSgR
+	iq088+kmqQDxYnkna7TGE3AHaxjHFQ/KDg==
+X-Google-Smtp-Source: ABdhPJx7vEvVHPf307EZUtTMx1OLu+j2gPNrbakPRbsIAMn9YUVJ+E19U0AT3M7MD6PevlxCIyFy9A==
+X-Received: by 2002:a17:907:7287:b0:6df:8f48:3f76 with SMTP id dt7-20020a170907728700b006df8f483f76mr11638186ejc.411.1647691952456;
+        Sat, 19 Mar 2022 05:12:32 -0700 (PDT)
 Received: from localhost.localdomain (p200300d9974079002dc18ae79cfc5336.dip0.t-ipconnect.de. [2003:d9:9740:7900:2dc1:8ae7:9cfc:5336])
-        by smtp.googlemail.com with ESMTPSA id ch26-20020a0564021bda00b00418f99695f0sm3757757edb.23.2022.03.19.05.12.30
+        by smtp.googlemail.com with ESMTPSA id ch26-20020a0564021bda00b00418f99695f0sm3757757edb.23.2022.03.19.05.12.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Mar 2022 05:12:31 -0700 (PDT)
+        Sat, 19 Mar 2022 05:12:32 -0700 (PDT)
 From: Manfred Spraul <manfred@colorfullife.com>
 To: nbd@other.debian.org,
 	Wouter Verhelst <w@uter.be>
-Cc: Manfred Spraul <manfred.spraul@de.bosch.com>,
-	Eric Blake <eblake@redhat.com>
-Subject: [PATCH 1/3] proto.md: correct spelling mistake and bad markdown formatting
-Date: Sat, 19 Mar 2022 13:12:25 +0100
-Message-Id: <20220319121227.39165-2-manfred@colorfullife.com>
+Cc: Manfred Spraul <manfred.spraul@de.bosch.com>
+Subject: [PATCH 2/3] nbd-trdump, nbd-trplay: printf improvements/corrections
+Date: Sat, 19 Mar 2022 13:12:26 +0100
+Message-Id: <20220319121227.39165-3-manfred@colorfullife.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220319121227.39165-1-manfred@colorfullife.com>
 References: <20220319121227.39165-1-manfred@colorfullife.com>
@@ -86,9 +85,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <lZQqADBQ-CF.A.pgH.BjcNiB@bendel>
+Resent-Message-ID: <37TqKJkd9aM.A.qjH.JjcNiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1737
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1739
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -98,48 +97,73 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220319121227.39165-2-manfred@colorfullife.com
+List-Archive: https://lists.debian.org/msgid-search/20220319121227.39165-3-manfred@colorfullife.com
 Resent-Date: Sat, 19 Mar 2022 12:12:57 +0000 (UTC)
 
 From: Manfred Spraul <manfred.spraul@de.bosch.com>
 
-1) Correct a spelling mistake notice by Eric Blake
-2) the resulting .html output from markdown is ugly, thus reformat
-   it a bit.
+Two improvements to the printf output:
+- Correct an incorrect printout from nbd-trplay:
+  When open() on the the log file fails, the tool incorrectly warns
+  that the disk image is inaccessible.
 
-Reported-by: Eric Blake <eblake@redhat.com>
+- Both nbd-trdump and nbd-trplay: Add a warning if unknown options
+  are encountered.
+
 Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
 ---
- doc/proto.md | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ nbd-trdump.c | 4 ++++
+ nbd-trplay.c | 4 +++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/doc/proto.md b/doc/proto.md
-index 81ac755..d3c0a5e 100644
---- a/doc/proto.md
-+++ b/doc/proto.md
-@@ -461,14 +461,14 @@ of disconnect other than in one of the above circumstances.
- #### Reserved Magic values
- 
- The following magic values are reserved and must not be used
--for future protocol extentions:
--
--0x12560953 - Historic value for NBD_REQUEST_MAGIC, used
--	     until Linux 2.1.116pre2.
--0x96744668 - Historic value for NBD_REPLY_MAGIC, used
--	     until Linux 2.1.116pre2.
--0x25609514 - Used by nbd-server to store data log flags in the
--	     transaction log. Never sent from/to a client.
-+for future protocol extensions:
+diff --git a/nbd-trdump.c b/nbd-trdump.c
+index d914e63..c7c5322 100644
+--- a/nbd-trdump.c
++++ b/nbd-trdump.c
+@@ -130,14 +130,18 @@ int main(int argc, char**argv) {
+ 					break;
+ 				default:
+ 					printf("TRACE_OPTION ? Unknown type\n");
++					printf(" Further log file evaluation may be incorrect, please upgrade nbd-trdump.\n");
 +
-+* 0x12560953 - Historic value for NBD_REQUEST_MAGIC, used
-+  until Linux 2.1.116pre2.
-+* 0x96744668 - Historic value for NBD_REPLY_MAGIC, used
-+  until Linux 2.1.116pre2.
-+* 0x25609514 - Used by nbd-server to store data log flags in the
-+  transaction log. Never sent from/to a client.
+ 				}
+ 			} else {
+ 				printf("TRACE_OPTION ? Unknown FROM_MAGIC\n");
++				printf(" Further log file evaluation may be incorrect, please upgrade nbd-trdump.\n");
+ 			}
+ 			break;
  
- ## TLS support
+ 		default:
+ 			printf("? Unknown transaction type %08x\n",magic);
++			printf(" Further log file evaluation may be incorrect, please upgrade nbd-trdump.\n");
+ 			break;
+ 		}
+ 		
+diff --git a/nbd-trplay.c b/nbd-trplay.c
+index 143d8cb..f98b7df 100644
+--- a/nbd-trplay.c
++++ b/nbd-trplay.c
+@@ -221,9 +221,11 @@ int main_loop(int logfd, int imagefd) {
+ 					break;
+ 				default:
+ 					printf("TRACE_OPTION ? Unknown type\n");
++					printf(" Further log file evaluation may be incorrect, please upgrade nbd-trplay.\n");
+ 				}
+ 			} else {
+ 				printf("TRACE_OPTION ? Unknown FROM_MAGIC\n");
++				printf(" Further log file evaluation may be incorrect, please upgrade nbd-trplay.\n");
+ 			}
+ 			break;
  
+@@ -301,7 +303,7 @@ int main(int argc, char **argv) {
+ 		case 'l':
+ 			logfd = open(optarg, O_RDONLY, 0);
+ 			if (logfd == -1) {
+-				printf("  Opening disk image failed, errno %d.", errno);
++				printf("  Opening log file failed, errno %d.", errno);
+ 				return 1;
+ 			}
+ 			break;
 -- 
 2.35.1
 
