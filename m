@@ -1,92 +1,76 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94EA04E7071
-	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 11:06:22 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39F814E71C2
+	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 12:00:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 69382204F8; Fri, 25 Mar 2022 10:06:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 10:06:22 2022
-Old-Return-Path: <jack@suse.cz>
+	id 23E2520322; Fri, 25 Mar 2022 11:00:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 11:00:24 2022
+Old-Return-Path: <penguin-kernel@I-love.SAKURA.ne.jp>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.5 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=4.0 tests=MURPHY_DRUGS_REL8,NICE_REPLY_A,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id F0027203D3
-	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 09:49:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 74ADC20471
+	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 10:43:03 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.39 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+X-Amavis-Spam-Status: No, score=-1.991 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id XyvBtGZcwIOk for <lists-other-nbd@bendel.debian.org>;
-	Fri, 25 Mar 2022 09:49:06 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 93D2520390
-	for <nbd@other.debian.org>; Fri, 25 Mar 2022 09:49:06 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-	by smtp-out2.suse.de (Postfix) with ESMTP id 681041F745;
-	Fri, 25 Mar 2022 09:49:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1648201744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItwV+LxNiyLDZ3YayKhuaNJrqNcYwtTrZwhrPL8tQmY=;
-	b=M3DDvbbpsnbyNm3CbOqMRNR3+90vFhF3nmqMK1exp0nUNw8YcQbKc+6XJVv7OouuFJjngu
-	jiK22JGRrhhLFhOlhqtX8z0ug6PezYZNRpkb+PLboGZgljGGyvFoX6uVoWHjqRsHgm8ELD
-	Tz3japMGL4KxyYZSogxRzbK6ZhHB5Bc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1648201744;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItwV+LxNiyLDZ3YayKhuaNJrqNcYwtTrZwhrPL8tQmY=;
-	b=La0sKVgTgNrgdIrK/p86Pn596n69y945VQ9b7dziG5K+jOG5QBio8Tn5HVVFT+HYmWqr4o
-	1BuJRJpK2+BJ9XBA==
-Received: from quack3.suse.cz (unknown [10.100.200.198])
+	with ESMTP id SZYatp7fyKAJ for <lists-other-nbd@bendel.debian.org>;
+	Fri, 25 Mar 2022 10:42:58 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from www262.sakura.ne.jp (www262.sakura.ne.jp [202.181.97.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by relay2.suse.de (Postfix) with ESMTPS id 50FADA3B82;
-	Fri, 25 Mar 2022 09:49:04 +0000 (UTC)
-Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id EC0DCA0610; Fri, 25 Mar 2022 10:49:03 +0100 (CET)
-Date: Fri, 25 Mar 2022 10:49:03 +0100
-From: Jan Kara <jack@suse.cz>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>,
-	Minchan Kim <minchan@kernel.org>, Nitin Gupta <ngupta@vflare.org>,
-	Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
-	Jan Kara <jack@suse.cz>, "Darrick J . Wong" <djwong@kernel.org>,
-	Ming Lei <ming.lei@redhat.com>, Matteo Croce <mcroce@microsoft.com>,
-	linux-block@vger.kernel.org, nbd@other.debian.org
-Subject: Re: [PATCH 12/14] loop: suppress uevents while reconfiguring the
- device
-Message-ID: <20220325094903.t4srf2a3ttshacto@quack3.lan>
-References: <20220325063929.1773899-1-hch@lst.de>
- <20220325063929.1773899-13-hch@lst.de>
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id A66AA203F5
+	for <nbd@other.debian.org>; Fri, 25 Mar 2022 10:42:56 +0000 (UTC)
+Received: from fsav414.sakura.ne.jp (fsav414.sakura.ne.jp [133.242.250.113])
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 22PAgaTR006607;
+	Fri, 25 Mar 2022 19:42:36 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Received: from www262.sakura.ne.jp (202.181.97.72)
+ by fsav414.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav414.sakura.ne.jp);
+ Fri, 25 Mar 2022 19:42:36 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav414.sakura.ne.jp)
+Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
+	(authenticated bits=0)
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 22PAga6E006599
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NO);
+	Fri, 25 Mar 2022 19:42:36 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Message-ID: <53c6c4b8-0aad-c882-d2e9-91eb9533aa21@I-love.SAKURA.ne.jp>
+Date: Fri, 25 Mar 2022 19:42:34 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220325063929.1773899-13-hch@lst.de>
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [PATCH 11/14] loop: implement ->free_disk
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
+        Josef Bacik <josef@toxicpanda.com>, Minchan Kim <minchan@kernel.org>,
+        Nitin Gupta <ngupta@vflare.org>
+Cc: Jan Kara <jack@suse.cz>, "Darrick J . Wong" <djwong@kernel.org>,
+        Ming Lei <ming.lei@redhat.com>, Matteo Croce <mcroce@microsoft.com>,
+        linux-block@vger.kernel.org, nbd@other.debian.org
+References: <20220325063929.1773899-1-hch@lst.de>
+ <20220325063929.1773899-12-hch@lst.de>
+From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+In-Reply-To: <20220325063929.1773899-12-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <OVNYuPHinIB.A.uFG.eQZPiB@bendel>
+Resent-Message-ID: <CIzKQh01jFM.A.b8.IDaPiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1800
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1801
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,103 +80,20 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220325094903.t4srf2a3ttshacto@quack3.lan
-Resent-Date: Fri, 25 Mar 2022 10:06:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/53c6c4b8-0aad-c882-d2e9-91eb9533aa21@I-love.SAKURA.ne.jp
+Resent-Date: Fri, 25 Mar 2022 11:00:24 +0000 (UTC)
 
-On Fri 25-03-22 07:39:27, Christoph Hellwig wrote:
-> Currently, udev change event is generated for a loop device before the
-> device is ready for IO. Due to serialization on lo->lo_mutex in
-> lo_open() this does not matter because anybody is able to open the
-> device and do IO only after the configuration is finished. However this
-> synchronization in lo_open() is going away so make sure userspace
-> reacting to the change event will see the new device state by generating
-> the event only when the device is setup.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+On 2022/03/25 15:39, Christoph Hellwig wrote:
+> Ensure that the lo_device which is stored in the gendisk private
+> data is valid until the gendisk is freed.  Currently the loop driver
+> uses a lot of effort to make sure a device is not freed when it is
+> still in use, but to to fix a potential deadlock this will be relaxed
+> a bit soon.
 
-Looks good. Feel free to add:
-
-Reviewed-by: Jan Kara <jack@suse.cz>
-
-								Honza
-
-> ---
->  drivers/block/loop.c | 25 +++++++++++++++++++++----
->  1 file changed, 21 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-> index b3170e8cdbe95..bfd21af7aa38b 100644
-> --- a/drivers/block/loop.c
-> +++ b/drivers/block/loop.c
-> @@ -572,6 +572,10 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
->  
->  	if (!file)
->  		return -EBADF;
-> +
-> +	/* suppress uevents while reconfiguring the device */
-> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 1);
-> +
->  	is_loop = is_loop_device(file);
->  	error = loop_global_lock_killable(lo, is_loop);
->  	if (error)
-> @@ -626,13 +630,18 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
->  	fput(old_file);
->  	if (partscan)
->  		loop_reread_partitions(lo);
-> -	return 0;
-> +
-> +	error = 0;
-> +done:
-> +	/* enable and uncork uevent now that we are done */
-> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 0);
-> +	return error;
->  
->  out_err:
->  	loop_global_unlock(lo, is_loop);
->  out_putf:
->  	fput(file);
-> -	return error;
-> +	goto done;
->  }
->  
->  /* loop sysfs attributes */
-> @@ -999,6 +1008,9 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
->  	/* This is safe, since we have a reference from open(). */
->  	__module_get(THIS_MODULE);
->  
-> +	/* suppress uevents while reconfiguring the device */
-> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 1);
-> +
->  	/*
->  	 * If we don't hold exclusive handle for the device, upgrade to it
->  	 * here to avoid changing device under exclusive owner.
-> @@ -1101,7 +1113,12 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
->  		loop_reread_partitions(lo);
->  	if (!(mode & FMODE_EXCL))
->  		bd_abort_claiming(bdev, loop_configure);
-> -	return 0;
-> +
-> +	error = 0;
-> +done:
-> +	/* enable and uncork uevent now that we are done */
-> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 0);
-> +	return error;
->  
->  out_unlock:
->  	loop_global_unlock(lo, is_loop);
-> @@ -1112,7 +1129,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
->  	fput(file);
->  	/* This is safe: open() is still holding a reference. */
->  	module_put(THIS_MODULE);
-> -	return error;
-> +	goto done;
->  }
->  
->  static void __loop_clr_fd(struct loop_device *lo, bool release)
-> -- 
-> 2.30.2
-> 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+This patch breaks blk_cleanup_disk() into blk_cleanup_queue() and put_disk() on
+loop_remove() side only. But there is blk_cleanup_disk() in the error path of
+loop_add() side. Don't we need to rewrite the error path of loop_add() side, for
+put_disk() from blk_cleanup_disk() from loop_add() calls kfree() via lo_free_disk()
+but out_cleanup_disk: label falls through to blk_mq_free_tag_set() (which seems to
+be UAF read) and kfree() (which seems to be double kfree()) ?
 
