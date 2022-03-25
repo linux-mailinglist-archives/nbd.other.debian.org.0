@@ -2,89 +2,76 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 280C44E6B5E
-	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 01:00:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E75074E6E66
+	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 07:57:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0644F203ED; Fri, 25 Mar 2022 00:00:39 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 00:00:38 2022
-Old-Return-Path: <eblake@redhat.com>
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DIGITS_LETTERS,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+	id CE69920458; Fri, 25 Mar 2022 06:57:35 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 06:57:35 2022
+Old-Return-Path: <BATV+8af3a5752749cd19e826+6788+infradead.org+hch@bombadil.srs.infradead.org>
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CD7A42022E
-	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 00:00:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 88D5E202E2
+	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 06:40:04 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.605 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-1.517,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+X-Spam-Flag: NO
+X-Spam-Score: -4.161
+X-Spam-Level:
+X-Amavis-Spam-Status: No, score=-4.161 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_EF=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id LwdXtTnSd9XI for <lists-other-nbd@bendel.debian.org>;
-	Fri, 25 Mar 2022 00:00:24 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 4315B2023B
-	for <nbd@other.debian.org>; Fri, 25 Mar 2022 00:00:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1648166418;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wGv5/YFeYT8NsV7sZ7cUJLgc0xvlmXWf0KI+/r3s5XQ=;
-	b=ZR6o9Bu1WUGSMpKgnzXoLx0AMdqZeXvJeIugGlhJn0kne77g27/ZglSArQGeeutqrX3GfM
-	3+jIv2B/NWyXANLyhGFkYYWUfwcWulSirkSAxGvH+4CYNa7RQlTAL0Ir6CiW81JTnvH8/i
-	9C/A//S+KwgPp4UU5LAyJ65f640pJuk=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-368-TwfOp_FbOdmFJU-nFtSRQA-1; Thu, 24 Mar 2022 20:00:13 -0400
-X-MC-Unique: TwfOp_FbOdmFJU-nFtSRQA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DDC7F95470A;
-	Fri, 25 Mar 2022 00:00:12 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.192])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 5E6E8409B3F8;
-	Fri, 25 Mar 2022 00:00:11 +0000 (UTC)
-Date: Thu, 24 Mar 2022 19:00:09 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Wouter Verhelst <w@uter.be>
-Cc: nbd@other.debian.org, qemu-devel@nongnu.org, qemu-block@nongnu.org,
-	libguestfs@redhat.com, nsoffer@redhat.com, v.sementsov-og@mail.ru
-Subject: Re: [PATCH] spec: Add NBD_OPT_EXTENDED_HEADERS
-Message-ID: <20220325000009.dbtpp2owoqdbjf2q@redhat.com>
-References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
- <20211203231434.3900824-1-eblake@redhat.com>
- <YjyrBLhG5ph6UA/E@pc181009.grep.be>
+	with ESMTP id aSrKNUi6l1td for <lists-other-nbd@bendel.debian.org>;
+	Fri, 25 Mar 2022 06:39:58 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id E6EE820452
+	for <nbd@other.debian.org>; Fri, 25 Mar 2022 06:39:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=GZoXaYyF7vEJO3Tu4Gtd0TaYRNuVudX60qmzVoPMimI=; b=eRzr4xdNNrKyrjzXNs4dzDIOa6
+	I1HYdNEP6UBHi9Th1ebhX+M+5iMryuPTociS5EDycWJvWaguE1A1nd/I7AQUhc0XPnVh5SpQbfx8W
+	ZEGadEmp6h+UtGMDz4+NH9F4PrBvZ89vkim53AqTbfwqIjCZBlcv8vqhyVJVm1Ugs9b4WGZENDZ3k
+	ptmMuAx33R8xUr3MHTHF3eqkwaMAstnjlMXTRGK5z1/5W1dNaCjku2rb+0QmYx/AthwcBSaCJB8Rd
+	nxjnff7SYl0qM9qBthWYXF3XyMFi3idGl6NzXxoY1Vc2pvXMbG7bLAPIrS62eO58PHgDFhHLpHKcj
+	oYieguxw==;
+Received: from 089144194144.atnat0003.highway.a1.net ([89.144.194.144] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+	id 1nXdbh-001HFl-6C; Fri, 25 Mar 2022 06:39:34 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Nitin Gupta <ngupta@vflare.org>
+Cc: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
+	Jan Kara <jack@suse.cz>,
+	"Darrick J . Wong" <djwong@kernel.org>,
+	Ming Lei <ming.lei@redhat.com>,
+	Matteo Croce <mcroce@microsoft.com>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: yet another approach to fix the loop lock order inversions v5
+Date: Fri, 25 Mar 2022 07:39:15 +0100
+Message-Id: <20220325063929.1773899-1-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-In-Reply-To: <YjyrBLhG5ph6UA/E@pc181009.grep.be>
-User-Agent: NeoMutt/20211029-512-43304b
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <l6cRLwkmaxJ.A.erD.mYQPiB@bendel>
+Resent-Message-ID: <b02qvica2oD.A.IhH.ffWPiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1781
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1785
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -94,227 +81,32 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220325000009.dbtpp2owoqdbjf2q@redhat.com
-Resent-Date: Fri, 25 Mar 2022 00:00:39 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220325063929.1773899-1-hch@lst.de
+Resent-Date: Fri, 25 Mar 2022 06:57:35 +0000 (UTC)
 
-[Updating Vladimir's new preferred address in cc list]
+Hi all,
 
-On Thu, Mar 24, 2022 at 07:31:48PM +0200, Wouter Verhelst wrote:
-> Hi Eric,
-> 
-> Thanks for the ping; it had slipped my mind.
-> 
-> On Fri, Dec 03, 2021 at 05:14:34PM -0600, Eric Blake wrote:
-> >  #### Request message
-> > 
-> > -The request message, sent by the client, looks as follows:
-> > +The compact request message, sent by the client when extended
-> > +transactions are not negotiated using `NBD_OPT_EXTENDED_HEADERS`,
-> > +looks as follows:
-> > 
-> >  C: 32 bits, 0x25609513, magic (`NBD_REQUEST_MAGIC`)  
-> >  C: 16 bits, command flags  
-> > @@ -353,14 +370,26 @@ C: 64 bits, offset (unsigned)
-> >  C: 32 bits, length (unsigned)  
-> >  C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)  
-> > 
-> > +If negotiation agreed on extended transactions with
-> > +`NBD_OPT_EXTENDED_HEADERS`, the client instead uses extended requests:
-> > +
-> > +C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)  
-> > +C: 16 bits, command flags  
-> > +C: 16 bits, type  
-> > +C: 64 bits, handle  
-> > +C: 64 bits, offset (unsigned)  
-> > +C: 64 bits, length (unsigned)  
-> > +C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)  
-> > +
-> 
-> Perhaps we should decouple the ideas of "effect length" and "payload
-> length"? As in,
-> 
-> C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)
-> C: 16 bits, command flags
-> C: 16 bits, type
-> C: 64 bits, handle
-> C: 64 bits, offset
-> C: 64 bits, effect length
-> C: 64 bits, payload length
-> C: (*payload length* bytes of data)
-> 
-> This makes the protocol more context free. With the current set of
-> commands, only NBD_CMD_WRITE would have payload length be nonzero, but
-> that doesn't have to remain the case forever; e.g., we could have a
-> command that extends NBD_CMD_BLOCK_STATUS to only query a subset of the
-> metadata contexts that we declared (if that is wanted, of course).
-> 
-> Of course, that does have the annoying side effect of no longer fitting
-> in 32 bytes, requiring a 40-byte header instead. I think it would be
-> worth it though.
+this series uses the approach from Tetsuo to delay the destroy_workueue
+call, extended by a delayed teardown of the workers to fix a potential
+race window then the workqueue can be still round after finishing the
+commands. 
 
-Could we still keep a 32-byte header, by having a new command (or new
-command flag to the existing NBD_CMD_BLOCK_STATUS), such that the
-payload itself contains the needed extra bytes?
+Changes since v4:
+ - keep the (questionable) __invalidate_device call in nbd as-is for now
+ - suppress uevents while reconfiguring
 
-Hmm - right now, the only command with a payload is NBD_CMD_WRITE, and
-all other commands use the length field as an effect length.  So maybe
-what we do is have a single command flag that says whether the length
-field is serving as payload length or as effect length.  NBD_CMD_WRITE
-would always set the new flag (if extended headers were negotiated),
-and most other NBD_CMD_* would leave the flag unset, but in the case
-of BLOCK_STATUS wanting only a subset of id status reported, we could
-then have:
+Changes since v3:
+ - change bd_openers into a atomic_t, including a bunch of cleanups
+   and fix found while adding those
 
-HEADER:
-C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)
-C: 16 bits, command flags, NBD_CMD_FLAG_PAYLOAD
-C: 16 bits, type, NBD_CMD_BLOCK_STATUS
-C: 64 bits, handle
-C: 64 bits, offset
-C: 64 bits, payload length = 12 + 4*n
-PAYLOAD:
-C: 64 bits, effect length (hint on desired range)
-C: 32 bits, number of ids = n
-C: 32 bits, id[0]
-...
-C: 32 bits, id[n-1]
+Changes since v2:
+ - rebased to the lastest block for-next tree, which has the async
+   clear reverted and ->free_disk
+ - impkement ->free_disk for loop to handle open vs delete races
+   more gracefully
+ - get rid of lo_refcnt entirely
 
-vs.
-
-HEADER:
-C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)
-C: 16 bits, command flags, 0
-C: 16 bits, type, NBD_CMD_BLOCK_STATUS
-C: 64 bits, handle
-C: 64 bits, offset
-C: 64 bits, effect length (hint on desired range)
-
-HEADER:
-C: 32 bits, 0x21e41c71, magic (`NBD_REQUEST_EXT_MAGIC`)
-C: 16 bits, command flags, NBD_CMD_FLAG_PAYLOAD
-C: 16 bits, type, NBD_CMD_WRITE
-C: 64 bits, handle
-C: 64 bits, offset
-C: 64 bits, payload length = n
-PAYLOAD:
-C: n*8 bits data
-
-
-> 
-> (This is obviously not relevant for reply messages, only for request
-> messages)
-
-Staying at a power of 2 may still be worth the expense of a new cmd
-flag which must always be set for writes when extended headers are in
-use.
-
-> 
-> >  #### Simple reply message
-> > 
-> >  The simple reply message MUST be sent by the server in response to all
-> >  requests if structured replies have not been negotiated using
-> > -`NBD_OPT_STRUCTURED_REPLY`. If structured replies have been negotiated, a simple
-> > -reply MAY be used as a reply to any request other than `NBD_CMD_READ`,
-> > -but only if the reply has no data payload.  The message looks as
-> > -follows:
-> > +`NBD_OPT_STRUCTURED_REPLY`. If structured replies have been
-> > +negotiated, a simple reply MAY be used as a reply to any request other
-> > +than `NBD_CMD_READ`, but only if the reply has no data payload.  If
-> > +extended headers were not negotiated using `NBD_OPT_EXTENDED_HEADERS`,
-> > +the message looks as follows:
-> > 
-> >  S: 32 bits, 0x67446698, magic (`NBD_SIMPLE_REPLY_MAGIC`; used to be
-> >     `NBD_REPLY_MAGIC`)  
-> > @@ -369,6 +398,16 @@ S: 64 bits, handle
-> >  S: (*length* bytes of data if the request is of type `NBD_CMD_READ` and
-> >      *error* is zero)  
-> > 
-> > +If extended headers were negotiated using `NBD_OPT_EXTENDED_HEADERS`,
-> > +the message looks like:
-> > +
-> > +S: 32 bits, 0x60d12fd6, magic (`NBD_SIMPLE_REPLY_EXT_MAGIC`)  
-> > +S: 32 bits, error (MAY be zero)  
-> > +S: 64 bits, handle  
-> > +S: 128 bits, padding (MUST be zero)  
-> 
-> Should all these requirements about padding not be a SHOULD rather than
-> a MUST?
-
-Elsewhere in the thread, we talked about having
-NBD_SIMPLE_REPLY_EXT_MAGIC have 64 bits length (only non-zero when
-replying to NBD_CMD_READ) and 64 bits pad, instead of 128 bits pad.
-
-For future extensibility, it's probably safest to require the server
-to send 0 bits in the pad now, so that we can use them later.  Should
-clients then ignore unknown padding bits, or is there a risk that a
-future definition of non-zero values in what is now padding bits may
-confuse an existing client that merely ignores those bits?
-
-If we don't think extensibility is needed, then using SHOULD instead
-of MUST means a non-careful server can leak data through the padding.
-But it is certainly less restrictive to use SHOULD instead of MUST
-(well-written servers won't leak, sloppy servers might, clients must
-ignore the padding, and extension is not possible because of sloppy
-servers).
-
-> 
-> [...]
-> > +* `NBD_OPT_EXTENDED_HEADERS` (11)
-> > +
-> > +    The client wishes to use extended headers during the transmission
-> > +    phase.  The client MUST NOT send any additional data with the
-> > +    option, and the server SHOULD reject a request that includes data
-> > +    with `NBD_REP_ERR_INVALID`.
-> > +
-> > +    The server replies with the following, or with an error permitted
-> > +    elsewhere in this document:
-> > +
-> > +    - `NBD_REP_ACK`: Extended headers have been negotiated; the client
-> > +      MUST use the 32-byte extended request header, and the server
-> > +      MUST use the 32-byte extended reply header.
-> > +    - For backwards compatibility, clients SHOULD be prepared to also
-> > +      handle `NBD_REP_ERR_UNSUP`; in this case, only the compact
-> > +      transmission headers will be used.
-> > +
-> > +    If the client requests `NBD_OPT_STARTTLS` after this option, it
-> > +    MUST renegotiate extended headers.
-> > +
-> 
-> Two thoughts here:
-> 
-> - We should probably allow NBD_REP_ERR_BLOCK_SIZE_REQD as a reply to
->   this message; I could imagine a server might not want to talk 64-bit
->   lengths if it doesn't know that block sizes are going to be
->   reasonable.
-
-Good addition.  I'll include it in v2.
-
-> - In the same vein, should we perhaps also add an error message for when
->   extended headers are negotiated without structured replies? Perhaps a
->   server implementation might not want to implement the "extended
->   headers but no structured replies" message format.
-
-Seems reasonable.
-
-> 
-> On that note, while I know I had said earlier that I would prefer not
-> making this new extension depend on structured replies, in hindsight
-> perhaps it *is* a good idea to add that dependency; otherwise we create
-> an extra message format that is really a degenerate case of "we want to
-> be modern in one way but not in another", and that screams out to me
-> "I'm not going to be used much, look at me for security issues!"
-> 
-> Which perhaps is not a very good idea.
-
-Yeah, the more I read back over Vladimir's message, the more I am
-agreeing that just because we CAN be orthogonal doesn't mean we WANT
-to be orthogonal.  Every degree of orthogonality increases the testing
-burden.  I'm happy to rework v2 along those lines (structured replies
-mandatory, and only one extended reply header, so that only compact
-style has two header types).
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+Changes since v1:
+ - add comments to document the lo_refcnt synchronization
+ - fix comment typos
 
