@@ -1,84 +1,96 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AE804E6E76
-	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 07:59:36 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id C75904E704C
+	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 10:51:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4120A20458; Fri, 25 Mar 2022 06:59:36 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 06:59:36 2022
-Old-Return-Path: <BATV+8af3a5752749cd19e826+6788+infradead.org+hch@bombadil.srs.infradead.org>
+	id 64804204B8; Fri, 25 Mar 2022 09:51:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 09:51:09 2022
+Old-Return-Path: <jack@suse.cz>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FOURLA,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-2.5 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MD5_SHA1_SUM,
 	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D18AC2034C
-	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 06:40:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 49DF220448
+	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 09:34:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.041 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-4.39 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	HEADER_FROM_DIFFERENT_DOMAINS=0.249, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id iDS9CnhW4Fgk for <lists-other-nbd@bendel.debian.org>;
-	Fri, 25 Mar 2022 06:40:37 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
+	with ESMTP id VQzxS1mq8Snu for <lists-other-nbd@bendel.debian.org>;
+	Fri, 25 Mar 2022 09:34:09 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 828B820380
-	for <nbd@other.debian.org>; Fri, 25 Mar 2022 06:40:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=bB/XPHDelsXpg9wVf6zNnXdYkaqzTiJaHZxOpLu8A0U=; b=QRo0HoFNjl/zpXBOKBTJMDf/Xe
-	o9mAIqWappMaI2sicN+hDyGrMG7OP7sHFDQhF4a02DWbVSHoshl0d7HsggkDbU4nkiPhjC73G5SLW
-	9LVfHwK6qq/QfmvH+8QXDYnovrz7CHnt0t6JiiDd2NpR8THt1tHw7gn5Z+lM+WR8iRE9JRgtk+8fD
-	LkpS6JGY2CTzOMcFyiGTAvZCtMG8VSOaNs1+6sJxg2AZqV3ZfjZQ6gmhgtXjLdY9089YSxEa3WEOq
-	wkSFpQVJWHXIbp6R5TJFcwFRZCMbmibsMxJ+5znLT53ZidXc7dHLqEKcmErwq8c8WcOzNu378+rPb
-	b8+3N4EA==;
-Received: from 089144194144.atnat0003.highway.a1.net ([89.144.194.144] helo=localhost)
-	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1nXdcX-001HU0-V0; Fri, 25 Mar 2022 06:40:26 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>,
+	by bendel.debian.org (Postfix) with ESMTPS id 0ABDD203FF
+	for <nbd@other.debian.org>; Fri, 25 Mar 2022 09:34:08 +0000 (UTC)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+	by smtp-out2.suse.de (Postfix) with ESMTP id 472DF1F38D;
+	Fri, 25 Mar 2022 09:34:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1648200846; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=MsyCNFPN20seFERlWMYTQaTaBEboZs+FaC506U8jafA=;
+	b=mRjSN0C5x5/qfjvU6Ss9HfYQZOOJXCqqhKZ+es4KVJD56MK67Um3jAPnp/sgLwgRswK+vJ
+	SM8B8Ve+Lk7XZCSTfKfP0e9JskZkrKwC3izY9DSQQenCcjzn2I3TfHaw6Xz8cr97X89Hav
+	bX8Kb9XOfaThCPpEaLLxQdm4du5WVdI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1648200846;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=MsyCNFPN20seFERlWMYTQaTaBEboZs+FaC506U8jafA=;
+	b=3ljM2fy6nBKCwcPRBlrS4cJxaG8JjYNgZQ+ztp6d6J0XBiescOTwSIoYIqHxFL+PKa9nae
+	zbnQEkVai11jJBBw==
+Received: from quack3.suse.cz (unknown [10.100.200.198])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by relay2.suse.de (Postfix) with ESMTPS id B14DBA3B96;
+	Fri, 25 Mar 2022 09:34:05 +0000 (UTC)
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+	id 3289AA0610; Fri, 25 Mar 2022 10:34:05 +0100 (CET)
+Date: Fri, 25 Mar 2022 10:34:05 +0100
+From: Jan Kara <jack@suse.cz>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jan Kara <jack@suse.cz>, Jens Axboe <axboe@kernel.dk>,
 	Josef Bacik <josef@toxicpanda.com>,
-	Minchan Kim <minchan@kernel.org>,
-	Nitin Gupta <ngupta@vflare.org>
-Cc: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
-	Jan Kara <jack@suse.cz>,
+	Minchan Kim <minchan@kernel.org>, Nitin Gupta <ngupta@vflare.org>,
+	Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
 	"Darrick J . Wong" <djwong@kernel.org>,
-	Ming Lei <ming.lei@redhat.com>,
-	Matteo Croce <mcroce@microsoft.com>,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	syzbot+6479585dfd4dedd3f7e1@syzkaller.appspotmail.com
-Subject: [PATCH 14/14] loop: don't destroy lo->workqueue in __loop_clr_fd
-Date: Fri, 25 Mar 2022 07:39:29 +0100
-Message-Id: <20220325063929.1773899-15-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220325063929.1773899-1-hch@lst.de>
-References: <20220325063929.1773899-1-hch@lst.de>
+	Ming Lei <ming.lei@redhat.com>, linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: Re: [PATCH 12/13] loop: remove lo_refcount and avoid lo_mutex in
+ ->open / ->release
+Message-ID: <20220325093405.wfz2r5uyoptlwfcn@quack3.lan>
+References: <20220324075119.1556334-1-hch@lst.de>
+ <20220324075119.1556334-13-hch@lst.de>
+ <20220324141321.pqesnshaswwk3svk@quack3.lan>
+ <20220324171518.GC28007@lst.de>
+ <20220324174701.GA28583@lst.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220324174701.GA28583@lst.de>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <acbSAcFra5J.A.DK.YhWPiB@bendel>
+Resent-Message-ID: <0YuV0uWlRiE.A.EBB.NCZPiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1796
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1797
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,95 +100,123 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220325063929.1773899-15-hch@lst.de
-Resent-Date: Fri, 25 Mar 2022 06:59:36 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220325093405.wfz2r5uyoptlwfcn@quack3.lan
+Resent-Date: Fri, 25 Mar 2022 09:51:09 +0000 (UTC)
 
-There is no need to destroy the workqueue when clearing unbinding
-a loop device from a backing file.  Not doing so on the other hand
-avoid creating a complex lock dependency chain involving the global
-system_transition_mutex.
+On Thu 24-03-22 18:47:01, Christoph Hellwig wrote:
+> On Thu, Mar 24, 2022 at 06:15:18PM +0100, Christoph Hellwig wrote:
+> > On Thu, Mar 24, 2022 at 03:13:21PM +0100, Jan Kara wrote:
+> > > > Signed-off-by: Christoph Hellwig <hch@lst.de>
+> > > 
+> > > Looks good but I still think we need something like attached preparatory
+> > > patch to not regress e.g. filesystem probing triggered by udev events. What
+> > > do you think?
+> > 
+> > Yes, I think it makes sense to add that.
+> 
+> Actually, looking at it in a little more detail: this misses the
+> explicit kobject_uevent calls for the capacity changes.  I think the
+> best idea might be something like this:
+> 
+> ---
+> From db5ab8ab0fbcf07af769023a894fafc22b662cd9 Mon Sep 17 00:00:00 2001
+> From: Christoph Hellwig <hch@lst.de>
+> Date: Thu, 24 Mar 2022 18:41:28 +0100
+> Subject: loop: suppress uevents while reconfiguring the device
+> 
+> Currently, udev change event is generated for a loop device before the
+> device is ready for IO. Due to serialization on lo->lo_mutex in
+> lo_open() this does not matter because anybody is able to open the
+> device and do IO only after the configuration is finished. However this
+> synchronization in lo_open() is going away so make sure userspace
+> reacting to the change event will see the new device state by generating
+> the event only when the device is setup.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Based on a patch from Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>.
+Yeah, even better. Feel free to add:
 
-Reported-by: syzbot+6479585dfd4dedd3f7e1@syzkaller.appspotmail.com
-Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Jan Kara <jack@suse.cz>
-Tested-by: syzbot+6479585dfd4dedd3f7e1@syzkaller.appspotmail.com
----
- drivers/block/loop.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 8ad8cfffdcbdc..2043d3efbc491 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -817,7 +817,6 @@ struct loop_worker {
- };
- 
- static void loop_workfn(struct work_struct *work);
--static void loop_rootcg_workfn(struct work_struct *work);
- 
- #ifdef CONFIG_BLK_CGROUP
- static inline int queue_on_root_worker(struct cgroup_subsys_state *css)
-@@ -1055,20 +1054,19 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
- 	    !file->f_op->write_iter)
- 		lo->lo_flags |= LO_FLAGS_READ_ONLY;
- 
--	lo->workqueue = alloc_workqueue("loop%d",
--					WQ_UNBOUND | WQ_FREEZABLE,
--					0,
--					lo->lo_number);
- 	if (!lo->workqueue) {
--		error = -ENOMEM;
--		goto out_unlock;
-+		lo->workqueue = alloc_workqueue("loop%d",
-+						WQ_UNBOUND | WQ_FREEZABLE,
-+						0, lo->lo_number);
-+		if (!lo->workqueue) {
-+			error = -ENOMEM;
-+			goto out_unlock;
-+		}
- 	}
- 
- 	disk_force_media_change(lo->lo_disk, DISK_EVENT_MEDIA_CHANGE);
- 	set_disk_ro(lo->lo_disk, (lo->lo_flags & LO_FLAGS_READ_ONLY) != 0);
- 
--	INIT_WORK(&lo->rootcg_work, loop_rootcg_workfn);
--	INIT_LIST_HEAD(&lo->rootcg_cmd_list);
- 	lo->use_dio = lo->lo_flags & LO_FLAGS_DIRECT_IO;
- 	lo->lo_device = bdev;
- 	lo->lo_backing_file = file;
-@@ -1169,10 +1167,6 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
- 	if (!release)
- 		blk_mq_freeze_queue(lo->lo_queue);
- 
--	destroy_workqueue(lo->workqueue);
--	loop_free_idle_workers(lo, true);
--	del_timer_sync(&lo->timer);
--
- 	spin_lock_irq(&lo->lo_lock);
- 	filp = lo->lo_backing_file;
- 	lo->lo_backing_file = NULL;
-@@ -1766,6 +1760,10 @@ static void lo_free_disk(struct gendisk *disk)
- {
- 	struct loop_device *lo = disk->private_data;
- 
-+	if (lo->workqueue)
-+		destroy_workqueue(lo->workqueue);
-+	loop_free_idle_workers(lo, true);
-+	del_timer_sync(&lo->timer);
- 	mutex_destroy(&lo->lo_mutex);
- 	kfree(lo);
- }
-@@ -2029,6 +2027,8 @@ static int loop_add(int i)
- 	lo->lo_number		= i;
- 	spin_lock_init(&lo->lo_lock);
- 	spin_lock_init(&lo->lo_work_lock);
-+	INIT_WORK(&lo->rootcg_work, loop_rootcg_workfn);
-+	INIT_LIST_HEAD(&lo->rootcg_cmd_list);
- 	disk->major		= LOOP_MAJOR;
- 	disk->first_minor	= i << part_shift;
- 	disk->minors		= 1 << part_shift;
+								Honza
+
+> ---
+>  drivers/block/loop.c | 25 +++++++++++++++++++++----
+>  1 file changed, 21 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+> index b3170e8cdbe95..bfd21af7aa38b 100644
+> --- a/drivers/block/loop.c
+> +++ b/drivers/block/loop.c
+> @@ -572,6 +572,10 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
+>  
+>  	if (!file)
+>  		return -EBADF;
+> +
+> +	/* suppress uevents while reconfiguring the device */
+> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 1);
+> +
+>  	is_loop = is_loop_device(file);
+>  	error = loop_global_lock_killable(lo, is_loop);
+>  	if (error)
+> @@ -626,13 +630,18 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
+>  	fput(old_file);
+>  	if (partscan)
+>  		loop_reread_partitions(lo);
+> -	return 0;
+> +
+> +	error = 0;
+> +done:
+> +	/* enable and uncork uevent now that we are done */
+> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 0);
+> +	return error;
+>  
+>  out_err:
+>  	loop_global_unlock(lo, is_loop);
+>  out_putf:
+>  	fput(file);
+> -	return error;
+> +	goto done;
+>  }
+>  
+>  /* loop sysfs attributes */
+> @@ -999,6 +1008,9 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
+>  	/* This is safe, since we have a reference from open(). */
+>  	__module_get(THIS_MODULE);
+>  
+> +	/* suppress uevents while reconfiguring the device */
+> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 1);
+> +
+>  	/*
+>  	 * If we don't hold exclusive handle for the device, upgrade to it
+>  	 * here to avoid changing device under exclusive owner.
+> @@ -1101,7 +1113,12 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
+>  		loop_reread_partitions(lo);
+>  	if (!(mode & FMODE_EXCL))
+>  		bd_abort_claiming(bdev, loop_configure);
+> -	return 0;
+> +
+> +	error = 0;
+> +done:
+> +	/* enable and uncork uevent now that we are done */
+> +	dev_set_uevent_suppress(disk_to_dev(lo->lo_disk), 0);
+> +	return error;
+>  
+>  out_unlock:
+>  	loop_global_unlock(lo, is_loop);
+> @@ -1112,7 +1129,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
+>  	fput(file);
+>  	/* This is safe: open() is still holding a reference. */
+>  	module_put(THIS_MODULE);
+> -	return error;
+> +	goto done;
+>  }
+>  
+>  static void __loop_clr_fd(struct loop_device *lo, bool release)
+> -- 
+> 2.30.2
+> 
 -- 
-2.30.2
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
