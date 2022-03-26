@@ -1,91 +1,79 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCBDD4E7B01
-	for <lists+nbd@lfdr.de>; Fri, 25 Mar 2022 23:19:59 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BE494E7EB9
+	for <lists+nbd@lfdr.de>; Sat, 26 Mar 2022 04:09:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A772920465; Fri, 25 Mar 2022 22:19:59 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar 25 22:19:59 2022
-Old-Return-Path: <eblake@redhat.com>
+	id C3845205A4; Sat, 26 Mar 2022 03:09:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Mar 26 03:09:09 2022
+Old-Return-Path: <penguin-kernel@I-love.SAKURA.ne.jp>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-9.9 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,PHONENUMBER,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.0 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0917F2040B
-	for <lists-other-nbd@bendel.debian.org>; Fri, 25 Mar 2022 22:19:51 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B8A2020540
+	for <lists-other-nbd@bendel.debian.org>; Sat, 26 Mar 2022 02:53:03 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.105 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-1.517,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, PHONENUMBER=1.5, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.991 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-0.001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 0Wb2Th05FFlp for <lists-other-nbd@bendel.debian.org>;
-	Fri, 25 Mar 2022 22:19:45 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 8B3A7203ED
-	for <nbd@other.debian.org>; Fri, 25 Mar 2022 22:19:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1648246780;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qDAz5OhNaHnTuIe7vlccj3Lfym0aXzWa1SM32LRRjEU=;
-	b=YCLBS1zmoJlUNikN4vRG1ieXvPA0JABnqBKQmhODz76UFGUHx7Bsz/DWb/BYHSdq0s3nip
-	JWoJT5UNPz2TxaUuQZmeNUojBjmSb0EsSZTjEGS6dNb+z+FSJMBF2zfbGt0wqUU5uXiqH7
-	uoWzfWRdNOa4za1mP4CoSbdvaoaxouE=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-198-p-ZZESBpNi6oqSp7rnCk6w-1; Fri, 25 Mar 2022 18:19:34 -0400
-X-MC-Unique: p-ZZESBpNi6oqSp7rnCk6w-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8B2C13804521;
-	Fri, 25 Mar 2022 22:19:34 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.192])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id E53F440CF8EC;
-	Fri, 25 Mar 2022 22:19:33 +0000 (UTC)
-Date: Fri, 25 Mar 2022 17:19:32 -0500
-From: Eric Blake <eblake@redhat.com>
-To: "Richard W.M. Jones" <rjones@redhat.com>
-Cc: nbd@other.debian.org, v.sementsov-og@mail.ru, libguestfs@redhat.com,
-	qemu-block@nongnu.org
-Subject: Re: [Libguestfs] [PATCH v2 3/3] spec: Clarify BLOCK_STATUS reply
- details
-Message-ID: <20220325221932.5g3ji3rbzjqhr7to@redhat.com>
-References: <20220325124102.921017-1-eblake@redhat.com>
- <20220325124102.921017-4-eblake@redhat.com>
- <20220325200442.GU8021@redhat.com>
+	with ESMTP id iocVmO9ruZGW for <lists-other-nbd@bendel.debian.org>;
+	Sat, 26 Mar 2022 02:52:57 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from www262.sakura.ne.jp (www262.sakura.ne.jp [202.181.97.72])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 4A5EB203CA
+	for <nbd@other.debian.org>; Sat, 26 Mar 2022 02:52:56 +0000 (UTC)
+Received: from fsav312.sakura.ne.jp (fsav312.sakura.ne.jp [153.120.85.143])
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 22Q2qaEv006264;
+	Sat, 26 Mar 2022 11:52:36 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Received: from www262.sakura.ne.jp (202.181.97.72)
+ by fsav312.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav312.sakura.ne.jp);
+ Sat, 26 Mar 2022 11:52:36 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav312.sakura.ne.jp)
+Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
+	(authenticated bits=0)
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 22Q2qaQI006261
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NO);
+	Sat, 26 Mar 2022 11:52:36 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Message-ID: <03628e13-ca56-4ed0-da5a-ee698c83f48d@I-love.SAKURA.ne.jp>
+Date: Sat, 26 Mar 2022 11:52:36 +0900
 MIME-Version: 1.0
-In-Reply-To: <20220325200442.GU8021@redhat.com>
-User-Agent: NeoMutt/20211029-512-43304b
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [PATCH 13/14] loop: remove lo_refcount and avoid lo_mutex in
+ ->open / ->release
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
+        Josef Bacik <josef@toxicpanda.com>, Minchan Kim <minchan@kernel.org>,
+        Nitin Gupta <ngupta@vflare.org>
+Cc: Jan Kara <jack@suse.cz>, "Darrick J . Wong" <djwong@kernel.org>,
+        Ming Lei <ming.lei@redhat.com>, Matteo Croce <mcroce@microsoft.com>,
+        linux-block@vger.kernel.org, nbd@other.debian.org
+References: <20220325063929.1773899-1-hch@lst.de>
+ <20220325063929.1773899-14-hch@lst.de>
+From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+In-Reply-To: <20220325063929.1773899-14-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <aKTAstKG20G.A.3sB.PAkPiB@bendel>
+Resent-Message-ID: <G2ENQUWY9SP.A.H6B.VPoPiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1812
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1813
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -95,140 +83,148 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220325221932.5g3ji3rbzjqhr7to@redhat.com
-Resent-Date: Fri, 25 Mar 2022 22:19:59 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/03628e13-ca56-4ed0-da5a-ee698c83f48d@I-love.SAKURA.ne.jp
+Resent-Date: Sat, 26 Mar 2022 03:09:09 +0000 (UTC)
 
-On Fri, Mar 25, 2022 at 08:04:42PM +0000, Richard W.M. Jones wrote:
-> On Fri, Mar 25, 2022 at 07:41:02AM -0500, Eric Blake wrote:
-> > Our docs were inconsistent on whether a NBD_REPLY_TYPE_BLOCK_STATUS
-> > reply chunk can exceed the client's requested length, and silent on
-> > whether the lengths must be consistent whem multiple contexts were
-> 
-> "when"
+Since __loop_clr_fd() is currently holding loop_validate_mutex and lo->lo_mutex,
+"avoid lo_mutex in ->release" part is incomplete.
 
-Oops - will fix ;)
+The intent of holding loop_validate_mutex (which causes disk->open_mutex =>
+loop_validate_mutex => lo->lo_mutex => blk_mq_freeze_queue()/blk_mq_unfreeze_queue()
+chain) is to make loop_validate_file() traversal safe.
 
-> 
-> > negotiated.  Clarify this to match existing practice as implemented in
-> > qemu-nbd.  Clean up some nearby grammatical errors while at it.
-> > ---
-> >  doc/proto.md | 38 ++++++++++++++++++++++++--------------
-> >  1 file changed, 24 insertions(+), 14 deletions(-)
-> > 
-> > diff --git a/doc/proto.md b/doc/proto.md
-> > index 8a817d2..8276201 100644
-> > --- a/doc/proto.md
-> > +++ b/doc/proto.md
-> > @@ -882,15 +882,22 @@ The procedure works as follows:
-> >    server supports.
-> >  - During transmission, a client can then indicate interest in metadata
-> >    for a given region by way of the `NBD_CMD_BLOCK_STATUS` command,
-> > -  where *offset* and *length* indicate the area of interest. The
-> > -  server MUST then respond with the requested information, for all
-> > -  contexts which were selected during negotiation. For every metadata
-> > -  context, the server sends one set of extent chunks, where the sizes
-> > -  of the extents MUST be less than or equal to the length as specified
-> > -  in the request. Each extent comes with a *flags* field, the
-> > -  semantics of which are defined by the metadata context.
-> > -- A server MUST reply to `NBD_CMD_BLOCK_STATUS` with a structured
-> > -  reply of type `NBD_REPLY_TYPE_BLOCK_STATUS`.
-> > +  where *offset* and *length* indicate the area of interest. On
-> > +  success, the server MUST respond with one structured reply chunk of
-> > +  type `NBD_REPLY_TYPE_BLOCK_STATUS` per metadata context selected
-> > +  during negotiation, where each reply chunk is a list of one or more
-> > +  extents for that context.
-> > +
-> > +The client's requested *length* is only a hint to the server, so the
-> > +cumulative size of the extents in each chunk of the server's reply may
-> > +be shorter or longer the original request; and when more than one
-> 
-> ^ than the original request
-> 
-> > +metadata context was negotiated, the cumulative length per context may
-> 
-> Why is the word "cumulative" here?
+Since ->release is called with disk->open_mutex held, and __loop_clr_fd() from
+lo_release() is called via ->release when disk_openers() == 0, we are guaranteed
+that "struct file" which will be passed to loop_validate_file() via fget() cannot
+be the loop device __loop_clr_fd(lo, true) will clear. Thus, there is no need to
+hold loop_validate_mutex and lo->lo_mutex from __loop_clr_fd() if release == true.
 
-Suppose we negotiate base:allocation (server replies ID 1) and
-qemu:dirty-bitmap:map (server replies ID 2).  Then on a successful
-NBD_CMD_BLOCK_STATUS for 4096 bytes starting at offset 1024, qemu-nbd
-could reply:
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 2506193a4fd1..d47f3d86dd55 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -1136,25 +1136,26 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
+ 	gfp_t gfp = lo->old_gfp_mask;
+ 
+ 	/*
+-	 * Flush loop_configure() and loop_change_fd(). It is acceptable for
+-	 * loop_validate_file() to succeed, for actual clear operation has not
+-	 * started yet.
+-	 */
+-	mutex_lock(&loop_validate_mutex);
+-	mutex_unlock(&loop_validate_mutex);
+-	/*
+-	 * loop_validate_file() now fails because l->lo_state != Lo_bound
+-	 * became visible.
++	 * Make sure that Lo_rundown state becomes visible to loop_configure()
++	 * and loop_change_fd(). When called from ->release, we are guaranteed
++	 * that the "struct file" which loop_configure()/loop_change_fd() found
++	 * via fget() is not this loop device.
+ 	 */
++	if (!release) {
++		mutex_lock(&loop_validate_mutex);
++		mutex_unlock(&loop_validate_mutex);
++	}
+ 
+ 	/*
+-	 * Since this function is called upon "ioctl(LOOP_CLR_FD)" xor "close()
+-	 * after ioctl(LOOP_CLR_FD)", it is a sign of something going wrong if
+-	 * lo->lo_state has changed while waiting for lo->lo_mutex.
++	 * It is a sign of something going wrong if lo->lo_state has changed
++	 * while waiting for lo->lo_mutex. When called from ->release, we are
++	 * guaranteed that the nobody is using this loop device.
+ 	 */
+-	mutex_lock(&lo->lo_mutex);
+-	BUG_ON(lo->lo_state != Lo_rundown);
+-	mutex_unlock(&lo->lo_mutex);
++	if (!release) {
++		mutex_lock(&lo->lo_mutex);
++		BUG_ON(lo->lo_state != Lo_rundown);
++		mutex_unlock(&lo->lo_mutex);
++	}
+ 
+ 	if (test_bit(QUEUE_FLAG_WC, &lo->lo_queue->queue_flags))
+ 		blk_queue_write_cache(lo->lo_queue, false, false);
 
-REPLY_TYPE_BLOCK_STATUS (length 20 bytes = 2 extents): id=1, extent[0] = { length 2048, flags 0 }, extent[1] = { length 3072, flags HOLE }
-REPLY_TYPE_BLOCK_STATUS (length 12 bytes = 1 extent): id=2, extent[1] = { length 1024, flags 0 }
+But thinking again about release == false case, which I wrote "It is acceptable
+for loop_validate_file() to succeed, for actual clear operation has not started
+yet.", I came to feel why it is acceptable to succeed.
 
-There are two lists of extents, but no required correlation between
-the two lists; the list for id 1 has a cumulative length of 5k (larger
-than the client's request), and the list for id 2 has a cumulative
-length of 1k (smaller than the client's request).
+Even if loop_validate_file() was safely traversed due to serialization via
+loop_validate_mutex, I/O requests after loop_configure()/loop_change_fd() completed
+will fail. Is this behavior what we want?
 
-Clients negotiating multiple contexts must be prepared for such
-impedence mismatch between the different contexts, rather than servers
-being required to generate lists with identical number of elements and
-length fields.  But I'm welcome to ideas on how best to word that.
+If we don't want I/O requests after loop_configure()/loop_change_fd() completed
+fail due to __loop_clr_fd(), it is not acceptable for loop_validate_file() to
+succeed. We should hold loop_validate_mutex before setting Lo_rundown in order to
+make sure that loop_validate_file() will see Lo_rundown state. That is, something
+like below will be expected?
 
-> 
-> > +differ within a single block status request.  Each extent comes with a
-> > +*flags* field, the semantics of which are defined by the metadata
-> > +context.  The client may use the `NBD_CMD_FLAG_REQ_ONE` flag to
-> > +further constrains the server's reply so that each chunk contains
-> > +exactly one extent whose length does not exceed the client's original
-> > +*length*.
-> 
-> In these two adjacent sentences you talk about the flags field for
-> each extent (which is really the type of the extent), and then the
-> client request flags, and it's kind of confusing.  Maybe make that a
-> bit clearer, eg. "In the request, the client may set the
-> NBD_CMD_FLAG_REQ_ONE flag ...".
-
-Yes, that is an improvement.
-
-> 
-> >  A client MUST NOT use `NBD_CMD_BLOCK_STATUS` unless it selected a
-> >  nonzero number of metadata contexts during negotiation, and used the
-> > @@ -1778,8 +1785,8 @@ MUST initiate a hard disconnect.
-> >    *length* MUST be 4 + (a positive integer multiple of 8).  This reply
-> >    represents a series of consecutive block descriptors where the sum
-> >    of the length fields within the descriptors is subject to further
-> > -  constraints documented below. This chunk type MUST appear
-> > -  exactly once per metadata ID in a structured reply.
-> > +  constraints documented below.  A successful block status request MUST
-> > +  have exactly one status chunk per negotiated metadata context ID.
-> > 
-> >    The payload starts with:
-> > 
-> > @@ -1801,15 +1808,18 @@ MUST initiate a hard disconnect.
-> >    *length* of the final extent MAY result in a sum larger than the
-> >    original requested length, if the server has that information anyway
-> >    as a side effect of reporting the status of the requested region.
-> > +  When multiple metadata contexts are negotiated, the cumulative
-> > +  lengths in each chunk reply need not be identical.
-> 
-> Again, I'm unclear what is "cumulative" about the lengths.
-
-If a reply chunk has more than one extent for a given context, then
-there is a cumulative length in bytes of the amount of information
-returned by adding up the length portion of each of the extent
-entries.
-
-> 
-> >    Even if the client did not use the `NBD_CMD_FLAG_REQ_ONE` flag in
-> >    its request, the server MAY return fewer descriptors in the reply
-> >    than would be required to fully specify the whole range of requested
-> >    information to the client, if looking up the information would be
-> >    too resource-intensive for the server, so long as at least one
-> > -  extent is returned. Servers should however be aware that most
-> > -  clients implementations will then simply ask for the next extent
-> > -  instead.
-> > +  extent is returned.  Servers should however be aware that most
-> > +  client implementations will likely follow up with a request for
-> > +  extent information at the first offset not covered by a
-> > +  reduced-length reply.
-> 
-> Rich.
-> 
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 2506193a4fd1..a4ff94ca654f 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -1135,27 +1135,6 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
+ 	struct file *filp;
+ 	gfp_t gfp = lo->old_gfp_mask;
+ 
+-	/*
+-	 * Flush loop_configure() and loop_change_fd(). It is acceptable for
+-	 * loop_validate_file() to succeed, for actual clear operation has not
+-	 * started yet.
+-	 */
+-	mutex_lock(&loop_validate_mutex);
+-	mutex_unlock(&loop_validate_mutex);
+-	/*
+-	 * loop_validate_file() now fails because l->lo_state != Lo_bound
+-	 * became visible.
+-	 */
+-
+-	/*
+-	 * Since this function is called upon "ioctl(LOOP_CLR_FD)" xor "close()
+-	 * after ioctl(LOOP_CLR_FD)", it is a sign of something going wrong if
+-	 * lo->lo_state has changed while waiting for lo->lo_mutex.
+-	 */
+-	mutex_lock(&lo->lo_mutex);
+-	BUG_ON(lo->lo_state != Lo_rundown);
+-	mutex_unlock(&lo->lo_mutex);
+-
+ 	if (test_bit(QUEUE_FLAG_WC, &lo->lo_queue->queue_flags))
+ 		blk_queue_write_cache(lo->lo_queue, false, false);
+ 
+@@ -1238,11 +1217,18 @@ static int loop_clr_fd(struct loop_device *lo)
+ {
+ 	int err;
+ 
+-	err = mutex_lock_killable(&lo->lo_mutex);
++	/*
++	 * Use global lock when setting Lo_rundown state in order to make sure
++	 * that loop_validate_file() will fail if the "struct file" which
++	 * loop_configure()/loop_change_fd() found via fget() was this loop
++	 * device. The disk_openers(lo->lo_disk) > 1 test below guarantees that
++	 * fget() did not return this loop device.
++	 */
++	err = loop_global_lock_killable(lo, true);
+ 	if (err)
+ 		return err;
+ 	if (lo->lo_state != Lo_bound) {
+-		mutex_unlock(&lo->lo_mutex);
++		loop_global_unlock(lo, true);
+ 		return -ENXIO;
+ 	}
+ 	/*
+@@ -1257,11 +1243,11 @@ static int loop_clr_fd(struct loop_device *lo)
+ 	 */
+ 	if (disk_openers(lo->lo_disk) > 1) {
+ 		lo->lo_flags |= LO_FLAGS_AUTOCLEAR;
+-		mutex_unlock(&lo->lo_mutex);
++		loop_global_unlock(lo, true);
+ 		return 0;
+ 	}
+ 	lo->lo_state = Lo_rundown;
+-	mutex_unlock(&lo->lo_mutex);
++	loop_global_unlock(lo, true);
+ 
+ 	__loop_clr_fd(lo, false);
+ 	return 0;
 
