@@ -2,75 +2,97 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A78E4EB117
-	for <lists+nbd@lfdr.de>; Tue, 29 Mar 2022 17:54:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C30224EB5FB
+	for <lists+nbd@lfdr.de>; Wed, 30 Mar 2022 00:30:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6421521257; Tue, 29 Mar 2022 15:54:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar 29 15:54:09 2022
-Old-Return-Path: <penguin-kernel@I-love.SAKURA.ne.jp>
+	id 77A972141B; Tue, 29 Mar 2022 22:30:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar 29 22:30:13 2022
+Old-Return-Path: <adeboyejofolashade55@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.0 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=3.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
+	FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,GMAIL,LOTS_OF_MONEY,MONEY,
+	MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE,
+	T_US_DOLLARS_3 autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7C609210E7
-	for <lists-other-nbd@bendel.debian.org>; Tue, 29 Mar 2022 15:37:21 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 81F54213A2
+	for <lists-other-nbd@bendel.debian.org>; Tue, 29 Mar 2022 22:14:46 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.99 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=4.823 tagged_above=-10000 required=5.3
+	tests=[BAYES_40=-0.01, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+	FREEMAIL_REPLYTO=1, FREEMAIL_REPLYTO_END_DIGIT=0.25, GMAIL=1,
+	LOTS_OF_MONEY=0.001, MONEY=0.5, MONEY_FREEMAIL_REPTO=0.001,
+	PYZOR_CHECK=2, RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01,
+	T_US_DOLLARS_3=0.01, UNWANTED_LANGUAGE_BODY=0.03]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 4HkXG7nHp02O for <lists-other-nbd@bendel.debian.org>;
-	Tue, 29 Mar 2022 15:37:15 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from www262.sakura.ne.jp (www262.sakura.ne.jp [202.181.97.72])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 2D249210E5
-	for <nbd@other.debian.org>; Tue, 29 Mar 2022 15:37:14 +0000 (UTC)
-Received: from fsav415.sakura.ne.jp (fsav415.sakura.ne.jp [133.242.250.114])
-	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 22TFaqnS020483;
-	Wed, 30 Mar 2022 00:36:52 +0900 (JST)
-	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
-Received: from www262.sakura.ne.jp (202.181.97.72)
- by fsav415.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav415.sakura.ne.jp);
- Wed, 30 Mar 2022 00:36:52 +0900 (JST)
-X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav415.sakura.ne.jp)
-Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
-	(authenticated bits=0)
-	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 22TFapE4020480
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 30 Mar 2022 00:36:52 +0900 (JST)
-	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
-Message-ID: <fda9e2b7-d1db-e00c-98aa-e8ff555b88eb@I-love.SAKURA.ne.jp>
-Date: Wed, 30 Mar 2022 00:36:49 +0900
+	with ESMTP id BLHVDNahc_QE for <lists-other-nbd@bendel.debian.org>;
+	Tue, 29 Mar 2022 22:14:41 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id D73DE2139F
+	for <nbd@other.debian.org>; Tue, 29 Mar 2022 22:14:38 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id d7so26744751wrb.7
+        for <nbd@other.debian.org>; Tue, 29 Mar 2022 15:14:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:mime-version:content-transfer-encoding
+         :content-description:subject:to:from:date:reply-to;
+        bh=+v//v9bV1cKxYYqp6E5HrJfuFydY/JXcjMGnmfr7lM0=;
+        b=hHSTOnS61GmzikUVcbjZs7Z4wiDc6fX50YgbJ5ae3Ib7Py/ccALeD5eOwhvtc0/zr6
+         1dfYr3cGIbK4Gdus4EDqmH0BYUURz+1YaEwim4m+TjgNgjYnT0Upv7FrRMT2vyyX0Om4
+         i5eS6R2KLsPWb8aQEOltb3kXJo8aRl70OMML3vJYe/S+Ef0LYC5scCUoC8YrElSsOgGs
+         ymtaFh5Me6O414v11siqDdw0PDVmONsRu37Y0ebA3nhUO2agZ0LZuCFMRlku2h6iomiC
+         sXUhP8IK2R8FU7QK+6iHn4E8Bcgu/s032YnsQVrbWcQoIeNCRG7EdJzwGbfsZzNBveh9
+         ouIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:mime-version
+         :content-transfer-encoding:content-description:subject:to:from:date
+         :reply-to;
+        bh=+v//v9bV1cKxYYqp6E5HrJfuFydY/JXcjMGnmfr7lM0=;
+        b=UTMOwFqKs/kVo23WcIgeZc6O+BhV1YCUfEDEaq6gkqQuw1mzaGY5HSHFaXpvhXb4YE
+         7z487lqAdy1Kb8ipDi/Xderd6bkurmQ5nyfu+dmj8z7ix/dezWZKUARTlaqDMpSz8l2H
+         1pwXdWF23case0Yw1JejpE4s68/8fRbLvp2tkQ4fOMxwYdXMFGpu+dlVB1IDyyh3VXQS
+         T4gAbH99dFmZrBMAtfkC0ayLU3k6ijmknEzkvvGLYRIJRxaInvKMk75oUA1R6dLnutvX
+         Hh4K75I0WESsf9WtG/UR4h+hIWGG5E4gxTg2JrZMiWi5Rt6Dobf4fGU+e5+Nbm1RLdF1
+         39Sg==
+X-Gm-Message-State: AOAM5338skxVwWpVeLKrhfq/qH26CGkyXwYHpSQXhUqnsW5rgPpJq2XY
+	F8gbTQW3OCslb4hvGrieX+o=
+X-Google-Smtp-Source: ABdhPJzSsStXLUQGMJ8s22ypX/GOcEooDy42Y64QQyppu+DmWIIfad6RzJEqkN6RkQFP870iXIswsw==
+X-Received: by 2002:a5d:6511:0:b0:204:62a:20fc with SMTP id x17-20020a5d6511000000b00204062a20fcmr33314935wru.352.1648592076082;
+        Tue, 29 Mar 2022 15:14:36 -0700 (PDT)
+Received: from [172.20.10.4] ([102.91.4.172])
+        by smtp.gmail.com with ESMTPSA id r13-20020adfbb0d000000b00203e0efdd3bsm16158256wrg.107.2022.03.29.15.14.31
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Tue, 29 Mar 2022 15:14:35 -0700 (PDT)
+Message-ID: <624384cb.1c69fb81.4a583.fa01@mx.google.com>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: [PATCH 15/14] loop: avoid loop_validate_mutex/lo_mutex in ->release
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Jan Kara <jack@suse.cz>
-Cc: "Darrick J . Wong" <djwong@kernel.org>, Ming Lei <ming.lei@redhat.com>,
-        Matteo Croce <mcroce@microsoft.com>, linux-block@vger.kernel.org,
-        nbd@other.debian.org, Jens Axboe <axboe@kernel.dk>,
-        Josef Bacik <josef@toxicpanda.com>, Minchan Kim <minchan@kernel.org>,
-        Nitin Gupta <ngupta@vflare.org>
-References: <20220325063929.1773899-1-hch@lst.de>
-From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
-In-Reply-To: <20220325063929.1773899-1-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Gefeliciteerd, er is geld aan je gedoneerd
+To: Recipients <adeboyejofolashade55@gmail.com>
+From: adeboyejofolashade55@gmail.com
+Date: Tue, 29 Mar 2022 23:14:27 +0100
+Reply-To: mike.weirsky.foundation003@gmail.com
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <eCOOMXEqulO.A.7jD.huyQiB@bendel>
+Resent-Message-ID: <ZxgYuwRnOfF.A.kcH.1h4QiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1821
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1822
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -80,132 +102,19 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/fda9e2b7-d1db-e00c-98aa-e8ff555b88eb@I-love.SAKURA.ne.jp
-Resent-Date: Tue, 29 Mar 2022 15:54:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/624384cb.1c69fb81.4a583.fa01@mx.google.com
+Resent-Date: Tue, 29 Mar 2022 22:30:13 +0000 (UTC)
 
-Since ->release is called with disk->open_mutex held, and __loop_clr_fd()
- from lo_release() is called via ->release when disk_openers() == 0, we are
-guaranteed that "struct file" which will be passed to loop_validate_file()
-via fget() cannot be the loop device __loop_clr_fd(lo, true) will clear.
-Thus, there is no need to hold loop_validate_mutex from __loop_clr_fd()
-if release == true.
+Beste begunstigde,
 
-When I made commit 3ce6e1f662a91097 ("loop: reintroduce global lock for
-safe loop_validate_file() traversal"), I wrote "It is acceptable for
-loop_validate_file() to succeed, for actual clear operation has not started
-yet.". But now I came to feel why it is acceptable to succeed.
+ Je hebt een liefdadigheidsdonatie van ($ 10.000.000,00) van Mr. Mike Weirs=
+ky, een winnaar van een powerball-jackpotloterij van $ 273 miljoen.  Ik don=
+eer aan 5 willekeurige personen als je deze e-mail ontvangt, dan is je e-ma=
+il geselecteerd na een spin-ball. Ik heb vrijwillig besloten om het bedrag =
+van $ 10 miljoen USD aan jou te doneren als een van de geselecteerde 5, om =
+mijn winst te verifi=EBren
+ =
 
-It seems that the loop driver was added in Linux 1.3.68, and
-
-  if (lo->lo_refcnt > 1)
-    return -EBUSY;
-
-check in loop_clr_fd() was there from the beginning. The intent of this
-check was unclear. But now I think that current
-
-  disk_openers(lo->lo_disk) > 1
-
-form is there for three reasons.
-
-(1) Avoid I/O errors when some process which opens and reads from this
-    loop device in response to uevent notification (e.g. systemd-udevd),
-    as described in commit a1ecac3b0656a682 ("loop: Make explicit loop
-    device destruction lazy"). This opener is short-lived because it is
-    likely that the file descriptor used by that process is closed soon.
-
-(2) Avoid I/O errors caused by underlying layer of stacked loop devices
-    (i.e. ioctl(some_loop_fd, LOOP_SET_FD, other_loop_fd)) being suddenly
-    disappeared. This opener is long-lived because this reference is
-    associated with not a file descriptor but lo->lo_backing_file.
-
-(3) Avoid I/O errors caused by underlying layer of mounted loop device
-    (i.e. mount(some_loop_device, some_mount_point)) being suddenly
-    disappeared. This opener is long-lived because this reference is
-    associated with not a file descriptor but mount.
-
-While race in (1) might be acceptable, (2) and (3) should be checked
-racelessly. That is, make sure that __loop_clr_fd() will not run if
-loop_validate_file() succeeds, by doing refcount check with global lock
-held when explicit loop device destruction is requested.
-
-As a result of no longer waiting for lo->lo_mutex after setting Lo_rundown,
-we can remove pointless BUG_ON(lo->lo_state != Lo_rundown) check.
-
-Signed-off-by: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
----
- drivers/block/loop.c | 38 +++++++++++++-------------------------
- 1 file changed, 13 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 2506193a4fd1..6b813c592159 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -1135,27 +1135,6 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
- 	struct file *filp;
- 	gfp_t gfp = lo->old_gfp_mask;
- 
--	/*
--	 * Flush loop_configure() and loop_change_fd(). It is acceptable for
--	 * loop_validate_file() to succeed, for actual clear operation has not
--	 * started yet.
--	 */
--	mutex_lock(&loop_validate_mutex);
--	mutex_unlock(&loop_validate_mutex);
--	/*
--	 * loop_validate_file() now fails because l->lo_state != Lo_bound
--	 * became visible.
--	 */
--
--	/*
--	 * Since this function is called upon "ioctl(LOOP_CLR_FD)" xor "close()
--	 * after ioctl(LOOP_CLR_FD)", it is a sign of something going wrong if
--	 * lo->lo_state has changed while waiting for lo->lo_mutex.
--	 */
--	mutex_lock(&lo->lo_mutex);
--	BUG_ON(lo->lo_state != Lo_rundown);
--	mutex_unlock(&lo->lo_mutex);
--
- 	if (test_bit(QUEUE_FLAG_WC, &lo->lo_queue->queue_flags))
- 		blk_queue_write_cache(lo->lo_queue, false, false);
- 
-@@ -1238,11 +1217,20 @@ static int loop_clr_fd(struct loop_device *lo)
- {
- 	int err;
- 
--	err = mutex_lock_killable(&lo->lo_mutex);
-+	/*
-+	 * Since lo_ioctl() is called without locks held, it is possible that
-+	 * loop_configure()/loop_change_fd() and loop_clr_fd() run in parallel.
-+	 *
-+	 * Therefore, use global lock when setting Lo_rundown state in order to
-+	 * make sure that loop_validate_file() will fail if the "struct file"
-+	 * which loop_configure()/loop_change_fd() found via fget() was this
-+	 * loop device.
-+	 */
-+	err = loop_global_lock_killable(lo, true);
- 	if (err)
- 		return err;
- 	if (lo->lo_state != Lo_bound) {
--		mutex_unlock(&lo->lo_mutex);
-+		loop_global_unlock(lo, true);
- 		return -ENXIO;
- 	}
- 	/*
-@@ -1257,11 +1245,11 @@ static int loop_clr_fd(struct loop_device *lo)
- 	 */
- 	if (disk_openers(lo->lo_disk) > 1) {
- 		lo->lo_flags |= LO_FLAGS_AUTOCLEAR;
--		mutex_unlock(&lo->lo_mutex);
-+		loop_global_unlock(lo, true);
- 		return 0;
- 	}
- 	lo->lo_state = Lo_rundown;
--	mutex_unlock(&lo->lo_mutex);
-+	loop_global_unlock(lo, true);
- 
- 	__loop_clr_fd(lo, false);
- 	return 0;
--- 
-2.32.0
-
+  Vriendelijk antwoord op: mike.weirsky.foundation003@gmail.com
+ Voor uw claim.
 
