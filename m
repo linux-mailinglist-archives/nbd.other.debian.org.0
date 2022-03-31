@@ -2,91 +2,75 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF4414EBCBD
-	for <lists+nbd@lfdr.de>; Wed, 30 Mar 2022 10:30:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C42974ED128
+	for <lists+nbd@lfdr.de>; Thu, 31 Mar 2022 03:03:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B3A18215C8; Wed, 30 Mar 2022 08:30:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar 30 08:30:10 2022
-Old-Return-Path: <jack@suse.cz>
+	id A817621A31; Thu, 31 Mar 2022 01:03:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Mar 31 01:03:10 2022
+Old-Return-Path: <zhangwensheng5@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.5 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.8 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,PHONENUMBER,RCVD_IN_DNSWL_MED,
+	RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 894CD215AC
-	for <lists-other-nbd@bendel.debian.org>; Wed, 30 Mar 2022 08:14:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B251B21A6A
+	for <lists-other-nbd@bendel.debian.org>; Thu, 31 Mar 2022 00:45:42 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.39 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.289 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, PHONENUMBER=1.5,
+	RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H5=0.001,
+	RCVD_IN_MSPIKE_WL=0.001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8OBFIUtS_hkT for <lists-other-nbd@bendel.debian.org>;
-	Wed, 30 Mar 2022 08:14:09 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 3000E215A7
-	for <nbd@other.debian.org>; Wed, 30 Mar 2022 08:14:09 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-	by smtp-out2.suse.de (Postfix) with ESMTP id A8DAA1F37B;
-	Wed, 30 Mar 2022 08:14:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1648628046; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=e3DMJp9nphLsLvcjfDMvgaqnLJ4znnl+dEDdp+bNsQY=;
-	b=IsF5tLAEYxuxjPV4WX8DDBeyosJeRLngcBo/Xd6RfiKLHvgMAVeuG9QMoD60OGxm3yUWsw
-	5Rde+vp2XSE22g8i1i+i6xexxlR5SxfAi/50i/G/9bk6rHBDKqIITgEmUxgWOE+BGZIR8z
-	qrIX+xFJNN9kBMeM4OBy759GxNSeCWs=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1648628046;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=e3DMJp9nphLsLvcjfDMvgaqnLJ4znnl+dEDdp+bNsQY=;
-	b=hSlg0azAyUWECtOw0xb4wYpOdD4fOyMDcqkVU3GYt31BhIBditXYw8XPJrOnkHzuGWVw5w
-	/FliLDE+SkN4G2Aw==
-Received: from quack3.suse.cz (unknown [10.163.28.18])
+	with ESMTP id h-uVazJkJFiM for <lists-other-nbd@bendel.debian.org>;
+	Thu, 31 Mar 2022 00:45:37 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga02-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by relay2.suse.de (Postfix) with ESMTPS id 7C58EA3B8A;
-	Wed, 30 Mar 2022 08:14:06 +0000 (UTC)
-Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id A2D5EA0610; Wed, 30 Mar 2022 10:14:00 +0200 (CEST)
-Date: Wed, 30 Mar 2022 10:14:00 +0200
-From: Jan Kara <jack@suse.cz>
-To: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
-Cc: Christoph Hellwig <hch@lst.de>, Jan Kara <jack@suse.cz>,
-	"Darrick J . Wong" <djwong@kernel.org>,
-	Ming Lei <ming.lei@redhat.com>, Matteo Croce <mcroce@microsoft.com>,
-	linux-block@vger.kernel.org, nbd@other.debian.org,
-	Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>,
-	Minchan Kim <minchan@kernel.org>, Nitin Gupta <ngupta@vflare.org>
-Subject: Re: [PATCH 15/14] loop: avoid loop_validate_mutex/lo_mutex in
- ->release
-Message-ID: <20220330081400.womvc72fqnj6i44t@quack3.lan>
-References: <20220325063929.1773899-1-hch@lst.de>
- <fda9e2b7-d1db-e00c-98aa-e8ff555b88eb@I-love.SAKURA.ne.jp>
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 4512321A56
+	for <nbd@other.debian.org>; Thu, 31 Mar 2022 00:45:35 +0000 (UTC)
+Received: from kwepemi500016.china.huawei.com (unknown [172.30.72.53])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KTPfq52lDzCqxX;
+	Thu, 31 Mar 2022 08:43:15 +0800 (CST)
+Received: from [10.174.176.103] (10.174.176.103) by
+ kwepemi500016.china.huawei.com (7.221.188.220) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Thu, 31 Mar 2022 08:45:28 +0800
+Message-ID: <4f9e579e-1604-4bd4-f988-cb038e3ebdc3@huawei.com>
+Date: Thu, 31 Mar 2022 08:45:27 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fda9e2b7-d1db-e00c-98aa-e8ff555b88eb@I-love.SAKURA.ne.jp>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.1
+Subject: Re: [PATCH -next] nbd: fix possible overflow on 'first_minor' in
+ nbd_dev_add()
+From: "zhangwensheng (E)" <zhangwensheng5@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nbd@other.debian.org>, <yukuai3@huawei.com>
+References: <20220310093224.4002895-1-zhangwensheng5@huawei.com>
+ <0e5faf35-5adb-3ea1-9f7f-7c4f61a623b2@huawei.com>
+ <8139ea99-09fa-eb84-e9ef-f1fb470b5b88@huawei.com>
+In-Reply-To: <8139ea99-09fa-eb84-e9ef-f1fb470b5b88@huawei.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.176.103]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ kwepemi500016.china.huawei.com (7.221.188.220)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <xVHY2LilWhL.A.InG.SUBRiB@bendel>
+Resent-Message-ID: <627wSzzE1nB.A.g7C.O3PRiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1840
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1841
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,144 +80,77 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220330081400.womvc72fqnj6i44t@quack3.lan
-Resent-Date: Wed, 30 Mar 2022 08:30:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/4f9e579e-1604-4bd4-f988-cb038e3ebdc3@huawei.com
+Resent-Date: Thu, 31 Mar 2022 01:03:10 +0000 (UTC)
 
-On Wed 30-03-22 00:36:49, Tetsuo Handa wrote:
-> Since ->release is called with disk->open_mutex held, and __loop_clr_fd()
->  from lo_release() is called via ->release when disk_openers() == 0, we are
-> guaranteed that "struct file" which will be passed to loop_validate_file()
-> via fget() cannot be the loop device __loop_clr_fd(lo, true) will clear.
-> Thus, there is no need to hold loop_validate_mutex from __loop_clr_fd()
-> if release == true.
-> 
-> When I made commit 3ce6e1f662a91097 ("loop: reintroduce global lock for
-> safe loop_validate_file() traversal"), I wrote "It is acceptable for
-> loop_validate_file() to succeed, for actual clear operation has not started
-> yet.". But now I came to feel why it is acceptable to succeed.
-> 
-> It seems that the loop driver was added in Linux 1.3.68, and
-> 
->   if (lo->lo_refcnt > 1)
->     return -EBUSY;
-> 
-> check in loop_clr_fd() was there from the beginning. The intent of this
-> check was unclear. But now I think that current
-> 
->   disk_openers(lo->lo_disk) > 1
-> 
-> form is there for three reasons.
-> 
-> (1) Avoid I/O errors when some process which opens and reads from this
->     loop device in response to uevent notification (e.g. systemd-udevd),
->     as described in commit a1ecac3b0656a682 ("loop: Make explicit loop
->     device destruction lazy"). This opener is short-lived because it is
->     likely that the file descriptor used by that process is closed soon.
-> 
-> (2) Avoid I/O errors caused by underlying layer of stacked loop devices
->     (i.e. ioctl(some_loop_fd, LOOP_SET_FD, other_loop_fd)) being suddenly
->     disappeared. This opener is long-lived because this reference is
->     associated with not a file descriptor but lo->lo_backing_file.
-> 
-> (3) Avoid I/O errors caused by underlying layer of mounted loop device
->     (i.e. mount(some_loop_device, some_mount_point)) being suddenly
->     disappeared. This opener is long-lived because this reference is
->     associated with not a file descriptor but mount.
-> 
-> While race in (1) might be acceptable, (2) and (3) should be checked
-> racelessly. That is, make sure that __loop_clr_fd() will not run if
-> loop_validate_file() succeeds, by doing refcount check with global lock
-> held when explicit loop device destruction is requested.
-> 
-> As a result of no longer waiting for lo->lo_mutex after setting Lo_rundown,
-> we can remove pointless BUG_ON(lo->lo_state != Lo_rundown) check.
-> 
-> Signed-off-by: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+friendly ping...
 
-Yeah, the patch makes sense to me. Feel free to add:
-
-Reviewed-by: Jan Kara <jack@suse.cz>
-
-								Honza
-
-> ---
->  drivers/block/loop.c | 38 +++++++++++++-------------------------
->  1 file changed, 13 insertions(+), 25 deletions(-)
-> 
-> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-> index 2506193a4fd1..6b813c592159 100644
-> --- a/drivers/block/loop.c
-> +++ b/drivers/block/loop.c
-> @@ -1135,27 +1135,6 @@ static void __loop_clr_fd(struct loop_device *lo, bool release)
->  	struct file *filp;
->  	gfp_t gfp = lo->old_gfp_mask;
->  
-> -	/*
-> -	 * Flush loop_configure() and loop_change_fd(). It is acceptable for
-> -	 * loop_validate_file() to succeed, for actual clear operation has not
-> -	 * started yet.
-> -	 */
-> -	mutex_lock(&loop_validate_mutex);
-> -	mutex_unlock(&loop_validate_mutex);
-> -	/*
-> -	 * loop_validate_file() now fails because l->lo_state != Lo_bound
-> -	 * became visible.
-> -	 */
-> -
-> -	/*
-> -	 * Since this function is called upon "ioctl(LOOP_CLR_FD)" xor "close()
-> -	 * after ioctl(LOOP_CLR_FD)", it is a sign of something going wrong if
-> -	 * lo->lo_state has changed while waiting for lo->lo_mutex.
-> -	 */
-> -	mutex_lock(&lo->lo_mutex);
-> -	BUG_ON(lo->lo_state != Lo_rundown);
-> -	mutex_unlock(&lo->lo_mutex);
-> -
->  	if (test_bit(QUEUE_FLAG_WC, &lo->lo_queue->queue_flags))
->  		blk_queue_write_cache(lo->lo_queue, false, false);
->  
-> @@ -1238,11 +1217,20 @@ static int loop_clr_fd(struct loop_device *lo)
->  {
->  	int err;
->  
-> -	err = mutex_lock_killable(&lo->lo_mutex);
-> +	/*
-> +	 * Since lo_ioctl() is called without locks held, it is possible that
-> +	 * loop_configure()/loop_change_fd() and loop_clr_fd() run in parallel.
-> +	 *
-> +	 * Therefore, use global lock when setting Lo_rundown state in order to
-> +	 * make sure that loop_validate_file() will fail if the "struct file"
-> +	 * which loop_configure()/loop_change_fd() found via fget() was this
-> +	 * loop device.
-> +	 */
-> +	err = loop_global_lock_killable(lo, true);
->  	if (err)
->  		return err;
->  	if (lo->lo_state != Lo_bound) {
-> -		mutex_unlock(&lo->lo_mutex);
-> +		loop_global_unlock(lo, true);
->  		return -ENXIO;
->  	}
->  	/*
-> @@ -1257,11 +1245,11 @@ static int loop_clr_fd(struct loop_device *lo)
->  	 */
->  	if (disk_openers(lo->lo_disk) > 1) {
->  		lo->lo_flags |= LO_FLAGS_AUTOCLEAR;
-> -		mutex_unlock(&lo->lo_mutex);
-> +		loop_global_unlock(lo, true);
->  		return 0;
->  	}
->  	lo->lo_state = Lo_rundown;
-> -	mutex_unlock(&lo->lo_mutex);
-> +	loop_global_unlock(lo, true);
->  
->  	__loop_clr_fd(lo, false);
->  	return 0;
-> -- 
-> 2.32.0
-> 
-> 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+在 2022/3/17 21:05, zhangwensheng (E) 写道:
+> friendly ping...
+>
+> 在 2022/3/11 10:43, zhangwensheng (E) 写道:
+>> friendly ping...
+>>
+>> 在 2022/3/10 17:32, Zhang Wensheng 写道:
+>>> When 'index' is a big numbers, it may become negative which forced
+>>> to 'int'. then 'index << part_shift' might overflow to a positive
+>>> value that is not greater than '0xfffff', then sysfs might complains
+>>> about duplicate creation. Because of this, move the 'index' judgment
+>>> to the front will fix it and be better.
+>>>
+>>> Fixes: b0d9111a2d53 ("nbd: use an idr to keep track of nbd devices")
+>>> Fixes: 940c264984fd ("nbd: fix possible overflow for 'first_minor' 
+>>> in nbd_dev_add()")
+>>> Signed-off-by: Zhang Wensheng <zhangwensheng5@huawei.com>
+>>> ---
+>>>   drivers/block/nbd.c | 24 ++++++++++++------------
+>>>   1 file changed, 12 insertions(+), 12 deletions(-)
+>>>
+>>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>>> index 5a1f98494ddd..b3cdfc0ffb98 100644
+>>> --- a/drivers/block/nbd.c
+>>> +++ b/drivers/block/nbd.c
+>>> @@ -1800,17 +1800,6 @@ static struct nbd_device *nbd_dev_add(int 
+>>> index, unsigned int refs)
+>>>       refcount_set(&nbd->refs, 0);
+>>>       INIT_LIST_HEAD(&nbd->list);
+>>>       disk->major = NBD_MAJOR;
+>>> -
+>>> -    /* Too big first_minor can cause duplicate creation of
+>>> -     * sysfs files/links, since index << part_shift might overflow, or
+>>> -     * MKDEV() expect that the max bits of first_minor is 20.
+>>> -     */
+>>> -    disk->first_minor = index << part_shift;
+>>> -    if (disk->first_minor < index || disk->first_minor > MINORMASK) {
+>>> -        err = -EINVAL;
+>>> -        goto out_free_work;
+>>> -    }
+>>> -
+>>>       disk->minors = 1 << part_shift;
+>>>       disk->fops = &nbd_fops;
+>>>       disk->private_data = nbd;
+>>> @@ -1915,8 +1904,19 @@ static int nbd_genl_connect(struct sk_buff 
+>>> *skb, struct genl_info *info)
+>>>       if (!netlink_capable(skb, CAP_SYS_ADMIN))
+>>>           return -EPERM;
+>>>   -    if (info->attrs[NBD_ATTR_INDEX])
+>>> +    if (info->attrs[NBD_ATTR_INDEX]) {
+>>>           index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
+>>> +
+>>> +        /*
+>>> +         * Too big first_minor can cause duplicate creation of
+>>> +         * sysfs files/links, since index << part_shift might 
+>>> overflow, or
+>>> +         * MKDEV() expect that the max bits of first_minor is 20.
+>>> +         */
+>>> +        if (index < 0 || index > MINORMASK >> part_shift) {
+>>> +            printk(KERN_ERR "nbd: illegal input index %d\n", index);
+>>> +            return -EINVAL;
+>>> +        }
+>>> +    }
+>>>       if (!info->attrs[NBD_ATTR_SOCKETS]) {
+>>>           printk(KERN_ERR "nbd: must specify at least one socket\n");
+>>>           return -EINVAL;
+>> .
+> .
 
