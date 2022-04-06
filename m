@@ -1,69 +1,98 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DF9B4F5C26
-	for <lists+nbd@lfdr.de>; Wed,  6 Apr 2022 13:27:11 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F9454F5EEB
+	for <lists+nbd@lfdr.de>; Wed,  6 Apr 2022 15:12:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0BB41205D9; Wed,  6 Apr 2022 11:27:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr  6 11:27:10 2022
-Old-Return-Path: <zhangwensheng5@huawei.com>
+	id 1101020506; Wed,  6 Apr 2022 13:12:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr  6 13:12:09 2022
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,PHONENUMBER,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H5,
-	RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-3.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C6F53204AB
-	for <lists-other-nbd@bendel.debian.org>; Wed,  6 Apr 2022 11:11:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 18E0E205A8
+	for <lists-other-nbd@bendel.debian.org>; Wed,  6 Apr 2022 12:55:43 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.788 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	PHONENUMBER=1.5, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H5=0.001,
-	RCVD_IN_MSPIKE_WL=0.001, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=-1.991 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id dFSeXVrbGIek for <lists-other-nbd@bendel.debian.org>;
-	Wed,  6 Apr 2022 11:11:09 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 932042051D
-	for <nbd@other.debian.org>; Wed,  6 Apr 2022 11:10:18 +0000 (UTC)
-Received: from kwepemi500016.china.huawei.com (unknown [172.30.72.56])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KYMDm6WYWz4wmT;
-	Wed,  6 Apr 2022 19:07:52 +0800 (CST)
-Received: from localhost.localdomain (10.175.127.227) by
- kwepemi500016.china.huawei.com (7.221.188.220) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 6 Apr 2022 19:10:11 +0800
-From: Zhang Wensheng <zhangwensheng5@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>
-CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<nbd@other.debian.org>
-Subject: [PATCH -next] nbd: fix possible overflow on 'first_minor' in nbd_dev_add()
-Date: Wed, 6 Apr 2022 19:24:49 +0800
-Message-ID: <20220406112449.2203191-1-zhangwensheng5@huawei.com>
-X-Mailer: git-send-email 2.31.1
+	with ESMTP id tmB5ecOyAjhj for <lists-other-nbd@bendel.debian.org>;
+	Wed,  6 Apr 2022 12:55:38 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pg1-x530.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com [IPv6:2607:f8b0:4864:20::530])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 42AEF205A6
+	for <nbd@other.debian.org>; Wed,  6 Apr 2022 12:55:37 +0000 (UTC)
+Received: by mail-pg1-x530.google.com with SMTP id d185so2100127pgc.13
+        for <nbd@other.debian.org>; Wed, 06 Apr 2022 05:55:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=Ia9+/STEIK6s5M7yq5g28XApY0uGE7BS8OCfCM69b6A=;
+        b=1jHJjG0vgz25gIzyBuScalLuzhFAfWyPNeNxdThD5QdRv6nV6NS/H9b5sgMPyXcpeA
+         jCApD1jmvsgeKI5/tguxrCXmMwlkeU+UtDeN87DbXpH4BDnpcB6dNPoaNFysouTNi34D
+         mwPOhoX8zj1JT2o34AsxHa7g1kWrXlKyqZo4B12OymnG/M27MMOZOiT0ZqBIcj9nC5R8
+         nEgHt4nRlVA9IBDe+fKF7fgMLJMJoAxtikpXI44H+hEZOFb1kQS4ccI3urifRwJofOu2
+         YNBnw7a4es5sxt9ZeJGKY6WGELxoWRLrYJlPP0GAzQkQbAbpFKYrApa4HUSOepOQTWEw
+         CfNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=Ia9+/STEIK6s5M7yq5g28XApY0uGE7BS8OCfCM69b6A=;
+        b=N2QZBoPqIX6Wyhivj8zuv+ks4TU2zAbfkxm5Z+GHGbELopyNZkllbMazBlCzSmOy5N
+         ate4CMtRo5mVhCdX/9a7ZKZDT/2VzMOc6EbJHiLbPvcSQCQTWHUor1m2iLj0szFMInnr
+         U3X3EC/UvK6F5xkn96gjRbe8KBORQYZAUa3BduzSWM0T2DLWO2RAuTOs3yyJfl7tVIoI
+         DXGddSt2N9vUizbURpfKckdluHR1eWaYei1vFnTWuicUa8Rrp3OwPrHGg5KQTL0A6tqH
+         wwIxmZwtU5NvlEEexPy6XRIidJK5vCj7UMWi0+kcHB8DzT8sOxuRKypIa47GBc5oE6rp
+         D3Mg==
+X-Gm-Message-State: AOAM530nmg32Rn+OnO3vzlZk/QsBYusuNEgj6QR9ZP5krR7Fg41UTeTE
+	YJkvMExrl1xfpaTEZ2RiU/R5RQ==
+X-Google-Smtp-Source: ABdhPJw2Mh1njoqbEPjpvRC2p3sOjeTsg/pWyOftIQWGeQ7ifA9CMlk2Fr9+xIAJq2EzH3psDacsUg==
+X-Received: by 2002:a05:6a00:a92:b0:4e0:57a7:2d5d with SMTP id b18-20020a056a000a9200b004e057a72d5dmr8534617pfl.81.1649249734194;
+        Wed, 06 Apr 2022 05:55:34 -0700 (PDT)
+Received: from [192.168.1.100] ([198.8.77.157])
+        by smtp.gmail.com with ESMTPSA id a38-20020a056a001d2600b004f72acd4dadsm19647671pfx.81.2022.04.06.05.55.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 06 Apr 2022 05:55:33 -0700 (PDT)
+Message-ID: <263199dd-34e4-36ff-51ef-23a8f4bbe5b2@kernel.dk>
+Date: Wed, 6 Apr 2022 06:55:32 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- kwepemi500016.china.huawei.com (7.221.188.220)
-X-CFilter-Loop: Reflected
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [PATCH -next] nbd: fix possible overflow on 'first_minor' in
+ nbd_dev_add()
+Content-Language: en-US
+To: Zhang Wensheng <zhangwensheng5@huawei.com>, josef@toxicpanda.com
+Cc: linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+ nbd@other.debian.org
+References: <20220406112449.2203191-1-zhangwensheng5@huawei.com>
+From: Jens Axboe <axboe@kernel.dk>
+In-Reply-To: <20220406112449.2203191-1-zhangwensheng5@huawei.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <mg2wKB4ufvI.A.E4D.OkXTiB@bendel>
+Resent-Message-ID: <JsdxcgnVr5H.A.kWC.pGZTiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1884
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1885
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -73,65 +102,20 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220406112449.2203191-1-zhangwensheng5@huawei.com
-Resent-Date: Wed,  6 Apr 2022 11:27:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/263199dd-34e4-36ff-51ef-23a8f4bbe5b2@kernel.dk
+Resent-Date: Wed,  6 Apr 2022 13:12:09 +0000 (UTC)
 
-When 'index' is a big numbers, it may become negative which forced
-to 'int'. then 'index << part_shift' might overflow to a positive
-value that is not greater than '0xfffff', then sysfs might complains
-about duplicate creation. Because of this, move the 'index' judgment
-to the front will fix it and be better.
+On 4/6/22 5:24 AM, Zhang Wensheng wrote:
+> When 'index' is a big numbers, it may become negative which forced
+> to 'int'. then 'index << part_shift' might overflow to a positive
+> value that is not greater than '0xfffff', then sysfs might complains
+> about duplicate creation. Because of this, move the 'index' judgment
+> to the front will fix it and be better.
 
-Fixes: b0d9111a2d53 ("nbd: use an idr to keep track of nbd devices")
-Fixes: 940c264984fd ("nbd: fix possible overflow for 'first_minor' in nbd_dev_add()")
-Signed-off-by: Zhang Wensheng <zhangwensheng5@huawei.com>
----
- drivers/block/nbd.c | 23 ++++++++++++-----------
- 1 file changed, 12 insertions(+), 11 deletions(-)
+What's changed in this version? Always add a v2 to both the subject
+line and below the '---' so that folks reviewing this will know
+what changes you made since the last posting.
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 5a1f98494ddd..9448aacbcf0f 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1800,17 +1800,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
- 	refcount_set(&nbd->refs, 0);
- 	INIT_LIST_HEAD(&nbd->list);
- 	disk->major = NBD_MAJOR;
--
--	/* Too big first_minor can cause duplicate creation of
--	 * sysfs files/links, since index << part_shift might overflow, or
--	 * MKDEV() expect that the max bits of first_minor is 20.
--	 */
- 	disk->first_minor = index << part_shift;
--	if (disk->first_minor < index || disk->first_minor > MINORMASK) {
--		err = -EINVAL;
--		goto out_free_work;
--	}
--
- 	disk->minors = 1 << part_shift;
- 	disk->fops = &nbd_fops;
- 	disk->private_data = nbd;
-@@ -1915,8 +1905,19 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 	if (!netlink_capable(skb, CAP_SYS_ADMIN))
- 		return -EPERM;
- 
--	if (info->attrs[NBD_ATTR_INDEX])
-+	if (info->attrs[NBD_ATTR_INDEX]) {
- 		index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
-+
-+		/*
-+		 * Too big first_minor can cause duplicate creation of
-+		 * sysfs files/links, since index << part_shift might overflow, or
-+		 * MKDEV() expect that the max bits of first_minor is 20.
-+		 */
-+		if (index < 0 || index > MINORMASK >> part_shift) {
-+			printk(KERN_ERR "nbd: illegal input index %d\n", index);
-+			return -EINVAL;
-+		}
-+	}
- 	if (!info->attrs[NBD_ATTR_SOCKETS]) {
- 		printk(KERN_ERR "nbd: must specify at least one socket\n");
- 		return -EINVAL;
 -- 
-2.31.1
+Jens Axboe
 
