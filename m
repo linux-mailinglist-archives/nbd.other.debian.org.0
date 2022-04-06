@@ -1,133 +1,192 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B0DC4F58D7
-	for <lists+nbd@lfdr.de>; Wed,  6 Apr 2022 11:18:11 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CEA94F5A88
+	for <lists+nbd@lfdr.de>; Wed,  6 Apr 2022 12:21:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E4A4E205DC; Wed,  6 Apr 2022 09:18:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr  6 09:18:10 2022
-Old-Return-Path: <prvs=0880ca2a2=damien.lemoal@opensource.wdc.com>
+	id 44E79205A3; Wed,  6 Apr 2022 10:21:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr  6 10:21:09 2022
+Old-Return-Path: <prvs=08844476d=Johannes.Thumshirn@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
+X-Spam-Level: **
+X-Spam-Status: No, score=2.4 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_MED,THREADTOPIC,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3557B205B4
-	for <lists-other-nbd@bendel.debian.org>; Wed,  6 Apr 2022 09:00:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 86C2E2056A
+	for <lists-other-nbd@bendel.debian.org>; Wed,  6 Apr 2022 10:03:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.491 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.51 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, THREADTOPIC=2, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id GLQ_c98YMjbP for <lists-other-nbd@bendel.debian.org>;
-	Wed,  6 Apr 2022 09:00:05 +0000 (UTC)
+	with ESMTP id c__DynvWOJH6 for <lists-other-nbd@bendel.debian.org>;
+	Wed,  6 Apr 2022 10:03:47 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 438 seconds by postgrey-1.36 at bendel; Wed, 06 Apr 2022 09:00:05 UTC
 Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "*.hgst.iphmx.com", Issuer "Go Daddy Secure Certificate Authority - G2" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4D5C8205B3
-	for <nbd@other.debian.org>; Wed,  6 Apr 2022 09:00:05 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 25BB220527
+	for <nbd@other.debian.org>; Wed,  6 Apr 2022 10:03:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1649235605; x=1680771605;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=LFM3dJ4XtmmQmpjm/ADKwYliPf/iPacGMSt9/3x5IFU=;
-  b=bQoQ7QB4pmX1zkL20IplWXV5Y0iw+nGZsgBxtf87yN0LtTl+FZ6VOczf
-   KS+z4cWeV/x2jxrgxEKhMbhxtJyv2JbDtpzy2o+fgCl1C8I4GuFUTOE1O
-   SlgF8nLEVSk14LIBFC3Vzl7fcIdKusIFm5YMwvQERazyF0dnrisqeEa17
-   3hlEk4RcRrKd7040oI0XCGCgrzBQPXYKdS8rv1JkMFMpHoaAvtxmXotG1
-   QTykap2KA4WSbcTMqGZRFC1dLaJVOuWQAhRVnfSG9pW1gRHrVH3I5z9RT
-   coIt9M/YWCIR7QIjYg2s+OnCnSlHP+YNhRz+m+GOcwfckdEA4GNR9iqRh
-   A==;
+  t=1649239426; x=1680775426;
+  h=from:to:cc:subject:date:message-id:references:
+   content-transfer-encoding:mime-version;
+  bh=G8FZ0D3PP/OudJ5uuxCAz/C/vBHo8wESZoPwxTWqVEI=;
+  b=IegKaZxGrXc2s1ALkGM0hMXpzmSs8aPMnACCnEh6O5yrsgK1A0J9E3MD
+   5f5OL0yQcH1wPWkWPQmUKEMTCMzqKL4nwa0IFvd+Er7ol78uTqAugPi0O
+   SmLcuAS9Oxuk4w+pffsOoNhw1D+5BHSPmDKqTQQILYGU/ryB+LGbRj3pC
+   IYkIlVICSDiG7tyuZJPbh6q9PIpwOoQkisX2Gc6+maiarzWmJozj/SLGj
+   n3yw7HKR4fr0cYsYF+axejyzJsIT1WImfRZ7Eiks7nPsLBHIBh/ji5sfd
+   3N/2mtt+r2lLGFjXwgObvooX0MHPtN0MFkJhcnDhmBtd7+T+kyGhT/Fw1
+   w==;
 X-IronPort-AV: E=Sophos;i="5.90,239,1643644800"; 
-   d="scan'208";a="202066082"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 06 Apr 2022 16:52:41 +0800
-IronPort-SDR: o4VrL/8POlzBp9aS9CNONCnHC60Ci7qCs82WHU999XaqTDfYGKcspUDUd1ZVK20Wf7L00NlE90
- LD8vPT3O/lDMudqK3sbPHkmrq/flkxRsT9ZSlIp28mTG3BI4avP5++CBh6FYyY+WibyWs8KkGz
- bvi8ourC35iuFgHcaKx6bD2fpOeuEdsIwC7mfSOYws4R17nSlni1LpMwVF9I8p3o5b/1mxXysI
- MpHo4eqVeJx4AXs8aNqelgn2Vx1ng+sjiYSOA+AgK/oFxg1eNit9BiMkDFjF31D8UKDVrs9ezS
- PN5OwnhJjKTXvztSLFxJN5gx
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 06 Apr 2022 01:23:24 -0700
-IronPort-SDR: Ko9lmA9AmvQK0HSGke4zE5Bcpn+LRMp3DqqEDEt9AzSJBIgzwG3t8/f+Nmppqcl+pBZH22FEkh
- HDMeoqZDAWu0RO/Cw34p5vs5YQ752s+YS0pmQZb5fra+Z9EuT3ov1g9jltXsDS/73G5WkYk16E
- vvx1BZCjiNTJKrIYMPOTQvRNChNap02C5Q/lZn8wC5qfoFLWa6x6UD/BefEXHlB+JU+VnwOsoj
- ivZ4k9IRlCkRauQv6fs168sy2KgF7GAS6T4KpC+kAaGc5G7wbvjHk2kGYIR4IjbmeJud3BiHAo
- vvI=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
-  by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 06 Apr 2022 01:52:43 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
-	by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KYJDp1GfHz1SVnx
-	for <nbd@other.debian.org>; Wed,  6 Apr 2022 01:52:42 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
-	reason="pass (just generated, assumed good)"
-	header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
-	opensource.wdc.com; h=content-transfer-encoding:content-type
-	:in-reply-to:organization:from:references:to:content-language
-	:subject:user-agent:mime-version:date:message-id; s=dkim; t=
-	1649235161; x=1651827162; bh=LFM3dJ4XtmmQmpjm/ADKwYliPf/iPacGMSt
-	9/3x5IFU=; b=qvkCgjbtXOykeK3hzZNeB4nFZLJBLeVyzVQiFxPBd+c54HMRQrR
-	r3mHxfVWNdkNw5DIJA4fgfkXPh93epK0mDoQ3kgu2fpFkbSa8brjeKFgTDNdjUXK
-	QEdaChXXlXS0VTxT7h9gL19ju3gtHs6R6Mypq0Cc5OI+h1pEURz6XYf1UQ1mcqds
-	uMy2QNMB1cQhY28LO46skbuCxOrF4i88P2mQlM7t3vtuiUBfVFmxO2ZMvku2/0fT
-	GRED3B4iBwE6imVQ9DU7YD88eHs1K7YN6+E1hQRftlmDiNgCGpghEuxtQnop4vN/
-	eOwwsoVyhIxEYaxD0ZFdcLlRFvL5b8ALceg==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
-	by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id ZsPMmNI0XTUm for <nbd@other.debian.org>;
-	Wed,  6 Apr 2022 01:52:41 -0700 (PDT)
-Received: from [10.149.53.254] (washi.fujisawa.hgst.com [10.149.53.254])
-	by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KYJDg4WyPz1Rvlx;
-	Wed,  6 Apr 2022 01:52:35 -0700 (PDT)
-Message-ID: <ea3d14cb-00ea-8d7b-4615-9347fdd7aa27@opensource.wdc.com>
-Date: Wed, 6 Apr 2022 17:52:34 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH 14/27] block: add a bdev_max_zone_append_sectors helper
-Content-Language: en-US
+   d="scan'208";a="202070883"
+Received: from mail-mw2nam12lp2047.outbound.protection.outlook.com (HELO NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.47])
+  by ob1.hgst.iphmx.com with ESMTP; 06 Apr 2022 17:56:16 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=V05NAY6D5JNITXI7Uynm69uEjjVcBnSlpyCo87ZK+7VNb/vNpbU/FGi3Zm4n+QsXvV1R2M1mgUcaKgqXWKOBs2MmOnPHYOx0mf5YYQxnoM0AvkShgu1SyoboY68Dx2zKl8Uf4iJOhncIA6vDQqIJDIdaFpGoex90SHXJLbRjto2Ef1HuPvBnk7DYH2DSgjpEIal8qfyhxm7iPcopbTERi4WlXQFT79jCEr4w8lN9FM/RSSqMKtf8VRPLa2YJcz1sapScY8eXJVZIAqJjsQ2RMIgmspOZD6lvtMEO9wHdsTMzcimJpOVt4KtmbfYaKSPV+mrO6yGHsR3rAIS7Kia8WA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=G8FZ0D3PP/OudJ5uuxCAz/C/vBHo8wESZoPwxTWqVEI=;
+ b=GjJh9NCq/Gzn6rw2u6uDpjQ6iYwYWd9FZiQMYL+8Y7mbz+iUBERKxG8T6yP66B0dOfFFO3vwnwjHhL5cJ7a14/ttIVmBAsA2+Jf88E3WxyK/Iwt+gdPSl1hZzqGnhyTvPOGPa3cms9QugMUwvUl3E+fV7y9d3Vf8fvQQLly8o1BfZeop4ARAM6/koy+tRR4xEkvdn3W9PV2LAN97amtjDqfLzQJdk6A4uClpSTUQwWSKzDOf+30fisQzsnMASBz0qLgsVwakbzxZ33qMj0NcGRFCbSH5XkhyUqip/aXo9Vx4B9O6QU5tp244DdVW0Dp4N3sLx3xdz9wP97RhrVKPlA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G8FZ0D3PP/OudJ5uuxCAz/C/vBHo8wESZoPwxTWqVEI=;
+ b=h54PSavZiCLPvRz23Tg4lVZ4eo4TKNMgHAWOAetI02cemxA+lChC4jRXXc8PjhI9PpOfpk4p+MbkbZh9C5rjse+BNktIEqyQrd9A+SZwSDKo/qziD0BGPaKZXMgxzonamG8DYo93OQ1hSVvzQSjS+8JMtRvaZ5G9kcajf+Hcwbk=
+Received: from PH0PR04MB7416.namprd04.prod.outlook.com (2603:10b6:510:12::17)
+ by DM6PR04MB6607.namprd04.prod.outlook.com (2603:10b6:5:209::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.21; Wed, 6 Apr
+ 2022 09:56:17 +0000
+Received: from PH0PR04MB7416.namprd04.prod.outlook.com
+ ([fe80::a898:5c75:3097:52c2]) by PH0PR04MB7416.namprd04.prod.outlook.com
+ ([fe80::a898:5c75:3097:52c2%3]) with mapi id 15.20.5144.022; Wed, 6 Apr 2022
+ 09:56:17 +0000
+From: Johannes Thumshirn <Johannes.Thumshirn@wdc.com>
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: dm-devel@redhat.com, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-um@lists.infradead.org,
- linux-block@vger.kernel.org, drbd-dev@lists.linbit.com,
- nbd@other.debian.org, ceph-devel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
- linux-bcache@vger.kernel.org, linux-raid@vger.kernel.org,
- linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
- linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
- linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
- ntfs3@lists.linux.dev, ocfs2-devel@oss.oracle.com, linux-mm@kvack.org
+CC: "dm-devel@redhat.com" <dm-devel@redhat.com>, "linux-xfs@vger.kernel.org"
+	<linux-xfs@vger.kernel.org>, "linux-fsdevel@vger.kernel.org"
+	<linux-fsdevel@vger.kernel.org>, "linux-um@lists.infradead.org"
+	<linux-um@lists.infradead.org>, "linux-block@vger.kernel.org"
+	<linux-block@vger.kernel.org>, "drbd-dev@lists.linbit.com"
+	<drbd-dev@lists.linbit.com>, "nbd@other.debian.org" <nbd@other.debian.org>,
+	"ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, "linux-bcache@vger.kernel.org"
+	<linux-bcache@vger.kernel.org>, "linux-raid@vger.kernel.org"
+	<linux-raid@vger.kernel.org>, "linux-mmc@vger.kernel.org"
+	<linux-mmc@vger.kernel.org>, "linux-mtd@lists.infradead.org"
+	<linux-mtd@lists.infradead.org>, "linux-nvme@lists.infradead.org"
+	<linux-nvme@lists.infradead.org>, "linux-s390@vger.kernel.org"
+	<linux-s390@vger.kernel.org>, "linux-scsi@vger.kernel.org"
+	<linux-scsi@vger.kernel.org>, "target-devel@vger.kernel.org"
+	<target-devel@vger.kernel.org>, "linux-btrfs@vger.kernel.org"
+	<linux-btrfs@vger.kernel.org>, "linux-ext4@vger.kernel.org"
+	<linux-ext4@vger.kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+	<linux-f2fs-devel@lists.sourceforge.net>, "cluster-devel@redhat.com"
+	<cluster-devel@redhat.com>, "jfs-discussion@lists.sourceforge.net"
+	<jfs-discussion@lists.sourceforge.net>, "linux-nilfs@vger.kernel.org"
+	<linux-nilfs@vger.kernel.org>, "ntfs3@lists.linux.dev"
+	<ntfs3@lists.linux.dev>, "ocfs2-devel@oss.oracle.com"
+	<ocfs2-devel@oss.oracle.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>
+Subject: Re: [PATCH 07/27] btrfs: use bdev_max_active_zones instead of open
+ coding it
+Thread-Topic: [PATCH 07/27] btrfs: use bdev_max_active_zones instead of open
+ coding it
+Thread-Index: AQHYSZhFjrFhkOtPTU+vji2wK2+0AA==
+Date: Wed, 6 Apr 2022 09:56:17 +0000
+Message-ID:
+ <PH0PR04MB74169FBB31E68E76E34DDAC59BE79@PH0PR04MB7416.namprd04.prod.outlook.com>
 References: <20220406060516.409838-1-hch@lst.de>
- <20220406060516.409838-15-hch@lst.de>
-From: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Organization: Western Digital Research
-In-Reply-To: <20220406060516.409838-15-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20220406060516.409838-8-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: bcb98ed4-cc62-4a3f-8a01-08da17b3b1bf
+x-ms-traffictypediagnostic: DM6PR04MB6607:EE_
+x-microsoft-antispam-prvs:
+ <DM6PR04MB6607721F18B062BF57BF16C19BE79@DM6PR04MB6607.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ Nk2MJlm/r7uGtMIckrZ8/20DB84cHxXsyMPbPfGUVCbeLXDLxGaUBQM+iMbI0TIDMo8ybZcbg05B1l9oYxnCRDXiZkCfwL3sn98KZz49BhXqro2r1QD7cS1mUSAk52FIyznZ4v0Klb7TdN7t9KQcVo5GmjUcoyVro/T9NgdLhj55YUmzdMDKplWtvSR6br8YGC4S6tSCcTufSCuVvWT4UQ8n1zjpHCFVe4BHJ9HrIIcshXSnzVylfjU4RVUlTcWWznKi6E4q39IhnKk5tf0BjqmepnIOk3fA/n3MYk5dt47VBb3YFRTpkcX4/AFxtQC6VeUbKz9kKrwIxEi0zkZzLqmByyavkn9KDz7K1VUmM/IBgoJr+SdhhFpqcVBbjI34GNuS4i+tZ7mVmk3cHDbtKp8ZKZQB9EbL4QTCET7woB2SFLYFet5MlheD4eympyeAVgxzOTRGC0mQ7sBtQju+XlfkXIn0knIcLEYqswn28rGiCm+seMTcuTaukFfRvCjLv0fCsdkgIkp1enerhTohsdwWdDbZ+yq1L0ErZ2hSg1TGMszTXRTYRgoHxgKx6q6lnVf/EjZaac5fApQ86UVZVvJk2ZmXDrDAHY9W8X5FhQ65nRgId2WPz7Iaafh/jz8PnSfbw8pn8JGOOzrL06MADBo07mPq7omMiRg4rfqsamruR3NxRnLLR0oUXZQi/Ur9Rb8aQlEHzL6upjizBkGf+w==
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR04MB7416.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(4270600006)(9686003)(508600001)(186003)(6506007)(7696005)(2906002)(7416002)(5660300002)(55016003)(8936002)(54906003)(19618925003)(316002)(71200400001)(110136005)(66946007)(52536014)(91956017)(66476007)(66556008)(4326008)(8676002)(64756008)(66446008)(76116006)(122000001)(86362001)(558084003)(38100700002)(82960400001)(33656002)(38070700005);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?OcznZgIADteDPeFOUq+CN6sBYP+/kmW3D5j7xx/K5X/J7+64nNzLXNZa+5ah?=
+ =?us-ascii?Q?0ZgohPpwD570vI6niIUBqcq2mCCC4bPs3HF9If0pDTXYMHbI5tpo+6uU1ajy?=
+ =?us-ascii?Q?GGFzW70IH51vjuIirLPrIWVPk5C5eXCcUNZzJcSEIE6PNPIKJh8vD3O1Gvk4?=
+ =?us-ascii?Q?1JMEcCgnGyp8YHCCJNHAPDicTDwIRgbtUTLad92MTeu9qzZjwWCkwywcvQwt?=
+ =?us-ascii?Q?MQCZ8nki7Ux40zqnfiHYW+AhE2QGn4PDo5ixzVfwJ5/CUh3lM+9R2CPt1KPy?=
+ =?us-ascii?Q?xMEWdeuD60BMfglDOIbAaCEfUj65VFnSDiAftlXQ+XaObFIxp/QPxtBkAMAk?=
+ =?us-ascii?Q?rjtGO6aBO8v/hwlPRrlzKYyRMFzUupk4CNGmWt3Z2IlK23bdO/HzsNLxTdvx?=
+ =?us-ascii?Q?F/ab1WHMG/SfMEs+/cPEMU62hGIc40jgnlkSc4dGNIFAdBiguKYZaGG40axo?=
+ =?us-ascii?Q?QLghxYfv64zM0N2OzXk9KtGnE5SAQwTZzdmHpSj/wkFPfGDPZSJcP/D8E5q6?=
+ =?us-ascii?Q?e4ZjHnyW0TJ/kaldqrqvKSXkAYfCuDulEO9Ab8xhUwNp4Z6iVdFGrfFukliC?=
+ =?us-ascii?Q?l+OkRH0ECfZcpim6uUsWVelANXXl0CYIxLtvhYnbWq7F9uER2Gkwgy7QJsaF?=
+ =?us-ascii?Q?a628Srj0r2WumyRX4DssaZU2WCZdNF3VVjs8bZD1nIlEGU9begPUu+HJu5+k?=
+ =?us-ascii?Q?x1i/41euwTUu5uPNfIvdcGf9IExlDD8h5yt9mzd1KFjeMoll1jNgV6rNH27u?=
+ =?us-ascii?Q?n5RoeaGlsbgmvdc7mJ/LXpfVAwT4SqZjDcAintezx/IwTSs1nMq0ijtjMwj5?=
+ =?us-ascii?Q?ktv0vvU+Seq3y6wA12FQwXNEnpCfZv6o3c9BSVhlkXduwFn0p9Qt/8y9VCoL?=
+ =?us-ascii?Q?XSPsZoCBzzT2ubGt9sHwVpS1BkHCBUBhQoQewbrEeCa29DVl3ed+DkaZ8ob+?=
+ =?us-ascii?Q?Nc5IThF/mXr1dysBDqiFaJyPY8uUJxrJOYRV7lKrRp4UsCFiyI+7/o2Rgpmr?=
+ =?us-ascii?Q?fTzaqvAujVgknGtvFcFfmCIjItgOkWsyLomudA7hPeq4uzzkCKSK0pOdMohG?=
+ =?us-ascii?Q?X0UwxPRIaa0N4ZT+pMwBlMt5dzNpoaPZWDDf4JU4m6hNClFZ/x+wQyKM7e2y?=
+ =?us-ascii?Q?UJsUD6GGV4bwKlrdEdWAOgCxyxpiC2djuoWWy4g85tnBZ+XqkQfUw0RZXcbQ?=
+ =?us-ascii?Q?fK9KiSv+3KpPfWsDnOvBYOPszdjmONcj+hhzHBnSIYEbG21zO8z5mklY9mQg?=
+ =?us-ascii?Q?7oYXPYninSoU/jB0VOwqNhE0A0vfGE6us35k0t6QTwwy7q5O+N4/zEl0qjI/?=
+ =?us-ascii?Q?1I+wpUkDObvtm8TDU0hWXPgNkTPh8rsoO8KSJKQNVkU+ZozXt2Tscv8yBG1R?=
+ =?us-ascii?Q?W6JpbZs64SuI3PGS7YENHXSzLCdWvwvbrl1brK2kEsB9pZAdOVRNpYXpfZk4?=
+ =?us-ascii?Q?jkdiLxCmn8+Pcw+yl9h2w1w7W/ZHIyg9ueLehxJUo/iNEEGOuZzyejQK+rxe?=
+ =?us-ascii?Q?crCPwopA2pduPyJjACdthNl8guUPhrkN6l9z3DswDYdOLK8XUOmi1J6cRYPp?=
+ =?us-ascii?Q?YQE71i+MmFCGHlMV5PsmiLWXzSqROnXLPiyWMThDmeKTHGbO4cWOsQUXdgcw?=
+ =?us-ascii?Q?ThDnH0E0c6RYiqUF0XGnbh/5zrSNZ67EW1UzQM2DDgrbheYQZNPfPnwzrsX7?=
+ =?us-ascii?Q?wGWLt6hh6RYPBUxbuI06xXGPdpEjZtYHTk9G2Z1PbKhVxooLrjGgvlZepxHD?=
+ =?us-ascii?Q?ESS+vxrYZAlXP1aqBsNdF0KHRkGfUwam9adbrdHQogei2n0gj35+KZLyAQRJ?=
+x-ms-exchange-antispam-messagedata-1: srMZBCvbXKwnVy/kz7Xcntl/ozUqZq/HpIw=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR04MB7416.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bcb98ed4-cc62-4a3f-8a01-08da17b3b1bf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Apr 2022 09:56:17.3333
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: lPW8HtDsBeFYCtcSfoUiCOuBbQaewM1lFtcu2MbVcViHTWVnuqNjO14Ik1QVllpEu4CmuoDpR6lIPDCOe3F2OgQTSlM/31m3s23SGbVrgRY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB6607
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <fPERJrdOZeF.A.q1C.SrVTiB@bendel>
+Resent-Message-ID: <4PkCeU95Lq.A.BUE.VmWTiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1881
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1883
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -137,77 +196,9 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ea3d14cb-00ea-8d7b-4615-9347fdd7aa27@opensource.wdc.com
-Resent-Date: Wed,  6 Apr 2022 09:18:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/PH0PR04MB74169FBB31E68E76E34DDAC59BE79@PH0PR04MB7416.namprd04.prod.outlook.com
+Resent-Date: Wed,  6 Apr 2022 10:21:09 +0000 (UTC)
 
-On 4/6/22 15:05, Christoph Hellwig wrote:
-> Add a helper to check the max supported sectors for zone append based on
-> the block_device instead of having to poke into the block layer internal
-> request_queue.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   drivers/nvme/target/zns.c | 3 +--
->   fs/zonefs/super.c         | 3 +--
->   include/linux/blkdev.h    | 6 ++++++
->   3 files changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/nvme/target/zns.c b/drivers/nvme/target/zns.c
-> index e34718b095504..82b61acf7a72b 100644
-> --- a/drivers/nvme/target/zns.c
-> +++ b/drivers/nvme/target/zns.c
-> @@ -34,8 +34,7 @@ static int validate_conv_zones_cb(struct blk_zone *z,
->   
->   bool nvmet_bdev_zns_enable(struct nvmet_ns *ns)
->   {
-> -	struct request_queue *q = ns->bdev->bd_disk->queue;
-> -	u8 zasl = nvmet_zasl(queue_max_zone_append_sectors(q));
-> +	u8 zasl = nvmet_zasl(bdev_max_zone_append_sectors(ns->bdev));
->   	struct gendisk *bd_disk = ns->bdev->bd_disk;
->   	int ret;
->   
-> diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
-> index 3614c7834007d..7a63807b736c4 100644
-> --- a/fs/zonefs/super.c
-> +++ b/fs/zonefs/super.c
-> @@ -678,13 +678,12 @@ static ssize_t zonefs_file_dio_append(struct kiocb *iocb, struct iov_iter *from)
->   	struct inode *inode = file_inode(iocb->ki_filp);
->   	struct zonefs_inode_info *zi = ZONEFS_I(inode);
->   	struct block_device *bdev = inode->i_sb->s_bdev;
-> -	unsigned int max;
-> +	unsigned int max = bdev_max_zone_append_sectors(bdev);
->   	struct bio *bio;
->   	ssize_t size;
->   	int nr_pages;
->   	ssize_t ret;
->   
-> -	max = queue_max_zone_append_sectors(bdev_get_queue(bdev));
->   	max = ALIGN_DOWN(max << SECTOR_SHIFT, inode->i_sb->s_blocksize);
->   	iov_iter_truncate(from, max);
->   
-> diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-> index a433798c3343e..f8c50b77543eb 100644
-> --- a/include/linux/blkdev.h
-> +++ b/include/linux/blkdev.h
-> @@ -1188,6 +1188,12 @@ static inline unsigned int queue_max_zone_append_sectors(const struct request_qu
->   	return min(l->max_zone_append_sectors, l->max_sectors);
->   }
->   
-> +static inline unsigned int
-> +bdev_max_zone_append_sectors(struct block_device *bdev)
-> +{
-> +	return queue_max_zone_append_sectors(bdev_get_queue(bdev));
-> +}
-> +
->   static inline unsigned queue_logical_block_size(const struct request_queue *q)
->   {
->   	int retval = 512;
-
-Looks good.
-
-Acked-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-
--- 
-Damien Le Moal
-Western Digital Research
+Looks good,=0A=
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>=0A=
 
