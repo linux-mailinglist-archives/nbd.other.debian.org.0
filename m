@@ -1,88 +1,84 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 532004F88E5
-	for <lists+nbd@lfdr.de>; Thu,  7 Apr 2022 23:37:49 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id C23A04F88EC
+	for <lists+nbd@lfdr.de>; Thu,  7 Apr 2022 23:57:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3A469203AC; Thu,  7 Apr 2022 21:37:49 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr  7 21:37:49 2022
-Old-Return-Path: <eblake@redhat.com>
+	id 936D9205DD; Thu,  7 Apr 2022 21:57:05 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr  7 21:57:05 2022
+Old-Return-Path: <v.sementsov-og@mail.ru>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.9 required=4.0 tests=DIGITS_LETTERS,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE
+X-Spam-Status: No, score=-11.6 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,NICE_REPLY_A,PHONENUMBER,
+	RCVD_IN_DNSWL_LOW,SARE_FREE_WEBM_RuMail,T_SCC_BODY_TEXT_LINE
 	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 31F62203CD
-	for <lists-other-nbd@bendel.debian.org>; Thu,  7 Apr 2022 21:37:36 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5E7D720355
+	for <lists-other-nbd@bendel.debian.org>; Thu,  7 Apr 2022 21:56:57 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.789 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.619 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FREEMAIL_FROM=0.001, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-0.001, PHONENUMBER=1.5, RCVD_IN_DNSWL_LOW=-0.7,
+	SARE_FREE_WEBM_RuMail=0.671, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8uCzGQLY1nJT for <lists-other-nbd@bendel.debian.org>;
-	Thu,  7 Apr 2022 21:37:30 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id B951520377
-	for <nbd@other.debian.org>; Thu,  7 Apr 2022 21:37:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1649367445;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cUooFQ+8E7pKcJQMTjASZJ9E2zCnxKtkowaUvEeswRo=;
-	b=iHtP1UV4PLoHYZNlTLEqwTFlM/sNDO+2ukWHghTevXoIjQhfTVdQzMFGMCUidvS4zzr3/F
-	sXRBEB+29nhhHkE3shlKefKUhD5XnRqoEMh2aTetvPN8yDw+QlKVns0ms6p5jONlzE/sCQ
-	gpbHlgTyR5qahH+ex+RzGAPMQGanmmk=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-438-DmF8RbJTOhGS_Cca4gCFQQ-1; Thu, 07 Apr 2022 17:37:22 -0400
-X-MC-Unique: DmF8RbJTOhGS_Cca4gCFQQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7CB7F1010360;
-	Thu,  7 Apr 2022 21:37:22 +0000 (UTC)
-Received: from blue.redhat.com (unknown [10.2.16.165])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 166D0407DEC7;
-	Thu,  7 Apr 2022 21:37:22 +0000 (UTC)
-From: Eric Blake <eblake@redhat.com>
-To: nbd@other.debian.org
-Cc: libguestfs@redhat.com,
-	qemu-block@nongnu.org,
-	v.sementsov-og@mail.ru
-Subject: [PATCH 2/2] spec: Tweak description of maximum block size
-Date: Thu,  7 Apr 2022 16:37:20 -0500
-Message-Id: <20220407213720.250252-3-eblake@redhat.com>
-In-Reply-To: <20220407213720.250252-1-eblake@redhat.com>
-References: <20220407213720.250252-1-eblake@redhat.com>
+	with ESMTP id TJTcjEMia3rr for <lists-other-nbd@bendel.debian.org>;
+	Thu,  7 Apr 2022 21:56:52 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .mail. - helo: .smtp39.i.mail. - helo-domain: .mail.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+X-Greylist: delayed 4756 seconds by postgrey-1.36 at bendel; Thu, 07 Apr 2022 21:56:52 UTC
+Received: from smtp39.i.mail.ru (smtp39.i.mail.ru [94.100.177.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 3B59420448
+	for <nbd@other.debian.org>; Thu,  7 Apr 2022 21:56:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru; s=mail4;
+	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc; bh=FLCVfDS/wDZdi6ZdS/Y43TCq+NMTcPrHEBtNC28DiqE=;
+	t=1649368612;x=1649974012; 
+	b=gN8kYc22wb39ZGZ8TSv9s9Z+q/sydO9muPmL25lqpgm01pT4ZbYdgpNy+G4NMXXWEByQ0lQ0jBH+hzz1RDoJ7wON5pmVcYoR4ng5qHUj+BN0nu95La7jetnJc2ZuK1xaF2CEXsiwVdS4NxSBgg5wR/yN+F1IvsdZQeTKuQ0HLy0Mx+hSHQ0hS1kiirCv28btIcIccY1r9HRhWM0UmAYQHPNKEtoCickdAKEniB6vTuAZMKJG5NEKSruojp0y8an5pfR2yui1x/XotAQS11/C+W6YKo9dSx162Do6xG5Q90yxf2oLSz1SpJsGaNN2s4TYYaoCPW2cbWkoLR/hJIS4oA==;
+Received: by smtp39.i.mail.ru with esmtpa (envelope-from <v.sementsov-og@mail.ru>)
+	id 1nca7T-0003ni-OD; Fri, 08 Apr 2022 00:56:48 +0300
+Message-ID: <4f31f508-c5c4-b9ac-2f14-9aaefc2636b2@mail.ru>
+Date: Fri, 8 Apr 2022 00:56:47 +0300
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH v3] spec: Clarify BLOCK_STATUS reply details
+Content-Language: en-US
+To: Eric Blake <eblake@redhat.com>
+Cc: nbd@other.debian.org, libguestfs@redhat.com, qemu-block@nongnu.org,
+ rjones@redhat.com
+References: <20220401210807.1515492-1-eblake@redhat.com>
+ <5de5ca1b-e68f-1a09-77e4-3083aa0e31d4@mail.ru>
+ <20220407213434.dow5rvz32od4sv32@redhat.com>
+From: Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>
+In-Reply-To: <20220407213434.dow5rvz32od4sv32@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: smtp39.i.mail.ru; auth=pass smtp.auth=v.sementsov-og@mail.ru smtp.mailfrom=v.sementsov-og@mail.ru
+X-4EC0790: 10
+X-7564579A: B8F34718100C35BD
+X-77F55803: 4F1203BC0FB41BD9B63E071AA8307CB87A70185104E97852B5412553A988E753182A05F538085040D8669660A574B6F0D6E6CBE87710CD5ECFA3B9E7F66C19E51D34F8FCC6FA5819
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE78CB87876C5D626D4EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F790063776672C316918EFDB8638F802B75D45FF36EB9D2243A4F8B5A6FCA7DBDB1FC311F39EFFDF887939037866D6147AF826D82DD7F8A647A7020F89347B98E8AE47D56F9789CCF6C18C3F8528715B7D10C86878DA827A17800CE7838080FD34C772219FA2833FD35BB23D9E625A9149C048EE33AC447995A7AD18BDFBBEFFF4125B51D2E47CDBA5A96583BD4B6F7A4D31EC0BC014FD901B82EE079FA2833FD35BB23D27C277FBC8AE2E8BC908CD1B87A134A2A471835C12D1D977C4224003CC836476EB9C4185024447017B076A6E789B0E975F5C1EE8F4F765FCCA3E976C47030043D81D268191BDAD3DBD4B6F7A4D31EC0BEA7A3FFF5B025636D81D268191BDAD3D78DA827A17800CE7020E156585EF7189EC76A7562686271EEC990983EF5C03292E808ACE2090B5E14AD6D5ED66289B5259CC434672EE63711DD303D21008E298D5E8D9A59859A8B6B372FE9A2E580EFC725E5C173C3A84C360730CB3C202F6D135872C767BF85DA2F004C90652538430E4A6367B16DE6309
+X-8FC586DF: 6EFBBC1D9D64D975
+X-C1DE0DAB: 0D63561A33F958A53D28D776AB4563AAD56BD3DF1B79A00A755536FEF01D1CADD59269BC5F550898D99A6476B3ADF6B47008B74DF8BB9EF7333BD3B22AA88B938A852937E12ACA75B66DA94168EAEAEF8E8E86DC7131B365E7726E8460B7C23C
+X-C8649E89: 4E36BF7865823D7055A7F0CF078B5EC49A30900B95165D342B94C1DAF75C4D2269710441A81426A6AD187BD7FE0A8145BD578826486A8F851199CB081803E09C1D7E09C32AA3244C80C3A23D8B88F90CEF6796182DBFC78C725D5B54B2FE457583B48618A63566E0
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojzDs61/8Pi1EaSphesB+lIg==
+X-Mailru-Sender: 6C3E74F07C41AE946BC06F16BD5C391343F10AB632E0286498FB9EEA3896A0C7CD70E0747007D94BE6462B2528CDCABCE234FDC7CE4030BEBA6D275AA6409EB3BDC3C9FB484E02823A35ECB215E68A28E3F6503ABEB32C155FEEDEB644C299C0ED14614B50AE0675
+X-Mras: Ok
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nygvrPOi1aF.A.lWD.tm1TiB@bendel>
+Resent-Message-ID: <Ui4XeJNNaUJ.A.qJF.x41TiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1922
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1923
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,155 +88,135 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220407213720.250252-3-eblake@redhat.com
-Resent-Date: Thu,  7 Apr 2022 21:37:49 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/4f31f508-c5c4-b9ac-2f14-9aaefc2636b2@mail.ru
+Resent-Date: Thu,  7 Apr 2022 21:57:05 +0000 (UTC)
 
-Commit 9f30fedb improved the spec to allow non-payload requests that
-exceed any advertised maximum block size.  Take this one step further
-by permitting the server to use NBD_EOVERFLOW as a hint to the client
-when a request is oversize (while permitting NBD_EINVAL for
-back-compat), and by rewording the text to explicitly call out that
-what is being advertised is the maximum payload length, not maximum
-block size.  This becomes more important when we add 64-bit
-extensions, where it becomes possible to extend `NBD_CMD_BLOCK_STATUS`
-to have both an effect length (how much of the image does the client
-want status on) and a payload length (filtering the response to a
-subset of negotiated metadata contexts).
----
- doc/proto.md | 70 ++++++++++++++++++++++++++++++----------------------
- 1 file changed, 40 insertions(+), 30 deletions(-)
+08.04.2022 00:34, Eric Blake wrote:
+> On Thu, Apr 07, 2022 at 11:37:31PM +0300, Vladimir Sementsov-Ogievskiy wrote:
+>> 02.04.2022 00:08, Eric Blake wrote:
+>>> Our docs were inconsistent on whether a NBD_REPLY_TYPE_BLOCK_STATUS
+>>> reply chunk can exceed the client's requested length, and silent on
+>>> whether the lengths must be consistent when multiple contexts were
+>>> negotiated.  Clarify this to match existing practice as implemented in
+>>> qemu-nbd.
+>>
+>> I think by existing practice you mean only the latter?
+>>
+>> Seems that currently we never report more information than requested on BLOCK_STATUS.
+> 
+> nbdkit allows the last extent to exceed the client's requested length;
+> and that has always been an intentional design feature (if I ask for
+> status on 1M, but you know the entire 100M image is sparse, you should
+> be able to reply right away with a 100M hole, rather than making me
+> query 99 more times).
 
-diff --git a/doc/proto.md b/doc/proto.md
-index c3c7cd9..e332e21 100644
---- a/doc/proto.md
-+++ b/doc/proto.md
-@@ -769,8 +769,8 @@ learn the server's constraints without committing to them.
+OK, I'm for. I mean only wording. Maybe s/qemu-nbd/qemu-nbd and nbdkit/, but that does not really matter.
 
- If block size constraints have not been advertised or agreed on
- externally, then a server SHOULD support a default minimum block size
--of 1, a preferred block size of 2^12 (4,096), and a maximum block size
--that is effectively unlimited (0xffffffff, or the export size if that
-+of 1, a preferred block size of 2^12 (4,096), and a maximum block payload
-+size that is at least 2^25 (33,554,432) (or the export size if that
- is smaller), while a client desiring maximum interoperability SHOULD
- constrain its requests to a minimum block size of 2^9 (512), and limit
- `NBD_CMD_READ` and `NBD_CMD_WRITE` commands to a maximum block size of
-@@ -815,8 +815,8 @@ the preferred block size for that export.  The server MAY advertise an
- export size that is not an integer multiple of the preferred block
- size.
+> 
+>>
+>> hope that there no existing too strict clients that supports BLOCK_STATUS without REQ_ONE and check each extent to be less than original request length (accordingly to old spec):)
+> 
+> The old spec was ambiguous.  In one place it said NO reply chunk could
+> exceed the client length, regardless of REQ_ONE; in another, it said
+> that you have to use REQ_ONE to constrain the reply length.  As
+> existing servers behave like the latter, that is what this patch does
+> to make the two places in the spec consistent with one another.
+> 
+>> Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@openvz.org>
+>>
+>>> Clean up some nearby grammatical errors while at it.
+>>> ---
+>>>
+>>> Another round of rewording attempts, based on feedback from Rich on
+>>> v2.  I went ahead and pushed patch 1 and 2 of the v2 series, as they
+>>> were less controversial.
+>>>
+>>>    doc/proto.md | 42 ++++++++++++++++++++++++++++--------------
+>>>    1 file changed, 28 insertions(+), 14 deletions(-)
+>>>
+>>> diff --git a/doc/proto.md b/doc/proto.md
+>>> index 8a817d2..bacccfa 100644
+>>> --- a/doc/proto.md
+>>> +++ b/doc/proto.md
+>>> @@ -882,15 +882,25 @@ The procedure works as follows:
+>>>      server supports.
+>>>    - During transmission, a client can then indicate interest in metadata
+>>>      for a given region by way of the `NBD_CMD_BLOCK_STATUS` command,
+>>> -  where *offset* and *length* indicate the area of interest. The
+>>> -  server MUST then respond with the requested information, for all
+>>> -  contexts which were selected during negotiation. For every metadata
+>>> -  context, the server sends one set of extent chunks, where the sizes
+>>> -  of the extents MUST be less than or equal to the length as specified
+>>> -  in the request. Each extent comes with a *flags* field, the
+>>> -  semantics of which are defined by the metadata context.
+>>> -- A server MUST reply to `NBD_CMD_BLOCK_STATUS` with a structured
+>>> -  reply of type `NBD_REPLY_TYPE_BLOCK_STATUS`.
+>>> +  where *offset* and *length* indicate the area of interest. On
+>>> +  success, the server MUST respond with one structured reply chunk of
+>>> +  type `NBD_REPLY_TYPE_BLOCK_STATUS` per metadata context selected
+>>> +  during negotiation, where each reply chunk is a list of one or more
+>>> +  consecutive extents for that context.  Each extent comes with a
+>>> +  *flags* field, the semantics of which are defined by the metadata
+>>> +  context.
+>>> +
+>>> +The client's requested *length* is only a hint to the server, so the
+>>> +cumulative extent length contained in a chunk of the server's reply
+>>> +may be shorter or longer the original request.  When more than one
+>>> +metadata context was negotiated, the reply chunks for the different
+>>> +contexts of a single block status request need not have the same
+>>> +number of extents or cumulative extent length.
+>>> +
+>>> +In the request, the client may use the `NBD_CMD_FLAG_REQ_ONE` command
+>>> +flag to further constrain the server's reply so that each chunk
+>>> +contains exactly one extent whose length does not exceed the client's
+>>> +original *length*.
+>>>
+>>>    A client MUST NOT use `NBD_CMD_BLOCK_STATUS` unless it selected a
+>>>    nonzero number of metadata contexts during negotiation, and used the
+>>> @@ -1778,8 +1788,8 @@ MUST initiate a hard disconnect.
+>>>      *length* MUST be 4 + (a positive integer multiple of 8).  This reply
+>>>      represents a series of consecutive block descriptors where the sum
+>>>      of the length fields within the descriptors is subject to further
+>>> -  constraints documented below. This chunk type MUST appear
+>>> -  exactly once per metadata ID in a structured reply.
+>>> +  constraints documented below.  A successful block status request MUST
+>>> +  have exactly one status chunk per negotiated metadata context ID.
+>>>
+>>>      The payload starts with:
+>>>
+>>> @@ -1801,15 +1811,19 @@ MUST initiate a hard disconnect.
+>>>      *length* of the final extent MAY result in a sum larger than the
+>>>      original requested length, if the server has that information anyway
+>>>      as a side effect of reporting the status of the requested region.
+>>> +  When multiple metadata contexts are negotiated, the reply chunks for
+>>> +  the different contexts need not have the same number of extents or
+>>> +  cumulative extent length.
+>>>
+>>>      Even if the client did not use the `NBD_CMD_FLAG_REQ_ONE` flag in
+>>>      its request, the server MAY return fewer descriptors in the reply
+>>>      than would be required to fully specify the whole range of requested
+>>>      information to the client, if looking up the information would be
+>>>      too resource-intensive for the server, so long as at least one
+>>> -  extent is returned. Servers should however be aware that most
+>>> -  clients implementations will then simply ask for the next extent
+>>> -  instead.
+>>> +  extent is returned.  Servers should however be aware that most
+>>> +  client implementations will likely follow up with a request for
+>>> +  extent information at the first offset not covered by a
+>>> +  reduced-length reply.
+>>>
+>>>    All error chunk types have bit 15 set, and begin with the same
+>>>    *error*, *message length*, and optional *message* fields as
+>>
+>>
+>> -- 
+>> Best regards,
+>> Vladimir
+>>
+> 
 
--The maximum block size represents the maximum length that the server
--is willing to handle in one request.  If advertised, it MAY be
-+The maximum block size represents the maximum payload length that the
-+server is willing to handle in one request.  If advertised, it MAY be
- something other than a power of 2, but MUST be either an integer
- multiple of the minimum block size or the value 0xffffffff for no
- inherent limit, MUST be at least as large as the smaller of the
-@@ -825,7 +825,20 @@ preferred block size or export size, and SHOULD be at least 2^20
- MAY advertise a maximum block size that is larger than the export
- size, although in that case, the client MUST treat the export size as
- the effective maximum block size (as further constrained by a nonzero
--offset).
-+offset). For commands that require a payload in either direction and
-+where the client controls the payload length (`NBD_CMD_WRITE` or
-+`NBD_CMD_READ`), the client MUST NOT use a length larger than the
-+maximum block size. For replies where the payload length is controlled
-+by the server (such as `NBD_CMD_BLOCK_STATUS` without the flag
-+`NBD_CMD_FLAG_REQ_ONE`), the server MUST NOT send a reply larger than
-+the maximum block size. For commands that do not require a payload
-+(such as `NBD_CMD_TRIM`), the client MAY request a length larger than
-+the maximum; the server SHOULD NOT disconnect, but MAY reply with an
-+`NBD_EOVERFLOW` or `NBD_EINVAL` error if the oversize request would
-+require more server resources than the same command operating on only
-+the maximum block size (such as some implementations of
-+`NBD_CMD_WRITE_ZEROES` without the flag `NBD_CMD_FLAG_FAST_ZERO`, or
-+`NBD_CMD_CACHE`).
 
- Where a transmission request can have a nonzero *offset* and/or
- *length* (such as `NBD_CMD_READ`, `NBD_CMD_WRITE`, or `NBD_CMD_TRIM`),
-@@ -833,24 +846,17 @@ the client MUST ensure that *offset* and *length* are integer
- multiples of any advertised minimum block size, and SHOULD use integer
- multiples of any advertised preferred block size where possible.  For
- those requests, the client MUST NOT use a *length* which, when added to
--*offset*, would exceed the export size. Also for NBD_CMD_READ,
--NBD_CMD_WRITE, NBD_CMD_CACHE and NBD_CMD_WRITE_ZEROES (except for
--when NBD_CMD_FLAG_FAST_ZERO is set), the client MUST NOT use a *length*
--larger than any advertised maximum block size.
--The server SHOULD report an `NBD_EINVAL` error if
--the client's request is not aligned to advertised minimum block size
--boundaries, or is larger than the advertised maximum block size.
-+*offset*, would exceed the export size.  The server SHOULD report an
-+`NBD_EINVAL` error if the client's request is not aligned to advertised
-+minimum block size boundaries or would exceed the export size.
-+
- Notwithstanding any maximum block size advertised, either the server
--or the client MAY initiate a hard disconnect if the payload of an
--`NBD_CMD_WRITE` request or `NBD_CMD_READ` reply would be large enough
--to be deemed a denial of service attack; however, for maximum
--portability, any *length* less than 2^25 (33,554,432) bytes SHOULD NOT
--be considered a denial of service attack (even if the advertised
--maximum block size is smaller).  For all other commands, where the
--*length* is not reflected in the payload (such as `NBD_CMD_TRIM` or
--`NBD_CMD_WRITE_ZEROES`), a server SHOULD merely fail the command with
--an `NBD_EINVAL` error for a client that exceeds the maximum block size,
--rather than initiating a hard disconnect.
-+or the client MAY initiate a hard disconnect if a payload length of
-+either a request or a reply would be large enough to be deemed a
-+denial of service attack; however, for maximum portability, any
-+*length* less than 2^25 (33,554,432) bytes SHOULD NOT be considered a
-+denial of service attack (even if the advertised maximum block size is
-+smaller).
-
- ## Metadata querying
-
-@@ -1592,7 +1598,7 @@ during option haggling in the fixed newstyle negotiation.
-       - 16 bits, `NBD_INFO_BLOCK_SIZE`  
-       - 32 bits, minimum block size  
-       - 32 bits, preferred block size  
--      - 32 bits, maximum block size  
-+      - 32 bits, maximum block payload size  
-
- * `NBD_REP_META_CONTEXT` (4)
-
-@@ -1740,7 +1746,8 @@ Some chunk types can additionally be categorized by role, such as
- *error chunks* or *content chunks*.  Each type determines how to
- interpret the "length" bytes of payload.  If the client receives
- an unknown or unexpected type, other than an *error chunk*, it
--MUST initiate a hard disconnect.
-+MUST initiate a hard disconnect.  A server MUST NOT send a chunk
-+larger than any advertised maximum block payload size.
-
- * `NBD_REPLY_TYPE_NONE` (0)
-
-@@ -2111,11 +2118,12 @@ The following request types exist:
-     If the server advertised `NBD_FLAG_SEND_FAST_ZERO` but
-     `NBD_CMD_FLAG_FAST_ZERO` is not set, then the server MUST NOT fail
-     with `NBD_ENOTSUP`, even if the operation is no faster than a
--    corresponding `NBD_CMD_WRITE`. Conversely, if
--    `NBD_CMD_FLAG_FAST_ZERO` is set, the server MUST fail quickly with
--    `NBD_ENOTSUP` unless the request can be serviced in less time than
--    a corresponding `NBD_CMD_WRITE`, and SHOULD NOT alter the contents
--    of the export when returning this failure. The server's
-+    corresponding `NBD_CMD_WRITE`. Conversely, if `NBD_CMD_FLAG_FAST_ZERO`
-+    is set, the server SHOULD NOT fail with `NBD_EOVERFLOW` regardless of
-+    the client length, MUST fail quickly with `NBD_ENOTSUP` unless the
-+    request can be serviced in less time than a corresponding
-+    `NBD_CMD_WRITE`, and SHOULD NOT alter the contents of the export when
-+    returning an `NBD_ENOTSUP` failure. The server's
-     determination on whether to fail a fast request MAY depend on a
-     number of factors, such as whether the request was suitably
-     aligned, on whether the `NBD_CMD_FLAG_NO_HOLE` flag was present,
-@@ -2266,7 +2274,9 @@ SHOULD return `NBD_EPERM` if it receives a write or trim request on a
- read-only export.
-
- The server SHOULD NOT return `NBD_EOVERFLOW` except as documented in
--response to `NBD_CMD_READ` when `NBD_CMD_FLAG_DF` is supported.
-+response to `NBD_CMD_READ` when `NBD_CMD_FLAG_DF` is supported, or when
-+a command without payload requests a length larger than an advertised
-+maximum block payload length.
-
- The server SHOULD NOT return `NBD_ENOTSUP` except as documented in
- response to `NBD_CMD_WRITE_ZEROES` when `NBD_CMD_FLAG_FAST_ZERO` is
 -- 
-2.35.1
+Best regards,
+Vladimir
 
