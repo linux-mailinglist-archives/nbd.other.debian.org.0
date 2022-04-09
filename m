@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B7584FA4EE
-	for <lists+nbd@lfdr.de>; Sat,  9 Apr 2022 07:12:07 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id F03C34FA4F0
+	for <lists+nbd@lfdr.de>; Sat,  9 Apr 2022 07:12:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 832BA2046C; Sat,  9 Apr 2022 05:12:07 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr  9 05:12:07 2022
+	id D830F20367; Sat,  9 Apr 2022 05:12:29 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr  9 05:12:29 2022
 Old-Return-Path: <BATV+43fc5532e856fea764d1+6803+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5B57B2045E
-	for <lists-other-nbd@bendel.debian.org>; Sat,  9 Apr 2022 04:51:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6AE922045B
+	for <lists-other-nbd@bendel.debian.org>; Sat,  9 Apr 2022 04:52:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.141 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
@@ -29,28 +29,28 @@ X-Amavis-Spam-Status: No, score=-0.141 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id XQlK1O8nuOJw for <lists-other-nbd@bendel.debian.org>;
-	Sat,  9 Apr 2022 04:51:56 +0000 (UTC)
+	with ESMTP id vQsEY2q2Zc7K for <lists-other-nbd@bendel.debian.org>;
+	Sat,  9 Apr 2022 04:52:05 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 31A562045B
-	for <nbd@other.debian.org>; Sat,  9 Apr 2022 04:51:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 26B572045E
+	for <nbd@other.debian.org>; Sat,  9 Apr 2022 04:52:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=V+N3WPhcjqbqmVRPAoIxuBjo6dgh1f5KuPVQDpaEGEs=; b=tiIaiEVMWAbVYZUjb2lOkfyysx
-	dbx49Qpm+lo+UUevAGrVDIkvKOBa+44snHlQ0a+KaxdGF8tKMoYuXWs/fvRv0ae96tcME++4ORVYu
-	qYaC1vBwLvlzDvH7/c4A7h9mvUaVl8+MzbhpnW7kmDycYjo20v3XRILfplXYTrbZMX8JEk4N43tKH
-	ZGQP+OitiIrdN0xV7JNnkLHd6fyLWakKMo7lxXmk9Yj+ODdh4QMMFZVM+vhTm4zDm7nCREr0fmSsA
-	waBKGG0G7evAOkXMc1HpZXEoglbkXIOtFpSCT7RrqLEic0YOHBHXQ9EKk4JuDHcopl0LFeqmVS4RI
-	X94UE+Ww==;
+	bh=q2ranmlO4Nl6vweHnkN5W/lhAXFqjXPKY6W4cI6bGNw=; b=ZwXWqq27tMeyVdjCd9/fIV+62b
+	YxoMIWLS5QBW9+N570g/a7MqnPHccUJQp/73S/ehTJ9VEsGu0nZXpLT2GsIb95dlGJnKSkFIT7WNJ
+	Q2sY9of4Z8TkC7fc/FklkIOgdhls0Ao3F7MloWBwUhbTcUSp/MjOHIau/ybVaMror8iobGwcOp0AA
+	+a4GNDWpu5gRhJyLqGbdZW5DNs6lIAJYj08W7f1olcpdRSmv2+7GaRf1xJ5QApQRYFU40mFosdlZy
+	0ALRAEA3rIIwBWnBlj8QEgYL1eIM3It3IcCM+Tc/eC3LmnRLah4kAgVmx2WJTHuXLjilmSIpHNWrZ
+	1FnhvyJg==;
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1nd34X-00217H-QX; Sat, 09 Apr 2022 04:51:42 +0000
+	id 1nd34b-0021Bd-D3; Sat, 09 Apr 2022 04:51:45 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -81,9 +81,9 @@ Cc: dm-devel@redhat.com,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
 	"Martin K . Petersen" <martin.petersen@oracle.com>
-Subject: [PATCH 16/27] block: use bdev_alignment_offset in part_alignment_offset_show
-Date: Sat,  9 Apr 2022 06:50:32 +0200
-Message-Id: <20220409045043.23593-17-hch@lst.de>
+Subject: [PATCH 17/27] block: use bdev_alignment_offset in disk_alignment_offset_show
+Date: Sat,  9 Apr 2022 06:50:33 +0200
+Message-Id: <20220409045043.23593-18-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
@@ -93,9 +93,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QyegHpJZsJE.A.e9C.nWRUiB@bendel>
+Resent-Message-ID: <eaydAJxfQ0C.A.XDD.9WRUiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1950
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1952
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -105,37 +105,51 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220409045043.23593-17-hch@lst.de
-Resent-Date: Sat,  9 Apr 2022 05:12:07 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220409045043.23593-18-hch@lst.de
+Resent-Date: Sat,  9 Apr 2022 05:12:29 +0000 (UTC)
 
-Replace the open coded offset calculation with the proper helper.
-This is an ABI change in that the -1 for a misaligned partition is
-properly propagated, which can be considered a bug fix and matches
-what is done on the whole device.
+This does the same as the open coded variant except for an extra branch,
+and allows to remove queue_alignment_offset entirely.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 ---
- block/partitions/core.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ block/genhd.c          | 2 +-
+ include/linux/blkdev.h | 8 --------
+ 2 files changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/block/partitions/core.c b/block/partitions/core.c
-index 2ef8dfa1e5c85..240b3fff521e4 100644
---- a/block/partitions/core.c
-+++ b/block/partitions/core.c
-@@ -200,11 +200,7 @@ static ssize_t part_ro_show(struct device *dev,
- static ssize_t part_alignment_offset_show(struct device *dev,
- 					  struct device_attribute *attr, char *buf)
+diff --git a/block/genhd.c b/block/genhd.c
+index b8b6759d670f0..712031ce19070 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -1010,7 +1010,7 @@ static ssize_t disk_alignment_offset_show(struct device *dev,
  {
--	struct block_device *bdev = dev_to_bdev(dev);
--
--	return sprintf(buf, "%u\n",
--		queue_limit_alignment_offset(&bdev_get_queue(bdev)->limits,
--				bdev->bd_start_sect));
-+	return sprintf(buf, "%u\n", bdev_alignment_offset(dev_to_bdev(dev)));
+ 	struct gendisk *disk = dev_to_disk(dev);
+ 
+-	return sprintf(buf, "%d\n", queue_alignment_offset(disk->queue));
++	return sprintf(buf, "%d\n", bdev_alignment_offset(disk->part0));
  }
  
- static ssize_t part_discard_alignment_show(struct device *dev,
+ static ssize_t disk_discard_alignment_show(struct device *dev,
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index f8c50b77543eb..d5346e72e3645 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1251,14 +1251,6 @@ bdev_zone_write_granularity(struct block_device *bdev)
+ 	return queue_zone_write_granularity(bdev_get_queue(bdev));
+ }
+ 
+-static inline int queue_alignment_offset(const struct request_queue *q)
+-{
+-	if (q->limits.misaligned)
+-		return -1;
+-
+-	return q->limits.alignment_offset;
+-}
+-
+ static inline int queue_limit_alignment_offset(struct queue_limits *lim, sector_t sector)
+ {
+ 	unsigned int granularity = max(lim->physical_block_size, lim->io_min);
 -- 
 2.30.2
 
