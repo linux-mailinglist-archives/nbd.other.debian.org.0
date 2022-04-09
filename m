@@ -1,56 +1,56 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FCF24FA4E4
-	for <lists+nbd@lfdr.de>; Sat,  9 Apr 2022 07:10:38 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 726B54FA4E5
+	for <lists+nbd@lfdr.de>; Sat,  9 Apr 2022 07:10:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2717F20416; Sat,  9 Apr 2022 05:10:38 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr  9 05:10:38 2022
+	id 58CBD2046E; Sat,  9 Apr 2022 05:10:49 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr  9 05:10:49 2022
 Old-Return-Path: <BATV+43fc5532e856fea764d1+6803+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: *
-X-Spam-Status: No, score=1.9 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,FOURLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,
-	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 06AA92045E
-	for <lists-other-nbd@bendel.debian.org>; Sat,  9 Apr 2022 04:51:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 1B8A42045E
+	for <lists-other-nbd@bendel.debian.org>; Sat,  9 Apr 2022 04:51:30 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.041 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-0.141 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1,
 	HEADER_FROM_DIFFERENT_DOMAINS=0.249, MURPHY_DRUGS_REL8=0.02,
 	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id w8ujEoid1zXJ for <lists-other-nbd@bendel.debian.org>;
-	Sat,  9 Apr 2022 04:51:24 +0000 (UTC)
+	with ESMTP id bSMPrdoaaKAu for <lists-other-nbd@bendel.debian.org>;
+	Sat,  9 Apr 2022 04:51:27 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B8B932045B
-	for <nbd@other.debian.org>; Sat,  9 Apr 2022 04:51:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id E5AF12045B
+	for <nbd@other.debian.org>; Sat,  9 Apr 2022 04:51:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=fGcL4rT6o55inYg+xD7k4NQPOksglZvB+PFSEP+xhA8=; b=x49SryV2SEOzb+YKli0UJZwys7
-	Znb1rsPTkSfYcHPVo9D6b2U83E7uqw2G98XO8zYfl/hKwrvVhicKgqjDvuZYTEB489P843L//CwDT
-	gqCbBf9JUwJ6J0Nu3a/lcC/IfwnnEVdVHN84pWvuhxzJiYH6crHhPnTIzf9dIWY5MLhKlVfzyM0Vq
-	bwRuU6hgXkjUYp1qcxu8V6Fo824rSDUIbNTnNROyu48YrBGf3oVsysJ9CQPrqpevcWLNQdLnu2N4C
-	4XspCM6we8vYPn8dRLL0TG98f118C88z+RALpryzLlARTzoVN3y6dQTJp4lOBr41BAbVo0sl+miwh
-	a6JWWqsQ==;
+	bh=Bh+vV8H1PUD+w/3YWj6wMRz8JdOJ8okMcDjW6Mx/Fiw=; b=DWf7imoDvMSXJTtirA5ltk+rtE
+	YeH7NxKahOANJaW3JeWmpEL0KWvrQ+sUioHsm0dQaUs7Tks6Ss/UVOXMhmulR7QEBLriQYI1KEMzQ
+	aO9ISV0dwvPZErcNPFhlMeFi6wIDVT8NvUOYYMlUOKdrnhvM68xwDYg36srZ722XpvX8aIcmuYcaD
+	sB1HtVb3yxckb8p+8Hs6srY4Fa9xc+Rr/tmxJaQIFCFAy3LRp9g0YB5fD3IXoh+PksnNKd9R9552Q
+	DFKI2Il5Y+lOkByKWQ2YD6LETuE64wDq4THU/F5OZAcQu9U4H1sQRvyeZgS12iohkvkHfPdltFjhr
+	Z+SPB7CA==;
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1nd345-0020fc-8h; Sat, 09 Apr 2022 04:51:13 +0000
+	id 1nd348-0020i9-Di; Sat, 09 Apr 2022 04:51:16 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -81,9 +81,9 @@ Cc: dm-devel@redhat.com,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
 	Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Subject: [PATCH 08/27] btrfs: use bdev_max_active_zones instead of open coding it
-Date: Sat,  9 Apr 2022 06:50:24 +0200
-Message-Id: <20220409045043.23593-9-hch@lst.de>
+Subject: [PATCH 09/27] ntfs3: use bdev_logical_block_size instead of open coding it
+Date: Sat,  9 Apr 2022 06:50:25 +0200
+Message-Id: <20220409045043.23593-10-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
@@ -93,9 +93,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <WuIX0mvb3sK.A.voC.OVRUiB@bendel>
+Resent-Message-ID: <st6q0aa0S1.A.RrC.ZVRUiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/1942
+X-Mailing-List: <nbd@other.debian.org> archive/latest/1943
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -105,36 +105,28 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220409045043.23593-9-hch@lst.de
-Resent-Date: Sat,  9 Apr 2022 05:10:38 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220409045043.23593-10-hch@lst.de
+Resent-Date: Sat,  9 Apr 2022 05:10:49 +0000 (UTC)
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- fs/btrfs/zoned.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/ntfs3/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/btrfs/zoned.c b/fs/btrfs/zoned.c
-index 1b1b310c3c510..f72cad7391a11 100644
---- a/fs/btrfs/zoned.c
-+++ b/fs/btrfs/zoned.c
-@@ -350,7 +350,6 @@ int btrfs_get_dev_zone_info(struct btrfs_device *device, bool populate_cache)
- 	struct btrfs_fs_info *fs_info = device->fs_info;
- 	struct btrfs_zoned_device_info *zone_info = NULL;
- 	struct block_device *bdev = device->bdev;
--	struct request_queue *queue = bdev_get_queue(bdev);
- 	unsigned int max_active_zones;
- 	unsigned int nactive;
- 	sector_t nr_sectors;
-@@ -410,7 +409,7 @@ int btrfs_get_dev_zone_info(struct btrfs_device *device, bool populate_cache)
- 	if (!IS_ALIGNED(nr_sectors, zone_sectors))
- 		zone_info->nr_zones++;
+diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
+index 278dcf5024102..cd30e81abbce0 100644
+--- a/fs/ntfs3/super.c
++++ b/fs/ntfs3/super.c
+@@ -920,7 +920,7 @@ static int ntfs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 	}
  
--	max_active_zones = queue_max_active_zones(queue);
-+	max_active_zones = bdev_max_active_zones(bdev);
- 	if (max_active_zones && max_active_zones < BTRFS_MIN_ACTIVE_ZONES) {
- 		btrfs_err_in_rcu(fs_info,
- "zoned: %s: max active zones %u is too small, need at least %u active zones",
+ 	/* Parse boot. */
+-	err = ntfs_init_from_boot(sb, rq ? queue_logical_block_size(rq) : 512,
++	err = ntfs_init_from_boot(sb, bdev_logical_block_size(bdev),
+ 				  bdev_nr_bytes(bdev));
+ 	if (err)
+ 		goto out;
 -- 
 2.30.2
 
