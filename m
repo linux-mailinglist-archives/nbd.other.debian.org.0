@@ -2,131 +2,187 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 958965023F0
-	for <lists+nbd@lfdr.de>; Fri, 15 Apr 2022 07:33:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A8B2502513
+	for <lists+nbd@lfdr.de>; Fri, 15 Apr 2022 08:00:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7CDF020348; Fri, 15 Apr 2022 05:33:22 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Apr 15 05:33:22 2022
-Old-Return-Path: <prvs=0972008b0=damien.lemoal@opensource.wdc.com>
+	id D7F3720327; Fri, 15 Apr 2022 06:00:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Apr 15 06:00:10 2022
+Old-Return-Path: <chaitanyak@nvidia.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+X-Spam-Level: **
+X-Spam-Status: No, score=2.2 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
+	NICE_REPLY_A,THREADTOPIC,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3CD312037A
-	for <lists-other-nbd@bendel.debian.org>; Fri, 15 Apr 2022 05:17:13 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5C869201AD
+	for <lists-other-nbd@bendel.debian.org>; Fri, 15 Apr 2022 05:43:17 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.772 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.282, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=1.527 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.282,
+	THREADTOPIC=2, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 5BAb04U0VpPh for <lists-other-nbd@bendel.debian.org>;
-	Fri, 15 Apr 2022 05:17:08 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
+	with ESMTP id 5hB4Uhums5E1 for <lists-other-nbd@bendel.debian.org>;
+	Fri, 15 Apr 2022 05:43:14 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .nvidia. - helo: .nam10-dm6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
+X-Greylist: delayed 304 seconds by postgrey-1.36 at bendel; Fri, 15 Apr 2022 05:43:14 UTC
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on20628.outbound.protection.outlook.com [IPv6:2a01:111:f400:7e88::628])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.hgst.iphmx.com", Issuer "Go Daddy Secure Certificate Authority - G2" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 564A8202E4
-	for <nbd@other.debian.org>; Fri, 15 Apr 2022 05:17:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1649999828; x=1681535828;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=wC6/PVYH+J9es8aT7sK5ZaGwsGnDQHOFu7y4PW6r0NI=;
-  b=GD9a56MKvgAkhWWNv/SidMlhBT47rNMcvfB7nE/N8rpbGQTJLzSSo7IN
-   vbxtgBvshbrg4vNHUj4p5TVYksp3P375bOawUJjpxYRK5gNedho67GQDQ
-   qHYjjk1gfOK+UJTYsxxhJ9P2eypmIN//R6qOF4xjDodEdWOyI7IT2eqkv
-   /LHcQbKKhM1JaYiz4TsVdmL9xMQR8j0AKW8ygOP/GoSHYwjwDUCqZi8X+
-   nNBl+rct3aohnnDrSDY3qYuLCi4tkEvxyQAWU7Q42j4Q5nnnjBKrJ1UYk
-   /1wdIVSo8Giy/gkWbDS08gzUbt15BPk0FOZQ7X1IEpz1XtjKg7Bzbnt2x
-   w==;
-X-IronPort-AV: E=Sophos;i="5.90,261,1643644800"; 
-   d="scan'208";a="309936284"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 15 Apr 2022 13:09:49 +0800
-IronPort-SDR: GVVBhl4YT7GCRQ83RA5L0wWpcIDkVycDUjHXNm5wHaax3umcA1o5RkKLV0WsHvq+IBLRL4Hk9F
- je5O5uwSwGmyxHZsjsb8mUIsVMeWrWRGk9T5qOcmuyf3LhaQVmMVXtFT/F9yjClvLXu8cspik1
- I+6cmq+RNWgtQmIaO9IEz8TdNZT09aqxubF5FHH7txd7ZomYl8LxZXUf0F1Pl4vi23m/eykrL3
- 5RwEObn3RTk7rhfjOQGMCigf4Dt3MMu3IqArx/dPLo9ykIEXCqYCXFJaEed3dK/RVhqldkX9eZ
- rsCIGB0votlEDa+uP8Xwb5W5
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 14 Apr 2022 21:40:14 -0700
-IronPort-SDR: nIZcdwBb4GWYEPquwM87Oj+0uBBuW1oVgebUZkTlmQc0AgyexOmfEMonedfP1qKF2eECfU0Bef
- FWgeUSWeN5qFijskXguVVwhkVyUv6dghjTw9L09PebFDeQMBleUfehtAHVynNUwZ6wUpf+FGst
- NNEZ6V+XxikQpUbleFHgTkwKzBPdJAqIPS6pBUw12tb6OdtvG/em2iZDyjm0kRxFia70G2vgxa
- zKDUWm8dNiCXZ8BbnHVj/ejd94KQBTiYCaXxKig1F2XTUi4CbTtkpm4WCHRSraiFkk+uaKY7o3
- bLI=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
-  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 14 Apr 2022 22:09:50 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
-	by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KfksT0fkWz1Rwrw
-	for <nbd@other.debian.org>; Thu, 14 Apr 2022 22:09:49 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
-	reason="pass (just generated, assumed good)"
-	header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
-	opensource.wdc.com; h=content-transfer-encoding:content-type
-	:in-reply-to:organization:from:references:to:content-language
-	:subject:user-agent:mime-version:date:message-id; s=dkim; t=
-	1649999388; x=1652591389; bh=wC6/PVYH+J9es8aT7sK5ZaGwsGnDQHOFu7y
-	4PW6r0NI=; b=D8kdC3rz3pjqnugRL+G3XHXL6Ng78iZSZCza4fEMQpTN/xdgY6D
-	ndgbPRv8Ii6RTniwYP01qFwFHzH91r1LoAWx6xGwWEN+Qsp3Ex2YpjoRKlcblFjc
-	7yjQF4oBeK9egOucgCIrr2m+tKTIlJA0mcKIvKIgWCVnz5iEJtEs0vxeju2wZT96
-	jtBkpdSzig+EY3uiGMCOqAfDYf4ob5UMdfn63Y/7o6floZGBngeQCZ8K+n+vY3d5
-	lYsSP/0Lz/G5amM7P4+yygELabSZDZHGZG/YfdQpCLMrO4FBxFoQbF9pdD3HvN17
-	o1OWdE4/X82Vq8Fyie48I/oIcM5G/NLyIZA==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
-	by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id 5wAHMlfW2OOI for <nbd@other.debian.org>;
-	Thu, 14 Apr 2022 22:09:48 -0700 (PDT)
-Received: from [10.225.163.9] (unknown [10.225.163.9])
-	by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KfksM3c9Fz1Rvlx;
-	Thu, 14 Apr 2022 22:09:43 -0700 (PDT)
-Message-ID: <62ebc311-e5ef-cea5-5236-0c83d1a3eb64@opensource.wdc.com>
-Date: Fri, 15 Apr 2022 14:09:42 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH 10/27] mm: use bdev_is_zoned in claim_swapfile
-Content-Language: en-US
+	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 37BE920201
+	for <nbd@other.debian.org>; Fri, 15 Apr 2022 05:43:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=R5xmOosq2CA76gdgm6VfUB1pSubKAWraGkUGptftmTUx6soaY2zrItNPwxTlvdnQbkGHRttyCOskGudy4NlF/wLoXzpzF/EsejVfBD8RRVawAg+HW2h2Ee8k1M5oGEVjdpdQkLnp9EnFko0ztZjGDVY2GAb3D+22PwiZeOcl9O/N26mW1ZBSkqJub6ssns2U9MWviR5Kp569zngIlDY7GFnDkw/6Ks6kQ9nZku5RTAHm+naUGvlvAxOHUdhXUezohgNOsgU83OCH/IkOyRZPOePv1MkJZcFcw478P1UtyoermwZEegfM+bn0WB67fM231W8jiRLDfh6tPoB58hiJ4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/5H+8Htl+4waRugxbMx4Qrdik8L7tyzYJrNYknxljDg=;
+ b=DD6/kBr1T8p20Qy5G4MnmbrlfQNsSPGYYHlOFiqCnxtlUvYkrslD6SVVIGbaJomLomkFAnjRGvdKt8LRZRtSydG5qfl2li1LIECN75pldb4hGa4u11EtW3ABLfCnwYax/2NVXnVtzNxNdLb2NJWk5l50LzyORV7pAngYn/T0umInWjqueJJbW0UozX9F1Eh/eibcpUMH5kdJL31+H73UelklLS8Uem/8wu+ZkE8oLksRYXhDaZMlXTAkUvdB6hAb/UDbK3J8Sz15smPZPeo/1hFCELeu0uPc2kmh8xS8C02Vk4Bs2eoRYFjKNRmukSuXeDlPAW6UR1vqQs1a/HbCvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/5H+8Htl+4waRugxbMx4Qrdik8L7tyzYJrNYknxljDg=;
+ b=bbQcnGI+WjMQNQsa+dIiZJb6XflLSwuUmitGjnUrE1+K2mZ1hM0qTAY6w5oFoM3BVgzz1TLav0E5w8H2LEdwFgKZBKvW++4hTnZmCQJ9NFJVhYN9f3dkATOUCjUANbMEKL6l45b8yYqPoW2ybuDs/rZLEvXj7UV3+OSsOvgIaGenA0jsWeFjQS+vn7lKL1TxKHIT6zWvmDWd9fBFFHkj10xS7juBmZeLdjI3Tgubc1dkhc2jSdph4ITmdstRwFudio8xxKlcTK6jae6mJOWVC+wXHrG3+Jzh3JSVwz25WoFXEVaPWIxmEm/WdZ8SC3lvxlKY9mi9dU4KBSIX0yRhJQ==
+Received: from MW2PR12MB4667.namprd12.prod.outlook.com (2603:10b6:302:12::28)
+ by CY4PR12MB1815.namprd12.prod.outlook.com (2603:10b6:903:122::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Fri, 15 Apr
+ 2022 05:43:09 +0000
+Received: from MW2PR12MB4667.namprd12.prod.outlook.com
+ ([fe80::a90b:9df2:370c:e76b]) by MW2PR12MB4667.namprd12.prod.outlook.com
+ ([fe80::a90b:9df2:370c:e76b%3]) with mapi id 15.20.5144.030; Fri, 15 Apr 2022
+ 05:43:08 +0000
+From: Chaitanya Kulkarni <chaitanyak@nvidia.com>
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: dm-devel@redhat.com, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-um@lists.infradead.org,
- linux-block@vger.kernel.org, drbd-dev@lists.linbit.com,
- nbd@other.debian.org, ceph-devel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
- linux-bcache@vger.kernel.org, linux-raid@vger.kernel.org,
- linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
- linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
- linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
- ntfs3@lists.linux.dev, ocfs2-devel@oss.oracle.com, linux-mm@kvack.org
+CC: "dm-devel@redhat.com" <dm-devel@redhat.com>, "linux-xfs@vger.kernel.org"
+	<linux-xfs@vger.kernel.org>, "linux-fsdevel@vger.kernel.org"
+	<linux-fsdevel@vger.kernel.org>, "linux-um@lists.infradead.org"
+	<linux-um@lists.infradead.org>, "linux-block@vger.kernel.org"
+	<linux-block@vger.kernel.org>, "drbd-dev@lists.linbit.com"
+	<drbd-dev@lists.linbit.com>, "nbd@other.debian.org" <nbd@other.debian.org>,
+	"ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, "linux-bcache@vger.kernel.org"
+	<linux-bcache@vger.kernel.org>, "linux-raid@vger.kernel.org"
+	<linux-raid@vger.kernel.org>, "linux-mmc@vger.kernel.org"
+	<linux-mmc@vger.kernel.org>, "linux-mtd@lists.infradead.org"
+	<linux-mtd@lists.infradead.org>, "linux-nvme@lists.infradead.org"
+	<linux-nvme@lists.infradead.org>, "linux-s390@vger.kernel.org"
+	<linux-s390@vger.kernel.org>, "linux-scsi@vger.kernel.org"
+	<linux-scsi@vger.kernel.org>, "target-devel@vger.kernel.org"
+	<target-devel@vger.kernel.org>, "linux-btrfs@vger.kernel.org"
+	<linux-btrfs@vger.kernel.org>, "linux-ext4@vger.kernel.org"
+	<linux-ext4@vger.kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+	<linux-f2fs-devel@lists.sourceforge.net>, "cluster-devel@redhat.com"
+	<cluster-devel@redhat.com>, "jfs-discussion@lists.sourceforge.net"
+	<jfs-discussion@lists.sourceforge.net>, "linux-nilfs@vger.kernel.org"
+	<linux-nilfs@vger.kernel.org>, "ntfs3@lists.linux.dev"
+	<ntfs3@lists.linux.dev>, "ocfs2-devel@oss.oracle.com"
+	<ocfs2-devel@oss.oracle.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+	Damien Le Moal <damien.lemoal@opensource.wdc.com>, "Martin K . Petersen"
+	<martin.petersen@oracle.com>, Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Subject: Re: [PATCH 15/27] block: add a bdev_max_zone_append_sectors helper
+Thread-Topic: [PATCH 15/27] block: add a bdev_max_zone_append_sectors helper
+Thread-Index: AQHYUIThL7IFGipIVkSGIZfvx5g6z6zwdlQA
+Date: Fri, 15 Apr 2022 05:43:08 +0000
+Message-ID: <29b7e5b3-172b-c006-94c3-ad23e058e438@nvidia.com>
 References: <20220415045258.199825-1-hch@lst.de>
- <20220415045258.199825-11-hch@lst.de>
-From: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Organization: Western Digital Research
-In-Reply-To: <20220415045258.199825-11-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20220415045258.199825-16-hch@lst.de>
+In-Reply-To: <20220415045258.199825-16-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 329d9650-aa25-4c36-bb1c-08da1ea2d25f
+x-ms-traffictypediagnostic: CY4PR12MB1815:EE_
+x-microsoft-antispam-prvs:
+ <CY4PR12MB1815F3B93CAD76B7BC5687A4A3EE9@CY4PR12MB1815.namprd12.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ t6t+OjGUQ1OzaWpmgj6CRMw/oONXIm3UqcwYFA2T2rxL0gmi2gY70ddUD0K6Yoaibu9boOOIqd1sMsP4CbzKPtbQYwM1IuxsKpoKGXVP0M3JkttCknJs8GZDnhcxJgArTJBsyvlZnBqIbkRjFPCLFihtUqT6fV0hVQZNY2BxY2P5UAf5WBOR7I0LhKaVr/CWet93K7A7AXwUD2dYflyjdTdDHm9tcJPkTAXcir/2fpOqvw+eKW2jdnYm7P5aWyirx/3QPcRunm2hFEAIbKyvQGga+6KLFRgexCQ5D/Hih+3RRNOxKCsCZVGzDlSp8zaoD9hXaKgpW+yvFslrcRXDHv2iiP+jaeEB3zaZU7axixGIkNC+6QxEA1W099/MWYtx9krTcvxx8yUJ65Bwf6Vy1QkdXPjwMVMCaTTb5t8AHDKLW+c/4tXcEq+MDjI3vHByOqfK7z0Rd1Rly7qnjDQqcLdHpj9KWhC0LbbG4XgzwGQcQ6TQGEvliw6Y/kToovcBRrI4vpileZwct9UvYcC6islmD0DWSoaNjyHDsTwPQQt7e9A4Syw6quQC/ODj+xrkfNS4L70tSmleGz0qVUkKLjRyWJA5ficWTWVeyDq0jlaeehPKszMYOPXZ/mTOZgJlW883XsU9Ydwb48LBCXutALWEoeiS8UsOIPoHMn9hq1f8HO028tdO+IFYz4749b6dvSCp2+cNqJZWrdJnK6UGvaYqUvnP3sF6fcv0lB1FLdjUHsBTqH5cddPu7xcS/XyS0zo+QyH22wYdQqyV0xXOzQ==
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW2PR12MB4667.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(7416002)(8936002)(2906002)(91956017)(7406005)(5660300002)(4326008)(66556008)(83380400001)(86362001)(31686004)(508600001)(4744005)(38070700005)(6512007)(2616005)(186003)(53546011)(6506007)(36756003)(66946007)(66476007)(54906003)(110136005)(71200400001)(76116006)(6486002)(38100700002)(64756008)(66446008)(122000001)(8676002)(31696002)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?WGF4eEVUSDhUZVgvZEFGYUtJdXZaMHp1VnQxYVNBZ0ZpblNkYm1pUUl2SEtM?=
+ =?utf-8?B?Nk9KeDNZbHB3aUlYMlhoYVBIdzZNWE4zcFNBaVkxUUFYV0thZzBhRTRQYUNu?=
+ =?utf-8?B?dlFwdXRpTFdwbmdZS3MxZDFrV0hFUUxJeGVYNkVnWkVEVDdmRk5QdmpTTjZa?=
+ =?utf-8?B?d1Q4NysydjJWWmU2TkZJM2NPempodW54VjFzK2pTVWtMV3Aybi9rNlJMMm9q?=
+ =?utf-8?B?ZDlhZ280cSsxQ3ZtT1owK1kxYmo4QmxOVit0cEhwQWsrYmw0RzdFM0JXSGtJ?=
+ =?utf-8?B?QWFkVnVFMDJQdGVIMmRIMDVjK0h0bDc2UFIwS0k5bEcreEdjOTJJTXQyc2R1?=
+ =?utf-8?B?YWRLZXFza2xabjFLU3dOSHdvSFJKOGZpc3B2ZllvZ0p3Ky85dUx3cVpHYmVu?=
+ =?utf-8?B?YktUbkVIZUovMlFxY3FpRFQzUmxQc1BhY3loSGNWcmZ1c0tOSHdIcDVsN0Z5?=
+ =?utf-8?B?VmR6dXN4ZnJLUm9adGVkL0pCSGtZM3ZmcURMWU1NTUVGUmRQb2JiUm1UWmFY?=
+ =?utf-8?B?TUw4bzBaQ05jbXpqL0hxMTkzTytiN0hMT0NJclZwOWxpQWxzU3ZvYkpBeGVV?=
+ =?utf-8?B?cWhiRHBCOHR6b2FtWkFwcWVkcjZRTlVTZ3hNWE9ZeDYxNFEzWHZadmVaYWRQ?=
+ =?utf-8?B?TG5VZUtJVnVqZVhGVTJ3RWkxWG5MQWZHemNNMXhwc2hjbkRjbXRpUUMyVExa?=
+ =?utf-8?B?c1FNOGhWcm41Rk94ZUhmWlE3M0xCOUZvTFpMcWptdlM3NzhLYzhxaDRMdVAw?=
+ =?utf-8?B?UEJxRlB3RUk4a0g1SktnTUJPZjhCcitPbW1UV3BrU2NTTHVwN1Fpd2hSTDBu?=
+ =?utf-8?B?Tk4rZ1NMOHg3THZyUXE3T215cGs0NkVSa2FxV0p6ZWhYL29Cc0hydHdoeUts?=
+ =?utf-8?B?cjY3RHFYNTlQUFRGajA2YU5VMUJud1A5ZEhleXBFaVB3aitncWVOVlFIWUVF?=
+ =?utf-8?B?SHZhTlAzemxBZ2FuQWhQcnI0NktpdE9XY0ZKRURBTDFWeWZmSXNDZTZkRENB?=
+ =?utf-8?B?cS9pS1ovV0VmeFRwd1hqVXFCTjMxT3dockhqV1NWeXlxVU04cHNuUnhNYlZD?=
+ =?utf-8?B?R2owcFpVbUhMZlI2L3c4a3dublkyTWdzZDQydFJKa04rOGVhZDBFb1JhdE94?=
+ =?utf-8?B?dGR4bTYxUGljT1R4L0ZRcTBlbVRyVXZLTGF3emhhZ0VqcmdKTGVEbVlYWXdK?=
+ =?utf-8?B?OVZWK3FWRlFqSEp5TDBWaldiQXBGaW9pVXVkRTl4YmpUUkVzS2tMMEZJYkMy?=
+ =?utf-8?B?eEpxcVJmQUFPN0dHVTdPSXh6OG1rOE1UUXNRNmU0KzV0M0FkUFh0Z0FHV2Ro?=
+ =?utf-8?B?dVAyeHF3RUh3Tms2OWJoTlpyM0pPR2tZcnllZ2hpY2NTM293a1dYUjRuNmNG?=
+ =?utf-8?B?VldPK0ViRlBVTG9lTWc1bkYxeUZFZGx1cFoxZTd3YmVxeXJ3OHI3bElRMTRG?=
+ =?utf-8?B?ZUduVXVtRzY4VHY2cHlYaTVVRGx5MVBqdkIxTDcwSXA0RC9GeDh4ZDVUeHVr?=
+ =?utf-8?B?NUF1dnNwdGp5WXJJNCtrbTdPK2M5TXFEWXJ3UDJmTFZVaEcxYlduNWFmZ2d2?=
+ =?utf-8?B?SXNSOXlXOGVjcUpiZmxDRGpaM2xEKzkrNUFPTnJHRllDMkIvN0tZNTR5bG5C?=
+ =?utf-8?B?dEpDV0VwRU9wTDJBSnlwTEh1cVN3dzBKS0piN0hwaEVzSWU0a2owcGVBWWZX?=
+ =?utf-8?B?QTBCS1dtdnU2OElqam93OFVRRHdaZHBkSXp4eWdQZlNkbXJkOTQzbk1sRmNr?=
+ =?utf-8?B?Z3AzTDNTY2NLN3VRVDlqYy9FWlJWb25GZmd0SjF0U3ZoZGtqL01TSTF4MTNE?=
+ =?utf-8?B?enIvNkpLUCt2K2hrZ3h3anM1SFBVVnFkTHphaXJMYWlxaE1ycHBxYlo5bEpt?=
+ =?utf-8?B?R3puZ043TzlkSDlVSTZmQ1ZQblI1SjJNSlI1N3FXSDBWeUE0bzZBUElWWjg4?=
+ =?utf-8?B?Q2Y1YlBic0RpdXhpcXd2TXBPY0llZzhxbWU1RzRzMk92OGQ3bW5yamp4NWhi?=
+ =?utf-8?B?SEUyMFBqcDdaa29NTDZFV3ZGVGJjakF5aHFDTGZyU1RQSzZhYlU2d2pDSmpT?=
+ =?utf-8?B?Q3NOVnltRDhndzJVMndLWjB4Z3VVSlVqSE84VEFEaGZNdTF0QVBSQXN0NFYz?=
+ =?utf-8?B?amhicXhOdE5ybmxnSE5XbTZya3ZFSVcrMUhYSHB6cnJOeDBLdEZja3ZSeUdv?=
+ =?utf-8?B?VTVPQ0g0Y1BNVFNJakNIWkl3b1VtL3NSSnVEV0pUR2o0a1V1b285VnVNcVVx?=
+ =?utf-8?B?dkZKczUrK0JJOWlEMzRGc1JBVVA2dThsU0daUmtvS0R5VW10VkkyZkNGNjlm?=
+ =?utf-8?B?THJORE5zYkl4enJBNTRrMjlYYWJ3U2RoV3lyWUFrS2VvUlhpOFIrZ3JQZ2tC?=
+ =?utf-8?Q?9dpsVxsWYuGaBiJZKWvNwYXf0NoBW3MqzIHF/?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6CDFF86F90989C4A95462B2BEA592E1A@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MW2PR12MB4667.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 329d9650-aa25-4c36-bb1c-08da1ea2d25f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Apr 2022 05:43:08.8277
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: pI4Ug6p8HtKxYGGTRxGsdbryu83yFMwivmnD9Bi4GdnIIxiVGCQx5DSYPhYLUiIiFyypc2wCWvLHLPzmgBetuw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR12MB1815
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <4o0_Gj-ZSnC.A.GSF.iOQWiB@bendel>
+Resent-Message-ID: <H5A1SA--wnB.A.I1F.qnQWiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2000
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2001
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -136,36 +192,17 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/62ebc311-e5ef-cea5-5236-0c83d1a3eb64@opensource.wdc.com
-Resent-Date: Fri, 15 Apr 2022 05:33:22 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/29b7e5b3-172b-c006-94c3-ad23e058e438@nvidia.com
+Resent-Date: Fri, 15 Apr 2022 06:00:10 +0000 (UTC)
 
-On 4/15/22 13:52, Christoph Hellwig wrote:
-> Use the bdev based helper instead of poking into the queue.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  mm/swapfile.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/mm/swapfile.c b/mm/swapfile.c
-> index 63c61f8b26118..4c7537162af5e 100644
-> --- a/mm/swapfile.c
-> +++ b/mm/swapfile.c
-> @@ -2761,7 +2761,7 @@ static int claim_swapfile(struct swap_info_struct *p, struct inode *inode)
->  		 * write only restriction.  Hence zoned block devices are not
->  		 * suitable for swapping.  Disallow them here.
->  		 */
-> -		if (blk_queue_is_zoned(p->bdev->bd_disk->queue))
-> +		if (bdev_is_zoned(p->bdev))
->  			return -EINVAL;
->  		p->flags |= SWP_BLKDEV;
->  	} else if (S_ISREG(inode->i_mode)) {
-
-Looks good.
-
-Reviewed-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-
--- 
-Damien Le Moal
-Western Digital Research
+T24gNC8xNC8yMiAyMTo1MiwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6DQo+IEFkZCBhIGhlbHBl
+ciB0byBjaGVjayB0aGUgbWF4IHN1cHBvcnRlZCBzZWN0b3JzIGZvciB6b25lIGFwcGVuZCBiYXNl
+ZCBvbg0KPiB0aGUgYmxvY2tfZGV2aWNlIGluc3RlYWQgb2YgaGF2aW5nIHRvIHBva2UgaW50byB0
+aGUgYmxvY2sgbGF5ZXIgaW50ZXJuYWwNCj4gcmVxdWVzdF9xdWV1ZS4NCj4gDQo+IFNpZ25lZC1v
+ZmYtYnk6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPg0KPiBBY2tlZC1ieTogRGFtaWVu
+IExlIE1vYWwgPGRhbWllbi5sZW1vYWxAb3BlbnNvdXJjZS53ZGMuY29tPg0KPiBSZXZpZXdlZC1i
+eTogTWFydGluIEsuIFBldGVyc2VuIDxtYXJ0aW4ucGV0ZXJzZW5Ab3JhY2xlLmNvbT4NCj4gUmV2
+aWV3ZWQtYnk6IEpvaGFubmVzIFRodW1zaGlybiA8am9oYW5uZXMudGh1bXNoaXJuQHdkYy5jb20+
+DQo+IC0tLQ0KDQpMb29rcyBnb29kLg0KDQpSZXZpZXdlZC1ieTogQ2hhaXRhbnlhIEt1bGthcm5p
+IDxrY2hAbnZpZGlhLmNvbT4NCg0KLWNrDQoNCg0K
 
