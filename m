@@ -1,99 +1,73 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id E77D750327D
-	for <lists+nbd@lfdr.de>; Sat, 16 Apr 2022 04:57:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45B0B503472
+	for <lists+nbd@lfdr.de>; Sat, 16 Apr 2022 08:27:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7D1CE204AF; Sat, 16 Apr 2022 02:57:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr 16 02:57:09 2022
-Old-Return-Path: <chao@kernel.org>
+	id 0F054203A7; Sat, 16 Apr 2022 06:27:11 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr 16 06:27:10 2022
+Old-Return-Path: <zhangwensheng5@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,GMAIL,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_HI,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-3.7 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,PHONENUMBER,RCVD_IN_DNSWL_MED,
+	RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 27B20204AB
-	for <lists-other-nbd@bendel.debian.org>; Sat, 16 Apr 2022 02:39:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EFCA8204A7
+	for <lists-other-nbd@bendel.debian.org>; Sat, 16 Apr 2022 06:09:26 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.473 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, GMAIL=1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-1.282, RCVD_IN_DNSWL_HI=-5, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.07 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-1.282, PHONENUMBER=1.5, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Sdio7f8bF7vT for <lists-other-nbd@bendel.debian.org>;
-	Sat, 16 Apr 2022 02:39:22 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-X-Greylist: delayed 616 seconds by postgrey-1.36 at bendel; Sat, 16 Apr 2022 02:39:22 UTC
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	with ESMTP id NZDZ7GTjV8jr for <lists-other-nbd@bendel.debian.org>;
+	Sat, 16 Apr 2022 06:09:22 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga01-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 72A6C20343
-	for <nbd@other.debian.org>; Sat, 16 Apr 2022 02:39:22 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 2FF20B82E4A;
-	Sat, 16 Apr 2022 02:29:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49BEAC385A9;
-	Sat, 16 Apr 2022 02:28:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1650076142;
-	bh=64fC476XAzTfqTSPn+hnDLb+pMKn+pGg/cu9T2ZYoeo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=YR2swQd5bHjAFWTiUHuzi2CBAoBviVOC618ZH6KrZjKGz54+nb14CQuuZA/rg7rT4
-	 HOUGUM1/um4+uLyDQbz+2PZe7eFGngBlsNfmtF55BEnpI8SeGgAW1TB9RPEF0hZ/gu
-	 wadS+mRuD6cvw4fVgc6pYN09yVoj6blhm7pLMwx6SJQPqerB95uO3eDsfGVZkI1tAT
-	 ypjbfbxn7+bT/FWjnusepnTR0gEoGRsC/NgAvlwAmFKhGsjLJGRbec9W3gsrNwS1xO
-	 /N5W0GD6Xr6BMAFslHSxbnYfv+w/HrqJWAmw3dvOKrGV8WDuaNAVrqQjvW1ASku3np
-	 CHDdJgFxl65YQ==
-Message-ID: <ffa14a07-b8f9-828e-97bc-cf7a2099bab5@kernel.org>
-Date: Sat, 16 Apr 2022 10:28:49 +0800
+	by bendel.debian.org (Postfix) with ESMTPS id B14B32046D
+	for <nbd@other.debian.org>; Sat, 16 Apr 2022 06:09:17 +0000 (UTC)
+Received: from kwepemi500016.china.huawei.com (unknown [172.30.72.56])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4KgN6l1hywzfYmy;
+	Sat, 16 Apr 2022 14:08:31 +0800 (CST)
+Received: from [10.174.176.103] (10.174.176.103) by
+ kwepemi500016.china.huawei.com (7.221.188.220) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Sat, 16 Apr 2022 14:09:10 +0800
+Message-ID: <da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com>
+Date: Sat, 16 Apr 2022 14:09:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [f2fs-dev] [PATCH 26/27] block: decouple REQ_OP_SECURE_ERASE from
- REQ_OP_DISCARD
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: jfs-discussion@lists.sourceforge.net, linux-nvme@lists.infradead.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- dm-devel@redhat.com, target-devel@vger.kernel.org,
- linux-mtd@lists.infradead.org, drbd-dev@lists.linbit.com,
- linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-scsi@vger.kernel.org, cluster-devel@redhat.com,
- xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
- linux-um@lists.infradead.org, nbd@other.debian.org,
- linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Coly Li <colyli@suse.de>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, linux-raid@vger.kernel.org,
- "Martin K . Petersen" <martin.petersen@oracle.com>,
- linux-mmc@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org,
- =?UTF-8?Q?Christoph_B=c3=b6hmwalder?= <christoph.boehmwalder@linbit.com>,
- ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- ntfs3@lists.linux.dev, linux-btrfs@vger.kernel.org
-References: <20220415045258.199825-1-hch@lst.de>
- <20220415045258.199825-27-hch@lst.de>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220415045258.199825-27-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Thunderbird/91.4.1
+Subject: Re: [PATCH -next v2] nbd: fix possible overflow on 'first_minor' in
+ nbd_dev_add()
+From: "zhangwensheng (E)" <zhangwensheng5@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nbd@other.debian.org>
+References: <20220407032505.3797948-1-zhangwensheng5@huawei.com>
+In-Reply-To: <20220407032505.3797948-1-zhangwensheng5@huawei.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.176.103]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ kwepemi500016.china.huawei.com (7.221.188.220)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nW6KDcGSWoE.A.4m.FCjWiB@bendel>
+Resent-Message-ID: <ZD369Got4UM.A.gLF.-GmWiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2015
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2016
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -103,25 +77,70 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ffa14a07-b8f9-828e-97bc-cf7a2099bab5@kernel.org
-Resent-Date: Sat, 16 Apr 2022 02:57:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com
+Resent-Date: Sat, 16 Apr 2022 06:27:11 +0000 (UTC)
 
-On 2022/4/15 12:52, Christoph Hellwig wrote:
-> Secure erase is a very different operation from discard in that it is
-> a data integrity operation vs hint.  Fully split the limits and helper
-> infrastructure to make the separation more clear.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
-> Acked-by: Christoph Böhmwalder <christoph.boehmwalder@linbit.com> [drbd]
-> Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com> [nifs2]
-> Acked-by: Jaegeuk Kim <jaegeuk@kernel.org> [f2fs]
-> Acked-by: Coly Li <colyli@suse.de> [bcache]
-> Acked-by: David Sterba <dsterba@suse.com> [btrfs]
+friendly ping...
 
-For f2fs part,
-
-Acked-by: Chao Yu <chao@kernel.org>
-
-Thanks,
+在 2022/4/7 11:25, Zhang Wensheng 写道:
+> When 'index' is a big numbers, it may become negative which forced
+> to 'int'. then 'index << part_shift' might overflow to a positive
+> value that is not greater than '0xfffff', then sysfs might complains
+> about duplicate creation. Because of this, move the 'index' judgment
+> to the front will fix it and be better.
+>
+> Fixes: b0d9111a2d53 ("nbd: use an idr to keep track of nbd devices")
+> Fixes: 940c264984fd ("nbd: fix possible overflow for 'first_minor' in nbd_dev_add()")
+> Signed-off-by: Zhang Wensheng <zhangwensheng5@huawei.com>
+> ---
+> v1->v2:
+> - add the line "disk->first_minor = index << part_shift;" which has
+> been deleted by mistake in v1.
+>
+>   drivers/block/nbd.c | 23 ++++++++++++-----------
+>   1 file changed, 12 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 5a1f98494ddd..9448aacbcf0f 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -1800,17 +1800,7 @@ static struct nbd_device *nbd_dev_add(int index, unsigned int refs)
+>   	refcount_set(&nbd->refs, 0);
+>   	INIT_LIST_HEAD(&nbd->list);
+>   	disk->major = NBD_MAJOR;
+> -
+> -	/* Too big first_minor can cause duplicate creation of
+> -	 * sysfs files/links, since index << part_shift might overflow, or
+> -	 * MKDEV() expect that the max bits of first_minor is 20.
+> -	 */
+>   	disk->first_minor = index << part_shift;
+> -	if (disk->first_minor < index || disk->first_minor > MINORMASK) {
+> -		err = -EINVAL;
+> -		goto out_free_work;
+> -	}
+> -
+>   	disk->minors = 1 << part_shift;
+>   	disk->fops = &nbd_fops;
+>   	disk->private_data = nbd;
+> @@ -1915,8 +1905,19 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
+>   	if (!netlink_capable(skb, CAP_SYS_ADMIN))
+>   		return -EPERM;
+>   
+> -	if (info->attrs[NBD_ATTR_INDEX])
+> +	if (info->attrs[NBD_ATTR_INDEX]) {
+>   		index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
+> +
+> +		/*
+> +		 * Too big first_minor can cause duplicate creation of
+> +		 * sysfs files/links, since index << part_shift might overflow, or
+> +		 * MKDEV() expect that the max bits of first_minor is 20.
+> +		 */
+> +		if (index < 0 || index > MINORMASK >> part_shift) {
+> +			printk(KERN_ERR "nbd: illegal input index %d\n", index);
+> +			return -EINVAL;
+> +		}
+> +	}
+>   	if (!info->attrs[NBD_ATTR_SOCKETS]) {
+>   		printk(KERN_ERR "nbd: must specify at least one socket\n");
+>   		return -EINVAL;
 
