@@ -1,175 +1,99 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FB8F50619E
-	for <lists+nbd@lfdr.de>; Tue, 19 Apr 2022 03:15:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50A4E5063BD
+	for <lists+nbd@lfdr.de>; Tue, 19 Apr 2022 07:09:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3F41B203C7; Tue, 19 Apr 2022 01:15:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Apr 19 01:15:10 2022
-Old-Return-Path: <chaitanyak@nvidia.com>
+	id 319C12035D; Tue, 19 Apr 2022 05:09:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Apr 19 05:09:09 2022
+Old-Return-Path: <jinpu.wang@ionos.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,THREADTOPIC,T_SCC_BODY_TEXT_LINE autolearn=no
+	RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DCF3C203C3
-	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Apr 2022 00:57:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 52708202FC
+	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Apr 2022 04:51:58 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.527 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-1.282,
-	THREADTOPIC=2, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=1.81 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id HGEqN2rmNbaW for <lists-other-nbd@bendel.debian.org>;
-	Tue, 19 Apr 2022 00:57:03 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL_SUBNET=-1.2 (check from: .nvidia. - helo: .nam12-dm6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -4.7
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2060f.outbound.protection.outlook.com [IPv6:2a01:111:f400:fe59::60f])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id B0F0A203C7
-	for <nbd@other.debian.org>; Tue, 19 Apr 2022 00:57:02 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DCTnzYl+A3W1QQ39xpG5158yMEOX1tX8kBsBFih687ArE4aExk9nDwadSZOJxtI8eSLpXx7MMVEFXK+vWQ6T5HRTB3E2c/PH17fWAv1mmQCW9KcWzKW56S6J4IxDY1NN94HBCdbrsihxpT0/hZWVtVXrq4m2PQBnpNcXYs5imYg4lrolYDCf4zf9ILKuJ588bnQ1+8I3rB9U6mHLGokShUOmwt5ZwlDSkL/jN2NyqjR+TMB+H5gOHFWaHJR7gR2HXTRfvqQ0oKZtCXkrQfVUEejwTJ5S+uVLAhBsjmYuEdRWRDI9HdoNiqyx9ZyCFfDPYf0Ueqqv1bzzDfVaWl0xGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ylu+JR0gsLNhok9CksoK3rBzZXhje5IsRF+GG5APk2s=;
- b=NhyDGKEHIKHnZQ6i6J4WB9/rf2SbvqnX8fTvl5GbbeRZc+L+MDC9mt5j3Q6c4yVp+7gx4BkL2CQIHM9Mi1wgO7zatLHOyW80qXA93sWUBRWZWnINVY+QO6mee3wvwvl7CsUwmo4Zyk+52t3IcnCOLot5C1Wkgckzo6kq2FrX7N+5GaMYKp45W24MvOFsziVYqYvZBRT2xRaOZNN7Qt8mMWWvk3BMK6W0/c/uLGk7Km+ShDd3pKpHMPw5Hv+f9/J130cOmwQ4Yl8S5veSkYuwpP0E6RiSjORFAucri1YJvCS+0aRqtuWFVJSUl2IVnFMqLXbCpaVJw/zI2wujGo/kpQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ylu+JR0gsLNhok9CksoK3rBzZXhje5IsRF+GG5APk2s=;
- b=EDDoBtO40FqhH6APtRLewO5ws0a/ttWuuMyQgjdR6zAnxJcQBjPBp8l2RrEvyJCGQWhoE3LqjgDnHPwYnSIM/C6FlHB6+3cRU6nNeKQkRLP9aiRQmx9LCnQ7U2TOmSLMCE3JqEl0L8Bun3T5hSpiPH7HiK15E9QhLyc1HYWmqcUjJHUlPS3+EZ0upPIyg6nqkq2Ls9jwQ49VrVXTvkujKbtqvEZRzEiZDnwj5GpL07WdWaRyJKQdco8D8vVmsWYEnPkn9avBBQNgjwk2TZyD3BCpW2egHzWEULxJvhFWHaN/Gq0j6jo+QA7g3caOjiChtPDpLBXS7FmJ6CMTJiCf7w==
-Received: from MW2PR12MB4667.namprd12.prod.outlook.com (2603:10b6:302:12::28)
- by BYAPR12MB5703.namprd12.prod.outlook.com (2603:10b6:a03:a5::32) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5164.18; Mon, 18 Apr
- 2022 21:23:05 +0000
-Received: from MW2PR12MB4667.namprd12.prod.outlook.com
- ([fe80::a90b:9df2:370c:e76b]) by MW2PR12MB4667.namprd12.prod.outlook.com
- ([fe80::a90b:9df2:370c:e76b%3]) with mapi id 15.20.5164.025; Mon, 18 Apr 2022
- 21:23:05 +0000
-From: Chaitanya Kulkarni <chaitanyak@nvidia.com>
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-CC: Richard Weinberger <richard@nod.at>, Johannes Berg
-	<johannes@sipsolutions.net>, Josef Bacik <josef@toxicpanda.com>, "Md. Haris
- Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, "Michael S.
- Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>, Mike Snitzer
-	<snitzer@kernel.org>, Song Liu <song@kernel.org>, Stefan Haberland
-	<sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, "Martin K.
- Petersen" <martin.petersen@oracle.com>, "linux-um@lists.infradead.org"
-	<linux-um@lists.infradead.org>, "linux-block@vger.kernel.org"
-	<linux-block@vger.kernel.org>, "nbd@other.debian.org" <nbd@other.debian.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "linux-raid@vger.kernel.org"
-	<linux-raid@vger.kernel.org>, "linux-nvme@lists.infradead.org"
-	<linux-nvme@lists.infradead.org>, "linux-s390@vger.kernel.org"
-	<linux-s390@vger.kernel.org>, "dm-devel@redhat.com" <dm-devel@redhat.com>
-Subject: Re: [PATCH 09/11] nvme: remove a spurious clear of discard_alignment
-Thread-Topic: [PATCH 09/11] nvme: remove a spurious clear of discard_alignment
-Thread-Index: AQHYUuBcFEm/XfqSQ0uW2E3HX2krVaz2LzqA
-Date: Mon, 18 Apr 2022 21:23:05 +0000
-Message-ID: <66df636c-b98a-23f7-20f5-f124109b81c1@nvidia.com>
-References: <20220418045314.360785-1-hch@lst.de>
- <20220418045314.360785-10-hch@lst.de>
-In-Reply-To: <20220418045314.360785-10-hch@lst.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 8ea33572-46a0-4def-4816-08da2181a0a0
-x-ms-traffictypediagnostic: BYAPR12MB5703:EE_
-x-microsoft-antispam-prvs:
- <BYAPR12MB57034654840D806181EA4705A3F39@BYAPR12MB5703.namprd12.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info:
- wZRIafoMZ+RNEv0jR3059UeyDTFK32ryaMGSLWdws/jWK1ZLHE9hYQAuxaagMVs/LEd/tpZiQVJDQf1nmESaKq+E5Cog4yW9qJs+ajxMRBm0ihATE22BxMXT67QvxcLPHLKUxtogqLjr2S3bccK0HG8KLBQgdD7S4N1dtflpco/vndZ9fHtv8ZVS44KE+gAB7iIu1cFQeZX00WRBwVkiIPbxklRZ7reZXWoinrMqonA+BbWykmn9TA6hOVhJkz+a4LV2zrC2nBas3p2lgORI24Re5BSDJaXDU71ZPwsW/FJY3K58yAj/q3xPJWAvcAzpClVyBI/ieTTMTanbP75jut6qk8WNQb7/Vn0m7SA19hWgKnRK/K+ONQrHCQR5N78AMkwuS+Fsl48/Y0Om1/cP0nF7aWaKnJ6dhQvQgK1wY+Lnmvoy+BE6li5iHNeJW1nlfWQ/A3HXyZ2MKDaObYA841BmXGhg3Fy4GVlTz/bkvccGcD5D0u5ncn7CJd9BRyI9HT4voIcBXJZEfYvnhiMQWgI+awGaihUto+et5YyvXTdHpJX1lg0tU6U3DQPO1sdLiez5LvX+/BVai9Rkxh846t7jct1VZnTXRVGqZYkIamc4I66l6G1W2ypSWvc6XABmk2hgEj3iAZbAcCsedSHS6h5dAxJXHpYA9nR2zGUkWfm0HSdv/eRAd8LZ6qz4Zjq5pVf670aNRxbNeWA42OmJ1kRJ7dXwgG38AMo2qb1kid+PSZXlzehAFA+FXLA4LD+7+h3ile31o23bjx8fvRA7Nw==
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW2PR12MB4667.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(558084003)(71200400001)(86362001)(5660300002)(66946007)(76116006)(31696002)(186003)(316002)(38070700005)(6486002)(38100700002)(2616005)(122000001)(66446008)(110136005)(7416002)(54906003)(64756008)(91956017)(4326008)(8676002)(66476007)(66556008)(508600001)(8936002)(31686004)(6506007)(36756003)(2906002)(6512007)(53546011)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?K3JyUHJGTk9VOGd4ejRtQ2k2SktOU0RoODU2STdRZ2Juc1lvMFFsRzdBUkRm?=
- =?utf-8?B?b0hxTGpHME5nWGs0bkxZRE5KUUpLZjg2U1NmY1VLUHNRVG56YXVEMnQwWHRL?=
- =?utf-8?B?YXNGQmNISmNxQjRxV2F5am1VZU5sV2hhb0ppSGtUT242b0U3OWVyUTE2eGt5?=
- =?utf-8?B?cnhLeHpNRC9uQ2hQNTFJNE9vWTkxUVRndmpnYmYwVjdqVDJnMldhVFhxVmhk?=
- =?utf-8?B?RTAvbm9yZVYxbDBDdlpWblJxRldKMVk1OVcwWi8xQWhxd1JVN0kzeHpsRkZC?=
- =?utf-8?B?M1YxMEoveUpVT2YxZFB2T2NmSkNBOGRlV0p5ZG43STJBMW1vVFJMdXNHUXVK?=
- =?utf-8?B?K1UrL21mcFk1Z3Nta3N2Y0xncE9tZnB0S1FKTzF3OHQ5VkNvYUtxUEgvYkVR?=
- =?utf-8?B?Y3hnWmY3ZGdQZEVuL2JaK1FndE9iaEJxbkJuSmFkZGFxckEyMTJkdEJ0VUFh?=
- =?utf-8?B?M2VlbUxXTVgwWUh5TGxqbkQyNUVTU05QcHRBcm1XQUNla0VKTzY0UUFYODAr?=
- =?utf-8?B?MjZucUQ3VDRpazRZRTFWeGt2QXZDWXhrdWowTjBUUHpwYUVvK0dYVnpiVE5l?=
- =?utf-8?B?Q2NKNEo5Z3ZuSlN4bXVvK3FvaHlUdHJTZVNLenBEQm53ekpiekxNeGYvOXZh?=
- =?utf-8?B?WUZLQjR6dWlXczl5VXFmVXg5TkplY1UzeWdVMGFzTmlaaGlBZjJETEhVbjhx?=
- =?utf-8?B?eFU0SXdBZ09zOEZtQU1rc2tIR1NlRTFzQXNzZnpWM3RCdE5rOXZKV1FwMksy?=
- =?utf-8?B?NFBralNBei9kOG1PWlhCZmFFa0szY1I5WHlZR3J2am5FMEUwRkp4Zk42VTc4?=
- =?utf-8?B?N3J6L1Z5YURoRVphVjMvdmxiR0NwMForU21QblVXUWN6Y2hOVTM4LzBqeUM4?=
- =?utf-8?B?NXV4aFlLUFFrdHpza1RtN3A2TkhDYnN5ZEZuRnlQVWRta0JiQTd1aEVQL2d0?=
- =?utf-8?B?ZlVXVVUwdllzTzFYN2dqQWVhNjYxVGZ5bUJEMXM0NGZHdnlsUUFSRFVVU1FF?=
- =?utf-8?B?TzhJQmhpZ0hZSG1oVjl0ODhsRXlYOC9lVVBETEZlaEZXWkhhNENnbytlYlJP?=
- =?utf-8?B?bnpyVXlMaE5XNzhUMFVYclF2aTFFQ2d4ZkUwTFhuUWxTRmpiSmYydnFYdHhh?=
- =?utf-8?B?bG9BWFp3TFcrVW1KN2xBWm84dnY1N3FoZ0NQcFhYRGtIeUM3ekxrVGFXL2Fk?=
- =?utf-8?B?NWRZQkVHZm1xb1I4RUt5Q0lKb2d4c3NSNkdlS1ZhTVptNjBQUUFhZHdXS09H?=
- =?utf-8?B?ZGxINlE1WDAzOUZNNlJObnVuaU93ckY1ZzJpMW9rYWN6c1RNdkZJdTBLTXZK?=
- =?utf-8?B?S1BJZnF1YXEyWmpiNVhNNXZ0d0FxZ0dDZHFOVm1URi9YUzMxc0VBMWFuSm94?=
- =?utf-8?B?L0xBWDhTUldOQjJZOG8xYnVzOHhWVzBvcDN4UmJmN0VadWd6OTZIVE16TTF1?=
- =?utf-8?B?OUxVbCtOOVRZR0oySW8raDhLalh6SDhwZXV4ZGI1aTVFWkh0ZTc3MUwvS1lC?=
- =?utf-8?B?UjVRdE9NWDJrRWdMKy9iaXRMMTV2c1VhLzBFVW4yU3JTblpicHQ4cDVPNC9n?=
- =?utf-8?B?b1VpTVN4b0VHalZVTzJrNFpTWHBreHU4L01IZE1VOU9LNHh4TWRBcXFtY1oz?=
- =?utf-8?B?RWVvVDYvYmRzUCszVE1adk4rNUp0Y3JSOHRNeVdOd3lvZCtEcTdWMFMxQTFM?=
- =?utf-8?B?bWNHVytkWXVjakNmKzgvV1RzZ01EWGFZdFRHYlVHSXNFSGxFODZqOTJJN2xI?=
- =?utf-8?B?RllFTHBybk1zeUxnU2FEbVBRa2tGWDNWcTRScTE4TWtvQ1R2bEQvQ25SWFd5?=
- =?utf-8?B?d0lWcWw2aURlYzR0VDZpay9SZy84VGVSU2tCSnlLOE9ZZ3ZseExMU2pUM1ha?=
- =?utf-8?B?bzg3SjJSc3I1V21Xc0FPOUVrci9LQmx5SkxpZThDRjdkTTEvdVk2ZWF4RXp4?=
- =?utf-8?B?NEhlK1NKdjBiU1gxT0k4UFA3U1l2cWRpNlprSnd2cVQ4SG5aWWIrdTRKVkto?=
- =?utf-8?B?QnFNU0hucTl1QWRwKzJaUFMzNTN2aVh2dGRJZEdkYUpKVCtPY21sVUtWbHor?=
- =?utf-8?B?L2ZRSkZBYjVQK1Jpd3dzcTNQRmltaDVXbVp2Zm4yVUE5azdFUTc5MEtWdVJ2?=
- =?utf-8?B?Wk1XQ0NmTEJHQnptT0tpNERWdXVzbk9xbG11VDBjMFpQNmhqK05tMkNKaTAw?=
- =?utf-8?B?T0tkbVhwSjZrMDEzR0lnMDgwak8zZVlXMXg5OVNlOWdBc0trSnpyellyWERK?=
- =?utf-8?B?L1dtT3FLaTYvUk9RdFU1NEFOSHFhOFNHcTJHQ3hBMkNDbSswUkd2K1JBMUNS?=
- =?utf-8?B?R0dUWEt1eTJXWExteGIrczUzWXMvVXE3eUIxejVJdVFneEQxZFR2SzBJVDc5?=
- =?utf-8?Q?3ThODCQ/tQz/cwX0=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2261F5F6E0810744877DAE4E412E6B80@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	with ESMTP id CvoieVVRwJ6t for <lists-other-nbd@bendel.debian.org>;
+	Tue, 19 Apr 2022 04:51:53 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .ionos. - helo: .mail-lf1-x12e.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 386C720312
+	for <nbd@other.debian.org>; Tue, 19 Apr 2022 04:51:49 +0000 (UTC)
+Received: by mail-lf1-x12e.google.com with SMTP id g19so13498859lfv.2
+        for <nbd@other.debian.org>; Mon, 18 Apr 2022 21:51:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ionos.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BI9yKDogyA9J1nIp2A5DqA5VrUzX8xmulCW+rbuq8PY=;
+        b=SJ+jl8otuJP8V2SgmRrkKx5N5mzchzJWNs3wHGu/KEMaBtHJMlOSyPwEwTYRCJOsK0
+         +ub417XW+OB47SmEbjExHhWdvjVWNP6f4maHx7wpcQ/meMLPTDZio2MhC3cJJ+CFcG7A
+         WyaAXMErjpaI/XL4ZkxN4ZoByVo51Plmy8MlzTn6CKA4kPvTL6QPTM/FElDnmxz/4bAo
+         dNPevLcXfcZa94Hc/QRZN/ahpyGhXVxqtHvMswx1d+ioXM8CH8EB0Ocsp4CDYa7mfCxx
+         3EMIYtoYuS9+fNRK0znetQsYbQBpHaSNFwuzb6Pw3NmrbbAzHjf8OVLAsic0niCU/6Hj
+         1cWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BI9yKDogyA9J1nIp2A5DqA5VrUzX8xmulCW+rbuq8PY=;
+        b=EyL2Kg5Ggt4rxrSFY2bqdpKOfyUTPZ8yiKWB1lttMBxfHBSRU4Q8XsuPXznADAAX8j
+         RcQIXaBlRVYCzwWms5gblMbmVpUHSBupXGuZGbkeORErZyIdemPD+l+9eOeCmHAD9n0b
+         TFqWyoV2LOPvTADJjWVgy2YNpILhwLyCGHWd0BWUKbgj6acn2MtsuOuIhJ6U07e/gzkV
+         +rAJ+sQ6PSkM6N7HCjaKKqmQxwj2Wmfs/g653zrdN3/+M3tpd1y7TxgLOUHGjaJoBPxI
+         CtZLuc3cz6/sJhmBjka1039HRNyHAwbt1VdX0sl6mEYvsWwzmeF0+K5DbEVoHoySur8c
+         rczw==
+X-Gm-Message-State: AOAM530iNtJroTknGNz/VLrvi3uEyPaUuvT4aXUhixj8zLj2mggO7mjh
+	GoxeaJrUiY+/6/QhgJjDbOIXH8g7WgLRx3IcUUWYzA==
+X-Google-Smtp-Source: ABdhPJyLR4ZusRr2xSa6FgTHa9kgMMN14+gTuhXJUl7advlAotvmYnqJxqDiVIivr0X1ZGDx839mhVaChBp2powMkIg=
+X-Received: by 2002:a05:6512:10c5:b0:471:a703:bca4 with SMTP id
+ k5-20020a05651210c500b00471a703bca4mr1289967lfg.581.1650343907228; Mon, 18
+ Apr 2022 21:51:47 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MW2PR12MB4667.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8ea33572-46a0-4def-4816-08da2181a0a0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Apr 2022 21:23:05.4140
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bX94/9AH8QVpG+ra0QBfSC7XQkW0/5sNBc2d1BEGlO4VFk0lgNSO6gOFfRnduTdTtrVmVUtGs0aqwIqvFg029g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB5703
-X-OriginatorOrg: Nvidia.com
+References: <20220418045314.360785-1-hch@lst.de> <20220418045314.360785-11-hch@lst.de>
+In-Reply-To: <20220418045314.360785-11-hch@lst.de>
+From: Jinpu Wang <jinpu.wang@ionos.com>
+Date: Tue, 19 Apr 2022 06:51:12 +0200
+Message-ID: <CAMGffEnxwHE_QgN2OS93BHe6U+XdYc_R5OmSROmF5F-HXK_E4A@mail.gmail.com>
+Subject: Re: [PATCH 10/11] rnbd-srv: use bdev_discard_alignment
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Richard Weinberger <richard@nod.at>, 
+	Johannes Berg <johannes@sipsolutions.net>, Josef Bacik <josef@toxicpanda.com>, 
+	"Md. Haris Iqbal" <haris.iqbal@ionos.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Mike Snitzer <snitzer@kernel.org>, Song Liu <song@kernel.org>, 
+	Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, linux-um@lists.infradead.org, 
+	linux-block@vger.kernel.org, nbd@other.debian.org, 
+	virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org, 
+	linux-raid@vger.kernel.org, linux-nvme@lists.infradead.org, 
+	linux-s390@vger.kernel.org, dm-devel@redhat.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <NlsRkVlkxTP.A.l4H.e0gXiB@bendel>
+Resent-Message-ID: <rXhtxnpXYfN.A.b4D.1PkXiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2040
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2041
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -179,12 +103,35 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/66df636c-b98a-23f7-20f5-f124109b81c1@nvidia.com
-Resent-Date: Tue, 19 Apr 2022 01:15:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAMGffEnxwHE_QgN2OS93BHe6U+XdYc_R5OmSROmF5F-HXK_E4A@mail.gmail.com
+Resent-Date: Tue, 19 Apr 2022 05:09:09 +0000 (UTC)
 
-T24gNC8xNy8yMiAyMTo1MywgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6DQo+IFRoZSBudm1lIGRy
-aXZlciBuZXZlciBzZXRzIGEgZGlzY2FyZF9hbGlnbm1lbnQsIHNvIGl0IGFsc28gZG9lbnMndCBu
-ZWVkDQo+IHRvIGNsZWFyIGl0IHRvIHplcm8uDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3Rv
-cGggSGVsbHdpZyA8aGNoQGxzdC5kZT4NCj4gLS0tDQoNClJldmlld2VkLWJ5OiBDaGFpdGFueWEg
-S3Vsa2FybmkgPGtjaEBudmlkaWEuY29tPg0KDQotY2sNCg0KDQo=
+On Mon, Apr 18, 2022 at 6:53 AM Christoph Hellwig <hch@lst.de> wrote:
+>
+> Use bdev_discard_alignment to calculate the correct discard alignment
+> offset even for partitions instead of just looking at the queue limit.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Thx!
+Acked-by: Jack Wang <jinpu.wang@ionos.com>
+> ---
+>  drivers/block/rnbd/rnbd-srv-dev.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/block/rnbd/rnbd-srv-dev.h b/drivers/block/rnbd/rnbd-srv-dev.h
+> index d080a0de59225..4309e52524691 100644
+> --- a/drivers/block/rnbd/rnbd-srv-dev.h
+> +++ b/drivers/block/rnbd/rnbd-srv-dev.h
+> @@ -59,7 +59,7 @@ static inline int rnbd_dev_get_discard_granularity(const struct rnbd_dev *dev)
+>
+>  static inline int rnbd_dev_get_discard_alignment(const struct rnbd_dev *dev)
+>  {
+> -       return bdev_get_queue(dev->bdev)->limits.discard_alignment;
+> +       return bdev_discard_alignment(dev->bdev);
+>  }
+>
+>  #endif /* RNBD_SRV_DEV_H */
+> --
+> 2.30.2
+>
 
