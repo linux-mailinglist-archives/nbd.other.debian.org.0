@@ -1,89 +1,73 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1E5E50BBDC
-	for <lists+nbd@lfdr.de>; Fri, 22 Apr 2022 17:42:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 51D2850C6D4
+	for <lists+nbd@lfdr.de>; Sat, 23 Apr 2022 05:09:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1903E20419; Fri, 22 Apr 2022 15:42:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Apr 22 15:42:10 2022
-Old-Return-Path: <josef@toxicpanda.com>
+	id 190BE20447; Sat, 23 Apr 2022 03:09:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr 23 03:09:10 2022
+Old-Return-Path: <zhangwensheng5@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.9 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,PHONENUMBER,RCVD_IN_DNSWL_MED
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4302E203BC
-	for <lists-other-nbd@bendel.debian.org>; Fri, 22 Apr 2022 15:24:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E7060203DD
+	for <lists-other-nbd@bendel.debian.org>; Sat, 23 Apr 2022 02:53:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.99 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.537 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.247, PHONENUMBER=1.5,
+	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id QN-RaPbrUGSc for <lists-other-nbd@bendel.debian.org>;
-	Fri, 22 Apr 2022 15:24:14 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-il1-x129.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 24E412040D
-	for <nbd@other.debian.org>; Fri, 22 Apr 2022 15:24:13 +0000 (UTC)
-Received: by mail-il1-x129.google.com with SMTP id o5so5243049ils.11
-        for <nbd@other.debian.org>; Fri, 22 Apr 2022 08:24:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Wxv1VHcdMAWKawTEifnINmazC29umb2i5gHiDAZVeBk=;
-        b=335nWJbBDhabHr89gG5tFiLbFOQLvASDcW1EglELgq0uhxBp97C2KaIqEwRKVbYsmx
-         GpS+ja0gF1YRQsUZmFTz2Nl2pDXP+Xg6v+vWDRNYMU8cLM1cbEfDWjFhC1kiLwXMHCqc
-         eUNTTMg/IucTx/f6rGjggjmKpM7YImY+ja+IfNi+FzeDGPOhrYxJqIu19gGYohfQaFGV
-         0SRajNzdFfpfR5CbaoKsMJp5T0wjU80hAdAdMAGsWbQc6pgeR7DyeISxjBih7RRxtKeA
-         yyb7xs1AH/m8scE0u5RTvPAz4HOf8cex/5nDUlehQfn/pXUbFnP8ggIcugUC7gLXuD4C
-         AWYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Wxv1VHcdMAWKawTEifnINmazC29umb2i5gHiDAZVeBk=;
-        b=KNVi6xKFntSix7QkvQWwMWHj+cQL3UmuLApOORdSYCU/Bc6BGnuQMwBBwb04wMU9KF
-         jxZ8TB0Wn7lvnrIy2vVW9OXJc9Pzdq7qr2vwHsR41418XuVZEBeiCEwCUbBGPhjGIPJw
-         r/mZ7AY6GxJX80lxh1kfjHbJHU8ngIGaaClqQ27LYZmCTJE8E+iiu3SGjsOFhYMUQlnX
-         PjETN0kgewdZyq+PnuKltzG3zgZDI/d19yoaSG6cxQXuReVeFD7XC3Mxf/Xbvwa1QmL4
-         Ze4q254yz+WhmKJYaxWoy1433kohzQB0/Ou3fmpwlmfvHVWGISDXrXN+d60KrNDHxvfT
-         QOJw==
-X-Gm-Message-State: AOAM533WPzOeymLeyWARk6z7SUBzXtkBPMFLj+LoRxxZHTqwi13GRN1f
-	yBetWUjpn9g51T83rAgYRNqhiWwPqhU4IXym5bKsbw==
-X-Google-Smtp-Source: ABdhPJynI2j2o9aSn9G09xaJSPgHCkDd+G+caW0XT60z6/oGe+SAEg8uILSJZITvWsJcMG2BcnPuKkJSdTWGHxW7IyE=
-X-Received: by 2002:a92:d2ca:0:b0:2ca:ca3a:de89 with SMTP id
- w10-20020a92d2ca000000b002caca3ade89mr2225426ilg.127.1650641049737; Fri, 22
- Apr 2022 08:24:09 -0700 (PDT)
+	with ESMTP id ZwHVIsKFYJko for <lists-other-nbd@bendel.debian.org>;
+	Sat, 23 Apr 2022 02:53:32 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga02-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 8653020369
+	for <nbd@other.debian.org>; Sat, 23 Apr 2022 02:53:29 +0000 (UTC)
+Received: from kwepemi500016.china.huawei.com (unknown [172.30.72.54])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KlbS71Q0czhYFk;
+	Sat, 23 Apr 2022 10:53:11 +0800 (CST)
+Received: from [10.174.176.103] (10.174.176.103) by
+ kwepemi500016.china.huawei.com (7.221.188.220) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Sat, 23 Apr 2022 10:53:22 +0800
+Message-ID: <f2fb47c9-edbb-65ce-5d6a-1363a814662f@huawei.com>
+Date: Sat, 23 Apr 2022 10:53:22 +0800
 MIME-Version: 1.0
-References: <20220422054224.19527-1-matthew.ruffell@canonical.com>
-In-Reply-To: <20220422054224.19527-1-matthew.ruffell@canonical.com>
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 22 Apr 2022 11:23:58 -0400
-Message-ID: <CAEzrpqe=LD3DQcEeLXmmFuq7cX_dAQ6DOCuJYWBoZWKKTmoTzA@mail.gmail.com>
-Subject: Re: [PROBLEM] nbd requests become stuck when devices watched by
- inotify emit udev uevent changes
-To: Matthew Ruffell <matthew.ruffell@canonical.com>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block <linux-block@vger.kernel.org>, 
-	nbd <nbd@other.debian.org>, Linux Kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.1
+Subject: Re: [PATCH -next v2] nbd: fix possible overflow on 'first_minor' in
+ nbd_dev_add()
+From: "zhangwensheng (E)" <zhangwensheng5@huawei.com>
+To: <josef@toxicpanda.com>, <axboe@kernel.dk>
+CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nbd@other.debian.org>
+References: <20220407032505.3797948-1-zhangwensheng5@huawei.com>
+ <da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com>
+In-Reply-To: <da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.176.103]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ kwepemi500016.china.huawei.com (7.221.188.220)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <68_miqs4z3G.A.vXF.RzsYiB@bendel>
+Resent-Message-ID: <4EBLAlnGPeG.A.QlC.W32YiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2045
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2046
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,37 +77,77 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAEzrpqe=LD3DQcEeLXmmFuq7cX_dAQ6DOCuJYWBoZWKKTmoTzA@mail.gmail.com
-Resent-Date: Fri, 22 Apr 2022 15:42:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f2fb47c9-edbb-65ce-5d6a-1363a814662f@huawei.com
+Resent-Date: Sat, 23 Apr 2022 03:09:10 +0000 (UTC)
 
-On Fri, Apr 22, 2022 at 1:42 AM Matthew Ruffell
-<matthew.ruffell@canonical.com> wrote:
+friendly ping...
+
+在 2022/4/16 14:09, zhangwensheng (E) 写道:
+> friendly ping...
 >
-> Dear maintainers of the nbd subsystem,
->
-> A user has come across an issue which causes the nbd module to hang after a
-> disconnect where a write has been made to a qemu qcow image file, with qemu-nbd
-> being the server.
->
-
-Ok there's two problems here, but I want to make sure I have the right
-fix for the hang first.  Can you apply this patch
-
-https://paste.centos.org/view/b1a2d01a
-
-and make sure the hang goes away?  Once that part is fixed I'll fix
-the IO errors, this is just us racing with systemd while we teardown
-the device and then we're triggering a partition read while the device
-is going down and it's complaining loudly.  Before we would
-set_capacity to 0 whenever we disconnected, but that causes problems
-with file systems that may still have the device open.  However now we
-only do this if the server does the CLEAR_SOCK ioctl, which clearly
-can race with systemd poking the device, so I need to make it
-set_capacity(0) when the last opener closes the device to prevent this
-style of race.
-
-Let me know if that patch fixes the hang, and then I'll work up
-something for the capacity problem.  Thanks,
-
-Josef
+> 在 2022/4/7 11:25, Zhang Wensheng 写道:
+>> When 'index' is a big numbers, it may become negative which forced
+>> to 'int'. then 'index << part_shift' might overflow to a positive
+>> value that is not greater than '0xfffff', then sysfs might complains
+>> about duplicate creation. Because of this, move the 'index' judgment
+>> to the front will fix it and be better.
+>>
+>> Fixes: b0d9111a2d53 ("nbd: use an idr to keep track of nbd devices")
+>> Fixes: 940c264984fd ("nbd: fix possible overflow for 'first_minor' in 
+>> nbd_dev_add()")
+>> Signed-off-by: Zhang Wensheng <zhangwensheng5@huawei.com>
+>> ---
+>> v1->v2:
+>> - add the line "disk->first_minor = index << part_shift;" which has
+>> been deleted by mistake in v1.
+>>
+>>   drivers/block/nbd.c | 23 ++++++++++++-----------
+>>   1 file changed, 12 insertions(+), 11 deletions(-)
+>>
+>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+>> index 5a1f98494ddd..9448aacbcf0f 100644
+>> --- a/drivers/block/nbd.c
+>> +++ b/drivers/block/nbd.c
+>> @@ -1800,17 +1800,7 @@ static struct nbd_device *nbd_dev_add(int 
+>> index, unsigned int refs)
+>>       refcount_set(&nbd->refs, 0);
+>>       INIT_LIST_HEAD(&nbd->list);
+>>       disk->major = NBD_MAJOR;
+>> -
+>> -    /* Too big first_minor can cause duplicate creation of
+>> -     * sysfs files/links, since index << part_shift might overflow, or
+>> -     * MKDEV() expect that the max bits of first_minor is 20.
+>> -     */
+>>       disk->first_minor = index << part_shift;
+>> -    if (disk->first_minor < index || disk->first_minor > MINORMASK) {
+>> -        err = -EINVAL;
+>> -        goto out_free_work;
+>> -    }
+>> -
+>>       disk->minors = 1 << part_shift;
+>>       disk->fops = &nbd_fops;
+>>       disk->private_data = nbd;
+>> @@ -1915,8 +1905,19 @@ static int nbd_genl_connect(struct sk_buff 
+>> *skb, struct genl_info *info)
+>>       if (!netlink_capable(skb, CAP_SYS_ADMIN))
+>>           return -EPERM;
+>>   -    if (info->attrs[NBD_ATTR_INDEX])
+>> +    if (info->attrs[NBD_ATTR_INDEX]) {
+>>           index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
+>> +
+>> +        /*
+>> +         * Too big first_minor can cause duplicate creation of
+>> +         * sysfs files/links, since index << part_shift might 
+>> overflow, or
+>> +         * MKDEV() expect that the max bits of first_minor is 20.
+>> +         */
+>> +        if (index < 0 || index > MINORMASK >> part_shift) {
+>> +            printk(KERN_ERR "nbd: illegal input index %d\n", index);
+>> +            return -EINVAL;
+>> +        }
+>> +    }
+>>       if (!info->attrs[NBD_ATTR_SOCKETS]) {
+>>           printk(KERN_ERR "nbd: must specify at least one socket\n");
+>>           return -EINVAL;
+> .
 
