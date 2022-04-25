@@ -2,72 +2,95 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D2850C6D4
-	for <lists+nbd@lfdr.de>; Sat, 23 Apr 2022 05:09:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B4B450EB4E
+	for <lists+nbd@lfdr.de>; Mon, 25 Apr 2022 23:33:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 190BE20447; Sat, 23 Apr 2022 03:09:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr 23 03:09:10 2022
-Old-Return-Path: <zhangwensheng5@huawei.com>
+	id 4781D2030F; Mon, 25 Apr 2022 21:33:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Apr 25 21:33:09 2022
+Old-Return-Path: <song@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,PHONENUMBER,RCVD_IN_DNSWL_MED
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.9 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E7060203DD
-	for <lists-other-nbd@bendel.debian.org>; Sat, 23 Apr 2022 02:53:36 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E3C292024C
+	for <lists-other-nbd@bendel.debian.org>; Mon, 25 Apr 2022 21:17:57 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.537 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.247, PHONENUMBER=1.5,
-	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=-3.765 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1,
+	DKIMWL_WL_HIGH=-0.575, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_HI=-5, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ZwHVIsKFYJko for <lists-other-nbd@bendel.debian.org>;
-	Sat, 23 Apr 2022 02:53:32 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga02-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	with ESMTP id 2jItt4_XW4-7 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 25 Apr 2022 21:17:53 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 532 seconds by postgrey-1.36 at bendel; Mon, 25 Apr 2022 21:17:53 UTC
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8653020369
-	for <nbd@other.debian.org>; Sat, 23 Apr 2022 02:53:29 +0000 (UTC)
-Received: from kwepemi500016.china.huawei.com (unknown [172.30.72.54])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KlbS71Q0czhYFk;
-	Sat, 23 Apr 2022 10:53:11 +0800 (CST)
-Received: from [10.174.176.103] (10.174.176.103) by
- kwepemi500016.china.huawei.com (7.221.188.220) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 23 Apr 2022 10:53:22 +0800
-Message-ID: <f2fb47c9-edbb-65ce-5d6a-1363a814662f@huawei.com>
-Date: Sat, 23 Apr 2022 10:53:22 +0800
+	by bendel.debian.org (Postfix) with ESMTPS id 3F0592023E
+	for <nbd@other.debian.org>; Mon, 25 Apr 2022 21:17:53 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 8C75E6140B
+	for <nbd@other.debian.org>; Mon, 25 Apr 2022 21:08:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AA1EC385BD
+	for <nbd@other.debian.org>; Mon, 25 Apr 2022 21:08:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1650920910;
+	bh=yN2FFsgqiwWmpQIWXC94b82E2wpYjQTq/CU/u3g3cjE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=pdKHj+9jtFEKRxbFIKbp6BN5W0SKHdhPUGdQDXd7Xqx9vi4EpkMV1Y4FokX/IkPYa
+	 fcHGk/4On2XWYf3uADhfEsr+7LxnZ49Mj82N7KMHrZLd/dwLJ08US+RaehkUasA6/k
+	 ULzEmN8W11D5KZ+Cm4S93JoYXPgu2ne6zBKyDbG+PP7TNy6nKJUI/Prlkq4aTHvM+N
+	 eDTgN5VZZLATieGxC8vMqcHVTHdQIL63mmQQGdiCPeBj+cARAR4cnGnqJ35UI9ZFbn
+	 uSL8Ys/PCGOp1a6uCJDJdZhN6mhZ0J51T+/xZ6Bj+aFJUo7nkxoRQiwNXWKGnT6ByK
+	 ZiFdXEcFhWfZg==
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-2f7bb893309so82512697b3.12
+        for <nbd@other.debian.org>; Mon, 25 Apr 2022 14:08:30 -0700 (PDT)
+X-Gm-Message-State: AOAM531EePGaxCJPvUbQVUZz5OfdJIpexUajqQIrJw30z8Ze/c+eZuaB
+	bmZ2b6toL7ZEX1YT9/biBtnFoJpgnDLJifLE9ng=
+X-Google-Smtp-Source: ABdhPJxgUnh58spmwdi5KGXzmrzAEx/WM60nf6Oi6YSWPgwfZEJsfaGjWIDBRUKlPyettQyT9R0PC00gVw9kzJ9ffYQ=
+X-Received: by 2002:a0d:e343:0:b0:2f7:cefb:577b with SMTP id
+ m64-20020a0de343000000b002f7cefb577bmr9909411ywe.472.1650920909604; Mon, 25
+ Apr 2022 14:08:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.1
-Subject: Re: [PATCH -next v2] nbd: fix possible overflow on 'first_minor' in
- nbd_dev_add()
-From: "zhangwensheng (E)" <zhangwensheng5@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>
-CC: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<nbd@other.debian.org>
-References: <20220407032505.3797948-1-zhangwensheng5@huawei.com>
- <da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com>
-In-Reply-To: <da58534e-aa43-b163-4c05-190e1e20c0ab@huawei.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.176.103]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- kwepemi500016.china.huawei.com (7.221.188.220)
-X-CFilter-Loop: Reflected
+References: <20220418045314.360785-1-hch@lst.de> <20220418045314.360785-7-hch@lst.de>
+In-Reply-To: <20220418045314.360785-7-hch@lst.de>
+From: Song Liu <song@kernel.org>
+Date: Mon, 25 Apr 2022 14:08:18 -0700
+X-Gmail-Original-Message-ID: <CAPhsuW7fpiAqAf+U491dTH4mWORZQCxfyT6zWQwN=4r5WJ429Q@mail.gmail.com>
+Message-ID: <CAPhsuW7fpiAqAf+U491dTH4mWORZQCxfyT6zWQwN=4r5WJ429Q@mail.gmail.com>
+Subject: Re: [PATCH 06/11] raid5: don't set the discard_alignment queue limit
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Richard Weinberger <richard@nod.at>, 
+	Johannes Berg <johannes@sipsolutions.net>, Josef Bacik <josef@toxicpanda.com>, 
+	"Md. Haris Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, 
+	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Mike Snitzer <snitzer@kernel.org>, Stefan Haberland <sth@linux.ibm.com>, 
+	Jan Hoeppner <hoeppner@linux.ibm.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, 
+	linux-um@lists.infradead.org, linux-block@vger.kernel.org, 
+	nbd@other.debian.org, virtualization@lists.linux-foundation.org, 
+	xen-devel@lists.xenproject.org, linux-raid <linux-raid@vger.kernel.org>, 
+	linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org, 
+	dm-devel@redhat.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <4EBLAlnGPeG.A.QlC.W32YiB@bendel>
+Resent-Message-ID: <8ufavrt2xGI.A.T1F.VOxZiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2046
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2047
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -77,77 +100,37 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/f2fb47c9-edbb-65ce-5d6a-1363a814662f@huawei.com
-Resent-Date: Sat, 23 Apr 2022 03:09:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAPhsuW7fpiAqAf+U491dTH4mWORZQCxfyT6zWQwN=4r5WJ429Q@mail.gmail.com
+Resent-Date: Mon, 25 Apr 2022 21:33:09 +0000 (UTC)
 
-friendly ping...
-
-在 2022/4/16 14:09, zhangwensheng (E) 写道:
-> friendly ping...
+On Sun, Apr 17, 2022 at 9:53 PM Christoph Hellwig <hch@lst.de> wrote:
 >
-> 在 2022/4/7 11:25, Zhang Wensheng 写道:
->> When 'index' is a big numbers, it may become negative which forced
->> to 'int'. then 'index << part_shift' might overflow to a positive
->> value that is not greater than '0xfffff', then sysfs might complains
->> about duplicate creation. Because of this, move the 'index' judgment
->> to the front will fix it and be better.
->>
->> Fixes: b0d9111a2d53 ("nbd: use an idr to keep track of nbd devices")
->> Fixes: 940c264984fd ("nbd: fix possible overflow for 'first_minor' in 
->> nbd_dev_add()")
->> Signed-off-by: Zhang Wensheng <zhangwensheng5@huawei.com>
->> ---
->> v1->v2:
->> - add the line "disk->first_minor = index << part_shift;" which has
->> been deleted by mistake in v1.
->>
->>   drivers/block/nbd.c | 23 ++++++++++++-----------
->>   1 file changed, 12 insertions(+), 11 deletions(-)
->>
->> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->> index 5a1f98494ddd..9448aacbcf0f 100644
->> --- a/drivers/block/nbd.c
->> +++ b/drivers/block/nbd.c
->> @@ -1800,17 +1800,7 @@ static struct nbd_device *nbd_dev_add(int 
->> index, unsigned int refs)
->>       refcount_set(&nbd->refs, 0);
->>       INIT_LIST_HEAD(&nbd->list);
->>       disk->major = NBD_MAJOR;
->> -
->> -    /* Too big first_minor can cause duplicate creation of
->> -     * sysfs files/links, since index << part_shift might overflow, or
->> -     * MKDEV() expect that the max bits of first_minor is 20.
->> -     */
->>       disk->first_minor = index << part_shift;
->> -    if (disk->first_minor < index || disk->first_minor > MINORMASK) {
->> -        err = -EINVAL;
->> -        goto out_free_work;
->> -    }
->> -
->>       disk->minors = 1 << part_shift;
->>       disk->fops = &nbd_fops;
->>       disk->private_data = nbd;
->> @@ -1915,8 +1905,19 @@ static int nbd_genl_connect(struct sk_buff 
->> *skb, struct genl_info *info)
->>       if (!netlink_capable(skb, CAP_SYS_ADMIN))
->>           return -EPERM;
->>   -    if (info->attrs[NBD_ATTR_INDEX])
->> +    if (info->attrs[NBD_ATTR_INDEX]) {
->>           index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
->> +
->> +        /*
->> +         * Too big first_minor can cause duplicate creation of
->> +         * sysfs files/links, since index << part_shift might 
->> overflow, or
->> +         * MKDEV() expect that the max bits of first_minor is 20.
->> +         */
->> +        if (index < 0 || index > MINORMASK >> part_shift) {
->> +            printk(KERN_ERR "nbd: illegal input index %d\n", index);
->> +            return -EINVAL;
->> +        }
->> +    }
->>       if (!info->attrs[NBD_ATTR_SOCKETS]) {
->>           printk(KERN_ERR "nbd: must specify at least one socket\n");
->>           return -EINVAL;
-> .
+> The discard_alignment queue limit is named a bit misleading means the
+> offset into the block device at which the discard granularity starts.
+> Setting it to the discard granularity as done by raid5 is mostly
+> harmless but also useless.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+
+Acked-by: Song Liu <song@kernel.org>
+
+> ---
+>  drivers/md/raid5.c | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/drivers/md/raid5.c b/drivers/md/raid5.c
+> index 59f91e392a2ae..39b0afdf40d0a 100644
+> --- a/drivers/md/raid5.c
+> +++ b/drivers/md/raid5.c
+> @@ -7749,7 +7749,6 @@ static int raid5_run(struct mddev *mddev)
+>                  */
+>                 stripe = stripe * PAGE_SIZE;
+>                 stripe = roundup_pow_of_two(stripe);
+> -               mddev->queue->limits.discard_alignment = stripe;
+>                 mddev->queue->limits.discard_granularity = stripe;
+>
+>                 blk_queue_max_write_zeroes_sectors(mddev->queue, 0);
+> --
+> 2.30.2
+>
 
