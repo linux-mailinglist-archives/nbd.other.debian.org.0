@@ -1,98 +1,192 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7EEE50EB63
-	for <lists+nbd@lfdr.de>; Tue, 26 Apr 2022 00:03:28 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2407350EFF5
+	for <lists+nbd@lfdr.de>; Tue, 26 Apr 2022 06:33:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 61E9D20345; Mon, 25 Apr 2022 22:03:28 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Apr 25 22:03:28 2022
-Old-Return-Path: <matthew.ruffell@canonical.com>
+	id CACBC20351; Tue, 26 Apr 2022 04:33:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Apr 26 04:33:08 2022
+Old-Return-Path: <martin.petersen@oracle.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=2.0 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1AA1E20306
-	for <lists-other-nbd@bendel.debian.org>; Mon, 25 Apr 2022 21:47:42 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2C12D20203
+	for <lists-other-nbd@bendel.debian.org>; Tue, 26 Apr 2022 04:17:13 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.065 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.575,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+X-Amavis-Spam-Status: No, score=0.09 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Ntx47seKwdjq for <lists-other-nbd@bendel.debian.org>;
-	Mon, 25 Apr 2022 21:47:37 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-relay-internal-0.canonical.com (smtp-relay-internal-0.canonical.com [185.125.188.122])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 1F8AD2029D
-	for <nbd@other.debian.org>; Mon, 25 Apr 2022 21:47:37 +0000 (UTC)
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 600863F325
-	for <nbd@other.debian.org>; Mon, 25 Apr 2022 21:47:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-	s=20210705; t=1650923253;
-	bh=UO4wzxZajFtH3qcfy3dLF1bQAk44v43NDT+rmdRn5Yo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type;
-	b=J5+97Ol7GprYEW2ZEzNG4XzYVNsOUW0hZWdsQzVB/duFtm7QztNyWaCuwFifRdVLS
-	 UK1L5wsfM9Ng4KwhlUOM6ddLDISodBfm93unZoI892dJsJUI9OK76qgKASLecXZrIl
-	 5xct1CynTk3pCa0/saQfmfmTeEuPUvvFJ39omJCB6zUfdh317D7D8oJL8sg2+gTRu5
-	 zvxU6CqFHPfTPxzVPL7Yr8qVvVYIjp27l5LhfKkcRFx92VoQAZoiGANueJM+j7uut6
-	 Z01+xXCiWe/4/Eu4Z42UtYTMKKty4G3LW01MvFO8wM3jPXKC2pKF4sYWBi/9RfCYM+
-	 4vhJAozziJTUg==
-Received: by mail-pl1-f198.google.com with SMTP id t14-20020a1709028c8e00b0015cf7e541feso3971923plo.1
-        for <nbd@other.debian.org>; Mon, 25 Apr 2022 14:47:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=UO4wzxZajFtH3qcfy3dLF1bQAk44v43NDT+rmdRn5Yo=;
-        b=pZz5gPTUIc78iG5Xsi/9JwmNgZI4/L2QhozPG7SH+4QdM2+TywPgl6ia6NHZwCIiZu
-         Ys+OeQGQ+OeRYksX8myid+1nIRZHL2RRdvLeiFJr5bv1OoL6wNXIMTMNZ74iTlOYnmuf
-         D/5Lybh6OBHT+JK4vbKiHWlkaPKS513EXD+RjgCaw2hfjXO37eZMkUQfhMdnCIZHom+K
-         Ae+m9vsmuSX8JyRXM1ZJkaJS9OpFoZQSo5/2Ubp/Vv9pDfjFRYkt5FkqPndiSypa8jhA
-         aHyAgv9N9Bfv210rD0MqZQYt0KzjAr8v3PyLXjccdMMheqTidtkSg3+DQJUTJoUBpWlx
-         +1Mg==
-X-Gm-Message-State: AOAM533+3ks2cCYQI3uNaCHN39MVDO/+D8+Mq7MlrFU/ymyxyc3O3p1A
-	cVC8Lp6R42Jq6VMHHJT53g5Tu71fHljSMUs/UnUXks2yrSHGMymEB9hTwrjQ8B6aHg2TbFh7d4a
-	ClfHT4qkDDuqYi2AIDj6qGr7Em6fFqopajWLaFCEs8SpTc4k=
-X-Received: by 2002:a17:90b:886:b0:1d9:3a05:3f2a with SMTP id bj6-20020a17090b088600b001d93a053f2amr14051820pjb.53.1650923251849;
-        Mon, 25 Apr 2022 14:47:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw2rdYzYOX06hsXRuD35oezdKlAmuDxmoRYv+cEWg5RH4h591X/jJQypqGczm4ZFvbqbJKbrTN/oPcN6sjDAD4=
-X-Received: by 2002:a17:90b:886:b0:1d9:3a05:3f2a with SMTP id
- bj6-20020a17090b088600b001d93a053f2amr14051798pjb.53.1650923251590; Mon, 25
- Apr 2022 14:47:31 -0700 (PDT)
+	with ESMTP id D45ilF351nb3 for <lists-other-nbd@bendel.debian.org>;
+	Tue, 26 Apr 2022 04:17:07 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .oracle. - helo: .mx0b-00069f02.pphosted. - helo-domain: .pphosted.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "*.pphosted.com", Issuer "Thawte RSA CA 2018" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 9FFEC2030A
+	for <nbd@other.debian.org>; Tue, 26 Apr 2022 04:17:04 +0000 (UTC)
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23PLV6sI022232;
+	Tue, 26 Apr 2022 04:16:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=to : cc : subject :
+ from : message-id : references : date : in-reply-to : content-type :
+ mime-version; s=corp-2021-07-09;
+ bh=VgShOSuxQqfoj97gAL6GK2pWBCOuBmWMfHpOmNYmLms=;
+ b=OtYmsq8G8b5RI22dbLOhM5Jw4sreT66i/r4obiHaBmE7x18GcwopAR6A8LjRsyP0yrwu
+ /ChcpAp6Eb+flbIKuNrqgeGzAo2MUWXRoZreohyeg2Rk5mO6D+sfmjFltbiKlvM+ELq4
+ RwcStAPaLz8AX9im04VlQ59ayyK9WPT2W0QQoZYXQ8mY8foBidZ4jI6BX78BsHu0SlDP
+ 0e3v4HGavanW1GE7bFS/xzTyDjsi91O1EhjtH7JLEwO9tlcmdUNIQJ+4n3n660UGzZCo
+ qfqJQCDk0chCqM7CUmiA+I094CYXxG4ZZB7SXmK+GU4U6eIyF00KFboyDbWOLXmL5mGc 2A== 
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3fmaw4d0w8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 26 Apr 2022 04:16:28 +0000
+Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.16.1.2/8.16.1.2) with SMTP id 23Q4AR5j012450;
+	Tue, 26 Apr 2022 04:16:27 GMT
+Received: from nam11-dm6-obe.outbound.protection.outlook.com (mail-dm6nam11lp2175.outbound.protection.outlook.com [104.47.57.175])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com with ESMTP id 3fp5yj4940-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 26 Apr 2022 04:16:27 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZUOhLZKNL3vrNl/maSq9xt45/b5a9NdXwIhXvstJAYwIsAi0DxupEQl/Yvix7bJkhWOcyWDMj1Z86LqzR2sBaF9Njm7mKI0E7iPfS6tvhupy6YoXis7wjl2yAmEg3XVwIwnRD7TXGS7Lp4uSKHm+D+vNIIKsp07IgnqK3C/esfCnpvAQspS/rwxCLYikKu3NATPpsD8FIckfWAfsADoxVsInmB+mfKQ5CeQKCpwTgVdzibDwYWjb0/FhMPRYu+CM7azS0uotfZMZj4EMLuozZJHZhuyydbp/FNVzkBbrTHENZwrGfiMYt1NkVjqWTGu+IUDuJEm5vrAdkdX6U4bYvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VgShOSuxQqfoj97gAL6GK2pWBCOuBmWMfHpOmNYmLms=;
+ b=MELrS1W3JzftJQi7nfd3yt907GKzrEuF69GOSkRcSt/yRF0P26S8bQJ3u5SkwIh0cbPh/4ivs7IazWwxNEzZuDmdrvufbsv1y9r2NtHzoWo80/GIyAOCopQpRS3vQYoRIo4eGWfsudOh0C6qucCJFG21qOmmTOxEKGvrOsUO+etVxSrAc947LtMJM6bXqTIh5nhnlWjxNB0GOtSQ6vZTzyBo+HadFY+E5bfv6pIpzk5wldicLOXEXu+ZRKS1179vvO1XHRQsi8So10WAuPLIms6ajGHbjwXkzrTBwQxPBvDCMrIfTM0degoP/A7PqMTdRDHZbTcDPtXzs1+/+qwQGw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VgShOSuxQqfoj97gAL6GK2pWBCOuBmWMfHpOmNYmLms=;
+ b=A3am2cwBpuqjfY9kIPSeyfS7WwrY3aqquCThNKiIOdYqL981QzGx0dyEc11s46jGa6ebZeevTJj/79eFZ394X8QAkoUzqgK1xhVr0SGikjY+BNh5NjuNlE+uzRx6fhSULKfR/dmqEh9lDelXfGMgep7VN1yBS1p98+BvJXLcSAU=
+Received: from PH0PR10MB4759.namprd10.prod.outlook.com (2603:10b6:510:3d::12)
+ by DM6PR10MB3129.namprd10.prod.outlook.com (2603:10b6:5:1a9::31) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Tue, 26 Apr
+ 2022 04:16:24 +0000
+Received: from PH0PR10MB4759.namprd10.prod.outlook.com
+ ([fe80::d1db:de4e:9b71:3192]) by PH0PR10MB4759.namprd10.prod.outlook.com
+ ([fe80::d1db:de4e:9b71:3192%9]) with mapi id 15.20.5186.021; Tue, 26 Apr 2022
+ 04:16:24 +0000
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Richard Weinberger <richard@nod.at>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Josef Bacik
+ <josef@toxicpanda.com>,
+        "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+        Jack
+ Wang <jinpu.wang@ionos.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Roger Pau =?utf-8?Q?Monn=C3=A9?=
+ <roger.pau@citrix.com>,
+        Mike Snitzer <snitzer@kernel.org>, Song Liu
+ <song@kernel.org>,
+        Stefan Haberland <sth@linux.ibm.com>,
+        Jan Hoeppner
+ <hoeppner@linux.ibm.com>,
+        "Martin K. Petersen"
+ <martin.petersen@oracle.com>,
+        linux-um@lists.infradead.org, linux-block@vger.kernel.org,
+        nbd@other.debian.org, virtualization@lists.linux-foundation.org,
+        xen-devel@lists.xenproject.org, linux-raid@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
+        dm-devel@redhat.com
+Subject: Re: fix and cleanup discard_alignment handling
+From: "Martin K. Petersen" <martin.petersen@oracle.com>
+Organization: Oracle Corporation
+Message-ID: <yq1tuagv5xw.fsf@ca-mkp.ca.oracle.com>
+References: <20220418045314.360785-1-hch@lst.de>
+Date: Tue, 26 Apr 2022 00:16:21 -0400
+In-Reply-To: <20220418045314.360785-1-hch@lst.de> (Christoph Hellwig's message
+	of "Mon, 18 Apr 2022 06:53:03 +0200")
+Content-Type: text/plain
+X-ClientProxiedBy: BYAPR07CA0082.namprd07.prod.outlook.com
+ (2603:10b6:a03:12b::23) To PH0PR10MB4759.namprd10.prod.outlook.com
+ (2603:10b6:510:3d::12)
 MIME-Version: 1.0
-References: <20220422054224.19527-1-matthew.ruffell@canonical.com> <CAEzrpqe=LD3DQcEeLXmmFuq7cX_dAQ6DOCuJYWBoZWKKTmoTzA@mail.gmail.com>
-In-Reply-To: <CAEzrpqe=LD3DQcEeLXmmFuq7cX_dAQ6DOCuJYWBoZWKKTmoTzA@mail.gmail.com>
-From: Matthew Ruffell <matthew.ruffell@canonical.com>
-Date: Tue, 26 Apr 2022 09:47:20 +1200
-Message-ID: <CAKAwkKt3yMOOW3NXcE91WkGr+8xj050CYP2pLoQVHt_2wXq=-w@mail.gmail.com>
-Subject: Re: [PROBLEM] nbd requests become stuck when devices watched by
- inotify emit udev uevent changes
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block <linux-block@vger.kernel.org>, 
-	nbd <nbd@other.debian.org>, Linux Kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 835a5865-72d0-4ac4-b537-08da273b86d0
+X-MS-TrafficTypeDiagnostic: DM6PR10MB3129:EE_
+X-Microsoft-Antispam-PRVS: 
+	<DM6PR10MB31292380D74F76EFD145BA388EFB9@DM6PR10MB3129.namprd10.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	X0D6KBg3dYE7LKh6WthP6tgUSgJnyXvQVuy37VB7bVFWKyTyZpiYPqKVs3Jzizuwg+Sf92KHStLxr+xa3JI22N1hfVbIdR+D/hINi8ev2jXI5RPeztSc9M7Pfv8wN/KlfccpqYFzZlCo5fZC0qJe9mn6+euobijLQ+ae3W1Q4ZSSK+k6g3gj1X9rr3ZFeCf9R4oOxgqjLqE//AGw5JJz14O+wIKv8oOUSl5DbPRYYE5pYch3DXESswFS7q0LgWDkyynxnMeCOwM3I+ZcXRp0HDOOw38bg1/UmGwk7R6kKoQT09BnhshRQptOGkKJbk1TqA3ojIMkvwsO3BvRvme7OKVzKhtfYOrpHTxE1nDe7oUu1zaDggjj9Hx+tUiT2rsXAHF4nqmCzuVh5sZx8O3Fr3KQAaZ0iGVMV17moVVHaqC7x0Ze//UiVG51Ku4RDI3eHLUHWoAnGy3IJzDuYBG/otHNI3ceEV+qLsmjxX8+cDTfHXvH4dK89dvlqS3ADewVSJmXUQBL3kRw79LXhxkRdbBZckOUrZjGYfDlE6UNpH3ka85nzwyCT15D+xxviw7SVLIkB+uYD47wiiadu9xCVEbX7c1Bbglyrs2g+wOET49yX+M04p188Ceo0MX4Z0s/fEANDpsEvkPbetZ+B9iMa8H7On2NO3ifD93u8aM1pkJwPcnEAW2NFb6Go6fxxHT6CptTyDO4NAfDFQ+CIZFuRA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR10MB4759.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(52116002)(8936002)(186003)(4744005)(86362001)(7416002)(508600001)(2906002)(6666004)(6512007)(6506007)(26005)(36916002)(38100700002)(38350700002)(83380400001)(5660300002)(316002)(6916009)(4326008)(8676002)(6486002)(66476007)(66556008)(54906003)(66946007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?TB4tA924ES23Jbjeya1BYJTs1OvtA/zZv6THpxhMU79cce2hBvRPpiS49za3?=
+ =?us-ascii?Q?mUONwmtJsiCknSg/EcY91oV51b/6kYP1mGaQV91M1HhGLu1bE/mmUjgXe5BE?=
+ =?us-ascii?Q?SqqnyHd99Z6KyY5CLuitjo7OSNvyWpQ3ukZ8SyjQEJIcvnq3Gg3EkU5R+HG3?=
+ =?us-ascii?Q?F8fUv9n6HOda4W/bB+HraU/tzreM8+EWPjk2HYGDdAC7U32s3JGn4V6pFdjc?=
+ =?us-ascii?Q?EyZC/gXEK2RXovs+rqNtiXAn8Y1xnn5A0A4Nh1NIJFpuaTiTpo2VmTYmol6m?=
+ =?us-ascii?Q?0UbCryYNd+ZCvW5dW/X4TU1Qv+oPKgMV9lqUzmk7xOYKt+9B/hPqNDcHBglp?=
+ =?us-ascii?Q?XTeDDi8XHXO1D5P3WLajf6NjFpitG4XqaV9vmUxClpxedVXvRbi98PBuLTeF?=
+ =?us-ascii?Q?BKRu/8UIxZUe9pthO/CO66KVDUBcGOnzELJEsoRFs08hY/UG2sqncy7tgt0t?=
+ =?us-ascii?Q?nvA55r3YQu8SSkHhw50KmjFF706K/czmMyEdVi2HXCzcPiOxOs7KvhJywE1B?=
+ =?us-ascii?Q?Eh1gGP/2tgTCaYhCTSs1zZ+ZFeoSw0ocq/HEgpIntTv6HJtpQx6KqSRGOXV7?=
+ =?us-ascii?Q?JcDQxbe1XhEdhnAbfzp6vEcG6YCNbs0SIxKP6hS7jAteqV8nRLnAjLRy1Pph?=
+ =?us-ascii?Q?H6E+hxLB1CInAKwRT0/+o/fAsfmcGgoDJAnIfVg8BZ67BgRdV2VALulbozvP?=
+ =?us-ascii?Q?2wnmKY+uku255u0vK1dEoptoo6YpiOODxrPEKu2rm5dJklw426eL7Pcbf6mB?=
+ =?us-ascii?Q?2jo0Q1xNQoM3RmwrrrIufsvxMNGmz1mWqLgExox8rn0CGer6iwJVzl7MHvtx?=
+ =?us-ascii?Q?WSisn2XeQ31GZs2Ays3lwTmolcCHLf1sN39+oJQziOJg5iSOUBlrE3qY9ryn?=
+ =?us-ascii?Q?Ddy2KZo9oGxfl0CzSidZvVjfHjOQuDCpI794Pucgfowl2w2KruGMXZS3GVgl?=
+ =?us-ascii?Q?QB4KWlnDOPGRepoOY18EgaS2wd3XXbdWYFxh7NY0ySmiq96j9DUNERGzOtGP?=
+ =?us-ascii?Q?ke8nRsN6Uts+l5dXLI1WLLJtOTOMskxZ5cqzXGXbWfs6cnqNc4N47g+MOOMi?=
+ =?us-ascii?Q?khwSby0iMLA5fQsyRHYHr+Yt2+cgpCymS7woTMu5/GYc2Qz71IwKaYYrE0T4?=
+ =?us-ascii?Q?yiHlseLzNfilBiXLRkBdCfz1quf0+RtPshsIz4+ucUYTNDgmJi75SEuIBUEP?=
+ =?us-ascii?Q?Aqhzuj7AMa3Y9agTnz1W+7vd7+L4aj3Hz1KF6fS2W+PqHp6HVS757X8KtSDp?=
+ =?us-ascii?Q?00DgbNPViQTRs9TQ//lU3PUutFq7odj+TM3IxVZlfds0Qyg3pxbOo0g4JNg1?=
+ =?us-ascii?Q?sMXx2p6R35Wqw94RidfoO22d7QrxNBSa2tC5TV1fuA5Xo0CrGQkdrvgBTJVO?=
+ =?us-ascii?Q?6YNaMJanUjQJVYnjGO6DkWgTuVC/n+nGFzYXeqdMymlT1wFUzJlaASPKrpyF?=
+ =?us-ascii?Q?SQJvJ90b4tiE3DW5z5HBnA85+dXINGsNFxdRxipwE6F0s4T4sLeeFObSgiNe?=
+ =?us-ascii?Q?0PU//rhhc23Negk43JrkvaDsNkInRzuILS80NmHqquWDI/2TR1/Jwq2acRt+?=
+ =?us-ascii?Q?pDpZbxqRYu0dB0FOfOHQwMQMUtJXNwhRUEyyKvKFB1kh9YRCqY7Le4w8GOcL?=
+ =?us-ascii?Q?68r28By/gaXsB3HU2N6tNEWEddQVidZzuQSCRzX6xxDgwLEGc1T4y59QDQ3m?=
+ =?us-ascii?Q?XW6XaDzoV+2/HLCd7yg08CDJxvE5dwpDDIETeYfsVF8WLkmnrhL6SSnsWcHg?=
+ =?us-ascii?Q?//ysxLiDUE8tILEWYPxrVO9Squzf3gk=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 835a5865-72d0-4ac4-b537-08da273b86d0
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB4759.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2022 04:16:24.7224
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Nf2TI3DEgT4qtSJndbWmRFqMGbzkMS2vq7+Y5mOBDAJDRs7oHXuyNKkAk9ybd0dRtdbzLEe54D/bHDq4bXF1AdU2cnvLzYXAEPCE3V3v7Ak=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB3129
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.486,18.0.858
+ definitions=2022-04-26_01:2022-04-25,2022-04-26 signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxlogscore=999 mlxscore=0
+ suspectscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2202240000
+ definitions=main-2204260025
+X-Proofpoint-GUID: 76EsLqdiuyTX3yre8fbQOOLA-RdU5MY-
+X-Proofpoint-ORIG-GUID: 76EsLqdiuyTX3yre8fbQOOLA-RdU5MY-
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <cfw70q8ht6O.A.UAD.wqxZiB@bendel>
+Resent-Message-ID: <2pKLYhz37PF.A.BCG.EY3ZiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2048
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2049
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -102,52 +196,24 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAKAwkKt3yMOOW3NXcE91WkGr+8xj050CYP2pLoQVHt_2wXq=-w@mail.gmail.com
-Resent-Date: Mon, 25 Apr 2022 22:03:28 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/yq1tuagv5xw.fsf@ca-mkp.ca.oracle.com
+Resent-Date: Tue, 26 Apr 2022 04:33:08 +0000 (UTC)
 
-Hi Josef,
 
-The pastebin has expired the link, and I can't access your patch.
-Seems to default to 1 day deletion.
+Christoph,
 
-Could you please create a new paste or send the patch inline in this
-email thread?
+> the somewhat confusing name of the discard_alignment queue limit, that
+> really is an offset for the discard granularity mislead a lot of
+> driver authors to set it to an incorrect value.  This series tries to
+> fix up all these cases.
 
-I am more than happy to try the patch out.
+Not sure how I ended up with "discard_alignment" when I called the
+corresponding I/O parameter "alignment_offset".
 
-Thank you for your analysis.
-Matthew
+Anyway. All this looks good to me.
 
-On Sat, Apr 23, 2022 at 3:24 AM Josef Bacik <josef@toxicpanda.com> wrote:
->
-> On Fri, Apr 22, 2022 at 1:42 AM Matthew Ruffell
-> <matthew.ruffell@canonical.com> wrote:
-> >
-> > Dear maintainers of the nbd subsystem,
-> >
-> > A user has come across an issue which causes the nbd module to hang after a
-> > disconnect where a write has been made to a qemu qcow image file, with qemu-nbd
-> > being the server.
-> >
->
-> Ok there's two problems here, but I want to make sure I have the right
-> fix for the hang first.  Can you apply this patch
->
-> https://paste.centos.org/view/b1a2d01a
->
-> and make sure the hang goes away?  Once that part is fixed I'll fix
-> the IO errors, this is just us racing with systemd while we teardown
-> the device and then we're triggering a partition read while the device
-> is going down and it's complaining loudly.  Before we would
-> set_capacity to 0 whenever we disconnected, but that causes problems
-> with file systems that may still have the device open.  However now we
-> only do this if the server does the CLEAR_SOCK ioctl, which clearly
-> can race with systemd poking the device, so I need to make it
-> set_capacity(0) when the last opener closes the device to prevent this
-> style of race.
->
-> Let me know if that patch fixes the hang, and then I'll work up
-> something for the capacity problem.  Thanks,
->
-> Josef
+Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+
+-- 
+Martin K. Petersen	Oracle Linux Engineering
 
