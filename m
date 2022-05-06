@@ -2,132 +2,106 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B4A51D895
-	for <lists+nbd@lfdr.de>; Fri,  6 May 2022 15:15:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9758551E01F
+	for <lists+nbd@lfdr.de>; Fri,  6 May 2022 22:26:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3AEC82038F; Fri,  6 May 2022 13:15:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri May  6 13:15:09 2022
-Old-Return-Path: <hoeppner@linux.ibm.com>
+	id 7CA302039D; Fri,  6 May 2022 20:26:16 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri May  6 20:26:16 2022
+Old-Return-Path: <Nikolaus@rath.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,FOURLA,MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_MSPIKE_H2,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-6.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,RCVD_IN_DNSWL_LOW,
+	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 46A5420391
-	for <lists-other-nbd@bendel.debian.org>; Fri,  6 May 2022 12:57:41 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 840B720380
+	for <lists-other-nbd@bendel.debian.org>; Fri,  6 May 2022 20:26:08 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.238 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.247, RCVD_IN_MSPIKE_H2=-0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.808 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001,
+	RCVD_IN_MSPIKE_WL=0.001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id xXYi3Lz4pHrN for <lists-other-nbd@bendel.debian.org>;
-	Fri,  6 May 2022 12:57:36 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.pphosted.com", Issuer "Sectigo RSA Organization Validation Secure Server CA" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 3AE32203A3
-	for <nbd@other.debian.org>; Fri,  6 May 2022 12:57:35 +0000 (UTC)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 246Bhqsi032725;
-	Fri, 6 May 2022 12:57:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=evV7zW0Pkptdgxryp8q/nhaiY9RbM7s7Y7FBYLM1+3A=;
- b=Jpd/LqQ8qRyc1xkIsreNzVu3YNJxk4TaXrlRk5EXzrQXl5UeIjcnnMKpZQPsVJ0GWk+H
- 4OO+eKdI0ysFLbuy272CQquw7xLwkRQ1s5GUWbXY8kFuS71Ceev4HZ45AsEQ8oZBvzjh
- vj9ZT2cWF915zG+QEbX57A1GZjGTBqhBXVby9LhxAVMXfdHc8D2HNV+6fPiIWZDjoX8J
- xQc3nUSMfgk+A0yFcqxH7BuTTwMYt5urI5Cc5SR3b708MtZCLHe7iDRxY/w+5R6s+qyZ
- 89+99+cfayWa/722v5Fz4JyhE/P1cqJ/2euDxDC5GLt/zC7591d5SNeke9efRBlC4wae 9g== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3fw3279f16-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 06 May 2022 12:57:05 +0000
-Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 246C6GE1009740;
-	Fri, 6 May 2022 12:57:04 GMT
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
-	by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3fw3279f0m-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 06 May 2022 12:57:04 +0000
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
-	by ppma03ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 246CrK4Z028206;
-	Fri, 6 May 2022 12:57:02 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
-	by ppma03ams.nl.ibm.com with ESMTP id 3ftp7fwgbx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 06 May 2022 12:57:02 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 246Cv0dI39256422
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 6 May 2022 12:57:00 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id F2900A4053;
-	Fri,  6 May 2022 12:56:59 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1CD1EA4040;
-	Fri,  6 May 2022 12:56:59 +0000 (GMT)
-Received: from [9.145.54.141] (unknown [9.145.54.141])
-	by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Fri,  6 May 2022 12:56:59 +0000 (GMT)
-Message-ID: <1f26f6b4-4d33-6291-31c2-5cb68a5be829@linux.ibm.com>
-Date: Fri, 6 May 2022 14:56:58 +0200
+	with ESMTP id cipeGaesxx-K for <lists-other-nbd@bendel.debian.org>;
+	Fri,  6 May 2022 20:26:03 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .rath. - helo: .out1-smtp.messagingengine. - helo-domain: .messagingengine.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 155BE20379
+	for <nbd@other.debian.org>; Fri,  6 May 2022 20:26:02 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailout.nyi.internal (Postfix) with ESMTP id 7C6625C0118
+	for <nbd@other.debian.org>; Fri,  6 May 2022 16:25:58 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute2.internal (MEProxy); Fri, 06 May 2022 16:25:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rath.org; h=cc
+	:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1651868758; x=1651955158; bh=coBLHoveJ9
+	xTyAO/utpDGsp0Z5Ec/cXOpw0Ysw0tFSo=; b=vFo3z0FoiQGqB8A3qDf41zk3tT
+	OW8adffizpPE69ykzy3yHRH/K2jNnmYxnm4NJX3a/ghLyiWN2mqV/9QJMZ6PIcEr
+	UMYjD+ugeVry4E0jx6BA8BJAXWgZTKo6UEnEtAQUfgHnn+GSxIYOj93cOskkHyrR
+	QevgtYC9eQSHunYT11ObCfZ4HUc8A0ATxkJKfX/xCy4qtzzwi23lgTEYgRVvjqZS
+	P48VHGOo29UHqJapu3Lw5trgQgJXCBjY4yjooszxuVuq6KWKklDwLnFFphYehKar
+	GWWKpc5sk5syOkN1AFku6NxLh9aIG90AGC6ml01AMW/DH9ohPlhiit0DQLiA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:content-type
+	:date:date:from:from:in-reply-to:message-id:mime-version
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1651868758; x=
+	1651955158; bh=coBLHoveJ9xTyAO/utpDGsp0Z5Ec/cXOpw0Ysw0tFSo=; b=N
+	LJTEWFwA8MJN3nTmPwGDWOmMbdAg/W5OUw3Ed8s+K278Ov6QjwQFmNZnmOUsZHtu
+	oNiNSF9FZ3iQnw2Qm6ftailvn332LgLXmqntIfY1TW6McpAulAFP18tMDFABTQpX
+	PybqdGoR+u6rG9wGt67gvqsOL3lbHddJrc3Gdm+JGKDTFuY5tk6jEQYu9QGAL/cf
+	egr0cPOSbzT9A6l3htgXE+EAqaN559avAMZO+AGNCbpobtWkqP2/Gcb7glMAt4CT
+	9UOG3VliPFKWLRcBnd3Fw2vc6+VFmpNEM8QnTdquOIf5q0h/qfTjlXy1AYj8rNEx
+	FO97uUKHimMcOILTvbKKQ==
+X-ME-Sender: <xms:VoR1YgNcBcblQvACVSREh3rLQz6zQ2FSH232fSWLZos1t8LMkIXALA>
+    <xme:VoR1Ym_7rNWtpP1ghwjUeiAOZnJfAmunCzCQxO5C6Vw1T8GE7JSx3JsfKOSz7Be-u
+    2E9dRN2rouDNR9->
+X-ME-Received: <xmr:VoR1YnQgQWgU8IcRv9iRMEye0FEV5Cnk_ZL8rk56m29mnDKyK2xUK1Px5Z5iyAFAk1ZG2cioR8U>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeefgddugeejucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkfgggtgfgsehtqhdttd
+    dtreejnecuhfhrohhmpefpihhkohhlrghushcutfgrthhhuceopfhikhholhgruhhssehr
+    rghthhdrohhrgheqnecuggftrfgrthhtvghrnhepffeuieevteehkeehfedugfegfeejve
+    ekvddvjeeuveegheekleegkefhteduffehnecuffhomhgrihhnpehrvgguhhgrthdrtgho
+    mhdprhgrthhhrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
+    hilhhfrhhomheppfhikhholhgruhhssehrrghthhdrohhrgh
+X-ME-Proxy: <xmx:VoR1Yot1tq4SEeUXgKqWiPs_mR4i3fvcqTUlEeWVJ6yOw1dlXAuWAQ>
+    <xmx:VoR1YoeysnOiY3c-vGMGES3N50pmCGednqnvrtViSpwRNY90VWr1sA>
+    <xmx:VoR1Ys3p1fYemvVMmx0JPPuDPhGFc_vn7x6wpoWQ0W_fYhkYXjuV3w>
+    <xmx:VoR1YprpOEqA34o9sDQf8nNcftHznunZ0Ii0zjS2dIzlLMzzolpiRw>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <nbd@other.debian.org>; Fri, 6 May 2022 16:25:58 -0400 (EDT)
+Received: from vostro.rath.org (vostro [192.168.12.4])
+	by ebox.rath.org (Postfix) with ESMTPS id 62ACE94D
+	for <nbd@other.debian.org>; Fri,  6 May 2022 20:25:56 +0000 (UTC)
+Received: by vostro.rath.org (Postfix, from userid 1000)
+	id CACA4C01E1; Fri,  6 May 2022 21:25:55 +0100 (BST)
+From: Nikolaus Rath <Nikolaus@rath.org>
+To: nbd@other.debian.org
+Subject: How to safely disconnect NBD device
+Date: Fri, 06 May 2022 21:25:55 +0100
+Message-ID: <87o80awgq4.fsf@vostro.rath.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [PATCH 07/11] dasd: don't set the discard_alignment queue limit
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: Richard Weinberger <richard@nod.at>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Josef Bacik
- <josef@toxicpanda.com>,
-        "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-        Jack Wang <jinpu.wang@ionos.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>,
-        Mike Snitzer <snitzer@kernel.org>, Song Liu <song@kernel.org>,
-        Stefan Haberland <sth@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        linux-um@lists.infradead.org, linux-block@vger.kernel.org,
-        nbd@other.debian.org, virtualization@lists.linux-foundation.org,
-        xen-devel@lists.xenproject.org, linux-raid@vger.kernel.org,
-        linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
-        dm-devel@redhat.com
-References: <20220418045314.360785-1-hch@lst.de>
- <20220418045314.360785-8-hch@lst.de>
-From: =?UTF-8?Q?Jan_H=c3=b6ppner?= <hoeppner@linux.ibm.com>
-In-Reply-To: <20220418045314.360785-8-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: 8a7-K9CSYxb93olkIOkZv_aoAnTW7JGG
-X-Proofpoint-GUID: eBrk8yaxusH63MjrlJz40h5tJPgmJePg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-06_04,2022-05-06_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 suspectscore=0
- malwarescore=0 phishscore=0 mlxlogscore=999 adultscore=0 clxscore=1011
- priorityscore=1501 spamscore=0 bulkscore=0 lowpriorityscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2205060070
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nBQ20lglZtG.A.B4.d9RdiB@bendel>
+Resent-Message-ID: <LPbdQYM2PS.A.bAE.oRYdiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2060
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2061
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -137,38 +111,57 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/1f26f6b4-4d33-6291-31c2-5cb68a5be829@linux.ibm.com
-Resent-Date: Fri,  6 May 2022 13:15:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/87o80awgq4.fsf@vostro.rath.org
+Resent-Date: Fri,  6 May 2022 20:26:16 +0000 (UTC)
 
-On 18/04/2022 06:53, Christoph Hellwig wrote:
-> The discard_alignment queue limit is named a bit misleading means the
-> offset into the block device at which the discard granularity starts.
-> Setting it to PAGE_SIZE while the discard granularity is the block size
-> that is smaller or the same as PAGE_SIZE as done by dasd is mostly
-> harmless but also useless.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Hello,
 
-Acked-by: Jan Höppner <hoeppner@linux.ibm.com>
+(Following up from
+https://listman.redhat.com/archives/libguestfs/2022-May/028820.html)
 
-Sorry for a rather late answer. I saw that Jens already applied
-the patches so it's fine when the Ack isn't added anymore.
-Wanted to send it anyway so that you know we're aware of it.
+I was experimenting with nbd, and found that running a command like:
 
-> ---
->  drivers/s390/block/dasd_fba.c | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/drivers/s390/block/dasd_fba.c b/drivers/s390/block/dasd_fba.c
-> index 8bd5665db9198..60be7f7bf2d16 100644
-> --- a/drivers/s390/block/dasd_fba.c
-> +++ b/drivers/s390/block/dasd_fba.c
-> @@ -782,7 +782,6 @@ static void dasd_fba_setup_blk_queue(struct dasd_block *block)
->  	blk_queue_segment_boundary(q, PAGE_SIZE - 1);
->  
->  	q->limits.discard_granularity = logical_block_size;
-> -	q->limits.discard_alignment = PAGE_SIZE;
->  
->  	/* Calculate max_discard_sectors and make it PAGE aligned */
->  	max_bytes = USHRT_MAX * logical_block_size;
+$ nbd-client localhost /dev/nbd1 && mkfs.ext4 /dev/nbd1 && nbd-client -d
+/dev/nbd1
+
+Frequently gives me errors like this:
+
+May 02 15:20:50 vostro.rath.org kernel: nbd1: detected capacity change from=
+ 0 to 52428800
+May 02 15:20:50 vostro.rath.org kernel: block nbd1: NBD_DISCONNECT
+May 02 15:20:50 vostro.rath.org kernel: block nbd1: Disconnected due to use=
+r request.
+May 02 15:20:50 vostro.rath.org kernel: block nbd1: shutting down sockets
+May 02 15:20:50 vostro.rath.org kernel: I/O error, dev nbd1, sector 776 op =
+0x0:(READ) flags 0x80700 phys_seg 29 prio class 0
+May 02 15:20:50 vostro.rath.org kernel: I/O error, dev nbd1, sector 776 op =
+0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+May 02 15:20:50 vostro.rath.org kernel: Buffer I/O error on dev nbd1, logic=
+al block 97, async page read
+May 02 15:20:50 vostro.rath.org kernel: block nbd1: Attempted send on inval=
+id socket
+May 02 15:20:50 vostro.rath.org kernel: I/O error, dev nbd1, sector 0 op 0x=
+1:(WRITE) flags 0x800 phys_seg 0 prio class 0
+May 02 15:20:50 vostro.rath.org kernel: block nbd1: Attempted send on inval=
+id socket
+May 02 15:20:50 vostro.rath.org kernel: I/O error, dev nbd1, sector 0 op 0x=
+1:(WRITE) flags 0x800 phys_seg 0 prio class 0
+
+
+To me, this looks as if the kernel is shutting down the NBD connection
+while there are still active requests and/or while there is still dirty
+data that needs to be flushed.
+
+Is this expected behavior?
+
+If so, what is the recommended way to *safely* disconnect an NBD device?
+
+Best,
+-Nikolaus
+
+--=20
+GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F
+
+             =C2=BBTime flies like an arrow, fruit flies like a Banana.=C2=
+=AB
 
