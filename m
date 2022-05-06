@@ -2,73 +2,132 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 210FA51B525
-	for <lists+nbd@lfdr.de>; Thu,  5 May 2022 03:15:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91B4A51D895
+	for <lists+nbd@lfdr.de>; Fri,  6 May 2022 15:15:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B7C3F202BB; Thu,  5 May 2022 01:15:07 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu May  5 01:15:07 2022
-Old-Return-Path: <yukuai3@huawei.com>
+	id 3AEC82038F; Fri,  6 May 2022 13:15:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri May  6 13:15:09 2022
+Old-Return-Path: <hoeppner@linux.ibm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=4.0 tests=MURPHY_DRUGS_REL8,
-	NICE_REPLY_A,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,FOURLA,MURPHY_DRUGS_REL8,
+	NICE_REPLY_A,RCVD_IN_MSPIKE_H2,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 34628202CD
-	for <lists-other-nbd@bendel.debian.org>; Thu,  5 May 2022 00:57:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 46A5420391
+	for <lists-other-nbd@bendel.debian.org>; Fri,  6 May 2022 12:57:41 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.517 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, MIME_CHARSET_FARAWAY=0.02, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-3.247, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.238 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.247, RCVD_IN_MSPIKE_H2=-0.001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 45hJe7eon2mQ for <lists-other-nbd@bendel.debian.org>;
-	Thu,  5 May 2022 00:57:35 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	with ESMTP id xXYi3Lz4pHrN for <lists-other-nbd@bendel.debian.org>;
+	Fri,  6 May 2022 12:57:36 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B39CF202B9
-	for <nbd@other.debian.org>; Thu,  5 May 2022 00:57:35 +0000 (UTC)
-Received: from kwepemi100001.china.huawei.com (unknown [172.30.72.54])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4KtwJh5VgFzhYsv;
-	Thu,  5 May 2022 08:57:08 +0800 (CST)
-Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- kwepemi100001.china.huawei.com (7.221.188.215) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Thu, 5 May 2022 08:57:30 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- kwepemm600009.china.huawei.com (7.193.23.164) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Thu, 5 May 2022 08:57:29 +0800
-Subject: Re: [PATCH -next 0/6] nbd: bugfix and cleanup patches
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <ming.lei@redhat.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-References: <20220426130746.885140-1-yukuai3@huawei.com>
-From: "yukuai (C)" <yukuai3@huawei.com>
-Message-ID: <a8f0b55b-625c-3393-fadb-5724e129abdf@huawei.com>
-Date: Thu, 5 May 2022 08:57:28 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	(Client CN "*.pphosted.com", Issuer "Sectigo RSA Organization Validation Secure Server CA" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 3AE32203A3
+	for <nbd@other.debian.org>; Fri,  6 May 2022 12:57:35 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 246Bhqsi032725;
+	Fri, 6 May 2022 12:57:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=evV7zW0Pkptdgxryp8q/nhaiY9RbM7s7Y7FBYLM1+3A=;
+ b=Jpd/LqQ8qRyc1xkIsreNzVu3YNJxk4TaXrlRk5EXzrQXl5UeIjcnnMKpZQPsVJ0GWk+H
+ 4OO+eKdI0ysFLbuy272CQquw7xLwkRQ1s5GUWbXY8kFuS71Ceev4HZ45AsEQ8oZBvzjh
+ vj9ZT2cWF915zG+QEbX57A1GZjGTBqhBXVby9LhxAVMXfdHc8D2HNV+6fPiIWZDjoX8J
+ xQc3nUSMfgk+A0yFcqxH7BuTTwMYt5urI5Cc5SR3b708MtZCLHe7iDRxY/w+5R6s+qyZ
+ 89+99+cfayWa/722v5Fz4JyhE/P1cqJ/2euDxDC5GLt/zC7591d5SNeke9efRBlC4wae 9g== 
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3fw3279f16-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 06 May 2022 12:57:05 +0000
+Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 246C6GE1009740;
+	Fri, 6 May 2022 12:57:04 GMT
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
+	by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3fw3279f0m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 06 May 2022 12:57:04 +0000
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+	by ppma03ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 246CrK4Z028206;
+	Fri, 6 May 2022 12:57:02 GMT
+Received: from b06cxnps3074.portsmouth.uk.ibm.com (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
+	by ppma03ams.nl.ibm.com with ESMTP id 3ftp7fwgbx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 06 May 2022 12:57:02 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
+	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 246Cv0dI39256422
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 6 May 2022 12:57:00 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id F2900A4053;
+	Fri,  6 May 2022 12:56:59 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 1CD1EA4040;
+	Fri,  6 May 2022 12:56:59 +0000 (GMT)
+Received: from [9.145.54.141] (unknown [9.145.54.141])
+	by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Fri,  6 May 2022 12:56:59 +0000 (GMT)
+Message-ID: <1f26f6b4-4d33-6291-31c2-5cb68a5be829@linux.ibm.com>
+Date: Fri, 6 May 2022 14:56:58 +0200
 MIME-Version: 1.0
-In-Reply-To: <20220426130746.885140-1-yukuai3@huawei.com>
-Content-Type: text/plain; charset="gbk"; format=flowed
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Subject: Re: [PATCH 07/11] dasd: don't set the discard_alignment queue limit
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Richard Weinberger <richard@nod.at>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Josef Bacik
+ <josef@toxicpanda.com>,
+        "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+        Jack Wang <jinpu.wang@ionos.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>,
+        Mike Snitzer <snitzer@kernel.org>, Song Liu <song@kernel.org>,
+        Stefan Haberland <sth@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        linux-um@lists.infradead.org, linux-block@vger.kernel.org,
+        nbd@other.debian.org, virtualization@lists.linux-foundation.org,
+        xen-devel@lists.xenproject.org, linux-raid@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
+        dm-devel@redhat.com
+References: <20220418045314.360785-1-hch@lst.de>
+ <20220418045314.360785-8-hch@lst.de>
+From: =?UTF-8?Q?Jan_H=c3=b6ppner?= <hoeppner@linux.ibm.com>
+In-Reply-To: <20220418045314.360785-8-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- kwepemm600009.china.huawei.com (7.193.23.164)
-X-CFilter-Loop: Reflected
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: 8a7-K9CSYxb93olkIOkZv_aoAnTW7JGG
+X-Proofpoint-GUID: eBrk8yaxusH63MjrlJz40h5tJPgmJePg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
+ definitions=2022-05-06_04,2022-05-06_01,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 suspectscore=0
+ malwarescore=0 phishscore=0 mlxlogscore=999 adultscore=0 clxscore=1011
+ priorityscore=1501 spamscore=0 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2205060070
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <0WykujPZtRD.A.ByE.bUyciB@bendel>
+Resent-Message-ID: <nBQ20lglZtG.A.B4.d9RdiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2059
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2060
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -78,29 +137,38 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/a8f0b55b-625c-3393-fadb-5724e129abdf@huawei.com
-Resent-Date: Thu,  5 May 2022 01:15:07 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1f26f6b4-4d33-6291-31c2-5cb68a5be829@linux.ibm.com
+Resent-Date: Fri,  6 May 2022 13:15:09 +0000 (UTC)
 
-friendly ping ...
+On 18/04/2022 06:53, Christoph Hellwig wrote:
+> The discard_alignment queue limit is named a bit misleading means the
+> offset into the block device at which the discard granularity starts.
+> Setting it to PAGE_SIZE while the discard granularity is the block size
+> that is smaller or the same as PAGE_SIZE as done by dasd is mostly
+> harmless but also useless.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-ÔÚ 2022/04/26 21:07, Yu Kuai Ð´µÀ:
-> path 1-2 fix races between nbd setup and module removal.
-> patch 3 fix io can't be completed in some error path.
-> patch 4 fix io hung when disconnecting failed.
-> patch 5 fix sysfs warning about duplicate creation.
-> patch 6 use pr_err to output error message.
+Acked-by: Jan HÃ¶ppner <hoeppner@linux.ibm.com>
+
+Sorry for a rather late answer. I saw that Jens already applied
+the patches so it's fine when the Ack isn't added anymore.
+Wanted to send it anyway so that you know we're aware of it.
+
+> ---
+>  drivers/s390/block/dasd_fba.c | 1 -
+>  1 file changed, 1 deletion(-)
 > 
-> Yu Kuai (5):
->    nbd: call genl_unregister_family() first in nbd_cleanup()
->    nbd: fix race between nbd_alloc_config() and module removal
->    nbd: don't clear 'NBD_CMD_INFLIGHT' flag if request is not completed
->    nbd: fix io hung while disconnecting device
->    nbd: use pr_err to output error message
-> 
-> Zhang Wensheng (1):
->    nbd: fix possible overflow on 'first_minor' in nbd_dev_add()
-> 
->   drivers/block/nbd.c | 119 +++++++++++++++++++++++++++-----------------
->   1 file changed, 74 insertions(+), 45 deletions(-)
-> 
+> diff --git a/drivers/s390/block/dasd_fba.c b/drivers/s390/block/dasd_fba.c
+> index 8bd5665db9198..60be7f7bf2d16 100644
+> --- a/drivers/s390/block/dasd_fba.c
+> +++ b/drivers/s390/block/dasd_fba.c
+> @@ -782,7 +782,6 @@ static void dasd_fba_setup_blk_queue(struct dasd_block *block)
+>  	blk_queue_segment_boundary(q, PAGE_SIZE - 1);
+>  
+>  	q->limits.discard_granularity = logical_block_size;
+> -	q->limits.discard_alignment = PAGE_SIZE;
+>  
+>  	/* Calculate max_discard_sectors and make it PAGE aligned */
+>  	max_bytes = USHRT_MAX * logical_block_size;
 
