@@ -2,91 +2,81 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 711F7528445
-	for <lists+nbd@lfdr.de>; Mon, 16 May 2022 14:36:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1F7E5284F9
+	for <lists+nbd@lfdr.de>; Mon, 16 May 2022 15:09:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 44DA2203C3; Mon, 16 May 2022 12:36:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon May 16 12:36:09 2022
-Old-Return-Path: <axboe@kernel.dk>
+	id 8A35F20409; Mon, 16 May 2022 13:09:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon May 16 13:09:10 2022
+Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
-	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-2.7 required=4.0 tests=MURPHY_DRUGS_REL8,
+	NICE_REPLY_A,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 92BDC20351
-	for <lists-other-nbd@bendel.debian.org>; Mon, 16 May 2022 12:20:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 11413203E0
+	for <lists-other-nbd@bendel.debian.org>; Mon, 16 May 2022 12:53:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.99 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.537 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.247,
+	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id VFviitbFg7wm for <lists-other-nbd@bendel.debian.org>;
-	Mon, 16 May 2022 12:20:29 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pf1-x433.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com [IPv6:2607:f8b0:4864:20::433])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id CCA86203D0
-	for <nbd@other.debian.org>; Mon, 16 May 2022 12:20:29 +0000 (UTC)
-Received: by mail-pf1-x433.google.com with SMTP id y41so13840340pfw.12
-        for <nbd@other.debian.org>; Mon, 16 May 2022 05:20:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:in-reply-to:references:subject:message-id:date
-         :mime-version:content-transfer-encoding;
-        bh=KiHgPRQNMM51hvm96SqNj33U6OXbW6qZzYEx0pv+WEQ=;
-        b=lgPqdq84TcmO/n5+xA+cuAOzIElmdxREfkewtW2D0BhxlqDQWSnsf07w8aekQ7VCms
-         RuHnLDvLLF1cuVxcGaHsMiuLDWim3UtCkMc4xGy4ByFcMabhhNXZhrqG0IgoaxXq39uF
-         spbM9UuoAD1m0+lCH/zC7Mci5QNuuQbe6QdQfuAZVCruHw7KFA6RlQOLPB6+/qzRC7oJ
-         hyZiqOo3hYBEU2aU5VHCXGZSiWjPza304U1dlpJqKGfjrrW6QUIDHzlaXuI0bNthUImY
-         R/AarvweTj1NVetd3vgMA9he1qEY69zcAVjoINB+7R0E0WE4RTj911w74WYrMv+gZ84j
-         F/aA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:in-reply-to:references:subject
-         :message-id:date:mime-version:content-transfer-encoding;
-        bh=KiHgPRQNMM51hvm96SqNj33U6OXbW6qZzYEx0pv+WEQ=;
-        b=VVH/led8WtLCriJUkYIETZDTk1kT1y54tIC0M2Y4AzLp6fXyX2yR9KAMPMNQqWPXUT
-         +J+6Oaq/+UahL3NtEHzVwzX0yyBXEvtJgCrHzEcKQmf4GlsfHlxr4fVbN4JQfEA6mNP+
-         u5eEdb+3fsIPjH39K+xK7Z6JmFqFzFEX7rlo/CqS1JMJZLZRNYhfTYVedw6Uqxxa5Bkn
-         fCAs5pJp2I4SHnJ1/JgsWKZjt25rS1/zqCMwb3j7jbqnUDyu9yCZ7jeyotuJ6rBeP/LU
-         2467zGDzHYpRoHJJdHX3ZNnRCs0w7ERDPH/Kys1IHX0mqPu+0I2mGtJAWhSGmQYY+QFg
-         Uggw==
-X-Gm-Message-State: AOAM530uSzCKEA0wYtJxNd0iBXL8iyll06nV50X8TlpcxsLXd8woow7A
-	KytBZS0XWeU1Ay3H9vOFgJtojg==
-X-Google-Smtp-Source: ABdhPJzfMPeDythetyHLEbcX8r99P4NlIIOCE7Gh+INnjSrFzi9IWiEZ+HhqI8NeeOl9CLyLf+qg9Q==
-X-Received: by 2002:a05:6a00:cc4:b0:50d:e9db:6145 with SMTP id b4-20020a056a000cc400b0050de9db6145mr17232353pfv.56.1652703625903;
-        Mon, 16 May 2022 05:20:25 -0700 (PDT)
-Received: from [127.0.1.1] ([198.8.77.157])
-        by smtp.gmail.com with ESMTPSA id z21-20020aa785d5000000b0050dc76281c8sm6811476pfn.162.2022.05.16.05.20.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 May 2022 05:20:25 -0700 (PDT)
-From: Jens Axboe <axboe@kernel.dk>
-To: xieyongji@bytedance.com, josef@toxicpanda.com
-Cc: nbd@other.debian.org, zero.xu@bytedance.com, linux-block@vger.kernel.org
-In-Reply-To: <20220322080639.142-1-xieyongji@bytedance.com>
-References: <20220322080639.142-1-xieyongji@bytedance.com>
-Subject: Re: [PATCH] nbd: Fix hung on disconnect request if socket is closed before
-Message-Id: <165270362494.10115.13881054748910771179.b4-ty@kernel.dk>
-Date: Mon, 16 May 2022 06:20:24 -0600
+	with ESMTP id 6mUJ0Bfi8xd6 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 16 May 2022 12:53:31 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huawei. - helo: .szxga03-in.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id D74B5203DC
+	for <nbd@other.debian.org>; Mon, 16 May 2022 12:53:28 +0000 (UTC)
+Received: from kwepemi100016.china.huawei.com (unknown [172.30.72.53])
+	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4L1zZP5tqvzCspx;
+	Mon, 16 May 2022 20:48:29 +0800 (CST)
+Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
+ kwepemi100016.china.huawei.com (7.221.188.123) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 16 May 2022 20:53:22 +0800
+Received: from [10.174.176.73] (10.174.176.73) by
+ kwepemm600009.china.huawei.com (7.193.23.164) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 16 May 2022 20:53:22 +0800
+Subject: Re: [PROBLEM] nbd requests become stuck when devices watched by
+ inotify emit udev uevent changes
+To: Josef Bacik <josef@toxicpanda.com>
+CC: Matthew Ruffell <matthew.ruffell@canonical.com>, Jens Axboe
+	<axboe@kernel.dk>, linux-block <linux-block@vger.kernel.org>, nbd
+	<nbd@other.debian.org>, Linux Kernel <linux-kernel@vger.kernel.org>
+References: <20220422054224.19527-1-matthew.ruffell@canonical.com>
+ <CAEzrpqe=LD3DQcEeLXmmFuq7cX_dAQ6DOCuJYWBoZWKKTmoTzA@mail.gmail.com>
+ <CAKAwkKt3yMOOW3NXcE91WkGr+8xj050CYP2pLoQVHt_2wXq=-w@mail.gmail.com>
+ <CAKAwkKvfFn18RjupuqGpx4QeAiMYKSq7QUTd3wEL=pkZ+BENpQ@mail.gmail.com>
+ <Yn5Zf6lONff1AoOA@localhost.localdomain>
+ <6efae367-12fa-1a58-7438-1b39dc0d6ef8@huawei.com>
+ <YoJA8C2XtXY27qJ1@localhost.localdomain>
+From: "yukuai (C)" <yukuai3@huawei.com>
+Message-ID: <e0718adf-fe2a-5f1d-a880-bac72cabfe42@huawei.com>
+Date: Mon, 16 May 2022 20:53:21 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <YoJA8C2XtXY27qJ1@localhost.localdomain>
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.176.73]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ kwepemm600009.china.huawei.com (7.193.23.164)
+X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <wGgKpBXAorM.A.im.5UkgiB@bendel>
+Resent-Message-ID: <vMCCD2yGS4N.A.4XE.2zkgiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2074
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2075
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -96,28 +86,43 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/165270362494.10115.13881054748910771179.b4-ty@kernel.dk
-Resent-Date: Mon, 16 May 2022 12:36:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/e0718adf-fe2a-5f1d-a880-bac72cabfe42@huawei.com
+Resent-Date: Mon, 16 May 2022 13:09:10 +0000 (UTC)
 
-On Tue, 22 Mar 2022 16:06:39 +0800, Xie Yongji wrote:
-> When userspace closes the socket before sending a disconnect
-> request, the following I/O requests will be blocked in
-> wait_for_reconnect() until dead timeout. This will cause the
-> following disconnect request also hung on blk_mq_quiesce_queue().
-> That means we have no way to disconnect a nbd device if there
-> are some I/O requests waiting for reconnecting until dead timeout.
-> It's not expected. So let's wake up the thread waiting for
-> reconnecting directly when a disconnect request is sent.
+在 2022/05/16 20:17, Josef Bacik 写道:
+
+>> Hi, Josef
+>>
+>> This seems to try to fix the same problem that I described here:
+>>
+>> nbd: fix io hung while disconnecting device
+>> https://lists.debian.org/nbd/2022/04/msg00207.html
+>>
+>> There are still some io that are stuck, which means the devcie is
+>> probably still opened. Thus nbd_config_put() can't reach here.
+>> I'm afraid this patch can't fix the io hung.
+>>
+>> Matthew, can you try a test with this patch together with my patch below
+>> to comfirm my thought?
+>>
+>> nbd: don't clear 'NBD_CMD_INFLIGHT' flag if request is not completed
+>> https://lists.debian.org/nbd/2022/04/msg00212.html.
+>>
 > 
-> [...]
+> Re-submit this one, but fix it so we just test the bit to see if we need to skip
+> it, and change it so we only CLEAR when we're sure we're going to complete the
+> request.  Thanks,
 
-Applied, thanks!
+Ok, thanks for your advice. I'll send a new version.
 
-[1/1] nbd: Fix hung on disconnect request if socket is closed before
-      commit: 491bf8f236fdeec698fa6744993f1ecf3fafd1a5
+BTW, do you have any suggestions on other patches of the patchset?
 
-Best regards,
--- 
-Jens Axboe
+https://lore.kernel.org/all/20220426130746.885140-1-yukuai3@huawei.com/
 
+Thanks,
+Kuai
+> 
+> Josef
+> .
+> 
 
