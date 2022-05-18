@@ -2,72 +2,72 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B54B52B9E1
-	for <lists+nbd@lfdr.de>; Wed, 18 May 2022 14:30:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EBA252C252
+	for <lists+nbd@lfdr.de>; Wed, 18 May 2022 20:36:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1DF1B204F2; Wed, 18 May 2022 12:30:54 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 18 12:30:54 2022
-Old-Return-Path: <yukuai3@huawei.com>
+	id 362D62039E; Wed, 18 May 2022 18:36:18 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 18 18:36:10 2022
+Old-Return-Path: <joe@perches.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.6 required=4.0 tests=KHOP_HELO_FCRDNS,
+	MURPHY_DRUGS_REL8,SARE_MSGID_LONG40,T_SCC_BODY_TEXT_LINE,
+	UNPARSEABLE_RELAY autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D363020613
-	for <lists-other-nbd@bendel.debian.org>; Wed, 18 May 2022 12:12:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id CE4E9203E0
+	for <lists-other-nbd@bendel.debian.org>; Wed, 18 May 2022 18:19:51 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.29 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.351 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, MURPHY_DRUGS_REL8=0.02,
+	SARE_MSGID_LONG40=0.637, T_SCC_BODY_TEXT_LINE=-0.01,
+	UNPARSEABLE_RELAY=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 4zppkq4Njtf9 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 18 May 2022 12:12:45 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	with ESMTP id vj-TrZP3sldC for <lists-other-nbd@bendel.debian.org>;
+	Wed, 18 May 2022 18:19:48 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL16_SUBNET=-0.41 (check from: .perches. - helo: .relay5.hostedemail. - helo-domain: .hostedemail.)  FROM/MX_MATCHES_UNVR_HELO(DOMAIN)_OR_CL_NAME(DOMAIN)=-1.5 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -4.66
+X-Greylist: delayed 449 seconds by postgrey-1.36 at bendel; Wed, 18 May 2022 18:19:48 UTC
+Received: from relay5.hostedemail.com (smtprelay0015.hostedemail.com [216.40.44.15])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 884DA20643
-	for <nbd@other.debian.org>; Wed, 18 May 2022 12:12:43 +0000 (UTC)
-Received: from kwepemi100015.china.huawei.com (unknown [172.30.72.55])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4L3BgB0f8zzhYgp;
-	Wed, 18 May 2022 20:11:50 +0800 (CST)
-Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- kwepemi100015.china.huawei.com (7.221.188.125) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 18 May 2022 20:12:39 +0800
-Received: from huawei.com (10.175.127.227) by kwepemm600009.china.huawei.com
- (7.193.23.164) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Wed, 18 May
- 2022 20:12:38 +0800
-From: Yu Kuai <yukuai3@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <ming.lei@redhat.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yukuai3@huawei.com>, <yi.zhang@huawei.com>
-Subject: [PATCH -next v2 6/6] nbd: use pr_err to output error message
-Date: Wed, 18 May 2022 20:26:18 +0800
-Message-ID: <20220518122618.1702997-7-yukuai3@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220518122618.1702997-1-yukuai3@huawei.com>
+	by bendel.debian.org (Postfix) with ESMTPS id D5D0B203AC
+	for <nbd@other.debian.org>; Wed, 18 May 2022 18:19:47 +0000 (UTC)
+Received: from omf01.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay07.hostedemail.com (Postfix) with ESMTP id C66A02086D;
+	Wed, 18 May 2022 18:12:13 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf01.hostedemail.com (Postfix) with ESMTPA id 42ABB6000E;
+	Wed, 18 May 2022 18:12:12 +0000 (UTC)
+Message-ID: <f0acebb66b9b46ad472e0d0989dc0f5810cac3dd.camel@perches.com>
+Subject: Re: [PATCH -next v2 6/6] nbd: use pr_err to output error message
+From: Joe Perches <joe@perches.com>
+To: Yu Kuai <yukuai3@huawei.com>, josef@toxicpanda.com, axboe@kernel.dk, 
+	ming.lei@redhat.com
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org, 
+	linux-kernel@vger.kernel.org, yi.zhang@huawei.com
+Date: Wed, 18 May 2022 11:12:11 -0700
+In-Reply-To: <20220518122618.1702997-7-yukuai3@huawei.com>
 References: <20220518122618.1702997-1-yukuai3@huawei.com>
+	 <20220518122618.1702997-7-yukuai3@huawei.com>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.40.4-1ubuntu2 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- kwepemm600009.china.huawei.com (7.193.23.164)
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 7bit
+X-Stat-Signature: w4co9fngahnb146d6hsxcz85b1hfpa7z
+X-Rspamd-Server: rspamout04
+X-Rspamd-Queue-Id: 42ABB6000E
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX19oEFmBk8xUFTV8bdFQZy9WR91s/9xDnsE=
+X-HE-Tag: 1652897532-761824
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <CA42w_4tgnF.A.gP.-bOhiB@bendel>
+Resent-Message-ID: <ZwwN9eSBJuD.A.HAD.ayThiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2080
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2083
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -77,175 +77,59 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220518122618.1702997-7-yukuai3@huawei.com
-Resent-Date: Wed, 18 May 2022 12:30:54 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f0acebb66b9b46ad472e0d0989dc0f5810cac3dd.camel@perches.com
+Resent-Date: Wed, 18 May 2022 18:36:18 +0000 (UTC)
 
-Instead of using the long printk(KERN_ERR "nbd: ...") to
-output error message, defining pr_fmt and using
-the short pr_err("") to do that. The replacemen is done
-by using the following command:
+On Wed, 2022-05-18 at 20:26 +0800, Yu Kuai wrote:
+> Instead of using the long printk(KERN_ERR "nbd: ...") to
+> output error message, defining pr_fmt and using
+> the short pr_err("") to do that. The replacemen is done
+> by using the following command:
+> 
+>   sed -i 's/printk(KERN_ERR "nbd: /pr_err("/g' \
+> 		  drivers/block/nbd.c
 
-  sed -i 's/printk(KERN_ERR "nbd: /pr_err("/g' \
-		  drivers/block/nbd.c
+It's also good to rewrap to 80 columns where possible.
 
-Signed-off-by: Hou Tao <houtao1@huawei.com>
-Signed-off-by: Yu Kuai <yukuai3@huawei.com>
----
- drivers/block/nbd.c | 36 ++++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+[]
+> @@ -2130,13 +2130,13 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
+>  	nbd = idr_find(&nbd_index_idr, index);
+>  	if (!nbd) {
+>  		mutex_unlock(&nbd_index_mutex);
+> -		printk(KERN_ERR "nbd: couldn't find device at index %d\n",
+> +		pr_err("couldn't find device at index %d\n",
+>  		       index);
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 349bc3da878d..25902ebc87f1 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1928,16 +1928,16 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 		 * MKDEV() expect that the max bits of first_minor is 20.
- 		 */
- 		if (index < 0 || index > MINORMASK >> part_shift) {
--			printk(KERN_ERR "nbd: illegal input index %d\n", index);
-+			pr_err("illegal input index %d\n", index);
- 			return -EINVAL;
- 		}
- 	}
- 	if (!info->attrs[NBD_ATTR_SOCKETS]) {
--		printk(KERN_ERR "nbd: must specify at least one socket\n");
-+		pr_err("must specify at least one socket\n");
- 		return -EINVAL;
- 	}
- 	if (!info->attrs[NBD_ATTR_SIZE_BYTES]) {
--		printk(KERN_ERR "nbd: must specify a size in bytes for the device\n");
-+		pr_err("must specify a size in bytes for the device\n");
- 		return -EINVAL;
- 	}
- again:
-@@ -1973,7 +1973,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 		nbd_put(nbd);
- 		if (index == -1)
- 			goto again;
--		printk(KERN_ERR "nbd: nbd%d already in use\n", index);
-+		pr_err("nbd%d already in use\n", index);
- 		return -EBUSY;
- 	}
- 	if (WARN_ON(nbd->config)) {
-@@ -1985,7 +1985,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 	if (IS_ERR(config)) {
- 		mutex_unlock(&nbd->config_lock);
- 		nbd_put(nbd);
--		printk(KERN_ERR "nbd: couldn't allocate config\n");
-+		pr_err("couldn't allocate config\n");
- 		return PTR_ERR(config);
- 	}
- 	nbd->config = config;
-@@ -2041,7 +2041,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 			struct nlattr *socks[NBD_SOCK_MAX+1];
- 
- 			if (nla_type(attr) != NBD_SOCK_ITEM) {
--				printk(KERN_ERR "nbd: socks must be embedded in a SOCK_ITEM attr\n");
-+				pr_err("socks must be embedded in a SOCK_ITEM attr\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2050,7 +2050,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 							  nbd_sock_policy,
- 							  info->extack);
- 			if (ret != 0) {
--				printk(KERN_ERR "nbd: error processing sock list\n");
-+				pr_err("error processing sock list\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2122,7 +2122,7 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
- 		return -EPERM;
- 
- 	if (!info->attrs[NBD_ATTR_INDEX]) {
--		printk(KERN_ERR "nbd: must specify an index to disconnect\n");
-+		pr_err("must specify an index to disconnect\n");
- 		return -EINVAL;
- 	}
- 	index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
-@@ -2130,13 +2130,13 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
- 	nbd = idr_find(&nbd_index_idr, index);
- 	if (!nbd) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: couldn't find device at index %d\n",
-+		pr_err("couldn't find device at index %d\n",
- 		       index);
- 		return -EINVAL;
- 	}
- 	if (!refcount_inc_not_zero(&nbd->refs)) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: device at index %d is going down\n",
-+		pr_err("device at index %d is going down\n",
- 		       index);
- 		return -EINVAL;
- 	}
-@@ -2162,7 +2162,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 		return -EPERM;
- 
- 	if (!info->attrs[NBD_ATTR_INDEX]) {
--		printk(KERN_ERR "nbd: must specify a device to reconfigure\n");
-+		pr_err("must specify a device to reconfigure\n");
- 		return -EINVAL;
- 	}
- 	index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
-@@ -2170,7 +2170,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 	nbd = idr_find(&nbd_index_idr, index);
- 	if (!nbd) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: couldn't find a device at index %d\n",
-+		pr_err("couldn't find a device at index %d\n",
- 		       index);
- 		return -EINVAL;
- 	}
-@@ -2192,7 +2192,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 	}
- 	if (!refcount_inc_not_zero(&nbd->refs)) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: device at index %d is going down\n",
-+		pr_err("device at index %d is going down\n",
- 		       index);
- 		return -EINVAL;
- 	}
-@@ -2257,7 +2257,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 			struct nlattr *socks[NBD_SOCK_MAX+1];
- 
- 			if (nla_type(attr) != NBD_SOCK_ITEM) {
--				printk(KERN_ERR "nbd: socks must be embedded in a SOCK_ITEM attr\n");
-+				pr_err("socks must be embedded in a SOCK_ITEM attr\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2266,7 +2266,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 							  nbd_sock_policy,
- 							  info->extack);
- 			if (ret != 0) {
--				printk(KERN_ERR "nbd: error processing sock list\n");
-+				pr_err("error processing sock list\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2483,7 +2483,7 @@ static int __init nbd_init(void)
- 	BUILD_BUG_ON(sizeof(struct nbd_request) != 28);
- 
- 	if (max_part < 0) {
--		printk(KERN_ERR "nbd: max_part must be >= 0\n");
-+		pr_err("max_part must be >= 0\n");
- 		return -EINVAL;
- 	}
- 
-@@ -2562,10 +2562,10 @@ static void __exit nbd_cleanup(void)
- 		nbd = list_first_entry(&del_list, struct nbd_device, list);
- 		list_del_init(&nbd->list);
- 		if (refcount_read(&nbd->config_refs))
--			printk(KERN_ERR "nbd: possibly leaking nbd_config (ref %d)\n",
-+			pr_err("possibly leaking nbd_config (ref %d)\n",
- 					refcount_read(&nbd->config_refs));
- 		if (refcount_read(&nbd->refs) != 1)
--			printk(KERN_ERR "nbd: possibly leaking a device\n");
-+			pr_err("possibly leaking a device\n");
- 		nbd_put(nbd);
- 	}
- 
--- 
-2.31.1
+like here
+
+>  		return -EINVAL;
+>  	}
+>  	if (!refcount_inc_not_zero(&nbd->refs)) {
+>  		mutex_unlock(&nbd_index_mutex);
+> -		printk(KERN_ERR "nbd: device at index %d is going down\n",
+> +		pr_err("device at index %d is going down\n",
+>  		       index);
+
+and here and below...
+
+> @@ -2170,7 +2170,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
+>  	nbd = idr_find(&nbd_index_idr, index);
+>  	if (!nbd) {
+>  		mutex_unlock(&nbd_index_mutex);
+> -		printk(KERN_ERR "nbd: couldn't find a device at index %d\n",
+> +		pr_err("couldn't find a device at index %d\n",
+>  		       index);
+>  		return -EINVAL;
+>  	}
+> @@ -2192,7 +2192,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
+>  	}
+>  	if (!refcount_inc_not_zero(&nbd->refs)) {
+>  		mutex_unlock(&nbd_index_mutex);
+> -		printk(KERN_ERR "nbd: device at index %d is going down\n",
+> +		pr_err("device at index %d is going down\n",
+>  		       index);
+>  		return -EINVAL;
+>  	}
+
 
