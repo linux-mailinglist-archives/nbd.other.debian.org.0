@@ -1,57 +1,57 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1687452B9E2
-	for <lists+nbd@lfdr.de>; Wed, 18 May 2022 14:31:05 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C5F552B9E0
+	for <lists+nbd@lfdr.de>; Wed, 18 May 2022 14:30:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id F14C52055D; Wed, 18 May 2022 12:31:04 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 18 12:31:04 2022
+	id 1E1E6205FE; Wed, 18 May 2022 12:30:43 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 18 12:30:43 2022
 Old-Return-Path: <yukuai3@huawei.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.2 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	FVGT_m_MULTI_ODD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0261520631
-	for <lists-other-nbd@bendel.debian.org>; Wed, 18 May 2022 12:12:48 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 7011520631
+	for <lists-other-nbd@bendel.debian.org>; Wed, 18 May 2022 12:12:47 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.29 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.17 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id qEASRNSXFEoz for <lists-other-nbd@bendel.debian.org>;
-	Wed, 18 May 2022 12:12:43 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+	with ESMTP id GG_dBmAANYUq for <lists-other-nbd@bendel.debian.org>;
+	Wed, 18 May 2022 12:12:42 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B5C2F20638
+	by bendel.debian.org (Postfix) with ESMTPS id 2AE2420634
 	for <nbd@other.debian.org>; Wed, 18 May 2022 12:12:42 +0000 (UTC)
-Received: from kwepemi100016.china.huawei.com (unknown [172.30.72.54])
-	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4L3BZQ49YlzCsjp;
-	Wed, 18 May 2022 20:07:42 +0800 (CST)
+Received: from kwepemi100017.china.huawei.com (unknown [172.30.72.56])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4L3Bg856V3zhZ9t;
+	Wed, 18 May 2022 20:11:48 +0800 (CST)
 Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- kwepemi100016.china.huawei.com (7.221.188.123) with Microsoft SMTP Server
+ kwepemi100017.china.huawei.com (7.221.188.163) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 18 May 2022 20:12:37 +0800
+ 15.1.2375.24; Wed, 18 May 2022 20:12:38 +0800
 Received: from huawei.com (10.175.127.227) by kwepemm600009.china.huawei.com
  (7.193.23.164) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Wed, 18 May
- 2022 20:12:36 +0800
+ 2022 20:12:37 +0800
 From: Yu Kuai <yukuai3@huawei.com>
 To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <ming.lei@redhat.com>
 CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
 	<linux-kernel@vger.kernel.org>, <yukuai3@huawei.com>, <yi.zhang@huawei.com>
-Subject: [PATCH -next v2 3/6] nbd: don't clear 'NBD_CMD_INFLIGHT' flag if request is not completed
-Date: Wed, 18 May 2022 20:26:15 +0800
-Message-ID: <20220518122618.1702997-4-yukuai3@huawei.com>
+Subject: [PATCH -next v2 4/6] nbd: fix io hung while disconnecting device
+Date: Wed, 18 May 2022 20:26:16 +0800
+Message-ID: <20220518122618.1702997-5-yukuai3@huawei.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220518122618.1702997-1-yukuai3@huawei.com>
 References: <20220518122618.1702997-1-yukuai3@huawei.com>
@@ -65,9 +65,9 @@ X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <dCJ-7LqiWUN.A.tR.IcOhiB@bendel>
+Resent-Message-ID: <XYpgK_6G4XD.A.pM.zbOhiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2081
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2079
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -77,74 +77,71 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220518122618.1702997-4-yukuai3@huawei.com
-Resent-Date: Wed, 18 May 2022 12:31:04 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220518122618.1702997-5-yukuai3@huawei.com
+Resent-Date: Wed, 18 May 2022 12:30:43 +0000 (UTC)
 
-Otherwise io will hung because request will only be completed if the
-cmd has the flag 'NBD_CMD_INFLIGHT'.
+In our tests, "qemu-nbd" triggers a io hung:
 
-Fixes: 07175cb1baf4 ("nbd: make sure request completion won't concurrent")
+INFO: task qemu-nbd:11445 blocked for more than 368 seconds.
+      Not tainted 5.18.0-rc3-next-20220422-00003-g2176915513ca #884
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:qemu-nbd        state:D stack:    0 pid:11445 ppid:     1 flags:0x00000000
+Call Trace:
+ <TASK>
+ __schedule+0x480/0x1050
+ ? _raw_spin_lock_irqsave+0x3e/0xb0
+ schedule+0x9c/0x1b0
+ blk_mq_freeze_queue_wait+0x9d/0xf0
+ ? ipi_rseq+0x70/0x70
+ blk_mq_freeze_queue+0x2b/0x40
+ nbd_add_socket+0x6b/0x270 [nbd]
+ nbd_ioctl+0x383/0x510 [nbd]
+ blkdev_ioctl+0x18e/0x3e0
+ __x64_sys_ioctl+0xac/0x120
+ do_syscall_64+0x35/0x80
+ entry_SYSCALL_64_after_hwframe+0x44/0xae
+RIP: 0033:0x7fd8ff706577
+RSP: 002b:00007fd8fcdfebf8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000040000000 RCX: 00007fd8ff706577
+RDX: 000000000000000d RSI: 000000000000ab00 RDI: 000000000000000f
+RBP: 000000000000000f R08: 000000000000fbe8 R09: 000055fe497c62b0
+R10: 00000002aff20000 R11: 0000000000000246 R12: 000000000000006d
+R13: 0000000000000000 R14: 00007ffe82dc5e70 R15: 00007fd8fcdff9c0
+
+"qemu-ndb -d" will call ioctl 'NBD_DISCONNECT' first, however, following
+message was found:
+
+block nbd0: Send disconnect failed -32
+
+Which indicate that something is wrong with the server. Then,
+"qemu-nbd -d" will call ioctl 'NBD_CLEAR_SOCK', however ioctl can't clear
+requests after commit 2516ab1543fd("nbd: only clear the queue on device
+teardown"). And in the meantime, request can't complete through timeout
+because nbd_xmit_timeout() will always return 'BLK_EH_RESET_TIMER', which
+means such request will never be completed in this situation.
+
+Now that the flag 'NBD_CMD_INFLIGHT' can make sure requests won't
+complete multiple times, switch back to call nbd_clear_sock() in
+nbd_clear_sock_ioctl(), so that inflight requests can be cleared.
+
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- drivers/block/nbd.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ drivers/block/nbd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 2ee1e376d5c4..a0d0910dae2a 100644
+index a0d0910dae2a..ec736cc52134 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -403,13 +403,14 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
- 	if (!mutex_trylock(&cmd->lock))
- 		return BLK_EH_RESET_TIMER;
- 
--	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
-+	if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
- 		mutex_unlock(&cmd->lock);
- 		return BLK_EH_DONE;
- 	}
- 
- 	if (!refcount_inc_not_zero(&nbd->config_refs)) {
- 		cmd->status = BLK_STS_TIMEOUT;
-+		__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
- 		mutex_unlock(&cmd->lock);
- 		goto done;
- 	}
-@@ -478,6 +479,7 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
- 	dev_err_ratelimited(nbd_to_dev(nbd), "Connection timed out\n");
- 	set_bit(NBD_RT_TIMEDOUT, &config->runtime_flags);
- 	cmd->status = BLK_STS_IOERR;
-+	__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
- 	mutex_unlock(&cmd->lock);
- 	sock_shutdown(nbd);
- 	nbd_config_put(nbd);
-@@ -745,7 +747,7 @@ static struct nbd_cmd *nbd_handle_reply(struct nbd_device *nbd, int index,
- 	cmd = blk_mq_rq_to_pdu(req);
- 
- 	mutex_lock(&cmd->lock);
--	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
-+	if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
- 		dev_err(disk_to_dev(nbd->disk), "Suspicious reply %d (status %u flags %lu)",
- 			tag, cmd->status, cmd->flags);
- 		ret = -ENOENT;
-@@ -854,8 +856,16 @@ static void recv_work(struct work_struct *work)
- 		}
- 
- 		rq = blk_mq_rq_from_pdu(cmd);
--		if (likely(!blk_should_fake_timeout(rq->q)))
--			blk_mq_complete_request(rq);
-+		if (likely(!blk_should_fake_timeout(rq->q))) {
-+			bool complete;
-+
-+			mutex_lock(&cmd->lock);
-+			complete = __test_and_clear_bit(NBD_CMD_INFLIGHT,
-+							&cmd->flags);
-+			mutex_unlock(&cmd->lock);
-+			if (complete)
-+				blk_mq_complete_request(rq);
-+		}
- 		percpu_ref_put(&q->q_usage_counter);
- 	}
- 
+@@ -1429,7 +1429,7 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd)
+ static void nbd_clear_sock_ioctl(struct nbd_device *nbd,
+ 				 struct block_device *bdev)
+ {
+-	sock_shutdown(nbd);
++	nbd_clear_sock(nbd);
+ 	__invalidate_device(bdev, true);
+ 	nbd_bdev_reset(nbd);
+ 	if (test_and_clear_bit(NBD_RT_HAS_CONFIG_REF,
 -- 
 2.31.1
 
