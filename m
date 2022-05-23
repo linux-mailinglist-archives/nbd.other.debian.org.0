@@ -1,74 +1,95 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 947EC52F9CB
-	for <lists+nbd@lfdr.de>; Sat, 21 May 2022 09:43:07 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 959B2531153
+	for <lists+nbd@lfdr.de>; Mon, 23 May 2022 16:30:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7C3102028D; Sat, 21 May 2022 07:43:07 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat May 21 07:43:07 2022
-Old-Return-Path: <yukuai3@huawei.com>
+	id 5C6D420194; Mon, 23 May 2022 14:30:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon May 23 14:30:10 2022
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B53D3202D7
-	for <lists-other-nbd@bendel.debian.org>; Sat, 21 May 2022 07:24:23 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 05BAB20166
+	for <lists-other-nbd@bendel.debian.org>; Mon, 23 May 2022 14:12:55 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.29 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.99 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id u6qAXV_4tiLj for <lists-other-nbd@bendel.debian.org>;
-	Sat, 21 May 2022 07:24:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7D800202E2
-	for <nbd@other.debian.org>; Sat, 21 May 2022 07:24:18 +0000 (UTC)
-Received: from kwepemi500008.china.huawei.com (unknown [172.30.72.56])
-	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4L4w2D4hSlzCsYl;
-	Sat, 21 May 2022 15:19:16 +0800 (CST)
-Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- kwepemi500008.china.huawei.com (7.221.188.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 21 May 2022 15:24:14 +0800
-Received: from huawei.com (10.175.127.227) by kwepemm600009.china.huawei.com
- (7.193.23.164) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Sat, 21 May
- 2022 15:24:13 +0800
-From: Yu Kuai <yukuai3@huawei.com>
-To: <josef@toxicpanda.com>, <axboe@kernel.dk>, <yukuai3@huawei.com>,
-	<ming.lei@redhat.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-Subject: [PATCH -next v3 6/6] nbd: use pr_err to output error message
-Date: Sat, 21 May 2022 15:37:49 +0800
-Message-ID: <20220521073749.3146892-7-yukuai3@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220521073749.3146892-1-yukuai3@huawei.com>
+	with ESMTP id T72xc4TZ0I8K for <lists-other-nbd@bendel.debian.org>;
+	Mon, 23 May 2022 14:12:50 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x72a.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com [IPv6:2607:f8b0:4864:20::72a])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 234EE2017A
+	for <nbd@other.debian.org>; Mon, 23 May 2022 14:12:49 +0000 (UTC)
+Received: by mail-qk1-x72a.google.com with SMTP id r84so1419125qke.10
+        for <nbd@other.debian.org>; Mon, 23 May 2022 07:12:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=D9PaxQgh0dgGWTqhmUPSOfrq/Hw+1kY6VaKwgcNAm/M=;
+        b=fFXpBoD84sQ7AF2ZfHFijFUDydy/a0AwqnA2dCvm8Mj/8UQianCRe4XVRsoBfQuG2D
+         ICxF4JAgz7ViGJ1oKYxAZkstk3z9csDWHCrN7zFaS2fe9Nyge/XTh6UJfs5XmHLA8Ix/
+         VyqAeQnm7o5wH93bsuJtKiwbDYH+OfkHSdKBFtS18g3I2W7vHeUt3GKHMAh85K/+gY+t
+         O/KB58s6E5wWXEiOCrjIEWgi5j8SBvckaZZmAOx+JsBvzs5EklxxaITJJBn2axzY2cON
+         D5V/uKFrC1Cmug3j/8WqLbad+hB3tBNaOlCyKQ+DurNVcTrJLVGhktLtikOuIWgXXn1D
+         0Zvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=D9PaxQgh0dgGWTqhmUPSOfrq/Hw+1kY6VaKwgcNAm/M=;
+        b=mRJhJ7yxEOq3+YV+44ucvS+Xao72/5jZsdwpSbPQry3dq8p0XkaZp0jXjjc4abWxkg
+         8vndYTfizBhWveLnTH/5lSCca8/Ruhm43rT6hERyuZZvGR/Ky1p2I8SlsVU4RmCXYehE
+         fwTgV/WvI8LM2NlirmkeIyIiPWFuuWNH1OvP7d9r6Akl7J1P7YuBfyf+g9+7YC7SMVUr
+         GnG6aPM+oNvdLRnv6R4fHdqxv+4IVQvmYhvdZe1DeVCR0g9R66flWQZrRSO/OrKPiMpW
+         B5kI3jscOrCzCL3rs7q6Y4uY6olqWFDMkAAoxeSA7EhQ17ufABpDmC0L7v9As6ZOVCd4
+         fLTw==
+X-Gm-Message-State: AOAM5307mkCMtP83ctLNR1xGa2/77KWOpc243NfOI8Cq3DQhbVu+u6iu
+	4sTaLepjckAZcEvhdQPTz6HTqw==
+X-Google-Smtp-Source: ABdhPJya52lpcsbBSkKIaQkTMnZzwxjA4yWpPSm4Nqk0vkxh0Nl49AOOILI0+gCK/4A+BtBJMJq0hQ==
+X-Received: by 2002:a37:d245:0:b0:69b:f153:9c38 with SMTP id f66-20020a37d245000000b0069bf1539c38mr13876045qkj.692.1653315166256;
+        Mon, 23 May 2022 07:12:46 -0700 (PDT)
+Received: from localhost (cpe-174-109-172-136.nc.res.rr.com. [174.109.172.136])
+        by smtp.gmail.com with ESMTPSA id u2-20020a05620a120200b0069fc13ce206sm4289849qkj.55.2022.05.23.07.12.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 May 2022 07:12:45 -0700 (PDT)
+Date: Mon, 23 May 2022 10:12:44 -0400
+From: Josef Bacik <josef@toxicpanda.com>
+To: Yu Kuai <yukuai3@huawei.com>
+Cc: axboe@kernel.dk, ming.lei@redhat.com, linux-block@vger.kernel.org,
+	nbd@other.debian.org, linux-kernel@vger.kernel.org,
+	yi.zhang@huawei.com
+Subject: Re: [PATCH -next v3 3/6] nbd: don't clear 'NBD_CMD_INFLIGHT' flag if
+ request is not completed
+Message-ID: <YouWXEcyoBNUXLb7@localhost.localdomain>
 References: <20220521073749.3146892-1-yukuai3@huawei.com>
+ <20220521073749.3146892-4-yukuai3@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- kwepemm600009.china.huawei.com (7.193.23.164)
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220521073749.3146892-4-yukuai3@huawei.com>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <gWFfDPfjXwL.A.nFG.LgJiiB@bendel>
+Resent-Message-ID: <qH9Tf2DVIuF.A.Z4B.yp5iiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2091
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2093
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -78,180 +99,75 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220521073749.3146892-7-yukuai3@huawei.com
-Resent-Date: Sat, 21 May 2022 07:43:07 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YouWXEcyoBNUXLb7@localhost.localdomain
+Resent-Date: Mon, 23 May 2022 14:30:10 +0000 (UTC)
 
-Instead of using the long printk(KERN_ERR "nbd: ...") to
-output error message, defining pr_fmt and using
-the short pr_err("") to do that. The replacemen is done
-by using the following command:
+On Sat, May 21, 2022 at 03:37:46PM +0800, Yu Kuai wrote:
+> Otherwise io will hung because request will only be completed if the
+> cmd has the flag 'NBD_CMD_INFLIGHT'.
+> 
+> Fixes: 07175cb1baf4 ("nbd: make sure request completion won't concurrent")
+> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
+> ---
+>  drivers/block/nbd.c | 18 ++++++++++++++----
+>  1 file changed, 14 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 2ee1e376d5c4..a0d0910dae2a 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -403,13 +403,14 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
+>  	if (!mutex_trylock(&cmd->lock))
+>  		return BLK_EH_RESET_TIMER;
+>  
+> -	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
+> +	if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
+>  		mutex_unlock(&cmd->lock);
+>  		return BLK_EH_DONE;
+>  	}
+>  
+>  	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+>  		cmd->status = BLK_STS_TIMEOUT;
+> +		__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
+>  		mutex_unlock(&cmd->lock);
+>  		goto done;
+>  	}
+> @@ -478,6 +479,7 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req,
+>  	dev_err_ratelimited(nbd_to_dev(nbd), "Connection timed out\n");
+>  	set_bit(NBD_RT_TIMEDOUT, &config->runtime_flags);
+>  	cmd->status = BLK_STS_IOERR;
+> +	__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
+>  	mutex_unlock(&cmd->lock);
+>  	sock_shutdown(nbd);
+>  	nbd_config_put(nbd);
+> @@ -745,7 +747,7 @@ static struct nbd_cmd *nbd_handle_reply(struct nbd_device *nbd, int index,
+>  	cmd = blk_mq_rq_to_pdu(req);
+>  
+>  	mutex_lock(&cmd->lock);
+> -	if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
+> +	if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
+>  		dev_err(disk_to_dev(nbd->disk), "Suspicious reply %d (status %u flags %lu)",
+>  			tag, cmd->status, cmd->flags);
+>  		ret = -ENOENT;
+> @@ -854,8 +856,16 @@ static void recv_work(struct work_struct *work)
+>  		}
+>  
+>  		rq = blk_mq_rq_from_pdu(cmd);
+> -		if (likely(!blk_should_fake_timeout(rq->q)))
+> -			blk_mq_complete_request(rq);
+> +		if (likely(!blk_should_fake_timeout(rq->q))) {
+> +			bool complete;
+> +
+> +			mutex_lock(&cmd->lock);
+> +			complete = __test_and_clear_bit(NBD_CMD_INFLIGHT,
+> +							&cmd->flags);
+> +			mutex_unlock(&cmd->lock);
+> +			if (complete)
+> +				blk_mq_complete_request(rq);
+> +		}
 
-  sed -i 's/printk(KERN_ERR "nbd: /pr_err("/g' \
-		  drivers/block/nbd.c
+I'd rather this be handled in nbd_handle_reply.  We should return with it
+cleared if it's ready to be completed.  Thanks,
 
-This patch also rewrap to 80 columns where possible.
-
-Signed-off-by: Hou Tao <houtao1@huawei.com>
-Signed-off-by: Yu Kuai <yukuai3@huawei.com>
----
- drivers/block/nbd.c | 40 ++++++++++++++++++----------------------
- 1 file changed, 18 insertions(+), 22 deletions(-)
-
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 349bc3da878d..07f3c139a3d7 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1928,16 +1928,16 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 		 * MKDEV() expect that the max bits of first_minor is 20.
- 		 */
- 		if (index < 0 || index > MINORMASK >> part_shift) {
--			printk(KERN_ERR "nbd: illegal input index %d\n", index);
-+			pr_err("illegal input index %d\n", index);
- 			return -EINVAL;
- 		}
- 	}
- 	if (!info->attrs[NBD_ATTR_SOCKETS]) {
--		printk(KERN_ERR "nbd: must specify at least one socket\n");
-+		pr_err("must specify at least one socket\n");
- 		return -EINVAL;
- 	}
- 	if (!info->attrs[NBD_ATTR_SIZE_BYTES]) {
--		printk(KERN_ERR "nbd: must specify a size in bytes for the device\n");
-+		pr_err("must specify a size in bytes for the device\n");
- 		return -EINVAL;
- 	}
- again:
-@@ -1973,7 +1973,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 		nbd_put(nbd);
- 		if (index == -1)
- 			goto again;
--		printk(KERN_ERR "nbd: nbd%d already in use\n", index);
-+		pr_err("nbd%d already in use\n", index);
- 		return -EBUSY;
- 	}
- 	if (WARN_ON(nbd->config)) {
-@@ -1985,7 +1985,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 	if (IS_ERR(config)) {
- 		mutex_unlock(&nbd->config_lock);
- 		nbd_put(nbd);
--		printk(KERN_ERR "nbd: couldn't allocate config\n");
-+		pr_err("couldn't allocate config\n");
- 		return PTR_ERR(config);
- 	}
- 	nbd->config = config;
-@@ -2041,7 +2041,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 			struct nlattr *socks[NBD_SOCK_MAX+1];
- 
- 			if (nla_type(attr) != NBD_SOCK_ITEM) {
--				printk(KERN_ERR "nbd: socks must be embedded in a SOCK_ITEM attr\n");
-+				pr_err("socks must be embedded in a SOCK_ITEM attr\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2050,7 +2050,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
- 							  nbd_sock_policy,
- 							  info->extack);
- 			if (ret != 0) {
--				printk(KERN_ERR "nbd: error processing sock list\n");
-+				pr_err("error processing sock list\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2122,7 +2122,7 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
- 		return -EPERM;
- 
- 	if (!info->attrs[NBD_ATTR_INDEX]) {
--		printk(KERN_ERR "nbd: must specify an index to disconnect\n");
-+		pr_err("must specify an index to disconnect\n");
- 		return -EINVAL;
- 	}
- 	index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
-@@ -2130,14 +2130,12 @@ static int nbd_genl_disconnect(struct sk_buff *skb, struct genl_info *info)
- 	nbd = idr_find(&nbd_index_idr, index);
- 	if (!nbd) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: couldn't find device at index %d\n",
--		       index);
-+		pr_err("couldn't find device at index %d\n", index);
- 		return -EINVAL;
- 	}
- 	if (!refcount_inc_not_zero(&nbd->refs)) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: device at index %d is going down\n",
--		       index);
-+		pr_err("device at index %d is going down\n", index);
- 		return -EINVAL;
- 	}
- 	mutex_unlock(&nbd_index_mutex);
-@@ -2162,7 +2160,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 		return -EPERM;
- 
- 	if (!info->attrs[NBD_ATTR_INDEX]) {
--		printk(KERN_ERR "nbd: must specify a device to reconfigure\n");
-+		pr_err("must specify a device to reconfigure\n");
- 		return -EINVAL;
- 	}
- 	index = nla_get_u32(info->attrs[NBD_ATTR_INDEX]);
-@@ -2170,8 +2168,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 	nbd = idr_find(&nbd_index_idr, index);
- 	if (!nbd) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: couldn't find a device at index %d\n",
--		       index);
-+		pr_err("couldn't find a device at index %d\n", index);
- 		return -EINVAL;
- 	}
- 	if (nbd->backend) {
-@@ -2192,8 +2189,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 	}
- 	if (!refcount_inc_not_zero(&nbd->refs)) {
- 		mutex_unlock(&nbd_index_mutex);
--		printk(KERN_ERR "nbd: device at index %d is going down\n",
--		       index);
-+		pr_err("device at index %d is going down\n", index);
- 		return -EINVAL;
- 	}
- 	mutex_unlock(&nbd_index_mutex);
-@@ -2257,7 +2253,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 			struct nlattr *socks[NBD_SOCK_MAX+1];
- 
- 			if (nla_type(attr) != NBD_SOCK_ITEM) {
--				printk(KERN_ERR "nbd: socks must be embedded in a SOCK_ITEM attr\n");
-+				pr_err("socks must be embedded in a SOCK_ITEM attr\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2266,7 +2262,7 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
- 							  nbd_sock_policy,
- 							  info->extack);
- 			if (ret != 0) {
--				printk(KERN_ERR "nbd: error processing sock list\n");
-+				pr_err("error processing sock list\n");
- 				ret = -EINVAL;
- 				goto out;
- 			}
-@@ -2483,7 +2479,7 @@ static int __init nbd_init(void)
- 	BUILD_BUG_ON(sizeof(struct nbd_request) != 28);
- 
- 	if (max_part < 0) {
--		printk(KERN_ERR "nbd: max_part must be >= 0\n");
-+		pr_err("max_part must be >= 0\n");
- 		return -EINVAL;
- 	}
- 
-@@ -2562,10 +2558,10 @@ static void __exit nbd_cleanup(void)
- 		nbd = list_first_entry(&del_list, struct nbd_device, list);
- 		list_del_init(&nbd->list);
- 		if (refcount_read(&nbd->config_refs))
--			printk(KERN_ERR "nbd: possibly leaking nbd_config (ref %d)\n",
-+			pr_err("possibly leaking nbd_config (ref %d)\n",
- 					refcount_read(&nbd->config_refs));
- 		if (refcount_read(&nbd->refs) != 1)
--			printk(KERN_ERR "nbd: possibly leaking a device\n");
-+			pr_err("possibly leaking a device\n");
- 		nbd_put(nbd);
- 	}
- 
--- 
-2.31.1
+Josef
 
