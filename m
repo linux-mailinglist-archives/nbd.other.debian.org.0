@@ -1,78 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B5B55320B3
-	for <lists+nbd@lfdr.de>; Tue, 24 May 2022 04:09:11 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 211EE534552
+	for <lists+nbd@lfdr.de>; Wed, 25 May 2022 22:51:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1BD6B20251; Tue, 24 May 2022 02:09:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue May 24 02:09:10 2022
-Old-Return-Path: <yukuai3@huawei.com>
+	id 05F32205B0; Wed, 25 May 2022 20:51:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 25 20:51:13 2022
+Old-Return-Path: <luisadonstin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.6 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.7 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,GMAIL,RCVD_IN_DNSWL_NONE,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 33E472021D
-	for <lists-other-nbd@bendel.debian.org>; Tue, 24 May 2022 01:51:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C9BC920635
+	for <lists-other-nbd@bendel.debian.org>; Wed, 25 May 2022 20:35:21 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.118 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DIGITS_LETTERS=1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-3.328, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.791 tagged_above=-10000 required=5.3
+	tests=[DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001, GMAIL=1,
+	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 1bk9TeknP6Ol for <lists-other-nbd@bendel.debian.org>;
-	Tue, 24 May 2022 01:51:14 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id DDE7120149
-	for <nbd@other.debian.org>; Tue, 24 May 2022 01:51:13 +0000 (UTC)
-Received: from kwepemi500013.china.huawei.com (unknown [172.30.72.55])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4L6cXp2hSrzQkKB;
-	Tue, 24 May 2022 09:48:10 +0800 (CST)
-Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- kwepemi500013.china.huawei.com (7.221.188.120) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 24 May 2022 09:51:09 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- kwepemm600009.china.huawei.com (7.193.23.164) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 24 May 2022 09:51:08 +0800
-Subject: Re: [PATCH -next v3 3/6] nbd: don't clear 'NBD_CMD_INFLIGHT' flag if
- request is not completed
-From: Yu Kuai <yukuai3@huawei.com>
-To: Josef Bacik <josef@toxicpanda.com>
-CC: <axboe@kernel.dk>, <ming.lei@redhat.com>, <linux-block@vger.kernel.org>,
-	<nbd@other.debian.org>, <linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-References: <20220521073749.3146892-1-yukuai3@huawei.com>
- <20220521073749.3146892-4-yukuai3@huawei.com>
- <YouWXEcyoBNUXLb7@localhost.localdomain>
- <6a549193-909b-6f6e-532b-99cd2898ad80@huawei.com>
-Message-ID: <ee5ee5f2-74ea-cac1-00e1-0645c04893ee@huawei.com>
-Date: Tue, 24 May 2022 09:51:08 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	with ESMTP id pdR-e69ZB9YO for <lists-other-nbd@bendel.debian.org>;
+	Wed, 25 May 2022 20:35:17 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com [IPv6:2a00:1450:4864:20::629])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 6170C205BA
+	for <nbd@other.debian.org>; Wed, 25 May 2022 20:35:14 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id f21so30250029ejh.11
+        for <nbd@other.debian.org>; Wed, 25 May 2022 13:35:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=jF4MxsPSKKSAh34A0y7fWqFeFSCCDQ9NCjS0um7aELU=;
+        b=VocQsthp4kr71VkA6y/yGQ8r7PzvrX8S0kDee5bYwGXinCWOEWzdKcvX7qcajQQvGu
+         FO46yq2dNFoJHRXEn1midlW/oMmMAE/tH12+3dL6eCDwk/aXnzFoZCoXYF7Tr2XdXAWF
+         A14RSJ7nwmV5Qn/QoKcAQnffjrruBdZQi5J4nFon7T4xNFyrzXHYChC8X8Q7vV/O0l3G
+         Z6kSQfj+bwrSd9gDnvGTu2FkqtNFM/AKycKz8EdP1s6K6YZjA9EDOUYTL090EYLi69Jx
+         FPI6DZKF09Tmz0hCD4UJidqzxCTHlRf+WFpdOUsf3yKhZ6hLlPG8x7UCYJ8ts18QQbpn
+         zECA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=jF4MxsPSKKSAh34A0y7fWqFeFSCCDQ9NCjS0um7aELU=;
+        b=Bw38dXtsInY5gY/PpAPPybbaXvy+3XuiXuU4Q/Winhkhu5+GxVS5dPOzGi4pvg4ZtU
+         mSbGVkyQhBha9Ooyqq/vwrid5SKi6VW7sD3j07r1dxgGQ5+Wd05x0TTcyv/vshFobKfk
+         xtYfV37CK5mPfZE6JKIouUXw1ZJphj5xgHMwZoQfUfKz8v8/S+KnIDc/8fnt2CZyJGtN
+         2QS2Jm5yluGRkai3QhUtaUzUZv9dfrbM48HVnvBEuAbiYI9+3juN7W6XmWQexMqaSr5X
+         X10P0k2DBxUE6DcLQPLHACIP9HVNzvY52guNYxj7snd0Yo00tx/pr/FvD0dAsLLam9GF
+         kmTw==
+X-Gm-Message-State: AOAM533ho1F4YZW0xvfm10Uy8geVZD5CsRCkmi6xsUv06JDBlf/ETBEs
+	IkLvHLYgdRUf0m4LB9oqV2l+f4Jc7bdVwqSLu0o=
+X-Google-Smtp-Source: ABdhPJydmv+bbHARzEgvyIwdIWejEqbES0XbtJbkAtabvPybUWLA8/SV0kCjBlZCGBxZXSvZwXoaS3LA/pCN6q+ewUw=
+X-Received: by 2002:a17:907:7242:b0:6f5:2904:5354 with SMTP id
+ ds2-20020a170907724200b006f529045354mr32161701ejc.452.1653510911898; Wed, 25
+ May 2022 13:35:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <6a549193-909b-6f6e-532b-99cd2898ad80@huawei.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600009.china.huawei.com (7.193.23.164)
-X-CFilter-Loop: Reflected
+Received: by 2002:ab4:a26b:0:0:0:0:0 with HTTP; Wed, 25 May 2022 13:35:11
+ -0700 (PDT)
+From: Luisa Donstin <luisadonstin@gmail.com>
+Date: Wed, 25 May 2022 22:35:11 +0200
+Message-ID: <CA+QBM2rd1NojOmQ247cmwY+sk9R4hWU6pMA3fqAMrkMrBDEUUw@mail.gmail.com>
+Subject: Bitte kontaktaufnahme Erforderlich !!! Please Contact Required !!!
+To: contact@firstdiamondbk.com
+Cc: info@firstdiamondbk.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QYwEs1ySJ6L.A.RQG.G5DjiB@bendel>
+Resent-Message-ID: <dGmozJXDO8I.A.E1.BbpjiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2100
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2101
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -82,104 +93,50 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ee5ee5f2-74ea-cac1-00e1-0645c04893ee@huawei.com
-Resent-Date: Tue, 24 May 2022 02:09:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CA+QBM2rd1NojOmQ247cmwY+sk9R4hWU6pMA3fqAMrkMrBDEUUw@mail.gmail.com
+Resent-Date: Wed, 25 May 2022 20:51:14 +0000 (UTC)
 
-在 2022/05/24 9:07, Yu Kuai 写道:
-> 在 2022/05/23 22:12, Josef Bacik 写道:
->> On Sat, May 21, 2022 at 03:37:46PM +0800, Yu Kuai wrote:
->>> Otherwise io will hung because request will only be completed if the
->>> cmd has the flag 'NBD_CMD_INFLIGHT'.
->>>
->>> Fixes: 07175cb1baf4 ("nbd: make sure request completion won't 
->>> concurrent")
->>> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
->>> ---
->>>   drivers/block/nbd.c | 18 ++++++++++++++----
->>>   1 file changed, 14 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->>> index 2ee1e376d5c4..a0d0910dae2a 100644
->>> --- a/drivers/block/nbd.c
->>> +++ b/drivers/block/nbd.c
->>> @@ -403,13 +403,14 @@ static enum blk_eh_timer_return 
->>> nbd_xmit_timeout(struct request *req,
->>>       if (!mutex_trylock(&cmd->lock))
->>>           return BLK_EH_RESET_TIMER;
->>> -    if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->>> +    if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->>>           mutex_unlock(&cmd->lock);
->>>           return BLK_EH_DONE;
->>>       }
->>>       if (!refcount_inc_not_zero(&nbd->config_refs)) {
->>>           cmd->status = BLK_STS_TIMEOUT;
->>> +        __clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
->>>           mutex_unlock(&cmd->lock);
->>>           goto done;
->>>       }
->>> @@ -478,6 +479,7 @@ static enum blk_eh_timer_return 
->>> nbd_xmit_timeout(struct request *req,
->>>       dev_err_ratelimited(nbd_to_dev(nbd), "Connection timed out\n");
->>>       set_bit(NBD_RT_TIMEDOUT, &config->runtime_flags);
->>>       cmd->status = BLK_STS_IOERR;
->>> +    __clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
->>>       mutex_unlock(&cmd->lock);
->>>       sock_shutdown(nbd);
->>>       nbd_config_put(nbd);
->>> @@ -745,7 +747,7 @@ static struct nbd_cmd *nbd_handle_reply(struct 
->>> nbd_device *nbd, int index,
->>>       cmd = blk_mq_rq_to_pdu(req);
->>>       mutex_lock(&cmd->lock);
->>> -    if (!__test_and_clear_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->>> +    if (!test_bit(NBD_CMD_INFLIGHT, &cmd->flags)) {
->>>           dev_err(disk_to_dev(nbd->disk), "Suspicious reply %d 
->>> (status %u flags %lu)",
->>>               tag, cmd->status, cmd->flags);
->>>           ret = -ENOENT;
->>> @@ -854,8 +856,16 @@ static void recv_work(struct work_struct *work)
->>>           }
->>>           rq = blk_mq_rq_from_pdu(cmd);
->>> -        if (likely(!blk_should_fake_timeout(rq->q)))
->>> -            blk_mq_complete_request(rq);
->>> +        if (likely(!blk_should_fake_timeout(rq->q))) {
->>> +            bool complete;
->>> +
->>> +            mutex_lock(&cmd->lock);
->>> +            complete = __test_and_clear_bit(NBD_CMD_INFLIGHT,
->>> +                            &cmd->flags);
->>> +            mutex_unlock(&cmd->lock);
->>> +            if (complete)
->>> +                blk_mq_complete_request(rq);
->>> +        }
->>
->> I'd rather this be handled in nbd_handle_reply.  We should return with it
->> cleared if it's ready to be completed.  Thanks,
-> Hi,
-> 
-> Thanks for your advice, I'll do that in next version. I'll still have to
-> hold the lock to set the bit again in case blk_should_fake_timeout()
-> pass...
+Guten Tag,
 
-Hi, Josef
+Ich habe mich nur gefragt, ob Sie meine vorherige E-Mail bekommen
 
-I just found out that this way is problematic:
-t1:			t2:
-recv_work
-  nbd_handle_reply
-   __clear_bit
-			nbd_xmit_timeout
-			 test_bit(NBD_CMD_INFLIGHT, &cmd->flags) -> fail
-			 return BLK_EH_DONE -> rq can't complete
-  blk_should_fake_timeout -> true
-  __set_bit
+haben ?
 
-__clear_bit and then __set_bit from recv_work leaves a window, and
-concurrent nbd_xmit_timeout() may lead to that request can't be
-completed through both timeout and recv_work().
+Ich habe versucht, Sie per E-Mail zu erreichen.
 
-Do you think it's ok to keep the current implementation with some
-comments to explain the above scenario?
+Kommen Sie bitte schnell zu mir zur=C3=BCck, es ist sehr wichtig.
 
-Thanks,
-Kuai
+Danke
+
+Luisa Donstin
+
+luisadonstin@gmail.com
+
+
+
+
+
+
+
+
+
+----------------------------------
+
+
+
+
+Good Afternoon,
+
+I was just wondering if you got my Previous E-mail
+have ?
+
+I tried to reach you by E-mail.
+
+Please come back to me quickly, it is very Important.
+
+Thanks
+
+Luisa Donstin
+
+luisadonstin@gmail.com
 
