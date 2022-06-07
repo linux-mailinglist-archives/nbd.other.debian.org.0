@@ -2,59 +2,60 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 700365409DF
-	for <lists+nbd@lfdr.de>; Tue,  7 Jun 2022 20:18:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE5455409E0
+	for <lists+nbd@lfdr.de>; Tue,  7 Jun 2022 20:18:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 36ED72045C; Tue,  7 Jun 2022 18:18:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun  7 18:18:13 2022
+	id 9D2D620457; Tue,  7 Jun 2022 18:18:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun  7 18:18:24 2022
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-11.3 required=4.0 tests=DIGITS_LETTERS,
 	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+	FOURLA,FVGT_m_MULTI_ODD,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_HI,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A70A820457
-	for <lists-other-nbd@bendel.debian.org>; Tue,  7 Jun 2022 18:01:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 41B31203F7
+	for <lists-other-nbd@bendel.debian.org>; Tue,  7 Jun 2022 18:01:33 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-12.891 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-12.871 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.801,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, FVGT_m_MULTI_ODD=0.02,
+	LDO_WHITELIST=-5, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_HI=-5, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id vMEm1Usi0FTO for <lists-other-nbd@bendel.debian.org>;
-	Tue,  7 Jun 2022 18:01:25 +0000 (UTC)
+	with ESMTP id WmjzPYdm6aCF for <lists-other-nbd@bendel.debian.org>;
+	Tue,  7 Jun 2022 18:01:28 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D0C42203F7
-	for <nbd@other.debian.org>; Tue,  7 Jun 2022 18:01:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id D9AB720426
+	for <nbd@other.debian.org>; Tue,  7 Jun 2022 18:01:27 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id CA15D61883;
-	Tue,  7 Jun 2022 18:01:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 868EEC36AFF;
-	Tue,  7 Jun 2022 18:01:21 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id CD01E618E2;
+	Tue,  7 Jun 2022 18:01:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2446CC385A5;
+	Tue,  7 Jun 2022 18:01:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1654624882;
-	bh=u55HeR7SthBNosvPn/aFIqQ92KU9yt37iTugdJBEoz8=;
+	s=k20201202; t=1654624884;
+	bh=GP35MdY1n3PZlU1vMAok6zgGS0Rcn1be1uzwLaMaprk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Yh1b9bSRtn/ZLKWmKOWnGeHmJvn4vSxhrK1ukPI+XYBbQ4KXiOJNSz7betLp1A/kX
-	 rTgc96LPA2ElzdUSveOlzd3bbaerWm6Bx+GHQ9OySVhudN1zd2RqHZ9I34rMxcPSyz
-	 2kTmQn6jKTfuiWWxJmzG4BuVsVrXXHvOFiUHUVqlMvNytzHOuC6b6rnpxN6Sqm3phF
-	 eQLCQCEAox4uaomQofmN1BGle8q6R/rctvD/dkn3R4XNdWbHMY45CcuhSmIqqDK1QQ
-	 rT236UKQAr/nBU3W7860+VvHtslV2frIwar3V/ifd7mDefepFK+9SZXtS5w2OyJPUd
-	 GlIAtdvYX+EAg==
+	b=JHERr+Uiw+aGADZpE6AmRVQOspYVj6p8AbaeUeGnIGLAY02y2BTc9IE9YJ28Abk7+
+	 mQW1khoTdv0ZUKloeUvIY8VGqcpli2eUX6rSzvndAGfTH4NeGaWqk4jWACa93rB5It
+	 rBqPm77p4wEeop9p7OhqhWruBuAHjXq2O/1mMHKSDwMXIEHfrc69kbWQjVSg0pXZtQ
+	 d49Efa/sekapcr52XGXnX4V3+iL8E3fLdSaiyjXsVlo8oAm6SNTPNizKJnYyG+TLnz
+	 Vha3NgtNP+K1/W1q88J8g96xCe93NIppdOrQytC1LJk04oL4Auev464cUFJTboQF9/
+	 5liaGKRT+9DRA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -65,9 +66,9 @@ Cc: Yu Kuai <yukuai3@huawei.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 5.4 29/34] nbd: call genl_unregister_family() first in nbd_cleanup()
-Date: Tue,  7 Jun 2022 14:00:04 -0400
-Message-Id: <20220607180011.481266-29-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 30/34] nbd: fix race between nbd_alloc_config() and module removal
+Date: Tue,  7 Jun 2022 14:00:05 -0400
+Message-Id: <20220607180011.481266-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220607180011.481266-1-sashal@kernel.org>
 References: <20220607180011.481266-1-sashal@kernel.org>
@@ -78,9 +79,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <xGjW-g9wJhH.A.-hG.lZ5niB@bendel>
+Resent-Message-ID: <cuAlBKSP-lG.A.CkG.wZ5niB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2127
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2128
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -90,75 +91,125 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220607180011.481266-29-sashal@kernel.org
-Resent-Date: Tue,  7 Jun 2022 18:18:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20220607180011.481266-30-sashal@kernel.org
+Resent-Date: Tue,  7 Jun 2022 18:18:24 +0000 (UTC)
 
 From: Yu Kuai <yukuai3@huawei.com>
 
-[ Upstream commit 06c4da89c24e7023ea448cadf8e9daf06a0aae6e ]
+[ Upstream commit c55b2b983b0fa012942c3eb16384b2b722caa810 ]
 
-Otherwise there may be race between module removal and the handling of
-netlink command, which can lead to the oops as shown below:
+When nbd module is being removing, nbd_alloc_config() may be
+called concurrently by nbd_genl_connect(), although try_module_get()
+will return false, but nbd_alloc_config() doesn't handle it.
 
-  BUG: kernel NULL pointer dereference, address: 0000000000000098
-  Oops: 0002 [#1] SMP PTI
-  CPU: 1 PID: 31299 Comm: nbd-client Tainted: G            E     5.14.0-rc4
+The race may lead to the leak of nbd_config and its related
+resources (e.g, recv_workq) and oops in nbd_read_stat() due
+to the unload of nbd module as shown below:
+
+  BUG: kernel NULL pointer dereference, address: 0000000000000040
+  Oops: 0000 [#1] SMP PTI
+  CPU: 5 PID: 13840 Comm: kworker/u17:33 Not tainted 5.14.0+ #1
   Hardware name: QEMU Standard PC (i440FX + PIIX, 1996)
-  RIP: 0010:down_write+0x1a/0x50
+  Workqueue: knbd16-recv recv_work [nbd]
+  RIP: 0010:nbd_read_stat.cold+0x130/0x1a4 [nbd]
   Call Trace:
-   start_creating+0x89/0x130
-   debugfs_create_dir+0x1b/0x130
-   nbd_start_device+0x13d/0x390 [nbd]
-   nbd_genl_connect+0x42f/0x748 [nbd]
-   genl_family_rcv_msg_doit.isra.0+0xec/0x150
-   genl_rcv_msg+0xe5/0x1e0
-   netlink_rcv_skb+0x55/0x100
-   genl_rcv+0x29/0x40
-   netlink_unicast+0x1a8/0x250
-   netlink_sendmsg+0x21b/0x430
-   ____sys_sendmsg+0x2a4/0x2d0
-   ___sys_sendmsg+0x81/0xc0
-   __sys_sendmsg+0x62/0xb0
-   __x64_sys_sendmsg+0x1f/0x30
-   do_syscall_64+0x3b/0xc0
-   entry_SYSCALL_64_after_hwframe+0x44/0xae
-  Modules linked in: nbd(E-)
+   recv_work+0x3b/0xb0 [nbd]
+   process_one_work+0x1ed/0x390
+   worker_thread+0x4a/0x3d0
+   kthread+0x12a/0x150
+   ret_from_fork+0x22/0x30
+
+Fixing it by checking the return value of try_module_get()
+in nbd_alloc_config(). As nbd_alloc_config() may return ERR_PTR(-ENODEV),
+assign nbd->config only when nbd_alloc_config() succeeds to ensure
+the value of nbd->config is binary (valid or NULL).
+
+Also adding a debug message to check the reference counter
+of nbd_config during module removal.
 
 Signed-off-by: Hou Tao <houtao1@huawei.com>
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 Reviewed-by: Josef Bacik <josef@toxicpanda.com>
-Link: https://lore.kernel.org/r/20220521073749.3146892-2-yukuai3@huawei.com
+Link: https://lore.kernel.org/r/20220521073749.3146892-3-yukuai3@huawei.com
 Signed-off-by: Jens Axboe <axboe@kernel.dk>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/block/nbd.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/block/nbd.c | 28 +++++++++++++++++++---------
+ 1 file changed, 19 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 25e81b1a59a5..927f287681b2 100644
+index 927f287681b2..c8ea0f415304 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -2441,6 +2441,12 @@ static void __exit nbd_cleanup(void)
- 	struct nbd_device *nbd;
- 	LIST_HEAD(del_list);
+@@ -1453,15 +1453,20 @@ static struct nbd_config *nbd_alloc_config(void)
+ {
+ 	struct nbd_config *config;
  
-+	/*
-+	 * Unregister netlink interface prior to waiting
-+	 * for the completion of netlink commands.
-+	 */
-+	genl_unregister_family(&nbd_genl_family);
++	if (!try_module_get(THIS_MODULE))
++		return ERR_PTR(-ENODEV);
 +
- 	nbd_dbg_close();
- 
- 	mutex_lock(&nbd_index_mutex);
-@@ -2456,7 +2462,6 @@ static void __exit nbd_cleanup(void)
- 	}
- 
- 	idr_destroy(&nbd_index_idr);
--	genl_unregister_family(&nbd_genl_family);
- 	unregister_blkdev(NBD_MAJOR, "nbd");
+ 	config = kzalloc(sizeof(struct nbd_config), GFP_NOFS);
+-	if (!config)
+-		return NULL;
++	if (!config) {
++		module_put(THIS_MODULE);
++		return ERR_PTR(-ENOMEM);
++	}
++
+ 	atomic_set(&config->recv_threads, 0);
+ 	init_waitqueue_head(&config->recv_wq);
+ 	init_waitqueue_head(&config->conn_wait);
+ 	config->blksize = NBD_DEF_BLKSIZE;
+ 	atomic_set(&config->live_connections, 0);
+-	try_module_get(THIS_MODULE);
+ 	return config;
  }
  
+@@ -1488,12 +1493,13 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
+ 			mutex_unlock(&nbd->config_lock);
+ 			goto out;
+ 		}
+-		config = nbd->config = nbd_alloc_config();
+-		if (!config) {
+-			ret = -ENOMEM;
++		config = nbd_alloc_config();
++		if (IS_ERR(config)) {
++			ret = PTR_ERR(config);
+ 			mutex_unlock(&nbd->config_lock);
+ 			goto out;
+ 		}
++		nbd->config = config;
+ 		refcount_set(&nbd->config_refs, 1);
+ 		refcount_inc(&nbd->refs);
+ 		mutex_unlock(&nbd->config_lock);
+@@ -1915,13 +1921,14 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
+ 		nbd_put(nbd);
+ 		return -EINVAL;
+ 	}
+-	config = nbd->config = nbd_alloc_config();
+-	if (!nbd->config) {
++	config = nbd_alloc_config();
++	if (IS_ERR(config)) {
+ 		mutex_unlock(&nbd->config_lock);
+ 		nbd_put(nbd);
+ 		printk(KERN_ERR "nbd: couldn't allocate config\n");
+-		return -ENOMEM;
++		return PTR_ERR(config);
+ 	}
++	nbd->config = config;
+ 	refcount_set(&nbd->config_refs, 1);
+ 	set_bit(NBD_RT_BOUND, &config->runtime_flags);
+ 
+@@ -2456,6 +2463,9 @@ static void __exit nbd_cleanup(void)
+ 	while (!list_empty(&del_list)) {
+ 		nbd = list_first_entry(&del_list, struct nbd_device, list);
+ 		list_del_init(&nbd->list);
++		if (refcount_read(&nbd->config_refs))
++			printk(KERN_ERR "nbd: possibly leaking nbd_config (ref %d)\n",
++					refcount_read(&nbd->config_refs));
+ 		if (refcount_read(&nbd->refs) != 1)
+ 			printk(KERN_ERR "nbd: possibly leaking a device\n");
+ 		nbd_put(nbd);
 -- 
 2.35.1
 
