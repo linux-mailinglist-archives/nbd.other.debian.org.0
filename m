@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0ACE551483
-	for <lists+nbd@lfdr.de>; Mon, 20 Jun 2022 11:39:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFB96551467
+	for <lists+nbd@lfdr.de>; Mon, 20 Jun 2022 11:33:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2ED6320389; Mon, 20 Jun 2022 09:39:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 20 09:39:09 2022
+	id C7F402043C; Mon, 20 Jun 2022 09:33:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 20 09:33:08 2022
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-1.5 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0D2F52042C
-	for <lists-other-nbd@bendel.debian.org>; Mon, 20 Jun 2022 09:23:03 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B60E520416
+	for <lists-other-nbd@bendel.debian.org>; Mon, 20 Jun 2022 09:15:13 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-4.618 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -29,56 +29,55 @@ X-Amavis-Spam-Status: No, score=-4.618 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 51df-Uo3MK9G for <lists-other-nbd@bendel.debian.org>;
-	Mon, 20 Jun 2022 09:23:00 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
-X-Greylist: delayed 498 seconds by postgrey-1.36 at bendel; Mon, 20 Jun 2022 09:23:00 UTC
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+	with ESMTP id XDlXyv8aRTUX for <lists-other-nbd@bendel.debian.org>;
+	Mon, 20 Jun 2022 09:15:08 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 6D26720434
-	for <nbd@other.debian.org>; Mon, 20 Jun 2022 09:23:00 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id CC93A20426
+	for <nbd@other.debian.org>; Mon, 20 Jun 2022 09:15:08 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id F19351F9DB;
-	Mon, 20 Jun 2022 09:14:38 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 963E121BCC;
+	Mon, 20 Jun 2022 09:15:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1655716479; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1655716506; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=mun6kkTBka4blPimiza/vyI98J12pl71BNv2YPF93hs=;
-	b=bQPoC/IzexlGKG3xbmu3XikL5TKSkhgS5T07klrUkcFLGqcHoqBGCaGdQcMZPdGiIB2ZuP
-	76bJjH9inHuqUmLVL4gLYPcyLrGDP/zGgwhLYJXtT2B1wXC5pWzNyGgn8geag9BQKYC+sz
-	3RTyZ6REJGQ4EYDlzMy2B1ah20feulM=
+	bh=nB/yp3HEkDLSR53YvvZ+cc5b/XzsxSbMJCE0yslr6zc=;
+	b=NbhPF3eiBjOwpBjTxTBUKGLcxsUpBieYpaa2bJ0nJbYXBQ1DPLTOv6PAryYp6pYuLkGJMp
+	3tgfG0fa6fCminQ1DLzfMd+WjxmVl6rS3eV3Ue98Pv9uCHk+cY4HYM23Vh4hlY/v6JSEwM
+	aDLxRMGXFqqMCswLEfi5wCfSCrf/UVM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1655716479;
+	s=susede2_ed25519; t=1655716506;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=mun6kkTBka4blPimiza/vyI98J12pl71BNv2YPF93hs=;
-	b=sueMt3Y0uPvZleSXDT55HMwsiGA3lkffNlA/3s4vc0UnNp+lvi+U/2QWJ8thEVQGUUkY1f
-	leZGidcxy4MKkzCA==
+	bh=nB/yp3HEkDLSR53YvvZ+cc5b/XzsxSbMJCE0yslr6zc=;
+	b=VbVTFwKgG2nIUv1fgI3haPjroW7GO/BMDsd2lrneNkiRPCEGxdO4NFMQyrPoSvjY0kdG6w
+	7BnNKKpZ/4fiogDA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CC68E134CA;
-	Mon, 20 Jun 2022 09:14:38 +0000 (UTC)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 779E5134CA;
+	Mon, 20 Jun 2022 09:15:06 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
 	by imap2.suse-dmz.suse.de with ESMTPSA
-	id 0kh8MX46sGJtPQAAMHmgww
-	(envelope-from <hare@suse.de>); Mon, 20 Jun 2022 09:14:38 +0000
-Message-ID: <8bde22c7-1c7e-3593-3217-3a4434769a96@suse.de>
-Date: Mon, 20 Jun 2022 11:14:38 +0200
+	id rzLrHJo6sGK+PQAAMHmgww
+	(envelope-from <hare@suse.de>); Mon, 20 Jun 2022 09:15:06 +0000
+Message-ID: <34c6fd01-fcb7-b618-959f-331b65cc8739@suse.de>
+Date: Mon, 20 Jun 2022 11:15:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.4.0
-Subject: Re: [PATCH 1/5] scsi: core: Remove reserved request time-out handling
+Subject: Re: [PATCH 2/5] blk-mq: Add a flag for reserved requests
 Content-Language: en-US
 To: John Garry <john.garry@huawei.com>, axboe@kernel.dk,
  damien.lemoal@opensource.wdc.com, bvanassche@acm.org, hch@lst.de,
@@ -90,17 +89,17 @@ Cc: linux-rdma@vger.kernel.org, linux-mmc@vger.kernel.org,
  linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
  nbd@other.debian.org
 References: <1655463320-241202-1-git-send-email-john.garry@huawei.com>
- <1655463320-241202-2-git-send-email-john.garry@huawei.com>
+ <1655463320-241202-3-git-send-email-john.garry@huawei.com>
 From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <1655463320-241202-2-git-send-email-john.garry@huawei.com>
+In-Reply-To: <1655463320-241202-3-git-send-email-john.garry@huawei.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <vrtROOXI4E.A.9pE.9AEsiB@bendel>
+Resent-Message-ID: <XYsD9Kwjq7B.A.k6.U7DsiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2165
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2164
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -110,23 +109,20 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/8bde22c7-1c7e-3593-3217-3a4434769a96@suse.de
-Resent-Date: Mon, 20 Jun 2022 09:39:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/34c6fd01-fcb7-b618-959f-331b65cc8739@suse.de
+Resent-Date: Mon, 20 Jun 2022 09:33:08 +0000 (UTC)
 
 On 6/17/22 12:55, John Garry wrote:
-> The SCSI code does not currently support reserved commands. As such,
-> requests which time-out would never be reserved, and scsi_timeout()
-> 'reserved' arg should never be set.
-> 
-> Remove handling for reserved requests and drop wrapper scsi_timeout() as
-> it now just calls scsi_times_out() always.
+> Add a flag for reserved requests so that drivers may know this for any
+> special handling.
 > 
 > Signed-off-by: John Garry <john.garry@huawei.com>
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Reviewed-by: Bart Van Assche <bvanassche@acm.org>
 > ---
->   drivers/scsi/scsi_error.c |  3 ++-
->   drivers/scsi/scsi_lib.c   | 12 ++----------
->   drivers/scsi/scsi_priv.h  |  3 ++-
->   3 files changed, 6 insertions(+), 12 deletions(-)
+>   block/blk-mq.c         | 6 ++++++
+>   include/linux/blk-mq.h | 6 ++++++
+>   2 files changed, 12 insertions(+)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
