@@ -1,84 +1,84 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC3155812E
-	for <lists+nbd@lfdr.de>; Thu, 23 Jun 2022 18:57:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id B0CAF559CA8
+	for <lists+nbd@lfdr.de>; Fri, 24 Jun 2022 16:50:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id F156620369; Thu, 23 Jun 2022 16:57:08 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun 23 16:57:08 2022
-Old-Return-Path: <rohan.khanna@thoughtworks.com>
+	id 93A3E20444; Fri, 24 Jun 2022 14:50:00 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jun 24 14:50:00 2022
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,HTML_MESSAGE,RCVD_IN_DNSWL_NONE,
-	T_REMOTE_IMAGE,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Level: 
+X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 21B4D20267
-	for <lists-other-nbd@bendel.debian.org>; Thu, 23 Jun 2022 16:41:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3E11B20436
+	for <lists-other-nbd@bendel.debian.org>; Fri, 24 Jun 2022 14:49:51 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.79 tagged_above=-10000 required=5.3
-	tests=[BAYES_20=-1, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=2,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_REMOTE_IMAGE=1,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.19 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id iKGVxll090UP for <lists-other-nbd@bendel.debian.org>;
-	Thu, 23 Jun 2022 16:41:09 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .thoughtworks. - helo: .mail-lf1-x135.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com [IPv6:2a00:1450:4864:20::135])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 2E8B22031E
-	for <nbd@other.debian.org>; Thu, 23 Jun 2022 16:41:05 +0000 (UTC)
-Received: by mail-lf1-x135.google.com with SMTP id c2so26624lfk.0
-        for <nbd@other.debian.org>; Thu, 23 Jun 2022 09:41:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thoughtworks.com; s=thoughtworks;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=xUEC2ltUMVaxidy1l1N5f6LVzuPgAwjwlCmoPES3AJ0=;
-        b=EorDyzDkwmah5afLQhRU9btak1+maWT+QcUCvUGVmB+beNdL0j6FvxDni/HDcHYo9e
-         yVQAlKgigO5irkz0WQiB7rOjDECWmp3WxCiejU8uPEsWK7ilrJxdwson7vrxPfz68Icz
-         VnBebs2P56KH6804q/L5cOxiqPAmVIYHQRfxUzi9+Vh7bc+VWEFauajd5EeuRiVQyYL7
-         cAToHlq0rb+CCXQ228Cj6xoCQsFDmx2amB2xSLPrWYK39TZcRSYgN2KxPtn0cjFUBUZ9
-         9GlXOMpIMNkQt3S7xmbjBxFe1Ne3LLqrBEahkC5chmf7nSgzz3mv7fHG1jV1fXqykkAE
-         OLLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=xUEC2ltUMVaxidy1l1N5f6LVzuPgAwjwlCmoPES3AJ0=;
-        b=nzEAFxOht3gU6fIamFvF8wpuu+iTrgNQ1t3M87bKDSDe8kweaf1EPu7lJuneBJxRj9
-         UIjYXRs5TI3Ajbq+dtvJjj0qot/W+ULqlLVW2vGHNxwbTqtw8SwMrWL/N2UhPCmXBUvN
-         DknMnPhBiwAI4gk4lq1vhwgB02Q7HOX07Qzlzd1ytTjheaALhLV/moi4KL3mTh9vFcW8
-         SPJMDYAoDx+9uRMjcnJM5FeBqwWJCdE/VyBKbr5mxHZfFDnyvNLfj5ExGbxAMjBFFEPP
-         CjgK4Xb3Z+BxBB0Wd9nqmf6UBJQz1fj4R3+0odRNWHTuYfTZh4yvdiSphNBeTNKuLMBv
-         MPSA==
-X-Gm-Message-State: AJIora/JRqpCeZgPCcChJ3kvSGwZgfOnW4GZmjoswMA4Q3ZmI+/AfUGU
-	FmF+r8ldz1NfrJpFa8RN3bIoGwBQEjrKYzQX41tkGcjLy4wFUA==
-X-Google-Smtp-Source: AGRyM1uLeGFJINPG+gRIBkh9cgT2Q7TVzNZywpBKvDzDMAh/9+Z+eh35h9JjXUWtMW/YioWVTgf/FqDcY2ggmB6VQUM=
-X-Received: by 2002:a05:6512:2828:b0:47f:68dc:9feb with SMTP id
- cf40-20020a056512282800b0047f68dc9febmr6012125lfb.475.1656002462532; Thu, 23
- Jun 2022 09:41:02 -0700 (PDT)
+	with ESMTP id 9YlA0a22tLNA for <lists-other-nbd@bendel.debian.org>;
+	Fri, 24 Jun 2022 14:49:46 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 2463 seconds by postgrey-1.36 at bendel; Fri, 24 Jun 2022 14:49:46 UTC
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 3B11420345
+	for <nbd@other.debian.org>; Fri, 24 Jun 2022 14:49:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=okVoW3coGsj92b0uQX3QABTSFN/ShjVxlxWt4Cg34NM=; b=OdgDByPkM61YGfv+kPMzjxyoxp
+	7Ch0/pMENwrwZ0w91LQPLsRcD/nVKZ9CB9xpx4VOD5ObsixSvmq5RDqKVb3gaf3TFfs48PKZA30to
+	105yJwQl6pf+V8JcFTDABphOegXGk9yBi8245f/2xWp60e1bJttt8RZv2P0PNbsE/K6Sy8OjoAI20
+	UQcU0CT2jF26tKVzn2tEZG0goK4IiRB2fyXxKeuWtDzaJ6mvy+Fsczq+Sc5Ih8QPLnSs7TODAuebx
+	sNggTv4qa5JfzRUDr/IgGP/bWgu2JaT4vOSyUJ0bmsQMjaA1+Z/ljNItFRioPbKKfeQ8HbAtKtiDo
+	pPX4bZuQ==;
+Received: from [102.39.138.29] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <w@uter.be>)
+	id 1o4jzE-003Llb-Kn; Fri, 24 Jun 2022 16:08:40 +0200
+Received: from wouter by pc220518 with local (Exim 4.95)
+	(envelope-from <w@uter.be>)
+	id 1o4jz7-0001bN-B3;
+	Fri, 24 Jun 2022 16:08:33 +0200
+Date: Fri, 24 Jun 2022 16:08:33 +0200
+From: Wouter Verhelst <w@uter.be>
+To: "Richard W.M. Jones" <rjones@redhat.com>
+Cc: Eric Blake <eblake@redhat.com>, nbd@other.debian.org,
+	libguestfs@redhat.com, Nikolaus Rath <Nikolaus@rath.org>
+Subject: Re: Kernel driver I/O block size hinting
+Message-ID: <YrXFYf+6aVUNyIhi@pc220518.home.grep.be>
+References: <20220614143819.GX8021@redhat.com>
+ <Yqxed4R13WgNjzky@pc220518.home.grep.be>
 MIME-Version: 1.0
-From: Rohan Khanna <rohan.khanna@thoughtworks.com>
-Date: Thu, 23 Jun 2022 18:40:46 +0200
-Message-ID: <CAGx2udZv9_umjYk2Ot_QsNAMQ4sY7OJX=sFrTW=1L5kmb6PgHA@mail.gmail.com>
-Subject: Requesting some information regarding building nbd-client for macos
-To: nbd@other.debian.org
-Content-Type: multipart/alternative; boundary="00000000000086eb7505e2201e99"
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Yqxed4R13WgNjzky@pc220518.home.grep.be>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <WezhgbJOPML.A.dRB.ktJtiB@bendel>
+Resent-Message-ID: <n5jbp9eeUIP.A.nMG.Y8ctiB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2178
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2179
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,102 +88,110 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAGx2udZv9_umjYk2Ot_QsNAMQ4sY7OJX=sFrTW=1L5kmb6PgHA@mail.gmail.com
-Resent-Date: Thu, 23 Jun 2022 16:57:08 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/YrXFYf+6aVUNyIhi@pc220518.home.grep.be
+Resent-Date: Fri, 24 Jun 2022 14:50:00 +0000 (UTC)
 
---00000000000086eb7505e2201e99
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Sorry for the late reply.
 
-Hello
-I am writing to you requesting for some information as to how may I go
-about building nbd-client for macos. Anything to point me in the right
-direction would be greatly appreciated.
-Kind regards,
+I just noticed that my mail config was borked; I was happily sending out
+emails, but none of them reached anyone :-/
 
-Rohan Khanna
-He/Him
-Consultant Data Engineer
-Email rohan.khanna@thoughtworks.com
-[image: Thoughtworks]
-<http://www.thoughtworks.com/?utm_campaign=3Drohan-khanna-signature&utm_med=
-ium=3Demail&utm_source=3Dthoughtworks-email-signature-generator>
-[image: Delivering extraordinary impact together. Learn more about
-Thoughtworks]
-<https://www.thoughtworks.com/?utm_source=3Demail-signature&utm_medium=3Dem=
-ail&utm_campaign=3Dbrand>
-ThoughtWorks Deutschland GmbH - Gro=C3=9Fer Burstah 46-48 - D-20457 Hamburg
-Sitz der Gesellschaft: Hamburg
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Peter Buhrmann
-AG Hamburg - HRB 115336
+Fixed now.
 
---00000000000086eb7505e2201e99
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jun 17, 2022 at 12:59:04PM +0200, Wouter Verhelst wrote:
+> Hi,
+> 
+> On Tue, Jun 14, 2022 at 03:38:19PM +0100, Richard W.M. Jones wrote:
+> > This is a follow-up to this thread:
+> > 
+> >   https://listman.redhat.com/archives/libguestfs/2022-June/thread.html#29210
+> > 
+> > about getting the kernel client (nbd.ko) to obey block size
+> > constraints sent by the NBD server:
+> > 
+> >   https://github.com/NetworkBlockDevice/nbd/blob/master/doc/proto.md#block-size-constraints
+> > 
+> > I was sent this very interesting design document about the original
+> > intent behind the kernel's I/O limits:
+> > 
+> >   https://people.redhat.com/msnitzer/docs/io-limits.txt
+> > 
+> > There are four or five kernel block layer settings we could usefully
+> > adjust, and there are three NBD block size constraints, and in my
+> > opinion there's not a very clear mapping between them.  But I'll have
+> > a go at what I think we should do.
+> > 
+> > 	- - -
+> > 
+> > (1) Kernel physical_block_size & logical_block_size: The example given
+> > is of a hard disk with 4K physical sectors (AF) which can nevertheless
+> > emulate 512-byte sectors.  In this case you'd set physical_block_size
+> > = 4K, logical_block_size = 512b.
+> > 
+> > Data structures (partition tables, etc) should be aligned to
+> > physical_block_size to avoid unnecessary RMW cycles.  But the
+> > fundamental until of I/O is logical_block_size.
+> > 
+> > Current behaviour of nbd.ko is that logical_block_size ==
+> > physical_block_size == the nbd-client "-b" option (default: 512 bytes,
+> > contradicting the documentation).
+> 
+> Whoops, indeed. Fixed in git.
+> 
+> > I think we should set logical_block_size == physical_block_size ==
+> > MAX (512, NBD minimum block size constraint).
+> > 
+> > What should happen to the nbd-client -b option?
+> 
+> I believe it remains useful to have an override for exceptional
+> situations. I think I'll leave it (but we can provide an appropriate
+> warning about this possibly being a bad idea in the man page)
+> 
+> It might be useful to extend the syntax to specify more than one block
+> size, given that there are going to be multiple ones now.
+> 
+> > (2) Kernel minimum_io_size: The documentation says this is the
+> > "preferred minimum unit for random I/O".
+> > 
+> > Current behaviour of nbd.ko is this is not set.
+> > 
+> > I think the NBD's preferred block size should map to minimum_io_size.
+> > 
+> > 
+> > (3) Kernel optimal_io_size: The documentation says this is the
+> > "[preferred] streaming I/O [size]".
+> > 
+> > Current behaviour of nbd.ko is this is not set.
+> > 
+> > NBD doesn't really have the concept of streaming vs random I/O, so we
+> > could either ignore this or set it to the same value as
+> > minimum_io_size.
+> > 
+> > I have a kernel patch allowing nbd-client to set both minimum_io_size
+> > and optimal_io_size from userspace.
+> > 
+> > 
+> > (4) Kernel blk_queue_max_hw_sectors: This is documented as: "set max
+> > sectors for a request ... Enables a low level driver to set a hard
+> > upper limit, max_hw_sectors, on the size of requests."
+> > 
+> > Current behaviour of nbd.ko is that we set this to 65536 (sectors?
+> > blocks?), which for 512b sectors is 32M.
+> > 
+> > I think we could set this to MIN (32M, NBD maximum block size constraint),
+> > converting the result to sectors.
+> > 
+> > 	- - -
+> > 
+> > What do people think?
+> 
+> Yes, this all looks reasonable to me. Thanks.
+> 
+> -- 
+>      w@uter.{be,co.za}
+> wouter@{grep.be,fosdem.org,debian.org}
 
-<div dir=3D"ltr"><div>Hello</div><div>I am writing to you requesting for so=
-me information as to how may I go about building nbd-client for macos. Anyt=
-hing to point me in=C2=A0the right direction would be greatly appreciated.=
-=C2=A0</div><div>Kind regards,</div><br clear=3D"all"><div><div dir=3D"ltr"=
- class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"l=
-tr"><table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" style=3D"color:=
-rgb(34,34,34);caption-side:bottom;border-collapse:collapse;font-size:12px;l=
-ine-height:12px;font-family:Inter,sans-serif;width:max-content"><tbody styl=
-e=3D"border-width:0px;border-style:solid"><tr style=3D"border-width:0px;bor=
-der-style:solid;font-family:Inter,Helvetica,Arial,sans-serif;color:rgb(51,5=
-1,51)"><td colspan=3D"2" style=3D"font-family:Bitter,sans-serif;border-widt=
-h:0px;border-style:solid;border-color:inherit;max-width:6rem;font-weight:70=
-0;padding-bottom:4px;padding-right:1rem">Rohan Khanna</td></tr><tr style=3D=
-"border-width:0px;border-style:solid;font-family:Inter,Helvetica,Arial,sans=
--serif;color:rgb(51,51,51)"><td style=3D"font-family:Inter,sans-serif;borde=
-r-width:0px;border-style:solid;border-color:inherit;max-width:6rem;padding-=
-bottom:4px">He/Him</td></tr><tr style=3D"border-width:0px;border-style:soli=
-d;font-family:Inter,Helvetica,Arial,sans-serif;color:rgb(51,51,51)"><td col=
-span=3D"2" style=3D"font-family:Inter,sans-serif;border-width:0px;border-st=
-yle:solid;border-color:inherit;max-width:6rem;font-style:italic;padding-bot=
-tom:12px">Consultant Data Engineer</td></tr><tr style=3D"border-width:0px;b=
-order-style:solid;font-family:Inter,Helvetica,Arial,sans-serif;color:rgb(51=
-,51,51)"><td style=3D"font-family:Inter,sans-serif;border-width:0px;border-=
-style:solid;border-color:inherit;max-width:6rem;padding-bottom:4px;padding-=
-right:1rem">Email</td><td style=3D"font-family:Inter,sans-serif;border-widt=
-h:0px;border-style:solid;border-color:inherit;min-width:200px;font-weight:7=
-00;padding-bottom:4px;padding-right:1rem"><a href=3D"mailto:rohan.khanna@th=
-oughtworks.com" style=3D"color:white" target=3D"_blank"><span style=3D"colo=
-r:rgb(189,66,87)">rohan.khanna@thoughtworks.com</span></a></td></tr><tr sty=
-le=3D"border-width:0px;border-style:solid;font-family:Inter,Helvetica,Arial=
-,sans-serif;color:rgb(51,51,51)"></tr><tr style=3D"border-width:0px;border-=
-style:solid;font-family:Inter,Helvetica,Arial,sans-serif;color:rgb(51,51,51=
-)"><td colspan=3D"2" style=3D"font-family:Inter,Helvetica,Arial,sans-serif;=
-border-width:0px;border-style:solid;border-color:inherit;max-width:6rem"><a=
- href=3D"http://www.thoughtworks.com/?utm_campaign=3Drohan-khanna-signature=
-&amp;utm_medium=3Demail&amp;utm_source=3Dthoughtworks-email-signature-gener=
-ator" style=3D"color:rgb(13,110,253)" target=3D"_blank"><img src=3D"http://=
-gentle-reef-2837.herokuapp.com/images/thoughtworks_logo.png" height=3D"31" =
-alt=3D"Thoughtworks" title=3D"Thoughtworks" style=3D"vertical-align:middle;=
-border-style:none;margin-top:10px;padding-top:8px;display:block;padding-rig=
-ht:0px!important;padding-bottom:0px!important;padding-left:0px!important"><=
-/a></td></tr><tr style=3D"border-width:0px;border-style:solid;font-family:I=
-nter,Helvetica,Arial,sans-serif;color:rgb(51,51,51)"><td colspan=3D"2" styl=
-e=3D"font-family:Inter,Helvetica,Arial,sans-serif;border-width:0px;border-s=
-tyle:solid;border-color:inherit;max-width:6rem"><a href=3D"https://www.thou=
-ghtworks.com/?utm_source=3Demail-signature&amp;utm_medium=3Demail&amp;utm_c=
-ampaign=3Dbrand" style=3D"color:rgb(13,110,253)" target=3D"_blank"><img src=
-=3D"http://gentle-reef-2837.herokuapp.com/images/tw_2021_email_footer2.jpg"=
- width=3D"460" alt=3D"Delivering extraordinary impact together. Learn more =
-about Thoughtworks" title=3D"Delivering extraordinary impact together. Lear=
-n more about Thoughtworks" style=3D"vertical-align:middle;border-style:none=
-;margin-top:10px;padding-top:8px;display:block;padding-right:0px!important;=
-padding-bottom:0px!important;padding-left:0px!important"></a></td></tr><tr =
-style=3D"border-width:0px;border-style:solid;font-family:Inter,Helvetica,Ar=
-ial,sans-serif;color:rgb(51,51,51)"></tr><tr style=3D"border-width:0px;bord=
-er-style:solid;font-family:Inter,Helvetica,Arial,sans-serif;color:rgb(51,51=
-,51)"></tr></tbody></table><span style=3D"color:rgb(34,34,34)">ThoughtWorks=
- Deutschland GmbH - Gro=C3=9Fer Burstah 46-48 - D-20457 Hamburg</span><br s=
-tyle=3D"color:rgb(34,34,34)"><span style=3D"color:rgb(34,34,34)">Sitz der G=
-esellschaft: Hamburg</span><br style=3D"color:rgb(34,34,34)"><span style=3D=
-"color:rgb(34,34,34)">Gesch=C3=A4ftsf=C3=BChrer: Dr. Peter Buhrmann</span><=
-br style=3D"color:rgb(34,34,34)"><span style=3D"color:rgb(34,34,34)">AG Ham=
-burg - HRB 115336</span><br></div></div></div></div>
-
---00000000000086eb7505e2201e99--
+-- 
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
 
