@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED424579844
-	for <lists+nbd@lfdr.de>; Tue, 19 Jul 2022 13:18:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F35457A0DE
+	for <lists+nbd@lfdr.de>; Tue, 19 Jul 2022 16:12:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B07EE2057B; Tue, 19 Jul 2022 11:18:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jul 19 11:18:10 2022
+	id 7A06420408; Tue, 19 Jul 2022 14:12:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jul 19 14:12:09 2022
 Old-Return-Path: <info@unileverrotterdamgroup.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: **
@@ -16,41 +16,40 @@ X-Spam-Status: No, score=2.1 required=4.0 tests=FOURLA,SUPPORTMAIL5
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5493B20603
-	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Jul 2022 11:00:04 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 66D00203D3
+	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Jul 2022 13:56:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=2.09 tagged_above=-10000 required=5.3
 	tests=[FOURLA=0.1, SUPPORTMAIL5=2, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ZX37mw70ll_c for <lists-other-nbd@bendel.debian.org>;
-	Tue, 19 Jul 2022 11:00:01 +0000 (UTC)
+	with ESMTP id WkeCcbKLEdvo for <lists-other-nbd@bendel.debian.org>;
+	Tue, 19 Jul 2022 13:56:01 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 743 seconds by postgrey-1.36 at bendel; Tue, 19 Jul 2022 10:59:58 UTC
 Received: from mail.velocitynet.com.au (mail.velocitynet.com.au [203.55.137.25])
-	by bendel.debian.org (Postfix) with ESMTP id 60A5F20602
-	for <nbd@other.debian.org>; Tue, 19 Jul 2022 10:59:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 65AD9203AA
+	for <nbd@other.debian.org>; Tue, 19 Jul 2022 13:55:59 +0000 (UTC)
 Received: from webmail.emailme.com.au (webmail.velocitynet.com.au [203.31.48.148])
-	by mail.velocitynet.com.au (Postfix) with ESMTP id 38B53600EE;
-	Tue, 19 Jul 2022 20:47:14 +1000 (EST)
+	by mail.velocitynet.com.au (Postfix) with ESMTP id 5FC24601AF;
+	Tue, 19 Jul 2022 23:54:03 +1000 (EST)
 MIME-Version: 1.0
-Date: Tue, 19 Jul 2022 20:17:12 +1000
+Date: Tue, 19 Jul 2022 23:24:01 +1000
 From: Unilever Supply Chain <info@unileverrotterdamgroup.com>
 To: undisclosed-recipients:;
 Subject: Request for Quotation
 Reply-To: purchasing@unilevergroups.nl
-Message-ID: <b72f7a21bc6dc4394f956e8ec9a3e3a2@mail.velocitynet.com.au>
+Message-ID: <93cd410831c80da502bf30bbe21ce50a@mail.velocitynet.com.au>
 X-Sender: info@unileverrotterdamgroup.com
 User-Agent: RoundCube Webmail/0.3.1
 Content-Type: multipart/mixed;
-	boundary="=_dc0a885dd2208fc8eecc8e10efee175b"
+	boundary="=_40705491fc0224d8a419d0cf0d9cfc39"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <8hWuxiiLqpF.A.-1G.yLp1iB@bendel>
+Resent-Message-ID: <Pft0a2qj4WN.A.I5F.5ur1iB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2193
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2194
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -60,12 +59,13 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/b72f7a21bc6dc4394f956e8ec9a3e3a2@mail.velocitynet.com.au
-Resent-Date: Tue, 19 Jul 2022 11:18:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/93cd410831c80da502bf30bbe21ce50a@mail.velocitynet.com.au
+Resent-Date: Tue, 19 Jul 2022 14:12:09 +0000 (UTC)
 
---=_dc0a885dd2208fc8eecc8e10efee175b
+--=_40705491fc0224d8a419d0cf0d9cfc39
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset=UTF-8
+
 
 
 Good day,
@@ -82,7 +82,7 @@ Please we are looking forward to receive your best offer
 
 Kind Regards/Vriendelijke Groeten
 Mr.Ibrahim Bakker
---=_dc0a885dd2208fc8eecc8e10efee175b
+--=_40705491fc0224d8a419d0cf0d9cfc39
 Content-Transfer-Encoding: base64
 Content-Type: application/pdf; charset=binary; charset=UTF-8;
  name="Request for Quotation.pdf";
@@ -2461,7 +2461,7 @@ MDAgbiAKMDAwMDA3NzQzOSAwMDAwMCBuIAowMDAwMDc4MTY2IDAwMDAwIG4gCjAwMDAwNzg3MjUg
 MDAwMDAgbiAKdHJhaWxlcgo8PCAvU2l6ZSA1MSAvUm9vdCAxIDAgUiAvSW5mbyAyIDAgUgovSUQg
 Wzw0QTJDOTdBMkYyNjNGRUUxMjBGMDUyQkEwMDZCMUUxQT48NEEyQzk3QTJGMjYzRkVFMTIwRjA1
 MkJBMDA2QjFFMUE+XQo+PgpzdGFydHhyZWYKMTM0MDEyCiUlRU9GCg==
---=_dc0a885dd2208fc8eecc8e10efee175b
+--=_40705491fc0224d8a419d0cf0d9cfc39
 Content-Transfer-Encoding: base64
 Content-Type: application/pdf; charset=binary; charset=UTF-8;
  name="Parts Specification.pdf";
@@ -2963,5 +2963,5 @@ ZWF0aW9uRGF0ZShEOjIwMjIwNTIzMTk1MTAwKzAyJzAwJyk+PgplbmRvYmoKeHJlZgowIDMKMDAw
 MDAwMDAwMCA2NTUzNSBmIAowMDAwMDI3ODAyIDAwMDAwIG4gCjAwMDAwMjc4NTMgMDAwMDAgbiAK
 dHJhaWxlcgo8PC9JRFs8YTJiMDM2YTY0NmZjYmU1MDEwYmE3YWNhMjQ1ZTc0OWE+IDxhMmIwMzZh
 NjQ2ZmNiZTUwMTBiYTdhY2EyNDVlNzQ5YT5dL1NpemUgMz4+CnN0YXJ0eHJlZgoxMDUKJSVFT0YK
---=_dc0a885dd2208fc8eecc8e10efee175b--
+--=_40705491fc0224d8a419d0cf0d9cfc39--
 
