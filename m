@@ -2,84 +2,75 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5758B57EB8B
-	for <lists+nbd@lfdr.de>; Sat, 23 Jul 2022 04:33:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 294A357EBAD
+	for <lists+nbd@lfdr.de>; Sat, 23 Jul 2022 05:30:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 273B2204AC; Sat, 23 Jul 2022 02:33:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Jul 23 02:33:10 2022
-Old-Return-Path: <yukuai1@huaweicloud.com>
+	id DC5B72057D; Sat, 23 Jul 2022 03:30:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Jul 23 03:30:09 2022
+Old-Return-Path: <joe@perches.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=4.0 tests=MURPHY_DRUGS_REL8,NICE_REPLY_A
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,SARE_MSGID_LONG40,
+	UNPARSEABLE_RELAY autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1B3DB2057D
-	for <lists-other-nbd@bendel.debian.org>; Sat, 23 Jul 2022 02:15:52 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3B1A520576
+	for <lists-other-nbd@bendel.debian.org>; Sat, 23 Jul 2022 03:12:53 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.991 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.352 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, SARE_MSGID_LONG40=0.637,
+	T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id zTPItL2AKAYd for <lists-other-nbd@bendel.debian.org>;
-	Sat, 23 Jul 2022 02:15:46 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	with ESMTP id qRxT8QiAOKZF for <lists-other-nbd@bendel.debian.org>;
+	Sat, 23 Jul 2022 03:12:48 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 HELO_IP_IN_CL16_SUBNET=-0.41 (check from: .perches. - helo: .relay.hostedemail. - helo-domain: .hostedemail.)  FROM/MX_MATCHES_UNVR_HELO(DOMAIN)_OR_CL_NAME(DOMAIN)=-1.5 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -4.66
+Received: from relay.hostedemail.com (smtprelay0016.hostedemail.com [216.40.44.16])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8DAFD20579
-	for <nbd@other.debian.org>; Sat, 23 Jul 2022 02:15:46 +0000 (UTC)
-Received: from mail02.huawei.com (unknown [172.30.67.153])
-	by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4LqVHZ07xgzKCfS
-	for <nbd@other.debian.org>; Sat, 23 Jul 2022 10:14:34 +0800 (CST)
-Received: from [10.174.176.73] (unknown [10.174.176.73])
-	by APP3 (Coremail) with SMTP id _Ch0CgAXemnMWdtiwj1WBA--.40945S3;
-	Sat, 23 Jul 2022 10:15:41 +0800 (CST)
+	by bendel.debian.org (Postfix) with ESMTPS id 073C520567
+	for <nbd@other.debian.org>; Sat, 23 Jul 2022 03:12:46 +0000 (UTC)
+Received: from omf01.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay09.hostedemail.com (Postfix) with ESMTP id EB98E80E78;
+	Sat, 23 Jul 2022 03:12:41 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf01.hostedemail.com (Postfix) with ESMTPA id 4EA3B60009;
+	Sat, 23 Jul 2022 03:12:40 +0000 (UTC)
+Message-ID: <c4cf82073cccd574aa75b3a8e1f15748929c7621.camel@perches.com>
 Subject: Re: [PATCH] nbd: add missing definition of pr_fmt
-To: Yu Kuai <yukuai3@huawei.com>, Joe Perches <joe@perches.com>,
- josef@toxicpanda.com, axboe@kernel.dk, houtao1@huawei.com
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org, yi.zhang@huawei.com
+From: Joe Perches <joe@perches.com>
+To: Yu Kuai <yukuai1@huaweicloud.com>, Yu Kuai <yukuai3@huawei.com>, 
+	josef@toxicpanda.com, axboe@kernel.dk, houtao1@huawei.com
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org, 
+	linux-kernel@vger.kernel.org, yi.zhang@huawei.com
+Date: Fri, 22 Jul 2022 20:12:39 -0700
+In-Reply-To: <ec031ff1-3936-92ce-b66b-59e3e6a289ab@huaweicloud.com>
 References: <20220706093320.1962871-1-yukuai1@huaweicloud.com>
- <853a5164-78cf-1ccb-8e18-cff5b5bce4ff@huaweicloud.com>
- <49a8099eb7dd01e9d2d190056171341d87cd442b.camel@perches.com>
- <0dba2f0c-ba02-853e-60e7-873eabedcd80@huaweicloud.com>
-From: Yu Kuai <yukuai1@huaweicloud.com>
-Message-ID: <ec031ff1-3936-92ce-b66b-59e3e6a289ab@huaweicloud.com>
-Date: Sat, 23 Jul 2022 10:15:39 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	 <853a5164-78cf-1ccb-8e18-cff5b5bce4ff@huaweicloud.com>
+	 <49a8099eb7dd01e9d2d190056171341d87cd442b.camel@perches.com>
+	 <0dba2f0c-ba02-853e-60e7-873eabedcd80@huaweicloud.com>
+	 <ec031ff1-3936-92ce-b66b-59e3e6a289ab@huaweicloud.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.1-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <0dba2f0c-ba02-853e-60e7-873eabedcd80@huaweicloud.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_Ch0CgAXemnMWdtiwj1WBA--.40945S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7XF17XryDCFyrCw4rCF43Awb_yoW8JrWDpF
-	4qya4kCr4vyr45G3WIyw1Skry3t3Z7Jr1ag34UZ3y09a9xCas3Ar17AFnYqrWvvr4kKw12
-	9F4Dt3y8AF1rWrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUyKb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6r1S6rWUM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I
-	0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07AlzVAYIcxG8wCF04k20xvY0x0E
-	wIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E74
-	80Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0
-	I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04
-	k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY
-	1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUrR6zUUUUU
-X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
-X-CFilter-Loop: Reflected
+X-Stat-Signature: xfaxua7y53z6efctdo35e56im6uo765i
+X-Rspamd-Server: rspamout01
+X-Rspamd-Queue-Id: 4EA3B60009
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX19vOmEdMuAg3rJ8m6FNkvIgGhqamKHXogU=
+X-HE-Tag: 1658545960-341427
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <-s69KRlF-RM.A.kfG.m312iB@bendel>
+Resent-Message-ID: <fNgD56Y_PTP.A.JxE.Bt22iB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2198
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2200
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,59 +80,82 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ec031ff1-3936-92ce-b66b-59e3e6a289ab@huaweicloud.com
-Resent-Date: Sat, 23 Jul 2022 02:33:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/c4cf82073cccd574aa75b3a8e1f15748929c7621.camel@perches.com
+Resent-Date: Sat, 23 Jul 2022 03:30:09 +0000 (UTC)
 
-Hi!
+On Sat, 2022-07-23 at 10:15 +0800, Yu Kuai wrote:
+> Hi!
 
-在 2022/07/20 19:46, Yu Kuai 写道:
-> Hi !
-> 
-> 在 2022/07/18 22:32, Joe Perches 写道:
->> On Mon, 2022-07-18 at 21:52 +0800, Yu Kuai wrote:
->>> 在 2022/07/06 17:33, Yu Kuai 写道:
->>>> From: Yu Kuai <yukuai3@huawei.com>
->>>>
->>>> commit 1243172d5894 ("nbd: use pr_err to output error message") tries
->>>> to define pr_fmt and use short pr_err() to output error message,
->>>> however, the definition is missed.
->>> friendly ping ...
->> []
->>>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->> []
->>>> @@ -44,6 +44,9 @@
->>>>    #include <linux/nbd-netlink.h>
->>>>    #include <net/genetlink.h>
->>>> +#undef pr_fmt
->>>> +#define pr_fmt(fmt) "nbd: " fmt
->>>> +
->> Typically, this #define is place before all #include lines
->> so there is no need for an #undef
+Hello.
 
-I tried to remove the #undef:
+> =E5=9C=A8 2022/07/20 19:46, Yu Kuai =E5=86=99=E9=81=93:
+> > =E5=9C=A8 2022/07/18 22:32, Joe Perches =E5=86=99=E9=81=93:
+> > > On Mon, 2022-07-18 at 21:52 +0800, Yu Kuai wrote:
+> > > > =E5=9C=A8 2022/07/06 17:33, Yu Kuai =E5=86=99=E9=81=93:
+> > > > > From: Yu Kuai <yukuai3@huawei.com>
+> > > > >=20
+> > > > > commit 1243172d5894 ("nbd: use pr_err to output error message") t=
+ries
+> > > > > to define pr_fmt and use short pr_err() to output error message,
+> > > > > however, the definition is missed.
+> > > > friendly ping ...
+> > > []
+> > > > > diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> > > []
+> > > > > @@ -44,6 +44,9 @@
+> > > > > =C2=A0=C2=A0 #include <linux/nbd-netlink.h>
+> > > > > =C2=A0=C2=A0 #include <net/genetlink.h>
+> > > > > +#undef pr_fmt
+> > > > > +#define pr_fmt(fmt) "nbd: " fmt
+> > > > > +
+> > > Typically, this #define is place before all #include lines
+> > > so there is no need for an #undef
+>=20
+> I tried to remove the #undef:
 
+I'll repeat my message.
+
+Move the #define before _any_ #include.
+
+Also, there are some message that would need existing "nbd: " output
+prefixes removed.
+---
+ drivers/block/nbd.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index f5d098a148cbf..222f26ac5e96a 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -44,7 +44,6 @@
-  #include <linux/nbd-netlink.h>
-  #include <net/genetlink.h>
-
-  #define pr_fmt(fmt) "nbd: " fmt
-
-And then following warning is triggered:
-
-drivers/block/nbd.c:47: warning: "pr_fmt" redefined
-    47 | #define pr_fmt(fmt) "nbd: " fmt
-
-It semms that keeping that #undef is the right thing to do.
-
-Thanks,
-Kuai
-> 
-> Thanks for you advice, I'll do that in v2.
-> 
-> Kuai
-> 
-> .
-> 
+@@ -11,6 +11,8 @@
+  * (part of code stolen from loop.c)
+  */
+=20
++#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
++
+ #include <linux/major.h>
+=20
+ #include <linux/blkdev.h>
+@@ -1950,8 +1952,8 @@ static int nbd_genl_connect(struct sk_buff *skb, stru=
+ct genl_info *info)
+ 			     test_bit(NBD_DISCONNECT_REQUESTED, &nbd->flags)) ||
+ 			    !refcount_inc_not_zero(&nbd->refs)) {
+ 				mutex_unlock(&nbd_index_mutex);
+-				pr_err("nbd: device at index %d is going down\n",
+-					index);
++				pr_err("device at index %d is going down\n",
++				       index);
+ 				return -EINVAL;
+ 			}
+ 		}
+@@ -1961,7 +1963,7 @@ static int nbd_genl_connect(struct sk_buff *skb, stru=
+ct genl_info *info)
+ 	if (!nbd) {
+ 		nbd =3D nbd_dev_add(index, 2);
+ 		if (IS_ERR(nbd)) {
+-			pr_err("nbd: failed to add new device\n");
++			pr_err("failed to add new device\n");
+ 			return PTR_ERR(nbd);
+ 		}
+ 	}
 
