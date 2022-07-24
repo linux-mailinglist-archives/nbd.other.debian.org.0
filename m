@@ -1,80 +1,81 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E1D457EBE9
-	for <lists+nbd@lfdr.de>; Sat, 23 Jul 2022 06:24:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id E21C457F4D0
+	for <lists+nbd@lfdr.de>; Sun, 24 Jul 2022 13:24:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5F9B120584; Sat, 23 Jul 2022 04:24:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Jul 23 04:24:10 2022
-Old-Return-Path: <yukuai3@huawei.com>
+	id C1DF7204EA; Sun, 24 Jul 2022 11:24:01 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jul 24 11:24:01 2022
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RCVD_IN_DNSWL_MED autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 45F5220553
-	for <lists-other-nbd@bendel.debian.org>; Sat, 23 Jul 2022 04:08:49 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 98849204E3
+	for <lists-other-nbd@bendel.debian.org>; Sun, 24 Jul 2022 11:23:53 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.291 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MURPHY_DRUGS_REL8=0.02,
-	NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.21 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id FqDcwkUoLcGn for <lists-other-nbd@bendel.debian.org>;
-	Sat, 23 Jul 2022 04:08:43 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	with ESMTP id eZXB02shRcKr for <lists-other-nbd@bendel.debian.org>;
+	Sun, 24 Jul 2022 11:23:50 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 182052053E
-	for <nbd@other.debian.org>; Sat, 23 Jul 2022 04:08:42 +0000 (UTC)
-Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.53])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4LqXmM41ZDzkX6Y;
-	Sat, 23 Jul 2022 12:06:11 +0800 (CST)
-Received: from kwepemm600009.china.huawei.com (7.193.23.164) by
- dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 23 Jul 2022 12:08:35 +0800
-Received: from [10.174.176.73] (10.174.176.73) by
- kwepemm600009.china.huawei.com (7.193.23.164) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 23 Jul 2022 12:08:34 +0800
-Subject: Re: [PATCH] nbd: add missing definition of pr_fmt
-To: Joe Perches <joe@perches.com>, Yu Kuai <yukuai1@huaweicloud.com>,
-	<josef@toxicpanda.com>, <axboe@kernel.dk>, <houtao1@huawei.com>
-CC: <linux-block@vger.kernel.org>, <nbd@other.debian.org>,
-	<linux-kernel@vger.kernel.org>, <yi.zhang@huawei.com>
-References: <20220706093320.1962871-1-yukuai1@huaweicloud.com>
- <853a5164-78cf-1ccb-8e18-cff5b5bce4ff@huaweicloud.com>
- <49a8099eb7dd01e9d2d190056171341d87cd442b.camel@perches.com>
- <0dba2f0c-ba02-853e-60e7-873eabedcd80@huaweicloud.com>
- <ec031ff1-3936-92ce-b66b-59e3e6a289ab@huaweicloud.com>
- <c4cf82073cccd574aa75b3a8e1f15748929c7621.camel@perches.com>
-From: Yu Kuai <yukuai3@huawei.com>
-Message-ID: <809c7cb8-6602-8568-cd91-33281a6fb508@huawei.com>
-Date: Sat, 23 Jul 2022 12:08:33 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	by bendel.debian.org (Postfix) with ESMTPS id 58B26204DD
+	for <nbd@other.debian.org>; Sun, 24 Jul 2022 11:23:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=GF5LVS13QXBMwJDwZWaR9BsCg+18/J7+vdaORtqy/hM=; b=WVaKaI3jCBY2eTvTQfbjJGjhMm
+	LE0BHSnXNyzmsTAMMxgoAJHcBshB09PSOIPW0G7iD9J2DfEVnTKlPproZ5FVjekpG1hMNG3jac7Uf
+	l9/dEh/biSwZ+mZIPAW1VveqTn1TqAeJlq10ULwhyt8YjRN4bfA7t/Fjt4YZvganhu22GGFUUgRa0
+	F8Gi3opBbY7JywTuSRyxsRp+O80tHxZakGcwNRhovo1+d+MAsflbg572BoAzLk4o6ZvE9n7+18tp3
+	Fleu6gCoQlhRvbBsLQ7ubeo9dayF4AeofbpuY3Ds9T6vIr7MEpSMY7plJHTEAVknh+SmYmjjQSySE
+	Nc7yXs9Q==;
+Received: from [102.39.138.29] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <w@uter.be>)
+	id 1oFZi6-00GepL-UO; Sun, 24 Jul 2022 13:23:46 +0200
+Received: from wouter by pc220518 with local (Exim 4.96)
+	(envelope-from <w@uter.be>)
+	id 1oFZhz-0002k9-2g;
+	Sun, 24 Jul 2022 13:23:39 +0200
+Date: Sun, 24 Jul 2022 13:23:39 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Turakar <turakar23@gmail.com>
+Cc: nbd@other.debian.org
+Subject: Re: Setup NBD with TLS
+Message-ID: <Yt0ru9B4fSraI90p@pc220518.home.grep.be>
+References: <618b6ab5-e275-6573-e00d-aa62019089bb@gmail.com>
+ <0540e6c2-57c0-5c06-08e8-69be5b350201@gmail.com>
+ <abab8c6e-1bba-8d89-3cde-cda678d785a7@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <c4cf82073cccd574aa75b3a8e1f15748929c7621.camel@perches.com>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.176.73]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- kwepemm600009.china.huawei.com (7.193.23.164)
-X-CFilter-Loop: Reflected
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <abab8c6e-1bba-8d89-3cde-cda678d785a7@gmail.com>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <bf_zFwHseYE.A.yfF.qf32iB@bendel>
+Resent-Message-ID: <ik06m_k1hK.A.iiH.RvS3iB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2201
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2202
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,90 +85,102 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/809c7cb8-6602-8568-cd91-33281a6fb508@huawei.com
-Resent-Date: Sat, 23 Jul 2022 04:24:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/Yt0ru9B4fSraI90p@pc220518.home.grep.be
+Resent-Date: Sun, 24 Jul 2022 11:24:01 +0000 (UTC)
 
-Hi!
+Glad to hear everything is sorted.
 
-在 2022/07/23 11:12, Joe Perches 写道:
-> On Sat, 2022-07-23 at 10:15 +0800, Yu Kuai wrote:
->> Hi!
-> 
-> Hello.
-> 
->> 在 2022/07/20 19:46, Yu Kuai 写道:
->>> 在 2022/07/18 22:32, Joe Perches 写道:
->>>> On Mon, 2022-07-18 at 21:52 +0800, Yu Kuai wrote:
->>>>> 在 2022/07/06 17:33, Yu Kuai 写道:
->>>>>> From: Yu Kuai <yukuai3@huawei.com>
->>>>>>
->>>>>> commit 1243172d5894 ("nbd: use pr_err to output error message") tries
->>>>>> to define pr_fmt and use short pr_err() to output error message,
->>>>>> however, the definition is missed.
->>>>> friendly ping ...
->>>> []
->>>>>> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
->>>> []
->>>>>> @@ -44,6 +44,9 @@
->>>>>>     #include <linux/nbd-netlink.h>
->>>>>>     #include <net/genetlink.h>
->>>>>> +#undef pr_fmt
->>>>>> +#define pr_fmt(fmt) "nbd: " fmt
->>>>>> +
->>>> Typically, this #define is place before all #include lines
->>>> so there is no need for an #undef
->>
->> I tried to remove the #undef:
-> 
-> I'll repeat my message.
-> 
-> Move the #define before _any_ #include.
-> 
-> Also, there are some message that would need existing "nbd: " output
-> prefixes removed.
+Could you clarify how you managed to fix it in the end? I'm trying to
+figure out which part of the documentation is unclear, so we can clarify
+that for future users.
 
-Thanks for your explanation, I do miss that.
+On Wed, Jul 20, 2022 at 11:37:45AM +0200, Turakar wrote:
+>    Following the guide of nbdkit everything worked out.
+> 
+>    [1]https://libguestfs.org/nbdkit-tls.1.html
+> 
+>    On 16/07/2022 22:29, Turakar wrote:
+> 
+>    An addition: A similar error occurs if only use encryption and no
+>    authentication:
+> 
+>    $ nbd-client localhost /dev/nbd1 -N export -n -x
+>    Negotiation: ..Error: Read failed: Connection reset by peer
+>    E: received invalid negotiation magic 11567081237618425856 (expected
+>    1100100111001001)
+> 
+>    On 16/07/2022 14:40, Turakar wrote:
+> 
+>    Hello,
+> 
+>    I am currently trying to setup nbd-server/nbd-client with TLS
+>    authentication, but I ran into some difficult error messages. If this
+>    is the wrong list for support, please feel free to redirect me.
+> 
+>    I use one system (Debian 10) for both nbd-server and nbd-client for
+>    debugging, but want to move to separate hosts later. I used the
+>    following nbd-server config file:
+> 
+>    [generic]
+>           user = root
+>           group = root
+>           includedir = /etc/nbd-server/conf.d
+>           allowlist = true
+>    # TLS setup
+>           force_tls = true
+>           cacertfile = /etc/nbd-server/certificates/ca.cert.pem
+>           certfile = /etc/nbd-server/certificates/server.cert.pem
+>           keyfile = /etc/nbd-server/certificates/server.key.pem
+>    [export]
+>           exportname = /dev/system/nixos
+>           flush = true
+> 
+>    I created the certificates as follows:
+> 
+>    $ openssl genrsa -des3 -out ca.key 4096
+>    $ openssl req -new -x509 -days 36500 -key ca.key -out ca.cert.pem
+>    $ openssl genrsa -out server.key 4096
+>    $ openssl req -new -key server.key -out server.csr
+>    $ openssl x509 -req -days 36500 -in server.csr -CA ca.cert.pem -CAkey
+>    ca.key -CAcreateserial -out server.crt
+>    $ openssl genrsa -out client.key.pem 4096
+>    $ openssl req -new -key -client.key.pem -out client.csr
+>    $ openssl x509 -req -in client.csr -CA ca.cert.pem -CAkey ca.key
+>    -CAcreateserial -days 36500 -sha512 -out clien
+>    t.cert.pem
+> 
+>    And use the following command for testing the connection:
+> 
+>    $ nbd-client -l localhost -certfile
+>    /etc/nbd-server/certificates/client.cert.
+>    pem -keyfile /etc/nbd-server/certificates/client.key.pem -cacertfile
+>    /etc/nbd-server/certificates/ca.cert.pem -n
+>    Negotiation: ..
+>    Error: Reading magic from server: Connection reset by peer
+>    Exiting.
+> 
+>    Thereby, the server log says this:
+> 
+>    Jul 16 14:21:28 mini systemd[1]: Started LSB: Network Block Device
+>    server.
+>    Jul 16 14:21:30 mini nbd_server[26099]: Spawned a child process
+>    Jul 16 14:21:30 mini nbd_server[26099]: Child exited with 1
+> 
+>    Not that informative... Can someone of you spot the problem in my
+>    configuration?
+> 
+>    Remarks: If I set force_tls = False and do not use the certificates
+>    with nbd-client, it works fine. However, I need TLS encryption for my
+>    use case.
+> 
+>    Thank you and kind regards,
+>    Turakar
+> 
+> Referenties
+> 
+>    1. https://libguestfs.org/nbdkit-tls.1.html
 
-Kuai
-> ---
->   drivers/block/nbd.c | 8 +++++---
->   1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index f5d098a148cbf..222f26ac5e96a 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -11,6 +11,8 @@
->    * (part of code stolen from loop.c)
->    */
->   
-> +#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-> +
->   #include <linux/major.h>
->   
->   #include <linux/blkdev.h>
-> @@ -1950,8 +1952,8 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
->   			     test_bit(NBD_DISCONNECT_REQUESTED, &nbd->flags)) ||
->   			    !refcount_inc_not_zero(&nbd->refs)) {
->   				mutex_unlock(&nbd_index_mutex);
-> -				pr_err("nbd: device at index %d is going down\n",
-> -					index);
-> +				pr_err("device at index %d is going down\n",
-> +				       index);
->   				return -EINVAL;
->   			}
->   		}
-> @@ -1961,7 +1963,7 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
->   	if (!nbd) {
->   		nbd = nbd_dev_add(index, 2);
->   		if (IS_ERR(nbd)) {
-> -			pr_err("nbd: failed to add new device\n");
-> +			pr_err("failed to add new device\n");
->   			return PTR_ERR(nbd);
->   		}
->   	}
-> 
-> 
-> .
-> 
+-- 
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
 
