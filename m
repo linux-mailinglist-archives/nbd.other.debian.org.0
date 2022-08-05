@@ -2,79 +2,98 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAE17586E95
-	for <lists+nbd@lfdr.de>; Mon,  1 Aug 2022 18:34:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44B4E58A807
+	for <lists+nbd@lfdr.de>; Fri,  5 Aug 2022 10:26:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7F335204BE; Mon,  1 Aug 2022 16:34:33 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Aug  1 16:34:33 2022
-Old-Return-Path: <rjones@redhat.com>
+	id F02CB2052B; Fri,  5 Aug 2022 08:26:19 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug  5 08:26:19 2022
+Old-Return-Path: <manfred@colorfullife.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.0 required=4.0 tests=CHINA_PRODUCTS_BODY,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,FUZZY_OFFERS,LDOSUBSCRIBER,LDO_WHITELIST,RCVD_IN_DNSWL_LOW
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-9.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,TO_TOO_MANY,T_SCC_BODY_TEXT_LINE,
+	WORD_WITHOUT_VOWELS autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B199D204B0
-	for <lists-other-nbd@bendel.debian.org>; Mon,  1 Aug 2022 16:34:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 40B05204EA
+	for <lists-other-nbd@bendel.debian.org>; Fri,  5 Aug 2022 08:26:11 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.524 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CHINA_PRODUCTS_BODY=1, DKIMWL_WL_HIGH=-0.714,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	RCVD_IN_DNSWL_LOW=-0.7, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-4.99 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001, TO_TOO_MANY=1,
+	T_SCC_BODY_TEXT_LINE=-0.01, WORD_WITHOUT_VOWELS=1]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id kabUksEztDV4 for <lists-other-nbd@bendel.debian.org>;
-	Mon,  1 Aug 2022 16:34:18 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id B94A0204AB
-	for <nbd@other.debian.org>; Mon,  1 Aug 2022 16:34:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1659371653;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=l1B5bhd2ic48z2CEUN15rJhYeUpvE8evNHl6rrepG/U=;
-	b=EfQW5UoKVo6vGgyC1dduePIk5O1+SzcoY6D087913FeJ625eZW6/Aw3M+iioBrUVmyxQNq
-	t3/l2Ly3cwzxinHuPgktG/3wDYkA7KdIomuIAEgMevjFWeN4LI9wiqJa5zSTSlxxRm7dE5
-	xl/M0qv0qTz7c38r5zdMSCxpqqWLBrk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-587-kQ4iwNLAOECCoFknZW7YNg-1; Mon, 01 Aug 2022 12:34:12 -0400
-X-MC-Unique: kQ4iwNLAOECCoFknZW7YNg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AA6E53817A78
-	for <nbd@other.debian.org>; Mon,  1 Aug 2022 16:34:11 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.98])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 1C90C400DEF8;
-	Mon,  1 Aug 2022 16:34:10 +0000 (UTC)
-Date: Mon, 1 Aug 2022 17:34:10 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: libguestfs@redhat.com, nbd@other.debian.org
-Subject: ANNOUNCE: nbdkit 1.32 and libnbd 1.14 released
-Message-ID: <20220801163410.GY8021@redhat.com>
+	with ESMTP id M1uhq0znlgI6 for <lists-other-nbd@bendel.debian.org>;
+	Fri,  5 Aug 2022 08:26:05 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .colorfullife. - helo: .mail-ej1-x635.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com [IPv6:2a00:1450:4864:20::635])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id A3C692049C
+	for <nbd@other.debian.org>; Fri,  5 Aug 2022 08:26:01 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id gb36so3701024ejc.10
+        for <nbd@other.debian.org>; Fri, 05 Aug 2022 01:26:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=colorfullife-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=wfVbAncS7WlF/A72BpG5dEVApg68h3oEbY9bkWhBwIE=;
+        b=2KkupbfExSKDu3R6RNaAW7L3Tqyowj8s9ZYiZSdorwwawRVl1ZHb9WeLRBrxivNuLl
+         yBnqWfneQWaDS479UvTW4vAI767uZ/ej/m357WDKUuQwxz/AevLixHhhSXiDWB2ciJpn
+         bhX7+i2tRH2TbPFffIpHxvGJrJuydtg0Xc5Gs1fmd/Z57b4KMK14mATnvkBtRuzlRyBB
+         lmEzyIa5dxmZ6VYCU8LKDB8mV0i0xOOzuRklGoUy3LSi0uA/FrhyHilTUlN0dM4z3c44
+         BM+15CrQRw9HIGPLoHM5Dq9QJyu/BlfcCHqN1QPsfi2VZnpP9luEtv3zcq6M9s6O7buv
+         ub3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=wfVbAncS7WlF/A72BpG5dEVApg68h3oEbY9bkWhBwIE=;
+        b=V6HmlXfneE1s2egsFqO065UvHjD2ddzmdvJ11BW5S/IPZawERdkdrsxTyPlvmEcRom
+         npxWiskCh/tskNl0No7/6dbd0jwDcf5CoQKWaK+RrF/0gwDs3IV8r9QapWAnYTGjzizT
+         FsPmZNSOuvmPhCtg/n8CEyIBuY9Meb15obYVQV3T20lvyCB2/fa8ucJRDYty6P5QL1/p
+         WwT57tVvrZtYxv8Kmp5itUeHwLCt6rxTmPLfLVQUZepWLxEtTn0iT+cAm7szwD6FTcT9
+         FyKN2RN2teIvA0JWk/OEjDUt7K14zQCZZgNrlrMaeo95foWLvloJedfOR4e+xSD6V8rk
+         MB5g==
+X-Gm-Message-State: ACgBeo1R2D+ZrCaE0I4qb9tTH/gvXVkivJvD1WTWdnANIRO2/QxI7EO4
+	d6/1wbF7XO68Y3jOPOOmxx+Llg==
+X-Google-Smtp-Source: AA6agR5cU3O/WEoX6T3Bwgc5k1iFz1ITG9sK47aEsSHSnT7ZY2L6zu/3Pd6WPag1yX/D/0tc3m29HA==
+X-Received: by 2002:a17:907:69b0:b0:730:a1f0:63e7 with SMTP id ra48-20020a17090769b000b00730a1f063e7mr4460144ejc.364.1659687959091;
+        Fri, 05 Aug 2022 01:25:59 -0700 (PDT)
+Received: from localhost.localdomain (p200300d99703c2003e69dd231e074304.dip0.t-ipconnect.de. [2003:d9:9703:c200:3e69:dd23:1e07:4304])
+        by smtp.googlemail.com with ESMTPSA id dc2-20020a170906c7c200b007306df330e5sm1349720ejb.12.2022.08.05.01.25.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Aug 2022 01:25:58 -0700 (PDT)
+From: Manfred Spraul <manfred@colorfullife.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Federico Vaga <federico.vaga@vaga.pv.it>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <siyanteng@loongson.cn>,
+	Hu Haowen <src.res@email.cn>,
+	linux-doc@vger.kernel.org
+Cc: Josef Bacik <josef@toxicpanda.com>,
+	nbd@other.debian.org,
+	Manfred Spraul <manfred.spraul@de.bosch.com>
+Subject: [PATCH] Doc update: Correct magic values from nbd protocol, V2
+Date: Fri,  5 Aug 2022 10:25:32 +0200
+Message-Id: <20220805082532.55131-1-manfred@colorfullife.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <7HzxNhO0uPN.A.joB.ZCA6iB@bendel>
+Resent-Message-ID: <qONUcs5BL1N.A.TZH.rQN7iB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2207
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2208
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -84,320 +103,195 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20220801163410.GY8021@redhat.com
-Resent-Date: Mon,  1 Aug 2022 16:34:33 +0000 (UTC)
-
-nbdkit is a Network Block Device (NBD) server with stable plugin ABI
-and permissive license.  libnbd is an NBD client library.
-
-I'm pleased to announce the latest stable releases of both projects:
-nbdkit 1.32.0 and libnbd 1.14.0.  You can download both from the
-download directories here:
-
-https://download.libguestfs.org/nbdkit/
-https://download.libguestfs.org/libnbd/
-
-Release notes are online here and attached below:
-
-https://libguestfs.org/nbdkit-release-notes-1.32.1.html
-https://libguestfs.org/libnbd-release-notes-1.14.1.html
-
-Thanks to all those who contributed to these releases: Alan Somers,
-Eric Blake, Laszlo Ersek, Martin Kletzander, Nikolaus Rath, and Nir
-Soffer.
-
-Rich.
-
-
-----------------------------------------------------------------------
-
-       nbdkit-release-notes-1.32 - release notes for nbdkit 1.32
-
-DESCRIPTION
-       These are the release notes for nbdkit stable release 1.32.  This
-       describes the major changes since 1.30.
-
-       nbdkit 1.32.0 was released on 1 August 2022.
-
-   Security
-       There were no security issues found.  All past security issues and
-       information about how to report new ones can be found in
-       nbdkit-security(1).
-
-   Plugins
-       nbdkit-ssh-plugin(1) has new "create=(true|false)", "create-size" and
-       "create-mode" parameters to allow remote files to be created.
-
-       nbdkit-S3-plugin(1) was largely rewritten and should have better
-       performance and compatibility.  It also supports
-       splitting/concatenating multiple S3 objects into one virtual disk.
-       (Nikolaus Rath)
-
-   Filters
-       New nbdkit-luks-filter(1) allows you to open, read and write LUKSv1
-       disk images.  It is compatible with qemu and dm-crypt.
-
-       New nbdkit-scan-filter(1) which simply scans across the disk issuing
-       prefetches.
-
-       nbdkit-readahead-filter(1) has been completely rewritten so now it uses
-       prefetching from a parallel thread.  The old readahead filter was
-       deprecated, but if you are using it you should carefully read the new
-       documentation because it may require changes.
-
-       nbdkit-stats-filter(1) now summarises block size and alignment of
-       requests (Nikolaus Rath).
-
-       nbdkit-blocksize-filter(1) now handles parallel writes without losing
-       writes because of overlapping read-modify-write cycles.  If you are
-       using the blocksize filter it is recommended to upgrade.  (Eric Blake)
-
-       nbdkit-rate-filter(1) has a new "burstiness" parameter allowing the
-       bucket capacity to be adjusted, which helps with smoothing out large,
-       lumpy client requests.
-
-   Language bindings
-       Add "nbdkit.parse_size()" binding for Python (Nikolaus Rath).
-
-       Compatibility with OCaml 4.14.
-
-       Compatibility with Perl 5.36.
-
-   Server
-       kTLS should now work (transparently) when available in the kernel and
-       GnuTLS.  Use of kTLS will be indicated in debug output.  (Daiki Ueno,
-       František Krenželok)
-
-   Bug fixes
-       nbdkit-sh-plugin(3) now handles inline scripts correctly on non-glibc
-       platforms (Martin Kletzander).
-
-       Catch the case where nbdkit ends up linked to OpenSSL (because of a
-       transient dependency through GnuTLS) which broke nbdkit-vddk-plugin(1).
-       For more details see https://bugzilla.redhat.com/2057490.
-
-       Fix memory leak in nbdkit-python-plugin(3) which would lead to large
-       amounts of memory being leaked if your plugin implemented
-       "list_exports" or "extents" callbacks (Eric Blake).
-
-       The nbdkit-curl-plugin(1) cookie/header scripts feature now generates
-       an error properly if the shell script fails.
-
-       Fix further "phone home" messages in nbdkit-vddk-plugin(1) (thanks Ming
-       Xie).
-
-       Improve error message from nbdkit-vddk-plugin(1) when the thumbprint
-       parameter is wrong (Laszlo Ersek).
-
-       Fix "NBDKIT_CACHE_EMULATE" and "NBDKIT_ZERO_EMULATE" in filters.  These
-       could cause assertion failures before.  (Eric Blake)
-
-       Fix nbdkit-protect-filter(1) test if dependencies are missing (thanks
-       Jim Fehlig).
-
-       Fix a bounds error in nbdkit-checkwrite-filter(1).
-
-       The server will now fail and exit early if the --tls-verify-peer option
-       is used on platforms which do not support it.  Previously it would only
-       fail when a client connected using TLS.
-
-       Various bugs found by Coverity were analysed and fixed (Eric Blake).
-
-   Documentation
-       Document how to write plugins and filters in C++.  This has always been
-       possible, but was never documented before.
-
-       Document how to run nbdkit from inetd or xinetd superservers.
-
-       Fix how verbatim paragraphs in the documentation are rendered in HTML.
-
-       Document how to use nbdkit + TLS with nbd-client(1).
-
-   Tests
-       Various enhancements to fuzzing including supporting AFL++, AFL++
-       clang-LTO.  Add "./configure --disable-linker-script" which is needed
-       to use ASAN, and document how to use ASAN when fuzzing.
-
-       Improve runtime of linuxdisk test (Eric Blake).
-
-       Add interoperability tests with nbd-client(1), the Linux kernel client,
-       including TLS support.
-
-   Build
-       Add GitLab continuous integration (CI) at
-       https://gitlab.com/nbdkit/nbdkit/-/pipelines and many miscellaneous
-       build fixes (Martin Kletzander).
-
-       There are now "string_vector" and "const_string_vector" defined under
-       common/utils and used consistently throughout the code.
-
-       Microsoft Visual Studio Code formatting settings are available (in
-       .vscode/) (Nikolaus Rath).
-
-       Remove scripts/vddk-open.sh.  It is now available as a separate
-       project: https://gitlab.com/nbdkit/vddk-remote
-
-       "ARRAY_SIZE" macro added to simplify static array sizing (thanks Laszlo
-       Ersek).
-
-SEE ALSO
-       nbdkit(1).
-
-AUTHORS
-       Authors of nbdkit 1.32:
-
-       Alan Somers
-       Eric Blake
-       Laszlo Ersek
-       Martin Kletzander
-       Nikolaus Rath
-       Richard W.M. Jones
-
-COPYRIGHT
-       Copyright (C) 2013-2022 Red Hat Inc.
-
-LICENSE
-       Redistribution and use in source and binary forms, with or without
-       modification, are permitted provided that the following conditions are
-       met:
-
-       •   Redistributions of source code must retain the above copyright
-           notice, this list of conditions and the following disclaimer.
-
-       •   Redistributions in binary form must reproduce the above copyright
-           notice, this list of conditions and the following disclaimer in the
-           documentation and/or other materials provided with the
-           distribution.
-
-       •   Neither the name of Red Hat nor the names of its contributors may
-           be used to endorse or promote products derived from this software
-           without specific prior written permission.
-
-       THIS SOFTWARE IS PROVIDED BY RED HAT AND CONTRIBUTORS ''AS IS'' AND ANY
-       EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-       IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-       PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL RED HAT OR CONTRIBUTORS BE
-       LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-       CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-       SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
-       BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-       WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-       OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-       ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-----------------------------------------------------------------------
-
-       libnbd-release-notes-1.14 - release notes for libnbd 1.14
-
-DESCRIPTION
-       These are the release notes for libnbd stable release 1.14.  This
-       describes the major changes since 1.12.
-
-       libnbd 1.14.0 was released on 1 August 2022.
-
-   Security
-       No security issues were found in this release.
-
-       If you find a security issue, please read SECURITY in the source
-       (online here: https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY).
-       To find out about previous security issues in libnbd, see
-       libnbd-security(3).
-
-   New APIs
-       No new APIs were added in this release.
-
-   Enhancements to existing APIs
-       Optimizations to nbd_pread_structured(3) (Eric Blake).
-
-       Many performance enhancements in the Python bindings: "nbd.pread" now
-       avoids an extra memory allocation and copy.  Buffers can now be passed
-       to "nbd.Buffer.from_bytearray".  New methods
-       "nbd.Buffer.{to,from}_buffer" allow control over copying and sharing
-       "nbd.Buffer".  Any buffer-like object can be used in
-       "nbd.aio_{pread,pwrite}".  "len(nbd.Buffer(n))" now works.  Improve
-       error messages when the wrong types are passed to several APIs.  Fix
-       usage of "PyGILState".  (Eric Blake)
-
-       Golang "AioBuffer" now calls panic on invalid usage (Nir Soffer).
-
-       In golang tests, use "GOTRACEBACK=crash" so we get full core dumps on
-       failures.
-
-       kTLS should now work (transparently) when available in the kernel and
-       GnuTLS.  Use of kTLS will be indicated in debug output.  (Daiki Ueno,
-       František Krenželok)
-
-   Tools
-       New nbddump(1) tool which can efficiently hexdump the contents of an
-       NBD server.
-
-       nbdcopy(1) now obeys the NBD server minimum/preferred block size when
-       copying, which should make it more efficient and avoids issues with
-       some qemu-nbd configurations where the minimum block size must be
-       obeyed for correct operation.
-
-   Tests
-       New tests for "nbd+vsock://" URI support.
-
-   Other improvements and bug fixes
-       Fixed rare TLS deadlock when reading from slow servers, and support for
-       clean shutdown when connecting to qemu-nbd over TLS (thanks Michael
-       Ablassmeier).
-
-       The library now uses the GnuTLS flag "GNUTLS_NO_SIGNAL" (if available)
-       which ensures that TLS connections should not cause the main program to
-       exit with "SIGPIPE" in certain cases of server failure.  (Libnbd has
-       long used "MSG_NOSIGNAL" on non-TLS connections which has a similar
-       effect.)
-
-       Various enhancements to fuzzing were made, including support for AFL++
-       clang-LTO mode, ASAN, allowing seed test cases to be captured, and
-       extended testing of APIs.
-
-       Tests were fixed so they should pass on RHEL 7 and FreeBSD.
-
-   Documentation
-       No changes in this release.
-
-   Build
-       "ARRAY_SIZE" macro added to simplify static array sizing (thanks Laszlo
-       Ersek).
-
-       Various errors found by Coverity were fixed.
-
-SEE ALSO
-       libnbd(3).
-
-AUTHORS
-       Eric Blake
-       Nir Soffer
-       Richard W.M. Jones
-
-COPYRIGHT
-       Copyright (C) 2019-2022 Red Hat Inc.
-
-LICENSE
-       This library is free software; you can redistribute it and/or modify it
-       under the terms of the GNU Lesser General Public License as published
-       by the Free Software Foundation; either version 2 of the License, or
-       (at your option) any later version.
-
-       This library is distributed in the hope that it will be useful, but
-       WITHOUT ANY WARRANTY; without even the implied warranty of
-       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-       Lesser General Public License for more details.
-
-       You should have received a copy of the GNU Lesser General Public
-       License along with this library; if not, write to the Free Software
-       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-       02110-1301 USA
-
-
-
-
+List-Archive: https://lists.debian.org/msgid-search/20220805082532.55131-1-manfred@colorfullife.com
+Resent-Date: Fri,  5 Aug 2022 08:26:19 +0000 (UTC)
+
+From: Manfred Spraul <manfred.spraul@de.bosch.com>
+
+The magic number documentation refers to old values for
+NBD_REQUEST_MAGIC and NBD_REPLY_MAGIC: The documented values were used
+until Linux 2.1.116pre2.
+
+Thus:
+- Update the documentation.
+- Update the header file: The authorative source for the nbd protocol
+  is proto.md from the nbd package, thus mention this.
+- Remove the historic values from the header file.
+  The historic values are still documented in proto.md from the nbd
+  package.
+
+Removing the historic values is intentional:
+The values are stale for > 20 years, and this was not noticed.
+My guess is that everyone used grep to confirm that the values are
+still in use - and the historic values resulted that there were
+still hits with grep, ...
+
+Signed-off-by: Manfred Spraul <manfred.spraul@de.bosch.com>
+Link: https://github.com/NetworkBlockDevice/nbd/commit/107356ee528eb30744d518a8ac1cb6d379da4868
+Link: https://lore.kernel.org/all/20220318200446.14648-1-manfred@colorfullife.com/
+Link: https://lists.debian.org/nbd/2022/01/msg00039.html
+---
+V2:
+- more links added, especially a link to the commit for proto.md
+- typo corrected in the commit summary
+
+@Jonathan:
+I've created one patch that updates the English text and the 3 translations
+that contain magic-number.rst.
+Is this the right approach? I could also split the patch into 4 changes.
+
+ Documentation/process/magic-number.rst                    | 4 ++--
+ Documentation/translations/it_IT/process/magic-number.rst | 4 ++--
+ Documentation/translations/zh_CN/process/magic-number.rst | 4 ++--
+ Documentation/translations/zh_TW/process/magic-number.rst | 4 ++--
+ include/uapi/linux/nbd.h                                  | 3 ++-
+ 5 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/Documentation/process/magic-number.rst b/Documentation/process/magic-number.rst
+index f5ba36e96461..133ecfa10607 100644
+--- a/Documentation/process/magic-number.rst
++++ b/Documentation/process/magic-number.rst
+@@ -96,11 +96,11 @@ USB_SERIAL_PORT_MAGIC 0x7301           usb_serial_port          ``drivers/usb/se
+ CG_MAGIC              0x00090255       ufs_cylinder_group       ``include/linux/ufs_fs.h``
+ LSEMAGIC              0x05091998       lse                      ``drivers/fc4/fc.c``
+ RIEBL_MAGIC           0x09051990                                ``drivers/net/atarilance.c``
+-NBD_REQUEST_MAGIC     0x12560953       nbd_request              ``include/linux/nbd.h``
+ RED_MAGIC2            0x170fc2a5       (any)                    ``mm/slab.c``
+ BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/net/baycom_epp.c``
+ ISDN_X25IFACE_MAGIC   0x1e75a2b9       isdn_x25iface_proto_data ``drivers/isdn/isdn_x25iface.h``
+ ECP_MAGIC             0x21504345       cdkecpsig                ``include/linux/cdk.h``
++NBD_REQUEST_MAGIC     0x25609513       nbd_request              ``include/uapi/linux/nbd.h``
+ LSOMAGIC              0x27091997       lso                      ``drivers/fc4/fc.c``
+ LSMAGIC               0x2a3b4d2a       ls                       ``drivers/fc4/fc.c``
+ WANPIPE_MAGIC         0x414C4453       sdla_{dump,exec}         ``include/linux/wanpipe.h``
+@@ -129,12 +129,12 @@ M3_CARD_MAGIC         0x646e6f50       m3_card                  ``sound/oss/maes
+ FW_HEADER_MAGIC       0x65726F66       fw_header                ``drivers/atm/fore200e.h``
+ SLOT_MAGIC            0x67267321       slot                     ``drivers/hotplug/cpqphp.h``
+ SLOT_MAGIC            0x67267322       slot                     ``drivers/hotplug/acpiphp.h``
++NBD_REPLY_MAGIC       0x67446698       nbd_reply                ``include/uapi/linux/nbd.h``
+ LO_MAGIC              0x68797548       nbd_device               ``include/linux/nbd.h``
+ M3_STATE_MAGIC        0x734d724d       m3_state                 ``sound/oss/maestro3.c``
+ VMALLOC_MAGIC         0x87654320       snd_alloc_track          ``sound/core/memory.c``
+ KMALLOC_MAGIC         0x87654321       snd_alloc_track          ``sound/core/memory.c``
+ PWC_MAGIC             0x89DC10AB       pwc_device               ``drivers/usb/media/pwc.h``
+-NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/linux/nbd.h``
+ ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/eni.h``
+ CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/coda_fs_i.h``
+ YAM_MAGIC             0xF10A7654       yam_port                 ``drivers/net/hamradio/yam.c``
+diff --git a/Documentation/translations/it_IT/process/magic-number.rst b/Documentation/translations/it_IT/process/magic-number.rst
+index f452fafb1e84..17401994f2e8 100644
+--- a/Documentation/translations/it_IT/process/magic-number.rst
++++ b/Documentation/translations/it_IT/process/magic-number.rst
+@@ -102,11 +102,11 @@ USB_SERIAL_PORT_MAGIC 0x7301           usb_serial_port          ``drivers/usb/se
+ CG_MAGIC              0x00090255       ufs_cylinder_group       ``include/linux/ufs_fs.h``
+ LSEMAGIC              0x05091998       lse                      ``drivers/fc4/fc.c``
+ RIEBL_MAGIC           0x09051990                                ``drivers/net/atarilance.c``
+-NBD_REQUEST_MAGIC     0x12560953       nbd_request              ``include/linux/nbd.h``
+ RED_MAGIC2            0x170fc2a5       (any)                    ``mm/slab.c``
+ BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/net/baycom_epp.c``
+ ISDN_X25IFACE_MAGIC   0x1e75a2b9       isdn_x25iface_proto_data ``drivers/isdn/isdn_x25iface.h``
+ ECP_MAGIC             0x21504345       cdkecpsig                ``include/linux/cdk.h``
++NBD_REQUEST_MAGIC     0x25609513       nbd_request              ``include/uapi/linux/nbd.h``
+ LSOMAGIC              0x27091997       lso                      ``drivers/fc4/fc.c``
+ LSMAGIC               0x2a3b4d2a       ls                       ``drivers/fc4/fc.c``
+ WANPIPE_MAGIC         0x414C4453       sdla_{dump,exec}         ``include/linux/wanpipe.h``
+@@ -135,12 +135,12 @@ M3_CARD_MAGIC         0x646e6f50       m3_card                  ``sound/oss/maes
+ FW_HEADER_MAGIC       0x65726F66       fw_header                ``drivers/atm/fore200e.h``
+ SLOT_MAGIC            0x67267321       slot                     ``drivers/hotplug/cpqphp.h``
+ SLOT_MAGIC            0x67267322       slot                     ``drivers/hotplug/acpiphp.h``
++NBD_REPLY_MAGIC       0x67446698       nbd_reply                ``include/uapi/linux/nbd.h``
+ LO_MAGIC              0x68797548       nbd_device               ``include/linux/nbd.h``
+ M3_STATE_MAGIC        0x734d724d       m3_state                 ``sound/oss/maestro3.c``
+ VMALLOC_MAGIC         0x87654320       snd_alloc_track          ``sound/core/memory.c``
+ KMALLOC_MAGIC         0x87654321       snd_alloc_track          ``sound/core/memory.c``
+ PWC_MAGIC             0x89DC10AB       pwc_device               ``drivers/usb/media/pwc.h``
+-NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/linux/nbd.h``
+ ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/eni.h``
+ CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/coda_fs_i.h``
+ YAM_MAGIC             0xF10A7654       yam_port                 ``drivers/net/hamradio/yam.c``
+diff --git a/Documentation/translations/zh_CN/process/magic-number.rst b/Documentation/translations/zh_CN/process/magic-number.rst
+index 42f0635ca70a..1b376fe087b5 100644
+--- a/Documentation/translations/zh_CN/process/magic-number.rst
++++ b/Documentation/translations/zh_CN/process/magic-number.rst
+@@ -86,11 +86,11 @@ CG_MAGIC              0x00090255       ufs_cylinder_group       ``include/linux/
+ LSEMAGIC              0x05091998       lse                      ``drivers/fc4/fc.c``
+ GDTIOCTL_MAGIC        0x06030f07       gdth_iowr_str            ``drivers/scsi/gdth_ioctl.h``
+ RIEBL_MAGIC           0x09051990                                ``drivers/net/atarilance.c``
+-NBD_REQUEST_MAGIC     0x12560953       nbd_request              ``include/linux/nbd.h``
+ RED_MAGIC2            0x170fc2a5       (any)                    ``mm/slab.c``
+ BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/net/baycom_epp.c``
+ ISDN_X25IFACE_MAGIC   0x1e75a2b9       isdn_x25iface_proto_data ``drivers/isdn/isdn_x25iface.h``
+ ECP_MAGIC             0x21504345       cdkecpsig                ``include/linux/cdk.h``
++NBD_REQUEST_MAGIC     0x25609513       nbd_request              ``include/uapi/linux/nbd.h``
+ LSOMAGIC              0x27091997       lso                      ``drivers/fc4/fc.c``
+ LSMAGIC               0x2a3b4d2a       ls                       ``drivers/fc4/fc.c``
+ WANPIPE_MAGIC         0x414C4453       sdla_{dump,exec}         ``include/linux/wanpipe.h``
+@@ -119,12 +119,12 @@ M3_CARD_MAGIC         0x646e6f50       m3_card                  ``sound/oss/maes
+ FW_HEADER_MAGIC       0x65726F66       fw_header                ``drivers/atm/fore200e.h``
+ SLOT_MAGIC            0x67267321       slot                     ``drivers/hotplug/cpqphp.h``
+ SLOT_MAGIC            0x67267322       slot                     ``drivers/hotplug/acpiphp.h``
++NBD_REPLY_MAGIC       0x67446698       nbd_reply                ``include/uapi/linux/nbd.h``
+ LO_MAGIC              0x68797548       nbd_device               ``include/linux/nbd.h``
+ M3_STATE_MAGIC        0x734d724d       m3_state                 ``sound/oss/maestro3.c``
+ VMALLOC_MAGIC         0x87654320       snd_alloc_track          ``sound/core/memory.c``
+ KMALLOC_MAGIC         0x87654321       snd_alloc_track          ``sound/core/memory.c``
+ PWC_MAGIC             0x89DC10AB       pwc_device               ``drivers/usb/media/pwc.h``
+-NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/linux/nbd.h``
+ ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/eni.h``
+ CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/coda_fs_i.h``
+ DPMEM_MAGIC           0xc0ffee11       gdt_pci_sram             ``drivers/scsi/gdth.h``
+diff --git a/Documentation/translations/zh_TW/process/magic-number.rst b/Documentation/translations/zh_TW/process/magic-number.rst
+index ae321a9aaece..ff385a369c7b 100644
+--- a/Documentation/translations/zh_TW/process/magic-number.rst
++++ b/Documentation/translations/zh_TW/process/magic-number.rst
+@@ -89,11 +89,11 @@ CG_MAGIC              0x00090255       ufs_cylinder_group       ``include/linux/
+ LSEMAGIC              0x05091998       lse                      ``drivers/fc4/fc.c``
+ GDTIOCTL_MAGIC        0x06030f07       gdth_iowr_str            ``drivers/scsi/gdth_ioctl.h``
+ RIEBL_MAGIC           0x09051990                                ``drivers/net/atarilance.c``
+-NBD_REQUEST_MAGIC     0x12560953       nbd_request              ``include/linux/nbd.h``
+ RED_MAGIC2            0x170fc2a5       (any)                    ``mm/slab.c``
+ BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/net/baycom_epp.c``
+ ISDN_X25IFACE_MAGIC   0x1e75a2b9       isdn_x25iface_proto_data ``drivers/isdn/isdn_x25iface.h``
+ ECP_MAGIC             0x21504345       cdkecpsig                ``include/linux/cdk.h``
++NBD_REQUEST_MAGIC     0x25609513       nbd_request              ``include/uapi/linux/nbd.h``
+ LSOMAGIC              0x27091997       lso                      ``drivers/fc4/fc.c``
+ LSMAGIC               0x2a3b4d2a       ls                       ``drivers/fc4/fc.c``
+ WANPIPE_MAGIC         0x414C4453       sdla_{dump,exec}         ``include/linux/wanpipe.h``
+@@ -122,12 +122,12 @@ M3_CARD_MAGIC         0x646e6f50       m3_card                  ``sound/oss/maes
+ FW_HEADER_MAGIC       0x65726F66       fw_header                ``drivers/atm/fore200e.h``
+ SLOT_MAGIC            0x67267321       slot                     ``drivers/hotplug/cpqphp.h``
+ SLOT_MAGIC            0x67267322       slot                     ``drivers/hotplug/acpiphp.h``
++NBD_REPLY_MAGIC       0x67446698       nbd_reply                ``include/uapi/linux/nbd.h``
+ LO_MAGIC              0x68797548       nbd_device               ``include/linux/nbd.h``
+ M3_STATE_MAGIC        0x734d724d       m3_state                 ``sound/oss/maestro3.c``
+ VMALLOC_MAGIC         0x87654320       snd_alloc_track          ``sound/core/memory.c``
+ KMALLOC_MAGIC         0x87654321       snd_alloc_track          ``sound/core/memory.c``
+ PWC_MAGIC             0x89DC10AB       pwc_device               ``drivers/usb/media/pwc.h``
+-NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/linux/nbd.h``
+ ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/eni.h``
+ CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/coda_fs_i.h``
+ DPMEM_MAGIC           0xc0ffee11       gdt_pci_sram             ``drivers/scsi/gdth.h``
+diff --git a/include/uapi/linux/nbd.h b/include/uapi/linux/nbd.h
+index 20d6cc91435d..88752b20e6c8 100644
+--- a/include/uapi/linux/nbd.h
++++ b/include/uapi/linux/nbd.h
+@@ -11,6 +11,8 @@
+  *            Cleanup PARANOIA usage & code.
+  * 2004/02/19 Paul Clements
+  *            Removed PARANOIA, plus various cleanup and comments
++ *
++ * See doc/proto.md of the nbd package for more details on the protocol.
+  */
+ 
+ #ifndef _UAPILINUX_NBD_H
+@@ -63,7 +65,6 @@ enum {
+ 
+ #define NBD_REQUEST_MAGIC 0x25609513
+ #define NBD_REPLY_MAGIC 0x67446698
+-/* Do *not* use magics: 0x12560953 0x96744668. */
+ 
+ /*
+  * This is the packet used for communication between client and
 -- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-nbdkit - Flexible, fast NBD server with plugins
-https://gitlab.com/nbdkit/nbdkit
+2.37.1
 
