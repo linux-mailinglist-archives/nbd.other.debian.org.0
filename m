@@ -1,115 +1,113 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id E34885A5BDD
-	for <lists+nbd@lfdr.de>; Tue, 30 Aug 2022 08:31:59 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C8855A7199
+	for <lists+nbd@lfdr.de>; Wed, 31 Aug 2022 01:18:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9AABE20E21; Tue, 30 Aug 2022 06:31:54 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug 30 06:31:54 2022
-Old-Return-Path: <Nikolaus@rath.org>
+	id E38C721090; Tue, 30 Aug 2022 23:18:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug 30 23:18:12 2022
+Old-Return-Path: <bernd.schubert@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
-	LDOSUBSCRIBER,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-0.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,MURPHY_DRUGS_REL8,
+	NICE_REPLY_A,RCVD_IN_DNSWL_LOW,T_SCC_BODY_TEXT_LINE autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DA67A203B4
-	for <lists-other-nbd@bendel.debian.org>; Tue, 30 Aug 2022 06:31:43 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EBF2E21085
+	for <lists-other-nbd@bendel.debian.org>; Tue, 30 Aug 2022 23:02:34 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.788 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.79 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FREEMAIL_FROM=0.001, MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001,
+	RCVD_IN_DNSWL_LOW=-0.7, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id UAqA9nzuuitr for <lists-other-nbd@bendel.debian.org>;
-	Tue, 30 Aug 2022 06:31:39 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .rath. - helo: .out1-smtp.messagingengine. - helo-domain: .messagingengine.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
+	with ESMTP id fos3awZg_qTT for <lists-other-nbd@bendel.debian.org>;
+	Tue, 30 Aug 2022 23:02:25 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .fastmail. - helo: .wout5-smtp.messagingengine. - helo-domain: .messagingengine.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 18210203B2
-	for <nbd@other.debian.org>; Tue, 30 Aug 2022 06:31:38 +0000 (UTC)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
-	by mailout.nyi.internal (Postfix) with ESMTP id 514D85C013F;
-	Tue, 30 Aug 2022 02:31:35 -0400 (EDT)
+	by bendel.debian.org (Postfix) with ESMTPS id A0B6220FBA
+	for <nbd@other.debian.org>; Tue, 30 Aug 2022 23:02:24 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailout.west.internal (Postfix) with ESMTP id 6D15F320046E;
+	Tue, 30 Aug 2022 19:02:19 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute5.internal (MEProxy); Tue, 30 Aug 2022 02:31:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rath.org; h=cc
-	:content-transfer-encoding:content-type:date:date:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1661841095; x=1661927495; bh=zf7fDwcJn7
-	WQq9ptrk6vQ3Oilf6zxTV8H8hk70D5BqI=; b=e58Zb/gLO9PQ6EDsia+A+VBdJ0
-	ehdK9ReS0MvLfIzZVOj5qOcDl/xNhDy25Ch59l4t6bJTYBW6v1JYQgkzNI1BmLdK
-	CUi7hIIdroklr683emuuM+mUmVy8/DHbCkzZmjwBniVOR2hphCZJsnp9DyrfBBmJ
-	rCMtg/qbPF7Ye3QMb2RXdb5hGnN3A6H1bFhJhiAgc8NeHENN2WXsV9UGwL+vMngW
-	YIfNAJXrhxqgyu2S3cxO9SyAlYGEbQCbDFmz5qMFe0T8q0QIUAF0cAEbNp0JzbL3
-	K74fi/7Brh7cqkmALXh/Pke+3xfATdylygySL23kDLWhwqmTPx2DivzqVFyA==
+  by compute2.internal (MEProxy); Tue, 30 Aug 2022 19:02:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm1; t=1661900538; x=
+	1661986938; bh=FAoFi3hwBHOiUW2nBoAPQnw2f0ldWXGjO1yYq/Qibu8=; b=a
+	tOaDeI+zKOsR/4ivZ8vYguRw/IK2VHxeq/PDeljtuz4LmKmVjDQckmT2T5NL61Zj
+	W+m4/2V7/ZuArCxFqHFMLGChK9LHTomprmdGMLK8AVem5s+JJfSUdMYYhJllYW46
+	zFjHUtyZctvQJOfwOVz/KcgL3wwEwMW6IdyvD74DHlUq2B7pfI32As1jHgkMo40Y
+	4QykVgfy2Ihaj7+nFnodNdjAzREEQJYyVm7vxLjjHByR8SlHeRrbxrJj/Eor92f2
+	bPZ89FNBOTonhlmNe8bCnTrt17ZPMulaFQ1NoCpzCuOhnvnd5C4f8oc+WkS3DLoF
+	/NKlQEQDt6EBgqVqZFz4w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-transfer-encoding:content-type
 	:date:date:feedback-id:feedback-id:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1661841095; x=1661927495; bh=zf7fDwcJn7WQq9ptrk6vQ3Oilf6z
-	xTV8H8hk70D5BqI=; b=QTj4+sUI3qHyJ2H8H2Fze/OSBuXyQJ/2oBF33tA4YKIW
-	9ffmZq9K+tW/bCZrrw5kav5vy0OcFvfxg7T7Wh4v8glS+tlIsfnYXUlx4FWnbOuC
-	vqqX7mOUHJHU/kD9uZMz1HxRKi6MAIR0IUXhAohSBHCjfHvs1QqiTdDAAtH5s85Y
-	jdC+69MS/j7jwJQgsjUNyELHyhlZjDHL4e4P7PDiR3q0oVRYi4CQKLOS4DaNdF0r
-	WvTF/+I8PMWRISWd8wZobKNufRosdefRfYMF5E8NUXFhygir6z0kEWB8CdZwe5Df
-	gv3xMJeJ5VUx6rupx2rqoNPREHcoBwaXY8/P++M/eQ==
-X-ME-Sender: <xms:xq4NY3RHR2R6ORPKgcLa0_k9gr500YSLrXia80HFwoSskWAKOOmIxQ>
-    <xme:xq4NY4zAcXsZrPdKXi2KfWKNYrrG-3djSdmKuy_qhVPQXZjRgIIUkgDK0cJuuOz24
-    JvkByFRtCOwNzjn>
-X-ME-Received: <xmr:xq4NY80b3aJSUcB8HI-OpG5knH_qMBkhFIKaJuoVYwj1UGS_GzdhKKpqpajUlKdV8iuT8CTS4oo>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdekvddguddtlecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvffufffkfgggtgfgsehtqhdttddtreejnecuhfhrohhmpefpihhkohhl
-    rghushcutfgrthhhuceopfhikhholhgruhhssehrrghthhdrohhrgheqnecuggftrfgrth
-    htvghrnhepfeethffgjefhleekudeileduueffudevvdevfeekvedtveegveefjefgvdeu
-    tdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheppf
-    hikhholhgruhhssehrrghthhdrohhrgh
-X-ME-Proxy: <xmx:xq4NY3Bw_qq8HFpa_SAt---dEacfX6dicYHXx9ERpJwse4y_KZpZzg>
-    <xmx:xq4NYwhE3moWoJgL64lvgdq72eiw-hSLmOq2-wzb5aCe5Fg6AG-xtA>
-    <xmx:xq4NY7rDCFok2xhLbkb5t0CXZmp3fXJLDl39khn2Qp-gMdISF-F81g>
-    <xmx:x64NY6b2JYg44_Z3aSBf9uX1aDztdvm5ebOERuRCnaaPiM-qK24u0w>
-Feedback-ID: i53a843ae:Fastmail
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm1; t=1661900538; x=1661986938; bh=F
+	AoFi3hwBHOiUW2nBoAPQnw2f0ldWXGjO1yYq/Qibu8=; b=P7V47ltpe6RKcNxcF
+	moF5hTSa7UPuKrp/mydPaEHgr+fzuN3jD25OenR6rFAwNEy0mYheS2tPwgT2n37y
+	XSWxiTRuNQOqUzhu2i8bCn0TGAd9R+xld9M8u7KROKqhENxJDoO42uUSqD9qx2aI
+	nGq37v2eEBXC3JqnS5Pt33bpUftL3Eidd56ARWiOCRhhL6m6APho9vnK2vm0iMyb
+	xvmDtit6IqJN6380PIL65WOsjnfAkTfdrT+sgG1AB/U5aELb3TM0unbgROG5SFTO
+	wdW6rlxrP0kHZ/G+iq+utRo78whZrHd5CRbpcWZ0lb+jsmxXv7YZNO4L+vSxuRmw
+	8gHaQ==
+X-ME-Sender: <xms:-pYOYwDhe6dDsyt23467nUdEOjS5UC9nQj56EaDy4DTFg5wmL9hq6w>
+    <xme:-pYOYyjp2k9U3JihM6Y3wR-rlkERS8tAGOrlLlH9NoUYuFdiclQM4af2T9bb_UQu3
+    RfYlAdNl-wI0BK5>
+X-ME-Received: <xmr:-pYOYzmO70WkRZ3Ix32rIe922bEIuW2c1QYlqAn9AAJWon8OwnS_gvwew34U3WAkhe0-FrmkaKXFWgTtKOUBo9MzT-_CFGNGwrutqxOJsq_g3me_U5hG>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdekgedgudekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepkfffgggfuffvfhfhjggtgfesthejredttdefjeenucfhrhhomhepuegvrhhn
+    ugcuufgthhhusggvrhhtuceosggvrhhnugdrshgthhhusggvrhhtsehfrghsthhmrghilh
+    drfhhmqeenucggtffrrghtthgvrhhnpefhiedtvdffkeelkedtkefhhedtgeetjeekgedv
+    gfekteffhfefkedvleduueeuveenucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdhnrg
+    hrkhhivhgvrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghi
+    lhhfrhhomhepsggvrhhnugdrshgthhhusggvrhhtsehfrghsthhmrghilhdrfhhm
+X-ME-Proxy: <xmx:-pYOY2wwNtBf_hM7ZCkoy7HrLgya_0oSvYnOWV7yBlWubPaGYjjmTg>
+    <xmx:-pYOY1RqZ94loBuoGouUXBW6LmGgy9POf3Qhd8611yaD4FrTmxOffg>
+    <xmx:-pYOYxZa5vkKp3oOiBhb3wUJRu7AYjxKqzttTI3IkQRmoGhhYQ6pUA>
+    <xmx:-pYOYwfuTS18SXrkgus-YqEkCnuuS0EKda7Swb94ecgEAbLLh8wS0g>
+Feedback-ID: id8a24192:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 30 Aug 2022 02:31:34 -0400 (EDT)
-Received: from vostro.rath.org (vostro [192.168.12.4])
-	by ebox.rath.org (Postfix) with ESMTPS id D5B7B7B6;
-	Tue, 30 Aug 2022 06:31:32 +0000 (UTC)
-Received: by vostro.rath.org (Postfix, from userid 1000)
-	id B9F8A28791; Tue, 30 Aug 2022 07:31:31 +0100 (BST)
-From: Nikolaus Rath <Nikolaus@rath.org>
-To: nbd@other.debian.org,
-    Linux FS Devel <linux-fsdevel@vger.kernel.org>,
-    miklos <mszeredi@redhat.com>, Wouter Verhelst <w@uter.be>
-Subject: Why do NBD requests prevent hibernation, and FUSE requests do not?
-Mail-Copies-To: never
-Mail-Followup-To: nbd@other.debian.org, Linux FS Devel
-	<linux-fsdevel@vger.kernel.org>, miklos <mszeredi@redhat.com>, Wouter
-	Verhelst <w@uter.be>
-Date: Tue, 30 Aug 2022 07:31:31 +0100
-Message-ID: <87k06qb5to.fsf@vostro.rath.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
+ 30 Aug 2022 19:02:18 -0400 (EDT)
+Message-ID: <f7110017-8606-8e50-7d86-fc53324a571d@fastmail.fm>
+Date: Wed, 31 Aug 2022 01:02:16 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.0
+Subject: Re: Why do NBD requests prevent hibernation, and FUSE requests do
+ not?
+To: nbd@other.debian.org, Linux FS Devel <linux-fsdevel@vger.kernel.org>,
+ miklos <mszeredi@redhat.com>, Wouter Verhelst <w@uter.be>
+References: <87k06qb5to.fsf@vostro.rath.org>
+Content-Language: de-CH
+From: Bernd Schubert <bernd.schubert@fastmail.fm>
+In-Reply-To: <87k06qb5to.fsf@vostro.rath.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <vZfx3sKsdnM.A.s2.a7aDjB@bendel>
+Resent-Message-ID: <cXNuhdI9BRN.A.NpB.0qpDjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2211
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2212
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -119,89 +117,50 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/87k06qb5to.fsf@vostro.rath.org
-Resent-Date: Tue, 30 Aug 2022 06:31:54 +0000 (UTC)
-
-Hello,
-
-I am comparing the behavior of FUSE and NBD when attempting to hibernate
-the system.
-
-FUSE seems to be mostly compatible, I am able to suspend the system even
-when there is ongoing I/O on the fuse filesystem.
-
-With NBD, on the other hand, most I/O seems to prevent hibernation the
-system. Example hibernation error:
-
-  kernel: Freezing user space processes ...=20
-  kernel: Freezing of tasks failed after 20.003 seconds (1 tasks refusing t=
-o freeze, wq_busy=3D0):
-  kernel: task:rsync           state:D stack:    0 pid:348105 ppid:348104 f=
-lags:0x00004004
-  kernel: Call Trace:
-  kernel:  <TASK>
-  kernel:  __schedule+0x308/0x9e0
-  kernel:  schedule+0x4e/0xb0
-  kernel:  schedule_timeout+0x88/0x150
-  kernel:  ? __bpf_trace_tick_stop+0x10/0x10
-  kernel:  io_schedule_timeout+0x4c/0x80
-  kernel:  __cv_timedwait_common+0x129/0x160 [spl]
-  kernel:  ? dequeue_task_stop+0x70/0x70
-  kernel:  __cv_timedwait_io+0x15/0x20 [spl]
-  kernel:  zio_wait+0x129/0x2b0 [zfs]
-  kernel:  dmu_buf_hold+0x5b/0x90 [zfs]
-  kernel:  zap_lockdir+0x4e/0xb0 [zfs]
-  kernel:  zap_cursor_retrieve+0x1ae/0x320 [zfs]
-  kernel:  ? dbuf_prefetch+0xf/0x20 [zfs]
-  kernel:  ? dmu_prefetch+0xc8/0x200 [zfs]
-  kernel:  zfs_readdir+0x12a/0x440 [zfs]
-  kernel:  ? preempt_count_add+0x68/0xa0
-  kernel:  ? preempt_count_add+0x68/0xa0
-  kernel:  ? aa_file_perm+0x120/0x4c0
-  kernel:  ? rrw_exit+0x65/0x150 [zfs]
-  kernel:  ? _copy_to_user+0x21/0x30
-  kernel:  ? cp_new_stat+0x150/0x180
-  kernel:  zpl_iterate+0x4c/0x70 [zfs]
-  kernel:  iterate_dir+0x171/0x1c0
-  kernel:  __x64_sys_getdents64+0x78/0x110
-  kernel:  ? __ia32_sys_getdents64+0x110/0x110
-  kernel:  do_syscall_64+0x38/0xc0
-  kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xae
-  kernel: RIP: 0033:0x7f03c897a9c7
-  kernel: RSP: 002b:00007ffd41e3c518 EFLAGS: 00000293 ORIG_RAX: 00000000000=
-000d9
-  kernel: RAX: ffffffffffffffda RBX: 0000561eff64dd40 RCX: 00007f03c897a9c7
-  kernel: RDX: 0000000000008000 RSI: 0000561eff64dd70 RDI: 0000000000000000
-  kernel: RBP: 0000561eff64dd70 R08: 0000000000000030 R09: 00007f03c8a72be0
-  kernel: R10: 0000000000020000 R11: 0000000000000293 R12: ffffffffffffff80
-  kernel: R13: 0000561eff64dd44 R14: 0000000000000000 R15: 0000000000000001
-  kernel:  </TASK>
-
-(this is with ZFS on top of the NBD device).
+List-Archive: https://lists.debian.org/msgid-search/f7110017-8606-8e50-7d86-fc53324a571d@fastmail.fm
+Resent-Date: Tue, 30 Aug 2022 23:18:12 +0000 (UTC)
 
 
-As far as I can tell, the problem is that while an NBD request is
-pending, the atsk that waits for the result (in this case *rsync*) is
-refusing to freeze. This happens even when setting a 5 minute timeout
-for freezing (which is more than enough time for the NBD request to
-complete), so I suspect that the NBD server task (in this case nbdkit)
-has already been frozen and is thus unable to make progress.
 
-However, I do not understand why the same is not happening for FUSE
-(with FUSE requests being stuck because the FUSE daemon is already
-frozen). Was I just very lucky in my tests? Or are tasks waiting for
-FUSE request in a different kind of state? Or is NBD a red-herring here,
-and the real trouble is with ZFS?
+On 8/30/22 08:31, Nikolaus Rath wrote:
+> Hello,
+> 
+> I am comparing the behavior of FUSE and NBD when attempting to hibernate
+> the system.
+> 
+> FUSE seems to be mostly compatible, I am able to suspend the system even
+> when there is ongoing I/O on the fuse filesystem.
+> 
 
-It would be great if someone  could shed some light on what's going on.
+....
+
+> 
+> As far as I can tell, the problem is that while an NBD request is
+> pending, the atsk that waits for the result (in this case *rsync*) is
+> refusing to freeze. This happens even when setting a 5 minute timeout
+> for freezing (which is more than enough time for the NBD request to
+> complete), so I suspect that the NBD server task (in this case nbdkit)
+> has already been frozen and is thus unable to make progress.
+> 
+> However, I do not understand why the same is not happening for FUSE
+> (with FUSE requests being stuck because the FUSE daemon is already
+> frozen). Was I just very lucky in my tests? Or are tasks waiting for
+> FUSE request in a different kind of state? Or is NBD a red-herring here,
+> and the real trouble is with ZFS?
+> 
+> It would be great if someone  could shed some light on what's going on.
+
+I guess it is a generic issue also affecting fuse, see this patch
+
+https://lore.kernel.org/lkml/20220511013057.245827-1-dlunev@chromium.org/
+
+A bit down the thread you can find a reference to this ancient patch
+
+https://linux-kernel.vger.kernel.narkive.com/UeBWfN1V/patch-fuse-make-fuse-daemon-frozen-along-with-kernel-threads
+
+I had also asked about NFS when the server side is down, (and so a 
+request reply will not come) but didn't get an answer.
 
 
-Best,
--Nikolaus
-
---=20
-GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F
-
-             =C2=BBTime flies like an arrow, fruit flies like a Banana.=C2=
-=AB
+- Bernd
 
