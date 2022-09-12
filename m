@@ -1,95 +1,104 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 331835B216F
-	for <lists+nbd@lfdr.de>; Thu,  8 Sep 2022 17:00:12 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C5DD5B6234
+	for <lists+nbd@lfdr.de>; Mon, 12 Sep 2022 22:31:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id AF33A20540; Thu,  8 Sep 2022 15:00:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep  8 15:00:11 2022
-Old-Return-Path: <axboe@kernel.dk>
+	id 2975E20769; Mon, 12 Sep 2022 20:31:33 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Sep 12 20:31:33 2022
+Old-Return-Path: <nikolaus@rath.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
-	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-5.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,HTML_MESSAGE,HTML_NBSP,
+	LDOSUBSCRIBER,LDO_WHITELIST,ONEWORD,RCVD_IN_DNSWL_LOW,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E82EA20516
-	for <lists-other-nbd@bendel.debian.org>; Thu,  8 Sep 2022 14:42:08 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2B2BD20766
+	for <lists-other-nbd@bendel.debian.org>; Mon, 12 Sep 2022 20:31:21 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.99 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.81 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, HTML_MESSAGE=2,
+	HTML_NBSP=2, LDO_WHITELIST=-5, ONEWORD=2, RCVD_IN_DNSWL_LOW=-0.7,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id LhmHip28BjUN for <lists-other-nbd@bendel.debian.org>;
-	Thu,  8 Sep 2022 14:42:02 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-io1-xd36.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com [IPv6:2607:f8b0:4864:20::d36])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 0F29920510
-	for <nbd@other.debian.org>; Thu,  8 Sep 2022 14:41:58 +0000 (UTC)
-Received: by mail-io1-xd36.google.com with SMTP id c4so14234608iof.3
-        for <nbd@other.debian.org>; Thu, 08 Sep 2022 07:41:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:from:to:cc:subject:date;
-        bh=eWi2LVN2gecP1iaDEZcOslHil4OGn6GfTQ/ywsJxRU4=;
-        b=LKjkr2bv+FmCGfu/Wp+AD7fL5K2pMWUUr/vV1s25dbXJVUx4TqzGAbIbs3U+FdZr63
-         EEMPNe4U/xW3wZjBLydVXb7nPwUitbFOhP21p+51luHDGlI3dTd3IkqtXQ/9ozFWmrpP
-         3eCBO5dLwo0G5exrT/POHuU9YMjrmwsl9x5eaFnxTXtPsUqKdwVw7KV+suaLHEEqTaGn
-         C0PCYewzgTcTwu/EhdpJ8446cqW/bEsR6CtOhbhVo10yxauhr6xdI5ifbeq4Hib/e8Wx
-         UnRE75fukNUY+jS9IzTAvhetyrmOM/lsaZaa7sCrin/ytRc5yrFpcpFr/l5SsNBShxtC
-         RDdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=eWi2LVN2gecP1iaDEZcOslHil4OGn6GfTQ/ywsJxRU4=;
-        b=sbpq6mJvwDlFJJ6imNcFpMC+NtJs7ZfzQb/IUJfi+r/u16bhg0UeHO0UvKA4kRDNSz
-         wijHUoRKJFSteWGVlqUWMSpJI8WVaKMJfG+LuxL6UHUlmHkC1AL9w+LF1Q4yn+ZWuq98
-         r5h+CqmUungp+qpbjIDhWM2fmRiEl2CZzBk4jWZDXhChjmKDk29doVejTdbAQMm0EKjD
-         kkkG/wtyk2HU8oPLhmN8AHjKVf44Y5yDwxk/1XIINd0DelNGJ/fmHs4p3Xjhy1k4XJ/F
-         akqQOkXyx3Io6qGpmBui9zBx5STKmH6o3jmOzKwfG+dzHwnPs0XP4mJhgQJJ1wt5kd9Z
-         da4A==
-X-Gm-Message-State: ACgBeo3gT9v6O42F9oAKO0deh2AS4G2egBVmTaosc7tSzmufaKONv4lJ
-	XCn52A6Ln+a+CElpCud+m5p79g==
-X-Google-Smtp-Source: AA6agR7lYfm0H3nIDGjlRvtjZ9XMOgf94oL/eqyyJX1dmi3uEefT+PfOmLB45yRQs15z5OC/ZSTMmA==
-X-Received: by 2002:a05:6638:2103:b0:346:c965:b935 with SMTP id n3-20020a056638210300b00346c965b935mr4811111jaj.205.1662648115499;
-        Thu, 08 Sep 2022 07:41:55 -0700 (PDT)
-Received: from [127.0.0.1] ([207.135.234.126])
-        by smtp.gmail.com with ESMTPSA id k131-20020a6bba89000000b00689abadc36asm1146694iof.3.2022.09.08.07.41.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Sep 2022 07:41:54 -0700 (PDT)
-From: Jens Axboe <axboe@kernel.dk>
-To: josef@toxicpanda.com, Shigeru Yoshida <syoshida@redhat.com>
-Cc: linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, nbd@other.debian.org,
- syzbot+38e6c55d4969a14c1534@syzkaller.appspotmail.com
-In-Reply-To: <20220907163502.577561-1-syoshida@redhat.com>
-References: <20220907163502.577561-1-syoshida@redhat.com>
-Subject: Re: [PATCH] nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
-Message-Id: <166264811452.472176.16885663961423246810.b4-ty@kernel.dk>
-Date: Thu, 08 Sep 2022 08:41:54 -0600
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.10.0-dev-65ba7
-X-Rc-Spam: 2008-11-04_01
+	with ESMTP id 6FrGSvRG5Bm3 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 12 Sep 2022 20:31:12 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .rath. - helo: .wout4-smtp.messagingengine. - helo-domain: .messagingengine.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com [64.147.123.20])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 69B9C2075F
+	for <nbd@other.debian.org>; Mon, 12 Sep 2022 20:31:11 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id 3B03C3200987;
+	Mon, 12 Sep 2022 16:31:07 -0400 (EDT)
+Received: from imap45 ([10.202.2.95])
+  by compute4.internal (MEProxy); Mon, 12 Sep 2022 16:31:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rath.org; h=cc
+	:content-type:date:date:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to; s=fm3; t=
+	1663014666; x=1663101066; bh=HjDAMv23chqTgPSHgMLKClELb0q6/nFPXe5
+	TmJoRZ9A=; b=KBvA23Se20nZganSJsYhV6IyLlm6e7/5+ONb383HvhsnxO+Fewv
+	sLAYXzLBDWlJ2rsGZEZ5V5qAYPu7LbN8lGB/PjfwTXURtufRacacHmqdzO/gDzj5
+	MByVInFuZ1/br9sAS2xEcctdCnfdk2/tMMuwCjRb3nDK519P2M+8Xrmx50ohfB1i
+	MoBEsfZZBOHTOLlfuaPc7Hf9B2dyYqzQb8rEEnTr9C4PusBQlo4IJc6udj7QKfDM
+	mVjJxV3tKdTu3Ri+jsTkLYyjdHiOHu6Ne7wOfi7aajH9pMbpoKiGl68echRw/AZJ
+	rQbRYhesHOddLmVydLNmxD+5mfvcE4gXaHQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:date:date:feedback-id
+	:feedback-id:from:from:in-reply-to:message-id:mime-version
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1663014666; x=
+	1663101066; bh=HjDAMv23chqTgPSHgMLKClELb0q6/nFPXe5TmJoRZ9A=; b=b
+	/lSPQ68ni5N8I1N59RUv+3YX8sqHCvNrzGAYUd2jgCew2UIqkzdxEelQJj+IZsw6
+	N5QkIypNm7MdGRHOtClhnK9aFRXwS+WqeTWeL5vK2qJ6NQnxgMQGuP6MmlLC4lCW
+	+n4DlbMfrvzRB62jVO9AJBAD/1KNwPzmANs9q4i1NRe8iNx1p3k0g5yqiyJGD9n7
+	sVk0/Uz3WxHjFA84iblvY7kAPco1j9OWXFGW5uiduGNLkB8Xs8Pb2J0Hch3lJpjD
+	bp4c4fCmuCuwK4hrksuErGaYMnUP02T3SeOWT9SkbAUYrWiE/8l0/HPRuQmNMKrH
+	tIChyhoW7wNU5Y3DhOxwg==
+X-ME-Sender: <xms:CpcfY5UALFkTBNszTjrrBrvoQcd8WkxYlEW0T4qsmiKmUp-Pkt4I8g>
+    <xme:CpcfY5k5lIeTivdJc5HOZmoO4pGNwIwqsX9jnm4YX5lbKnSXCrzybjyCJj0cUHU8m
+    fKsdWoIW8LzA86H>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeduvddgudehvdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecunecujfgurhepofgfggfkfffhvffutgesrgdtre
+    erreerjeenucfhrhhomhepfdfpihhkohhlrghushcutfgrthhhfdcuoehnihhkohhlrghu
+    shesrhgrthhhrdhorhhgqeenucggtffrrghtthgvrhhnpeevleeiteegudekvdduheeuvd
+    ffgeekkeeviedugeffveegvddvvdejgfetffejudenucffohhmrghinheprhgrthhhrdho
+    rhhgnecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehmrghilhhfrhhomhepnh
+    hikhholhgruhhssehrrghthhdrohhrgh
+X-ME-Proxy: <xmx:CpcfY1ZUSKTLsjpedpqMuiFdBQgrwSk13yUc3cYMQkIJAJUNcy981A>
+    <xmx:CpcfY8WYvIasGyE_mT5oNpoDPpvlf8dEgET5mBER_x61gVpLu59wkA>
+    <xmx:CpcfYznObbfda9cMnGpG5psJMr_oHp-1Doo0iYlTFupqUW9YaVbWbA>
+    <xmx:CpcfYxjiB2rFEgstC2yk7-GzEaeS1PkONNjViQHd06OEhwoj8YHFgA>
+Feedback-ID: i53a843ae:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 629ED2720078; Mon, 12 Sep 2022 16:31:06 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.7.0-alpha0-929-g09f3e68182-fm-20220908.004-g09f3e681
+Mime-Version: 1.0
+Message-Id: <ee18c441-0734-412e-8533-4ace1973a715@www.fastmail.com>
+Date: Mon, 12 Sep 2022 21:30:46 +0100
+From: "Nikolaus Rath" <nikolaus@rath.org>
+To: libguestfs@redhat.com, nbd@other.debian.org,
+ zfs-discuss@list.zfsonlinux.org
+Subject: ZFS-on-NBD
+Content-Type: multipart/alternative;
+ boundary=32a724d1220e492e8fb5e78377e1399d
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <LrJEvycKdXN.A.CHC.7NgGjB@bendel>
+Resent-Message-ID: <xWxtHyYyBbM.A._h.lc5HjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2218
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2219
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -99,26 +108,55 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/166264811452.472176.16885663961423246810.b4-ty@kernel.dk
-Resent-Date: Thu,  8 Sep 2022 15:00:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ee18c441-0734-412e-8533-4ace1973a715@www.fastmail.com
+Resent-Date: Mon, 12 Sep 2022 20:31:33 +0000 (UTC)
 
-On Thu, 8 Sep 2022 01:35:02 +0900, Shigeru Yoshida wrote:
-> syzbot reported hung task [1].  The following program is a simplified
-> version of the reproducer:
-> 
-> int main(void)
-> {
-> 	int sv[2], fd;
-> 
-> [...]
+--32a724d1220e492e8fb5e78377e1399d
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Applied, thanks!
+Hi all,
 
-[1/1] nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
-      commit: 1de7c3cf48fc41cd95adb12bd1ea9033a917798a
+In case people have been wondering about the background of the various q=
+uestions that I asked on these lists in the last few months:=20
 
-Best regards,
--- 
-Jens Axboe
+I've been experimenting with running ZFS-on-NBD as a cloud backup soluti=
+on (and potential alternative to S3QL, which I am using for this purpose=
+ at the moment).
 
+In case someone is interested, here is the (rather long) write-up: https=
+://www.rath.org/s3ql-vs-zfs-on-nbd.html
+
+Best,
+-Nikolaus
+
+--
+GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F
+
+             =C2=BBTime flies like an arrow, fruit flies like a Banana.=C2=AB
+
+
+--32a724d1220e492e8fb5e78377e1399d
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head><title></title><style type=3D"text/css">p.Mso=
+Normal,p.MsoNoSpacing{margin:0}
+p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>Hi all,<br=
+></div><div><br></div><div>In case people have been wondering about the =
+background of the various questions that I asked on these lists in the l=
+ast few months: <br></div><div><br></div><div>I've been experimenting wi=
+th running ZFS-on-NBD as a cloud backup solution (and potential alternat=
+ive to S3QL, which I am using for this purpose at the moment).<br></div>=
+<div><br></div><div>In case someone is interested, here is the (rather l=
+ong) write-up: <a href=3D"https://www.rath.org/s3ql-vs-zfs-on-nbd.html">=
+https://www.rath.org/s3ql-vs-zfs-on-nbd.html</a><br></div><div><br></div=
+><div>Best,<br></div><div>-Nikolaus<br></div><div><br></div><div id=3D"s=
+ig33580657"><div class=3D"signature">--<br></div><div class=3D"signature=
+">GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F<br>=
+</div><div class=3D"signature"><br></div><div class=3D"signature">&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =C2=BB=
+Time flies like an arrow, fruit flies like a Banana.=C2=AB<br></div><div=
+ class=3D"signature"><br></div></div><div><br></div></body></html>
+--32a724d1220e492e8fb5e78377e1399d--
 
