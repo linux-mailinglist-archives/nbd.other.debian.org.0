@@ -1,87 +1,119 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 616C65BA2FD
-	for <lists+nbd@lfdr.de>; Fri, 16 Sep 2022 00:49:47 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA0B45BA7C2
+	for <lists+nbd@lfdr.de>; Fri, 16 Sep 2022 10:05:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3784520862; Thu, 15 Sep 2022 22:49:47 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 15 22:49:47 2022
-Old-Return-Path: <nabijaczleweli@nabijaczleweli.xyz>
+	id 43896208E8; Fri, 16 Sep 2022 08:05:50 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Sep 16 08:05:50 2022
+Old-Return-Path: <Nikolaus@rath.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FROM_SUSPICIOUS_NTLD,LDO_WHITELIST,MURPHY_DRUGS_REL8,PDS_OTHER_BAD_TLD,
-	PGPSIGNATURE,RDNS_NONE,SARE_MSGID_LONG40,T_SCC_BODY_TEXT_LINE,
-	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-5.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
+	LDOSUBSCRIBER,RCVD_IN_DNSWL_LOW autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DD42D20813
-	for <lists-other-nbd@bendel.debian.org>; Thu, 15 Sep 2022 22:49:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6FBCC208C9
+	for <lists-other-nbd@bendel.debian.org>; Fri, 16 Sep 2022 08:05:39 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.76 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	FROM_SUSPICIOUS_NTLD=0.001, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	PDS_OTHER_BAD_TLD=1.999, PGPSIGNATURE=-5, RDNS_NONE=0.793,
-	SARE_MSGID_LONG40=0.637, T_SCC_BODY_TEXT_LINE=-0.01,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.79 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_LOW=-0.7,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id XkRO7JHbDBGx for <lists-other-nbd@bendel.debian.org>;
-	Thu, 15 Sep 2022 22:49:28 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 552 seconds by postgrey-1.36 at bendel; Thu, 15 Sep 2022 22:49:28 UTC
-Received: from tarta.nabijaczleweli.xyz (unknown [139.28.40.42])
-	by bendel.debian.org (Postfix) with ESMTP id 6133D2077A
-	for <nbd@other.debian.org>; Thu, 15 Sep 2022 22:49:28 +0000 (UTC)
-Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
-	by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id F3CA6161C;
-	Fri, 16 Sep 2022 00:40:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
-	s=202205; t=1663281614;
-	bh=LJxbxN0p+J8K4MB6fZQ/FX68iUgDSxVET1nGFcHAxDw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HC9LxH81GBDUWS66rXqUxR+BRXg1iwoTKrioNmZDS2v0lCvd1wM+lSHHiiFytSw3B
-	 6Vb2KIeDz1mejudKQsmwPwTxqEBxngcMVCKPhKRQwHPcy2cMP8ohX6RQU7DwQoF6aA
-	 rk+qus0XbBml2Ts9sUwIBKihg6fFEe0AdImxESxD720xW4OId8+NcIlJlkiITDsVuZ
-	 xEAPGZ+z2UpRvdCIrh7f7KC3Iw6Wj2fNL+dDkOlirxDIfFsksIWTNqEzTFVMH8TO+o
-	 GlQrRd1u94EFPZvogOMRBzG+YGLI4E7CS3S0NZo10ImB6BDt/kEWzkAN9Uy789jlyN
-	 niyGI+wu92fvGzg0NLb0q2z0Rb5S972+NLeCDBeWODYSW7ZKP9WMhlgrBK2MOwvQtf
-	 cpF3txzKg5ZP0GPciHBGbgaGNWFvrwlIyz0q0t0CYvmklb5Nyt7mKW5okmN741PDX7
-	 64bifIfc2vpjF1KI0F06QSmNt1XV1LMwfWGlpXNx93SgfzicaY4AsS12CwJwFrnqIu
-	 nM0uRlzqvqFnPeDQ7vyvDWopT3+qVSDDlPhDxsOHizeaDlBP9TXO93pqgeGKQZXmZf
-	 o0VRN5qfUvwFy0iTvxNwh9WXvoihaKIzz5/EZyN/w1RbgGB+FL9PJqGyGJFuK5CEFR
-	 lAv5k4ye3tPfxl6krEp0q9wo=
-Date: Fri, 16 Sep 2022 00:40:12 +0200
-From: =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
-To: Greg KH <gregkh@linuxfoundation.org>
-Cc: Bagas Sanjaya <bagasdotme@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
-	Federico Vaga <federico.vaga@vaga.pv.it>,
-	Alex Shi <alexs@kernel.org>, Yanteng Si <siyanteng@loongson.cn>,
-	Hu Haowen <src.res@email.cn>, Josef Bacik <josef@toxicpanda.com>,
-	Jens Axboe <axboe@kernel.dk>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc-tw-discuss@lists.sourceforge.net,
-	linux-block@vger.kernel.org, nbd@other.debian.org
-Subject: [PATCH v4 16/18] nbd: remove define-only NBD_MAGIC, previously magic
- number
-Message-ID: <10a80681c5966fed1a1afc696e3db114f481514c.1663280877.git.nabijaczleweli@nabijaczleweli.xyz>
-References: <YyMlovoskUcHLEb7@kroah.com>
+	with ESMTP id 5kyLDIRz2_iM for <lists-other-nbd@bendel.debian.org>;
+	Fri, 16 Sep 2022 08:05:30 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .rath. - helo: .wout2-smtp.messagingengine. - helo-domain: .messagingengine.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com [64.147.123.25])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 8282B20853
+	for <nbd@other.debian.org>; Fri, 16 Sep 2022 08:05:29 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id 58B0E3200B15;
+	Fri, 16 Sep 2022 04:05:25 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Fri, 16 Sep 2022 04:05:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rath.org; h=cc
+	:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm3; t=1663315524; x=
+	1663401924; bh=DpGEM9lfiq2Xus0TNrTxUqZ9DBjKf+k0dABgR0oK4Bo=; b=D
+	XUYvDTfjOmT68tVPfiuHwoInrv1XTyY4xOX85VtdlgnFZ7xWpThzp/uM6/n65MNh
+	DB3y8gv8W+aj7plg4kEvdXyxfIiOTqgAV8IV8LtAuC3IXh7wG1fMBPNaj/qToQ4I
+	IVHjIxSqan/ROGr1dHoPbPFrtKJvkvnkNz2gRzv8WnTepfb9HFKfXUh/PWFBNtEl
+	6R8ckItQcVrRhNVZjHegETiPRE9pORkN8RmZAW9IbqKDrKddY61qhQFHE2a1H7AD
+	ApP76fUoOs4l4SBhn0X7J1oIw+wvrGvmB0J4T8k1LJjYuKLT100H9PgL26ofeYnW
+	p8XHOb2aCgbsh91NI/+rA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1663315524; x=
+	1663401924; bh=DpGEM9lfiq2Xus0TNrTxUqZ9DBjKf+k0dABgR0oK4Bo=; b=v
+	PQy9rwvKYM9fSw8AQdUP+wPFhKGIHKZb/BhBMkiHQ3cFa7p+NAnTlti+HZDVEEbn
+	BxoE/Ykex8Bsru5Ha0INxSWY2CnHEBP9I0LszJOz+58/xiK72vGBEqXywLLSgcRf
+	xueLum9FdzjotJatvkiszNsKY4lwoAnRcPhgANe72dxin6cNRaNqJb8yDr+F59lw
+	UyCNxZxEnAf4jArnH7881Oj5CdERyvU3otw2cDhlhBYlHcA17ztMCoeT4RFNzE4R
+	4xQmeecY0MQHvZbAmDQXh1ieyrRkgZbz17PyCTmT0657Xdcfy3rdg0ho7jtu5SPf
+	Y4mw8I/XSm9NnPU+Qn9DQ==
+X-ME-Sender: <xms:RC4kY8eJhfBiWTmvur1isQj1d30l9I-g9kRMcvKk4llTMlI2Djf8Iw>
+    <xme:RC4kY-OPDkCc9gCuVSldx0dP7vOtW0qSSkT-JQsRjfcFYKKbdcYAiMAu_PlM833jt
+    C5x4TUsZ82J2cLx>
+X-ME-Received: <xmr:RC4kY9iNHdKedBpbhXfAQhtnDEsB6uu5MjKw6780UsN1tLridnPh_KiIIjY29JrSe5eKlmXkelI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedvtddgtdduucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufhffjgfkfgggtgfgsehtqhdttddtreejnecuhfhrohhmpefpihhk
+    ohhlrghushcutfgrthhhuceopfhikhholhgruhhssehrrghthhdrohhrgheqnecuggftrf
+    grthhtvghrnhepvedtgeegtdduveffgeegueegleekkeeghfdttefhleevhfekfeduvdfh
+    udegueegnecuffhomhgrihhnpehfohhsuggvmhdrohhrghdpuggvsghirghnrdhorhhgne
+    cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheppfhikhho
+    lhgruhhssehrrghthhdrohhrgh
+X-ME-Proxy: <xmx:RC4kYx_hCFyZljq2kJ4dZB_h9bxpbA-cCRv5tlCEMapc6RuBCB6HWw>
+    <xmx:RC4kY4t44dB3soSP6l0egk6xV7IxOOJdTV9LvsXMeEbgGag-Qcxvaw>
+    <xmx:RC4kY4HRV62uSNosbmEYoTH_k3qKDDE0Iw8-r9DAvX8623n_eWQcqw>
+    <xmx:RC4kYyW4-9QVrZGRnlBC-o7vknUmQmw9q7vc60QqnJxYt1WeYUtOrQ>
+Feedback-ID: i53a843ae:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 16 Sep 2022 04:05:24 -0400 (EDT)
+Received: from vostro.rath.org (vostro [192.168.12.4])
+	by ebox.rath.org (Postfix) with ESMTPS id D4E85BD0;
+	Fri, 16 Sep 2022 08:05:22 +0000 (UTC)
+Received: by vostro.rath.org (Postfix, from userid 1000)
+	id 45F47D82AF; Fri, 16 Sep 2022 09:05:22 +0100 (BST)
+From: Nikolaus Rath <Nikolaus@rath.org>
+To: Wouter Verhelst <w@uter.be>
+Cc: nbd@other.debian.org,  Linux FS Devel <linux-fsdevel@vger.kernel.org>,
+  miklos <mszeredi@redhat.com>
+Subject: Re: Why do NBD requests prevent hibernation, and FUSE requests do not?
+References: <87k06qb5to.fsf@vostro.rath.org>
+	<YxH79CbXDUEa+r/2@pc220518.home.grep.be>
+Mail-Copies-To: never
+Mail-Followup-To: Wouter Verhelst <w@uter.be>, nbd@other.debian.org, Linux FS
+	Devel <linux-fsdevel@vger.kernel.org>, miklos <mszeredi@redhat.com>
+Date: Fri, 16 Sep 2022 09:05:22 +0100
+In-Reply-To: <YxH79CbXDUEa+r/2@pc220518.home.grep.be> (Wouter Verhelst's
+	message of "Fri, 2 Sep 2022 14:49:56 +0200")
+Message-ID: <87mtazrbgd.fsf@vostro.rath.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="xpjr53kvf7ol5gv5"
-Content-Disposition: inline
-In-Reply-To: <YyMlovoskUcHLEb7@kroah.com>
-User-Agent: NeoMutt/20220429
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <P7CGmdoM2a.A.U8E.Lw6IjB@bendel>
+Resent-Message-ID: <4VqlSIiek8.A.gVD.e5CJjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2223
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2224
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,147 +123,135 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/10a80681c5966fed1a1afc696e3db114f481514c.1663280877.git.nabijaczleweli@nabijaczleweli.xyz
-Resent-Date: Thu, 15 Sep 2022 22:49:47 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/87mtazrbgd.fsf@vostro.rath.org
+Resent-Date: Fri, 16 Sep 2022 08:05:50 +0000 (UTC)
+
+Hi Wouter,
+
+Following up on this: should the NBD server perhaps set
+PR_SET_IO_FLUSHER, and the kernel freeze tasks with this flag last?
+
+Best,
+-Nikolaus
+
+On Sep 02 2022, Wouter Verhelst <w@uter.be> wrote:
+> Hi Nikolaus,
+>
+> I do not know how FUSE works, so can't comment on that.
+>
+> NBD, however, is a message-passing protocol: the client sends a message
+> to request something over a network socket, which causes the server to
+> do some processing, and then to send a message back. As far as the
+> kernel is concerned (at least outside nbd.ko), there is no connection
+> between the request message and the reply message.
+>
+> As such, when the kernel suspends the nbd server, it has no way of
+> knowing that the in-kernel client is still waiting on a reply for a
+> message that was sent earlier.
+>
+> I'm guessing that for FUSE, there is such a link?
+>
+> On Tue, Aug 30, 2022 at 07:31:31AM +0100, Nikolaus Rath wrote:
+>> Hello,
+>>=20
+>> I am comparing the behavior of FUSE and NBD when attempting to hibernate
+>> the system.
+>>=20
+>> FUSE seems to be mostly compatible, I am able to suspend the system even
+>> when there is ongoing I/O on the fuse filesystem.
+>>=20
+>> With NBD, on the other hand, most I/O seems to prevent hibernation the
+>> system. Example hibernation error:
+>>=20
+>>   kernel: Freezing user space processes ...=20
+>>   kernel: Freezing of tasks failed after 20.003 seconds (1 tasks refusin=
+g to freeze, wq_busy=3D0):
+>>   kernel: task:rsync           state:D stack:    0 pid:348105 ppid:34810=
+4 flags:0x00004004
+>>   kernel: Call Trace:
+>>   kernel:  <TASK>
+>>   kernel:  __schedule+0x308/0x9e0
+>>   kernel:  schedule+0x4e/0xb0
+>>   kernel:  schedule_timeout+0x88/0x150
+>>   kernel:  ? __bpf_trace_tick_stop+0x10/0x10
+>>   kernel:  io_schedule_timeout+0x4c/0x80
+>>   kernel:  __cv_timedwait_common+0x129/0x160 [spl]
+>>   kernel:  ? dequeue_task_stop+0x70/0x70
+>>   kernel:  __cv_timedwait_io+0x15/0x20 [spl]
+>>   kernel:  zio_wait+0x129/0x2b0 [zfs]
+>>   kernel:  dmu_buf_hold+0x5b/0x90 [zfs]
+>>   kernel:  zap_lockdir+0x4e/0xb0 [zfs]
+>>   kernel:  zap_cursor_retrieve+0x1ae/0x320 [zfs]
+>>   kernel:  ? dbuf_prefetch+0xf/0x20 [zfs]
+>>   kernel:  ? dmu_prefetch+0xc8/0x200 [zfs]
+>>   kernel:  zfs_readdir+0x12a/0x440 [zfs]
+>>   kernel:  ? preempt_count_add+0x68/0xa0
+>>   kernel:  ? preempt_count_add+0x68/0xa0
+>>   kernel:  ? aa_file_perm+0x120/0x4c0
+>>   kernel:  ? rrw_exit+0x65/0x150 [zfs]
+>>   kernel:  ? _copy_to_user+0x21/0x30
+>>   kernel:  ? cp_new_stat+0x150/0x180
+>>   kernel:  zpl_iterate+0x4c/0x70 [zfs]
+>>   kernel:  iterate_dir+0x171/0x1c0
+>>   kernel:  __x64_sys_getdents64+0x78/0x110
+>>   kernel:  ? __ia32_sys_getdents64+0x110/0x110
+>>   kernel:  do_syscall_64+0x38/0xc0
+>>   kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xae
+>>   kernel: RIP: 0033:0x7f03c897a9c7
+>>   kernel: RSP: 002b:00007ffd41e3c518 EFLAGS: 00000293 ORIG_RAX: 00000000=
+000000d9
+>>   kernel: RAX: ffffffffffffffda RBX: 0000561eff64dd40 RCX: 00007f03c897a=
+9c7
+>>   kernel: RDX: 0000000000008000 RSI: 0000561eff64dd70 RDI: 0000000000000=
+000
+>>   kernel: RBP: 0000561eff64dd70 R08: 0000000000000030 R09: 00007f03c8a72=
+be0
+>>   kernel: R10: 0000000000020000 R11: 0000000000000293 R12: fffffffffffff=
+f80
+>>   kernel: R13: 0000561eff64dd44 R14: 0000000000000000 R15: 0000000000000=
+001
+>>   kernel:  </TASK>
+>>=20
+>> (this is with ZFS on top of the NBD device).
+>>=20
+>>=20
+>> As far as I can tell, the problem is that while an NBD request is
+>> pending, the atsk that waits for the result (in this case *rsync*) is
+>> refusing to freeze. This happens even when setting a 5 minute timeout
+>> for freezing (which is more than enough time for the NBD request to
+>> complete), so I suspect that the NBD server task (in this case nbdkit)
+>> has already been frozen and is thus unable to make progress.
+>>=20
+>> However, I do not understand why the same is not happening for FUSE
+>> (with FUSE requests being stuck because the FUSE daemon is already
+>> frozen). Was I just very lucky in my tests? Or are tasks waiting for
+>> FUSE request in a different kind of state? Or is NBD a red-herring here,
+>> and the real trouble is with ZFS?
+>>=20
+>> It would be great if someone  could shed some light on what's going on.
+>>=20
+>>=20
+>> Best,
+>> -Nikolaus
+>>=20
+>> --=20
+>> GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F
+>>=20
+>>              =C2=BBTime flies like an arrow, fruit flies like a Banana.=
+=C2=AB
+>>=20
+>>=20
+>
+> --=20
+>      w@uter.{be,co.za}
+> wouter@{grep.be,fosdem.org,debian.org}
+>
+> I will have a Tin-Actinium-Potassium mixture, thanks.
 
 
---xpjr53kvf7ol5gv5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-commit f4507164e779 ("nbd: rename the nbd_device variable from lo to
-nbd") renamed LO_MAGIC to NBD_MAGIC; commit 5ea8d10802ec ("nbd:
-separate out the config information") removed the last users of that
-
-Signed-off-by: Ahelenia Ziemia=C5=84ska <nabijaczleweli@nabijaczleweli.xyz>
----
- Documentation/process/magic-number.rst                    | 1 -
- Documentation/translations/it_IT/process/magic-number.rst | 1 -
- Documentation/translations/zh_CN/process/magic-number.rst | 1 -
- Documentation/translations/zh_TW/process/magic-number.rst | 1 -
- drivers/block/nbd.c                                       | 2 --
- 5 files changed, 6 deletions(-)
-
-diff --git a/Documentation/process/magic-number.rst b/Documentation/process=
-/magic-number.rst
-index e242ef9e5dd3..3f72252d9fd3 100644
---- a/Documentation/process/magic-number.rst
-+++ b/Documentation/process/magic-number.rst
-@@ -81,7 +81,6 @@ NBD_REQUEST_MAGIC     0x12560953       nbd_request       =
-       ``include/linux/
- BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/=
-net/baycom_epp.c``
- HDLCDRV_MAGIC         0x5ac6e778       hdlcdrv_state            ``include/=
-linux/hdlcdrv.h``
- KV_MAGIC              0x5f4b565f       kernel_vars_s            ``arch/mip=
-s/include/asm/sn/klkernvars.h``
--LO_MAGIC              0x68797548       nbd_device               ``include/=
-linux/nbd.h``
- NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/=
-linux/nbd.h``
- ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/=
-eni.h``
- CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/=
-coda_fs_i.h``
-diff --git a/Documentation/translations/it_IT/process/magic-number.rst b/Do=
-cumentation/translations/it_IT/process/magic-number.rst
-index 0730b561ff47..db57ea55d3be 100644
---- a/Documentation/translations/it_IT/process/magic-number.rst
-+++ b/Documentation/translations/it_IT/process/magic-number.rst
-@@ -87,7 +87,6 @@ NBD_REQUEST_MAGIC     0x12560953       nbd_request       =
-       ``include/linux/
- BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/=
-net/baycom_epp.c``
- HDLCDRV_MAGIC         0x5ac6e778       hdlcdrv_state            ``include/=
-linux/hdlcdrv.h``
- KV_MAGIC              0x5f4b565f       kernel_vars_s            ``arch/mip=
-s/include/asm/sn/klkernvars.h``
--LO_MAGIC              0x68797548       nbd_device               ``include/=
-linux/nbd.h``
- NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/=
-linux/nbd.h``
- ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/=
-eni.h``
- CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/=
-coda_fs_i.h``
-diff --git a/Documentation/translations/zh_CN/process/magic-number.rst b/Do=
-cumentation/translations/zh_CN/process/magic-number.rst
-index 70e46ecf8089..c555e857a210 100644
---- a/Documentation/translations/zh_CN/process/magic-number.rst
-+++ b/Documentation/translations/zh_CN/process/magic-number.rst
-@@ -70,7 +70,6 @@ NBD_REQUEST_MAGIC     0x12560953       nbd_request       =
-       ``include/linux/
- BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/=
-net/baycom_epp.c``
- HDLCDRV_MAGIC         0x5ac6e778       hdlcdrv_state            ``include/=
-linux/hdlcdrv.h``
- KV_MAGIC              0x5f4b565f       kernel_vars_s            ``arch/mip=
-s/include/asm/sn/klkernvars.h``
--LO_MAGIC              0x68797548       nbd_device               ``include/=
-linux/nbd.h``
- NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/=
-linux/nbd.h``
- ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/=
-eni.h``
- CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/=
-coda_fs_i.h``
-diff --git a/Documentation/translations/zh_TW/process/magic-number.rst b/Do=
-cumentation/translations/zh_TW/process/magic-number.rst
-index e2c650213d51..ebe99277b7b3 100644
---- a/Documentation/translations/zh_TW/process/magic-number.rst
-+++ b/Documentation/translations/zh_TW/process/magic-number.rst
-@@ -73,7 +73,6 @@ NBD_REQUEST_MAGIC     0x12560953       nbd_request       =
-       ``include/linux/
- BAYCOM_MAGIC          0x19730510       baycom_state             ``drivers/=
-net/baycom_epp.c``
- HDLCDRV_MAGIC         0x5ac6e778       hdlcdrv_state            ``include/=
-linux/hdlcdrv.h``
- KV_MAGIC              0x5f4b565f       kernel_vars_s            ``arch/mip=
-s/include/asm/sn/klkernvars.h``
--LO_MAGIC              0x68797548       nbd_device               ``include/=
-linux/nbd.h``
- NBD_REPLY_MAGIC       0x96744668       nbd_reply                ``include/=
-linux/nbd.h``
- ENI155_MAGIC          0xa54b872d       midway_eprom	        ``drivers/atm/=
-eni.h``
- CODA_MAGIC            0xC0DAC0DA       coda_file_info           ``fs/coda/=
-coda_fs_i.h``
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 2a709daefbc4..e185d7b5f1e8 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -157,8 +157,6 @@ static struct dentry *nbd_dbg_dir;
-=20
- #define nbd_name(nbd) ((nbd)->disk->disk_name)
-=20
--#define NBD_MAGIC 0x68797548
--
- #define NBD_DEF_BLKSIZE_BITS 10
-=20
- static unsigned int nbds_max =3D 16;
 --=20
-2.30.2
+GPG Fingerprint: ED31 791B 2C5C 1613 AF38 8B8A D113 FCAC 3C4E 599F
 
---xpjr53kvf7ol5gv5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmMjqcwACgkQvP0LAY0m
-WPFaRw/+KLY9JQVt3S6Uq8YY1O5AK2Xvnk8+Faf/e5+ajK0ZY+tODhLaUj532JPw
-KryqUqOduysnHgM/9eQ3E3+UwMqu/Q4YibiPrHPTkJkbSZIZAyZqahtSXM7+Jgi1
-W7iYjWtxk8ayGEAazuX0+f+7K9htN7grQNEhnKnFvRw0KVN74sAi01SqT5vxHTja
-zrsI0nPVVWgjiDYTt7PTNu3QSkoY1/mBtORzrMnCLOqRSiVS3IFFDhQMqt/L1Wcw
-SG3bqKEU4noZPrIj8uP8C9MRMkJKzJGNZsqhzKZltuhcUXYVAgkjkaSpsGWgbz7w
-UIJAGUVm2VXqdbGynmSfyxXJUX/q8PVWEiJ3zDHdkc534JLjlIKBbSinFkF3cMyC
-iSzkp5VA2RLWBYru/+E13vpH16gPstxKxPv7lZxCx6ZUms8ZBuT3R/oIchEHKJxm
-ZziSa/Iq9bVKl2lqsh4egkugcAtp8LkVoyOj6HT6Zx0QDlrAL/wDAJBg9XRYl/Q/
-M4rfoKffAJgsFFviwKhoripKIB2rSXbeiiX8lIEUAugSDxzM/0FB06dMQB8lYSMT
-RSW4VCpN6aRYHTB917vyRAdvQKUV3H8zH+abYBe3zVJb8+QZxFgzop7NJfHFJW9v
-UXGtgUDMDEPPIr+EJRxQ2a9rONdS67XMs4IOPuuylNwKy/j1L20=
-=bjLr
------END PGP SIGNATURE-----
-
---xpjr53kvf7ol5gv5--
+             =C2=BBTime flies like an arrow, fruit flies like a Banana.=C2=
+=AB
 
