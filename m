@@ -1,152 +1,144 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84C835F4EFE
-	for <lists+nbd@lfdr.de>; Wed,  5 Oct 2022 06:12:12 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CAE55F4F7F
+	for <lists+nbd@lfdr.de>; Wed,  5 Oct 2022 07:36:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2AB8F203C2; Wed,  5 Oct 2022 04:12:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct  5 04:12:12 2022
-Old-Return-Path: <chaitanyak@nvidia.com>
+	id D8F82203B8; Wed,  5 Oct 2022 05:36:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct  5 05:36:13 2022
+Old-Return-Path: <prvs=27087a391=damien.lemoal@opensource.wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+X-Spam-Level: **
+X-Spam-Status: No, score=3.0 required=4.0 tests=CC_TOO_MANY,DIGITS_LETTERS,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,TO_TOO_MANY autolearn=no
-	autolearn_force=no version=3.4.2
+	NICE_REPLY_A,RCVD_IN_DNSWL_MED,TO_TOO_MANY,TO_WAY_TOO_MANY
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DD9AD203B9
-	for <lists-other-nbd@bendel.debian.org>; Wed,  5 Oct 2022 03:55:02 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3645720359
+	for <lists-other-nbd@bendel.debian.org>; Wed,  5 Oct 2022 05:19:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=3.736 tagged_above=-10000 required=5.3
-	tests=[CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.083, DKIM_SIGNED=0.1,
+X-Amavis-Spam-Status: No, score=0.777 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
 	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H2=-0.001, TO_TOO_MANY=1]
-	autolearn=no autolearn_force=no
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-2.743, RCVD_IN_DNSWL_MED=-2.3,
+	TO_TOO_MANY=1, TO_WAY_TOO_MANY=3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id OUkubXMWTlTH for <lists-other-nbd@bendel.debian.org>;
-	Wed,  5 Oct 2022 03:54:55 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .nvidia. - helo: .nam11-dm6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
-X-Greylist: delayed 1027 seconds by postgrey-1.36 at bendel; Wed, 05 Oct 2022 03:54:55 UTC
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2047.outbound.protection.outlook.com [40.107.223.47])
+	with ESMTP id hTYp56VKUYqO for <lists-other-nbd@bendel.debian.org>;
+	Wed,  5 Oct 2022 05:19:03 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 438 seconds by postgrey-1.36 at bendel; Wed, 05 Oct 2022 05:19:02 UTC
+Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4C5B520383
-	for <nbd@other.debian.org>; Wed,  5 Oct 2022 03:54:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EAnP4nz11d924n5Ea6rkfbTTWZkOcBMR/h7ZkQJ1oHltLxDJaeH/Iez5BS7J79qQ2VcFFwKYgIGmCiYXjOb76HvhXSy2EaAQdXrVxivVboL/NYUst26hybzA8F8XTgXAFdbEcsSJMarnV5z3mvpNv6/2qB++DsmW8q+cjiY5mYdZRhiZtGSYFd3lR+A2iFGBWA/Ij8OWKnFTulTcMU+8KAKsLHdCYRDn4ExerGOo0Cz+trXQUARNz81ypcs8fpGxbeso3FeGPHnm9ypVjlCvgTaHFSZVumbmAN2zpDwlny92lM3GEdkISUQHh9Y61BlOgXREHFsrbzCGQ5y2BJTFOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YrgGetB/TLOjMS3vQknhv/SINTgMiPk7KqpkdclIcUs=;
- b=Xdz1XM9XgHs5tzhGy60K1VMGf7QyJWaVPAJhDsbnmp5W/XTYb8Bi8f8nb1UQ9e1IMXiPYTTYFi+RlZ3dI4B1Y65Z0QQl37FH3c1C70lf2zoeoThJTzvL5pDhglUPoxYHgg6oC5ZPXVTzZ7fI8eRAMYUPXqTcCbnYF3bAL97S2ILwtM1l2jXOjFCoIw/7vNwUKgtUw5eRwCmMqR8F6tJ6kWA6QAr1QEgGdFMtX9EEuzAUXyUW/5oQ5M9j8wHfEwj0ontzAsr9fQnTHG8LgEDXWpyAJq2jM6WEwKhEfCq2J7ZwlH6dHyJLv/NzzbtfG8MmACbtqAtD5iuTsSetceIsug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YrgGetB/TLOjMS3vQknhv/SINTgMiPk7KqpkdclIcUs=;
- b=iW3jsrpo9QXt4SmTdh80KE4thGPDh8fejFIagobwIQSERcoWvLGWdLcnqwJhThlAROWm8mvRxQA47EVCi2eq5eIqa5WE0yHiZwRofiP/64oBAIcTBy9/FMHs0x/UhCYe76qnqD/RIxdsnzqz50SrhQQ5XHpX7WIjLrthz2kNv59+A3mkKtYd3h3MQR4rPdtfo4TK1QbuPLEW/MLJ9voFSb02DML6kB8S+aqt7c7YeYtZ6sH/cLX22f9gL/69KTjRMugSIK3H29HTjUPGFQd45Kix5z6Vce1d/4Amspy1WZOvPhvdO4CpC2PD1IOhhn2ZmJ7Dkg4nMNlIVcZcz5zeig==
-Received: from BN8PR04CA0001.namprd04.prod.outlook.com (2603:10b6:408:70::14)
- by DM6PR12MB4863.namprd12.prod.outlook.com (2603:10b6:5:1b9::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.24; Wed, 5 Oct
- 2022 03:23:16 +0000
-Received: from BN8NAM11FT062.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:70:cafe::c8) by BN8PR04CA0001.outlook.office365.com
- (2603:10b6:408:70::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.26 via Frontend
- Transport; Wed, 5 Oct 2022 03:23:16 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- BN8NAM11FT062.mail.protection.outlook.com (10.13.177.34) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5709.10 via Frontend Transport; Wed, 5 Oct 2022 03:23:16 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.26; Tue, 4 Oct 2022
- 20:23:08 -0700
-Received: from dev.nvidia.com (10.126.230.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.29; Tue, 4 Oct 2022
- 20:23:05 -0700
-From: Chaitanya Kulkarni <kch@nvidia.com>
-To: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-omap@vger.kernel.org>, <linux-remoteproc@vger.kernel.org>,
-	<linux-mmc@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-nvme@lists.infradead.org>,
-	<linux-s390@vger.kernel.org>, <linux-scsi@vger.kernel.org>
-CC: <axboe@kernel.dk>, <efremov@linux.com>, <josef@toxicpanda.com>,
-	<idryomov@gmail.com>, <dongsheng.yang@easystack.cn>, <haris.iqbal@ionos.com>,
-	<jinpu.wang@ionos.com>, <mst@redhat.com>, <jasowang@redhat.com>,
-	<pbonzini@redhat.com>, <stefanha@redhat.com>, <ohad@wizery.com>,
-	<andersson@kernel.org>, <baolin.wang@linux.alibaba.com>,
-	<ulf.hansson@linaro.org>, <richard@nod.at>, <miquel.raynal@bootlin.com>,
-	<vigneshr@ti.com>, <marcan@marcan.st>, <sven@svenpeter.dev>,
-	<alyssa@rosenzweig.io>, <kbusch@kernel.org>, <hch@lst.de>,
-	<sagi@grimberg.me>, <sth@linux.ibm.com>, <hoeppner@linux.ibm.com>,
-	<hca@linux.ibm.com>, <gor@linux.ibm.com>, <agordeev@linux.ibm.com>,
-	<borntraeger@linux.ibm.com>, <svens@linux.ibm.com>, <jejb@linux.ibm.com>,
-	<martin.petersen@oracle.com>, <hare@suse.de>, <kch@nvidia.com>,
-	<bhelgaas@google.com>, <john.garry@huawei.com>, <mcgrof@kernel.org>,
-	<christophe.jaillet@wanadoo.fr>, <vaibhavgupta40@gmail.com>,
-	<wsa+renesas@sang-engineering.com>, <damien.lemoal@opensource.wdc.com>,
-	<johannes.thumshirn@wdc.com>, <bvanassche@acm.org>, <ming.lei@redhat.com>,
-	<shinichiro.kawasaki@wdc.com>, <vincent.fu@samsung.com>,
-	<christoph.boehmwalder@linbit.com>, <joel@jms.id.au>,
-	<vincent.whitchurch@axis.com>, <nbd@other.debian.org>,
-	<ceph-devel@vger.kernel.org>, <virtualization@lists.linux-foundation.org>,
-	<asahi@lists.linux.dev>
-Subject: [RFC PATCH 00/21] block: add and use init tagset helper
-Date: Tue, 4 Oct 2022 20:22:36 -0700
-Message-ID: <20221005032257.80681-1-kch@nvidia.com>
-X-Mailer: git-send-email 2.29.0
+	(Client CN "*.hgst.iphmx.com", Issuer "Go Daddy Secure Certificate Authority - G2" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id E898F20319
+	for <nbd@other.debian.org>; Wed,  5 Oct 2022 05:19:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1664947142; x=1696483142;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=t4Ggk8JN7aJqaDrHkVXVhSu8+EOy8cvFecQ8rYNiwuM=;
+  b=kGI5wnAn+4Z1zs33V6MK7f6LbcrRa1T53/GEbBmi4SEBLVOmoaX8vmn2
+   GKAe5PcT0+rAD5PDB5NYilQepmzA2ik3XjNQh0kNwwfDaL9gvRlEL8raf
+   KvbX24wXLtcpR+nfgx4VYx8ZH8wK8/7uRfu1/QiO3spD9TmYowhNpqZpK
+   t4DkzpISYkPXEm1QZydLnXyAxJNS8X6mgeSHD9uiW3IWqDaUsEcHz90R9
+   4qnBBEelh8+s/RD6Xz89Z7NGOZjox7YMeBKUYwC8zpRwDdWtmbu7Can6G
+   gmQy2Xy7TYcVJH4T56MSsENcITCyzjQIAjcvfNFyykE3nlgF2mr+JTEpe
+   w==;
+X-IronPort-AV: E=Sophos;i="5.95,159,1661788800"; 
+   d="scan'208";a="325118461"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com) ([199.255.45.14])
+  by ob1.hgst.iphmx.com with ESMTP; 05 Oct 2022 13:11:28 +0800
+IronPort-SDR: MVR6Sa4MZdvkPaiolYiR1Z1o+sKn3Mcp5pVgi2fD5I04pWXyfYROAw33ouZkR+zvNAj+1EKece
+ XrajnzYwFMgYjl4f2gxBYUitz1SNr+yhYFIhSw5nKrH5If7a2TKAQJmALQxDFvk2CBVzH83MdQ
+ p91aZ3MRmTRZ6I2Vqm6wQ0ZATn1gkIloilOBlqeE/0F4keNXlfWIuqR7UcWiHGgSpWP/6ZhBDl
+ 7hDPmEjjn00l2VxnMjMN+n0oGzZPDYYgeNaKoeEXzgSVa/FYLfvHEnPu8+j64+6w262WUpw9kY
+ 7HeyIoZfA5wWh0XlqzIsX6vA
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 04 Oct 2022 21:31:16 -0700
+IronPort-SDR: VIrbP8M/gtvogJpeAr0Zxhbmfb714564c2ydIJ3yYbWFZPbTr4u+xHPvbtd0gWn3If0tXVs94G
+ wU4WRgZlXe+E4YGeELXDyf4GuYKqfkiIY7S9ZG1f6TpeOhqAhGVikErWAnXj99uz/KkIQhqZo4
+ eu9/G7gqMsmk38rhxJAFuLucuDo+e1x2QgiEKoyPsk9FpK8Pt4/uRXztUBn/uzqqKMQTR/9cM5
+ PHmBkWHlkxs3GJCTuT+mjDpjI04t79A0iQ8d99wkskw7fSaXYZDlZignrlf7hcJc88FacDpe45
+ w4Q=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 04 Oct 2022 22:11:29 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+	by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4Mj2jW3C65z1Rwt8
+	for <nbd@other.debian.org>; Tue,  4 Oct 2022 22:11:27 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+	reason="pass (just generated, assumed good)"
+	header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+	opensource.wdc.com; h=content-transfer-encoding:content-type
+	:in-reply-to:organization:from:references:to:content-language
+	:subject:user-agent:mime-version:date:message-id; s=dkim; t=
+	1664946685; x=1667538686; bh=t4Ggk8JN7aJqaDrHkVXVhSu8+EOy8cvFecQ
+	8rYNiwuM=; b=tLHviaNBSZE88xLdQVOFiXAWb32/6ojwACuLRRnG8xU9QNHEWqD
+	f50ptDx5qVWJYd6IRLeybuJOMi2M6t5KRZI3AxvWZksBtihDPujw8HBCFBVcUIpO
+	ZfC3UqxRdafUnH0qS8IsrY5TqmTzapsn4pisieIRMNWD7VofvqnWQyDmT8TxJChB
+	KhPs6ot/7bsSNTEjACMw8pxc5R4wP5XrPylMOZlJtJDzi6yEHX9iayUOd3W/Y9EM
+	lajOzQCUf/ULm/9m5UmUAMRiYIxjEIGpDaIN3IIJblmsuApIMI/WI7OzPk1XLIjn
+	5iKMLXkiVy+cs7ipqm1Z7lpyxgZvmyF7ogw==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+	by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id 0g3IKUe71HsM for <nbd@other.debian.org>;
+	Tue,  4 Oct 2022 22:11:25 -0700 (PDT)
+Received: from [10.225.163.106] (unknown [10.225.163.106])
+	by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4Mj2jD37C6z1RvLy;
+	Tue,  4 Oct 2022 22:11:12 -0700 (PDT)
+Message-ID: <6fee2d7a-7fd1-73ee-2911-87a4ed3e8769@opensource.wdc.com>
+Date: Wed, 5 Oct 2022 14:11:11 +0900
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.126.230.35]
-X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT062:EE_|DM6PR12MB4863:EE_
-X-MS-Office365-Filtering-Correlation-Id: fce348ec-947a-4641-efb6-08daa680f183
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	9FlJpRPPWo/UczTdTCd5SyHamL/pqbpEL/Ib+DcXgEmnGmZ9HEQsxCsQSSaqCQcTZjccDkXjj6u6yhsKWFHSidDTY7fUyBz2KqAnbklpfj1swJc7PjxXCgzNELZVysLo4szooec2ZY8lzfdkSE6HtdY+DtVcTMVjT8/jV+DKt5E6leNDKjVvSwh8EQ+Et7lmmqiT5dBceOsWFEahHF9xDSoPAe8cAus+8SNEDsQM/6NnzlmMJLTqU3TNS2er/HUj3CSYob4ij3EhgCsbqwKE9P/opr4klhGiEvSjB3DqbxFBhoQWFGh3JkLy/bkJIE9ynCNZz144NHMITmR5CHCTeusxffP0uhFo7kUdiQBTkgxqKecyfPQnuhlX/bH6m9Szl15GpW7txUmH/1j62W3KaE9uc5ouAyMtQlwD5YGw+snHXJjYVq7VluiZGSPIx5lNKrFTs9brAjh+oHAqB/n511BLraQb8GC6Uxu2tRGuunDb47VIS8P+D/hbiblfD/8mXucfE4lBfj0SIMlLUoPlKp0fkZ4FwsXtU2X1Gkn+mFFL+PnaG2Bvhazs80UG8ITqBnJHvmm8BR0hiA5I9yOwQqNN/La6BsPmng/IjQ0jXZDQtHd5tXAwu7XpWpAsOHNrnNQejJI1nT3M/dr+3H7VZ902lZCeV4RpYrjbSktdNLt+0q4Qgde1mX3VLGrvRqUzqyMBNIPAnRd4/ehBsgzMWgL1bZOGZzvOa9nJKokVBQEo8fw8n1c1PismK7nqoMDbHtoaNR1b+Woq9GxppbdQ+Uk3j/bTNKU/oQZ46LetuLMSQ2+S8Aek1LfTGwDQtcXmq39TIGsaevKwgzMGZjrTtWGxjjuYVEglp3ZjLIPlBV0=
-X-Forefront-Antispam-Report:
-	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(39860400002)(136003)(396003)(451199015)(46966006)(40470700004)(36840700001)(7696005)(41300700001)(36756003)(6666004)(82740400003)(5660300002)(7366002)(7406005)(7416002)(8936002)(26005)(8676002)(316002)(70206006)(70586007)(4326008)(336012)(40480700001)(83380400001)(47076005)(426003)(82310400005)(16526019)(186003)(1076003)(921005)(356005)(7636003)(40460700003)(2906002)(2616005)(36860700001)(478600001)(110136005)(54906003)(21314003)(2101003)(83996005);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2022 03:23:16.2764
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fce348ec-947a-4641-efb6-08daa680f183
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT062.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4863
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [RFC PATCH 01/21] block: add and use init tagset helper
+Content-Language: en-US
+To: Chaitanya Kulkarni <kch@nvidia.com>, linux-block@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-omap@vger.kernel.org,
+ linux-remoteproc@vger.kernel.org, linux-mmc@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
+ linux-scsi@vger.kernel.org
+Cc: axboe@kernel.dk, efremov@linux.com, josef@toxicpanda.com,
+ idryomov@gmail.com, dongsheng.yang@easystack.cn, haris.iqbal@ionos.com,
+ jinpu.wang@ionos.com, mst@redhat.com, jasowang@redhat.com,
+ pbonzini@redhat.com, stefanha@redhat.com, ohad@wizery.com,
+ andersson@kernel.org, baolin.wang@linux.alibaba.com, ulf.hansson@linaro.org,
+ richard@nod.at, miquel.raynal@bootlin.com, vigneshr@ti.com,
+ marcan@marcan.st, sven@svenpeter.dev, alyssa@rosenzweig.io,
+ kbusch@kernel.org, hch@lst.de, sagi@grimberg.me, sth@linux.ibm.com,
+ hoeppner@linux.ibm.com, hca@linux.ibm.com, gor@linux.ibm.com,
+ agordeev@linux.ibm.com, borntraeger@linux.ibm.com, svens@linux.ibm.com,
+ jejb@linux.ibm.com, martin.petersen@oracle.com, hare@suse.de,
+ bhelgaas@google.com, john.garry@huawei.com, mcgrof@kernel.org,
+ christophe.jaillet@wanadoo.fr, vaibhavgupta40@gmail.com,
+ wsa+renesas@sang-engineering.com, johannes.thumshirn@wdc.com,
+ bvanassche@acm.org, ming.lei@redhat.com, shinichiro.kawasaki@wdc.com,
+ vincent.fu@samsung.com, christoph.boehmwalder@linbit.com, joel@jms.id.au,
+ vincent.whitchurch@axis.com, nbd@other.debian.org,
+ ceph-devel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ asahi@lists.linux.dev
+References: <20221005032257.80681-1-kch@nvidia.com>
+ <20221005032257.80681-2-kch@nvidia.com>
+From: Damien Le Moal <damien.lemoal@opensource.wdc.com>
+Organization: Western Digital Research
+In-Reply-To: <20221005032257.80681-2-kch@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <mPGk56XTN3I.A.dtD.cQQPjB@bendel>
+Resent-Message-ID: <eMJxz9ed84E.A.LiE.NfRPjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2227
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2228
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -156,69 +148,110 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20221005032257.80681-1-kch@nvidia.com
-Resent-Date: Wed,  5 Oct 2022 04:12:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6fee2d7a-7fd1-73ee-2911-87a4ed3e8769@opensource.wdc.com
+Resent-Date: Wed,  5 Oct 2022 05:36:13 +0000 (UTC)
 
-Hi,
+On 10/5/22 12:22, Chaitanya Kulkarni wrote:
+> Add and use the helper to initialize the common fields of the tag_set
+> such as blk_mq_ops, number of h/w queues, queue depth, command size,
+> numa_node, timeout, BLK_MQ_F_XXX flags, driver data. This initialization
+> is spread all over the block drivers. This avoids the code repetation of
+> the inialization code of the tag set in current block drivers and any
 
-Add and use the helper to initialize the common fields of the tag_set
-such as blk_mq_ops, number of h/w queues, queue depth, command size,
-numa_node, timeout, BLK_MQ_F_XXX flags, driver data. This initialization
-is spread all over the block drivers. This avoids repetation of
-inialization code of the tag set in current block drivers and any future
-ones.
+s/inialization/initialization
+s/repetation/repetition
 
-P.S. I'm aware of the EXPORT_SYMBOL_GPL() checkpatch warn just to make
-get some feedback to so I can remove the RFC tag.
+> future ones.
+> 
+> Signed-off-by: Chaitanya Kulkarni <kch@nvidia.com>
+> ---
+>  block/blk-mq.c                | 20 ++++++++++++++++++++
+>  drivers/block/null_blk/main.c | 10 +++-------
+>  include/linux/blk-mq.h        |  5 +++++
+>  3 files changed, 28 insertions(+), 7 deletions(-)
+> 
+> diff --git a/block/blk-mq.c b/block/blk-mq.c
+> index 8070b6c10e8d..e3a8dd81bbe2 100644
+> --- a/block/blk-mq.c
+> +++ b/block/blk-mq.c
+> @@ -4341,6 +4341,26 @@ static int blk_mq_alloc_tag_set_tags(struct blk_mq_tag_set *set,
+>  	return blk_mq_realloc_tag_set_tags(set, 0, new_nr_hw_queues);
+>  }
+>  
+> +void blk_mq_init_tag_set(struct blk_mq_tag_set *set,
+> +		const struct blk_mq_ops *ops, unsigned int nr_hw_queues,
+> +		unsigned int queue_depth, unsigned int cmd_size, int numa_node,
+> +		unsigned int timeout, unsigned int flags, void *driver_data)
 
--ck
+That is an awful lot of arguments... I would be tempted to say pack all
+these into a struct but then that would kind of negate this patchset goal.
+Using a function with that many arguments will be error prone, and hard to
+review... Not a fan.
 
-Chaitanya Kulkarni (21):
-  block: add and use init tagset helper
-  loop: use lib tagset init helper
-  nbd: use lib tagset init helper
-  rnbd: use lib tagset init helper
-  bsg-lib: use lib tagset init helper
-  rnbd-clt: use lib tagset init helper
-  virtio-blk: use lib tagset init helper
-  scsi: use lib tagset init helper
-  block: use lib tagset init helper
-  amiflop: use lib tagset init helper
-  floppy: use lib tagset init helper
-  mtip32xx: use lib tagset init helper
-  z3ram: use lib tagset init helper
-  scm_blk: use lib tagset init helper
-  ubi: use lib tagset init helper
-  mmc: core: use lib tagset init helper
-  dasd: use lib tagset init helper
-  nvme-core: use lib tagset init helper for I/O q
-  nvme-core: use lib tagset init helper for adminq
-  nvme-apple: use lib tagset init helper
-  nvme-pci: use lib tagset init helper
+> +{
+> +	if (!set)
+> +		return;
+> +
+> +	set->ops = ops;
+> +	set->nr_hw_queues = nr_hw_queues;
+> +	set->queue_depth = queue_depth;
+> +	set->cmd_size = cmd_size;
+> +	set->numa_node = numa_node;
+> +	set->timeout = timeout;
+> +	set->flags = flags;
+> +	set->driver_data = driver_data;
+> +}
+> +
 
- block/blk-mq.c                    | 27 ++++++++++++++++++++++-----
- block/bsg-lib.c                   |  9 +++------
- drivers/block/amiflop.c           |  8 +++-----
- drivers/block/floppy.c            |  7 ++-----
- drivers/block/loop.c              | 12 ++++--------
- drivers/block/mtip32xx/mtip32xx.c | 13 ++++---------
- drivers/block/nbd.c               | 11 +++--------
- drivers/block/null_blk/main.c     | 10 +++-------
- drivers/block/rbd.c               | 11 +++++------
- drivers/block/rnbd/rnbd-clt.c     | 25 +++++++++++--------------
- drivers/block/virtio_blk.c        | 14 +++++---------
- drivers/block/z2ram.c             |  7 ++-----
- drivers/mmc/core/queue.c          |  9 +++------
- drivers/mtd/ubi/block.c           | 11 +++--------
- drivers/nvme/host/apple.c         | 25 ++++++++-----------------
- drivers/nvme/host/core.c          | 21 +++++----------------
- drivers/nvme/host/pci.c           | 25 +++++++------------------
- drivers/s390/block/dasd_genhd.c   |  9 +++------
- drivers/s390/block/scm_blk.c      | 10 +++-------
- drivers/scsi/scsi_lib.c           | 13 +++++--------
- include/linux/blk-mq.h            |  5 +++++
- 21 files changed, 109 insertions(+), 173 deletions(-)
+No blank line here.
+
+> +EXPORT_SYMBOL_GPL(blk_mq_init_tag_set);
+> +
+>  /*
+>   * Alloc a tag set to be associated with one or more request queues.
+>   * May fail with EINVAL for various error conditions. May adjust the
+> diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
+> index 1f154f92f4c2..0b07aab980c4 100644
+> --- a/drivers/block/null_blk/main.c
+> +++ b/drivers/block/null_blk/main.c
+> @@ -1926,13 +1926,9 @@ static int null_init_tag_set(struct nullb *nullb, struct blk_mq_tag_set *set)
+>  			flags |= BLK_MQ_F_BLOCKING;
+>  	}
+>  
+> -	set->ops = &null_mq_ops;
+> -	set->cmd_size	= sizeof(struct nullb_cmd);
+> -	set->flags = flags;
+> -	set->driver_data = nullb;
+> -	set->nr_hw_queues = hw_queues;
+> -	set->queue_depth = queue_depth;
+> -	set->numa_node = numa_node;
+> +	blk_mq_init_tag_set(set, &null_mq_ops, hw_queues, queue_depth,
+> +			sizeof(struct nullb_cmd), numa_node, 0, flags, nullb);
+> +
+>  	if (poll_queues) {
+>  		set->nr_hw_queues += poll_queues;
+>  		set->nr_maps = 3;
+> diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
+> index ba18e9bdb799..06087a8e4398 100644
+> --- a/include/linux/blk-mq.h
+> +++ b/include/linux/blk-mq.h
+> @@ -708,6 +708,11 @@ int blk_mq_init_allocated_queue(struct blk_mq_tag_set *set,
+>  		struct request_queue *q);
+>  void blk_mq_destroy_queue(struct request_queue *);
+>  
+> +
+
+No need for the extra whiteline.
+
+> +void blk_mq_init_tag_set(struct blk_mq_tag_set *set,
+> +		const struct blk_mq_ops *ops, unsigned int nr_hw_queues,
+> +		unsigned int queue_depth, unsigned int cmd_size, int numa_node,
+> +		unsigned int timeout, unsigned int flags, void *driver_data);
+>  int blk_mq_alloc_tag_set(struct blk_mq_tag_set *set);
+>  int blk_mq_alloc_sq_tag_set(struct blk_mq_tag_set *set,
+>  		const struct blk_mq_ops *ops, unsigned int queue_depth,
 
 -- 
-2.29.0
+Damien Le Moal
+Western Digital Research
 
