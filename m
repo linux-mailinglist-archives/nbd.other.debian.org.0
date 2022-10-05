@@ -1,81 +1,152 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DE405F4B35
-	for <lists+nbd@lfdr.de>; Tue,  4 Oct 2022 23:53:40 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C835F4EFE
+	for <lists+nbd@lfdr.de>; Wed,  5 Oct 2022 06:12:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 050F0203D3; Tue,  4 Oct 2022 21:53:40 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Oct  4 21:53:39 2022
-Old-Return-Path: <eblake@redhat.com>
+	id 2AB8F203C2; Wed,  5 Oct 2022 04:12:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Oct  5 04:12:12 2022
+Old-Return-Path: <chaitanyak@nvidia.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-11.9 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
-	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_LOW
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,TO_TOO_MANY autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0695220281
-	for <lists-other-nbd@bendel.debian.org>; Tue,  4 Oct 2022 21:53:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DD9AD203B9
+	for <lists-other-nbd@bendel.debian.org>; Wed,  5 Oct 2022 03:55:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.863 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.083, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_LOW=-0.7]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=3.736 tagged_above=-10000 required=5.3
+	tests=[CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.083, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001, TO_TOO_MANY=1]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Ivx2GSxSkYAj for <lists-other-nbd@bendel.debian.org>;
-	Tue,  4 Oct 2022 21:53:20 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id AB41820278
-	for <nbd@other.debian.org>; Tue,  4 Oct 2022 21:53:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1664920395;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BQpOJsBfjImNyrlgmVEcpVUvmE8TGlz/ipyCLFVfnZg=;
-	b=DN3LytS0521Ve6XuDSvuTnP8UA7GlX67SrAYNiuKG0sFiDmB3PbkfGOLrMMiRdSqyQgPdA
-	b07AQPusplnSVWrVvu5ngMsr8O0/5h3bL9s94607CXFNMcFFBkKz6vWB4K4nnpOkm7HbGW
-	DkjuME34dP71NmhuBkKLCCvmcq/jaLo=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-264-ytMDyMdON9G8qPc6aXiRkg-1; Tue, 04 Oct 2022 17:21:50 -0400
-X-MC-Unique: ytMDyMdON9G8qPc6aXiRkg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A14B6185A7A8;
-	Tue,  4 Oct 2022 21:21:49 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.29])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id DCDA41121315;
-	Tue,  4 Oct 2022 21:21:48 +0000 (UTC)
-Date: Tue, 4 Oct 2022 16:21:46 -0500
-From: Eric Blake <eblake@redhat.com>
-To: nbd@other.debian.org
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, libguestfs@redhat.com,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Subject: Re: [PATCH] spec: Add NBD_OPT_EXTENDED_HEADERS
-Message-ID: <20221004212146.ufycpumvmptijwcy@redhat.com>
-References: <20211203231307.wmtbw7r72tyzkkax@redhat.com>
- <20211203231434.3900824-1-eblake@redhat.com>
+	with ESMTP id OUkubXMWTlTH for <lists-other-nbd@bendel.debian.org>;
+	Wed,  5 Oct 2022 03:54:55 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .nvidia. - helo: .nam11-dm6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
+X-Greylist: delayed 1027 seconds by postgrey-1.36 at bendel; Wed, 05 Oct 2022 03:54:55 UTC
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2047.outbound.protection.outlook.com [40.107.223.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 4C5B520383
+	for <nbd@other.debian.org>; Wed,  5 Oct 2022 03:54:53 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EAnP4nz11d924n5Ea6rkfbTTWZkOcBMR/h7ZkQJ1oHltLxDJaeH/Iez5BS7J79qQ2VcFFwKYgIGmCiYXjOb76HvhXSy2EaAQdXrVxivVboL/NYUst26hybzA8F8XTgXAFdbEcsSJMarnV5z3mvpNv6/2qB++DsmW8q+cjiY5mYdZRhiZtGSYFd3lR+A2iFGBWA/Ij8OWKnFTulTcMU+8KAKsLHdCYRDn4ExerGOo0Cz+trXQUARNz81ypcs8fpGxbeso3FeGPHnm9ypVjlCvgTaHFSZVumbmAN2zpDwlny92lM3GEdkISUQHh9Y61BlOgXREHFsrbzCGQ5y2BJTFOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YrgGetB/TLOjMS3vQknhv/SINTgMiPk7KqpkdclIcUs=;
+ b=Xdz1XM9XgHs5tzhGy60K1VMGf7QyJWaVPAJhDsbnmp5W/XTYb8Bi8f8nb1UQ9e1IMXiPYTTYFi+RlZ3dI4B1Y65Z0QQl37FH3c1C70lf2zoeoThJTzvL5pDhglUPoxYHgg6oC5ZPXVTzZ7fI8eRAMYUPXqTcCbnYF3bAL97S2ILwtM1l2jXOjFCoIw/7vNwUKgtUw5eRwCmMqR8F6tJ6kWA6QAr1QEgGdFMtX9EEuzAUXyUW/5oQ5M9j8wHfEwj0ontzAsr9fQnTHG8LgEDXWpyAJq2jM6WEwKhEfCq2J7ZwlH6dHyJLv/NzzbtfG8MmACbtqAtD5iuTsSetceIsug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YrgGetB/TLOjMS3vQknhv/SINTgMiPk7KqpkdclIcUs=;
+ b=iW3jsrpo9QXt4SmTdh80KE4thGPDh8fejFIagobwIQSERcoWvLGWdLcnqwJhThlAROWm8mvRxQA47EVCi2eq5eIqa5WE0yHiZwRofiP/64oBAIcTBy9/FMHs0x/UhCYe76qnqD/RIxdsnzqz50SrhQQ5XHpX7WIjLrthz2kNv59+A3mkKtYd3h3MQR4rPdtfo4TK1QbuPLEW/MLJ9voFSb02DML6kB8S+aqt7c7YeYtZ6sH/cLX22f9gL/69KTjRMugSIK3H29HTjUPGFQd45Kix5z6Vce1d/4Amspy1WZOvPhvdO4CpC2PD1IOhhn2ZmJ7Dkg4nMNlIVcZcz5zeig==
+Received: from BN8PR04CA0001.namprd04.prod.outlook.com (2603:10b6:408:70::14)
+ by DM6PR12MB4863.namprd12.prod.outlook.com (2603:10b6:5:1b9::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.24; Wed, 5 Oct
+ 2022 03:23:16 +0000
+Received: from BN8NAM11FT062.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:70:cafe::c8) by BN8PR04CA0001.outlook.office365.com
+ (2603:10b6:408:70::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.26 via Frontend
+ Transport; Wed, 5 Oct 2022 03:23:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ BN8NAM11FT062.mail.protection.outlook.com (10.13.177.34) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5709.10 via Frontend Transport; Wed, 5 Oct 2022 03:23:16 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.26; Tue, 4 Oct 2022
+ 20:23:08 -0700
+Received: from dev.nvidia.com (10.126.230.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.29; Tue, 4 Oct 2022
+ 20:23:05 -0700
+From: Chaitanya Kulkarni <kch@nvidia.com>
+To: <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-omap@vger.kernel.org>, <linux-remoteproc@vger.kernel.org>,
+	<linux-mmc@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-nvme@lists.infradead.org>,
+	<linux-s390@vger.kernel.org>, <linux-scsi@vger.kernel.org>
+CC: <axboe@kernel.dk>, <efremov@linux.com>, <josef@toxicpanda.com>,
+	<idryomov@gmail.com>, <dongsheng.yang@easystack.cn>, <haris.iqbal@ionos.com>,
+	<jinpu.wang@ionos.com>, <mst@redhat.com>, <jasowang@redhat.com>,
+	<pbonzini@redhat.com>, <stefanha@redhat.com>, <ohad@wizery.com>,
+	<andersson@kernel.org>, <baolin.wang@linux.alibaba.com>,
+	<ulf.hansson@linaro.org>, <richard@nod.at>, <miquel.raynal@bootlin.com>,
+	<vigneshr@ti.com>, <marcan@marcan.st>, <sven@svenpeter.dev>,
+	<alyssa@rosenzweig.io>, <kbusch@kernel.org>, <hch@lst.de>,
+	<sagi@grimberg.me>, <sth@linux.ibm.com>, <hoeppner@linux.ibm.com>,
+	<hca@linux.ibm.com>, <gor@linux.ibm.com>, <agordeev@linux.ibm.com>,
+	<borntraeger@linux.ibm.com>, <svens@linux.ibm.com>, <jejb@linux.ibm.com>,
+	<martin.petersen@oracle.com>, <hare@suse.de>, <kch@nvidia.com>,
+	<bhelgaas@google.com>, <john.garry@huawei.com>, <mcgrof@kernel.org>,
+	<christophe.jaillet@wanadoo.fr>, <vaibhavgupta40@gmail.com>,
+	<wsa+renesas@sang-engineering.com>, <damien.lemoal@opensource.wdc.com>,
+	<johannes.thumshirn@wdc.com>, <bvanassche@acm.org>, <ming.lei@redhat.com>,
+	<shinichiro.kawasaki@wdc.com>, <vincent.fu@samsung.com>,
+	<christoph.boehmwalder@linbit.com>, <joel@jms.id.au>,
+	<vincent.whitchurch@axis.com>, <nbd@other.debian.org>,
+	<ceph-devel@vger.kernel.org>, <virtualization@lists.linux-foundation.org>,
+	<asahi@lists.linux.dev>
+Subject: [RFC PATCH 00/21] block: add and use init tagset helper
+Date: Tue, 4 Oct 2022 20:22:36 -0700
+Message-ID: <20221005032257.80681-1-kch@nvidia.com>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211203231434.3900824-1-eblake@redhat.com>
-User-Agent: NeoMutt/20220429
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.126.230.35]
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT062:EE_|DM6PR12MB4863:EE_
+X-MS-Office365-Filtering-Correlation-Id: fce348ec-947a-4641-efb6-08daa680f183
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	9FlJpRPPWo/UczTdTCd5SyHamL/pqbpEL/Ib+DcXgEmnGmZ9HEQsxCsQSSaqCQcTZjccDkXjj6u6yhsKWFHSidDTY7fUyBz2KqAnbklpfj1swJc7PjxXCgzNELZVysLo4szooec2ZY8lzfdkSE6HtdY+DtVcTMVjT8/jV+DKt5E6leNDKjVvSwh8EQ+Et7lmmqiT5dBceOsWFEahHF9xDSoPAe8cAus+8SNEDsQM/6NnzlmMJLTqU3TNS2er/HUj3CSYob4ij3EhgCsbqwKE9P/opr4klhGiEvSjB3DqbxFBhoQWFGh3JkLy/bkJIE9ynCNZz144NHMITmR5CHCTeusxffP0uhFo7kUdiQBTkgxqKecyfPQnuhlX/bH6m9Szl15GpW7txUmH/1j62W3KaE9uc5ouAyMtQlwD5YGw+snHXJjYVq7VluiZGSPIx5lNKrFTs9brAjh+oHAqB/n511BLraQb8GC6Uxu2tRGuunDb47VIS8P+D/hbiblfD/8mXucfE4lBfj0SIMlLUoPlKp0fkZ4FwsXtU2X1Gkn+mFFL+PnaG2Bvhazs80UG8ITqBnJHvmm8BR0hiA5I9yOwQqNN/La6BsPmng/IjQ0jXZDQtHd5tXAwu7XpWpAsOHNrnNQejJI1nT3M/dr+3H7VZ902lZCeV4RpYrjbSktdNLt+0q4Qgde1mX3VLGrvRqUzqyMBNIPAnRd4/ehBsgzMWgL1bZOGZzvOa9nJKokVBQEo8fw8n1c1PismK7nqoMDbHtoaNR1b+Woq9GxppbdQ+Uk3j/bTNKU/oQZ46LetuLMSQ2+S8Aek1LfTGwDQtcXmq39TIGsaevKwgzMGZjrTtWGxjjuYVEglp3ZjLIPlBV0=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(39860400002)(136003)(396003)(451199015)(46966006)(40470700004)(36840700001)(7696005)(41300700001)(36756003)(6666004)(82740400003)(5660300002)(7366002)(7406005)(7416002)(8936002)(26005)(8676002)(316002)(70206006)(70586007)(4326008)(336012)(40480700001)(83380400001)(47076005)(426003)(82310400005)(16526019)(186003)(1076003)(921005)(356005)(7636003)(40460700003)(2906002)(2616005)(36860700001)(478600001)(110136005)(54906003)(21314003)(2101003)(83996005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2022 03:23:16.2764
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fce348ec-947a-4641-efb6-08daa680f183
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN8NAM11FT062.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4863
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <KxKgx0CPUJJ.A.LuH.jtKPjB@bendel>
+Resent-Message-ID: <mPGk56XTN3I.A.dtD.cQQPjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2226
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2227
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,63 +156,69 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20221004212146.ufycpumvmptijwcy@redhat.com
-Resent-Date: Tue,  4 Oct 2022 21:53:40 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20221005032257.80681-1-kch@nvidia.com
+Resent-Date: Wed,  5 Oct 2022 04:12:12 +0000 (UTC)
 
-On Fri, Dec 03, 2021 at 05:14:34PM -0600, Eric Blake wrote:
-> Add a new negotiation feature where the client and server agree to use
-> larger packet headers on every packet sent during transmission phase.
-> This has two purposes: first, it makes it possible to perform
-> operations like trim, write zeroes, and block status on more than 2^32
-> bytes in a single command; this in turn requires that some structured
-> replies from the server also be extended to match.  The wording chosen
-> here is careful to permit a server to use either flavor in its reply
-> (that is, a request less than 32-bits can trigger an extended reply,
-> and conversely a request larger than 32-bits can trigger a compact
-> reply).
+Hi,
 
-Following up on this original proposal with something that came out of
-KVM Forum this year.
+Add and use the helper to initialize the common fields of the tag_set
+such as blk_mq_ops, number of h/w queues, queue depth, command size,
+numa_node, timeout, BLK_MQ_F_XXX flags, driver data. This initialization
+is spread all over the block drivers. This avoids repetation of
+inialization code of the tag set in current block drivers and any future
+ones.
 
-> +* `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` (6)
-> +
-> +  This chunk type is in the status chunk category.  *length* MUST be
-> +  4 + (a positive multiple of 16).  The semantics of this chunk mirror
-> +  those of `NBD_REPLY_TYPE_BLOCK_STATUS`, other than the use of a
-> +  larger *extent length* field, as well as added padding to ease
-> +  alignment.  This chunk type MUST NOT be used unless extended headers
-> +  were negotiated with `NBD_OPT_EXTENDED_HEADERS`.
-> +
-> +  The payload starts with:
-> +
-> +  32 bits, metadata context ID  
-> +
-> +  and is followed by a list of one or more descriptors, each with this
-> +  layout:
-> +
-> +  64 bits, length of the extent to which the status below
-> +     applies (unsigned, MUST be nonzero)  
-> +  32 bits, status flags  
-> +  32 bits, padding (MUST be zero)
+P.S. I'm aware of the EXPORT_SYMBOL_GPL() checkpatch warn just to make
+get some feedback to so I can remove the RFC tag.
 
-During KVM Forum, I had several conversations about Zoned Block
-Devices (https://zonedstorage.io/docs/linux/zbd-api), and what it
-would take to expose ZBD information over NBD.  In particular,
-NBD_CMD_BLOCK_STATUS sounds like a great way for advertising
-information about zones (by adding several metadata contexts that can
-be negotiated during NBD_OPT_SET_META_CONTEXT), except for the fact
-that a zone might be larger than 32 bits in size.  So Rich Jones asked
-me the question of whether my work on 64-bit extensions to the NBD
-protocol could also allow for a server to advertise a metadata context
-only to clients that support 64-bit extensions, at which point it can
-report 64-bit offsets or lengths as needed, rather than being limited
-to 32-bit status flags.
+-ck
 
-The idea definitely has merit, so I'm working on incorporating that
-into my next revision for 64-bit extensions in NBD.
+Chaitanya Kulkarni (21):
+  block: add and use init tagset helper
+  loop: use lib tagset init helper
+  nbd: use lib tagset init helper
+  rnbd: use lib tagset init helper
+  bsg-lib: use lib tagset init helper
+  rnbd-clt: use lib tagset init helper
+  virtio-blk: use lib tagset init helper
+  scsi: use lib tagset init helper
+  block: use lib tagset init helper
+  amiflop: use lib tagset init helper
+  floppy: use lib tagset init helper
+  mtip32xx: use lib tagset init helper
+  z3ram: use lib tagset init helper
+  scm_blk: use lib tagset init helper
+  ubi: use lib tagset init helper
+  mmc: core: use lib tagset init helper
+  dasd: use lib tagset init helper
+  nvme-core: use lib tagset init helper for I/O q
+  nvme-core: use lib tagset init helper for adminq
+  nvme-apple: use lib tagset init helper
+  nvme-pci: use lib tagset init helper
+
+ block/blk-mq.c                    | 27 ++++++++++++++++++++++-----
+ block/bsg-lib.c                   |  9 +++------
+ drivers/block/amiflop.c           |  8 +++-----
+ drivers/block/floppy.c            |  7 ++-----
+ drivers/block/loop.c              | 12 ++++--------
+ drivers/block/mtip32xx/mtip32xx.c | 13 ++++---------
+ drivers/block/nbd.c               | 11 +++--------
+ drivers/block/null_blk/main.c     | 10 +++-------
+ drivers/block/rbd.c               | 11 +++++------
+ drivers/block/rnbd/rnbd-clt.c     | 25 +++++++++++--------------
+ drivers/block/virtio_blk.c        | 14 +++++---------
+ drivers/block/z2ram.c             |  7 ++-----
+ drivers/mmc/core/queue.c          |  9 +++------
+ drivers/mtd/ubi/block.c           | 11 +++--------
+ drivers/nvme/host/apple.c         | 25 ++++++++-----------------
+ drivers/nvme/host/core.c          | 21 +++++----------------
+ drivers/nvme/host/pci.c           | 25 +++++++------------------
+ drivers/s390/block/dasd_genhd.c   |  9 +++------
+ drivers/s390/block/scm_blk.c      | 10 +++-------
+ drivers/scsi/scsi_lib.c           | 13 +++++--------
+ include/linux/blk-mq.h            |  5 +++++
+ 21 files changed, 109 insertions(+), 173 deletions(-)
 
 -- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+2.29.0
 
