@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCCE95FD1DB
-	for <lists+nbd@lfdr.de>; Thu, 13 Oct 2022 02:54:27 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40AFA5FD1D9
+	for <lists+nbd@lfdr.de>; Thu, 13 Oct 2022 02:54:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B340C205E4; Thu, 13 Oct 2022 00:54:27 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Oct 13 00:54:27 2022
+	id 08AD0205E3; Thu, 13 Oct 2022 00:54:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Oct 13 00:54:12 2022
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,7 +18,7 @@ X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5DA43205D8
+	by bendel.debian.org (Postfix) with ESMTP id 2BFCB205DB
 	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Oct 2022 00:36:08 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-12.181 tagged_above=-10000 required=5.3
@@ -29,32 +29,32 @@ X-Amavis-Spam-Status: No, score=-12.181 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id HzCf3BDkodZy for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id DKMjie4p8kLR for <lists-other-nbd@bendel.debian.org>;
 	Thu, 13 Oct 2022 00:36:00 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 639 seconds by postgrey-1.36 at bendel; Thu, 13 Oct 2022 00:36:00 UTC
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+X-Greylist: delayed 617 seconds by postgrey-1.36 at bendel; Thu, 13 Oct 2022 00:36:00 UTC
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id C67F0205D5
+	by bendel.debian.org (Postfix) with ESMTPS id C8FD3205D8
 	for <nbd@other.debian.org>; Thu, 13 Oct 2022 00:36:00 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id BA428B81CEE;
-	Thu, 13 Oct 2022 00:25:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85CD8C433D6;
-	Thu, 13 Oct 2022 00:25:15 +0000 (UTC)
+	by ams.source.kernel.org (Postfix) with ESMTPS id 4B8A9B81CFD;
+	Thu, 13 Oct 2022 00:26:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A473C433D6;
+	Thu, 13 Oct 2022 00:26:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1665620716;
-	bh=azAkJqJbnTmmew6QdoYoIdY01RIbkpxXD1N808qO7go=;
+	s=k20201202; t=1665620789;
+	bh=LEl6rAYkaTCrqCjHts82zcSQepTHnV6TX+kZhzawsB0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=sVWAen0Hb9ulvH901a4QvXObkws7teQo1oolaw7eAjKg0J+P9ZhUcQKdMiootIHSe
-	 a6ky7HIruk4DdrVu8UBZKoPLWASvOuJQgGSIuhmz+0tQXkyPGeahzBS9DPMoCGq9dE
-	 h+JHGpERPx/iQ1LDBwqGrwGIlVD+ls+Qm66YXrZkcv3HrW8Rd9lNM7nekOS3QN3IBO
-	 gXPqZGDs4wi2jEM3bEsUXNKGj6+TlVqBQzgIMhxSC9kItd16qwiSf4lDmPoLPJaVR9
-	 blSKX552hAoxO3ttloYStRmyX46QN2PxGv2TtF5SnAc+kCZBUa3C4Wgh1pWyFgexPm
-	 BAQB2kJYU1TOg==
+	b=hvOXH6lhRt0+itWa7MYzuSzHzeOJ2iD/n+7xIFyqq/BPd3PzPG+RXMFMPsdtPEYks
+	 KtP3HUik2YFlxMhZ7NNUHgY7dL3TjhPacpDnXo/78vBMee9u8FVQWJvbPUsys6XIYn
+	 ECV2YsFjryChBZhJwtCB67D20JjVGuEZy9E9IRPa/VuaFubzlKHF+8/i9vpMrc15ET
+	 9a7EqCpAYvUER52kM9HvbsKbQVR5pHBJyaDkuVlUZJYTvUaL8tnU3E5D6IOw87S+DL
+	 AZp1JLJNK4y10bsWyfNnvVP5I2TSSC2/u/mRqWKS3EPUOnv+8QbzUJnsnx93glSkzC
+	 Ec64B0oTo8+ug==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -65,12 +65,12 @@ Cc: Shigeru Yoshida <syoshida@redhat.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 5.4 05/27] nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
-Date: Wed, 12 Oct 2022 20:24:37 -0400
-Message-Id: <20221013002501.1895204-5-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 03/19] nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
+Date: Wed, 12 Oct 2022 20:26:02 -0400
+Message-Id: <20221013002623.1895576-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221013002501.1895204-1-sashal@kernel.org>
-References: <20221013002501.1895204-1-sashal@kernel.org>
+In-Reply-To: <20221013002623.1895576-1-sashal@kernel.org>
+References: <20221013002623.1895576-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -78,9 +78,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <wjWNlp-qEx.A.wXD.DH2RjB@bendel>
+Resent-Message-ID: <2VVH7xyp2hG.A.FVD.0G2RjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2244
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2243
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -90,8 +90,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20221013002501.1895204-5-sashal@kernel.org
-Resent-Date: Thu, 13 Oct 2022 00:54:27 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20221013002623.1895576-3-sashal@kernel.org
+Resent-Date: Thu, 13 Oct 2022 00:54:13 +0000 (UTC)
 
 From: Shigeru Yoshida <syoshida@redhat.com>
 
@@ -136,10 +136,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 09323b0510f0..610dc6a36a9d 100644
+index 2ef7eec6461c..cc66983e8b6a 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1327,10 +1327,12 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *b
+@@ -1271,10 +1271,12 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *b
  	mutex_unlock(&nbd->config_lock);
  	ret = wait_event_interruptible(config->recv_wq,
  					 atomic_read(&config->recv_threads) == 0);
