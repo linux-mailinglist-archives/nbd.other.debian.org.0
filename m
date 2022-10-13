@@ -2,82 +2,84 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14FDD5F9B98
-	for <lists+nbd@lfdr.de>; Mon, 10 Oct 2022 11:06:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5B735FD119
+	for <lists+nbd@lfdr.de>; Thu, 13 Oct 2022 02:33:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 912512041B; Mon, 10 Oct 2022 09:06:15 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 10 09:06:15 2022
-Old-Return-Path: <BATV+04e4e05a438ac94c6a9b+6987+infradead.org+hch@bombadil.srs.infradead.org>
+	id 7B5AF205C4; Thu, 13 Oct 2022 00:33:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Oct 13 00:33:13 2022
+Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9F29A20553
-	for <lists-other-nbd@bendel.debian.org>; Mon, 10 Oct 2022 08:50:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A6A4920511
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Oct 2022 00:16:33 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.48 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-12.181 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8R2wOlVldS7Q for <lists-other-nbd@bendel.debian.org>;
-	Mon, 10 Oct 2022 08:50:27 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 3059 seconds by postgrey-1.36 at bendel; Mon, 10 Oct 2022 08:50:27 UTC
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	with ESMTP id aw_YL8LTmlB1 for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Oct 2022 00:16:29 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_IP=-2 (check from: .kernel. - helo: .dfw.source.kernel. - helo-domain: .kernel.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D87C020658
-	for <nbd@other.debian.org>; Mon, 10 Oct 2022 08:50:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=sWolSNkLX1ZPnLQhfmowne8piiQT5rQ6uM09AjXa5Dc=; b=aJIBlsb0nSpWjrle4oZywMion1
-	d0M1TLezw/OcG2P0MgPxI6aB4/HTO9AxzYy4TBBhT7iUcr9rtBjX/6QDGEY3NVp14bJ4/jDCFWOLR
-	AQbNGi/LTMEXH3wmTjrkT5Y5SGv/Ib9V7XughQZRpp+pgf73tDFKD5qBO9fZNJp7D5XdpZAn047TZ
-	EiJJmMepreW3fKePOipspGiOfrSt007DayqpG0JoDUJoeTic1aqPtkls/MHiWNJVicPA3qcsuILrN
-	M+txLRN4vmfGm/5lZL3wxlLajTmeHmNW15SUYd9J3te7dVhIl6aHu6Zoczw8l4kTSbppDR+vGd2rO
-	RUq4Vc7g==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1ohngj-00HSJR-TP; Mon, 10 Oct 2022 07:59:01 +0000
-Date: Mon, 10 Oct 2022 00:59:01 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Chaitanya Kulkarni <kch@nvidia.com>
-Cc: ogeert@linux-m68k.org, linux-block@vger.kernel.org,
-	linux-m68k@lists.linux-m68k.org, linux-kernel@vger.kernel.org,
-	drbd-dev@lists.linbit.com, nbd@other.debian.org,
-	linux-mtd@lists.infradead.org, axboe@kernel.dk,
-	philipp.reisner@linbit.com, lars.ellenberg@linbit.com,
-	christoph.boehmwalder@linbit.com, efremov@linux.com,
-	josef@toxicpanda.com, tim@cyberelk.net, haris.iqbal@ionos.com,
-	jinpu.wang@ionos.com, richard@nod.at, miquel.raynal@bootlin.com,
-	vigneshr@ti.com, mcgrof@kernel.org, hare@suse.de,
-	damien.lemoal@opensource.wdc.com, johannes.thumshirn@wdc.com,
-	bvanassche@acm.org, ming.lei@redhat.com, vincent.fu@samsung.com,
-	shinichiro.kawasaki@wdc.com
-Subject: Re: [RFC PATCH 01/18] block: add and use init disk helper
-Message-ID: <Y0PQxdzmMzAAW0KF@infradead.org>
-References: <20221005050027.39591-1-kch@nvidia.com>
- <20221005050027.39591-2-kch@nvidia.com>
+	by bendel.debian.org (Postfix) with ESMTPS id B3C6020486
+	for <nbd@other.debian.org>; Thu, 13 Oct 2022 00:16:26 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id B6F14616C3;
+	Thu, 13 Oct 2022 00:16:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3528CC433C1;
+	Thu, 13 Oct 2022 00:16:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1665620181;
+	bh=fvegeJIp2wdais0tigzcD56CJARkRkzBSW+xsY1dQP0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=EB2pXyAy4npPNYzi7Dq746MZ9nMJDBjUX0b1QWV1sX0x8N16IableQde9vCiuaoTz
+	 L2a1s6Fkq4KdR6JnkFynh4sOZLunDtJjvgGjba9/Eml11KGuu25qcU5y5sU+cqa2wc
+	 bfcLCW5z4VrgCfcEtzqWXD17lxp+BvaNx6bEbsq+2MBKLuzX3lriyqI3YnJTG/gRQM
+	 iPPkg34+3C0FJZUSvgWVprPJS65rzkrgLaGkYfo6u7LmUNhsZv/3VhgIpdOv0NxN6l
+	 90g+NnB5FEN8BQ0WPcgG0bCZ3EONDHAYb1QUPpqBFVODWDJcnJv8qIl2EWSrVA3j0H
+	 WddU74wIm6Sew==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Shigeru Yoshida <syoshida@redhat.com>,
+	syzbot+38e6c55d4969a14c1534@syzkaller.appspotmail.com,
+	Josef Bacik <josef@toxicpanda.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Sasha Levin <sashal@kernel.org>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org
+Subject: [PATCH AUTOSEL 6.0 12/67] nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
+Date: Wed, 12 Oct 2022 20:14:53 -0400
+Message-Id: <20221013001554.1892206-12-sashal@kernel.org>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20221013001554.1892206-1-sashal@kernel.org>
+References: <20221013001554.1892206-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221005050027.39591-2-kch@nvidia.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <g05zUhbBhTD.A.UMB.HC-QjB@bendel>
+Resent-Message-ID: <jXth2wCwU9D.A.-rF.Jz1RjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2237
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2238
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,27 +89,70 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Y0PQxdzmMzAAW0KF@infradead.org
-Resent-Date: Mon, 10 Oct 2022 09:06:15 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20221013001554.1892206-12-sashal@kernel.org
+Resent-Date: Thu, 13 Oct 2022 00:33:13 +0000 (UTC)
 
-On Tue, Oct 04, 2022 at 10:00:10PM -0700, Chaitanya Kulkarni wrote:
-> +void init_disk(struct gendisk *disk, int major, int first_minor,
-> +		int minors, sector_t sectors, void *private_data,
-> +		const struct block_device_operations *fops)
-> +{
-> +	disk->major = major;
-> +	disk->first_minor = first_minor;
-> +	disk->minors = minors;
-> +	set_capacity(disk, sectors);
-> +	disk->private_data = private_data;
-> +	disk->fops = fops;
+From: Shigeru Yoshida <syoshida@redhat.com>
 
-I don't like this at all.  For one major/first_minor/minors are
-optional and discouraged for new drivers.  Setting the capacity is
-a different thing and is done by helpers also used for revalidation
-in many drivers.
+[ Upstream commit 1de7c3cf48fc41cd95adb12bd1ea9033a917798a ]
 
-It might make sense to pass the fops (and maybe private_data) to
-blk_mq_alloc_disk / blk_alloc_disk, but even then I'm not quite
-sure it is worth the churn.
+syzbot reported hung task [1].  The following program is a simplified
+version of the reproducer:
+
+int main(void)
+{
+	int sv[2], fd;
+
+	if (socketpair(AF_UNIX, SOCK_STREAM, 0, sv) < 0)
+		return 1;
+	if ((fd = open("/dev/nbd0", 0)) < 0)
+		return 1;
+	if (ioctl(fd, NBD_SET_SIZE_BLOCKS, 0x81) < 0)
+		return 1;
+	if (ioctl(fd, NBD_SET_SOCK, sv[0]) < 0)
+		return 1;
+	if (ioctl(fd, NBD_DO_IT) < 0)
+		return 1;
+	return 0;
+}
+
+When signal interrupt nbd_start_device_ioctl() waiting the condition
+atomic_read(&config->recv_threads) == 0, the task can hung because it
+waits the completion of the inflight IOs.
+
+This patch fixes the issue by clearing queue, not just shutdown, when
+signal interrupt nbd_start_device_ioctl().
+
+Link: https://syzkaller.appspot.com/bug?id=7d89a3ffacd2b83fdd39549bc4d8e0a89ef21239 [1]
+Reported-by: syzbot+38e6c55d4969a14c1534@syzkaller.appspotmail.com
+Signed-off-by: Shigeru Yoshida <syoshida@redhat.com>
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
+Link: https://lore.kernel.org/r/20220907163502.577561-1-syoshida@redhat.com
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/block/nbd.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 2a709daefbc4..2a2a1d996a57 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -1413,10 +1413,12 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd)
+ 	mutex_unlock(&nbd->config_lock);
+ 	ret = wait_event_interruptible(config->recv_wq,
+ 					 atomic_read(&config->recv_threads) == 0);
+-	if (ret)
++	if (ret) {
+ 		sock_shutdown(nbd);
+-	flush_workqueue(nbd->recv_workq);
++		nbd_clear_que(nbd);
++	}
+ 
++	flush_workqueue(nbd->recv_workq);
+ 	mutex_lock(&nbd->config_lock);
+ 	nbd_bdev_reset(nbd);
+ 	/* user requested, ignore socket errors */
+-- 
+2.35.1
 
