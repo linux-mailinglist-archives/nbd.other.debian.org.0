@@ -2,71 +2,71 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91A18628C7A
-	for <lists+nbd@lfdr.de>; Mon, 14 Nov 2022 23:59:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B65E628CCF
+	for <lists+nbd@lfdr.de>; Tue, 15 Nov 2022 00:00:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7526E2067D; Mon, 14 Nov 2022 22:59:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 14 22:59:13 2022
+	id 0395C20668; Mon, 14 Nov 2022 23:00:31 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 14 23:00:30 2022
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.2 required=4.0 tests=DIGITS_LETTERS,
+X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
 	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=unavailable
-	autolearn_force=no version=3.4.2
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
+	RCVD_IN_MSPIKE_H2 autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 5510A20612
-	for <lists-other-nbd@bendel.debian.org>; Mon, 14 Nov 2022 22:58:37 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EBD692067E
+	for <lists-other-nbd@bendel.debian.org>; Mon, 14 Nov 2022 22:59:09 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.596 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-6.696 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.515,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
+	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 3Qz0GoYNQQR1 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 14 Nov 2022 22:58:32 +0000 (UTC)
+	with ESMTP id YZEmji7noim5 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 14 Nov 2022 22:59:06 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 940092067C
-	for <nbd@other.debian.org>; Mon, 14 Nov 2022 22:58:32 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id 94F8E20616
+	for <nbd@other.debian.org>; Mon, 14 Nov 2022 22:59:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1668466707;
+	s=mimecast20190719; t=1668466741;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5xwarWq7IS97eQgNFs7g0Lw+/taGHjpDs4Ete5qDg2U=;
-	b=ZKh7ChZCQgO0MokpKQVwMyqhjwikVB8+6WZa0OW916rIX2vF8cZ71B2oxy0o+8bshtgLhq
-	oUQURfNcomtODjrn5fYCty+rp8zwYArG/l7opCKyxoDILgnP5/OCXDW18p89BugXptJr4W
-	kHOBLbKQrMaI5yZr50/lD+TGqgzdHN8=
+	bh=VoOH8h5zJxs1trCxHkur4lW8NowOm3VRrSmQjkq7wik=;
+	b=Ib6v6EoHsGTtRwQQhHlFk5AwRFbI7tWNRjgYW/ObeYaUaoqNCIET7zq+VW90gNG4KWL66U
+	u/ODkGMfMfDndSW42a+popQqipvrdKicT/BLTq+qKunQO7NmujxeEMo/Oo2rcGxMkvLGcL
+	tbSOE17tV+4EzeE1xIo7jqN6PG+BB20=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-300-RlTzK5bCNRemScTiMHoUDw-1; Mon, 14 Nov 2022 17:52:11 -0500
-X-MC-Unique: RlTzK5bCNRemScTiMHoUDw-1
+ us-mta-621-gafmUrvGONm7ECI5Pdy_jw-1; Mon, 14 Nov 2022 17:52:12 -0500
+X-MC-Unique: gafmUrvGONm7ECI5Pdy_jw-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1216F857D0E;
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9726B185A7A3;
 	Mon, 14 Nov 2022 22:52:11 +0000 (UTC)
 Received: from green.redhat.com (unknown [10.2.16.240])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id A259940E9786;
-	Mon, 14 Nov 2022 22:52:10 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 34F6740E9786;
+	Mon, 14 Nov 2022 22:52:11 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: libguestfs@redhat.com
 Cc: qemu-devel@nongnu.org,
 	qemu-block@nongnu.org,
 	nbd@other.debian.org
-Subject: [libnbd PATCH v2 16/23] examples: Update copy-libev to use 64-bit block status
-Date: Mon, 14 Nov 2022 16:51:51 -0600
-Message-Id: <20221114225158.2186742-17-eblake@redhat.com>
+Subject: [libnbd PATCH v2 17/23] ocaml: Add example for 64-bit extents
+Date: Mon, 14 Nov 2022 16:51:52 -0600
+Message-Id: <20221114225158.2186742-18-eblake@redhat.com>
 In-Reply-To: <20221114225158.2186742-1-eblake@redhat.com>
 References: <20221114224141.cm5jgyxfmvie5xb5@redhat.com>
  <20221114225158.2186742-1-eblake@redhat.com>
@@ -76,9 +76,9 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <brSKMDvVPEI.A.-WB.BhscjB@bendel>
+Resent-Message-ID: <nbAJrGfYZwG.A.y-C.OiscjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2255
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2267
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,89 +88,85 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20221114225158.2186742-17-eblake@redhat.com
-Resent-Date: Mon, 14 Nov 2022 22:59:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20221114225158.2186742-18-eblake@redhat.com
+Resent-Date: Mon, 14 Nov 2022 23:00:31 +0000 (UTC)
 
-Although our use of "base:allocation" doesn't require the use of the
-64-bit API for flags, we might perform slightly faster for a server
-that does give us 64-bit extent lengths and honors larger nbd_zero
-lengths.
+Since our example program for 32-bit extents is inherently limited to
+32-bit lengths, it is also worth demonstrating the 64-bit extent API,
+including the difference in the array indexing being saner.
 ---
- examples/copy-libev.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ ocaml/examples/Makefile.am  |  3 ++-
+ ocaml/examples/extents64.ml | 42 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 ocaml/examples/extents64.ml
 
-diff --git a/examples/copy-libev.c b/examples/copy-libev.c
-index 418d99f1..d8b45d87 100644
---- a/examples/copy-libev.c
-+++ b/examples/copy-libev.c
-@@ -94,7 +94,7 @@ struct request {
- };
-
- struct extent {
--    uint32_t length;
-+    uint64_t length;
-     bool zero;
- };
-
-@@ -182,7 +182,7 @@ get_events(struct connection *c)
-
- static int
- extent_callback (void *user_data, const char *metacontext, uint64_t offset,
--                 uint32_t *entries, size_t nr_entries, int *error)
-+                 nbd_extent *entries, size_t nr_entries, int *error)
- {
-     struct request *r = user_data;
-
-@@ -197,22 +197,21 @@ extent_callback (void *user_data, const char *metacontext, uint64_t offset,
-         return 1;
-     }
-
--    /* Libnbd returns uint32_t pair (length, flags) for each extent. */
--    extents_len = nr_entries / 2;
-+    extents_len = nr_entries;
-
-     extents = malloc (extents_len * sizeof *extents);
-     if (extents == NULL)
-         FAIL ("Cannot allocated extents: %s", strerror (errno));
-
-     /* Copy libnbd entries to extents array. */
--    for (int i = 0, j = 0; i < extents_len; i++, j=i*2) {
--        extents[i].length = entries[j];
-+    for (int i = 0; i < extents_len; i++) {
-+        extents[i].length = entries[i].length;
-
-         /* Libnbd exposes both ZERO and HOLE flags. We care only about
-          * ZERO status, meaning we can copy this extent using efficinet
-          * zero method.
-          */
--        extents[i].zero = (entries[j + 1] & LIBNBD_STATE_ZERO) != 0;
-+        extents[i].zero = (entries[i].flags & LIBNBD_STATE_ZERO) != 0;
-     }
-
-     DEBUG ("r%zu: received %zu extents for %s",
-@@ -284,10 +283,10 @@ start_extents (struct request *r)
-     DEBUG ("r%zu: start extents offset=%" PRIi64 " count=%zu",
-            r->index, offset, count);
-
--    cookie = nbd_aio_block_status (
-+    cookie = nbd_aio_block_status_64 (
-         src.nbd, count, offset,
--        (nbd_extent_callback) { .callback=extent_callback,
--                                .user_data=r },
-+        (nbd_extent64_callback) { .callback=extent_callback,
-+                                  .user_data=r },
-         (nbd_completion_callback) { .callback=extents_completed,
-                                     .user_data=r },
-         0);
-@@ -322,7 +321,7 @@ next_extent (struct request *r)
-         limit = MIN (REQUEST_SIZE, size - offset);
-
-     while (length < limit) {
--        DEBUG ("e%zu: offset=%" PRIi64 " len=%" PRIu32 " zero=%d",
-+        DEBUG ("e%zu: offset=%" PRIi64 " len=%" PRIu64 " zero=%d",
-                extents_pos, offset, extents[extents_pos].length, is_zero);
-
-         /* If this extent is too large, steal some data from it to
+diff --git a/ocaml/examples/Makefile.am b/ocaml/examples/Makefile.am
+index 5ee6dd63..c6f4989d 100644
+--- a/ocaml/examples/Makefile.am
++++ b/ocaml/examples/Makefile.am
+@@ -1,5 +1,5 @@
+ # nbd client library in userspace
+-# Copyright (C) 2013-2019 Red Hat Inc.
++# Copyright (C) 2013-2022 Red Hat Inc.
+ #
+ # This library is free software; you can redistribute it and/or
+ # modify it under the terms of the GNU Lesser General Public
+@@ -20,6 +20,7 @@ include $(top_srcdir)/subdir-rules.mk
+ ml_examples = \
+ 	asynch_copy.ml \
+ 	extents.ml \
++	extents64.ml \
+ 	get_size.ml \
+ 	open_qcow2.ml \
+ 	server_flags.ml \
+diff --git a/ocaml/examples/extents64.ml b/ocaml/examples/extents64.ml
+new file mode 100644
+index 00000000..8ee7e218
+--- /dev/null
++++ b/ocaml/examples/extents64.ml
+@@ -0,0 +1,42 @@
++open Printf
++
++let () =
++  NBD.with_handle (
++    fun nbd ->
++      NBD.add_meta_context nbd "base:allocation";
++      NBD.connect_command nbd
++                          ["nbdkit"; "-s"; "--exit-with-parent"; "-r";
++                           "sparse-random"; "8G"];
++
++      (* Read the extents and print them. *)
++      let size = NBD.get_size nbd in
++      let cap =
++        match NBD.get_extended_headers_negotiated nbd with
++        | true -> size
++        | false -> 0x8000_0000_L in
++      let fetch_offset = ref 0_L in
++      while !fetch_offset < size do
++        let remaining = Int64.sub size !fetch_offset in
++        let fetch_size = min remaining cap in
++        NBD.block_status_64 nbd fetch_size !fetch_offset (
++          fun meta _ entries err ->
++            printf "nbd_block_status callback: meta=%s err=%d\n" meta !err;
++            if meta = "base:allocation" then (
++              printf "index\t%16s %16s %s\n" "offset" "length" "flags";
++              for i = 0 to Array.length entries - 1 do
++                let len = fst entries.(i)
++                and flags =
++                  match snd entries.(i) with
++                  | 0_L -> "data"
++                  | 1_L -> "hole"
++                  | 2_L -> "zero"
++                  | 3_L -> "hole+zero"
++                  | unknown -> sprintf "unknown (%Ld)" unknown in
++                printf "%d:\t%16Ld %16Ld %s\n" i !fetch_offset len flags;
++                fetch_offset := Int64.add !fetch_offset len
++              done;
++            );
++            0
++        ) (* NBD.block_status *)
++      done
++  )
 -- 
 2.38.1
 
