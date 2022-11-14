@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B59B628CD0
-	for <lists+nbd@lfdr.de>; Tue, 15 Nov 2022 00:00:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D67BF628C75
+	for <lists+nbd@lfdr.de>; Mon, 14 Nov 2022 23:58:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D0E8920678; Mon, 14 Nov 2022 23:00:34 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 14 23:00:34 2022
+	id A5CF220685; Mon, 14 Nov 2022 22:58:50 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 14 22:58:50 2022
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -19,8 +19,8 @@ X-Spam-Status: No, score=-10.2 required=4.0 tests=DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1D98E20616
-	for <lists-other-nbd@bendel.debian.org>; Mon, 14 Nov 2022 22:59:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 07C892067B
+	for <lists-other-nbd@bendel.debian.org>; Mon, 14 Nov 2022 22:58:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-6.596 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.515,
@@ -30,43 +30,43 @@ X-Amavis-Spam-Status: No, score=-6.596 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 7bSjzWo8EhXH for <lists-other-nbd@bendel.debian.org>;
-	Mon, 14 Nov 2022 22:59:07 +0000 (UTC)
+	with ESMTP id RJqqZuiBDlJ0 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 14 Nov 2022 22:58:27 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id CABE320683
-	for <nbd@other.debian.org>; Mon, 14 Nov 2022 22:59:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id BF83420616
+	for <nbd@other.debian.org>; Mon, 14 Nov 2022 22:58:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1668466741;
+	s=mimecast20190719; t=1668466701;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1cemSvuHYPXOo5uQfvR6U2aeVGuLoDft6zMTDXWL10Y=;
-	b=WrDlbp6GUdzK6e35P7fRO5UMNUJ6hsMJWQi1bHdP+KJVOrhHTHF376vdqnGo2B4YAadRs/
-	mOQDDyN3pHoeGxWpDiBSEp5XwXPYZPxArbpQ8OxFf99itsedyjx6p5GBBpoeRbDZfdVapZ
-	t45CrXypHyfrou71vbmZdZRUKpYGapM=
+	bh=qoAWbegsBTfEv47rBxOGcuvfh/pdMnVmqyolAT0+VnU=;
+	b=ig48sokiaFNyIFp+WuNJfWdJ0ge4N8PXCSa+619AlqQLA/HiuDEJAPWlRx9zdDGBYEnhCa
+	IJcHGQN9q1THnRDq0yzUvWJjbGAmmp9FkBhSHndiySav2GuHAp6uvYqqLm8fc7QtolIwez
+	rw2XAPBKK1+MQoDesV8x/wxsvuDy8zA=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-373-ua_psouvN3WsrSJyGMDkFw-1; Mon, 14 Nov 2022 17:52:06 -0500
-X-MC-Unique: ua_psouvN3WsrSJyGMDkFw-1
+ us-mta-433-0cOpsB4XOQ2s_ZGD88tnzQ-1; Mon, 14 Nov 2022 17:52:07 -0500
+X-MC-Unique: 0cOpsB4XOQ2s_ZGD88tnzQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 91B84196EF8B;
-	Mon, 14 Nov 2022 22:52:06 +0000 (UTC)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2A8EE802556;
+	Mon, 14 Nov 2022 22:52:07 +0000 (UTC)
 Received: from green.redhat.com (unknown [10.2.16.240])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 2D68440E9786;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id BBB9840E9794;
 	Mon, 14 Nov 2022 22:52:06 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: libguestfs@redhat.com
 Cc: qemu-devel@nongnu.org,
 	qemu-block@nongnu.org,
 	nbd@other.debian.org
-Subject: [libnbd PATCH v2 08/23] block_status: Track 64-bit extents internally
-Date: Mon, 14 Nov 2022 16:51:43 -0600
-Message-Id: <20221114225158.2186742-9-eblake@redhat.com>
+Subject: [libnbd PATCH v2 09/23] block_status: Accept 64-bit extents during block status
+Date: Mon, 14 Nov 2022 16:51:44 -0600
+Message-Id: <20221114225158.2186742-10-eblake@redhat.com>
 In-Reply-To: <20221114225158.2186742-1-eblake@redhat.com>
 References: <20221114224141.cm5jgyxfmvie5xb5@redhat.com>
  <20221114225158.2186742-1-eblake@redhat.com>
@@ -76,9 +76,9 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <_jkwW36h_SF.A.DAD.SiscjB@bendel>
+Resent-Message-ID: <5duepjh1ntF.A.XIB.qgscjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2268
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2252
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,269 +88,210 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20221114225158.2186742-9-eblake@redhat.com
-Resent-Date: Mon, 14 Nov 2022 23:00:34 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20221114225158.2186742-10-eblake@redhat.com
+Resent-Date: Mon, 14 Nov 2022 22:58:50 +0000 (UTC)
 
-When extended headers are in use, the server can send us 64-bit
-extents, even for a 32-bit query (if the server knows the entire image
-is data, for example, or if the metacontext has a status definition
-that uses more than 32 bits).  Also, while most contexts only have
-32-bit flags, a server is allowed to negotiate contexts with 64-bit
-flags when extended headers are in use.  Thus, for maximum
-flexibility, we are better off storing 64-bit data internally, with a
-goal of letting the client's 32-bit interface work as much as
-possible, and for a future API addition of a 64-bit interface to work
-even when the server only gave 32-bit results.
+Support a server giving us a 64-bit extent.  Note that the protocol
+says a server should not give a 64-bit answer when extended headers
+are not negotiated; we can handle that by reporting EPROTO but
+otherwise accepting the information.  Meanwhile, when extended headers
+are in effect, even a 32-bit original query can produce a 64-bit
+answer; and likewise, a 64-bit query may have so much information that
+the server truncates it to a 32-bit answer, so we must be prepared for
+either type of response.  Since we already store 64-bit extents
+internally, the user's 32-bit callback doesn't have to care which
+reply chunk the server uses (the shim takes care of that, and an
+upcoming patch adds new APIs to let the client use a 64-bit callback).
+Of course, until a later patch enables extended headers negotiation,
+no compliant server will trigger the new code here.
 
-For backwards compatibility, a client that never negotiates a 64-bit
-status context can be handled without errors by truncating any 64-bit
-lengths down to just under 4G; so the old 32-bit interface will
-continue to work in most cases.  But we can't truncate status down; if
-a user requests an extended status, the 32-bit interface can now
-report EOVERFLOW for that context (although that situation can't
-happen until a later patch actually turns on the use of extended
-headers).
-
-Note that the existing 32-bit nbd_block_status() API is now slightly
-slower, particularly when talking with a server that lacks extended
-headers: we are doing double size conversions.  But this speed penalty
-is likely in the noise compared to the network delays, and ideally
-clients will switch over to the new 64-bit interfaces as more and more
-servers start supporting extended headers.
-
-One of the trickier aspects of this patch is auditing that both the
-user's extent and our malloc'd shim get cleaned up once on all
-possible paths, so that there is neither a leak nor a double free.
+Implementation-wise, 'normal' and 'wide' are two different types but
+have the same underlying size; keeping the two names makes it easier
+to reason about when values are still in network byte order from the
+server or native endian for local processing.
 ---
- lib/internal.h                      |  8 +++-
- generator/states-reply-structured.c | 30 ++++++++-----
- lib/handle.c                        |  2 +-
- lib/rw.c                            | 70 ++++++++++++++++++++++++++++-
- 4 files changed, 95 insertions(+), 15 deletions(-)
+ lib/internal.h                      |  3 +
+ generator/states-reply-structured.c | 88 ++++++++++++++++++++++-------
+ 2 files changed, 72 insertions(+), 19 deletions(-)
 
 diff --git a/lib/internal.h b/lib/internal.h
-index 73fd24c0..0c23f882 100644
+index 0c23f882..b91fe6f6 100644
 --- a/lib/internal.h
 +++ b/lib/internal.h
-@@ -80,7 +80,7 @@ struct export {
-
- struct command_cb {
-   union {
--    nbd_extent_callback extent;
-+    nbd_extent64_callback extent;
-     nbd_chunk_callback chunk;
-     nbd_list_callback list;
-     nbd_context_callback context;
-@@ -302,7 +302,11 @@ struct nbd_handle {
-   size_t querynum;
-
-   /* When receiving block status, this is used. */
--  uint32_t *bs_entries;
-+  union {
-+    char *storage;      /* malloc's view */
-+    nbd_extent *normal; /* Our 64-bit preferred internal form; n slots */
-+    uint32_t *narrow;   /* 32-bit NBD_REPLY_TYPE_BLOCK_STATUS form; n*2 slots */
-+  } bs_entries;
+@@ -248,6 +248,7 @@ struct nbd_handle {
+         struct nbd_structured_reply_offset_data offset_data;
+         struct nbd_structured_reply_offset_hole offset_hole;
+         struct nbd_structured_reply_block_status_hdr bs_hdr;
++        struct nbd_structured_reply_block_status_ext_hdr bs_ext_hdr;
+         struct {
+           struct nbd_structured_reply_error error;
+           char msg[NBD_MAX_STRING]; /* Common to all error types */
+@@ -306,6 +307,8 @@ struct nbd_handle {
+     char *storage;      /* malloc's view */
+     nbd_extent *normal; /* Our 64-bit preferred internal form; n slots */
+     uint32_t *narrow;   /* 32-bit NBD_REPLY_TYPE_BLOCK_STATUS form; n*2 slots */
++    struct nbd_block_descriptor_ext *wide;
++                        /* 64-bit NBD_REPLY_TYPE_BLOCK_STATUS_EXT; n slots */
+   } bs_entries;
 
    /* Commands which are waiting to be issued [meaning the request
-    * packet is sent to the server].  This is used as a simple linked
 diff --git a/generator/states-reply-structured.c b/generator/states-reply-structured.c
-index da9894c6..d23e56a9 100644
+index d23e56a9..7e313b5a 100644
 --- a/generator/states-reply-structured.c
 +++ b/generator/states-reply-structured.c
-@@ -436,6 +436,7 @@  REPLY.STRUCTURED_REPLY.RECV_OFFSET_HOLE:
-  REPLY.STRUCTURED_REPLY.RECV_BS_HEADER:
+@@ -22,6 +22,8 @@
+ #include <stdint.h>
+ #include <inttypes.h>
+
++#include "minmax.h"
++
+ /* Structured reply must be completely inside the bounds of the
+  * requesting command.
+  */
+@@ -147,6 +149,24 @@  REPLY.STRUCTURED_REPLY.CHECK:
+     /* Start by reading the context ID. */
+     h->rbuf = &h->sbuf.reply.payload.bs_hdr;
+     h->rlen = sizeof h->sbuf.reply.payload.bs_hdr;
++    h->sbuf.reply.payload.bs_ext_hdr.count = 0;
++    SET_NEXT_STATE (%RECV_BS_HEADER);
++    break;
++
++  case NBD_REPLY_TYPE_BLOCK_STATUS_EXT:
++    if (cmd->type != NBD_CMD_BLOCK_STATUS ||
++        length < 24 ||
++        (length-8) % sizeof(struct nbd_block_descriptor_ext))
++      goto resync;
++    if (!h->extended_headers) {
++      debug (h, "unexpected 64-bit block status without extended headers, "
++             "this is probably a server bug");
++      if (cmd->error == 0)
++        cmd->error = EPROTO;
++    }
++    /* Start by reading the context ID. */
++    h->rbuf = &h->sbuf.reply.payload.bs_ext_hdr;
++    h->rlen = sizeof h->sbuf.reply.payload.bs_ext_hdr;
+     SET_NEXT_STATE (%RECV_BS_HEADER);
+     break;
+
+@@ -437,6 +457,7 @@  REPLY.STRUCTURED_REPLY.RECV_BS_HEADER:
    struct command *cmd = h->reply_cmd;
    uint32_t length;
-+  uint32_t count;
+   uint32_t count;
++  uint16_t type;
 
    switch (recv_into_rbuf (h)) {
    case -1: SET_NEXT_STATE (%.DEAD); return 0;
-@@ -450,15 +451,19 @@  REPLY.STRUCTURED_REPLY.RECV_BS_HEADER:
-     assert (cmd->type == NBD_CMD_BLOCK_STATUS);
-     assert (length >= 12);
-     length -= sizeof h->sbuf.reply.payload.bs_hdr;
-+    count = length / (2 * sizeof (uint32_t));
+@@ -446,24 +467,44 @@  REPLY.STRUCTURED_REPLY.RECV_BS_HEADER:
+     return 0;
+   case 0:
+     length = h->sbuf.reply.hdr.structured.length; /* normalized in CHECK */
++    type = be16toh (h->sbuf.reply.hdr.structured.type);
 
--    free (h->bs_entries);
--    h->bs_entries = malloc (length);
--    if (h->bs_entries == NULL) {
-+    /* Read raw data into a subset of h->bs_entries, then expand it
-+     * into place later during byte-swapping.
-+     */
-+    free (h->bs_entries.storage);
-+    h->bs_entries.storage = malloc (count * sizeof *h->bs_entries.normal);
-+    if (h->bs_entries.storage == NULL) {
+     assert (cmd); /* guaranteed by CHECK */
+     assert (cmd->type == NBD_CMD_BLOCK_STATUS);
+-    assert (length >= 12);
+-    length -= sizeof h->sbuf.reply.payload.bs_hdr;
+-    count = length / (2 * sizeof (uint32_t));
+
+-    /* Read raw data into a subset of h->bs_entries, then expand it
++    if (type == NBD_REPLY_TYPE_BLOCK_STATUS) {
++      assert (length >= 12);
++      length -= sizeof h->sbuf.reply.payload.bs_hdr;
++      count = length / (2 * sizeof (uint32_t));
++    }
++    else {
++      assert (type == NBD_REPLY_TYPE_BLOCK_STATUS_EXT);
++      assert (length >= 24);
++      length -= sizeof h->sbuf.reply.payload.bs_ext_hdr;
++      count = length / sizeof (struct nbd_block_descriptor_ext);
++      if (h->sbuf.reply.payload.bs_ext_hdr.count &&
++          count != be32toh (h->sbuf.reply.payload.bs_ext_hdr.count)) {
++        h->rbuf = NULL;
++        h->rlen = length;
++        SET_NEXT_STATE (%RESYNC);
++        return 0;
++      }
++    }
++    /* Normalize count for later use. */
++    h->sbuf.reply.payload.bs_ext_hdr.count = count;
++
++    /* Read raw data into an overlap of h->bs_entries, then move it
+      * into place later during byte-swapping.
+      */
+     free (h->bs_entries.storage);
+-    h->bs_entries.storage = malloc (count * sizeof *h->bs_entries.normal);
++    h->bs_entries.storage = malloc (MAX (count * sizeof *h->bs_entries.normal,
++                                         length));
+     if (h->bs_entries.storage == NULL) {
        SET_NEXT_STATE (%.DEAD);
        set_error (errno, "malloc");
        return 0;
      }
--    h->rbuf = h->bs_entries;
-+    h->rbuf = h->bs_entries.narrow;
+-    h->rbuf = h->bs_entries.narrow;
++    h->rbuf = h->bs_entries.storage;
      h->rlen = length;
      SET_NEXT_STATE (%RECV_BS_ENTRIES);
    }
-@@ -470,6 +475,7 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
+@@ -471,11 +512,10 @@  REPLY.STRUCTURED_REPLY.RECV_BS_HEADER:
+
+  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
+   struct command *cmd = h->reply_cmd;
+-  uint32_t length;
    uint32_t count;
    size_t i;
    uint32_t context_id;
-+  uint32_t *raw;
+-  uint32_t *raw;
++  uint16_t type;
 
    switch (recv_into_rbuf (h)) {
    case -1: SET_NEXT_STATE (%.DEAD); return 0;
-@@ -483,17 +489,21 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
+@@ -484,25 +524,35 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
+     SET_NEXT_STATE (%.READY);
+     return 0;
+   case 0:
+-    length = h->sbuf.reply.hdr.structured.length; /* normalized in CHECK */
++    type = be16toh (h->sbuf.reply.hdr.structured.type);
++    count = h->sbuf.reply.payload.bs_ext_hdr.count; /* normalized in BS_HEADER */
+
      assert (cmd); /* guaranteed by CHECK */
      assert (cmd->type == NBD_CMD_BLOCK_STATUS);
      assert (CALLBACK_IS_NOT_NULL (cmd->cb.fn.extent));
--    assert (h->bs_entries);
-+    assert (h->bs_entries.normal);
-     assert (length >= 12);
+-    assert (h->bs_entries.normal);
+-    assert (length >= 12);
++    assert (h->bs_entries.normal && count);
      assert (h->meta_valid);
-     count = (length - sizeof h->sbuf.reply.payload.bs_hdr) /
--      sizeof *h->bs_entries;
-+      (2 * sizeof (uint32_t));
+-    count = (length - sizeof h->sbuf.reply.payload.bs_hdr) /
+-      (2 * sizeof (uint32_t));
 
      /* Need to byte-swap the entries returned, but apart from that we
--     * don't validate them.
-+     * don't validate them.  Reverse order is essential, since we are
-+     * expanding in-place from narrow to wider type.
+-     * don't validate them.  Reverse order is essential, since we are
+-     * expanding in-place from narrow to wider type.
++     * don't validate them.
       */
--    for (i = 0; i < count; ++i)
--      h->bs_entries[i] = be32toh (h->bs_entries[i]);
-+    raw = h->bs_entries.narrow;
-+    for (i = count; i-- > 0; ) {
-+      h->bs_entries.normal[i].flags = be32toh (raw[i * 2 + 1]);
-+      h->bs_entries.normal[i].length = be32toh (raw[i * 2]);
+-    raw = h->bs_entries.narrow;
+-    for (i = count; i-- > 0; ) {
+-      h->bs_entries.normal[i].flags = be32toh (raw[i * 2 + 1]);
+-      h->bs_entries.normal[i].length = be32toh (raw[i * 2]);
++    if (type == NBD_REPLY_TYPE_BLOCK_STATUS) {
++      uint32_t *raw = h->bs_entries.narrow;
++
++      /* Expanding in-place from narrow to wide, must use reverse order. */
++      for (i = count; i-- > 0; ) {
++        h->bs_entries.normal[i].flags = be32toh (raw[i * 2 + 1]);
++        h->bs_entries.normal[i].length = be32toh (raw[i * 2]);
++      }
 +    }
++    else {
++      struct nbd_block_descriptor_ext *wide = h->bs_entries.wide;
++
++      assert (type == NBD_REPLY_TYPE_BLOCK_STATUS_EXT);
++      for (i = 0; i < count; i++) {
++        h->bs_entries.normal[i].length = be64toh (wide[i].length);
++        h->bs_entries.normal[i].flags = be64toh (wide[i].status_flags);
++      }
+     }
 
      /* Look up the context ID. */
-     context_id = be32toh (h->sbuf.reply.payload.bs_hdr.context_id);
-@@ -507,7 +517,7 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
-
-       if (CALL_CALLBACK (cmd->cb.fn.extent,
-                          h->meta_contexts.ptr[i].name, cmd->offset,
--                         h->bs_entries, count,
-+                         h->bs_entries.normal, count,
-                          &error) == -1)
-         if (cmd->error == 0)
-           cmd->error = error ? error : EPROTO;
-diff --git a/lib/handle.c b/lib/handle.c
-index 4a186f8f..41e442e7 100644
---- a/lib/handle.c
-+++ b/lib/handle.c
-@@ -130,7 +130,7 @@ nbd_close (struct nbd_handle *h)
-
-   string_vector_iter (&h->querylist, (void *) free);
-   free (h->querylist.ptr);
--  free (h->bs_entries);
-+  free (h->bs_entries.storage);
-   nbd_internal_reset_size_and_flags (h);
-   for (i = 0; i < h->meta_contexts.len; ++i)
-     free (h->meta_contexts.ptr[i].name);
-diff --git a/lib/rw.c b/lib/rw.c
-index 81dded3f..6212bf4c 100644
---- a/lib/rw.c
-+++ b/lib/rw.c
-@@ -42,6 +42,61 @@ wait_for_command (struct nbd_handle *h, int64_t cookie)
-   return r == -1 ? -1 : 0;
- }
-
-+/* Convert from 64-bit to 32-bit extent callback. */
-+static int
-+nbd_convert_extent (void *data, const char *metacontext, uint64_t offset,
-+                    nbd_extent *entries, size_t nr_entries, int *error)
-+{
-+  nbd_extent_callback *cb = data;
-+  uint32_t *array = malloc (nr_entries * 2 * sizeof *array);
-+  size_t i;
-+  int ret;
-+  bool fail = false;
-+
-+  if (array == NULL) {
-+    set_error (*error = errno, "malloc");
-+    return -1;
-+  }
-+
-+  for (i = 0; i < nr_entries; i++) {
-+    array[i * 2] = entries[i].length;
-+    array[i * 2 + 1] = entries[i].flags;
-+    /* If an extent is larger than 32 bits, silently truncate the rest
-+     * of the server's response; the client can then make progress
-+     * instead of needing to see failure.  Rather than track the
-+     * connection's alignment, just clamp the large extent to 4G-64M.
-+     * However, if flags doesn't fit in 32 bits, it's better to inform
-+     * the caller of an EOVERFLOW failure.
-+     *
-+     * Technically, a server with 64-bit answers is non-compliant if
-+     * the client did not negotiate extended headers - contexts that
-+     * include 64-bit flags should not have been negotiated in that
-+     * case.
-+     */
-+    if (entries[i].length > UINT32_MAX) {
-+      array[i++ * 2] = -MAX_REQUEST_SIZE;
-+      break;
-+    }
-+    if (entries[i].flags > UINT32_MAX) {
-+      *error = EOVERFLOW;
-+      fail = true;
-+      break;
-+    }
-+  }
-+
-+  ret = CALL_CALLBACK (*cb, metacontext, offset, array, i * 2, error);
-+  free (array);
-+  return fail ? -1 : ret;
-+}
-+
-+static void
-+nbd_convert_extent_free (void *data)
-+{
-+  nbd_extent_callback *cb = data;
-+  FREE_CALLBACK (*cb);
-+  free (cb);
-+}
-+
- /* Issue a read command and wait for the reply. */
- int
- nbd_unlocked_pread (struct nbd_handle *h, void *buf,
-@@ -487,12 +542,23 @@ nbd_unlocked_aio_block_status (struct nbd_handle *h,
-                                nbd_completion_callback *completion,
-                                uint32_t flags)
- {
--  struct command_cb cb = { .fn.extent = *extent,
-+  nbd_extent_callback *shim = malloc (sizeof *shim);
-+  struct command_cb cb = { .fn.extent.callback = nbd_convert_extent,
-+                           .fn.extent.user_data = shim,
-+                           .fn.extent.free = nbd_convert_extent_free,
-                            .completion = *completion };
-
-+  if (shim == NULL) {
-+    set_error (errno, "malloc");
-+    return -1;
-+  }
-+  *shim = *extent;
-+  SET_CALLBACK_TO_NULL (*extent);
-+
-   if (h->strict & LIBNBD_STRICT_COMMANDS) {
-     if (!h->structured_replies) {
-       set_error (ENOTSUP, "server does not support structured replies");
-+      FREE_CALLBACK (cb.fn.extent);
-       return -1;
-     }
-
-@@ -500,11 +566,11 @@ nbd_unlocked_aio_block_status (struct nbd_handle *h,
-       set_error (ENOTSUP, "did not negotiate any metadata contexts, "
-                  "either you did not call nbd_add_meta_context before "
-                  "connecting or the server does not support it");
-+      FREE_CALLBACK (cb.fn.extent);
-       return -1;
-     }
-   }
-
--  SET_CALLBACK_TO_NULL (*extent);
-   SET_CALLBACK_TO_NULL (*completion);
-   return nbd_internal_command_common (h, flags, NBD_CMD_BLOCK_STATUS, offset,
-                                       count, EINVAL, NULL, &cb);
 -- 
 2.38.1
 
