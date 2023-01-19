@@ -1,68 +1,78 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5807A666153
-	for <lists+nbd@lfdr.de>; Wed, 11 Jan 2023 18:03:12 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FD58673D33
+	for <lists+nbd@lfdr.de>; Thu, 19 Jan 2023 16:12:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2421120544; Wed, 11 Jan 2023 17:03:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 11 17:03:12 2023
-Old-Return-Path: <linux@weissschuh.net>
+	id B6B6D20A44; Thu, 19 Jan 2023 15:12:11 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jan 19 15:12:11 2023
+Old-Return-Path: <ming.lei@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.7 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
-	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.3 required=4.0 tests=AVAILABLENOW,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
+	MURPHY_FINANCE10,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=no
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B534D204C6
-	for <lists-other-nbd@bendel.debian.org>; Wed, 11 Jan 2023 16:46:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 22D9120A9B
+	for <lists-other-nbd@bendel.debian.org>; Thu, 19 Jan 2023 14:54:35 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.18 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02, WORD_WITHOUT_VOWELS=1]
+X-Amavis-Spam-Status: No, score=-0.602 tagged_above=-10000 required=5.3
+	tests=[AVAILABLENOW=1, BAYES_00=-2, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_FINANCE10=0.5,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id QjzCJUuD7ASb for <lists-other-nbd@bendel.debian.org>;
-	Wed, 11 Jan 2023 16:46:20 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 322 seconds by postgrey-1.36 at bendel; Wed, 11 Jan 2023 16:46:20 UTC
-Received: from todd.t-8ch.de (todd.t-8ch.de [IPv6:2a01:4f8:c010:41de::1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 3AB96204F3
-	for <nbd@other.debian.org>; Wed, 11 Jan 2023 16:46:19 +0000 (UTC)
-Date: Wed, 11 Jan 2023 16:40:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=weissschuh.net;
-	s=mail; t=1673455230;
-	bh=1CxCJtXN8jkj7d+XLUeTWv6kMDXKx4rzhz2v14YhVsY=;
-	h=Date:From:To:Subject:References:In-Reply-To:From;
-	b=RCEp35517cFDBBOE5Zgf53o0SXJ0BZvRVtjWgqTUaQLRipyhPS6dxBQppB26A/vBI
-	 77CgE5iEZf4TwJUAEsqeuISJpH/8kvU58kVeF3IMfZrBn8PiBPCBY4ODi7nPOIC8+0
-	 jx+ZFbtuRNSwW54W3fuWFKVyWzH/MRBmtRvBc5gw=
-From: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>
-To: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org, nbd@other.debian.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] nbd: automatically load module on genl access
-Message-ID: <20230111164027.7oqg6zmkcpfitb3l@t-8ch.de>
-References: <20221110052438.2188-1-linux@weissschuh.net>
+	with ESMTP id Au5c9aiXVTFg for <lists-other-nbd@bendel.debian.org>;
+	Thu, 19 Jan 2023 14:54:27 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id 1954E20A8F
+	for <nbd@other.debian.org>; Thu, 19 Jan 2023 14:54:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1674140061;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+	bh=xcrjXPZDX7R9jSoNCpV3rPeVgVzgUf1s0d7wCqmxknY=;
+	b=OMYemN4WAcHXRmgRExAjw+j0/x/TIFQ6Zq2s7TXsqWcNOvQR8+8+7KL02j+ik995YlO/bB
+	tTd/kz6LveBF6tO5kmzfLtV+OtUuGp6NuVzhUVxnT5uiDQI9HFZE2+dlMRO7r10zSi7ZN7
+	qSi7+WLFY6APKB5Ej7b897s+q0OJgtw=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-428-4vCX5u6kOv-DIqVNu1Hkpw-1; Thu, 19 Jan 2023 09:23:39 -0500
+X-MC-Unique: 4vCX5u6kOv-DIqVNu1Hkpw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6ECC7181E3F5;
+	Thu, 19 Jan 2023 14:23:38 +0000 (UTC)
+Received: from T590 (ovpn-8-27.pek2.redhat.com [10.72.8.27])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 4F0AD40C6EC4;
+	Thu, 19 Jan 2023 14:23:33 +0000 (UTC)
+Date: Thu, 19 Jan 2023 22:23:28 +0800
+From: Ming Lei <ming.lei@redhat.com>
+To: io-uring@vger.kernel.org, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, nbd@other.debian.org
+Cc: ming.lei@redhat.com
+Subject: ublk-nbd: ublk-nbd is avaialbe
+Message-ID: <Y8lSYBU9q5fjs7jS@T590>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20221110052438.2188-1-linux@weissschuh.net>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <clAgNO8YMvM.A.nfC.QvuvjB@bendel>
+Resent-Message-ID: <cuMrVEG95KG.A.eMF.L3VyjB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2318
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2319
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -72,40 +82,52 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230111164027.7oqg6zmkcpfitb3l@t-8ch.de
-Resent-Date: Wed, 11 Jan 2023 17:03:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/Y8lSYBU9q5fjs7jS@T590
+Resent-Date: Thu, 19 Jan 2023 15:12:11 +0000 (UTC)
 
 Hi,
 
-On Thu, Nov 10, 2022 at 06:24:38AM +0100, Thomas Weiﬂschuh wrote:
-> Instead of forcing the user to manually load the module do it
-> automatically.
-> 
-> Signed-off-by: Thomas Weiﬂschuh <linux@weissschuh.net>
-> ---
->  drivers/block/nbd.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index 5cffd96ef2d7..1c38a7ea9531 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -2328,6 +2328,7 @@ static struct genl_family nbd_genl_family __ro_after_init = {
->  	.mcgrps		= nbd_mcast_grps,
->  	.n_mcgrps	= ARRAY_SIZE(nbd_mcast_grps),
->  };
-> +MODULE_ALIAS_GENL_FAMILY(NBD_GENL_FAMILY_NAME);
->  
->  static int populate_nbd_status(struct nbd_device *nbd, struct sk_buff *reply)
->  {
-> 
-> base-commit: f67dd6ce0723ad013395f20a3f79d8a437d3f455
-> -- 
-> 2.38.1
-> 
+ublk-nbd[1] is available now.
 
-Any feedback on the patch?
+Basically it is one nbd client, but totally implemented in userspace,
+and wrt. current nbd-client in [2], the transmission phase is done
+by linux block nbd driver.
+
+The handshake implementation is borrowed from nbd project[2], so
+basically ublk-nbd just adds new code for implementing transmission
+phase, and it can be thought as moving linux block nbd driver into
+userspace.
+
+The added new code is basically in nbd/tgt_nbd.cpp, and io handling
+is based on liburing[3], and implemented by c++20 coroutine, so
+everything is done in single pthread totally lockless, meantime turns
+out it is pretty easy to design & implement, attributed to ublk framework,
+c++20 coroutine and liburing.
+
+ublk-nbd supports both tcp and unix socket, and allows to enable io_uring
+send zero copy via command line '--send_zc', see details in README[4].
+
+No regression is found in xfstests by using ublk-nbd as both test device
+and scratch device, and builtin test(make test T=nbd) runs well.
+
+Fio test("make test T=nbd") shows that ublk-nbd performance is
+basically same with nbd-client/nbd driver when running fio on real
+ethernet link(1g, 10+g), but ublk-nbd IOPS is higher by ~40% than
+nbd-client(nbd driver) with 512K BS, which is because linux nbd
+driver sets max_sectors_kb as 64KB at default.
+
+But when running fio over local tcp socket, it is observed in my test
+machine that ublk-nbd performs better than nbd-client/nbd driver,
+especially with 2 queue/2 jobs, and the gap could be 10% ~ 30%
+according to different block size.
+
+Any comments are welcome!
+
+[1] https://github.com/ming1/ubdsrv/blob/master/nbd
+[2] https://github.com/NetworkBlockDevice/nbd
+[3] https://github.com/axboe/liburing
+[4] https://github.com/ming1/ubdsrv/blob/master/nbd/README.rst
 
 Thanks,
-Thomas
+Ming
 
