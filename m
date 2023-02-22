@@ -2,82 +2,82 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B3B869E35F
-	for <lists+nbd@lfdr.de>; Tue, 21 Feb 2023 16:28:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A036769F22B
+	for <lists+nbd@lfdr.de>; Wed, 22 Feb 2023 10:49:52 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3A2EC20A07; Tue, 21 Feb 2023 15:28:55 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 21 15:28:55 2023
+	id 6D69C20B4B; Wed, 22 Feb 2023 09:49:52 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Feb 22 09:49:52 2023
 Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
+X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
 	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3238F209F9
-	for <lists-other-nbd@bendel.debian.org>; Tue, 21 Feb 2023 15:28:44 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id F255920B22
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Feb 2023 09:49:40 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.18 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-7.08 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
 	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id cuSP4FxzeRAi for <lists-other-nbd@bendel.debian.org>;
-	Tue, 21 Feb 2023 15:28:36 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+	with ESMTP id uX3pXmeXRJM6 for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Feb 2023 09:49:32 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
 Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id A658F209F3
-	for <nbd@other.debian.org>; Tue, 21 Feb 2023 15:28:36 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id B02E22088F
+	for <nbd@other.debian.org>; Wed, 22 Feb 2023 09:49:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
 	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
 	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=wpU4GWnGunuQpvZMVNVvPLhBK22cJPRxRC4WXwip7Y4=; b=Y5QyGPrIpSlTmr9ImPHsfiFNcJ
-	toQMcomrj05elgb2HjzzbIrDQRgJ8AY5yjaBu2zuW0vCPcaZ29SW3siDurWHVp/bM37y/Hi6Ig/xO
-	cu897KiTl5p66iG0yoWVpkzc2qRRwZ0GT7XNMfEXs7myHQJY2CoJXSEzGpgJ63O5P1Z2zEHUREEN6
-	5eIZvzbarL3wGxTENCiT+7i8P6DI1muFa2X5pyPlrVPXvndNfxhl/GTTw5FWzcVH6R0d1b4/iBxGv
-	7jsguIani6pv4DCTKdlzssv0RSt74cZH1lwvMhPr33asGNXAoTXAfMFRxvciKAs7zemAoSmHinpMY
-	//Mu1A7w==;
-Received: from [196.251.239.242] (helo=pc220518)
+	bh=EbBMKAnTWe+s3mdJi9bAs0O++03SbP6Btd81X8uSdgA=; b=SeAB/lHUGU9BsQBfHU1/4fh601
+	n7Q7kIV0LSz548wUYyxZvMthP7JHioW8l+uIoCUGl89dQjSknljAYEsXdbYOIPkFb6cuEHZB9VlkC
+	wFJMMDOmbUyAs5FDNISemOqnIF8BTE+pvNI7e/spfKOLJNGC/rRNJ2PdRbiFdyI4P+VsU9cO7IN3z
+	W+2EbT+wnn1+SxiDEWW8OPoStL1TP3SG1dOl2e7OLKdYtV4VLYYirOKNaoGwF18NOb8BPsMv9s0UM
+	p5efvR7ynzW7ZAxQ1jxIwD3SHPcr6LNJa63K6CmosYlnYdQOBLJvGzvEiI21S4xZwUtynwu4dTstY
+	Rs/inaYA==;
+Received: from [102.39.141.34] (helo=pc220518)
 	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.94.2)
 	(envelope-from <w@uter.be>)
-	id 1pUUSh-00H19U-Th; Tue, 21 Feb 2023 16:21:48 +0100
+	id 1pUlke-0097vC-Hr; Wed, 22 Feb 2023 10:49:28 +0100
 Received: from wouter by pc220518 with local (Exim 4.96)
 	(envelope-from <w@uter.be>)
-	id 1pUUSX-000L4w-1P;
-	Tue, 21 Feb 2023 17:21:37 +0200
-Date: Tue, 21 Feb 2023 17:21:37 +0200
+	id 1pUlkU-000VbS-37;
+	Wed, 22 Feb 2023 11:49:18 +0200
+Date: Wed, 22 Feb 2023 11:49:18 +0200
 From: Wouter Verhelst <w@uter.be>
 To: Eric Blake <eblake@redhat.com>
 Cc: nbd@other.debian.org, qemu-devel@nongnu.org, qemu-block@nongnu.org,
 	libguestfs@redhat.com
-Subject: Re: [PATCH v2 2/6] spec: Tweak description of maximum block size
-Message-ID: <Y/ThgdLldvb5rpwA@pc220518.home.grep.be>
+Subject: Re: [PATCH v2 3/6] spec: Add NBD_OPT_EXTENDED_HEADERS
+Message-ID: <Y/XlHhLWwm2pZ4RL@pc220518.home.grep.be>
 References: <20221114224141.cm5jgyxfmvie5xb5@redhat.com>
  <20221114224655.2186173-1-eblake@redhat.com>
- <20221114224655.2186173-3-eblake@redhat.com>
+ <20221114224655.2186173-4-eblake@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20221114224655.2186173-3-eblake@redhat.com>
+In-Reply-To: <20221114224655.2186173-4-eblake@redhat.com>
 X-Speed: Gates' Law: Every 18 months, the speed of software halves.
 Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QWjGKEIfqON.A.EUD.3MO9jB@bendel>
+Resent-Message-ID: <1QJdCazmMCD.A.o8F.AVe9jB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2328
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2329
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,84 +87,180 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Y/ThgdLldvb5rpwA@pc220518.home.grep.be
-Resent-Date: Tue, 21 Feb 2023 15:28:55 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/Y/XlHhLWwm2pZ4RL@pc220518.home.grep.be
+Resent-Date: Wed, 22 Feb 2023 09:49:52 +0000 (UTC)
 
-Hi Eric,
-
-Busy days, busy times. Sorry about the insane delays here.
-
-On Mon, Nov 14, 2022 at 04:46:51PM -0600, Eric Blake wrote:
-> Commit 9f30fedb improved the spec to allow non-payload requests that
-> exceed any advertised maximum block size.  Take this one step further
-> by permitting the server to use NBD_EOVERFLOW as a hint to the client
-> when a request is oversize (while permitting NBD_EINVAL for
-> back-compat), and by rewording the text to explicitly call out that
-> what is being advertised is the maximum payload length, not maximum
-> block size.  This becomes more important when we add 64-bit
-> extensions, where it becomes possible to extend `NBD_CMD_BLOCK_STATUS`
-> to have both an effect length (how much of the image does the client
-> want status on - may be larger than 32 bits) and an optional payload
-> length (a way to filter the response to a subset of negotiated
-> metadata contexts).  In the shorter term, it means that a server may
-> (but not must) accept a read request larger than the maximum block
-> size if it can use structured replies to keep each chunk of the
-> response under the maximum payload limits.
-> ---
->  doc/proto.md | 127 +++++++++++++++++++++++++++++----------------------
->  1 file changed, 73 insertions(+), 54 deletions(-)
+On Mon, Nov 14, 2022 at 04:46:52PM -0600, Eric Blake wrote:
+[...]
+> @@ -1370,9 +1475,10 @@ of the newstyle negotiation.
+>      Return a list of `NBD_REP_META_CONTEXT` replies, one per context,
+>      followed by an `NBD_REP_ACK` or an error.
 > 
-> diff --git a/doc/proto.md b/doc/proto.md
-> index 8f08583..53c334a 100644
-> --- a/doc/proto.md
-> +++ b/doc/proto.md
-> @@ -745,8 +745,8 @@ text unless the client insists on TLS.
-> 
->  During transmission phase, several operations are constrained by the
->  export size sent by the final `NBD_OPT_EXPORT_NAME` or `NBD_OPT_GO`,
-> -as well as by three block size constraints defined here (minimum,
-> -preferred, and maximum).
-> +as well as by three block size constraints defined here (minimum
-> +block, preferred block, and maximum payload).
-> 
->  If a client can honour server block size constraints (as set out below
->  and under `NBD_INFO_BLOCK_SIZE`), it SHOULD announce this during the
-> @@ -772,15 +772,15 @@ learn the server's constraints without committing to them.
-> 
->  If block size constraints have not been advertised or agreed on
->  externally, then a server SHOULD support a default minimum block size
-> -of 1, a preferred block size of 2^12 (4,096), and a maximum block size
-> -that is effectively unlimited (0xffffffff, or the export size if that
-> -is smaller), while a client desiring maximum interoperability SHOULD
-> -constrain its requests to a minimum block size of 2^9 (512), and limit
-> -`NBD_CMD_READ` and `NBD_CMD_WRITE` commands to a maximum block size of
-> -2^25 (33,554,432).  A server that wants to enforce block sizes other
-> -than the defaults specified here MAY refuse to go into transmission
-> -phase with a client that uses `NBD_OPT_EXPORT_NAME` (via a hard
-> -disconnect) or which uses `NBD_OPT_GO` without requesting
-> +of 1, a preferred block size of 2^12 (4,096), and a maximum block
-> +payload size that is at least 2^25 (33,554,432) (even if the export
-> +size is smaller); while a client desiring maximum interoperability
-> +SHOULD constrain its requests to a minimum block size of 2^9 (512),
-> +and limit `NBD_CMD_READ` and `NBD_CMD_WRITE` commands to a maximum
-> +block size of 2^25 (33,554,432).  A server that wants to enforce block
-> +sizes other than the defaults specified here MAY refuse to go into
-> +transmission phase with a client that uses `NBD_OPT_EXPORT_NAME` (via
-> +a hard disconnect) or which uses `NBD_OPT_GO` without requesting
+> -    This option SHOULD NOT be requested unless structured replies have
+> -    been negotiated first. If a client attempts to do so, a server
+> -    MAY send `NBD_REP_ERR_INVALID`.
+> +    This option SHOULD NOT be requested unless structured replies or
+> +    extended headers have been negotiated first. If a client attempts
+> +    to do so, a server MAY send `NBD_REP_ERR_INVALID` or
+> +    `NBD_REP_ERR_EXT_HEADER_REQD`.
 
-This does more than what the commit message says: it also limits payload
-size from 0xffffffff to 2^25. We already have a "A server that desires
-maximum interoperability" clause that mentions the 2^25, so I'm not
-entirely sure why we need to restrict that for the default cause.
+Is it the intent that NBD_REP_ERR_EXT_HEADER_REQD means structured
+replies are not supported by this server? I think that could be
+clarified here.
 
-Remember, apart from specifying how something should be implemented, the
-spec also documents current and historic behavior. I am probably
-convinced that it makes more sense to steer people towards limiting to
-2^25, but it should be done in such a way that servers which accept a
-0xffffffff block size are not suddenly noncompliant. I don't think this
-does that.
+(this occurs twice)
 
-[no further comments on this one]
+[...]
+> +* `NBD_OPT_EXTENDED_HEADERS` (11)
+> +
+> +    The client wishes to use extended headers during the transmission
+> +    phase.  The client MUST NOT send any additional data with the
+> +    option, and the server SHOULD reject a request that includes data
+> +    with `NBD_REP_ERR_INVALID`.
+> +
+> +    When successful, this option takes precedence over structured
+> +    replies.  A client MAY request structured replies first, although
+> +    a server SHOULD support this option even if structured replies are
+> +    not negotiated.
+> +
+> +    It is envisioned that future extensions will add other new
+> +    requests that support a data payload in the request or reply.  A
+> +    server that supports such extensions SHOULD NOT advertise those
+> +    extensions until the client has negotiated extended headers; and a
+> +    client MUST NOT make use of those extensions without first
+> +    enabling support for reply payloads.
+> +
+> +    The server replies with the following, or with an error permitted
+> +    elsewhere in this document:
+> +
+> +    - `NBD_REP_ACK`: Extended headers have been negotiated; the client
+> +      MUST use the 32-byte extended request header, with proper use of
+> +      `NBD_CMD_FLAG_PAYLOAD_LEN` for all commands sending a payload;
+> +      and the server MUST use the 32-byte extended reply header.
+> +    - For backwards compatibility, clients SHOULD be prepared to also
+> +      handle `NBD_REP_ERR_UNSUP`; in this case, only the compact
+> +      transmission headers will be used.
+> +
+> +    Note that a response of `NBD_REP_ERR_BLOCK_SIZE_REQD` does not
+> +    make sense in response to this command, but a server MAY fail with
+> +    that error for a later `NBD_OPT_GO` without a client request for
+> +    `NBD_INFO_BLOCK_SIZE`, since the use of extended headers provides
+> +    more incentive for a client to promise to obey block size
+> +    constraints.
+> +
+> +    If the client requests `NBD_OPT_STARTTLS` after this option, it
+> +    MUST renegotiate extended headers.
+> +
+
+Does it make sense here to also forbid use of NBD_OPT_EXPORT_NAME? I
+think the sooner we get rid of that, the better ;-)
+
+[...]
+> @@ -1746,13 +1914,15 @@ unrecognized flags.
+> 
+>  #### Structured reply types
+> 
+> -These values are used in the "type" field of a structured reply.
+> -Some chunk types can additionally be categorized by role, such as
+> -*error chunks* or *content chunks*.  Each type determines how to
+> -interpret the "length" bytes of payload.  If the client receives
+> -an unknown or unexpected type, other than an *error chunk*, it
+> -MUST initiate a hard disconnect.  A server MUST NOT send a chunk
+> -larger than any advertised maximum block payload size.
+> +These values are used in the "type" field of a structured reply.  Some
+> +chunk types can additionally be categorized by role, such as *error
+> +chunks*, *content chunks*, or *status chunks*.  Each type determines
+> +how to interpret the "length" bytes of payload.  If the client
+> +receives an unknown or unexpected type, other than an *error chunk*,
+> +it MAY initiate a hard disconnect on the grounds that the client is
+> +uncertain whether the server handled the request as desired.  A server
+> +MUST NOT send a chunk larger than any advertised maximum block payload
+> +size.
+
+Why do we make this a MAY rather than a MUST?
+
+Also, should this section say "structured or extended reply"? We use the
+same types for both.
+
+[...]
+> +* `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` (6)
+> +
+> +  This chunk type is in the status chunk category.  *length* MUST be
+> +  8 + (a positive multiple of 16).  The semantics of this chunk mirror
+> +  those of `NBD_REPLY_TYPE_BLOCK_STATUS`, other than the use of a
+> +  larger *extent length* field, added padding in each descriptor to
+> +  ease alignment, and the addition of a *descriptor count* field that
+> +  can be used for easier client processing.  This chunk type MUST NOT
+> +  be used unless extended headers were negotiated with
+> +  `NBD_OPT_EXTENDED_HEADERS`.
+> +
+> +  If the *descriptor count* field contains 0, the number of subsequent
+> +  descriptors is determined solely by the *length* field of the reply
+> +  header.  However, the server MAY populate the *descriptor count*
+> +  field with the number of descriptors that follow; when doing this,
+> +  the server MUST ensure that the header *length* is equal to
+> +  *descriptor count* * 16 + 8.
+> +
+> +  The payload starts with:
+> +
+> +  32 bits, metadata context ID  
+> +  32 bits, descriptor count  
+> +
+> +  and is followed by a list of one or more descriptors, each with this
+> +  layout:
+> +
+> +  64 bits, length of the extent to which the status below
+> +     applies (unsigned, MUST be nonzero)  
+> +  32 bits, padding (MUST be zero)  
+> +  32 bits, status flags  
+> +
+> +  Note that even when extended headers are in use, the client MUST be
+> +  prepared for the server to use either the compact or extended chunk
+> +  type, regardless of whether the client's hinted effect length was
+> +  more or less than 32 bits; but the server MUST use exactly one of
+> +  the two chunk types per negotiated metacontext ID.
+
+Is this last paragraph really a good idea? I would think it makes more
+sense to require the new format if we're already required to support it
+on both sides anyway.
+
+[...]
+> -    The list of block status descriptors within the
+> -    `NBD_REPLY_TYPE_BLOCK_STATUS` chunk represent consecutive portions
+> -    of the file starting from specified *offset*.  If the client used
+
+I know this was in the old text (hence me mentioning it here), but this
+should probably say "export" rarher than "file". NBD does not deal
+(conceptually) with files...
+
+> -    the `NBD_CMD_FLAG_REQ_ONE` flag, each chunk contains exactly one
+> -    descriptor where the *length* of the descriptor MUST NOT be
+> -    greater than the *length* of the request; otherwise, a chunk MAY
+> -    contain multiple descriptors, and the final descriptor MAY extend
+> -    beyond the original requested size if the server can determine a
+> -    larger length without additional effort.  On the other hand, the
+> -    server MAY return less data than requested.  In particular, a
+> -    server SHOULD NOT send more than 2^20 status descriptors in a
+> -    single chunk.  However the server MUST return at least one status
+> -    descriptor, and since each status descriptor has a non-zero
+> -    length, a client can always make progress on a successful return.
+> +    The list of block status descriptors within a given status chunk
+> +    represent consecutive portions of the file starting from specified
+> +    *offset*.  If the client used the `NBD_CMD_FLAG_REQ_ONE` flag,
+> +    each chunk contains exactly one descriptor where the *length* of
+> +    the descriptor MUST NOT be greater than the *length* of the
+> +    request; otherwise, a chunk MAY contain multiple descriptors, and
+> +    the final descriptor MAY extend beyond the original requested size
+> +    if the server can determine a larger length without additional
+> +    effort.  On the other hand, the server MAY return less data than
+> +    requested.  In particular, a server SHOULD NOT send more than 2^20
+> +    status descriptors in a single chunk.  However the server MUST
+> +    return at least one status descriptor, and since each status
+> +    descriptor has a non-zero length, a client can always make
+> +    progress on a successful return.
+
+Other than that, no comments on this one.
+
 -- 
      w@uter.{be,co.za}
 wouter@{grep.be,fosdem.org,debian.org}
