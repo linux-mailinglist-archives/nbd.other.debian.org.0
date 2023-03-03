@@ -2,155 +2,81 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A5466A8A1D
-	for <lists+nbd@lfdr.de>; Thu,  2 Mar 2023 21:21:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71E636AA4C3
+	for <lists+nbd@lfdr.de>; Fri,  3 Mar 2023 23:47:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 09687208B1; Thu,  2 Mar 2023 20:21:44 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Mar  2 20:21:44 2023
-Old-Return-Path: <chaitanyak@nvidia.com>
+	id 403272088A; Fri,  3 Mar 2023 22:47:39 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Mar  3 22:47:39 2023
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,NICE_REPLY_A,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,THREADTOPIC autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-10.2 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 2C6D0208A3
-	for <lists-other-nbd@bendel.debian.org>; Thu,  2 Mar 2023 20:03:54 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 483E2208C6
+	for <lists-other-nbd@bendel.debian.org>; Fri,  3 Mar 2023 22:47:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.272 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.09,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, THREADTOPIC=2]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-6.082 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 23Nl_D0ij3lj for <lists-other-nbd@bendel.debian.org>;
-	Thu,  2 Mar 2023 20:03:46 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .nvidia. - helo: .nam04-dm6-obe.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (mail-dm6nam04on2088.outbound.protection.outlook.com [40.107.102.88])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 2AF93208A6
-	for <nbd@other.debian.org>; Thu,  2 Mar 2023 20:03:45 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SDTxtJDu+wMkNVy81sK0K/L378Siv+96b285k7ywrEDuNDU84IILGAegWaET2xeh3JPuFMENkCRoZgkSmGMksc26ZpCsk5EBbO0CdOVByVfEP6I+ahVJmmGTvrU6cy+gBmmY5t+P3Spurde8/4jenjl6LAYXvXaMcjZ4hIblfsYH5emsut0O7uhOje/Et8fLQztpeLG+MA9ywmkLeOrNAIdJEspYg/wZ/Bmh2XD8YPo2Bb8QnzeanbIIgGSMAlez1dKsny1EgfJYIUM8Cyh2DXplIMgqO0Z5uTCY0CILRXt9+AlzrclURdqCTN9J/UxflwU1tUVOO+PvJ3C5P7Q3WQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7V4SFRCpIwGIebnN53Ax3umwHUN1vjX2UaUKS8TytlA=;
- b=CIXEsCznpihnBBzo0jLzOQU7/CVd5TDVzG4Xq34EZIM5QEufEIzaWxsy5Ho8uWHI4gRYNXsqdrJC5yk5rRyNsXKvhEgCQPRwU/iZppMi9pKc/9h9liZD33wRDJqAcu1BbKXT4Fjpflw87FSFlG+dYOLGmTe+z0mEKXimtLZdbcmuVrKjwdAUqBWeB++yCZ1Mc6NtVIPrELTteUeD4JKu1v9AerXhBsgC9FeAUW0nQ1babbCUtKz7GSlOKN+AXYuVXHEGJ9kAQ9UAlHNXo9tOTXU86v4kyrIQ/isThIcrnEtrQpa1gqvTeKNyZidnzRDTMKcHlwABn6rVwna/c1yOFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7V4SFRCpIwGIebnN53Ax3umwHUN1vjX2UaUKS8TytlA=;
- b=l01ToNtcipZ4MdVCGJo0GbhbXJWlBZeq5vKLa40bIszpI7L7EpFSo7wqgCpcTpWdLmBsUb0QDqfyJZPIAeBsWbRYD5gxOvWbO1lgntqBFeJ/+3f5fhAXKzHp9aKK/mJVV8LG0ELMxcJkujXprvpA90wdh+k1k+UI2+zzUN+cjGxewlzUtfYQAUgiE6ndhIMBzqLK3IcblXJfTYGVGMXkvhS0GLLW+F7s5U+FrjGLk+Kw3UZYk05+i1AONZOW6IaRZGautyfaww+YJKVLjU0S3501LLCTfofC+/H54GIJU/cpSCV3PltqUlNxxX5geDd1s72gsFSl8fKFBKGxIlDe/Q==
-Received: from MW2PR12MB4667.namprd12.prod.outlook.com (2603:10b6:302:12::28)
- by PH8PR12MB8605.namprd12.prod.outlook.com (2603:10b6:510:1cc::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.17; Thu, 2 Mar
- 2023 18:29:51 +0000
-Received: from MW2PR12MB4667.namprd12.prod.outlook.com
- ([fe80::4aaa:495:78b4:1d7c]) by MW2PR12MB4667.namprd12.prod.outlook.com
- ([fe80::4aaa:495:78b4:1d7c%3]) with mapi id 15.20.6156.019; Thu, 2 Mar 2023
- 18:29:51 +0000
-From: Chaitanya Kulkarni <chaitanyak@nvidia.com>
-To: Jakub Kicinski <kuba@kernel.org>, "josef@toxicpanda.com"
-	<josef@toxicpanda.com>, "axboe@kernel.dk" <axboe@kernel.dk>
-CC: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>
-Subject: Re: [PATCH -next 2/2] nbd: use the structured req attr check
-Thread-Topic: [PATCH -next 2/2] nbd: use the structured req attr check
-Thread-Index: AQHZR/WSz0GCfLQoikuoZhfPo+9SuK7n2giA
-Date: Thu, 2 Mar 2023 18:29:51 +0000
-Message-ID: <449b9a62-d76b-8d1c-6cbc-14fbbb9fcd69@nvidia.com>
-References: <20230224021301.1630703-1-kuba@kernel.org>
- <20230224021301.1630703-2-kuba@kernel.org>
-In-Reply-To: <20230224021301.1630703-2-kuba@kernel.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MW2PR12MB4667:EE_|PH8PR12MB8605:EE_
-x-ms-office365-filtering-correlation-id: bee12aeb-5eb1-4c7b-db1e-08db1b4c1ca7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info:
- xfVNO9b9yQMmhgfxDf6Pva0TrZfWIfirofR4m8VtmbyCn+awLmE2AU2TDv5gOzvf+ptUhpeWFXD/2qxPKoh5AT6QaU6GU7W19TWZYuvdg0NSN6sfUFh/hNyW1s8WSJPLKSKAp6I7xH42ykuoa25sU/90cQduNsQbi+z07gfJ7L/QdQRzd8g3csOoSKh5fEMA+S4XjmP92Gp5hpq750A3aMRguEba1Woeoz1U1nVMH/TInz8sSvMdCFPhr8PqQ9Kty6Y8vwJmEVOcyBM1fgDgT0MFsaLgHsI7R4qm0a7ipCn1w10xU/8pV5M6o2ZVY0pVufE+wSp6k69wYfmFcKuDeXPHrq+bZdsLy26pPgJwwnaOI5G0fTO6VkYVMXNt5t1kXEkqLPSiQjRVmU0bzAkNKmghbTaKBj/iqjUA5SuU7sLnOvH/bqdqffkw37YL3TCisCUrORpwJX7JehYZ8Fqp0ZUrbWcO2mCiq+1AZpSEIEBg1ThBnBuvPaCLgI7uNOZxAVWWYxNfRkqzUNiIAz0BlwC0X6X0T1/Y2nkorpKk0bH/jM2vOy6JeDFsZr6cR3wu+FaV0ZEWGcvXiKYvvs27OEBzxkGReEAmOphGO3PYaP+Q/lP5hzdCWXNRStzvkyFU+g2+CeUf9YMEfcjCylhN2pWsjnf895SsKGVmAkQa8IVGQv9GApkFMuGdOZ4VyZcT8+B6TnHCGY9XdpiRXoUvxEdvwnUv+tAkqDZ1Y9f33l8y4uSPvm8M0t3YuQUkJVZU5MzNhDSNK9P94y7f/SMgBw==
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW2PR12MB4667.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(396003)(39860400002)(136003)(376002)(346002)(451199018)(31686004)(71200400001)(36756003)(38100700002)(122000001)(5660300002)(8936002)(478600001)(86362001)(66946007)(31696002)(38070700005)(2616005)(26005)(6486002)(6512007)(6506007)(53546011)(66446008)(76116006)(4744005)(66476007)(186003)(64756008)(66556008)(2906002)(8676002)(91956017)(41300700001)(4326008)(316002)(54906003)(110136005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?c0EvQjlsU2xKM3BCUFRLTnhidlgwSEJDWWJYV3dBcE16bzAvTE1lV0N2OFQw?=
- =?utf-8?B?MmR1STRoVVMxUW5saDhJZUkweE5pcUNGYTh1OVl3eHcrZmpTZ3pFcTFhUm9q?=
- =?utf-8?B?QXAyNFE3MHJNbmt4Qk9DUG5sN0g0cVlFU0IrY0RNS3hFQ3l0aUVJY0ZiZFVQ?=
- =?utf-8?B?SHRYcW9BVU5TVVpqbWt5b3ZuampyQ0hmUjFGNHd2LzVmNUhya2l3Qm9CNFdT?=
- =?utf-8?B?eVBGQWxOWTlEUkdMOUt4aHNkSk1LdnZ6VEtGVjdjd0QwVVB1T2FwR2ZjcXE3?=
- =?utf-8?B?VmRHcTI4aUNBdDVUNHhLdnRDTVpTdkhWUVBCUnk4YXhUTUNDMTZGUU9MSXlw?=
- =?utf-8?B?OWFLeStNclo5dzQvSjNqc1plOTBRcENhK3lMa2k4WlIxVlE1WU92c3g3dTNH?=
- =?utf-8?B?TWlkcEk5bWI0UHErZE82WWlMRkZ2UW9HU2hXenY4SFR0L0g3UEhyQTBURW51?=
- =?utf-8?B?cWpudG9vb0V4SGRBQWUwelVuckdPeTFZYVMzbndjMWxhdWNRNFREYU5hTE5j?=
- =?utf-8?B?TTBXUC9pV3pxdVBnS3N3V2xLc1NKeGVXc0QvbzlJbW15ZENURjE2YTh3SHJj?=
- =?utf-8?B?eVVaL1Z2Mkk0RjFEU0JWTXU5c2hib0w5eUZwdE5NQWVBbFlJZmdVdUp1TmRl?=
- =?utf-8?B?bXptNzh3NVpPK0N6dk41NVlnVnFXY1RCbGNWVHUxWTdwRWZScTh6aU52T2NP?=
- =?utf-8?B?elJiZEliZ004L01zTjR0eEVzaUxUYUxScWljYUNZSnI4bWJPQk1kUlQvbmxy?=
- =?utf-8?B?bUNWQ3dCbm9QUFduSXhoV2JGWldJbmRsaXhRN3NOczhkWlRtUGZNd2JNYlBy?=
- =?utf-8?B?eGdaRnExZ25hTlZCTm8zQmNXWUV5bWZHK3ZMZm5xaWllYjE5OEt3bDViclBw?=
- =?utf-8?B?VGJCS1FBT2ZObnM3RkJRclJwZ21selRRMFpDRUFsWWZWM3R5d09JOC93cmgw?=
- =?utf-8?B?ZFVzSnVRUDhtM2t5OW1MelB1RVR2S0ladUlwNW9HcTFTYkZidVNPdlBSN2NJ?=
- =?utf-8?B?eDZFcGdhcisvdzNEQ095MXhtYTYvNkJOZlBMSUQ2c0RmdzBiK1ZmM29hNlZn?=
- =?utf-8?B?a3pkSWs2Ui9oYXlhSndNV1YzeFU3cFZ5KzgxbFU4b0Nxa3FYUWJJQnlhUEcw?=
- =?utf-8?B?cUxwR21HSkdWanZPQ200ZE45cllKNHl2bjV6Y1BIbHNlNTZ2ZjlSWjd3bm5R?=
- =?utf-8?B?N3Nwc3pyZnA3UWV2Slk1Vk9lRTE5Y3BucXVNZWg1dnJYbWV5Qk5DMzdXYVlT?=
- =?utf-8?B?dmFPaEU2K2FueUVWcU5uY252Q2dGaWs1a2REN1pVbllkdG9JNTl0Qmx0Q0ND?=
- =?utf-8?B?YVl2dWFTYnFvaHhJeU1Ba3dGRHVjMDVTWVJIS2RPeHdVdmhhQmt2a0dERnc5?=
- =?utf-8?B?elBleDU4UjdTbkxQbGNhT0dWZ0k1MElQbUVKWmpOYS9idlVxUUhJcTJBUVBV?=
- =?utf-8?B?NWdEelNEdHVTc0JnWWhacXdDbWdrVHBRMVIyWmc4SGtOcytybWo1d1NqUDA3?=
- =?utf-8?B?eUI3U3AyeUxTYWoxT3BFMkEyWkMzTnFwUXN0Z3hHckEwZGRqazZIQzMrVWpL?=
- =?utf-8?B?NEN2L3hGaWh6c3hiVldYbVA3ZWl6ZjYzRHQvSVZhZWtGVEM3SklpOGl2M1Y0?=
- =?utf-8?B?Z1JnSkRNRk9MVVJmOHNFZGgyTWxTUnd6dWdTUVRxVDl2cHlvd2xERk1Rbk9n?=
- =?utf-8?B?MWVCV1p0bnNCamN3TUppWEdESWxUQjNPWlZ2TngrUWJ1TG1JY0QvdUxWdHNs?=
- =?utf-8?B?Z2NVcjE2ejNjWGpTMjRQaGR4bWZ5N1dDQVp1amFjUDlFOExuYnR1Yk13ODBE?=
- =?utf-8?B?aUJETG5SeXd1TUFDc0UrUC9aL2dCYkJDdGpTOU9teUVzazl3QlJtcC8zRWNr?=
- =?utf-8?B?ZlBCWVl0a0E4LzlMN0RQcHpyRkkvWmlwK2pUakk5UVFSWWhTRjMyeHhBYW5x?=
- =?utf-8?B?M3JldHFDZGU3SUV2UkM2cXJ3amY3YXdsWkVpblJDc0d1QXNqaStiNXI1RWFr?=
- =?utf-8?B?a1Z3M0d5UlRHVnRrbEVjb0lnQitmNVQ4S3ZTK3RINitFaGVlVlkvdU5nSTlx?=
- =?utf-8?B?RjkwOVR6c1V3a0g1clZVeHNQR083S3dZVVNvRFk3SDBzbXRnUFc5bHUrcFRX?=
- =?utf-8?Q?AxdC2RCrtUH1Z6l4vt8j4oCFA?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <EE9FF31DB55E9F47A0DA88BE034396EA@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	with ESMTP id dIW4jYuCE9QG for <lists-other-nbd@bendel.debian.org>;
+	Fri,  3 Mar 2023 22:47:20 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by bendel.debian.org (Postfix) with ESMTP id 7E8AB208A1
+	for <nbd@other.debian.org>; Fri,  3 Mar 2023 22:47:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1677883635;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=XK8t/e7YVPL5RHN8HJ9JoLH1ncLNXR2xNgH4IC4L32s=;
+	b=eTqi/DI+zV7S3cUov67J2My1U92TsukFARTodFuoHvEKfiNc8ABBzTJXj/Gr+910ZZp8Np
+	XpZHi0bF8wFVg3o5WICMJC6BuT2wG7TlnL+ZQIkVc/RDNjSH+FsOak/kXzMvJFYKZBEQpf
+	2d0rRWtKpWLiM/H+fxQXp/2wcI/C13M=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-45-PUcuTUaOMwelH3Cyj2-mWg-1; Fri, 03 Mar 2023 17:15:08 -0500
+X-MC-Unique: PUcuTUaOMwelH3Cyj2-mWg-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B307D3C0DDCA;
+	Fri,  3 Mar 2023 22:15:07 +0000 (UTC)
+Received: from green.redhat.com (unknown [10.2.16.108])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 428C92026D4B;
+	Fri,  3 Mar 2023 22:15:07 +0000 (UTC)
+From: Eric Blake <eblake@redhat.com>
+To: nbd@other.debian.org
+Cc: qemu-block@nongnu.org,
+	libguestfs@redhat.com,
+	"Richard W . M . Jones" <rjones@redhat.com>
+Subject: [PATCH] docs: Prefer 'cookie' over 'handle'
+Date: Fri,  3 Mar 2023 16:15:03 -0600
+Message-Id: <20230303221503.1769410-1-eblake@redhat.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MW2PR12MB4667.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bee12aeb-5eb1-4c7b-db1e-08db1b4c1ca7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2023 18:29:51.4659
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xzJYaxesfTT+SxmgPausMPUbJD9IaupWAlml8el4rG47+gvpgPlT6SfY++jZ8oqE3GMpBuQu8b+AAhZbgYcQyw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB8605
-X-Rc-Spam: 2008-11-04_01
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <ltC-oCSDi4D.A.3AE.XVQAkB@bendel>
+Resent-Message-ID: <hsLlJJSsoQM.A.TpH.LknAkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2338
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2344
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -160,15 +86,88 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/449b9a62-d76b-8d1c-6cbc-14fbbb9fcd69@nvidia.com
-Resent-Date: Thu,  2 Mar 2023 20:21:44 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230303221503.1769410-1-eblake@redhat.com
+Resent-Date: Fri,  3 Mar 2023 22:47:39 +0000 (UTC)
 
-T24gMi8yMy8yMyAxODoxMywgSmFrdWIgS2ljaW5za2kgd3JvdGU6DQo+IFVzZSB0aGUgbWFjcm8g
-Zm9yIGNoZWNraW5nIHByZXNlbmNlIG9mIHJlcXVpcmVkIGF0dHJpYnV0ZXMuDQo+IEl0IGhhcyB0
-aGUgYWR2YW50YWdlIG9mIHJlcG9ydGluZyB0byB0aGUgdXNlciB3aGljaCBhdHRyDQo+IHdhcyBt
-aXNzaW5nIGluIGEgbWFjaGluZS1yZWFkYWJsZSBmb3JtYXQgKGV4dGFjaykuDQo+IA0KPiBSZXZp
-ZXdlZC1ieTogSm9zZWYgQmFjaWsgPGpvc2VmQHRveGljcGFuZGEuY29tPg0KPiBTaWduZWQtb2Zm
-LWJ5OiBKYWt1YiBLaWNpbnNraSA8a3ViYUBrZXJuZWwub3JnPg0KPiAtLS0NCg0KTG9va3MgZ29v
-ZC4NCg0KUmV2aWV3ZWQtYnk6IENoYWl0YW55YSBLdWxrYXJuaSA8a2NoQG52aWRpYS5jb20+DQoN
-Ci1jaw0KDQoNCg==
+In libnbd, we quickly learned that distinguishing between 'handle'
+(verb for acting on an object) and 'handle' (noun describing which
+object to act on) could get confusing; we solved it by renaming the
+latter to 'cookie'.  Copy that approach into the NBD spec, and make it
+obvious that a cookie is opaque data from the point of view of the
+server.  Makes no difference to implementations (other than older code
+still using 'handle' may be slightly harder to tie back to the spec).
+
+Suggested-by: Richard W.M. Jones <rjones@redhat.com>
+Signed-off-by: Eric Blake <eblake@redhat.com>
+---
+ doc/proto.md | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/doc/proto.md b/doc/proto.md
+index 3a96703..abb23e8 100644
+--- a/doc/proto.md
++++ b/doc/proto.md
+@@ -301,11 +301,11 @@ may be handled by the server asynchronously), and structured reply
+ chunks from one request may be interleaved with reply messages from
+ other requests; however, there may be constraints that prevent
+ arbitrary reordering of structured reply chunks within a given reply.
+-Clients SHOULD use a handle that is distinct from all other currently
+-pending transactions, but MAY reuse handles that are no longer in
+-flight; handles need not be consecutive.  In each reply message
++Clients SHOULD use a cookie that is distinct from all other currently
++pending transactions, but MAY reuse cookies that are no longer in
++flight; cookies need not be consecutive.  In each reply message
+ (whether simple or structured), the server MUST use the same value for
+-handle as was sent by the client in the corresponding request.  In
++cookie as was sent by the client in the corresponding request.  In
+ this way, the client can correlate which request is receiving a
+ response.
+
+@@ -349,7 +349,7 @@ The request message, sent by the client, looks as follows:
+ C: 32 bits, 0x25609513, magic (`NBD_REQUEST_MAGIC`)  
+ C: 16 bits, command flags  
+ C: 16 bits, type  
+-C: 64 bits, handle  
++C: 64 bits, cookie  
+ C: 64 bits, offset (unsigned)  
+ C: 32 bits, length (unsigned)  
+ C: (*length* bytes of data if the request is of type `NBD_CMD_WRITE`)  
+@@ -366,7 +366,7 @@ follows:
+ S: 32 bits, 0x67446698, magic (`NBD_SIMPLE_REPLY_MAGIC`; used to be
+    `NBD_REPLY_MAGIC`)  
+ S: 32 bits, error (MAY be zero)  
+-S: 64 bits, handle  
++S: 64 bits, cookie  
+ S: (*length* bytes of data if the request is of type `NBD_CMD_READ` and
+     *error* is zero)  
+
+@@ -381,7 +381,7 @@ server must initiate a hard disconnect).  Second, there is no way to
+ efficiently skip over portions of a sparse file that are known to
+ contain all zeroes.  Finally, it is not possible to reliably decode
+ the server traffic without also having context of what pending read
+-requests were sent by the client, to see which *handle* values will
++requests were sent by the client, to see which *cookie* values will
+ have accompanying payload on success.  Therefore structured replies
+ are also permitted if negotiated.
+
+@@ -398,7 +398,7 @@ sending errors via a structured reply, as the error can then be
+ accompanied by a string payload to present to a human user.
+
+ A structured reply MAY occupy multiple structured chunk messages
+-(all with the same value for "handle"), and the
++(all with the same value for "cookie"), and the
+ `NBD_REPLY_FLAG_DONE` reply flag is used to identify the final
+ chunk.  Unless further documented by individual requests below,
+ the chunks MAY be sent in any order, except that the chunk with
+@@ -418,7 +418,7 @@ A structured reply chunk message looks as follows:
+ S: 32 bits, 0x668e33ef, magic (`NBD_STRUCTURED_REPLY_MAGIC`)  
+ S: 16 bits, flags  
+ S: 16 bits, type  
+-S: 64 bits, handle  
++S: 64 bits, cookie  
+ S: 32 bits, length of payload (unsigned)  
+ S: *length* bytes of payload data (if *length* is nonzero)  
+
+-- 
+2.39.2
 
