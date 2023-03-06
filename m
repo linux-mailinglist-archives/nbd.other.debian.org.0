@@ -1,83 +1,89 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CE3F6AAEA5
-	for <lists+nbd@lfdr.de>; Sun,  5 Mar 2023 09:54:07 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 137FA6AB93D
+	for <lists+nbd@lfdr.de>; Mon,  6 Mar 2023 10:06:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id C078F2082C; Sun,  5 Mar 2023 08:54:06 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sun Mar  5 08:54:06 2023
-Old-Return-Path: <w@uter.be>
+	id C552320767; Mon,  6 Mar 2023 09:06:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar  6 09:06:12 2023
+Old-Return-Path: <lersek@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-0.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no
 	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D1E1D20824
-	for <lists-other-nbd@bendel.debian.org>; Sun,  5 Mar 2023 08:53:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EE6BF20724
+	for <lists-other-nbd@bendel.debian.org>; Mon,  6 Mar 2023 08:48:49 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.18 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-2.182 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id G5tAWEO35Ldq for <lists-other-nbd@bendel.debian.org>;
-	Sun,  5 Mar 2023 08:53:49 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E03CB20818
-	for <nbd@other.debian.org>; Sun,  5 Mar 2023 08:53:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=71c3KvmJIEHZ80evY5FA64AIpVJibr19GwJYtq7uPdk=; b=NFL9Chmjn2u4PMFO+cqHe85fNn
-	mpvTVPnL/uEJGrKYLfMeB1T2k3mtwRnUcnzPYSmh+kgeGc638GGcpwBlm6B503BijabJRCv0O0lE/
-	N9MTPH9ORTtauLzA48KHoFGkuwU1f63YL2qQaF9ySry/lGPiNNxlgQ0xFKS9GF1sIRPPaFDO/2PrO
-	sQTH8EJ9b3IrsUXi9dAjkOZxfrqHlIoG1vmBmyC08POi121MBVm341/AFHQEFv72olKM+wzSrtYdx
-	tPQd7WlGCuZINJJzgQvhU1tbrzPQ/6fYtoki9yj0JuKkzJWlw3Xs99+VyIFQQ5rGF8MKnoclRLPir
-	Fy9I+qAA==;
-Received: from [102.39.141.34] (helo=pc220518)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <w@uter.be>)
-	id 1pYk7l-00095A-6p; Sun, 05 Mar 2023 09:53:45 +0100
-Received: from wouter by pc220518 with local (Exim 4.96)
-	(envelope-from <w@uter.be>)
-	id 1pYk7e-000T7l-1A;
-	Sun, 05 Mar 2023 10:53:38 +0200
-Date: Sun, 5 Mar 2023 10:53:38 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Nir Soffer <nsoffer@redhat.com>
-Cc: Eric Blake <eblake@redhat.com>, nbd@other.debian.org,
-	libguestfs@redhat.com, qemu-block@nongnu.org
-Subject: Re: [Libguestfs] [PATCH] docs: Prefer 'cookie' over 'handle'
-Message-ID: <ZARYkkOB/sarm6vO@pc220518.home.grep.be>
-References: <20230303221503.1769410-1-eblake@redhat.com>
- <CAMRbyyuN6xFNkqyCacU=PxBqwTKdPNdO6dW1FQgTpAyWHLs7uw@mail.gmail.com>
+	with ESMTP id uRS67lFDHcoB for <lists-other-nbd@bendel.debian.org>;
+	Mon,  6 Mar 2023 08:48:42 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id A63DF2037B
+	for <nbd@other.debian.org>; Mon,  6 Mar 2023 08:48:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1678092517;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=wcTy6AAGv8f3zCCNsdgXS+H4btu5VdEy3wfrCveIEFs=;
+	b=QsQLm7sZXUCmLYhV82xcQ9PyHIUp4cRMRpdY47k0pzgVPAhyCy2Fr8xIOjsnY4WPtFQAg7
+	h3gVzVasKiC+XTl1m/lTVHBwvcXRiNKXiJjKZVhkLJQA01Owo9gIgDo+BtKEeyADU33PKK
+	CXA1U5exOwyAG9a9/eoFxfrrQwF9/Ak=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-29-XuCTxh_6PtqBfxDuk9cCsw-1; Mon, 06 Mar 2023 03:48:33 -0500
+X-MC-Unique: XuCTxh_6PtqBfxDuk9cCsw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com [10.11.54.7])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4A4E1101A521;
+	Mon,  6 Mar 2023 08:48:33 +0000 (UTC)
+Received: from [10.39.193.0] (unknown [10.39.193.0])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id C27F614171C3;
+	Mon,  6 Mar 2023 08:48:31 +0000 (UTC)
+Message-ID: <2a150935-0a91-ee4e-7cc8-ad227e987fef@redhat.com>
+Date: Mon, 6 Mar 2023 09:48:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAMRbyyuN6xFNkqyCacU=PxBqwTKdPNdO6dW1FQgTpAyWHLs7uw@mail.gmail.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
+Subject: Re: [Libguestfs] [PATCH v2 1/6] spec: Recommend cap on
+ NBD_REPLY_TYPE_BLOCK_STATUS length
+Content-Language: en-US
+To: Wouter Verhelst <w@uter.be>, Eric Blake <eblake@redhat.com>
+Cc: libguestfs@redhat.com, nbd@other.debian.org, qemu-devel@nongnu.org,
+ qemu-block@nongnu.org,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+References: <20221114224141.cm5jgyxfmvie5xb5@redhat.com>
+ <20221114224655.2186173-1-eblake@redhat.com>
+ <20221114224655.2186173-2-eblake@redhat.com>
+ <f350f0ec-34b1-dca7-5bb0-344a6832f327@yandex-team.ru>
+ <20230303221740.pdwc6jtozstntih7@redhat.com>
+ <ZARVwVaRJbgvv/fO@pc220518.home.grep.be>
+From: Laszlo Ersek <lersek@redhat.com>
+In-Reply-To: <ZARVwVaRJbgvv/fO@pc220518.home.grep.be>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <0ELLjuj6ZWD.A.nWG.uiFBkB@bendel>
+Resent-Message-ID: <B0cMvfabY_J.A.X4F.E0aBkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2352
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2353
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,25 +93,30 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZARYkkOB/sarm6vO@pc220518.home.grep.be
-Resent-Date: Sun,  5 Mar 2023 08:54:06 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/2a150935-0a91-ee4e-7cc8-ad227e987fef@redhat.com
+Resent-Date: Mon,  6 Mar 2023 09:06:12 +0000 (UTC)
 
-On Sat, Mar 04, 2023 at 10:03:46PM +0200, Nir Soffer wrote:
-> On Sat, Mar 4, 2023 at 12:15 AM Eric Blake <eblake@redhat.com> wrote:
-> > Makes no difference to implementations (other than older code
-> > still using 'handle' may be slightly harder to tie back to the spec).
+On 3/5/23 09:41, Wouter Verhelst wrote:
+> On Fri, Mar 03, 2023 at 04:17:40PM -0600, Eric Blake wrote:
+>> On Fri, Dec 16, 2022 at 10:32:01PM +0300, Vladimir Sementsov-Ogievskiy wrote:
+>>> s-o-b line missed.
+>>
+>> I'm not sure if the NBD project has a strict policy on including one,
+>> but I don't mind adding it.
 > 
-> To avoid confusion with older code that carefully used "handle" to match
-> the spec, maybe add a note that "cookie" was named "handle" before?
+> I've never required it, mostly because it's something that I myself
+> always forget, too, so, *shrug*.
+> 
+> (if there were a way in git to make it add that automatically, that
+> would help; I've looked but haven't found it)
+> 
 
-Yes, this. I'm happy with renaming it cookie (it makes sense), but there
-is a *lot* of stuff out there that calls it "handle" (including a
-wireshark plugin) and it would be confusing if that link isn't available
-anywhere.
+You can point the "commit.template" git-config knob to a particular
+file, and then include your S-o-b in that file.
 
--- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
+There is also the "-s" ("--signoff") option for git-commit, but I don't
+see a git-config knob to make that permanent. (You can always introduce
+a git.alias for it though.)
 
-I will have a Tin-Actinium-Potassium mixture, thanks.
+Laszlo
 
