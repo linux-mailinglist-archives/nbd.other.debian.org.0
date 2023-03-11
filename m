@@ -1,100 +1,78 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id D60DB6B5BB6
-	for <lists+nbd@lfdr.de>; Sat, 11 Mar 2023 13:31:18 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBBA76B5C17
+	for <lists+nbd@lfdr.de>; Sat, 11 Mar 2023 14:07:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 987BB2061B; Sat, 11 Mar 2023 12:31:18 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Mar 11 12:31:18 2023
-Old-Return-Path: <nsoffer@redhat.com>
+	id 90C2420633; Sat, 11 Mar 2023 13:07:56 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Mar 11 13:07:56 2023
+Old-Return-Path: <wouter@grep.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
-	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
-	RCVD_IN_MSPIKE_H2 autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-10.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8 autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B010920616
-	for <lists-other-nbd@bendel.debian.org>; Sat, 11 Mar 2023 12:31:07 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A9C3C205EA
+	for <lists-other-nbd@bendel.debian.org>; Sat, 11 Mar 2023 13:07:38 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.182 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
+X-Amavis-Spam-Status: No, score=-6.83 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_EF=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02]
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id fhRjcSAcpXUl for <lists-other-nbd@bendel.debian.org>;
-	Sat, 11 Mar 2023 12:31:03 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 681B320614
-	for <nbd@other.debian.org>; Sat, 11 Mar 2023 12:31:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1678537857;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6tJN+LOTi1Ma+P6eA0R3ApEkRj3LCEestZfzy3kbU+s=;
-	b=FH1VjBXrMTQoMFCENTo2Fc471FfP+Vc8cYzwRH/rdBUzm2POydcOxKOJZUCCuNcnReOUkD
-	i8jGrguHtaDbfi9zdWni3vtdWzn9SHICtXoOJ1CFKD9wprZpCDSfsrFsRVZRpYd5XB5Gd1
-	+QRfj8iucodzZHuuiectPnEC+jt/PAw=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-468-ht3HtGifNiqXD2VAiZ-fyg-1; Sat, 11 Mar 2023 07:30:56 -0500
-X-MC-Unique: ht3HtGifNiqXD2VAiZ-fyg-1
-Received: by mail-qk1-f200.google.com with SMTP id m25-20020ae9e019000000b007421ddd945eso4473038qkk.6
-        for <nbd@other.debian.org>; Sat, 11 Mar 2023 04:30:56 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678537855;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6tJN+LOTi1Ma+P6eA0R3ApEkRj3LCEestZfzy3kbU+s=;
-        b=1U11YtkcbeGFDwuJ4PnKhxeBbPMsG4sBLhkt1EXMAp8B5EGCA164dIH9HDxmMDnNC/
-         fZ0fJdh/xfomoImwDeDSy3wwkIXJ3W4D3liDkpfch6Fx6KdjN7lCARhn7lbMPcqHmmhx
-         U2xE8WfFH/3NXGDWjyicYC6dd8Eo4OK2Qn1rNLr70+Wmpl7JXzX4TflaXOgRGy3wky1M
-         b7e/uM1BSAACQxz5cR9ZEv8nXHhC/w3X02S05i2BDfBLVKrptXNdIQ7mycddWpHPpgq3
-         HKSF7SeKhrwhwhd1X5LCGrE6uOgTU5As5A4WCPyVZuIoov2Zbrt5YykMXsyso/9djnfj
-         h9Xw==
-X-Gm-Message-State: AO0yUKWdpQftY6SOlNBWdumcQ8QQlhHpPheAfppOepQ0cJZeb4V1k+v0
-	6YvAVjgZq3TilvhzMyJNDhBnCg0DMxEUqu0pI9/SelalJVUuXPyQY3omWzXsqU86TJx4A6jXCZj
-	UWZtTkmH4kqyI8yaIawwMTzpCTI93XcQl7co5jCCA
-X-Received: by 2002:a05:620a:b42:b0:742:86ba:13b9 with SMTP id x2-20020a05620a0b4200b0074286ba13b9mr1247851qkg.6.1678537855645;
-        Sat, 11 Mar 2023 04:30:55 -0800 (PST)
-X-Google-Smtp-Source: AK7set/TpnkKszZ6s4HZDKvVwUOaQa5hdplglcxvHLdzpgsai2DkB2eoJKprpykjHsivQAew4hdywCki2O4XJedO/Ys=
-X-Received: by 2002:a05:620a:b42:b0:742:86ba:13b9 with SMTP id
- x2-20020a05620a0b4200b0074286ba13b9mr1247842qkg.6.1678537855362; Sat, 11 Mar
- 2023 04:30:55 -0800 (PST)
+	with ESMTP id ZdL7QlgSJW58 for <lists-other-nbd@bendel.debian.org>;
+	Sat, 11 Mar 2023 13:07:30 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 347632062C
+	for <nbd@other.debian.org>; Sat, 11 Mar 2023 13:07:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=grep.be;
+	s=2017.latin; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=qyGY9Kgq4SvQmXEd109Qmor156RlTTRE9ZcxxWo2KkM=; b=iY8x7rBtJwcSBmkR7rTUdWATJ5
+	tkCKLzorasqwuplkOYMlYvrqpSgckttjPQGI7grx7/w2h7MSVaD16m5BxeOlwo66iLX2NTahbucS9
+	ItlTTixKQqvNpFG3+ZeLbmhEQtfcz9Kh7VA0eHqlvj+0txHKfhPAPtvMfqoLI3VVsBSBstxXnJm9Z
+	4Sv7Ig8d6aWe3/wfuF/KQUkxP+MCsqqwH6Z3HLf2Rqb1aId6yXOArh2GDckiGC4FKHBqKzSILzJ5P
+	yy/WH38EfzW88cPKDmOX829ItBfw6L0yj4za8rLGdbn/L6zk/lURq/nrYvDdWg1lfKsMDD066g/Zy
+	qef7t8bQ==;
+Received: from [102.39.141.34] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <wouter@grep.be>)
+	id 1paywZ-005Upw-6t
+	for nbd@other.debian.org; Sat, 11 Mar 2023 14:07:27 +0100
+Received: from wouter by pc220518 with local (Exim 4.96)
+	(envelope-from <wouter@grep.be>)
+	id 1paywQ-0014JD-24
+	for nbd@other.debian.org;
+	Sat, 11 Mar 2023 15:07:18 +0200
+From: w@uter.be
+To: nbd@other.debian.org
+Subject: [PATCH v2] nbd-server: Implement structured replies
+Date: Sat, 11 Mar 2023 15:07:01 +0200
+Message-Id: <20230311130705.253855-1-w@uter.be>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230310201525.2615385-1-eblake@redhat.com> <20230310201525.2615385-3-eblake@redhat.com>
-In-Reply-To: <20230310201525.2615385-3-eblake@redhat.com>
-From: Nir Soffer <nsoffer@redhat.com>
-Date: Sat, 11 Mar 2023 14:30:39 +0200
-Message-ID: <CAMRbyysDE+v_D6Q3tCf_+86T0V57UE4Emw6zc_4vnUu0Yau23A@mail.gmail.com>
-Subject: Re: [PATCH 2/3] uapi nbd: add cookie alias to handle
-To: Eric Blake <eblake@redhat.com>
-Cc: josef@toxicpanda.com, linux-block@vger.kernel.org, nbd@other.debian.org, 
-	philipp.reisner@linbit.com, lars.ellenberg@linbit.com, 
-	christoph.boehmwalder@linbit.com, corbet@lwn.net, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <NHFtXPRkCa.A.DtG.WSHDkB@bendel>
+Resent-Message-ID: <WEVbXPXMXkC.A.UfH.s0HDkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2375
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2378
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -104,75 +82,18 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAMRbyysDE+v_D6Q3tCf_+86T0V57UE4Emw6zc_4vnUu0Yau23A@mail.gmail.com
-Resent-Date: Sat, 11 Mar 2023 12:31:18 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230311130705.253855-1-w@uter.be
+Resent-Date: Sat, 11 Mar 2023 13:07:56 +0000 (UTC)
 
-On Fri, Mar 10, 2023 at 10:16=E2=80=AFPM Eric Blake <eblake@redhat.com> wro=
-te:
->
-> The uapi <linux/nbd.h> header declares a 'char handle[8]' per request;
-> which is overloaded in English (are you referring to "handle" the
-> verb, such as handling a signal or writing a callback handler, or
-> "handle" the noun, the value used in a lookup table to correlate a
-> response back to the request).  Many client-side NBD implementations
-> (both servers and clients) have instead used 'u64 cookie' or similar,
-> as it is easier to directly assign an integer than to futz around with
-> memcpy.  In fact, upstream documentation is now encouraging this shift
-> in terminology: https://lists.debian.org/nbd/2023/03/msg00031.html
->
-> Accomplish this by use of an anonymous union to provide the alias for
-> anyone getting the definition from the uapi; this does not break
-> existing clients, while exposing the nicer name for those who prefer
-> it.  Note that block/nbd.c still uses the term handle (in fact, it
-> actually combines a 32-bit cookie and a 32-bit tag into the 64-bit
-> handle), but that internal usage is not changed the public uapi, since
-> no compliant NBD server has any reason to inspect or alter the 64
-> bits sent over the socket.
->
-> Signed-off-by: Eric Blake <eblake@redhat.com>
-> ---
->  include/uapi/linux/nbd.h | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
->
-> diff --git a/include/uapi/linux/nbd.h b/include/uapi/linux/nbd.h
-> index 8797387caaf7..f58f2043f62e 100644
-> --- a/include/uapi/linux/nbd.h
-> +++ b/include/uapi/linux/nbd.h
-> @@ -81,7 +81,10 @@ enum {
->  struct nbd_request {
->         __be32 magic;   /* NBD_REQUEST_MAGIC    */
->         __be32 type;    /* See NBD_CMD_*        */
-> -       char handle[8];
-> +       union {
-> +               char handle[8];
-> +               __be64 cookie;
-> +       };
->         __be64 from;
->         __be32 len;
->  } __attribute__((packed));
-> @@ -93,6 +96,9 @@ struct nbd_request {
->  struct nbd_reply {
->         __be32 magic;           /* NBD_REPLY_MAGIC      */
->         __be32 error;           /* 0 =3D ok, else error   */
-> -       char handle[8];         /* handle you got from request  */
-> +       union {
-> +               char handle[8]; /* handle you got from request  */
-> +               __be64 cookie;
+This series implements structured replies for nbd-server.
 
-Should we document like this?
+Changes from v1:
+- Ensure we write to the transactionlog in the case of structured
+  replies, too (had overlooked that, whoops)
+- Add missing checks for malloc() failure
+- Removal of unnecessary variables (or moved them to a more limited
+  scope)
+- Wipe the correct value upon STARTTLS
+- Consume unused values on error
 
-    union {
-        __be64 cookie; /* cookie you got from request */
-        char handle[8]; /* older name */
-
-I think we want future code to use the new term.
-
-> +       };
->  };
->  #endif /* _UAPILINUX_NBD_H */
-> --
-> 2.39.2
->
-
-Nir
 
