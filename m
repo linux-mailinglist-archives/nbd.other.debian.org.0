@@ -2,88 +2,94 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3CE76C4BF8
-	for <lists+nbd@lfdr.de>; Wed, 22 Mar 2023 14:39:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C8596C4DC8
+	for <lists+nbd@lfdr.de>; Wed, 22 Mar 2023 15:33:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9A36320553; Wed, 22 Mar 2023 13:39:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar 22 13:39:13 2023
-Old-Return-Path: <ming.lei@redhat.com>
+	id 095AA20690; Wed, 22 Mar 2023 14:33:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar 22 14:33:11 2023
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2 autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-0.1 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C71A0206B2
-	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Mar 2023 13:23:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id F3CBF2058B
+	for <lists-other-nbd@bendel.debian.org>; Wed, 22 Mar 2023 14:16:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.082 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, MD5_SHA1_SUM=-1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 0vZEdM0Mvkmw for <lists-other-nbd@bendel.debian.org>;
-	Wed, 22 Mar 2023 13:23:48 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 9035D206B1
-	for <nbd@other.debian.org>; Wed, 22 Mar 2023 13:23:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1679491423;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Vr/nw/QBGgbu6vHLXLGuyUHyWfBfiDPuxGzOQXoK3+8=;
-	b=fUjLkvupdV5WAv3tRtaZio08QgWkXkICJ6ZJevmCuBVlxg3LFY6gsV2wDn/rCUZALRSKLm
-	NMH2JDX+osHqg9E+LCdktHd4QUyZrH8WN/aw8I684JLFRKpJKnUDpqfJYdZI16QLC71VX3
-	rIZBTludLVrqinbHyJZ5mQAJsNmuY1I=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-452-1DUppYg_MCimdX7OH_7Hbw-1; Wed, 22 Mar 2023 09:23:39 -0400
-X-MC-Unique: 1DUppYg_MCimdX7OH_7Hbw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DC0D51C087AC;
-	Wed, 22 Mar 2023 13:23:38 +0000 (UTC)
-Received: from ovpn-8-17.pek2.redhat.com (ovpn-8-18.pek2.redhat.com [10.72.8.18])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id AD886C15BAD;
-	Wed, 22 Mar 2023 13:23:32 +0000 (UTC)
-Date: Wed, 22 Mar 2023 21:23:27 +0800
-From: Ming Lei <ming.lei@redhat.com>
+	with ESMTP id nOjQqHq5a5eI for <lists-other-nbd@bendel.debian.org>;
+	Wed, 22 Mar 2023 14:16:04 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-yw1-x1130.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com [IPv6:2607:f8b0:4864:20::1130])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 964E420510
+	for <nbd@other.debian.org>; Wed, 22 Mar 2023 14:16:00 +0000 (UTC)
+Received: by mail-yw1-x1130.google.com with SMTP id 00721157ae682-544b959a971so306963347b3.3
+        for <nbd@other.debian.org>; Wed, 22 Mar 2023 07:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20210112.gappssmtp.com; s=20210112; t=1679494557;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Whislchss/sFlCFTwP31713E4FxIStQL6qfZ4WUEnIc=;
+        b=tzVmChHwG5UdzVVOpXkf2rTQATcV+/+zaZ4pw3uDOzqEhkRt5Ve9ob8pgqEPs/Y1fe
+         UTg2YOvzk6LqHz80jJegh3QK/C6Nw5mUFmQRuYQdxN/g06L4n2D8VqGTpKrEwVLXCMyg
+         bcLY5fticeZdjLAS82sbu5TBTjdYbbZWwVewaUa46wFZTPzT8Iaeq+jOe9TXtX5fDQhM
+         bH0UkD0Bze72U3h9g4fm9xhtBi74DWE9y5/g7HVJ77mStLDJNqI5IlGO35ZFBslvbkdt
+         0tnWP6LHWVGlPLgYq0+b9Iy7dVlw0jYqZHf1nX5ZUpvjRTg0T1AmjYqWQfawOzmxCgxb
+         Ollg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679494557;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Whislchss/sFlCFTwP31713E4FxIStQL6qfZ4WUEnIc=;
+        b=f1Z7WP0YN1Za7XM8LIU77XRfRH57l+4JhKbECvnk1xXzr3Q8BGmYX+JF/OjmstImYR
+         nizC6YjXMVF7/F9Gu4du2ADnWkVsiTnTGdiZzUt5OwYKv2RaGMWiZabZXms25PJDzmbv
+         4QHnEWzbU0gV/tGj24DEpmP5sqe3Z7FZSjM6Sh/StS4pu2sipNnRzhQx0UxTiLJ3IKTj
+         pNfrncpqUsP+OB/ORNJOI49kN9dWW/KNrdu06RN9+qSsffHwlW2oNpLYZJri5iZti8NO
+         TTdoOPl3qO/xmtl/LIh8yAp3Jgklrw091FiCgP4j0lyGVa7kcQ1ztH/e8a/YpAOE5wyA
+         TzwA==
+X-Gm-Message-State: AO0yUKVYg28aee6PMxKjWOgTkssE5LAS0Gg9nWZ7H0k1LyIiWNOmxVbK
+	jC7TtCmw0Q7q+Z5O28GC7YlrjA==
+X-Google-Smtp-Source: AK7set867nYOJLPUXEWSXWMJFE/YmBaPwP8V/3k5TMR93AJK29UptcHHOv2RuPaUN5WddwnxgNj1hw==
+X-Received: by 2002:a05:7500:5bc3:b0:fb:d3c:28fe with SMTP id ed3-20020a0575005bc300b000fb0d3c28femr62914gab.29.1679494556330;
+        Wed, 22 Mar 2023 07:15:56 -0700 (PDT)
+Received: from localhost (cpe-174-109-170-245.nc.res.rr.com. [174.109.170.245])
+        by smtp.gmail.com with ESMTPSA id f66-20020a37d245000000b00745f3200f54sm11293540qkj.112.2023.03.22.07.15.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Mar 2023 07:15:55 -0700 (PDT)
+Date: Wed, 22 Mar 2023 10:15:53 -0400
+From: Josef Bacik <josef@toxicpanda.com>
 To: Eric Blake <eblake@redhat.com>
-Cc: josef@toxicpanda.com, linux-block@vger.kernel.org, nbd@other.debian.org,
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
 	philipp.reisner@linbit.com, lars.ellenberg@linbit.com,
 	christoph.boehmwalder@linbit.com, corbet@lwn.net,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	ming.lei@redhat.com
-Subject: Re: [PATCH v2 2/5] block nbd: send handle in network order
-Message-ID: <ZBsBT0nvK06MZZjF@ovpn-8-17.pek2.redhat.com>
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 0/5] nbd: s/handle/cookie/
+Message-ID: <20230321235250.GA1426669@localhost.localdomain>
 References: <20230317202749.419094-1-eblake@redhat.com>
- <20230317202749.419094-3-eblake@redhat.com>
- <ZBjqQckL7d5EJPlh@ovpn-8-29.pek2.redhat.com>
- <20230321135900.ni4w5ichvjba7s4u@redhat.com>
- <ZBpQLQtZP3Gj8MdS@ovpn-8-18.pek2.redhat.com>
- <20230322122921.ac47tbbkddrb72gq@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230322122921.ac47tbbkddrb72gq@redhat.com>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+In-Reply-To: <20230317202749.419094-1-eblake@redhat.com>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <8b3XAPShUhM.A.6gH.BUwGkB@bendel>
+Resent-Message-ID: <lmQgSgxxt6.A.KGG.nGxGkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2405
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2406
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,143 +99,35 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZBsBT0nvK06MZZjF@ovpn-8-17.pek2.redhat.com
-Resent-Date: Wed, 22 Mar 2023 13:39:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230321235250.GA1426669@localhost.localdomain
+Resent-Date: Wed, 22 Mar 2023 14:33:12 +0000 (UTC)
 
-On Wed, Mar 22, 2023 at 07:29:21AM -0500, Eric Blake wrote:
-> On Wed, Mar 22, 2023 at 08:47:41AM +0800, Ming Lei wrote:
-> > On Tue, Mar 21, 2023 at 08:59:00AM -0500, Eric Blake wrote:
-> > > On Tue, Mar 21, 2023 at 07:20:33AM +0800, Ming Lei wrote:
-> > > > On Fri, Mar 17, 2023 at 03:27:46PM -0500, Eric Blake wrote:
-> > > > > The NBD spec says the client handle (or cookie) is opaque on the
-> > > > > server, and therefore it really doesn't matter what endianness we use;
-> > > > > to date, the use of memcpy() between u64 and a char[8] has exposed
-> > > > > native endianness when treating the handle as a 64-bit number.
-> > > > 
-> > > > No, memcpy() works fine for char[8], which doesn't break endianness.
-> > > 
-> > > I didn't say memcpy() breaks endianness, I said it preserves it.  By
-> > > using memcpy(), you are exposing native endianness over the wire.
-> > > Thus, even though a server should not be making any decisions based on
-> > > the content of the handle (it is an opaque value handed back to the
-> > > client unchanged), the current kernel client code DOES leak through
-> > > information about whether the client is big- or little-endian;
-> > 
-> > How is the client cpu endianness leaked with handle defined as char[8]?
-> > 
-> > Suppose it is leaked, is it really one issue? Cause most of CPUs in
-> > the world is little-endian.
-> > 
-> > > contrast to the NBD protocol saying that ALL data is
-> > > network-byte-order.
-> > 
-> > That doesn't make sense for any data defined as char[] or byte which
-> > needn't to be little or big endian.
+On Fri, Mar 17, 2023 at 03:27:44PM -0500, Eric Blake wrote:
+> v1 was here: https://lkml.org/lkml/2023/3/10/1162
+> since then:
+> - split original 1/3 into 1/5 and 5/5
+> - new patch 2/5
+> - reorder members of anon union
+> - always send cookie in network order
 > 
-> The NBD spec defines it as a 64-bit opaque quantity - that does not
-> indicate whether it is a single integer or 8 characters, but because
-> it is opaque, we don't have to care.  However, if we DO treat it as an
-> integer (and the kernel client code DOES do that: internally, it is
-> building up a u64 integer), it is wise to consider network endianness.
-
-That depends on if it is reasonable to convert to int.
-
+> Eric Blake (5):
+>   uapi nbd: improve doc links to userspace spec
+>   block nbd: send handle in network order
+>   uapi nbd: add cookie alias to handle
+>   block nbd: use req.cookie instead of req.handle
+>   docs nbd: userspace NBD now favors github over sourceforge
 > 
-> > 
-> > > 
-> > > > 
-> > > > > However, since NBD protocol documents that everything else is in
-> > > > > network order, and tools like Wireshark will dump even the contents of
-> > > > > the handle as seen over the network, it's worth using a consistent
-> > > > > ordering regardless of the native endianness.
-> > > > > 
-> > > > > Plus, using a consistent endianness now allows an upcoming patch to
-> > > > > simplify this to directly use integer assignment instead of memcpy().
-> > > > 
-> > > > It isn't necessary, given ->handle is actually u64, which is handled by
-> > > > nbd client only.
-> > > 
-> > > No, re-read the whole series.  ->handle is actually char[8].  Later in
-> > > the series adds ->cookie as __be64 as an alias to ->handle, precisely
-> > > so that we are converting the u64 'handle' in kernel code into a
-> > > big-endian value on the wire, regardless of the host type, and making
-> > > it impossible for a server to inspect the wire data and learn the
-> > > kernel's endianness.
-> > 
-> > How does server learn the client cpu endianness in this way? Is it really
-> > one issue?
+>  Documentation/admin-guide/blockdev/nbd.rst |  2 +-
+>  drivers/block/nbd.c                        |  6 +++---
+>  include/uapi/linux/nbd.h                   | 25 +++++++++++++++++-----
+>  3 files changed, 24 insertions(+), 9 deletions(-)
 > 
-> Not a security issue, merely a consistency one.  A server that
-> inspects the handles being sent by the client, and checks whether they
-> are sequential when treated as a big- or little-endian number, can
-> infer whether the client is little-endian.  But there is nothing
-> useful it can do with that knowledge.  Rather, the consistency factor
-> is that if you have a wireshark plugin reading network traffic, and
-> are trying to correlate it back to kernel traces, it is NICE if the
-> wireshark plugin can display the SAME u64 number as the kernel was
-> sticking into the field - and the way to do that is to have a fixed
-> endianness of the u64 value over the wire.
-
-OK, so the real motivation is only for aligning wireshark output with nbd
-trace event. If yes, please add it in comment log.
-
-BTW, the nbd trace event can be converted to any format by bcc or bpftrace
-script, then you still can associate one with another.
-
 > 
-> > 
-> > > 
-> > > > 
-> > > > > 
-> > > > > Signed-off-by: Eric Blake <eblake@redhat.com>
-> > > > > 
-> > > > > ---
-> > > > > v2: new patch
-> > > > > ---
-> > > > >  drivers/block/nbd.c | 10 +++++++---
-> > > > >  1 file changed, 7 insertions(+), 3 deletions(-)
-> > > > > 
-> > > > > diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> > > > > index 592cfa8b765a..8a9487e79f1c 100644
-> > > > > --- a/drivers/block/nbd.c
-> > > > > +++ b/drivers/block/nbd.c
-> > > > > @@ -560,6 +560,7 @@ static int nbd_send_cmd(struct nbd_device *nbd, struct nbd_cmd *cmd, int index)
-> > > > >  	unsigned long size = blk_rq_bytes(req);
-> > > > >  	struct bio *bio;
-> > > > >  	u64 handle;
-> > > > > +	__be64 tmp;
-> > > > >  	u32 type;
-> > > > >  	u32 nbd_cmd_flags = 0;
-> > > > >  	int sent = nsock->sent, skip = 0;
-> > > > > @@ -606,7 +607,8 @@ static int nbd_send_cmd(struct nbd_device *nbd, struct nbd_cmd *cmd, int index)
-> > > > >  		request.len = htonl(size);
-> > > > >  	}
-> > > > >  	handle = nbd_cmd_handle(cmd);
-> > > > > -	memcpy(request.handle, &handle, sizeof(handle));
-> > > > > +	tmp = cpu_to_be64(handle);
-> > > > > +	memcpy(request.handle, &tmp, sizeof(tmp));
-> > > > 
-> > > > This way copies handle two times, really not fun.
-> > > 
-> > > Indeed.  And as mentioned in the commit message, it is temporary; the
-> > > second copy goes away later in the series once we can use direct
-> > > integer assignment.
-> > 
-> > Then please merge with following patch, given it is hard to review
-> > temporary change.
-> 
-> The underlying reason I split this patch out is that in v1 I got
-> complaints that I was not taking endianness into account.  The patch
-> series DOES cause an observable change (namely, a little-endian client
-> now sends a value in big-endian order that it used to send in
-> little-endian order) - but the change is harmless.  But if you want me
-> to squash this patch back with 4/5 in v3, I'm happy to do that.
-> 
-> Are there any other comments on this series that I should consider
-> before spending time putting out a v3?
+> base-commit: 8d3c682a5e3d9dfc2448ecbb22f4cd48359b9e21
 
-I think 2~4 should be merged to single patch.
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
 
 Thanks,
-Ming
+
+Josef
 
