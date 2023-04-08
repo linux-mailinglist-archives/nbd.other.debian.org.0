@@ -1,85 +1,81 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9ECE6CC211
-	for <lists+nbd@lfdr.de>; Tue, 28 Mar 2023 16:31:46 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C2286DBA1B
+	for <lists+nbd@lfdr.de>; Sat,  8 Apr 2023 12:39:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 68A3F204D7; Tue, 28 Mar 2023 14:31:46 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar 28 14:31:46 2023
-Old-Return-Path: <eblake@redhat.com>
+	id 5591C20669; Sat,  8 Apr 2023 10:39:31 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Apr  8 10:39:31 2023
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MONEY,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
+	MURPHY_DRUGS_REL8 autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C2749204E5
-	for <lists-other-nbd@bendel.debian.org>; Tue, 28 Mar 2023 14:31:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0DC5A20662
+	for <lists-other-nbd@bendel.debian.org>; Sat,  8 Apr 2023 10:39:21 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.063 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, MONEY=0.5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
-	SARE_MSGID_LONG45=0.893, SARE_MSGID_LONG50=0.726]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.18 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
+	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id QI5R-phRH45K for <lists-other-nbd@bendel.debian.org>;
-	Tue, 28 Mar 2023 14:31:28 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 411C1204D7
-	for <nbd@other.debian.org>; Tue, 28 Mar 2023 14:31:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1680013883;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JA4YbuQ/GI6fi+dUFUjZJ39bhLpwwfGIdAJA3tFjlUQ=;
-	b=f4KbR2b40cNiD+VRBeUaO6N1vZal4xi4LU1qH/EdRSjyTH/bZRQ/6QZqa50lrdJmtnZpl0
-	3oM0a/Xbv1UvuXsepEyYULFpQhsrPmVKIjvXHMhayn1T4zW7c3bAyWnqd40ahSuZXBsYnv
-	SYXiKVXKNeeLl7wDXBizmGjH6aV5kRA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-653-AeaGFadbPQemcjCZm27rRQ-1; Tue, 28 Mar 2023 10:31:20 -0400
-X-MC-Unique: AeaGFadbPQemcjCZm27rRQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CD316185A794;
-	Tue, 28 Mar 2023 14:31:19 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.173])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 8984FC15BA0;
-	Tue, 28 Mar 2023 14:31:19 +0000 (UTC)
-Date: Tue, 28 Mar 2023 09:31:17 -0500
-From: Eric Blake <eblake@redhat.com>
-To: w@uter.be
-Cc: nbd@other.debian.org
-Subject: Re: [PATCH 4/4] Implement negotiation of structured replies
-Message-ID: <pfehs7s7kxxpgy4grneuoeokdqdikxp2gz324am3rupi7j62tq@svbbeag6sgzv>
+	with ESMTP id RrbU_gu5fupt for <lists-other-nbd@bendel.debian.org>;
+	Sat,  8 Apr 2023 10:39:14 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id F3E5C20655
+	for <nbd@other.debian.org>; Sat,  8 Apr 2023 10:39:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=nnTgB/8BBTIq7m6UrfU8y+yctgQpYDSefnqtFrdp8ss=; b=ZEEz0tTBf6VMBZpfpmoOaaK7Er
+	RZ+Q9/E1Rby5GexesoV8DCgjAJlMypW8WPjnvQdrvz/AB1TfWDeASZfiL/S+UZT2Ix3tUQwL70xt4
+	CZIC+Hj2WvBe0Io2fWnM15kc7pcLCN9Dg8mKIOd7yUtm0GiWrmUh4UwnjtjJqtlqk53CQyyf4Q9xA
+	Gp8ROFPxH3wkUafXEPjjxATd1bjo+GgRuThFAxbR2F6nd336IZjxhVSgLw4eUP6drmOiC34pIRRgI
+	6q3wCHc7UiRa+NCjx1DT3HzUQugY4Im860brdhCMgfpdG/Lhiq1uObQCFY2cXGt/Ln95CMnWvxgGg
+	Q3FzAjIw==;
+Received: from [102.39.141.34] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <w@uter.be>)
+	id 1pl5yO-00EC4w-SC
+	for nbd@other.debian.org; Sat, 08 Apr 2023 12:39:08 +0200
+Received: from wouter by pc220518 with local (Exim 4.96)
+	(envelope-from <w@uter.be>)
+	id 1pl5yG-000DJ9-2F
+	for nbd@other.debian.org;
+	Sat, 08 Apr 2023 12:39:00 +0200
+Date: Sat, 8 Apr 2023 12:39:00 +0200
+From: Wouter Verhelst <w@uter.be>
+To: nbd@other.debian.org
+Subject: Re: [PATCH v2] nbd-server: Implement structured replies
+Message-ID: <ZDFERKb1FlQ6WBPl@pc220518.home.grep.be>
 References: <20230311130705.253855-1-w@uter.be>
- <20230311130705.253855-5-w@uter.be>
 MIME-Version: 1.0
-In-Reply-To: <20230311130705.253855-5-w@uter.be>
-User-Agent: NeoMutt/20230322
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <20230311130705.253855-1-w@uter.be>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <nctZIfQ5NjB.A.hP.SpvIkB@bendel>
+Resent-Message-ID: <4a7P-ogUer.A.YfB.jRUMkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2414
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2415
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,67 +85,30 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/pfehs7s7kxxpgy4grneuoeokdqdikxp2gz324am3rupi7j62tq@svbbeag6sgzv
-Resent-Date: Tue, 28 Mar 2023 14:31:46 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ZDFERKb1FlQ6WBPl@pc220518.home.grep.be
+Resent-Date: Sat,  8 Apr 2023 10:39:31 +0000 (UTC)
 
-On Sat, Mar 11, 2023 at 03:07:05PM +0200, w@uter.be wrote:
-> From: Wouter Verhelst <w@uter.be>
+FYI: this has now (with fixes for issues pointed out) been merged to
+master.
+
+On Sat, Mar 11, 2023 at 03:07:01PM +0200, w@uter.be wrote:
+> This series implements structured replies for nbd-server.
 > 
-> This should make it possible for us to use structured replies!
+> Changes from v1:
+> - Ensure we write to the transactionlog in the case of structured
+>   replies, too (had overlooked that, whoops)
+> - Add missing checks for malloc() failure
+> - Removal of unnecessary variables (or moved them to a more limited
+>   scope)
+> - Wipe the correct value upon STARTTLS
+> - Consume unused values on error
 > 
-> Signed-off-by: Wouter Verhelst <w@uter.be>
-> ---
->  cliserv.h    | 13 +++++++------
->  nbd-server.c | 28 ++++++++++++++++++++++++++++
->  nbd.h        |  1 +
->  3 files changed, 36 insertions(+), 6 deletions(-)
 > 
-
-> +/**
-> +  * Handle an NBD_OPT_STRUCTURED_REPLY message
-> +  */
-> +static void handle_structured_reply(CLIENT *client, uint32_t opt, GArray *servers, uint32_t cflags) {
-> +	uint32_t len;
-> +	int i;
-> +
-> +	socket_read(client, &len, sizeof(len));
-> +	len = ntohl(len);
-> +	if(len) {
-> +		send_reply(client, opt, NBD_REP_ERR_INVALID, -1, "NBD_OPT_STRUCTURED_REPLY with nonzero data length is not a valid request");
-> +		char buf[1024];
-> +		consume(client, len, buf, sizeof buf);
-> +	}
-> +	if(client->clientflags & F_STRUCTURED) {
-> +		send_reply(client, opt, NBD_REP_ERR_INVALID, -1, "NBD_OPT_STRUCTURED_REPLY has already been called");
-> +	}
-
-Missing an early 'return;', results in the server sending an
-unexpected ACK after the error which gets the client out of sync.
-Easy proof-of-concept, with libnbd 1.15.5 or newer:
-
-$ ./nbd-server -d -r 10809 $PWD/README.md
-$ nbdsh --opt-mode
-nbd> h.connect_uri('nbd://localhost')
-nbd> h.opt_structured_reply()    # sees the error; ack stays queued
-False
-nbd> h.opt_structured_reply()    # sees the stale ack; new error and ack queued
-True
-nbd> h.opt_structured_reply()    # sees the stale error; another error and ack queued
-True
-nbd> h.opt_go()                  # sees the stale ack; then queue is unexpected and client dies
-Traceback (most recent call last):
-  File "<console>", line 1, in <module>
-  File "/home/eblake/libnbd/python/nbd.py", line 1072, in opt_go
-    return libnbdmod.opt_go(self._o)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-nbd.Error: nbd_opt_go: server replied with error to opt_go request: Transport endpoint is not connected (ENOTCONN)
-
-With the return added,
-
-Reviewed-by: Eric Blake <eblake@redhat.com>
+> 
 
 -- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
+
+I will have a Tin-Actinium-Potassium mixture, thanks.
 
