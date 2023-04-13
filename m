@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 993A36E171E
-	for <lists+nbd@lfdr.de>; Fri, 14 Apr 2023 00:03:35 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DF6D6E171D
+	for <lists+nbd@lfdr.de>; Fri, 14 Apr 2023 00:03:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7F1452056F; Thu, 13 Apr 2023 22:03:35 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr 13 22:03:35 2023
+	id 0016D2056D; Thu, 13 Apr 2023 22:03:32 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr 13 22:03:32 2023
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -19,8 +19,8 @@ X-Spam-Status: No, score=-10.2 required=4.0 tests=DIGITS_LETTERS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C27CF2057A
-	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Apr 2023 22:03:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id CCB2E20569
+	for <lists-other-nbd@bendel.debian.org>; Thu, 13 Apr 2023 22:03:04 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-6.082 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
@@ -30,42 +30,42 @@ X-Amavis-Spam-Status: No, score=-6.082 tagged_above=-10000 required=5.3
 	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id TVneR7lXg5HZ for <lists-other-nbd@bendel.debian.org>;
-	Thu, 13 Apr 2023 22:02:54 +0000 (UTC)
+	with ESMTP id t8kfDZj7lOcW for <lists-other-nbd@bendel.debian.org>;
+	Thu, 13 Apr 2023 22:02:53 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 4ED952056B
-	for <nbd@other.debian.org>; Thu, 13 Apr 2023 22:02:54 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by bendel.debian.org (Postfix) with ESMTP id 7EA602056A
+	for <nbd@other.debian.org>; Thu, 13 Apr 2023 22:02:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1681423368;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XwCn/MISCSQo3TmZC3hFf3Kk05E32urUK3lgAGXJTxM=;
-	b=N+hF6hMrNasBMYg7P5wsDbNiT0609N9nmjjkhanTnedRxhB4uQUDAeb2tjXKD826QKnf7c
-	OnyY1RqGQ9yI5NpU0OqlrX2Qr4KpeqXDes3GfB2DzJ8OCEDyaZbiWRH6JscZMA5uxYT02u
-	sZ1L3f+64nz2DwMdeljumkQxHXZeFWY=
+	bh=zypMYYVStpIE9s2s/wJFrlHA36AXbFaBluH4kj7A5UM=;
+	b=GMWbeRrj3RgBx43abKJlUlmMU1htdHJc326+sjCCt27hYa9vRfWw8NgeBGZarlYdE9xRxw
+	FcEkYqLQTjRCjKnzqToVquYNMQszwojDid6oyn0pOLUXQUDOxCNn1K7v4YbRtEGuTob4+9
+	YKxn1D2hTAGYfrxRY10u2RkW9s1DHvA=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-251-Cw3xqsxAOXyWTuSgwuxfjQ-1; Thu, 13 Apr 2023 18:02:46 -0400
-X-MC-Unique: Cw3xqsxAOXyWTuSgwuxfjQ-1
+ us-mta-546-NYfXm8HXMpG-OQvjX-OftQ-1; Thu, 13 Apr 2023 18:02:47 -0400
+X-MC-Unique: NYfXm8HXMpG-OQvjX-OftQ-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 942EF1C0432A;
-	Thu, 13 Apr 2023 22:02:46 +0000 (UTC)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 160513C0C8B9;
+	Thu, 13 Apr 2023 22:02:47 +0000 (UTC)
 Received: from green.redhat.com (unknown [10.2.16.102])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3BBBD2027043;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B194A2027043;
 	Thu, 13 Apr 2023 22:02:46 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: nbd@other.debian.org
 Cc: qemu-block@nongnu.org,
 	libguestfs@redhat.com
-Subject: [PATCH v3 4/6] spec: Allow 64-bit block status results
-Date: Thu, 13 Apr 2023 17:02:39 -0500
-Message-Id: <20230413220241.1396012-5-eblake@redhat.com>
+Subject: [PATCH v3 5/6] spec: Introduce NBD_FLAG_BLOCK_STATUS_PAYLOAD
+Date: Thu, 13 Apr 2023 17:02:40 -0500
+Message-Id: <20230413220241.1396012-6-eblake@redhat.com>
 In-Reply-To: <20230413220241.1396012-1-eblake@redhat.com>
 References: <20230413220241.1396012-1-eblake@redhat.com>
 MIME-Version: 1.0
@@ -76,9 +76,9 @@ Content-type: text/plain
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <EPgHjxKgh7I.A.GCG.3wHOkB@bendel>
+Resent-Message-ID: <O9nKDc5eiJH.A.0AG.0wHOkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2426
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2425
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,153 +88,118 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230413220241.1396012-5-eblake@redhat.com
-Resent-Date: Thu, 13 Apr 2023 22:03:35 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230413220241.1396012-6-eblake@redhat.com
+Resent-Date: Thu, 13 Apr 2023 22:03:32 +0000 (UTC)
 
-There are some potential extension metadata contexts that would
-benefit from a 64-bit status value.  For example, Zoned Block Devices
-(see https://zonedstorage.io/docs/linux/zbd-api) may want to return
-the relative offset of where the next write will occur within the
-zone, where a zone may be larger than 4G; creating a metacontext
-"zbd:offset" that returns a 64-bit offset seems nicer than creating
-two metacontexts "zbd:offset_lo" and "zbd:offset_hi" that each return
-only 32 bits of the answer.
+NBD_CMD_BLOCK_STATUS currently forces the server to reply to all
+metacontext ids that the client negotiated via
+NBD_OPT_SET_META_CONTEXT.  But since extended headers make it easy for
+the client to pass command payloads, we can allow for a client to
+negotiate multiple metacontexts up front but express dynamic interest
+in varying subsets of those contexts over the life of the connection,
+for less wasted effort in responding to NBD_CMD_BLOCK_STATUS.  This
+works by having the command payload supply an effect length and a list
+of ids the client is currently interested in.
 
-While the addition of extended headers superficially justified leaving
-room in NBD_REPLY_TYPE_BLOCK_STATUS_EXT for the purpose of alignment,
-it also has the nice benefit of being useful to allow extension
-metadata contexts that can actually take advantage of the padding (and
-remembering that since network byte order is big-endian, the padding
-is in the correct location).  To ensure maximum backwards
-compatibility, require that all contexts in the "base:" namespace (so
-far, just "base:allocation") will only utilize 32-bit status.
+Signed-off-by: Eric Blake <eblake@redhat.com>
 ---
  doc/proto.md | 62 +++++++++++++++++++++++++++++++++++++++++-----------
  1 file changed, 49 insertions(+), 13 deletions(-)
 
 diff --git a/doc/proto.md b/doc/proto.md
-index 9098c42..ab1b066 100644
+index ab1b066..ddf0a89 100644
 --- a/doc/proto.md
 +++ b/doc/proto.md
-@@ -995,7 +995,10 @@ The procedure works as follows:
-   during transmission, the client MUST select one or more metadata
-   contexts with the `NBD_OPT_SET_META_CONTEXT` command. If needed, the
-   client can use `NBD_OPT_LIST_META_CONTEXT` to list contexts that the
--  server supports.
-+  server supports.  Most metadata contexts expose no more than 32 bits
-+  of information, but some metadata contexts have associated data that
-+  is 64 bits in length; using such contexts requires the client to
-+  first negotiate extended headers with `NBD_OPT_EXTENDED_HEADERS`.
- - During transmission, a client can then indicate interest in metadata
-   for a given region by way of the `NBD_CMD_BLOCK_STATUS` command,
-   where *offset* and *length* indicate the area of interest. On
-@@ -1053,7 +1056,7 @@ third-party namespaces are currently registered:
- Save in respect of the `base:` namespace described below, this specification
- requires no specific semantics of metadata contexts, except that all the
- information they provide MUST be representable within the flags field as
--defined for `NBD_REPLY_TYPE_BLOCK_STATUS`. Likewise, save in respect of
-+defined for `NBD_REPLY_TYPE_BLOCK_STATUS_EXT`. Likewise, save in respect of
- the `base:` namespace, the syntax of query strings is not specified by this
- document, other than the recommendation that the empty leaf-name makes
- sense as a wildcard for a client query during `NBD_OPT_LIST_META_CONTEXT`,
-@@ -1120,7 +1123,9 @@ should make no assumption as to its contents or stability.
+@@ -399,17 +399,20 @@ additional bytes of payload are present), or if the flag is absent
+ (there is no payload, and *length* instead is an effect length
+ describing how much of the export the request operates on).  The
+ command `NBD_CMD_WRITE` MUST use the flag `NBD_CMD_FLAG_PAYLOAD_LEN`
+-in this mode; while other commands SHOULD avoid the flag if the
+-server has not indicated extension suppport for payloads on that
+-command.  A server SHOULD initiate hard disconnect if a client sets
+-the `NBD_CMD_FLAG_PAYLOAD_LEN` flag and uses a *length* larger than
+-a server's advertised or default maximum payload length (capped at
+-32 bits by the constraints of `NBD_INFO_BLOCK_SIZE`); in all other
+-cases, a server SHOULD gracefully consume *length* bytes of payload
+-(even if it then replies with an `NBD_EINVAL` failure because the
+-particular command was not expecting a payload), and proceed with
+-the next client command.  Thus, only when *length* is used as an
+-effective length will it utilize a full 64-bit value.
++in this mode; most other commands omit it, although some like
++`NBD_CMD_BLOCK_STATUS` optionally support the flag in order to allow
++the client to pass additional information in the payload (where the
++command documents what the payload will contain, including the
++possibility of a separate effect length).  A server SHOULD initiate
++hard disconnect if a client sets the `NBD_CMD_FLAG_PAYLOAD_LEN` flag
++and uses a *length* larger than a server's advertised or default
++maximum payload length (capped at 32 bits by the constraints of
++`NBD_INFO_BLOCK_SIZE`); in all other cases, a server SHOULD gracefully
++consume *length* bytes of payload (even if it then replies with an
++`NBD_EINVAL` failure because the particular command was not expecting
++a payload), and proceed with the next client command.  Thus, only when
++*length* is used as an effective length will it utilize a full 64-bit
++value.
 
- For the `base:allocation` context, the remainder of the flags field is
- reserved. Servers SHOULD set it to all-zero; clients MUST ignore
--unknown flags.
-+unknown flags.  Because fewer than 32 flags are defined, this metadata
-+context does not require the use of `NBD_OPT_EXTENDED_HEADERS`, and a
-+server can use `NBD_REPLY_TYPE_BLOCK_STATUS` to return results.
+ #### Simple reply message
 
- ## Values
+@@ -1240,6 +1243,19 @@ The field has the following format:
+   will be faster than a regular write). Clients MUST NOT set the
+   `NBD_CMD_FLAG_FAST_ZERO` request flag unless this transmission flag
+   is set.
++- bit 12, `NBD_FLAG_BLOCK_STATUS_PAYLOAD`: Indicates that the server
++  understands the use of the `NBD_CMD_FLAG_PAYLOAD_LEN` flag to
++  `NBD_CMD_BLOCK_STATUS` to allow the client to request that the
++  server filters its response to a specific subset of negotiated
++  metacontext ids passed in via a client payload, rather than the
++  default of replying to all metacontext ids. Servers MUST NOT
++  advertise this bit unless the client successfully negotiates
++  extended headers via `NBD_OPT_EXTENDED_HEADERS`, and SHOULD NOT
++  advertise this bit in response to `NBD_OPT_EXPORT_NAME` or
++  `NBD_OPT_GO` if the client does not negotiate metacontexts with
++  `NBD_OPT_SET_META_CONTEXT`; clients SHOULD NOT set the
++  `NBD_CMD_FLAG_PAYLOAD_LEN` flag for `NBD_CMD_BLOCK_STATUS` unless
++  this transmission flag is set.
 
-@@ -1493,6 +1498,18 @@ of the newstyle negotiation.
-     to do so, a server MAY send `NBD_REP_ERR_INVALID` or
-     `NBD_REP_ERR_EXT_HEADER_REQD`.
+ Clients SHOULD ignore unknown flags.
 
-+    A server MAY support extension contexts that produce status values
-+    that require more than 32 bits.  The server MAY advertise such
-+    contexts even if the client has not yet negotiated extended
-+    headers, although it SHOULD then conclude the overall response
-+    with the `NBD_REP_ERR_EXT_HEADER_REQD` error to inform the client
-+    that extended headers are required to make full use of all
-+    contexts advertised.  However, since none of the contexts defined
-+    in the "base:" namespace provide more than 32 bits of status, a
-+    server MUST NOT use this failure mode when the response is limited
-+    to the "base:" namespace; nor may the server use this failure mode
-+    when the client has already negotiated extended headers.
+@@ -1930,8 +1946,11 @@ valid may depend on negotiation during the handshake phase.
+   header.  With extended headers, the flag MUST be set for
+   `NBD_CMD_WRITE` (as the write command always sends a payload of the
+   bytes to be written); for other commands, the flag will trigger an
+-  `NBD_EINVAL` error unless the server has advertised support for an
+-  extension payload form for the command.
++  `NBD_EINVAL` error unless the command documents an optional payload
++  form for the command and the server has implemented that form (an
++  example being `NBD_CMD_BLOCK_STATUS` providing a payload form for
++  restricting the response to a particular metacontext id, when the
++  server advertises `NBD_FLAG_BLOCK_STATUS_PAYLOAD`).
+
+ ##### Structured and extended header reply flags
+
+@@ -2478,6 +2497,23 @@ The following request types exist:
+     The server MAY send chunks in a different order than the context
+     ids were assigned in reply to `NBD_OPT_SET_META_CONTEXT`.
+
++    If extended headers were negotiated, a server MAY optionally
++    advertise, via the transmission flag
++    `NBD_FLAG_BLOCK_STATUS_PAYLOAD`, that it supports an alternative
++    request form where the client sets `NBD_CMD_FLAG_PAYLOAD_LEN` in
++    order to pass a payload that informs the server to limit its
++    replies to the metacontext id(s) in the client's request payload,
++    rather than giving an answer on all possible metacontext ids.  If
++    the server does not support the payload form, or detects duplicate
++    or unknown metacontext ids in the client's payload, the server
++    MUST gracefully consume the client's payload before failing with
++    `NBD_EINVAL`.  The payload form MUST occupy 8 + n*4 bytes, where n
++    is the number of metacontext ids the client is interested in (as
++    implied by the payload length), laid out as:
 +
-     Data:
-     - 32 bits, length of export name.  
-     - String, name of export for which we wish to list metadata
-@@ -1578,6 +1595,13 @@ of the newstyle negotiation.
-     to do so, a server SHOULD send `NBD_REP_ERR_INVALID` or
-     `NBD_REP_ERR_EXT_HEADER_REQD`.
-
-+    If a client requests a metadata context that utilizes 64-bit
-+    status, but has not yet negotiated extended headers, the server
-+    MUST either omit that context from its successful reply, or else
-+    fail the request with `NBD_REP_ERR_EXT_HEADER_REQD`.  The server
-+    MUST NOT use this failure for a client request that is limited to
-+    contexts in the "base:" namespace.
++    64 bits, effect length  
++    n * 32 bits, list of metacontext ids to use  
 +
-     A client MUST NOT send `NBD_CMD_BLOCK_STATUS` unless within the
-     negotiation phase it sent `NBD_OPT_SET_META_CONTEXT` at least
-     once, and where the final time it was sent, it referred to the
-@@ -2043,16 +2067,23 @@ small amount of fixed-length overhead inherent in the chunk type).
-   extent information at the first offset not covered by a
-   reduced-length reply.
-
-+  For an extension metadata context that documents that the status
-+  value may potentially occupy 64 bits, a server MUST NOT use this
-+  reply type unless the most-significant 32 bits of all *status*
-+  values included in this reply are all zeroes.  Note that if the
-+  client did not negotiate extended headers, then the server already
-+  guaranteed during the handshake phase that no metadata contexts
-+  utilizing a 64-bit status value were negotiated.
-+
- * `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` (6)
-
-   This chunk type is in the status chunk category.  *length* MUST be
-   8 + (a positive multiple of 16).  The semantics of this chunk mirror
-   those of `NBD_REPLY_TYPE_BLOCK_STATUS`, other than the use of a
--  larger *extent length* field, added padding in each descriptor to
--  ease alignment, and the addition of a *descriptor count* field that
--  can be used for easier client processing.  This chunk type MUST NOT
--  be used unless extended headers were negotiated with
--  `NBD_OPT_EXTENDED_HEADERS`.
-+  larger *extent length* field and a 64-bit *status* field, and the
-+  addition of a *descriptor count* field that can be used for easier
-+  client processing.  This chunk type MUST NOT be used unless extended
-+  headers were negotiated with `NBD_OPT_EXTENDED_HEADERS`.
-
-   If the *descriptor count* field contains 0, the number of subsequent
-   descriptors is determined solely by the *length* field of the reply
-@@ -2071,14 +2102,19 @@ small amount of fixed-length overhead inherent in the chunk type).
-
-   64 bits, length of the extent to which the status below
-      applies (unsigned, MUST be nonzero)  
--  32 bits, padding (MUST be zero)  
--  32 bits, status flags  
-+  64 bits, status flags  
-
-   Note that when extended headers are in use, the client MUST be
-   prepared for the server to use either the compact or extended chunk
--  type, regardless of whether the client's hinted effect length was
--  more or less than 32 bits; but the server MUST use exactly one of
--  the two chunk types per negotiated metacontext ID.
-+  type for metadata contexts, regardless of whether the client's
-+  hinted effect length was more or less than 32 bits; but the server
-+  MUST use exactly one of the two chunk types per negotiated
-+  metacontext ID.  However, the server MUST use the extended chunk
-+  type when responding to an extension metadata context that utilizes
-+  a 64-bit status code where the resulting *status* value is not
-+  representable in 32 bits.  For metadata contexts that only return a
-+  32-bit status (including all contexts in the "base:" namespace), the
-+  most-significant 32 bits of *status* MUST be all zeroes.
-
- All error chunk types have bit 15 set, and begin with the same
- *error*, *message length*, and optional *message* fields as
+     The list of block status descriptors within a given status chunk
+     represent consecutive portions of the export starting from
+     specified *offset*.  If the client used the `NBD_CMD_FLAG_REQ_ONE`
 -- 
 2.39.2
 
