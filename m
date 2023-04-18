@@ -2,86 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id F02946E66DB
-	for <lists+nbd@lfdr.de>; Tue, 18 Apr 2023 16:13:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 909AC6E6805
+	for <lists+nbd@lfdr.de>; Tue, 18 Apr 2023 17:25:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8881A20C77; Tue, 18 Apr 2023 14:13:41 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Apr 18 14:13:41 2023
-Old-Return-Path: <rjones@redhat.com>
+	id 7387F20A88; Tue, 18 Apr 2023 15:25:17 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Apr 18 15:25:17 2023
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	LONGWORD,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-9.6 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+	SARE_MSGID_LONG45,SARE_MSGID_LONG50,T_SCC_BODY_TEXT_LINE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E9EE420C75
-	for <lists-other-nbd@bendel.debian.org>; Tue, 18 Apr 2023 14:13:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id B812220A9D
+	for <lists-other-nbd@bendel.debian.org>; Tue, 18 Apr 2023 15:25:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.182 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-5.463 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, LONGWORD=2, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001]
-	autolearn=no autolearn_force=no
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id jCPWhtj8_fKV for <lists-other-nbd@bendel.debian.org>;
-	Tue, 18 Apr 2023 14:13:21 +0000 (UTC)
+	with ESMTP id m692jS4hp7gI for <lists-other-nbd@bendel.debian.org>;
+	Tue, 18 Apr 2023 15:24:57 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id A266620C74
-	for <nbd@other.debian.org>; Tue, 18 Apr 2023 14:13:21 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id 531B820A88
+	for <nbd@other.debian.org>; Tue, 18 Apr 2023 15:24:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681827195;
+	s=mimecast20190719; t=1681831492;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CskR2WDOyFo8MAsHuNOAXGogCFnseXgGNLqXH3N2now=;
-	b=S7CupWYtKOEnNDhJDVvMcgf6KMNQ8vHItDElb7ruDywADXAwbkOkf6WBLKqltboK/DGn8W
-	jOGcaapKY5uK11cqgA8ntEWqnVp/qsFXVQ9idK9HWXes1IRgRkWcmm5Vr7JK+NKNFFdYEN
-	VQT0/EZvTC32BwplDv6yy1PJiiwIqb0=
+	bh=9cIcH/VfLauUHOufE8I/W4L24ZeKk87x5ZhdoSwA4p4=;
+	b=KrQSnSIqgRix3VDf02WGAxizthxPm3IUD4B1u8hd7N322z/O1p2NiARDDP4OLiE45MAD0F
+	YzvD4yOFAZ7/+JqjN5rpgw3BIUsU+5SQcEHaS/zDTykYKr8wF1vppvuWi+uJBV89N18xW6
+	XWWaqjeNLIl5V4GrHDD/un16Tt/Vows=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-452-LOJ0qf12NkeIM2JJAQp3ow-1; Tue, 18 Apr 2023 10:13:14 -0400
-X-MC-Unique: LOJ0qf12NkeIM2JJAQp3ow-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
+ us-mta-175-XpAxxGf8M0KHJ425rXGwkg-1; Tue, 18 Apr 2023 11:24:51 -0400
+X-MC-Unique: XpAxxGf8M0KHJ425rXGwkg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4100C1C189AF;
-	Tue, 18 Apr 2023 14:13:12 +0000 (UTC)
-Received: from localhost (unknown [10.39.195.48])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id F170E2018620;
-	Tue, 18 Apr 2023 14:13:11 +0000 (UTC)
-Date: Tue, 18 Apr 2023 15:13:11 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B76A938221C5;
+	Tue, 18 Apr 2023 15:24:50 +0000 (UTC)
+Received: from redhat.com (unknown [10.2.16.177])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 26B45C15BA0;
+	Tue, 18 Apr 2023 15:24:50 +0000 (UTC)
+Date: Tue, 18 Apr 2023 10:24:48 -0500
+From: Eric Blake <eblake@redhat.com>
 To: Wouter Verhelst <w@uter.be>
-Cc: Eric Blake <eblake@redhat.com>, libguestfs@redhat.com,
-	qemu-block@nongnu.org, nbd@other.debian.org
-Subject: Re: [Libguestfs] [PATCH v3 6/6] RFC: spec: Introduce
- NBD_REPLY_TYPE_OFFSET_HOLE_EXT
-Message-ID: <20230418141311.GS7773@redhat.com>
+Cc: nbd@other.debian.org, qemu-block@nongnu.org, libguestfs@redhat.com
+Subject: Re: [PATCH v3 2/6] spec: Change maximum block size to maximum
+ payload size
+Message-ID: <lkiuoaxijqh6zmfg33qvv47s7maenwbipmjan74etvya7sb7ud@vkzm55m4fxdu>
 References: <20230413220241.1396012-1-eblake@redhat.com>
- <20230413220241.1396012-7-eblake@redhat.com>
- <ZD6OJXoQBNJH5p4W@pc220518.home.grep.be>
+ <20230413220241.1396012-3-eblake@redhat.com>
+ <ZD5iUNqjxne6c5Y1@pc220518.home.grep.be>
 MIME-Version: 1.0
-In-Reply-To: <ZD6OJXoQBNJH5p4W@pc220518.home.grep.be>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+In-Reply-To: <ZD5iUNqjxne6c5Y1@pc220518.home.grep.be>
+User-Agent: NeoMutt/20230407
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <k32Bf_gNguG.A.Pz.VWqPkB@bendel>
+Resent-Message-ID: <GKkBt_SPKX.A.rKH.dZrPkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2434
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2435
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,131 +90,177 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230418141311.GS7773@redhat.com
-Resent-Date: Tue, 18 Apr 2023 14:13:41 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/lkiuoaxijqh6zmfg33qvv47s7maenwbipmjan74etvya7sb7ud@vkzm55m4fxdu
+Resent-Date: Tue, 18 Apr 2023 15:25:17 +0000 (UTC)
 
-On Tue, Apr 18, 2023 at 02:33:41PM +0200, Wouter Verhelst wrote:
-> On Thu, Apr 13, 2023 at 05:02:41PM -0500, Eric Blake wrote:
-> > Rather than requiring all servers and clients to have a 32-bit limit
-> > on maximum NBD_CMD_READ/WRITE sizes, we can choose to standardize
-> > support for a 64-bit single I/O transaction now.
-> > NBD_REPLY_TYPE_OFFSET_DATA can already handle a large reply, but
-> > NBD_REPLY_TYPE_OFFSET_HOLE needs a 64-bit counterpart.
+On Tue, Apr 18, 2023 at 11:26:40AM +0200, Wouter Verhelst wrote:
+> On Thu, Apr 13, 2023 at 05:02:37PM -0500, Eric Blake wrote:
+> > Commit 9f30fedb improved the spec to allow non-payload requests like
+> > NBD_CMD_TRIM that exceed any advertised maximum block size.  Take this
+> > one step further by documenting that the server may use NBD_EOVERFLOW
+> > as a hint to the client when a non-payload request is oversize (while
+> > permitting NBD_EINVAL for back-compat), and by rewording the text to
+> > explicitly call out that what is being advertised is the maximum
+> > payload length, not maximum block size.  Furthermore, favor the term
+> > 'maximum payload size' instead of 'maximum block size', as the real
+> > limitation here is how many bytes are sent in one direction as part of
+> > the command (a maximum payload size may be related to maximum block
+> > size, but existing implementations of both servers and clients that
+> > actually implement NBD_INFO_BLOCK_SIZE have generally been advertising
+> > things like a 32M or 64M data cap, and not an underlying block size
+> > constraint).
 > > 
-> > By standardizing this, all clients must be prepared to support both
-> > types of hole type replies, even though most server implementations of
-> > extended replies are likely to only send one hole type.
+...
+> > @@ -747,8 +747,8 @@ text unless the client insists on TLS.
+> > 
+> >  During transmission phase, several operations are constrained by the
+> >  export size sent by the final `NBD_OPT_EXPORT_NAME` or `NBD_OPT_GO`,
+> > -as well as by three block size constraints defined here (minimum,
+> > -preferred, and maximum).
+> > +as well as by three block size constraints defined here (minimum
+> > +block, preferred block, and maximum payload).
 > 
-> I think it's probably a better idea to push this patch to a separate
-> "extension-*" branch, and link to that from proto.md on master. Those
-> are documented as "we standardized this, but no first implementor exists
-> yet".
+> I think this may be reworded as:
 > 
-> If someone actually comes up with a reason for 64-bit transactions, we
-> can then see if the spec matches the need and merge it to master.
+> "as well as by three size constraint defined here"
 > 
-> Otherwise this feels too much like a solution in search of a problem to
-> me.
-
-I'd like to push back a bit on this.  Firstly Eric does have two
-complete implementations.  It's true however that they not upstream in
-either case.
-
-But we also need this because there are relatively serious issues
-observed, particularly around trimming/zeroing, and extents.  The
-trimming problem can be demonstrated very easily in fact:
-
-    $ nbdkit -U - --filter=stats memory 1P statsfile=/dev/stdout --run ' time guestfish add "" protocol:nbd server:unix:$unixsocket discard:enable format:raw : run : mkfs xfs /dev/sda '
-    
-    real	 4m17.531s
-    user	 0m0.032s
-    sys	 0m0.040s
-    total: 1066328 ops, 257.558068 s, 1048578.04 GiB, 4071.23 GiB/s
-    read: 4356 ops, 0.003335 s, 14.61 MiB, 4.28 GiB/s op, 58.08 KiB/s total
-      Request size and alignment breakdown:
-        12 bits: 50.8% (2215 reqs, 8.65 MiB total)
-             12 bit aligned: 100.0% (2215)
-             13 bit aligned:  51.6% (1143)
-             14 bit aligned:  26.9% (595)
-             15 bit aligned:  14.6% (323)
-             16 bit aligned:   8.4% (185)
-             17+ bit-aligned:  4.9% (109)
-         9 bits: 47.4% (2064 reqs, 1.01 MiB total)
-              9 bit aligned: 100.0% (2064)
-             10+ bit-aligned:  0.6% (13)
-        other sizes:  1.8% (77 reqs, 14.61 MiB total)
-    
-    write: 13325 ops, 0.046782 s, 31.29 MiB, 668.91 MiB/s op, 124.41 KiB/s total
-      Request size and alignment breakdown:
-        12 bits: 53.8% (7170 reqs, 28.01 MiB total)
-             12 bit aligned: 100.0% (7170)
-             13 bit aligned:  50.0% (3585)
-             14 bit aligned:  25.0% (1793)
-             15 bit aligned:  12.5% (896)
-             16 bit aligned:   6.2% (448)
-             17+ bit-aligned:  3.1% (224)
-         9 bits: 46.2% (6150 reqs, 3.00 MiB total)
-              9 bit aligned: 100.0% (6150)
-             10 bit aligned:  33.4% (2054)
-             12 bit aligned:  16.7% (1029)
-             13 bit aligned:   8.4% (515)
-             14+ bit-aligned:  4.2% (259)
-        other sizes:  0.0% (5 reqs, 31.29 MiB total)
-    
-    trim: 1048576 ops, 306.059735 s, 1048576.00 GiB, 3426.05 GiB/s op, 4071.22 GiB/s total
-      Request size and alignment breakdown:
-        30 bits: 100.0% (1048576 reqs, 1048576.00 GiB total)
-             30 bit aligned: 100.0% (1048576)
-             31 bit aligned:  50.0% (524288)
-             32 bit aligned:  25.0% (262144)
-             33 bit aligned:  12.5% (131072)
-             34 bit aligned:   6.2% (65536)
-             35+ bit-aligned:  3.1% (32768)
-    
-    zero: 64 ops, 0.003912 s, 1.99 GiB, 508.75 GiB/s op, 7.91 MiB/s total
-      Request size and alignment breakdown:
-        25 bits: 98.4% (63 reqs, 1.97 GiB total)
-             13 bit aligned: 100.0% (63)
-        other sizes:  1.6% (1 reqs, 1.99 GiB total)
-    
-    flush: 7 ops, 0.000001 s, 0 bytes, 0 bytes/s op, 0 bytes/s total
-
-Note how trim takes a million operations and most of the time.  That
-should be done in one operation.  If you stop advertising discard
-support on the disk ("discard:disable") it takes only a fraction of
-the time.
-
-The extents one is harder to demonstrate, but it makes our code
-considerably more complex that we cannot just grab the extent map for
-a whole disk larger than 4GB in a single command.  (The complexity
-won't go away, but the querying will be faster with fewer round trips
-with this change.)
-
-Nevertheless I'm not opposed to keeping this as an extension until the
-implementations are upstream and bedded in.
-
-Rich.
-
-
-> With that said, for the things I didn't reply to, you can add:
+> as they're now no longer all block size constraints.
 > 
-> Reviewed-By: Wouter Verhelst <w@uter.be>
-> 
-> -- 
->      w@uter.{be,co.za}
-> wouter@{grep.be,fosdem.org,debian.org}
-> 
-> I will have a Tin-Actinium-Potassium mixture, thanks.
-> 
-> _______________________________________________
-> Libguestfs mailing list
-> Libguestfs@redhat.com
-> https://listman.redhat.com/mailman/listinfo/libguestfs
+> (this occurs more below)
+
+Concur; how about squashing in:
+
+diff --git i/doc/proto.md w/doc/proto.md
+index 9098c42..7918179 100644
+--- i/doc/proto.md
++++ w/doc/proto.md
+@@ -409,7 +409,7 @@ cases, a server SHOULD gracefully consume *length* bytes of payload
+ (even if it then replies with an `NBD_EINVAL` failure because the
+ particular command was not expecting a payload), and proceed with
+ the next client command.  Thus, only when *length* is used as an
+-effective length will it utilize a full 64-bit value.
++effect length will it utilize a full 64-bit value.
+
+ #### Simple reply message
+
+@@ -841,24 +841,24 @@ exports. It is not possible to avoid downgrade attacks
+ on exports which may be served either via TLS or in plain
+ text unless the client insists on TLS.
+
+-## Block size constraints
++## Size constraints
+
+ During transmission phase, several operations are constrained by the
+ export size sent by the final `NBD_OPT_EXPORT_NAME` or `NBD_OPT_GO`,
+-as well as by three block size constraints defined here (minimum
++as well as by three size constraints defined here (minimum
+ block, preferred block, and maximum payload).
+
+-If a client can honour server block size constraints (as set out below
++If a client can honour server size constraints (as set out below
+ and under `NBD_INFO_BLOCK_SIZE`), it SHOULD announce this during the
+ handshake phase by using `NBD_OPT_GO` (and `NBD_OPT_INFO` if used) with
+ an `NBD_INFO_BLOCK_SIZE` information request, and MUST use `NBD_OPT_GO`
+ rather than `NBD_OPT_EXPORT_NAME` (except in the case of a fallback
+ where the server did not support `NBD_OPT_INFO` or `NBD_OPT_GO`).
+
+-A server with block size constraints other than the default SHOULD
+-advertise the block size constraints during handshake phase via
++A server with size constraints other than the default SHOULD
++advertise the size constraints during handshake phase via
+ `NBD_INFO_BLOCK_SIZE` in response to `NBD_OPT_INFO` or `NBD_OPT_GO`,
+-and MUST do so unless it has agreed on block size constraints via out
++and MUST do so unless it has agreed on size constraints via out
+ of band means.
+
+ Some servers are able to make optimizations, such as opening files
+@@ -866,11 +866,11 @@ with `O_DIRECT`, if they know that the client will obey a particular
+ minimum block size, where it must fall back to safer but slower code
+ if the client might send unaligned requests. For that reason, if a
+ client issues an `NBD_OPT_GO` including an `NBD_INFO_BLOCK_SIZE`
+-information request, it MUST abide by the block size constraints it
++information request, it MUST abide by the size constraints it
+ receives. Clients MAY issue `NBD_OPT_INFO` with `NBD_INFO_BLOCK_SIZE` to
+ learn the server's constraints without committing to them.
+
+-If block size constraints have not been advertised or agreed on
++If size constraints have not been advertised or agreed on
+ externally, then a server SHOULD support a default minimum block size
+ of 1, a preferred block size of 2^12 (4,096), and a maximum
+ payload size that is at least 2^25 (33,554,432) (even if the export
+@@ -886,12 +886,12 @@ a hard disconnect) or which uses `NBD_OPT_GO` without requesting
+ that do not request sizing information when the server supports
+ default sizing or where sizing constraints can be agreed on
+ externally.  When allowing clients that did not negotiate sizing via
+-NBD, a server that enforces stricter block size constraints than the
++NBD, a server that enforces stricter size constraints than the
+ defaults MUST cleanly error commands that fall outside the constraints
+ without corrupting data; even so, enforcing constraints in this manner
+ may limit interoperability.
+
+-A client MAY choose to operate as if tighter block size constraints
++A client MAY choose to operate as if tighter size constraints
+ had been specified (for example, even when the server advertises the
+ default minimum block size of 1, a client may safely use a minimum
+ block size of 2^9 (512)).
+@@ -1392,13 +1392,13 @@ of the newstyle negotiation.
+       `NBD_REP_INFO` replies, but a SELECTIVETLS server MAY do so if
+       this is a TLS-only export.
+     - `NBD_REP_ERR_BLOCK_SIZE_REQD`: The server requires the client to
+-      request block size constraints using `NBD_INFO_BLOCK_SIZE` prior
++      request size constraints using `NBD_INFO_BLOCK_SIZE` prior
+       to entering transmission phase, because the server will be using
+       non-default block sizes constraints. The server MUST NOT send this
+-      error if block size constraints were requested with
++      error if size constraints were requested with
+       `NBD_INFO_BLOCK_SIZE` with the `NBD_OPT_INFO` or `NBD_OPT_GO`
+       request. The server SHOULD NOT send this error if it is using
+-      default block size constraints or block size constraints
++      default size constraints or size constraints
+       negotiated out of band. A server sending an
+       `NBD_REP_ERR_BLOCK_SIZE_REQD` error SHOULD ensure it first
+       sends an `NBD_INFO_BLOCK_SIZE` information reply in order
+@@ -1748,15 +1748,15 @@ during option haggling in the fixed newstyle negotiation.
+
+     * `NBD_INFO_BLOCK_SIZE` (3)
+
+-      Represents the server's advertised block size constraints; see the
+-      "Block size constraints" section for more details on what these
++      Represents the server's advertised size constraints; see the
++      "Size constraints" section for more details on what these
+       values represent, and on constraints on their values.  The server
+       MUST send this info if it is requested and it intends to enforce
+-      block size constraints other than the defaults. After
++      size constraints other than the defaults. After
+       sending this information in response to an `NBD_OPT_GO` in which
+       the client specifically requested `NBD_INFO_BLOCK_SIZE`, the server
+       can legitimately assume that any client that continues the session
+-      will support the block size constraints supplied (note that this
++      will support the size constraints supplied (note that this
+       assumption cannot be made solely on the basis of an `NBD_OPT_INFO`
+       with an `NBD_INFO_BLOCK_SIZE` request, or an `NBD_OPT_GO` without
+       an explicit `NBD_INFO_BLOCK_SIZE` request). The *length* MUST be 14,
+@@ -2644,7 +2644,7 @@ implement the following features:
+ - Servers that implement block constraints through `NBD_INFO_BLOCK_SIZE`
+   and desire maximum interoperability SHOULD NOT require them.
+   Similarly, clients that desire maximum interoperability SHOULD
+-  implement querying for block size constraints. Since some clients
++  implement querying for size constraints. Since some clients
+   default to a block size of 512 bytes, implementations desiring maximum
+   interoperability MAY default to that size.
+ - Clients or servers that desire interoperability with older
+@@ -2652,7 +2652,7 @@ implement the following features:
+   addition to `NBD_OPT_INFO` and `NBD_OPT_GO`.
+ - For data safety, implementing `NBD_CMD_FLUSH` and the
+   `NBD_CMD_FLAG_FUA` flag to `NBD_CMD_WRITE` is strongly recommended.
+-  Clients that do not implement querying for block size constraints
++  Clients that do not implement querying for size constraints
+   SHOULD abide by the rules laid out in the section "Block size
+   constraints", above.
+ - Servers that implement extended headers but desire interoperability
 
 -- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-virt-p2v converts physical machines to virtual machines.  Boot with a
-live CD or over the network (PXE) and turn machines into KVM guests.
-http://libguestfs.org/virt-v2v
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3266
+Virtualization:  qemu.org | libvirt.org
 
