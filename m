@@ -1,88 +1,94 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id D22376E95B1
-	for <lists+nbd@lfdr.de>; Thu, 20 Apr 2023 15:21:09 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D84B6E9CC0
+	for <lists+nbd@lfdr.de>; Thu, 20 Apr 2023 21:57:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id AF45620DD9; Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr 20 13:21:09 2023
-Old-Return-Path: <yukuai1@huaweicloud.com>
+	id 225C920EFB; Thu, 20 Apr 2023 19:57:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr 20 19:57:12 2023
+Old-Return-Path: <josef@toxicpanda.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.6 required=4.0 tests=DIGITS_LETTERS,
-	MURPHY_DRUGS_REL8,NICE_REPLY_A,RDNS_NONE,T_SCC_BODY_TEXT_LINE
+X-Spam-Status: No, score=0.9 required=4.0 tests=DIGITS_LETTERS,DKIM_SIGNED,
+	DKIM_VALID,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE
 	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 64DF820E42
-	for <lists-other-nbd@bendel.debian.org>; Thu, 20 Apr 2023 13:05:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id AA71420D8E
+	for <lists-other-nbd@bendel.debian.org>; Thu, 20 Apr 2023 19:41:30 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.168 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MIME_CHARSET_FARAWAY=0.02,
-	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RDNS_NONE=0.793]
+X-Amavis-Spam-Status: No, score=-0.98 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id lfJccleQCDho for <lists-other-nbd@bendel.debian.org>;
-	Thu, 20 Apr 2023 13:05:04 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 1041 seconds by postgrey-1.36 at bendel; Thu, 20 Apr 2023 13:05:03 UTC
-Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 52B5820E41
-	for <nbd@other.debian.org>; Thu, 20 Apr 2023 13:05:03 +0000 (UTC)
-Received: from mail02.huawei.com (unknown [172.30.67.153])
-	by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4Q2HVp29gVz4f3kjN
-	for <nbd@other.debian.org>; Thu, 20 Apr 2023 20:47:30 +0800 (CST)
-Received: from [10.174.176.73] (unknown [10.174.176.73])
-	by APP4 (Coremail) with SMTP id gCh0CgCH77JiNEFkbCQlHw--.15266S3;
-	Thu, 20 Apr 2023 20:47:32 +0800 (CST)
+	with ESMTP id PktZcM_v8SeP for <lists-other-nbd@bendel.debian.org>;
+	Thu, 20 Apr 2023 19:41:22 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .toxicpanda. - helo: .mail-qk1-x72d.google. - helo-domain: .google.)  FROM/MX_MATCHES_NOT_HELO(DOMAIN)=0; rate: -3.5
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com [IPv6:2607:f8b0:4864:20::72d])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id B595920DA4
+	for <nbd@other.debian.org>; Thu, 20 Apr 2023 19:41:21 +0000 (UTC)
+Received: by mail-qk1-x72d.google.com with SMTP id af79cd13be357-74df47ad36eso55169385a.0
+        for <nbd@other.debian.org>; Thu, 20 Apr 2023 12:41:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda-com.20221208.gappssmtp.com; s=20221208; t=1682019678; x=1684611678;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=hp2WoMYe8f0cA1azbQnh2XYZtbHDV4zsKL0sy4t3HRk=;
+        b=cokRKqTe/KXOWR8TgrgKE35GN/QC9l9kuQHbG/6uekngK4te5Ju9kOuReHGCH2JCB7
+         ctFyVY/HKqw53zXlDHfduMSnZZPS6ZVJ+FPUmcB/J9IOV83qIRPuCM4gYbngj1kdW5vK
+         Runi1pNLAMlkYVXyEeG7lHjgtt7WRvWtTVT6ZBBo05cA+Gnu2hFswC1rfKfnIvLLK/c6
+         HhkBTuMrKll6CjPW0vrjT4qOY/1xXEtAIMlLBeuZsJ/agTTbdx1B4sIy5PDCwMctLQS+
+         M7WitvFtu6bdQl8U+8ucEGoUD4Js5gRj77jSi7N1+q3jIsg/GVycnTQIx6z8QI/eFmW0
+         95nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1682019678; x=1684611678;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hp2WoMYe8f0cA1azbQnh2XYZtbHDV4zsKL0sy4t3HRk=;
+        b=ktiPcZdqoWiaNyCMStjtRxtvEUwx23i4QtveGD4pgO+0mSJLHQRRcATA/G0/Aycc1C
+         nvpDcVnAg5J37eZhjvp6fEVRK843MlgJMu2X4WVlEz3DGIfkyWj5hXEDuvoQnF5ckOxg
+         TIeXIseBgemVySwZkLi5XmA0LWO8BNgG7RwRVYBshEY6Ne+Cj3ieSfTMuIs/ye0csBs9
+         XgOoXav83Fbv09DDwxjgatlkmUDY0xJUxBDY2GVH2Gf6H2wq4M2nwtk+UibTZtrvlOjn
+         cUi++p6GOxrm28hNSuLFzBx/6r6dfOwFVU+D6y3GlSLmZFdGaKWpdxG/mSG4/kBFfPS1
+         OLeQ==
+X-Gm-Message-State: AAQBX9feDznI+hvmRHJhfsKq9Yrfgzr4Pe7P1Rc9O66kTYG3Y5XgmEfF
+	u/GNcOWdHTrMdepbAI5agjIBMw==
+X-Google-Smtp-Source: AKy350YHZGfUCPsTXzxR0dSmjqT1qchvqDRAVjb1f3XBS1FGLghWbLDnz+KIU+WWC8QMjSXcknjIpQ==
+X-Received: by 2002:a05:6214:e4e:b0:5ef:4ecb:cf9d with SMTP id o14-20020a0562140e4e00b005ef4ecbcf9dmr4390667qvc.6.1682019678370;
+        Thu, 20 Apr 2023 12:41:18 -0700 (PDT)
+Received: from localhost (hs-nc-a03feba254-450087-1.tingfiber.com. [64.98.124.17])
+        by smtp.gmail.com with ESMTPSA id i10-20020a0cedca000000b005dd8b9345b4sm597931qvr.76.2023.04.20.12.41.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Apr 2023 12:41:17 -0700 (PDT)
+Date: Thu, 20 Apr 2023 15:41:17 -0400
+From: Josef Bacik <josef@toxicpanda.com>
+To: Zhong Jinghua <zhongjinghua@huawei.com>
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org, nbd@other.debian.org,
+	linux-kernel@vger.kernel.org, yi.zhang@huawei.com,
+	yukuai3@huawei.com, houtao1@huawei.com, yangerkun@huawei.com
 Subject: Re: [PATCH-next] nbd: fix incomplete validation of ioctl arg
-To: Zhong Jinghua <zhongjinghua@huawei.com>, josef@toxicpanda.com,
- axboe@kernel.dk
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org, yi.zhang@huawei.com, houtao1@huawei.com,
- yangerkun@huawei.com, "yukuai (C)" <yukuai3@huawei.com>
+Message-ID: <20230420194117.GA2179876@localhost.localdomain>
 References: <20230206145805.2645671-1-zhongjinghua@huawei.com>
-From: Yu Kuai <yukuai1@huaweicloud.com>
-Message-ID: <f9e28d45-ddea-6056-7954-f28661975c1f@huaweicloud.com>
-Date: Thu, 20 Apr 2023 20:47:30 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <20230206145805.2645671-1-zhongjinghua@huawei.com>
-Content-Type: text/plain; charset=gbk; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:gCh0CgCH77JiNEFkbCQlHw--.15266S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxZry5Xr4kGw1UAw45tF48Xrb_yoW5WF1DpF
-	WjkF4UCryjyF17ua9Fya9ruFy5Xa1ftrW3KFy7CFy8ZFn2ka4I9FW8KryFqw1UtrWUW398
-	XFW5GFyvkw1jq3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvIb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
-	0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
-	6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
-	Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7Mxk0xIA0c2IE
-	e2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
-	Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q
-	6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
-	kF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE
-	14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
-	9x07UWE__UUUUU=
-X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
-X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <_4FiLIP8w9L.A.T4G.FxTQkB@bendel>
+Resent-Message-ID: <--bwonDhVLG.A.SdC.YkZQkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2440
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2441
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,10 +98,10 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/f9e28d45-ddea-6056-7954-f28661975c1f@huaweicloud.com
-Resent-Date: Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230420194117.GA2179876@localhost.localdomain
+Resent-Date: Thu, 20 Apr 2023 19:57:13 +0000 (UTC)
 
-ÔÚ 2023/02/06 22:58, Zhong Jinghua Ð´µÀ:
+On Mon, Feb 06, 2023 at 10:58:05PM +0800, Zhong Jinghua wrote:
 > We tested and found an alarm caused by nbd_ioctl arg without verification.
 > The UBSAN warning calltrace like below:
 > 
@@ -105,21 +111,21 @@ Resent-Date: Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
 > CPU: 3 PID: 2523 Comm: syz-executor.0 Not tainted 4.19.90 #1
 > Hardware name: linux,dummy-virt (DT)
 > Call trace:
->   dump_backtrace+0x0/0x3f0 arch/arm64/kernel/time.c:78
->   show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
->   __dump_stack lib/dump_stack.c:77 [inline]
->   dump_stack+0x170/0x1dc lib/dump_stack.c:118
->   ubsan_epilogue+0x18/0xb4 lib/ubsan.c:161
->   handle_overflow+0x188/0x1dc lib/ubsan.c:192
->   __ubsan_handle_sub_overflow+0x34/0x44 lib/ubsan.c:206
->   __block_write_full_page+0x94c/0xa20 fs/buffer.c:1709
->   block_write_full_page+0x1f0/0x280 fs/buffer.c:2934
->   blkdev_writepage+0x34/0x40 fs/block_dev.c:607
->   __writepage+0x68/0xe8 mm/page-writeback.c:2305
->   write_cache_pages+0x44c/0xc70 mm/page-writeback.c:2240
->   generic_writepages+0xdc/0x148 mm/page-writeback.c:2329
->   blkdev_writepages+0x2c/0x38 fs/block_dev.c:2114
->   do_writepages+0xd4/0x250 mm/page-writeback.c:2344
+>  dump_backtrace+0x0/0x3f0 arch/arm64/kernel/time.c:78
+>  show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
+>  __dump_stack lib/dump_stack.c:77 [inline]
+>  dump_stack+0x170/0x1dc lib/dump_stack.c:118
+>  ubsan_epilogue+0x18/0xb4 lib/ubsan.c:161
+>  handle_overflow+0x188/0x1dc lib/ubsan.c:192
+>  __ubsan_handle_sub_overflow+0x34/0x44 lib/ubsan.c:206
+>  __block_write_full_page+0x94c/0xa20 fs/buffer.c:1709
+>  block_write_full_page+0x1f0/0x280 fs/buffer.c:2934
+>  blkdev_writepage+0x34/0x40 fs/block_dev.c:607
+>  __writepage+0x68/0xe8 mm/page-writeback.c:2305
+>  write_cache_pages+0x44c/0xc70 mm/page-writeback.c:2240
+>  generic_writepages+0xdc/0x148 mm/page-writeback.c:2329
+>  blkdev_writepages+0x2c/0x38 fs/block_dev.c:2114
+>  do_writepages+0xd4/0x250 mm/page-writeback.c:2344
 > 
 > The reason for triggering this warning is __block_write_full_page()
 > -> i_size_read(inode) - 1 overflow.
@@ -131,39 +137,12 @@ Resent-Date: Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
 > it will become 1 after the coercion, which will return unexpected results.
 > 
 > Fix it by adding checks to prevent passing in too large numbers.
-
-Looks good to me, feel free to add:
-
-Reviewed-by: Yu Kuai <yukuai3@huawei.com>
 > 
 > Signed-off-by: Zhong Jinghua <zhongjinghua@huawei.com>
-> ---
->   drivers/block/nbd.c | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index 592cfa8b765a..e1c954094b6c 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -325,6 +325,9 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
->   	if (blk_validate_block_size(blksize))
->   		return -EINVAL;
->   
-> +	if (bytesize < 0)
-> +		return -EINVAL;
-> +
->   	nbd->config->bytesize = bytesize;
->   	nbd->config->blksize_bits = __ffs(blksize);
->   
-> @@ -1111,6 +1114,9 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
->   	struct nbd_sock *nsock;
->   	int err;
->   
-> +	/* Arg will be cast to int, check it to avoid overflow */
-> +	if (arg > INT_MAX)
-> +		return -EINVAL;
->   	sock = nbd_get_socket(nbd, arg, &err);
->   	if (!sock)
->   		return err;
-> 
+
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
+
+Thanks,
+
+Josef
 
