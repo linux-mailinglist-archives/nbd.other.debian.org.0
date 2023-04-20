@@ -1,76 +1,88 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 676CF6E7286
-	for <lists+nbd@lfdr.de>; Wed, 19 Apr 2023 07:06:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id D22376E95B1
+	for <lists+nbd@lfdr.de>; Thu, 20 Apr 2023 15:21:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 375B120D19; Wed, 19 Apr 2023 05:06:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 19 05:06:10 2023
-Old-Return-Path: <w@uter.be>
+	id AF45620DD9; Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr 20 13:21:09 2023
+Old-Return-Path: <yukuai1@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=0.6 required=4.0 tests=DIGITS_LETTERS,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RDNS_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7F8F920D15
-	for <lists-other-nbd@bendel.debian.org>; Wed, 19 Apr 2023 05:05:58 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 64DF820E42
+	for <lists-other-nbd@bendel.debian.org>; Thu, 20 Apr 2023 13:05:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.08 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.168 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, MIME_CHARSET_FARAWAY=0.02,
+	MURPHY_DRUGS_REL8=0.02, NICE_REPLY_A=-0.001, RDNS_NONE=0.793]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id nPc-gXuclhLE for <lists-other-nbd@bendel.debian.org>;
-	Wed, 19 Apr 2023 05:05:54 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	with ESMTP id lfJccleQCDho for <lists-other-nbd@bendel.debian.org>;
+	Thu, 20 Apr 2023 13:05:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 1041 seconds by postgrey-1.36 at bendel; Thu, 20 Apr 2023 13:05:03 UTC
+Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 0FE8820D14
-	for <nbd@other.debian.org>; Wed, 19 Apr 2023 05:05:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=+k8n9JcNqUHq+fxssiiuR5KOQvKHTac5K5ngLll3++w=; b=LKyB/qLVTX3nEokpyyXr6PNA9/
-	LACG4jjZDfFvsAf263zvMsJpaA7oqrSiv34TOOQNHiHcuw/A+CvvCzizAQl/bCwqSw4pdchEQY/Tz
-	vrdrtxyvcSlwYCq9gzDC2NRYPEyt8Qgs3RGaonbw/8xGsj0SzAquKUtV4m0kLE0PbfkVgkw1SWUuC
-	uAVGvcBZQF/VTEg4ymGo+TPtigE6WD5OJh28zA2OvjO7Z93oWtCQGjTDpay3AM95DHM7fxoNeK3CY
-	fa3M0MN+ND1aDLZ5/158JuNgxEymy/biXzivjy/iRmV6uyGY5skaHYp9mX3/M1R46yuMBHIAii77o
-	5AJGmhsw==;
-Received: from dd5fb47a2.static.telenet.be ([213.251.71.162] helo=[127.0.0.1])
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <w@uter.be>)
-	id 1pp00u-003qh0-3w; Wed, 19 Apr 2023 07:05:51 +0200
-Date: Wed, 19 Apr 2023 07:05:46 +0200
-From: Wouter Verhelst <w@uter.be>
-To: nbd@other.debian.org, Eric Blake <eblake@redhat.com>
-CC: qemu-block@nongnu.org, libguestfs@redhat.com
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3_2/6=5D_spec=3A_Change_maxim?= =?US-ASCII?Q?um_block_size_to_maximum_payload_size?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <lkiuoaxijqh6zmfg33qvv47s7maenwbipmjan74etvya7sb7ud@vkzm55m4fxdu>
-References: <20230413220241.1396012-1-eblake@redhat.com> <20230413220241.1396012-3-eblake@redhat.com> <ZD5iUNqjxne6c5Y1@pc220518.home.grep.be> <lkiuoaxijqh6zmfg33qvv47s7maenwbipmjan74etvya7sb7ud@vkzm55m4fxdu>
-Message-ID: <31C7EA89-7C22-48A4-BD3F-C77A92092D09@uter.be>
+	by bendel.debian.org (Postfix) with ESMTPS id 52B5820E41
+	for <nbd@other.debian.org>; Thu, 20 Apr 2023 13:05:03 +0000 (UTC)
+Received: from mail02.huawei.com (unknown [172.30.67.153])
+	by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4Q2HVp29gVz4f3kjN
+	for <nbd@other.debian.org>; Thu, 20 Apr 2023 20:47:30 +0800 (CST)
+Received: from [10.174.176.73] (unknown [10.174.176.73])
+	by APP4 (Coremail) with SMTP id gCh0CgCH77JiNEFkbCQlHw--.15266S3;
+	Thu, 20 Apr 2023 20:47:32 +0800 (CST)
+Subject: Re: [PATCH-next] nbd: fix incomplete validation of ioctl arg
+To: Zhong Jinghua <zhongjinghua@huawei.com>, josef@toxicpanda.com,
+ axboe@kernel.dk
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org, yi.zhang@huawei.com, houtao1@huawei.com,
+ yangerkun@huawei.com, "yukuai (C)" <yukuai3@huawei.com>
+References: <20230206145805.2645671-1-zhongjinghua@huawei.com>
+From: Yu Kuai <yukuai1@huaweicloud.com>
+Message-ID: <f9e28d45-ddea-6056-7954-f28661975c1f@huaweicloud.com>
+Date: Thu, 20 Apr 2023 20:47:30 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20230206145805.2645671-1-zhongjinghua@huawei.com>
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:gCh0CgCH77JiNEFkbCQlHw--.15266S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZry5Xr4kGw1UAw45tF48Xrb_yoW5WF1DpF
+	WjkF4UCryjyF17ua9Fya9ruFy5Xa1ftrW3KFy7CFy8ZFn2ka4I9FW8KryFqw1UtrWUW398
+	XFW5GFyvkw1jq3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvIb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
+	0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
+	6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
+	Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7Mxk0xIA0c2IE
+	e2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
+	Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q
+	6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
+	kF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE
+	14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
+	9x07UWE__UUUUU=
+X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <oq1wKIdsdJL.A.WeD.Cb3PkB@bendel>
+Resent-Message-ID: <_4FiLIP8w9L.A.T4G.FxTQkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2439
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2440
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -80,199 +92,78 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/31C7EA89-7C22-48A4-BD3F-C77A92092D09@uter.be
-Resent-Date: Wed, 19 Apr 2023 05:06:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f9e28d45-ddea-6056-7954-f28661975c1f@huaweicloud.com
+Resent-Date: Thu, 20 Apr 2023 13:21:09 +0000 (UTC)
 
-Yes, this will work=2E
+ÔÚ 2023/02/06 22:58, Zhong Jinghua Ð´µÀ:
+> We tested and found an alarm caused by nbd_ioctl arg without verification.
+> The UBSAN warning calltrace like below:
+> 
+> UBSAN: Undefined behaviour in fs/buffer.c:1709:35
+> signed integer overflow:
+> -9223372036854775808 - 1 cannot be represented in type 'long long int'
+> CPU: 3 PID: 2523 Comm: syz-executor.0 Not tainted 4.19.90 #1
+> Hardware name: linux,dummy-virt (DT)
+> Call trace:
+>   dump_backtrace+0x0/0x3f0 arch/arm64/kernel/time.c:78
+>   show_stack+0x28/0x38 arch/arm64/kernel/traps.c:158
+>   __dump_stack lib/dump_stack.c:77 [inline]
+>   dump_stack+0x170/0x1dc lib/dump_stack.c:118
+>   ubsan_epilogue+0x18/0xb4 lib/ubsan.c:161
+>   handle_overflow+0x188/0x1dc lib/ubsan.c:192
+>   __ubsan_handle_sub_overflow+0x34/0x44 lib/ubsan.c:206
+>   __block_write_full_page+0x94c/0xa20 fs/buffer.c:1709
+>   block_write_full_page+0x1f0/0x280 fs/buffer.c:2934
+>   blkdev_writepage+0x34/0x40 fs/block_dev.c:607
+>   __writepage+0x68/0xe8 mm/page-writeback.c:2305
+>   write_cache_pages+0x44c/0xc70 mm/page-writeback.c:2240
+>   generic_writepages+0xdc/0x148 mm/page-writeback.c:2329
+>   blkdev_writepages+0x2c/0x38 fs/block_dev.c:2114
+>   do_writepages+0xd4/0x250 mm/page-writeback.c:2344
+> 
+> The reason for triggering this warning is __block_write_full_page()
+> -> i_size_read(inode) - 1 overflow.
+> inode->i_size is assigned in __nbd_ioctl() -> nbd_set_size() -> bytesize.
+> We think it is necessary to limit the size of arg to prevent errors.
+> 
+> Moreover, __nbd_ioctl() -> nbd_add_socket(), arg will be cast to int.
+> Assuming the value of arg is 0x80000000000000001) (on a 64-bit machine),
+> it will become 1 after the coercion, which will return unexpected results.
+> 
+> Fix it by adding checks to prevent passing in too large numbers.
 
-Thanks=2E
+Looks good to me, feel free to add:
 
-(I think I already gave Reviewed-By for this one, but you can add it if I =
-didn't ;-)
-
-Eric Blake <eblake@redhat=2Ecom> schreef op 18 april 2023 17:24:48 CEST:
->On Tue, Apr 18, 2023 at 11:26:40AM +0200, Wouter Verhelst wrote:
->> On Thu, Apr 13, 2023 at 05:02:37PM -0500, Eric Blake wrote:
->> > Commit 9f30fedb improved the spec to allow non-payload requests like
->> > NBD_CMD_TRIM that exceed any advertised maximum block size=2E  Take t=
-his
->> > one step further by documenting that the server may use NBD_EOVERFLOW
->> > as a hint to the client when a non-payload request is oversize (while
->> > permitting NBD_EINVAL for back-compat), and by rewording the text to
->> > explicitly call out that what is being advertised is the maximum
->> > payload length, not maximum block size=2E  Furthermore, favor the ter=
-m
->> > 'maximum payload size' instead of 'maximum block size', as the real
->> > limitation here is how many bytes are sent in one direction as part o=
-f
->> > the command (a maximum payload size may be related to maximum block
->> > size, but existing implementations of both servers and clients that
->> > actually implement NBD_INFO_BLOCK_SIZE have generally been advertisin=
-g
->> > things like a 32M or 64M data cap, and not an underlying block size
->> > constraint)=2E
->> >=20
->=2E=2E=2E=2E
->> > @@ -747,8 +747,8 @@ text unless the client insists on TLS=2E
->> >=20
->> >  During transmission phase, several operations are constrained by the
->> >  export size sent by the final `NBD_OPT_EXPORT_NAME` or `NBD_OPT_GO`,
->> > -as well as by three block size constraints defined here (minimum,
->> > -preferred, and maximum)=2E
->> > +as well as by three block size constraints defined here (minimum
->> > +block, preferred block, and maximum payload)=2E
->>=20
->> I think this may be reworded as:
->>=20
->> "as well as by three size constraint defined here"
->>=20
->> as they're now no longer all block size constraints=2E
->>=20
->> (this occurs more below)
->
->Concur; how about squashing in:
->
->diff --git i/doc/proto=2Emd w/doc/proto=2Emd
->index 9098c42=2E=2E7918179 100644
->--- i/doc/proto=2Emd
->+++ w/doc/proto=2Emd
->@@ -409,7 +409,7 @@ cases, a server SHOULD gracefully consume *length* by=
-tes of payload
-> (even if it then replies with an `NBD_EINVAL` failure because the
-> particular command was not expecting a payload), and proceed with
-> the next client command=2E  Thus, only when *length* is used as an
->-effective length will it utilize a full 64-bit value=2E
->+effect length will it utilize a full 64-bit value=2E
->
-> #### Simple reply message
->
->@@ -841,24 +841,24 @@ exports=2E It is not possible to avoid downgrade at=
-tacks
-> on exports which may be served either via TLS or in plain
-> text unless the client insists on TLS=2E
->
->-## Block size constraints
->+## Size constraints
->
-> During transmission phase, several operations are constrained by the
-> export size sent by the final `NBD_OPT_EXPORT_NAME` or `NBD_OPT_GO`,
->-as well as by three block size constraints defined here (minimum
->+as well as by three size constraints defined here (minimum
-> block, preferred block, and maximum payload)=2E
->
->-If a client can honour server block size constraints (as set out below
->+If a client can honour server size constraints (as set out below
-> and under `NBD_INFO_BLOCK_SIZE`), it SHOULD announce this during the
-> handshake phase by using `NBD_OPT_GO` (and `NBD_OPT_INFO` if used) with
-> an `NBD_INFO_BLOCK_SIZE` information request, and MUST use `NBD_OPT_GO`
-> rather than `NBD_OPT_EXPORT_NAME` (except in the case of a fallback
-> where the server did not support `NBD_OPT_INFO` or `NBD_OPT_GO`)=2E
->
->-A server with block size constraints other than the default SHOULD
->-advertise the block size constraints during handshake phase via
->+A server with size constraints other than the default SHOULD
->+advertise the size constraints during handshake phase via
-> `NBD_INFO_BLOCK_SIZE` in response to `NBD_OPT_INFO` or `NBD_OPT_GO`,
->-and MUST do so unless it has agreed on block size constraints via out
->+and MUST do so unless it has agreed on size constraints via out
-> of band means=2E
->
-> Some servers are able to make optimizations, such as opening files
->@@ -866,11 +866,11 @@ with `O_DIRECT`, if they know that the client will =
-obey a particular
-> minimum block size, where it must fall back to safer but slower code
-> if the client might send unaligned requests=2E For that reason, if a
-> client issues an `NBD_OPT_GO` including an `NBD_INFO_BLOCK_SIZE`
->-information request, it MUST abide by the block size constraints it
->+information request, it MUST abide by the size constraints it
-> receives=2E Clients MAY issue `NBD_OPT_INFO` with `NBD_INFO_BLOCK_SIZE` =
-to
-> learn the server's constraints without committing to them=2E
->
->-If block size constraints have not been advertised or agreed on
->+If size constraints have not been advertised or agreed on
-> externally, then a server SHOULD support a default minimum block size
-> of 1, a preferred block size of 2^12 (4,096), and a maximum
-> payload size that is at least 2^25 (33,554,432) (even if the export
->@@ -886,12 +886,12 @@ a hard disconnect) or which uses `NBD_OPT_GO` witho=
-ut requesting
-> that do not request sizing information when the server supports
-> default sizing or where sizing constraints can be agreed on
-> externally=2E  When allowing clients that did not negotiate sizing via
->-NBD, a server that enforces stricter block size constraints than the
->+NBD, a server that enforces stricter size constraints than the
-> defaults MUST cleanly error commands that fall outside the constraints
-> without corrupting data; even so, enforcing constraints in this manner
-> may limit interoperability=2E
->
->-A client MAY choose to operate as if tighter block size constraints
->+A client MAY choose to operate as if tighter size constraints
-> had been specified (for example, even when the server advertises the
-> default minimum block size of 1, a client may safely use a minimum
-> block size of 2^9 (512))=2E
->@@ -1392,13 +1392,13 @@ of the newstyle negotiation=2E
->       `NBD_REP_INFO` replies, but a SELECTIVETLS server MAY do so if
->       this is a TLS-only export=2E
->     - `NBD_REP_ERR_BLOCK_SIZE_REQD`: The server requires the client to
->-      request block size constraints using `NBD_INFO_BLOCK_SIZE` prior
->+      request size constraints using `NBD_INFO_BLOCK_SIZE` prior
->       to entering transmission phase, because the server will be using
->       non-default block sizes constraints=2E The server MUST NOT send th=
-is
->-      error if block size constraints were requested with
->+      error if size constraints were requested with
->       `NBD_INFO_BLOCK_SIZE` with the `NBD_OPT_INFO` or `NBD_OPT_GO`
->       request=2E The server SHOULD NOT send this error if it is using
->-      default block size constraints or block size constraints
->+      default size constraints or size constraints
->       negotiated out of band=2E A server sending an
->       `NBD_REP_ERR_BLOCK_SIZE_REQD` error SHOULD ensure it first
->       sends an `NBD_INFO_BLOCK_SIZE` information reply in order
->@@ -1748,15 +1748,15 @@ during option haggling in the fixed newstyle nego=
-tiation=2E
->
->     * `NBD_INFO_BLOCK_SIZE` (3)
->
->-      Represents the server's advertised block size constraints; see the
->-      "Block size constraints" section for more details on what these
->+      Represents the server's advertised size constraints; see the
->+      "Size constraints" section for more details on what these
->       values represent, and on constraints on their values=2E  The serve=
-r
->       MUST send this info if it is requested and it intends to enforce
->-      block size constraints other than the defaults=2E After
->+      size constraints other than the defaults=2E After
->       sending this information in response to an `NBD_OPT_GO` in which
->       the client specifically requested `NBD_INFO_BLOCK_SIZE`, the serve=
-r
->       can legitimately assume that any client that continues the session
->-      will support the block size constraints supplied (note that this
->+      will support the size constraints supplied (note that this
->       assumption cannot be made solely on the basis of an `NBD_OPT_INFO`
->       with an `NBD_INFO_BLOCK_SIZE` request, or an `NBD_OPT_GO` without
->       an explicit `NBD_INFO_BLOCK_SIZE` request)=2E The *length* MUST be=
- 14,
->@@ -2644,7 +2644,7 @@ implement the following features:
-> - Servers that implement block constraints through `NBD_INFO_BLOCK_SIZE`
->   and desire maximum interoperability SHOULD NOT require them=2E
->   Similarly, clients that desire maximum interoperability SHOULD
->-  implement querying for block size constraints=2E Since some clients
->+  implement querying for size constraints=2E Since some clients
->   default to a block size of 512 bytes, implementations desiring maximum
->   interoperability MAY default to that size=2E
-> - Clients or servers that desire interoperability with older
->@@ -2652,7 +2652,7 @@ implement the following features:
->   addition to `NBD_OPT_INFO` and `NBD_OPT_GO`=2E
-> - For data safety, implementing `NBD_CMD_FLUSH` and the
->   `NBD_CMD_FLAG_FUA` flag to `NBD_CMD_WRITE` is strongly recommended=2E
->-  Clients that do not implement querying for block size constraints
->+  Clients that do not implement querying for size constraints
->   SHOULD abide by the rules laid out in the section "Block size
->   constraints", above=2E
-> - Servers that implement extended headers but desire interoperability
->
-
---=20
-Verstuurd vanaf mijn Android apparaat met K-9 Mail=2E Excuseer mijn beknop=
-theid=2E
+Reviewed-by: Yu Kuai <yukuai3@huawei.com>
+> 
+> Signed-off-by: Zhong Jinghua <zhongjinghua@huawei.com>
+> ---
+>   drivers/block/nbd.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
+> 
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index 592cfa8b765a..e1c954094b6c 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -325,6 +325,9 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+>   	if (blk_validate_block_size(blksize))
+>   		return -EINVAL;
+>   
+> +	if (bytesize < 0)
+> +		return -EINVAL;
+> +
+>   	nbd->config->bytesize = bytesize;
+>   	nbd->config->blksize_bits = __ffs(blksize);
+>   
+> @@ -1111,6 +1114,9 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
+>   	struct nbd_sock *nsock;
+>   	int err;
+>   
+> +	/* Arg will be cast to int, check it to avoid overflow */
+> +	if (arg > INT_MAX)
+> +		return -EINVAL;
+>   	sock = nbd_get_socket(nbd, arg, &err);
+>   	if (!sock)
+>   		return err;
+> 
 
