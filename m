@@ -2,152 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21D0E6ECC5C
-	for <lists+nbd@lfdr.de>; Mon, 24 Apr 2023 14:51:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C8326ED1C6
+	for <lists+nbd@lfdr.de>; Mon, 24 Apr 2023 17:54:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id ED93A20760; Mon, 24 Apr 2023 12:51:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Apr 24 12:51:13 2023
-Old-Return-Path: <nj.shetty@samsung.com>
+	id 4FD802078D; Mon, 24 Apr 2023 15:54:36 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Apr 24 15:54:36 2023
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MURPHY_DRUGS_REL8,
-	RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.4 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,T_SCC_BODY_TEXT_LINE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 44DE320755
-	for <lists-other-nbd@bendel.debian.org>; Mon, 24 Apr 2023 12:33:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C6D222076C
+	for <lists-other-nbd@bendel.debian.org>; Mon, 24 Apr 2023 15:54:24 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.501 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
+X-Amavis-Spam-Status: No, score=-7.082 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
-	RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01]
-	autolearn=no autolearn_force=no
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id gYYf0ciiFJ_q for <lists-other-nbd@bendel.debian.org>;
-	Mon, 24 Apr 2023 12:33:16 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .samsung. - helo: .mailout3.samsung. - helo-domain: .samsung.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mailout3.samsung.com", Issuer "DigiCert TLS RSA SHA256 2020 CA1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 88042206F5
-	for <nbd@other.debian.org>; Mon, 24 Apr 2023 12:33:12 +0000 (UTC)
-Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
-	by mailout3.samsung.com (KnoxPortal) with ESMTP id 20230424123307epoutp03e7059cf47e22be6b9cb1dbea8d58a603~Y3vDxeXVy2783727837epoutp03A
-	for <nbd@other.debian.org>; Mon, 24 Apr 2023 12:33:07 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com 20230424123307epoutp03e7059cf47e22be6b9cb1dbea8d58a603~Y3vDxeXVy2783727837epoutp03A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1682339587;
-	bh=6LtiAqDVhvqj4Zceo1FaUHVR0UivOdGpy/tkN42+w0A=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=iVEHsw0VmrDp76LR9WykfX9vJQx5K4DfbZI0Teqxqz5Qq5f88OzbuD4RwiDY9R9YV
-	 BMpG58H2VztL+3mGmHMAH+HK4gKBGlCy60x4nOYeHMeAkVZp7vZQWZQmPosReivjAG
-	 pLwf3zlJetDVBhdUQvJmVv2CDle/KwmzfLfS7WTI=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
-	epcas5p2.samsung.com (KnoxPortal) with ESMTP id
-	20230424123306epcas5p2a2d87cb75e53d0220d347e4562a37972~Y3vDU6Hg01838718387epcas5p2h;
-	Mon, 24 Apr 2023 12:33:06 +0000 (GMT)
-Received: from epsmges5p3new.samsung.com (unknown [182.195.38.177]) by
-	epsnrtp2.localdomain (Postfix) with ESMTP id 4Q4l0K1rQ7z4x9Pw; Mon, 24 Apr
-	2023 12:33:05 +0000 (GMT)
-Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
-	epsmges5p3new.samsung.com (Symantec Messaging Gateway) with SMTP id
-	CD.3D.55646.10776446; Mon, 24 Apr 2023 21:33:05 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
-	epcas5p1.samsung.com (KnoxPortal) with ESMTPA id
-	20230424104340epcas5p16e004dc5fc3cf147b6cdde64085ea6ec~Y2Pfni12I2875628756epcas5p1I;
-	Mon, 24 Apr 2023 10:43:40 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
-	epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
-	20230424104340epsmtrp1e88ce846a961976f4d575da83c1627af~Y2PfmpPG82606426064epsmtrp1l;
-	Mon, 24 Apr 2023 10:43:40 +0000 (GMT)
-X-AuditID: b6c32a4b-b71fa7000001d95e-1d-644677010477
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
-	epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
-	49.E9.27706.B5D56446; Mon, 24 Apr 2023 19:43:39 +0900 (KST)
-Received: from green245 (unknown [107.99.41.245]) by epsmtip2.samsung.com
-	(KnoxPortal) with ESMTPA id
-	20230424104337epsmtip239a08f2be0a1b63630c4dfaf82013362~Y2PdWgrKR1658516585epsmtip22;
-	Mon, 24 Apr 2023 10:43:37 +0000 (GMT)
-Date: Mon, 24 Apr 2023 16:10:46 +0530
-From: Nitesh Shetty <nj.shetty@samsung.com>
-To: Chaitanya Kulkarni <chaitanyak@nvidia.com>
-Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-	"linux-bcache@vger.kernel.org" <linux-bcache@vger.kernel.org>,
-	"axboe@kernel.dk" <axboe@kernel.dk>, "josef@toxicpanda.com"
-	<josef@toxicpanda.com>, "minchan@kernel.org" <minchan@kernel.org>,
-	"senozhatsky@chromium.org" <senozhatsky@chromium.org>, "colyli@suse.de"
-	<colyli@suse.de>, "kent.overstreet@gmail.com" <kent.overstreet@gmail.com>,
-	"dlemoal@kernel.org" <dlemoal@kernel.org>, "johannes.thumshirn@wdc.com"
-	<johannes.thumshirn@wdc.com>, "bvanassche@acm.org" <bvanassche@acm.org>,
-	"vincent.fu@samsung.com" <vincent.fu@samsung.com>, "akinobu.mita@gmail.com"
-	<akinobu.mita@gmail.com>, "shinichiro.kawasaki@wdc.com"
-	<shinichiro.kawasaki@wdc.com>, "nbd@other.debian.org"
-	<nbd@other.debian.org>, "Jason@zx2c4.com" <Jason@zx2c4.com>
-Subject: Re: [PATCH 0/5] block/drivers: don't clear the flag that is not set
-Message-ID: <20230424104046.GA17688@green245>
+	with ESMTP id HgHSCMptbZUN for <lists-other-nbd@bendel.debian.org>;
+	Mon, 24 Apr 2023 15:54:16 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id F2C772075F
+	for <nbd@other.debian.org>; Mon, 24 Apr 2023 15:54:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1682351650;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=fR5QB/WxcG4E5hkpk8NFHtu2xiL39PiGRV3wmp/LBPY=;
+	b=jLN7BBIMNclln3dRAzhNQQcyya0dAq/Nt6j7B+F6t1/BLUHVFRlot59z4wAl9ITnuwNsg4
+	N0rC0LU/299LP5qwmHt6Ul1r9yP5LAX88B1tn9fJ6tbwo5S15rUYsMQVWRbs1GlXj4ZwR5
+	ePTaqas+uHPXJQHXA8fyrMw/azoqqYE=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-639-VNVCDN7uPAGzeQMfl37bog-1; Mon, 24 Apr 2023 11:54:09 -0400
+X-MC-Unique: VNVCDN7uPAGzeQMfl37bog-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7AEC6884342
+	for <nbd@other.debian.org>; Mon, 24 Apr 2023 15:54:09 +0000 (UTC)
+Received: from green.redhat.com (unknown [10.2.16.41])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 1A4392166B29;
+	Mon, 24 Apr 2023 15:54:09 +0000 (UTC)
+From: Eric Blake <eblake@redhat.com>
+To: nbd@other.debian.org
+Cc: libguestfs@redhat.com,
+	vgoyal@redhat.com
+Subject: [PATCH] spec: Document extended headers extension branch
+Date: Mon, 24 Apr 2023 10:54:08 -0500
+Message-Id: <20230424155408.711365-1-eblake@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <86043b4b-0960-215f-17a7-4c1facdb0713@nvidia.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGJsWRmVeSWpSXmKPExsWy7bCmhi5juVuKwfUP3BavDnQwWqy+289m
-	Me3DT2aL9wcfs1pMbzzPbvFgv73Fg6tSFn+77jFZ/HloaHGkqcri2LZrTBZ7b2lbLPv6nt3i
-	99O1TBa7Ny5is9g3y9PicXcHo4Ogx+Ur3h6zGy6yeOycdZfd4/LZUo9NqzrZPHqb37F5XP3W
-	zOzRt2UVo8fm09UeEzZvZPX4vEnOo/1AN5PH5L9PmQN4o7JtMlITU1KLFFLzkvNTMvPSbZW8
-	g+Od403NDAx1DS0tzJUU8hJzU22VXHwCdN0yc4D+UlIoS8wpBQoFJBYXK+nb2RTll5akKmTk
-	F5fYKqUWpOQUmBToFSfmFpfmpevlpZZYGRoYGJkCFSZkZzy8llZwgaOipbWRqYGxjb2LkYND
-	QsBE4sgL0y5GLg4hgd2MEk+nP2aEcD4xSpw/1ArlfGOU+Lj/FhNMx9JJLBDxvYwS/TcXARVx
-	AjnPGCUW/S4CsVkEVCU+bvnKBlLPJqAtcfo/B0hYREBP4uqtG+wgvcwC69gk1k/uAOsVFvCR
-	ONf2iR3E5hXQlbj1dB8bhC0ocXLmExYQm1PATuLHhXlgcVEBZYkD244zgdgSAl84JHbeqoew
-	XSSeHGuCigtLvDq+hR3ClpJ42d8GZZdLrJyygg3kCAmBFkaJWddnMUIk7CVaT/UzgxzNLJAh
-	MW9dAkRYVmLqqXVgM5kF+CR6fz+Bms8rsWMejK0ssWb9AjYIW1Li2vdGNkhYeUjMvywNCZ4X
-	jBJvf8lOYJSfheSzWQjLZoEt0JFYsPsTG0RYWmL5Pw4IU1Ni/S79BYysqxglUwuKc9NTi00L
-	jPNSy+FRnZyfu4kRnOC1vHcwPnrwQe8QIxMH4yFGCQ5mJRFe4Sy3FCHelMTKqtSi/Pii0pzU
-	4kOMpsCImsgsJZqcD8wxeSXxhiaWBiZmZmYmlsZmhkrivOq2J5OFBNITS1KzU1MLUotg+pg4
-	OKUamOQyTO2DTqkk2c3r55Sw8V2b+G3DpisKf3bskgs/WOKklf8m4E2g1CLeyhdpPl3cu3tm
-	mpjzLFTfG5Ic+dK40P53qFy90xXV02cYRS9Oy1jP+n75Ju6HkooNcqmbmAJ/r/jF/ERBPn31
-	KlXeyC5nX8WDth2/bTeaGr4/lcLZaSK1TKDp5K0rKdImVeFMnlvPuro8sb9ufe/j69Szd7N+
-	qDvwVr938/i7eXbM+hrrSWbiPY4H5FaLNjL/+j/1Ds/P4ESBMpX2RQtvxm04n2BUeeKf/6bu
-	jKTcI4Wv73+zlX+2S1BUIt2nVHmKlOy8ojOmdlcsbzzZoDw70rF8S2nJmu2psxh4p1ud8f3Z
-	Xd+jxFKckWioxVxUnAgAg8IEN3kEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRmVeSWpSXmKPExsWy7bCSvG50rFuKwaFtVhavDnQwWqy+289m
-	Me3DT2aL9wcfs1pMbzzPbvFgv73Fg6tSFn+77jFZ/HloaHGkqcri2LZrTBZ7b2lbLPv6nt3i
-	99O1TBa7Ny5is9g3y9PicXcHo4Ogx+Ur3h6zGy6yeOycdZfd4/LZUo9NqzrZPHqb37F5XP3W
-	zOzRt2UVo8fm09UeEzZvZPX4vEnOo/1AN5PH5L9PmQN4o7hsUlJzMstSi/TtErgy3v68xlQw
-	ga1iz5TV7A2M91m6GDk4JARMJJZOAjK5OIQEdjNKNB96wtbFyAkUl5RY9vcIM4QtLLHy33N2
-	iKInjBIbN51mB0mwCKhKfNzylQ1kEJuAtsTp/xwgYREBPYmrt26A1TMLbGOTeLDtB9ggYQEf
-	iXNtn8B6eQV0JW493ccGMfQFo0TrzCuMEAlBiZMzn7CA2MwCWhI3/r1kAlnALCAtsfwf2AJO
-	ATuJHxfmgR0qKqAscWDbcaYJjIKzkHTPQtI9C6F7ASPzKkbJ1ILi3PTcYsMCw7zUcr3ixNzi
-	0rx0veT83E2M4CjV0tzBuH3VB71DjEwcjIcYJTiYlUR4PUqdUoR4UxIrq1KL8uOLSnNSiw8x
-	SnOwKInzXug6GS8kkJ5YkpqdmlqQWgSTZeLglGpgEi3a2Lx/883ZZ65slO1P7P19z11XZc7M
-	HOtHbAxnrimtSPrL6HcpzHdeUHvA5o/n+ZS9L5cLZwrPXH0u4iy35Lk3jZ3tU77r+Gv7KtTF
-	PpZdkr7n1RedmvtxlW3H/zGev/ja9ZJGknlV9FOTV8KPjS/556yU1O3W7LsTdle2u8dPdGbW
-	YsYlF0NW7d428bXJ688Oz99/FbMJe2Itq7AoWL+4O0Hoza4rkw6IuicJBuwsXqYy7bHnV6O7
-	6Vev81T5/8tRN+R0fnr264O9bx9Y7yt4/mBN7Fa9C+2LqzSKZ7Vcs9mwnMnj9RFPbosYY/3P
-	YZMV2mXP9aWdmjCr8aCFrvC5xzuTj/gmvlaT7IiVVGIpzkg01GIuKk4EANc7wnBBAwAA
-X-CMS-MailID: 20230424104340epcas5p16e004dc5fc3cf147b6cdde64085ea6ec
-X-Msg-Generator: CA
-Content-Type: multipart/mixed;
-	boundary="----M1XhpxpcEzXMl-TZDJz3dv6uQhpc8LNXMKbaeBmU9jEugurT=_3f4e1_"
-X-Sendblock-Type: REQ_APPROVE
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230424092940epcas5p3407002e7d5c79593ffbafc38f2b49e51
-References: <20230424073023.38935-1-kch@nvidia.com>
-	<CGME20230424092940epcas5p3407002e7d5c79593ffbafc38f2b49e51@epcas5p3.samsung.com>
-	<20230424092641.u6u25eyojewvasj4@green245>
-	<86043b4b-0960-215f-17a7-4c1facdb0713@nvidia.com>
-X-Rc-Spam: 2008-11-04_01
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <npZirSYbKEG.A.d-G.BtnRkB@bendel>
+Resent-Message-ID: <f3XmGnFsDYN.A.T5E.8YqRkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2450
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2451
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -157,45 +85,109 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230424104046.GA17688@green245
-Resent-Date: Mon, 24 Apr 2023 12:51:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230424155408.711365-1-eblake@redhat.com
+Resent-Date: Mon, 24 Apr 2023 15:54:36 +0000 (UTC)
 
-------M1XhpxpcEzXMl-TZDJz3dv6uQhpc8LNXMKbaeBmU9jEugurT=_3f4e1_
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Branch extension-ext-header now exists to capture the specs reviewed
+on list and tentatively implemented in both qemu (server and client)
+and libnbd (client) code.  I'm still working on implementing the
+extension in nbdkit (server) before promoting the extension branch to
+mainline.
 
-On Mon, Apr 24, 2023 at 10:25:34AM +0000, Chaitanya Kulkarni wrote:
-> On 4/24/23 02:26, Nitesh Shetty wrote:
-> > On 23/04/24 12:30AM, Chaitanya Kulkarni wrote:
-> >> null_blk
-> >> brd
-> >> nbd
-> >> zram
-> >> bcache
-> >
-> > Any particular reason for leaving out mtip and s390 drivers ?
-> >
-> 
-> I didn't find why this flag is clear at first place,
-> if this gets accepted I'll others gradually..
-> 
-> > Will it be better to use the flag similar to scsi devices and
-> > use it for random number generation ?
-> >
-> 
-> I didn't understand this comment.
-> 
+Meanwhile, structured replies and block status have been incorporated
+into mainline for some time now (see commit 6e896bca in 2018, v3.17);
+and while block status is still not implemented in the kernel module
+or in nbd-server, we did just recently implement structured replies in
+nbd-server.
 
-My bad. I intended, may be we can set QUEUE_FLAG_ADD_RANDOM flag.
-Similar to scsi once the request completes, using function
-add_disc_randomness() random generator can be updated.
+Signed-off-by: Eric Blake <eblake@redhat.com>
+---
 
-Regards,
-Nitesh Shetty
+Given the review on my v3 spec proposal for extended headers, I've
+pushed patch 1 and 2 of that series to mainline along with this patch,
+while patches 3-5 of that series are tweaked per review comments and
+pushed on the new extension-ext-header branch.  My next step will be
+posting v3 patches to qemu and libnbd which rebases my earlier
+proof-of-concept patches to those projects to match the spec as now
+live (and/or tweak the extension spec if something insurmountable
+comes up).
 
-------M1XhpxpcEzXMl-TZDJz3dv6uQhpc8LNXMKbaeBmU9jEugurT=_3f4e1_
-Content-Type: text/plain; charset="utf-8"
+ doc/proto.md | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
+
+diff --git a/doc/proto.md b/doc/proto.md
+index 460823b..8589e22 100644
+--- a/doc/proto.md
++++ b/doc/proto.md
+@@ -1137,6 +1137,9 @@ The field has the following format:
+   will be faster than a regular write). Clients MUST NOT set the
+   `NBD_CMD_FLAG_FAST_ZERO` request flag unless this transmission flag
+   is set.
++- bit 12, `NBD_FLAG_BLOCK_STATUS_PAYLOAD`; defined by the experimental
++  `EXTENDED_HEADERS`
++  [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
+
+ Clients SHOULD ignore unknown flags.
+
+@@ -1500,6 +1503,11 @@ of the newstyle negotiation.
+     option does not select any metadata context, provided the client
+     then does not attempt to issue `NBD_CMD_BLOCK_STATUS` commands.
+
++* `NBD_OPT_EXTENDED_HEADERS` (11)
++
++    Defined by the experimental `EXTENDED_HEADERS`
++    [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
++
+ #### Option reply types
+
+ These values are used in the "reply type" field, sent by the server
+@@ -1680,6 +1688,11 @@ case that data is an error message string suitable for display to the user.
+
+     The request or the reply is too large to process.
+
++* `NBD_REP_ERR_EXT_HEADER_REQD` (2^31 + 10)
++
++    Defined by the experimental `EXTENDED_HEADERS`
++    [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
++
+ ### Transmission phase
+
+ #### Flag fields
+@@ -1733,6 +1746,9 @@ valid may depend on negotiation during the handshake phase.
+   `NBD_CMD_WRITE`, then the server MUST fail quickly with an error of
+   `NBD_ENOTSUP`. The client MUST NOT set this unless the server advertised
+   `NBD_FLAG_SEND_FAST_ZERO`.
++- bit 5, `NBD_CMD_FLAG_PAYLOAD_LEN`; defined by the experimental
++  `EXTENDED_HEADERS`
++  [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
+
+ ##### Structured reply flags
+
+@@ -1853,6 +1869,11 @@ small amount of fixed-length overhead inherent in the chunk type).
+   extent information at the first offset not covered by a
+   reduced-length reply.
+
++* `NBD_REPLY_TYPE_BLOCK_STATUS_EXT` (6)
++
++  Defined by the experimental `EXTENDED_HEADERS`
++  [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
++
+ All error chunk types have bit 15 set, and begin with the same
+ *error*, *message length*, and optional *message* fields as
+ `NBD_REPLY_TYPE_ERROR`.  If nonzero, *message length* indicates
+@@ -2336,9 +2357,7 @@ with names starting with the word 'extension'.
+
+ Currently known are:
+
+-* The `STRUCTURED_REPLY` [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-structured-reply/doc/proto.md).
+-
+-* The `BLOCK_STATUS` [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-blockstatus/doc/proto.md) (based on the `STRUCTURED_REPLY` extension).
++* The `EXTENDED_HEADER` [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/proto.md).
+
+ * The `RESIZE` [extension](https://github.com/NetworkBlockDevice/nbd/blob/extension-resize/doc/proto.md).
 
 
-------M1XhpxpcEzXMl-TZDJz3dv6uQhpc8LNXMKbaeBmU9jEugurT=_3f4e1_--
+base-commit: daf3fce989b23cc8c9023f28e0eec2f074c9f1bd
+-- 
+2.40.0
 
