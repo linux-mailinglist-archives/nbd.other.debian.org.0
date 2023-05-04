@@ -2,58 +2,60 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 105A86F7635
-	for <lists+nbd@lfdr.de>; Thu,  4 May 2023 22:06:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD3E06F7638
+	for <lists+nbd@lfdr.de>; Thu,  4 May 2023 22:06:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E794520556; Thu,  4 May 2023 20:06:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu May  4 20:06:12 2023
+	id A507D205C6; Thu,  4 May 2023 20:06:26 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu May  4 20:06:26 2023
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDO_WHITELIST,
-	MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-10.4 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_HI,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BCA1B20752
-	for <lists-other-nbd@bendel.debian.org>; Thu,  4 May 2023 19:48:42 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id EE7F220752
+	for <lists-other-nbd@bendel.debian.org>; Thu,  4 May 2023 19:49:40 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-9.651 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-12.351 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.161,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
 	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 4VL_PmMjBnTE for <lists-other-nbd@bendel.debian.org>;
-	Thu,  4 May 2023 19:48:35 +0000 (UTC)
+	with ESMTP id 2OZ5n4G1z-fA for <lists-other-nbd@bendel.debian.org>;
+	Thu,  4 May 2023 19:49:33 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+X-Greylist: delayed 332 seconds by postgrey-1.36 at bendel; Thu, 04 May 2023 19:49:33 UTC
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B9B9D20744
-	for <nbd@other.debian.org>; Thu,  4 May 2023 19:48:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 1B35920753
+	for <nbd@other.debian.org>; Thu,  4 May 2023 19:49:32 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id D44D463730;
-	Thu,  4 May 2023 19:48:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61134C433D2;
-	Thu,  4 May 2023 19:48:03 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id BC23263822;
+	Thu,  4 May 2023 19:49:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4243FC433A4;
+	Thu,  4 May 2023 19:49:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1683229684;
-	bh=SV/TzqWc1Kjj3tGSHgeGLWFhf+071zfE4hkgxdfP0YA=;
+	s=k20201202; t=1683229769;
+	bh=Sjcfn1r0ahXPgKMDb045L/vCMqWCxC7V8Hoxetw5THw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=q/CprtiD/ZbfQhy6q9rkK9OXD7vfj7BNRNvpTI4qJzXvqZt9S8MsAB69Q0XRNMWIH
-	 dqhKOnHkFAZrE56TPBYKbmJ2Pm7tlFi8ZEN1e+xi9gXizO8kWLEbSkf0j1leQxQEPK
-	 xiCS60jhuDx4fbpnF3WrL7wq1BN3Pg9KUXKj/7TnMwstsvDHI5gSXrYpX77EBSmX78
-	 23L5BGIGz6o4oCEtC0VnKeXY1tm1gz6VWpIrCmEgdVEQhOLNRWTpUbxoUyRenbuJAl
-	 5OYtBgp7nvLpmUspu/XE5g/T4lD7kcygDiq3UrKzJRF9f5BYdHnb77bvOj0W7sXnIL
-	 rUxcl9MZVjPKw==
+	b=YhZ8lTteppQ4rhVDf0f3d7UAB6dRijw86SvRtmPNT12TnIkCUMWqAj93xTs1JMQhK
+	 q4b18+vqaZGV4p5qPhKivr9pQU4Fj2m5NtlMrucbyAZpg1Nt3oTFeWRHhvEdzEHQJb
+	 +6hSSk6NN652EjaxxL5nDSk4pns3eNV44aGhP8SqSVsc6i+DKnJV0Bsn1Okc42cUrQ
+	 id/xZtfC9huGePDw1Z5AeLct2dbqhSgib0VmbA0vituQtsja2PajGDzI8LwSWeAoom
+	 s6SfZkUuL9xHmoVdoUQlos4JQfCiHMY7qdfN5c2FRDtJ0oG3KKI2mKDwJTwagcXN56
+	 GRqiWnDr+ccyw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -64,12 +66,12 @@ Cc: Zhong Jinghua <zhongjinghua@huawei.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 6.1 38/49] nbd: fix incomplete validation of ioctl arg
-Date: Thu,  4 May 2023 15:46:15 -0400
-Message-Id: <20230504194626.3807438-38-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.15 26/30] nbd: fix incomplete validation of ioctl arg
+Date: Thu,  4 May 2023 15:48:19 -0400
+Message-Id: <20230504194824.3808028-26-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230504194626.3807438-1-sashal@kernel.org>
-References: <20230504194626.3807438-1-sashal@kernel.org>
+In-Reply-To: <20230504194824.3808028-1-sashal@kernel.org>
+References: <20230504194824.3808028-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,9 +79,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <c5UtaORBwlP.A.ia.0ABVkB@bendel>
+Resent-Message-ID: <8uJVwrmkmhL.A.zd.CBBVkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2462
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2463
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,8 +91,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230504194626.3807438-38-sashal@kernel.org
-Resent-Date: Thu,  4 May 2023 20:06:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230504194824.3808028-26-sashal@kernel.org
+Resent-Date: Thu,  4 May 2023 20:06:26 +0000 (UTC)
 
 From: Zhong Jinghua <zhongjinghua@huawei.com>
 
@@ -143,11 +145,11 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 6 insertions(+)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index e379ccc63c520..888a6abb50f53 100644
+index ade8b839e4458..394355f12d4e0 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -325,6 +325,9 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
- 	if (blk_validate_block_size(blksize))
+@@ -326,6 +326,9 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+ 	if (blksize < 512 || blksize > PAGE_SIZE || !is_power_of_2(blksize))
  		return -EINVAL;
  
 +	if (bytesize < 0)
@@ -156,7 +158,7 @@ index e379ccc63c520..888a6abb50f53 100644
  	nbd->config->bytesize = bytesize;
  	nbd->config->blksize_bits = __ffs(blksize);
  
-@@ -1110,6 +1113,9 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
+@@ -1048,6 +1051,9 @@ static int nbd_add_socket(struct nbd_device *nbd, unsigned long arg,
  	struct nbd_sock *nsock;
  	int err;
  
