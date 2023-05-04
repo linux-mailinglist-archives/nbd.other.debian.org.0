@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 121FC6F75AB
-	for <lists+nbd@lfdr.de>; Thu,  4 May 2023 22:00:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC33D6F75F2
+	for <lists+nbd@lfdr.de>; Thu,  4 May 2023 22:03:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id DAC6120759; Thu,  4 May 2023 20:00:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu May  4 20:00:12 2023
+	id 81F4C2076A; Thu,  4 May 2023 20:03:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu May  4 20:03:12 2023
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,42 +18,42 @@ X-Spam-Status: No, score=-7.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4EBB620744
-	for <lists-other-nbd@bendel.debian.org>; Thu,  4 May 2023 19:44:41 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8F60020744
+	for <lists-other-nbd@bendel.debian.org>; Thu,  4 May 2023 19:46:20 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-12.351 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-9.651 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.161,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
 	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_HI=-5,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_MED=-2.3,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id kA00is-TdUJS for <lists-other-nbd@bendel.debian.org>;
-	Thu,  4 May 2023 19:44:32 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_IP=-2 (check from: .kernel. - helo: .dfw.source.kernel. - helo-domain: .kernel.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+	with ESMTP id 4gm2ZkfH2hg8 for <lists-other-nbd@bendel.debian.org>;
+	Thu,  4 May 2023 19:46:11 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 1825E20750
-	for <nbd@other.debian.org>; Thu,  4 May 2023 19:44:31 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 6FCEC206F0
+	for <nbd@other.debian.org>; Thu,  4 May 2023 19:46:11 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 9FB706375E;
-	Thu,  4 May 2023 19:43:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73138C433AF;
-	Thu,  4 May 2023 19:43:53 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id D2D44637A3;
+	Thu,  4 May 2023 19:46:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F174C433A8;
+	Thu,  4 May 2023 19:46:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1683229434;
+	s=k20201202; t=1683229567;
 	bh=8PAcPdtGigjTmyNmB4KjebzR1n76DZ7lYtf9FipWSvY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fIZxB6jyBc6JoKyvemSZgi7QjQ7MABUu2SdSgvey1hq9WXXVh4V0Gmxo7T1t9AoG/
-	 /veeLLtWPA2xvWG4cUm5WnFkHiLvmqFIOR++nzF9Hq02hfqzIN9FS/f9KrK00BmoRM
-	 YzvKm6Rk7c+uVsjYa/szpQwaZlPYc6wDIBFI+i+qGC9wLUk8S7fe7IcHug75cNmPYj
-	 ZlNMExTzMo62V54Gw3UPJlGV3yJ1cGN3ZmlRVAEy7NzPPeAb/IJXPNuFHSqvqjNcCy
-	 WthEs/AshgDojqi7yrpx9vR7ow9CwKgzQfdOmyWPYP/POQQRRMUZbq38LcnJt66eRt
-	 e2qYPQcMZw0GA==
+	b=mMUtKvaz6ZgF+ukHJvU1hZ0IN4ccSDxqMgWO459krC9Hogqrg65jDv+3c5BTRiJQt
+	 +5lP2tii6xkGATx/XXl+/S0VhRInQnmp6EQFjsDay4ECioHIEi+LDsOK5E4UL27QYS
+	 pL6CGxKrr/6WiMHf4N83R1gv3zuFH4ImF0Cyi0h+Nk4c+dI24aHa4Tom+JXaynDZub
+	 zm57NJGOPjdDFu88tsuG3JpkQc37e9+tkPZKY8iqkruLwLyXTO0dn9ELIDjc3zNuQE
+	 ZRE+p2gRPKdHwsZNrZX6u8pryhvGjO4hlR2jg8tV14LSeIoIoNRPBQQpr72fqbj60d
+	 jc54Z8YIzW4sg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -64,12 +64,12 @@ Cc: Zhong Jinghua <zhongjinghua@huawei.com>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 6.3 48/59] nbd: fix incomplete validation of ioctl arg
-Date: Thu,  4 May 2023 15:41:31 -0400
-Message-Id: <20230504194142.3805425-48-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.2 42/53] nbd: fix incomplete validation of ioctl arg
+Date: Thu,  4 May 2023 15:44:02 -0400
+Message-Id: <20230504194413.3806354-42-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230504194142.3805425-1-sashal@kernel.org>
-References: <20230504194142.3805425-1-sashal@kernel.org>
+In-Reply-To: <20230504194413.3806354-1-sashal@kernel.org>
+References: <20230504194413.3806354-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,9 +77,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Du0_sniPf1J.A.9uH.M7AVkB@bendel>
+Resent-Message-ID: <mzfrI4_y0SO.A.G4H.A-AVkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2460
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2461
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,8 +89,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230504194142.3805425-48-sashal@kernel.org
-Resent-Date: Thu,  4 May 2023 20:00:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230504194413.3806354-42-sashal@kernel.org
+Resent-Date: Thu,  4 May 2023 20:03:12 +0000 (UTC)
 
 From: Zhong Jinghua <zhongjinghua@huawei.com>
 
