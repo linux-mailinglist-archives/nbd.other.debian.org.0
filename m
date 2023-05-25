@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9470A710CDE
-	for <lists+nbd@lfdr.de>; Thu, 25 May 2023 15:02:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 705B0710CEC
+	for <lists+nbd@lfdr.de>; Thu, 25 May 2023 15:03:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6396820633; Thu, 25 May 2023 13:02:07 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu May 25 13:02:07 2023
+	id 4022D204C2; Thu, 25 May 2023 13:03:00 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu May 25 13:03:00 2023
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -19,8 +19,8 @@ X-Spam-Status: No, score=-9.2 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9C81020481
-	for <lists-other-nbd@bendel.debian.org>; Thu, 25 May 2023 13:01:35 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id F02E02062F
+	for <lists-other-nbd@bendel.debian.org>; Thu, 25 May 2023 13:01:41 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-5.251 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.161,
@@ -31,42 +31,42 @@ X-Amavis-Spam-Status: No, score=-5.251 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id xPn9BFJWpZPj for <lists-other-nbd@bendel.debian.org>;
-	Thu, 25 May 2023 13:01:29 +0000 (UTC)
+	with ESMTP id ibQR3In0R0Y0 for <lists-other-nbd@bendel.debian.org>;
+	Thu, 25 May 2023 13:01:36 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 3D648204C2
-	for <nbd@other.debian.org>; Thu, 25 May 2023 13:01:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 18943205BE
+	for <nbd@other.debian.org>; Thu, 25 May 2023 13:01:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685019680;
+	s=mimecast20190719; t=1685019682;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PFBq4xhG8E8UF3Nab7KtMAQud83Osq6Qhfl/VESaOz8=;
-	b=Pmhw5//kuXBYtRnqdSehmdvelT8vFatd2wq7VHev8F11Xu+QYDG+NCiK+3DJtjaldzH20A
-	zRJv7+o7BsSqbBgkpuVwLQuP4homfCvHzM+O0LJOtWtpvbFscgarpQf2GLn2x1Anj9SUIF
-	jqhnHGPlYzc7LeHaC9SMNde5M5dyJv8=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=wmdwVAnBMsLs1nUgoXRJg+RAnm7vR7DpskUAeToSfzE=;
+	b=YTz3UvEougSghjk807SwlUZawnwJO463XZd1Yho2h2FddErUEOAy7/6ej0HoRpaDcrWaXF
+	R7VxfN/oBKkIzHvUSy8KATZSjbFQzOLfkAhGe6nHwdDPQ4TmJpIXIO5C9t3XXvoll640Z/
+	VjGMAnq1FP1rbfeGGygE3Y/jtD0o1rQ=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-153-euij54R5MgqH0-8iKZTsJg-1; Thu, 25 May 2023 09:01:19 -0400
-X-MC-Unique: euij54R5MgqH0-8iKZTsJg-1
+ us-mta-417-MPxdjMP5PzGisdJQE8V_9Q-1; Thu, 25 May 2023 09:01:19 -0400
+X-MC-Unique: MPxdjMP5PzGisdJQE8V_9Q-1
 Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B906E382C981;
-	Thu, 25 May 2023 13:01:18 +0000 (UTC)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3BA82858F18;
+	Thu, 25 May 2023 13:01:19 +0000 (UTC)
 Received: from green.redhat.com (unknown [10.2.16.46])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 661A6492B0A;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id DCE7A492B0A;
 	Thu, 25 May 2023 13:01:18 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: libguestfs@redhat.com
 Cc: qemu-block@nongnu.org,
 	nbd@other.debian.org
-Subject: [libnbd PATCH v3 20/22] interop: Add test of 64-bit block status
-Date: Thu, 25 May 2023 08:01:06 -0500
-Message-Id: <20230525130108.757242-21-eblake@redhat.com>
+Subject: [libnbd PATCH v3 21/22] api: Add nbd_can_block_status_payload()
+Date: Thu, 25 May 2023 08:01:07 -0500
+Message-Id: <20230525130108.757242-22-eblake@redhat.com>
 In-Reply-To: <20230525130108.757242-1-eblake@redhat.com>
 References: <20230525130108.757242-1-eblake@redhat.com>
 MIME-Version: 1.0
@@ -77,9 +77,9 @@ Content-type: text/plain
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <21kiGaX0J0J.A.6sF.Px1bkB@bendel>
+Resent-Message-ID: <Jjh1rSOKP6E.A.mrD.Ey1bkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2482
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2491
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,68 +89,243 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230525130108.757242-21-eblake@redhat.com
-Resent-Date: Thu, 25 May 2023 13:02:07 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230525130108.757242-22-eblake@redhat.com
+Resent-Date: Thu, 25 May 2023 13:03:00 +0000 (UTC)
 
-Prove that we can round-trip a block status request larger than 4G
-through a new-enough qemu-nbd.  Also serves as a unit test of our shim
-for converting internal 64-bit representation back to the older 32-bit
-nbd_block_status callback interface.
+In the recent NBD protocol extensions to add 64-bit commands [1], an
+additional option was added to allow NBD_CMD_BLOCK_STATUS pass a
+client payload instructing the server to filter its answers in nbd.git
+commit e6f3b94a (mainly useful when the client requests more than one
+meta context with NBD_OPT_SET_META_CONTEXT).  This patch lays the
+groundwork by exposing servers that advertise this capability,
+although libnbd does not yet actually utilize it until the next patch.
+
+At the time this patch was written, qemu-nbd was also patched to
+provide such support; hence, an interop/ test shows the API in action.
+
+[1] https://github.com/NetworkBlockDevice/nbd/blob/extension-ext-header/doc/
 
 Signed-off-by: Eric Blake <eblake@redhat.com>
 ---
- interop/Makefile.am     |   6 ++
- interop/large-status.c  | 186 ++++++++++++++++++++++++++++++++++++++++
- interop/large-status.sh |  49 +++++++++++
- .gitignore              |   1 +
- 4 files changed, 242 insertions(+)
- create mode 100644 interop/large-status.c
- create mode 100755 interop/large-status.sh
+ info/nbdinfo.pod                |  10 ++-
+ lib/nbd-protocol.h              |  29 +++++---
+ generator/API.ml                |  18 +++++
+ lib/flags.c                     |  12 +++
+ examples/server-flags.c         |   7 +-
+ interop/Makefile.am             |   6 ++
+ interop/block-status-payload.c  | 126 ++++++++++++++++++++++++++++++++
+ interop/block-status-payload.sh |  68 +++++++++++++++++
+ .gitignore                      |   1 +
+ info/can.c                      |   5 ++
+ info/show.c                     |   9 ++-
+ 11 files changed, 274 insertions(+), 17 deletions(-)
+ create mode 100644 interop/block-status-payload.c
+ create mode 100755 interop/block-status-payload.sh
 
+diff --git a/info/nbdinfo.pod b/info/nbdinfo.pod
+index 9ea4a278..f5dc53fa 100644
+--- a/info/nbdinfo.pod
++++ b/info/nbdinfo.pod
+@@ -178,6 +178,8 @@ rotating disk: accessing nearby blocks may be faster than random
+ access and requests should be sorted to improve performance.  Many
+ servers do not or cannot report this accurately.
+
++=item nbdinfo --can block-status-payload URI
++
+ =item nbdinfo --can cache URI
+
+ =item nbdinfo --can df URI
+@@ -345,10 +347,10 @@ The command does not print anything.  Instead it exits with success
+
+ For further information see the L<NBD
+ protocol|https://github.com/NetworkBlockDevice/nbd/blob/master/doc/proto.md>
+-and the following libnbd functions: L<nbd_can_cache(3)>,
+-L<nbd_can_df(3)>, L<nbd_can_fast_zero(3)>, L<nbd_can_flush(3)>,
+-L<nbd_can_fua(3)>, L<nbd_can_multi_conn(3)>, L<nbd_can_trim(3)>,
+-L<nbd_can_zero(3)>, L<nbd_is_read_only(3)>,
++and the following libnbd functions: L<nbd_can_block_status_payload(3)>,
++L<nbd_can_cache(3)>, L<nbd_can_df(3)>, L<nbd_can_fast_zero(3)>,
++L<nbd_can_flush(3)>, L<nbd_can_fua(3)>, L<nbd_can_multi_conn(3)>,
++L<nbd_can_trim(3)>, L<nbd_can_zero(3)>, L<nbd_is_read_only(3)>,
+ L<nbd_get_structured_replies_negotiated(3)>,
+ L<nbd_get_extended_headers_negotiated(3)>.
+
+diff --git a/lib/nbd-protocol.h b/lib/nbd-protocol.h
+index b6fa9b8a..9e358122 100644
+--- a/lib/nbd-protocol.h
++++ b/lib/nbd-protocol.h
+@@ -102,17 +102,18 @@ struct nbd_fixed_new_option_reply {
+ #define NBD_FLAG_NO_ZEROES         (1 << 1)
+
+ /* Per-export flags. */
+-#define NBD_FLAG_HAS_FLAGS         (1 << 0)
+-#define NBD_FLAG_READ_ONLY         (1 << 1)
+-#define NBD_FLAG_SEND_FLUSH        (1 << 2)
+-#define NBD_FLAG_SEND_FUA          (1 << 3)
+-#define NBD_FLAG_ROTATIONAL        (1 << 4)
+-#define NBD_FLAG_SEND_TRIM         (1 << 5)
+-#define NBD_FLAG_SEND_WRITE_ZEROES (1 << 6)
+-#define NBD_FLAG_SEND_DF           (1 << 7)
+-#define NBD_FLAG_CAN_MULTI_CONN    (1 << 8)
+-#define NBD_FLAG_SEND_CACHE        (1 << 10)
+-#define NBD_FLAG_SEND_FAST_ZERO    (1 << 11)
++#define NBD_FLAG_HAS_FLAGS            (1 << 0)
++#define NBD_FLAG_READ_ONLY            (1 << 1)
++#define NBD_FLAG_SEND_FLUSH           (1 << 2)
++#define NBD_FLAG_SEND_FUA             (1 << 3)
++#define NBD_FLAG_ROTATIONAL           (1 << 4)
++#define NBD_FLAG_SEND_TRIM            (1 << 5)
++#define NBD_FLAG_SEND_WRITE_ZEROES    (1 << 6)
++#define NBD_FLAG_SEND_DF              (1 << 7)
++#define NBD_FLAG_CAN_MULTI_CONN       (1 << 8)
++#define NBD_FLAG_SEND_CACHE           (1 << 10)
++#define NBD_FLAG_SEND_FAST_ZERO       (1 << 11)
++#define NBD_FLAG_BLOCK_STATUS_PAYLOAD (1 << 12)
+
+ /* NBD options (new style handshake only). */
+ #define NBD_OPT_EXPORT_NAME        1
+@@ -204,6 +205,12 @@ struct nbd_request_ext {
+   uint64_t count;               /* Request effect or payload length. */
+ } NBD_ATTRIBUTE_PACKED;
+
++/* Extended request payload for NBD_CMD_BLOCK_STATUS, when supported. */
++struct nbd_block_status_payload {
++  uint64_t length;              /* Effective length of client request */
++  /* followed by array of uint32_t ids */
++} NBD_ATTRIBUTE_PACKED;
++
+ /* Simple reply (server -> client). */
+ struct nbd_simple_reply {
+   uint32_t magic;               /* NBD_SIMPLE_REPLY_MAGIC. */
+diff --git a/generator/API.ml b/generator/API.ml
+index 85625bbd..5a31ce3b 100644
+--- a/generator/API.ml
++++ b/generator/API.ml
+@@ -2327,6 +2327,23 @@   "can_fast_zero", {
+     example = Some "examples/server-flags.c";
+   };
+
++  "can_block_status_payload", {
++    default_call with
++    args = []; ret = RBool;
++    permitted_states = [ Negotiating; Connected; Closed ];
++    shortdesc = "does the server support the block status payload flag?";
++    longdesc = "\
++Returns true if the server supports the use of the
++C<LIBNBD_CMD_FLAG_PAYLOAD_LEN> flag to allow filtering of the
++block status command.  Returns
++false if the server does not.  Note that this will never return
++true if L<nbd_get_extended_headers_negotiated(3)> is false."
++^ non_blocking_test_call_description;
++    see_also = [SectionLink "Flag calls"; Link "opt_info";
++                Link "get_extended_headers_negotiated"];
++    example = Some "examples/server-flags.c";
++  };
++
+   "can_df", {
+     default_call with
+     args = []; ret = RBool;
+@@ -4183,6 +4200,7 @@ let first_version =
+   "get_extended_headers_negotiated", (1, 18);
+   "opt_extended_headers", (1, 18);
+   "aio_opt_extended_headers", (1, 18);
++  "can_block_status_payload", (1, 18);
+
+   (* These calls are proposed for a future version of libnbd, but
+    * have not been added to any released version so far.
+diff --git a/lib/flags.c b/lib/flags.c
+index be880acf..7e6ddedd 100644
+--- a/lib/flags.c
++++ b/lib/flags.c
+@@ -66,6 +66,12 @@ nbd_internal_set_size_and_flags (struct nbd_handle *h,
+     eflags &= ~NBD_FLAG_SEND_DF;
+   }
+
++  if (eflags & NBD_FLAG_BLOCK_STATUS_PAYLOAD && !h->extended_headers) {
++    debug (h, "server lacks extended headers, ignoring claim "
++           "of block status payload");
++    eflags &= ~NBD_FLAG_BLOCK_STATUS_PAYLOAD;
++  }
++
+   if (eflags & NBD_FLAG_SEND_FAST_ZERO &&
+       !(eflags & NBD_FLAG_SEND_WRITE_ZEROES)) {
+     debug (h, "server lacks write zeroes, ignoring claim of fast zero");
+@@ -213,6 +219,12 @@ nbd_unlocked_can_cache (struct nbd_handle *h)
+   return get_flag (h, NBD_FLAG_SEND_CACHE);
+ }
+
++int
++nbd_unlocked_can_block_status_payload (struct nbd_handle *h)
++{
++  return get_flag (h, NBD_FLAG_BLOCK_STATUS_PAYLOAD);
++}
++
+ int
+ nbd_unlocked_can_meta_context (struct nbd_handle *h, const char *name)
+ {
+diff --git a/examples/server-flags.c b/examples/server-flags.c
+index d156aced..f53b86ed 100644
+--- a/examples/server-flags.c
++++ b/examples/server-flags.c
+@@ -78,8 +78,13 @@ main (int argc, char *argv[])
+   PRINT_FLAG (nbd_can_multi_conn);
+   PRINT_FLAG (nbd_can_trim);
+   PRINT_FLAG (nbd_can_zero);
+-#if LIBNBD_HAVE_NBD_CAN_FAST_ZERO /* Added in 1.2 */
++#if LIBNBD_HAVE_NBD_CAN_FAST_ZERO
++  /* Added in 1.2 */
+   PRINT_FLAG (nbd_can_fast_zero);
++#endif
++#if LIBNBD_HAVE_NBD_CAN_BLOCK_STATUS_PAYLOAD
++  /* Added in 1.18 */
++  PRINT_FLAG (nbd_can_block_status_payload);
+ #endif
+   PRINT_FLAG (nbd_is_read_only);
+   PRINT_FLAG (nbd_is_rotational);
 diff --git a/interop/Makefile.am b/interop/Makefile.am
-index 3f81df0c..9a7a5967 100644
+index 9a7a5967..f8c4cb7d 100644
 --- a/interop/Makefile.am
 +++ b/interop/Makefile.am
-@@ -21,6 +21,7 @@ EXTRA_DIST = \
- 	dirty-bitmap.sh \
- 	interop-qemu-storage-daemon.sh \
- 	interop-qemu-block-size.sh \
-+	large-status.sh \
- 	list-exports-nbd-config \
- 	list-exports-test-dir/disk1 \
+@@ -27,6 +27,7 @@ EXTRA_DIST = \
  	list-exports-test-dir/disk2 \
-@@ -134,6 +135,7 @@ check_PROGRAMS += \
- 	list-exports-qemu-nbd \
- 	socket-activation-qemu-nbd \
- 	dirty-bitmap \
-+	large-status \
+ 	structured-read.sh \
+ 	opt-extended-headers.sh \
++	block-status-payload.sh \
+ 	$(NULL)
+
+ TESTS_ENVIRONMENT = \
+@@ -138,6 +139,7 @@ check_PROGRAMS += \
+ 	large-status \
  	structured-read \
  	opt-extended-headers \
++	block-status-payload \
  	$(NULL)
-@@ -144,6 +146,7 @@ TESTS += \
- 	list-exports-qemu-nbd \
- 	socket-activation-qemu-nbd \
- 	dirty-bitmap.sh \
-+	large-status.sh \
+ TESTS += \
+ 	interop-qemu-nbd \
+@@ -150,6 +152,7 @@ TESTS += \
  	structured-read.sh \
  	interop-qemu-block-size.sh \
  	opt-extended-headers.sh \
-@@ -235,6 +238,9 @@ socket_activation_qemu_nbd_LDADD = $(top_builddir)/lib/libnbd.la
- dirty_bitmap_SOURCES = dirty-bitmap.c
- dirty_bitmap_LDADD = $(top_builddir)/lib/libnbd.la
++	block-status-payload.sh \
+ 	$(NULL)
 
-+large_status_SOURCES = large-status.c
-+large_status_LDADD = $(top_builddir)/lib/libnbd.la
+ interop_qemu_nbd_SOURCES = \
+@@ -247,6 +250,9 @@ structured_read_LDADD = $(top_builddir)/lib/libnbd.la
+ opt_extended_headers_SOURCES = opt-extended-headers.c
+ opt_extended_headers_LDADD = $(top_builddir)/lib/libnbd.la
+
++block_status_payload_SOURCES = block-status-payload.c
++block_status_payload_LDADD = $(top_builddir)/lib/libnbd.la
 +
- structured_read_SOURCES = structured-read.c
- structured_read_LDADD = $(top_builddir)/lib/libnbd.la
+ endif HAVE_QEMU_NBD
 
-diff --git a/interop/large-status.c b/interop/large-status.c
+ #----------------------------------------------------------------------
+diff --git a/interop/block-status-payload.c b/interop/block-status-payload.c
 new file mode 100644
-index 00000000..36415653
+index 00000000..9603dfe5
 --- /dev/null
-+++ b/interop/large-status.c
-@@ -0,0 +1,186 @@
++++ b/interop/block-status-payload.c
+@@ -0,0 +1,126 @@
 +/* NBD client library in userspace
 + * Copyright Red Hat
 + *
@@ -169,7 +344,7 @@ index 00000000..36415653
 + * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 + */
 +
-+/* Test 64-bit block status with qemu. */
++/* Test interaction with qemu using block status payload filtering. */
 +
 +#include <config.h>
 +
@@ -183,88 +358,27 @@ index 00000000..36415653
 +
 +#include <libnbd.h>
 +
-+static const char *bitmap;
++#include "array-size.h"
 +
-+struct data {
-+  bool req_one;    /* input: true if req_one was passed to request */
-+  int count;       /* input: count of expected remaining calls */
-+  bool seen_base;  /* output: true if base:allocation encountered */
-+  bool seen_dirty; /* output: true if qemu:dirty-bitmap encountered */
++static const char *contexts[] = {
++  "base:allocation",
++  "qemu:allocation-depth",
++  "qemu:dirty-bitmap:bitmap0",
++  "qemu:dirty-bitmap:bitmap1",
 +};
 +
 +static int
-+cb32 (void *opaque, const char *metacontext, uint64_t offset,
-+      uint32_t *entries, size_t len, int *error)
++cb (void *opaque, const char *metacontext, uint64_t offset,
++    nbd_extent *entries, size_t len, int *error)
 +{
-+  struct data *data = opaque;
++  /* Adjust seen according to which context was visited */
++  unsigned int *seen = opaque;
++  size_t i;
 +
-+  assert (offset == 0);
-+  assert (data->count-- > 0);
-+
-+  if (strcmp (metacontext, LIBNBD_CONTEXT_BASE_ALLOCATION) == 0) {
-+    assert (!data->seen_base);
-+    data->seen_base = true;
-+
-+    /* Data block offset 0 size 64k, remainder is hole */
-+    assert (len == 4);
-+    assert (entries[0] == 65536);
-+    assert (entries[1] == 0);
-+    /* libnbd had to truncate qemu's >4G answer */
-+    assert (entries[2] == 4227858432);
-+    assert (entries[3] == (LIBNBD_STATE_HOLE|LIBNBD_STATE_ZERO));
-+  }
-+  else if (strcmp (metacontext, bitmap) == 0) {
-+    assert (!data->seen_dirty);
-+    data->seen_dirty = true;
-+
-+    /* Dirty block at offset 5G-64k, remainder is clean */
-+    /* libnbd had to truncate qemu's >4G answer */
-+    assert (len == 2);
-+    assert (entries[0] == 4227858432);
-+    assert (entries[1] == 0);
-+  }
-+  else {
-+    fprintf (stderr, "unexpected context %s\n", metacontext);
-+    exit (EXIT_FAILURE);
-+  }
-+  return 0;
-+}
-+
-+static int
-+cb64 (void *opaque, const char *metacontext, uint64_t offset,
-+      nbd_extent *entries, size_t len, int *error)
-+{
-+  struct data *data = opaque;
-+
-+  assert (offset == 0);
-+  assert (data->count-- > 0);
-+
-+  if (strcmp (metacontext, LIBNBD_CONTEXT_BASE_ALLOCATION) == 0) {
-+    assert (!data->seen_base);
-+    data->seen_base = true;
-+
-+    /* Data block offset 0 size 64k, remainder is hole */
-+    assert (len == 2);
-+    assert (entries[0].length == 65536);
-+    assert (entries[0].flags == 0);
-+    assert (entries[1].length == 5368643584ULL);
-+    assert (entries[1].flags == (LIBNBD_STATE_HOLE|LIBNBD_STATE_ZERO));
-+  }
-+  else if (strcmp (metacontext, bitmap) == 0) {
-+    assert (!data->seen_dirty);
-+    data->seen_dirty = true;
-+
-+    /* Dirty block at offset 5G-64k, remainder is clean */
-+    assert (len == 2);
-+    assert (entries[0].length == 5368643584ULL);
-+    assert (entries[0].flags == 0);
-+    assert (entries[1].length == 65536);
-+    assert (entries[1].flags == 1);
-+  }
-+  else {
-+    fprintf (stderr, "unexpected context %s\n", metacontext);
-+    exit (EXIT_FAILURE);
-+  }
++  for (i = 0; i < ARRAY_SIZE (contexts); i++)
++    if (strcmp (contexts[i], metacontext) == 0)
++      break;
++  *seen |= 1 << i;
 +  return 0;
 +}
 +
@@ -273,13 +387,14 @@ index 00000000..36415653
 +{
 +  struct nbd_handle *nbd;
 +  int64_t exportsize;
-+  struct data data;
++  unsigned int seen;
++  size_t i;
++  int r;
 +
-+  if (argc < 3) {
-+    fprintf (stderr, "%s bitmap qemu-nbd [args ...]\n", argv[0]);
++  if (argc < 2) {
++    fprintf (stderr, "%s qemu-nbd [args ...]\n", argv[0]);
 +    exit (EXIT_FAILURE);
 +  }
-+  bitmap = argv[1];
 +
 +  nbd = nbd_create ();
 +  if (nbd == NULL) {
@@ -287,11 +402,26 @@ index 00000000..36415653
 +    exit (EXIT_FAILURE);
 +  }
 +
-+  nbd_add_meta_context (nbd, LIBNBD_CONTEXT_BASE_ALLOCATION);
-+  nbd_add_meta_context (nbd, bitmap);
++  assert (ARRAY_SIZE (contexts) == 4);
++  for (i = 0; i < ARRAY_SIZE (contexts); i++) {
++    if (nbd_add_meta_context (nbd, contexts[i]) == -1) {
++      fprintf (stderr, "%s\n", nbd_get_error ());
++      exit (EXIT_FAILURE);
++    }
++  }
 +
-+  if (nbd_connect_systemd_socket_activation (nbd, &argv[2]) == -1) {
++  if (nbd_connect_systemd_socket_activation (nbd, &argv[1]) == -1) {
 +    fprintf (stderr, "%s\n", nbd_get_error ());
++    exit (EXIT_FAILURE);
++  }
++
++  r = nbd_can_block_status_payload (nbd);
++  if (r == -1) {
++    fprintf (stderr, "%s\n", nbd_get_error ());
++    exit (EXIT_FAILURE);
++  }
++  if (r != 1) {
++    fprintf (stderr, "expecting block status payload support from qemu\n");
 +    exit (EXIT_FAILURE);
 +  }
 +
@@ -301,33 +431,18 @@ index 00000000..36415653
 +    exit (EXIT_FAILURE);
 +  }
 +
-+  if (nbd_get_extended_headers_negotiated (nbd) != 1) {
-+    fprintf (stderr, "skipping: qemu-nbd lacks extended headers\n");
-+    exit (77);
-+  }
-+
-+  /* Prove that we can round-trip a >4G block status request */
-+  data = (struct data) { .count = 2, };
++  /* An unfiltered call should see all four contexts */
++  seen = 0;
 +  if (nbd_block_status_64 (nbd, exportsize, 0,
-+                           (nbd_extent64_callback) { .callback = cb64,
-+                             .user_data = &data },
++                           (nbd_extent64_callback) { .callback = cb,
++                                                     .user_data = &seen },
 +                           0) == -1) {
 +    fprintf (stderr, "%s\n", nbd_get_error ());
 +    exit (EXIT_FAILURE);
 +  }
-+  assert (data.seen_base && data.seen_dirty);
++  assert (seen == 0xf);
 +
-+  /* Check libnbd's handling of a >4G response through older interface  */
-+  data = (struct data) { .count = 2, };
-+  if (nbd_block_status (nbd, exportsize, 0,
-+                        (nbd_extent_callback) { .callback = cb32,
-+                          .user_data = &data },
-+                        0) == -1) {
-+    fprintf (stderr, "%s\n", nbd_get_error ());
-+    exit (EXIT_FAILURE);
-+  }
-+  assert (data.seen_base && data.seen_dirty);
-+
++  /* FIXME: Test filtered calls once the API is added */
 +  if (nbd_shutdown (nbd, 0) == -1) {
 +    fprintf (stderr, "%s\n", nbd_get_error ());
 +    exit (EXIT_FAILURE);
@@ -337,12 +452,12 @@ index 00000000..36415653
 +
 +  exit (EXIT_SUCCESS);
 +}
-diff --git a/interop/large-status.sh b/interop/large-status.sh
+diff --git a/interop/block-status-payload.sh b/interop/block-status-payload.sh
 new file mode 100755
-index 00000000..46810dc3
+index 00000000..a12cfc8a
 --- /dev/null
-+++ b/interop/large-status.sh
-@@ -0,0 +1,49 @@
++++ b/interop/block-status-payload.sh
+@@ -0,0 +1,68 @@
 +#!/usr/bin/env bash
 +# nbd client library in userspace
 +# Copyright Red Hat
@@ -361,49 +476,125 @@ index 00000000..46810dc3
 +# License along with this library; if not, write to the Free Software
 +# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 +
-+# Test reading qemu dirty-bitmap.
++# Test use of block status payload for server filtering
 +
 +source ../tests/functions.sh
 +set -e
 +set -x
 +
 +requires qemu-img bitmap --help
-+requires qemu-nbd --version
++# This test uses the qemu-nbd -A and -B options.
++requires qemu-nbd -A -BA --version
 +
-+# This test uses the qemu-nbd -B option.
-+if ! qemu-nbd --help | grep -sq -- -B; then
-+    echo "$0: skipping because qemu-nbd does not support the -B option"
-+    exit 77
-+fi
++file="block-status-payload.qcow2"
++rm -f $file
++cleanup_fn rm -f $file
 +
-+files="large-status.qcow2"
-+rm -f $files
-+cleanup_fn rm -f $files
++# Create sparse file with two bitmaps.
++qemu-img create -f qcow2 $file 1M
++qemu-img bitmap --add --enable -f qcow2 $file bitmap0
++qemu-img bitmap --add --enable -f qcow2 $file bitmap1
 +
-+# Create mostly-sparse file with intentionally different data vs. dirty areas
-+# (64k data, 5G-64k hole,zero; 5G-64k clean, 64k dirty)
-+qemu-img create -f qcow2 large-status.qcow2 5G
-+qemu-img bitmap --add --enable -f qcow2 large-status.qcow2 bitmap0
-+qemu-io -f qcow2 -c "w -z $((5*1024*1024*1024 - 64*1024)) 64k" \
-+        large-status.qcow2
-+qemu-img bitmap --disable -f qcow2 large-status.qcow2 bitmap0
-+qemu-io -f qcow2 -c 'w 0 64k' large-status.qcow2
++# Unconditional part of test: qemu should not advertise block status payload
++# support if extended headers are not in use
++nbdsh -c '
++h.set_request_extended_headers(False)
++h.add_meta_context("base:allocation")
++h.add_meta_context("qemu:allocation-depth")
++h.add_meta_context("qemu:dirty-bitmap:bitmap0")
++h.add_meta_context("qemu:dirty-bitmap:bitmap1")
++h.set_opt_mode(True)
++args = ["qemu-nbd", "-f", "qcow2", "-A", "-B", "bitmap0", "-B", "bitmap1",
++        "'"$file"'"]
++h.connect_systemd_socket_activation(args)
++assert h.aio_is_negotiating() is True
++assert h.get_extended_headers_negotiated() is False
++# Flag not available until info or go
++try:
++  h.can_block_status_payload()
++  assert False
++except nbd.Error:
++  pass
++h.opt_info()
++assert h.can_block_status_payload() is False
++assert h.can_meta_context("base:allocation") is True
++h.opt_abort()
++'
 +
-+# Run the test.
-+$VG ./large-status qemu:dirty-bitmap:bitmap0 \
-+    qemu-nbd -f qcow2 -B bitmap0 large-status.qcow2
++# Conditional part of test: if qemu is new enough to support extended
++# headers, we assume it can also support block status payload.
++requires nbdinfo --can extended-headers -- [ qemu-nbd -r -f qcow2 "$file" ]
++$VG ./block-status-payload \
++    qemu-nbd -f qcow2 -A -B bitmap0 -B bitmap1 $file
 diff --git a/.gitignore b/.gitignore
-index 24642748..fd81357b 100644
+index fd81357b..a2d052bd 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -114,6 +114,7 @@ Makefile.in
- /interop/interop-qemu-nbd
- /interop/interop-qemu-nbd-tls-certs
- /interop/interop-qemu-nbd-tls-psk
-+/interop/large-status
- /interop/list-exports-nbd-server
- /interop/list-exports-nbdkit
- /interop/list-exports-qemu-nbd
+@@ -101,6 +101,7 @@ Makefile.in
+ /info/nbdinfo
+ /info/nbdinfo.1
+ /install-sh
++/interop/block-status-payload
+ /interop/dirty-bitmap
+ /interop/interop-nbd-server
+ /interop/interop-nbd-server-tls
+diff --git a/info/can.c b/info/can.c
+index 31c4a1ca..6dd68eeb 100644
+--- a/info/can.c
++++ b/info/can.c
+@@ -72,6 +72,11 @@ do_can (void)
+   else if (strcasecmp (can, "rotational") == 0)
+     feature = nbd_is_rotational (nbd);
+
++  else if (strcasecmp (can, "block status payload") == 0 ||
++           strcasecmp (can, "block-status-payload") == 0 ||
++           strcasecmp (can, "block_status_payload") == 0)
++    feature = nbd_can_block_status_payload (nbd);
++
+   else if (strcasecmp (can, "cache") == 0)
+     feature = nbd_can_cache (nbd);
+
+diff --git a/info/show.c b/info/show.c
+index 920bbb0a..8914f927 100644
+--- a/info/show.c
++++ b/info/show.c
+@@ -54,7 +54,7 @@ show_one_export (struct nbd_handle *nbd, const char *desc,
+   char *uri = NULL;
+   int is_rotational, is_read_only;
+   int can_cache, can_df, can_fast_zero, can_flush, can_fua,
+-    can_multi_conn, can_trim, can_zero;
++    can_multi_conn, can_trim, can_zero, can_block_status_payload;
+   int64_t block_minimum, block_preferred, block_maximum;
+   string_vector contexts = empty_vector;
+   bool show_context = false;
+@@ -120,6 +120,7 @@ show_one_export (struct nbd_handle *nbd, const char *desc,
+   can_multi_conn = nbd_can_multi_conn (nbd);
+   can_trim = nbd_can_trim (nbd);
+   can_zero = nbd_can_zero (nbd);
++  can_block_status_payload = nbd_can_block_status_payload (nbd);
+   block_minimum = nbd_get_block_size (nbd, LIBNBD_SIZE_MINIMUM);
+   block_preferred = nbd_get_block_size (nbd, LIBNBD_SIZE_PREFERRED);
+   block_maximum = nbd_get_block_size (nbd, LIBNBD_SIZE_MAXIMUM);
+@@ -161,6 +162,8 @@ show_one_export (struct nbd_handle *nbd, const char *desc,
+     if (is_read_only >= 0)
+       fprintf (fp, "\t%s: %s\n", "is_read_only",
+                is_read_only ? "true" : "false");
++    if (can_block_status_payload >= 0)
++      show_boolean ("can_block_status_payload", can_block_status_payload);
+     if (can_cache >= 0)
+       show_boolean ("can_cache", can_cache);
+     if (can_df >= 0)
+@@ -230,6 +233,10 @@ show_one_export (struct nbd_handle *nbd, const char *desc,
+     if (is_read_only >= 0)
+       fprintf (fp, "\t\"%s\": %s,\n",
+               "is_read_only", is_read_only ? "true" : "false");
++    if (can_block_status_payload >= 0)
++      fprintf (fp, "\t\"%s\": %s,\n",
++              "can_block_status_payload",
++               can_block_status_payload ? "true" : "false");
+     if (can_cache >= 0)
+       fprintf (fp, "\t\"%s\": %s,\n",
+               "can_cache", can_cache ? "true" : "false");
 -- 
 2.40.1
 
