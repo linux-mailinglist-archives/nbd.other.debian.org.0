@@ -2,70 +2,70 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3189F710CF1
-	for <lists+nbd@lfdr.de>; Thu, 25 May 2023 15:03:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA771710CDC
+	for <lists+nbd@lfdr.de>; Thu, 25 May 2023 15:01:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 16F79204B1; Thu, 25 May 2023 13:03:24 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu May 25 13:03:24 2023
+	id 8932820632; Thu, 25 May 2023 13:01:55 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu May 25 13:01:55 2023
 Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.3 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,
-	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
-	T_SCC_BODY_TEXT_LINE,WORD_WITHOUT_VOWELS autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
+	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 8DA2620471
-	for <lists-other-nbd@bendel.debian.org>; Thu, 25 May 2023 13:02:59 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E7EF520461
+	for <lists-other-nbd@bendel.debian.org>; Thu, 25 May 2023 13:01:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.351 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-6.351 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.161,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
 	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id X1MQZ3AijZVz for <lists-other-nbd@bendel.debian.org>;
-	Thu, 25 May 2023 13:02:56 +0000 (UTC)
+	with ESMTP id 4TTj-rYvoSyL for <lists-other-nbd@bendel.debian.org>;
+	Thu, 25 May 2023 13:01:23 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 826F020491
-	for <nbd@other.debian.org>; Thu, 25 May 2023 13:02:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A92BA204A2
+	for <nbd@other.debian.org>; Thu, 25 May 2023 13:01:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685019771;
+	s=mimecast20190719; t=1685019677;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bhc//5O4d+JtXQ/1BxxJfr1tsjFNqBspaVEly1XJcr4=;
-	b=FZcWWC6Vkj4l2VG6uKBVq+L+BZcXmyMfNq05iSsCffhl+R7rZZk3RqB26WqIh113ByTTG7
-	mUeNM5v2v9aAfiE/9RDCABU2vcFApM32hwgWiFLq1x7YWQAZ1dNM+keCF4cpYgebNGcX5I
-	3WeL7B36LptlF0v3slpWEnmkmxy9W40=
+	bh=LoyKa0UJWAqnscqyvwYUqkXf92ShZmcRaBEf8M6XApY=;
+	b=Xs4gtE1xoaRF7zlmaS6ClHVOGT88yuBHNgapDvNgE8zMiiZp93fA/djf+bQKABNJ0Sc0gV
+	+SdCl/yIDlLMGswYGUmJc6ApDBH28xTg3p0yA+P78fuGDwHsoxiW7SSXvJHFJi4FfuYhk5
+	U6OjPE3vaOpab/cnYB+fWMAzpqj64eQ=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-384-xsjdmcxZOvuoECdKPDBO0Q-1; Thu, 25 May 2023 09:01:40 -0400
-X-MC-Unique: xsjdmcxZOvuoECdKPDBO0Q-1
+ us-mta-411-LM5CPhFuOEOaOdCvY2ZMzQ-1; Thu, 25 May 2023 09:01:16 -0400
+X-MC-Unique: LM5CPhFuOEOaOdCvY2ZMzQ-1
 Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 63BF4101A597;
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D8549185A7B6;
 	Thu, 25 May 2023 13:01:15 +0000 (UTC)
 Received: from green.redhat.com (unknown [10.2.16.46])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 02D68492B0A;
-	Thu, 25 May 2023 13:01:14 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 85635492B0A;
+	Thu, 25 May 2023 13:01:15 +0000 (UTC)
 From: Eric Blake <eblake@redhat.com>
 To: libguestfs@redhat.com
 Cc: qemu-block@nongnu.org,
 	nbd@other.debian.org
-Subject: [libnbd PATCH v3 13/22] dump: Update nbddump to use 64-bit block status
-Date: Thu, 25 May 2023 08:00:59 -0500
-Message-Id: <20230525130108.757242-14-eblake@redhat.com>
+Subject: [libnbd PATCH v3 14/22] info: Expose extended-headers support through nbdinfo
+Date: Thu, 25 May 2023 08:01:00 -0500
+Message-Id: <20230525130108.757242-15-eblake@redhat.com>
 In-Reply-To: <20230525130108.757242-1-eblake@redhat.com>
 References: <20230525130108.757242-1-eblake@redhat.com>
 MIME-Version: 1.0
@@ -76,9 +76,9 @@ Content-type: text/plain
 Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <fU6vYmvnYAL.A.s6B.cy1bkB@bendel>
+Resent-Message-ID: <T9xPGT7fd1H.A.awC.Dx1bkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2495
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2480
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,94 +88,196 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230525130108.757242-14-eblake@redhat.com
-Resent-Date: Thu, 25 May 2023 13:03:24 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230525130108.757242-15-eblake@redhat.com
+Resent-Date: Thu, 25 May 2023 13:01:55 +0000 (UTC)
 
-Although our use of "base:allocation" doesn't require the use of the
-64-bit API for flags, we might perform slightly faster for a server
-that does give us 64-bit extent lengths.
+Add another bit of overall server information, as well as a '--can
+extended-headers' silent query.  For now, the testsuite is written
+assuming that when nbdkit finally adds extended headers support, it
+will also add a --no-eh kill switch comparable to its existing --no-sr
+switch.
 
 Signed-off-by: Eric Blake <eblake@redhat.com>
 ---
- dump/dump.c | 27 ++++++++++++++-------------
- 1 file changed, 14 insertions(+), 13 deletions(-)
+ info/nbdinfo.pod     | 11 ++++++++++-
+ info/can.c           |  9 +++++++++
+ info/info-can.sh     | 27 +++++++++++++++++++++++++++
+ info/info-packets.sh | 17 ++++++++++++++++-
+ info/main.c          |  7 ++++++-
+ 5 files changed, 68 insertions(+), 3 deletions(-)
 
-diff --git a/dump/dump.c b/dump/dump.c
-index b4aebe84..71053277 100644
---- a/dump/dump.c
-+++ b/dump/dump.c
-@@ -38,7 +38,7 @@
- #include "version.h"
- #include "vector.h"
+diff --git a/info/nbdinfo.pod b/info/nbdinfo.pod
+index 7eb3c1a0..9ea4a278 100644
+--- a/info/nbdinfo.pod
++++ b/info/nbdinfo.pod
+@@ -86,6 +86,7 @@ the I<--json> parameter:
+    "protocol": "newstyle-fixed",
+    "TLS": false,
+    "structured": true,
++   "extended": false,
+    "exports": [
+      {
+        "export-name": "",
+@@ -165,6 +166,11 @@ Test if the NBD URI connection is using TLS.
+ Test if server can respond with structured replies (a prerequisite
+ for supporting block status commands).
 
--DEFINE_VECTOR_TYPE (uint32_vector, uint32_t);
-+DEFINE_VECTOR_TYPE (uint64_vector, uint64_t);
++=item nbdinfo --can extended-headers URI
++
++Test if server supports extended headers (a prerequisite for
++supporting 64-bit commands; implies structured replies as well).
++
+ =item nbdinfo --is rotational URI
 
- static const char *progname;
- static struct nbd_handle *nbd;
-@@ -262,10 +262,10 @@ catch_signal (int sig)
- static int
- extent_callback (void *user_data, const char *metacontext,
-                  uint64_t offset,
--                 uint32_t *entries, size_t nr_entries,
-+                 nbd_extent *entries, size_t nr_entries,
-                  int *error)
- {
--  uint32_vector *list = user_data;
-+  uint64_vector *list = user_data;
-   size_t i;
+ Test if the server export is backed by something which behaves like a
+@@ -312,6 +318,8 @@ Display brief command line help and exit.
 
-   if (strcmp (metacontext, LIBNBD_CONTEXT_BASE_ALLOCATION) != 0)
-@@ -273,7 +273,8 @@ extent_callback (void *user_data, const char *metacontext,
+ =item B<--can df>
 
-   /* Just append the entries we got to the list. */
-   for (i = 0; i < nr_entries; ++i) {
--    if (uint32_vector_append (list, entries[i]) == -1) {
-+    if (uint64_vector_append (list, entries[i].length) == -1 ||
-+        uint64_vector_append (list, entries[i].flags) == -1) {
-       perror ("realloc");
-       exit (EXIT_FAILURE);
++=item B<--can extended-headers>
++
+ =item B<--can fast-zero>
+
+ =item B<--can flush>
+@@ -341,7 +349,8 @@ and the following libnbd functions: L<nbd_can_cache(3)>,
+ L<nbd_can_df(3)>, L<nbd_can_fast_zero(3)>, L<nbd_can_flush(3)>,
+ L<nbd_can_fua(3)>, L<nbd_can_multi_conn(3)>, L<nbd_can_trim(3)>,
+ L<nbd_can_zero(3)>, L<nbd_is_read_only(3)>,
+-L<nbd_get_structured_replies_negotiated(3)>.
++L<nbd_get_structured_replies_negotiated(3)>,
++L<nbd_get_extended_headers_negotiated(3)>.
+
+ =item B<--color>
+
+diff --git a/info/can.c b/info/can.c
+index 01ab4806..31c4a1ca 100644
+--- a/info/can.c
++++ b/info/can.c
+@@ -50,6 +50,15 @@ do_can (void)
+            strcasecmp (can, "structured_replies") == 0)
+     feature = nbd_get_structured_replies_negotiated (nbd);
+
++  else if (strcasecmp (can, "eh") == 0 ||
++           strcasecmp (can, "extended header") == 0 ||
++           strcasecmp (can, "extended-header") == 0 ||
++           strcasecmp (can, "extended_header") == 0 ||
++           strcasecmp (can, "extended headers") == 0 ||
++           strcasecmp (can, "extended-headers") == 0 ||
++           strcasecmp (can, "extended_headers") == 0)
++    feature = nbd_get_extended_headers_negotiated (nbd);
++
+   else if (strcasecmp (can, "readonly") == 0 ||
+            strcasecmp (can, "read-only") == 0 ||
+            strcasecmp (can, "read_only") == 0)
+diff --git a/info/info-can.sh b/info/info-can.sh
+index 6cc8cbf4..8154d1ce 100755
+--- a/info/info-can.sh
++++ b/info/info-can.sh
+@@ -61,6 +61,33 @@ esac
+ EOF
+ test $st = 2
+
++# --can extended-headers cannot be positively tested until nbdkit gains
++# --no-eh support.  Otherwise, it is similar to --can structured-reply.
++
++no_eh=
++if nbdkit --no-eh --help >/dev/null 2>/dev/null; then
++    no_eh=--no-eh
++    nbdkit -v -U - sh - \
++           --run '$VG nbdinfo --can extended-headers "nbd+unix:///?socket=$unixsocket"' <<'EOF'
++case "$1" in
++  get_size) echo 1024 ;;
++  pread) ;;
++  *) exit 2 ;;
++esac
++EOF
++fi
++
++st=0
++nbdkit -v -U - $no_eh sh - \
++       --run '$VG nbdinfo --can extended-headers "nbd+unix:///?socket=$unixsocket"' <<'EOF' || st=$?
++case "$1" in
++  get_size) echo 1024 ;;
++  pread) ;;
++  *) exit 2 ;;
++esac
++EOF
++test $st = 2
++
+ # --can cache and --can fua require special handling because in
+ # nbdkit-sh-plugin we must print "native" or "none".  Also the can_fua
+ # flag is only sent if the export is writable (hence can_write below).
+diff --git a/info/info-packets.sh b/info/info-packets.sh
+index 2460052e..410faef8 100755
+--- a/info/info-packets.sh
++++ b/info/info-packets.sh
+@@ -27,12 +27,27 @@ requires nbdkit --no-sr memory --version
+ out=info-packets.out
+ cleanup_fn rm -f $out
+
++# Older nbdkit does not support extended headers; --no-eh is a reliable
++# witness of whether nbdkit is new enough.
++
++no_eh=
++if nbdkit --no-eh --help >/dev/null 2>/dev/null; then
++    no_eh=--no-eh
++fi
++
+ nbdkit --no-sr -U - memory size=1M \
+        --run '$VG nbdinfo "nbd+unix:///?socket=$unixsocket"' > $out
+ cat $out
+ grep "protocol: .*using simple packets" $out
+
+-nbdkit -U - memory size=1M \
++nbdkit $no_eh -U - memory size=1M \
+        --run '$VG nbdinfo "nbd+unix:///?socket=$unixsocket"' > $out
+ cat $out
+ grep "protocol: .*using structured packets" $out
++
++if test x != "x$no_eh"; then
++    nbdkit -U - memory size=1M \
++           --run '$VG nbdinfo "nbd+unix:///?socket=$unixsocket"' > $out
++    cat $out
++    grep "protocol: .*using extended packets" $out
++fi
+diff --git a/info/main.c b/info/main.c
+index 1b99e089..8c923266 100644
+--- a/info/main.c
++++ b/info/main.c
+@@ -302,11 +302,13 @@ main (int argc, char *argv[])
+     const char *protocol;
+     int tls_negotiated;
+     int sr_negotiated;
++    int eh_negotiated;
+
+     /* Print per-connection fields. */
+     protocol = nbd_get_protocol (nbd);
+     tls_negotiated = nbd_get_tls_negotiated (nbd);
+     sr_negotiated = nbd_get_structured_replies_negotiated (nbd);
++    eh_negotiated = nbd_get_extended_headers_negotiated (nbd);
+
+     if (!json_output) {
+       if (protocol) {
+@@ -314,8 +316,9 @@ main (int argc, char *argv[])
+         fprintf (fp, "protocol: %s", protocol);
+         if (tls_negotiated >= 0)
+           fprintf (fp, " %s TLS", tls_negotiated ? "with" : "without");
+-        if (sr_negotiated >= 0)
++        if (eh_negotiated >= 0 && sr_negotiated >= 0)
+           fprintf (fp, ", using %s packets",
++                   eh_negotiated ? "extended" :
+                    sr_negotiated ? "structured" : "simple");
+         fprintf (fp, "\n");
+         ansi_restore (fp);
+@@ -333,6 +336,8 @@ main (int argc, char *argv[])
+         fprintf (fp, "\"TLS\": %s,\n", tls_negotiated ? "true" : "false");
+       if (sr_negotiated >= 0)
+         fprintf (fp, "\"structured\": %s,\n", sr_negotiated ? "true" : "false");
++      if (eh_negotiated >= 0)
++        fprintf (fp, "\"extended\": %s,\n", eh_negotiated ? "true" : "false");
      }
-@@ -284,7 +285,7 @@ extent_callback (void *user_data, const char *metacontext,
- static bool
- test_all_zeroes (uint64_t offset, size_t count)
- {
--  uint32_vector entries = empty_vector;
-+  uint64_vector entries = empty_vector;
-   size_t i;
-   uint64_t count_read;
 
-@@ -296,22 +297,22 @@ test_all_zeroes (uint64_t offset, size_t count)
-    * false, causing the main code to do a full read.  We could be
-    * smarter and keep asking the server (XXX).
-    */
--  if (nbd_block_status (nbd, count, offset,
--                        (nbd_extent_callback) {
--                          .callback = extent_callback,
--                          .user_data = &entries },
--                        0) == -1) {
-+  if (nbd_block_status_64 (nbd, count, offset,
-+                           (nbd_extent64_callback) {
-+                             .callback = extent_callback,
-+                             .user_data = &entries },
-+                           0) == -1) {
-     fprintf (stderr, "%s: %s\n", progname, nbd_get_error ());
-     exit (EXIT_FAILURE);
-   }
-
-   count_read = 0;
-   for (i = 0; i < entries.len; i += 2) {
--    uint32_t len = entries.ptr[i];
--    uint32_t type = entries.ptr[i+1];
-+    uint64_t len = entries.ptr[i];
-+    uint64_t type = entries.ptr[i+1];
-
-     count_read += len;
--    if (!(type & 2))            /* not zero */
-+    if (!(type & LIBNBD_STATE_ZERO))            /* not zero */
-       return false;
-   }
-
+     if (!list_all)
 -- 
 2.40.1
 
