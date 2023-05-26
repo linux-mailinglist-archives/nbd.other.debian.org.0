@@ -2,86 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ED5071275E
-	for <lists+nbd@lfdr.de>; Fri, 26 May 2023 15:19:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D198712A2B
+	for <lists+nbd@lfdr.de>; Fri, 26 May 2023 18:09:15 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3AB5C2048C; Fri, 26 May 2023 13:19:45 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri May 26 13:19:45 2023
-Old-Return-Path: <eblake@redhat.com>
+	id AE7EE2068D; Fri, 26 May 2023 16:09:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri May 26 16:09:14 2023
+Old-Return-Path: <lersek@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.7 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,
-	LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,SARE_MSGID_LONG45,
-	SARE_MSGID_LONG50,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+X-Spam-Status: No, score=0.8 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,
+	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id DBE472049E
-	for <lists-other-nbd@bendel.debian.org>; Fri, 26 May 2023 13:19:33 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 62E702068E
+	for <lists-other-nbd@bendel.debian.org>; Fri, 26 May 2023 15:53:59 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.732 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.251 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.161,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, SARE_MSGID_LONG45=0.893,
-	SARE_MSGID_LONG50=0.726, T_SCC_BODY_TEXT_LINE=-0.01]
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, MURPHY_DRUGS_REL8=0.02,
+	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id hncYdL9UYYmY for <lists-other-nbd@bendel.debian.org>;
-	Fri, 26 May 2023 13:19:26 +0000 (UTC)
+	with ESMTP id fs7K3umIQgDK for <lists-other-nbd@bendel.debian.org>;
+	Fri, 26 May 2023 15:53:50 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id C45E42047D
-	for <nbd@other.debian.org>; Fri, 26 May 2023 13:19:25 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id 4F86820681
+	for <nbd@other.debian.org>; Fri, 26 May 2023 15:53:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685107160;
+	s=mimecast20190719; t=1685116424;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Jth1+/6xCctT8NTYtXHl3+3Z6cOKIsHZtAPXL0t6OKM=;
-	b=Lr67m8IUN07CtcR5mThwh6HT7D1UVWkMG4/5k6ZJDCNuV5sVvWRT6ALuyjKbSZe4vNSAgo
-	HeK68Fomb8oWKT6mUeXRcRLCCQXBzI/1UioyXFiKwQuREdhCZIEd+fHv1mPwthdWCb7R3n
-	KLF5urYcYtvo+eIgvgu5IciJ+HI0SqY=
+	bh=hoVBWhcgwgX95HWv0TCCw8XvcvcEMOF1vm/084J05K4=;
+	b=ULL7TjqrlowGXRLsmsDeNgGRO06n0xeG0SY1hTnnMYWik8RcKJECmQQvANfh3WhsTO6pVX
+	vxcBaljLE1GP7dzi83hy69Paeg8NjzlRUCIalxICiNct+pmrsvtMllmawLwi5bflb8D25t
+	AHR6LXDhH+64gDcOOD+KkPdgBsaW5EM=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-134-adYTMACWPmit5T6sLE2jtg-1; Fri, 26 May 2023 09:19:17 -0400
-X-MC-Unique: adYTMACWPmit5T6sLE2jtg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
+ us-mta-203-8SPuTuKdNlqJo1Bt8XZElA-1; Fri, 26 May 2023 11:53:41 -0400
+X-MC-Unique: 8SPuTuKdNlqJo1Bt8XZElA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com [10.11.54.5])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CB329296A612;
-	Fri, 26 May 2023 13:19:16 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.65])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 54E0440C6CCF;
-	Fri, 26 May 2023 13:19:16 +0000 (UTC)
-Date: Fri, 26 May 2023 08:19:14 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Laszlo Ersek <lersek@redhat.com>
-Cc: libguestfs@redhat.com, qemu-block@nongnu.org, nbd@other.debian.org
-Subject: Re: [Libguestfs] [libnbd PATCH v3 01/22] block_status: Refactor
- array storage
-Message-ID: <j4t3spjcuw3qefezh4dkd3zi7husbz64rxzq35hd367ovwbbbf@mqurreepuc6w>
-References: <20230525130108.757242-1-eblake@redhat.com>
- <20230525130108.757242-2-eblake@redhat.com>
- <6cff3a35-9cbc-4781-f531-b7c651eede9e@redhat.com>
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 833DC3C11CD2;
+	Fri, 26 May 2023 15:53:41 +0000 (UTC)
+Received: from [10.39.193.100] (unknown [10.39.193.100])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 7117A7C2A;
+	Fri, 26 May 2023 15:53:40 +0000 (UTC)
+Message-ID: <1fa92626-e5ac-5e95-f697-88804020ad46@redhat.com>
+Date: Fri, 26 May 2023 17:53:38 +0200
 MIME-Version: 1.0
-In-Reply-To: <6cff3a35-9cbc-4781-f531-b7c651eede9e@redhat.com>
-User-Agent: NeoMutt/20230517
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+Subject: Re: [Libguestfs] [libnbd PATCH v3 02/22] internal: Refactor layout of
+ replies in sbuf
+To: Eric Blake <eblake@redhat.com>, libguestfs@redhat.com
+Cc: qemu-block@nongnu.org, nbd@other.debian.org
+References: <20230525130108.757242-1-eblake@redhat.com>
+ <20230525130108.757242-3-eblake@redhat.com>
+From: Laszlo Ersek <lersek@redhat.com>
+In-Reply-To: <20230525130108.757242-3-eblake@redhat.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <JLoqBiCbRBM.A.w6G.xHLckB@bendel>
+Resent-Message-ID: <-g_EU6BKFPN.A.UEC.qmNckB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2502
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2503
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,124 +90,351 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/j4t3spjcuw3qefezh4dkd3zi7husbz64rxzq35hd367ovwbbbf@mqurreepuc6w
-Resent-Date: Fri, 26 May 2023 13:19:45 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/1fa92626-e5ac-5e95-f697-88804020ad46@redhat.com
+Resent-Date: Fri, 26 May 2023 16:09:14 +0000 (UTC)
 
-On Thu, May 25, 2023 at 06:30:37PM +0200, Laszlo Ersek wrote:
-> On 5/25/23 15:00, Eric Blake wrote:
-> > For 32-bit block status, we were able to cheat and use an array with
-> > an odd number of elements, with array[0] holding the context id, and
-> > passing &array[1] to the user's callback.  But once we have 64-bit
-> > extents, we can no longer abuse array element 0 like that, for two
-> > reasons: 64-bit extents contain uint64_t which might not be
-> > alignment-compatible with an array of uint32_t on all architectures,
-> > and the new NBD_REPLY_TYPE_BLOCK_STATUS_EXT adds an additional count
-> > field before the array.
-> >
-> > +++ b/generator/states-reply-structured.c
-> > @@ -126,19 +126,10 @@  REPLY.STRUCTURED_REPLY.CHECK:
-> >          length < 12 || ((length-4) & 7) != 0)
-> 
-> This is important (the context doesn't show it in full): we're under
-> NBD_REPLY_TYPE_BLOCK_STATUS here (nested under
-> REPLY.STRUCTURED_REPLY.CHECK), and we enforce that
-> 
->   length = be32toh (h->sbuf.sr.structured_reply.length);
-> 
-> contains the context_id (4 bytes), plus a positive integral number of
-> block descriptor structures (8 bytes each).
+On 5/25/23 15:00, Eric Blake wrote:
+> In order to more easily add a third reply type with an even larger
+> header, but where the payload will look the same for both structured
+> and extended replies, it is nicer if simple and structured replies are
+> nested inside the same layer of sbuf.reply.hdr.
 
-And when 64-bit replies are added, there's a counterpart that contains
-a header (4+4 bytes) and then a positive integral number of block
-descriptors (16 bytes each).
+This makes sense, and the following, strictly related code change in the
+patch body corresponds to the explanation (except for the "__attribute__
+((packed))" removal, but more on that later):
 
-> > @@ -445,15 +468,16 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
-> >      assert (h->bs_entries);
-> >      assert (length >= 12);
-> >      assert (h->meta_valid);
-> > +    count = (length - sizeof h->sbuf.sr.payload.bs_hdr) / sizeof *h->bs_entries;
-> 
-> I have a slight problem with the pre-patch code here. We keep the
-> existent assertions (good), but I think the pre-patch RECV_BS_ENTRIES
-> code misses an assertion. Namely, after the size check (i.e., 12+
-> bytes), the pre-patch code should have said
-> 
->       assert ((length-4) & 7) == 0);
-> 
-> emphasizing the explicit check under REPLY.STRUCTURED_REPLY.CHECK.
-> 
-> The pre-patch code relies on this (a) silently by expecting (length/4)
-> to be an integer (in the mathematical sense), and (b) very silently by
-> expecting (length/4) to be an *odd* integer >= 3.
+-    struct nbd_simple_reply simple_reply;
+     struct {
+-      struct nbd_structured_reply structured_reply;
++      union {
++        struct nbd_simple_reply simple;
++        struct nbd_structured_reply structured;
++      } hdr;
+       union {
+         struct nbd_structured_reply_offset_data offset_data;
+         struct nbd_structured_reply_offset_hole offset_hole;
+         struct nbd_structured_reply_block_status_hdr bs_hdr;
+         struct {
+           struct nbd_structured_reply_error error;
+           char msg[NBD_MAX_STRING]; /* Common to all error types */
+           uint64_t offset; /* Only used for NBD_REPLY_TYPE_ERROR_OFFSET */
+         } __attribute__ ((packed)) error;
+       } payload;
+-    }  __attribute__ ((packed)) sr;
++    } reply;
 
-Likewise, once 64-bit replies are added, we will depend on (h->len/8)
-being an *odd* integer >= 3, but additionally that the count in the
-header match the (h->len-8)/16 computation.
+One interesting consequence is that the payload union now becomes
+possible after the simple header, which IIUC makes no sense per NBD
+spec. But, it doesn't hurt either.
 
-> 
-> Here's what I suggest as an update for this patch (to be squashed):
-> 
+At the same time:
+
+> While at it, note
+> that while .or and .sr are structs declared within the overall sbuf
+> union, we never read into both halves of those structs at the same
+> time, so it does not matter if their two halves are consecutive.
+
+I've been staring at this part for an extremely long time, and I just
+can't make any sense of it. My (strongly held) opinion is that this part
+of the patch should be split off to a separate patch.
+
+Here's a possible interpretation:
+
+- The "sbuf.or" ("option reply") member of the "sbuf" union is a
+  structure. It has two members: "sbuf.or.option_reply" (another
+  structure) and "sbuf.or.payload" (a union).
+
+  We never read into "sbuf.or.option_reply" and "sbuf.or.payload" at the
+  same time (i.e., we never cross the structure field boundary between
+  them, with a single recv operation), therefore we can remove the
+  "packed" attribute from "sbuf.or". This permits the compiler to insert
+  padding between "sbuf.or.option_reply" and "sbuf.or.payload", and/or
+  after "sbuf.or".
+
+- Similarly, the "sbuf.sr" ("structured reply") member of the "sbuf"
+  union is a structure. It has two members: "sbuf.sr.structured_reply"
+  (a structure) and "sbuf.sr.payload" (a union).
+
+  We never read into "sbuf.sr.structured_reply" and "sbuf.sr.payload" at
+  the same time (i.e., we never cross the structure field boundary
+  between them, with a single recv operation), therefore we can remove
+  the "packed" attribute from "sbuf.sr". This permits the compiler to
+  insert padding between "sbuf.sr.structured_reply" and
+  "sbuf.sr.payload", and/or after "sbuf.sr".
+
+In turn, my problem with this interpretation is that, if we never cross
+the struct member boundary within "sbuf.or" (i.e., between
+"option_reply" and "payload"), and similarly we never cross the struct
+member boundary within "sbuf.sr" (i.e., between "structured_reply" and
+"payload"), then *why* are "sbuf.or" and "sbuf.sr" structures in the
+first place (and not unions)?
+
+Now, I can imagine that the answer sounds like this: indeed we don't
+cross those field boundaries with a single recv, however we still need
+the data from both fields *at the same time*, later on.
+
+And this certainly sounds like a valid explanation, and dropping the
+"packed" attributes is fine / justified as well, under this
+interpreation, but it absolutely must be a separate patch, IMO. I think
+I've spent at least half an hour explaining it to myself.
+
+> Dropping the packed notation on those structs means the compiler can
+> align .payload more naturally, which may slightly improve performance
+> on some platforms, even if it makes the overall union a few bytes
+> larger due to padding.
+>
+> Visually, this patch changes the layout from:
+>
+>  offset  simple                structured
+> +------------------------------------------------------------+
+> |     union sbuf                                             |
+> |     +---------------------+------------------------------+ |
+> |     | struct simple_reply | union sr                     | |
+> |     | +-----------------+ | +--------------------------+ | |
+> |     | |                 | | | struct structured_reply  | | |
+> |     | |                 | | | +----------------------+ | | |
+> |  0  | | uint32_t magic  | | | | uint32_t magic       | | | |
+> |  4  | | uint32_t error  | | | | uint16_t flags       | | | |
+> |  6  | |                 | | | | uint16_t type        | | | |
+> |  8  | | uint64_t handle | | | | uint64_t handle      | | | |
+> |     | +-----------------+ | | |                      | | | |
+> | 16  | [padding]           | | | uint32_t length      | | | |
+> |     |                     | | +----------------------+ | | |
+> |     |                     | | union payload            | | |
+> |     |                     | | +-----------+----------+ | | |
+> | 20  |                     | | | ...       | ...      | | | |
+> |     |                     | | +-----------+----------+ | | |
+> |     |                     | +--------------------------+ | |
+> |     +---------------------+------------------------------+ |
+> +------------------------------------------------------------+
+>
+> to:
+>
+>  offset  simple                structured
+> +-------------------------------------------------------------+
+> |     union sbuf                                              |
+> |     +-----------------------------------------------------+ |
+> |     | struct reply                                        | |
+> |     | +-------------------------------------------------+ | |
+> |     | | union hdr                                       | | |
+> |     | | +--------------------+------------------------+ | | |
+> |     | | | struct simple      | struct structured      | | | |
+> |     | | | +----------------+ | +--------------------+ | | | |
+> |  0  | | | | uint32_t magic | | | uint32_t magic     | | | | |
+> |  4  | | | | uint32_t error | | | uint16_t flags     | | | | |
+> |  6  | | | |                | | | uint16_t type      | | | | |
+> |  8  | | | | uint64_t handle| | | uint64_t handle    | | | | |
+> |     | | | +----------------+ | |                    | | | | |
+> | 16  | | | [padding]          | | uint32_t length    | | | | |
+> |     | | |                    | +--------------------+ | | | |
+> | 20  | | |                    | [padding]              | | | |
+> |     | | +--------------------+------------------------+ | | |
+> |     | | union payload                                   | | |
+> |     | | +--------------------+------------------------+ | | |
+> | 24  | | | ...                | ...                    | | | |
+> |     | | +--------------------+------------------------+ | | |
+> |     | +-------------------------------------------------+ | |
+> |     +-----------------------------------------------------+ |
+> +-------------------------------------------------------------+
+>
+> Technically, whether the payload union offset moves to byte 24 (with
+> 20-23 now padding) or stays at 20 depends on compiler ABI; but many
+> systems prefer that any struct with a uint64_t provide 8-byte
+> alignment to its containing union.
+>
+> The commit is largely mechanical, and there should be no semantic
+> change.
+>
+> Signed-off-by: Eric Blake <eblake@redhat.com>
+> ---
+>  lib/internal.h                      |  12 ++--
+>  generator/states-reply-simple.c     |   4 +-
+>  generator/states-reply-structured.c | 103 ++++++++++++++--------------
+>  generator/states-reply.c            |  14 ++--
+>  4 files changed, 68 insertions(+), 65 deletions(-)
+>
+> diff --git a/lib/internal.h b/lib/internal.h
+> index 25eeea34..c71980ef 100644
+> --- a/lib/internal.h
+> +++ b/lib/internal.h
+> @@ -231,14 +231,16 @@ struct nbd_handle {
+>          struct {
+>            struct nbd_fixed_new_option_reply_meta_context context;
+>            char str[NBD_MAX_STRING];
+> -        }  __attribute__ ((packed)) context;
+> +        } __attribute__ ((packed)) context;
+
+Whitespace fixup, tolerable as a part of this patch.
+
+>          char err_msg[NBD_MAX_STRING];
+>        } payload;
+> -    }  __attribute__ ((packed)) or;
+> +    } or;
+
+So I disagree with doing this here. I'd like it to be its own patch.
+
+>      struct nbd_export_name_option_reply export_name_reply;
+> -    struct nbd_simple_reply simple_reply;
+>      struct {
+> -      struct nbd_structured_reply structured_reply;
+> +      union {
+> +        struct nbd_simple_reply simple;
+> +        struct nbd_structured_reply structured;
+> +      } hdr;
+>        union {
+>          struct nbd_structured_reply_offset_data offset_data;
+>          struct nbd_structured_reply_offset_hole offset_hole;
+
+Yes, fine (although formatting it with a much larger context would have
+helped -- anyway I'm reviewing the series with -W in my local clone).
+
+> @@ -249,7 +251,7 @@ struct nbd_handle {
+>            uint64_t offset; /* Only used for NBD_REPLY_TYPE_ERROR_OFFSET */
+>          } __attribute__ ((packed)) error;
+>        } payload;
+> -    }  __attribute__ ((packed)) sr;
+> +    } reply;
+>      uint16_t gflags;
+>      uint32_t cflags;
+>      uint32_t len;
+
+Here too, the __attribute__ ((packed)) removal shoould be in a separate
+patch. Renaming "sr" to "reply" is "in scope", of course.
+
+> diff --git a/generator/states-reply-simple.c b/generator/states-reply-simple.c
+> index 8fd9f62a..e6f1ee23 100644
+> --- a/generator/states-reply-simple.c
+> +++ b/generator/states-reply-simple.c
+> @@ -23,7 +23,7 @@  REPLY.SIMPLE_REPLY.START:
+>    struct command *cmd = h->reply_cmd;
+>    uint32_t error;
+>
+> -  error = be32toh (h->sbuf.simple_reply.error);
+> +  error = be32toh (h->sbuf.reply.hdr.simple.error);
+>
+>    if (cmd == NULL) {
+>      /* Unexpected reply.  If error was set or we have structured
+
+Yes.
+
+> @@ -39,7 +39,7 @@  REPLY.SIMPLE_REPLY.START:
+>      if (error || h->structured_replies)
+>        SET_NEXT_STATE (%^FINISH_COMMAND);
+>      else {
+> -      uint64_t cookie = be64toh (h->sbuf.simple_reply.handle);
+> +      uint64_t cookie = be64toh (h->sbuf.reply.hdr.simple.handle);
+>        SET_NEXT_STATE (%.DEAD);
+>        set_error (EPROTO,
+>                   "no matching cookie %" PRIu64 " found for server reply, "
+
+Yes; same thing, just different name.
+
 > diff --git a/generator/states-reply-structured.c b/generator/states-reply-structured.c
-> index da1e46929cd0..6cd4a49baa26 100644
+> index 96182222..6f96945a 100644
 > --- a/generator/states-reply-structured.c
 > +++ b/generator/states-reply-structured.c
-> @@ -43,6 +43,20 @@ structured_reply_in_bounds (uint64_t offset, uint32_t length,
->    return true;
->  }
-> 
-> +static bool
-> +bs_reply_length_ok (uint32_t length)
-> +{
-> +  if (length < (sizeof (struct nbd_structured_reply_block_status_hdr) +
-> +                sizeof (struct nbd_block_descriptor)))
-> +    return false;
-> +
-> +  length -= sizeof (struct nbd_structured_reply_block_status_hdr);
-> +  if (length % sizeof (struct nbd_block_descriptor) != 0)
-> +    return false;
-> +
-> +  return true;
-> +}
+> @@ -49,9 +49,9 @@  REPLY.STRUCTURED_REPLY.START:
+>     * so read the remaining part.
+>     */
+>    h->rbuf = &h->sbuf;
+> -  h->rbuf = (char *)h->rbuf + sizeof h->sbuf.simple_reply;
+> -  h->rlen = sizeof h->sbuf.sr.structured_reply;
+> -  h->rlen -= sizeof h->sbuf.simple_reply;
+> +  h->rbuf = (char *)h->rbuf + sizeof h->sbuf.reply.hdr.simple;
+> +  h->rlen = sizeof h->sbuf.reply.hdr.structured;
+> +  h->rlen -= sizeof h->sbuf.reply.hdr.simple;
+>    SET_NEXT_STATE (%RECV_REMAINING);
+>    return 0;
+>
 
-This is only valid for the 32-bit reply; but could easily be
-generalized to cover the 64-bit reply as well.  I definitely like
-wrapping the computation behind a helper function, so that we don't
-have to open-code repeat it in multiple spots.
+Here I disagree with the mechanical approach.
 
-I could even go with doing this sort of cleanup as its own
-prerequisite patch instead of squashing it in with this one,
-because....
+I even take issue with the pre-patch code. Pre-patch, we fill in
+"h->sbuf.simple_reply" (in "generator/states-reply.c"), i.e., one member
+of the top-level "sbuf" union, but then continue filling a member of a
+*different* member (i.e., "sr.structured_reply") of the "sbuf" union
+here. This looks undefined by the C standard, but even if it's not
+undefined, it's supremely confusing.
 
-> +
->  STATE_MACHINE {
->   REPLY.STRUCTURED_REPLY.START:
->    /* We've only read the simple_reply.  The structured_reply is longer,
-> @@ -123,7 +137,7 @@  REPLY.STRUCTURED_REPLY.CHECK:
-> 
->    case NBD_REPLY_TYPE_BLOCK_STATUS:
->      if (cmd->type != NBD_CMD_BLOCK_STATUS ||
-> -        length < 12 || ((length-4) & 7) != 0)
-> +        !bs_reply_length_ok (length))
->        goto resync;
+Now, if structure "nbd_simple_reply" were the first member of
+"nbd_structured_reply", maybe we could salvage this somehow -- but
+that's not the case.
 
-...that does indeed look easier to read.
+... Right, in "generator/states-reply.c", we have:
 
-> @@ -466,8 +480,11 @@  REPLY.STRUCTURED_REPLY.RECV_BS_ENTRIES:
->      assert (cmd->type == NBD_CMD_BLOCK_STATUS);
->      assert (CALLBACK_IS_NOT_NULL (cmd->cb.fn.extent));
->      assert (h->bs_entries);
-> -    assert (length >= 12);
-> +    assert (bs_reply_length_ok (length));
->      assert (h->meta_valid);
-> +    STATIC_ASSERT ((sizeof (struct nbd_block_descriptor) %
-> +                    sizeof *h->bs_entries) == 0,
-> +                   _block_desc_is_multiple_of_bs_entry);
->      count = (length - sizeof h->sbuf.sr.payload.bs_hdr) / sizeof *h->bs_entries;
+  /* We read all replies initially as if they are simple replies, but
+   * check the magic in CHECK_SIMPLE_OR_STRUCTURED_REPLY below.
+   * This works because the structured_reply header is larger.
+   */
 
-That static assertion also makes sense.
+This is precisely my problem.  The common initial subsequence is only
+the "uint32_t magic" field. Therefore the code in
+"generator/states-reply.c" should only read the magic field at first,
+and then branch to simple vs. structured reply.
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+Post-patch, the sbuf.reply.hdr union actually reflects this well! The
+structure members of that union all begin with the common subsequence
+"uint32_t magic", so using the special guarantee from the C standard,
+it's fine to fill in "magic" via one union member, and read it back via
+another. Pre-patch, the guarantee doesn't apply, because
+"sbuf.simple_reply" and "sbuf.sr.structured_reply" are not members of
+the same union.
+
+However, even with this patch applied (i.e., with "sbuf.reply.hdr"
+existing), the code performing the reading continues making me
+uncomfortable. We effectively have this sequence:
+
+- take address of "h->sbuf.reply.hdr"
+
+- read "sizeof h->sbuf.reply.hdr.simple" bytes into it
+
+- (at this point we can safely access "h->sbuf.reply.hdr.simple", *and*
+   "h->sbuf.reply.hdr.structured.magic" as well -- but not the rest of
+   "h->sbuf.reply.hdr.structured"!)
+
+- take the address of "h->sbuf.reply.hdr.structured.length" -- but not
+  by name; instead, only by virtue of the previous read having filled in
+  "magic", "flags", "type", and "handle", as a *happenstance*, via
+  populating "h->sbuf.reply.hdr.simple"
+
+- read as many bytes as necessary in order to complete
+  "h->sbuf.reply.hdr.structured", from that point onward.
+
+This smells to me.
+
+Optimally, the simple reply and the structured reply should look like
+this:
+
+  struct nbd_reply_header {
+    uint32_t magic;
+    union {
+      struct {
+        uint32_t error;
+        uint64_t handle;
+      } simple;
+      struct {
+        uint16_t flags;
+        uint16_t type;
+        uint64_t handle;
+        uint32_t length;
+      } structured;
+    } magic_specific;
+  };
+
+and we should have separate automaton states for reading
+"magic_specific.simple" and "magic_specific.structured".
+
+In REPLY.START, we should only read "magic".
+
+We should have a sepate state called REPLY.SIMPLE_REPLY.START, for
+reading "magic_specific.simple".
+
+In REPLY.STRUCTURED_REPLY.START, we should point h->rbuf at
+"magic_specific.structured", and read "sizeof magic_specific.structured"
+bytes.
+
+I'll stop here because there's already much to discuss.
+
+Thanks,
+Laszlo
 
