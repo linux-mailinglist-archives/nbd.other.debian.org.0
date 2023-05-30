@@ -2,86 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B93A712EE8
-	for <lists+nbd@lfdr.de>; Fri, 26 May 2023 23:26:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04552715D28
+	for <lists+nbd@lfdr.de>; Tue, 30 May 2023 13:27:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 61047206D5; Fri, 26 May 2023 21:26:33 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri May 26 21:26:33 2023
-Old-Return-Path: <eblake@redhat.com>
+	id BAA5720867; Tue, 30 May 2023 11:27:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue May 30 11:27:12 2023
+Old-Return-Path: <lersek@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,SARE_MSGID_LONG45,
-	SARE_MSGID_LONG50,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+X-Spam-Level: *
+X-Spam-Status: No, score=1.1 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MONEY,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,STOCKLIKE,T_SCC_BODY_TEXT_LINE autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 84F7E20557
-	for <lists-other-nbd@bendel.debian.org>; Fri, 26 May 2023 21:26:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5A3B72083D
+	for <lists-other-nbd@bendel.debian.org>; Tue, 30 May 2023 11:09:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.732 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-0.751 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.161, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	SARE_MSGID_LONG45=0.893, SARE_MSGID_LONG50=0.726,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	MONEY=0.5, MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	STOCKLIKE=1, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ffMH3bo-CVPo for <lists-other-nbd@bendel.debian.org>;
-	Fri, 26 May 2023 21:26:15 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -5.5
+	with ESMTP id qsWnVLslp-VM for <lists-other-nbd@bendel.debian.org>;
+	Tue, 30 May 2023 11:09:24 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 1B1622052A
-	for <nbd@other.debian.org>; Fri, 26 May 2023 21:26:15 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 7A5322084B
+	for <nbd@other.debian.org>; Tue, 30 May 2023 11:09:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685136370;
+	s=mimecast20190719; t=1685444959;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8zM2/rk8/5mOGCzTu12RN5HwBKkzBKTg2eUCtTZPLIQ=;
-	b=a/aK4czdJUo6m60qYa2ndlCcOqAfiHeuXHzs2p3z6o65Oe9BHdvSfIZUkHyzufFtj2R+Zo
-	wUPbDL5Tq9bdusn39sU1TQkV+lycVTW4K4JvCEWmmVBc4S2JZiVTjeGNLbKmolRAoW1a93
-	U/hp6ghOXisn/WBYH45IwV6+p0sPGbc=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=g73MwGhclWH1366vL0n5DOw6rQ8wF6E452Fef3c3hHI=;
+	b=QuQNn/hsqgPDaZNFVdEs/5fP7pZpRYZwDhfDIlTYcA7lbx9Jbar+gvbINA0eR5/Qjnl7lA
+	1NgNT9Ux233Rw0FZjZxyj9POOdmPEtoUgSVOYFfJvcdNMEhBMHwK+hOyhrSDVJtJG7pnhZ
+	DXCHsoBhll70j2R2Xx/cVxcz+6h853o=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-322-X35ChQzfM36VpLQTK-BlYg-1; Fri, 26 May 2023 17:26:07 -0400
-X-MC-Unique: X35ChQzfM36VpLQTK-BlYg-1
+ us-mta-38-CL-KOpYyOo6lBlFOuuxD2g-1; Tue, 30 May 2023 07:09:17 -0400
+X-MC-Unique: CL-KOpYyOo6lBlFOuuxD2g-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com [10.11.54.5])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AEF7B3803506;
-	Fri, 26 May 2023 21:26:06 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.124])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 37A7853BB;
-	Fri, 26 May 2023 21:26:06 +0000 (UTC)
-Date: Fri, 26 May 2023 16:26:04 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Laszlo Ersek <lersek@redhat.com>
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B725B80231B;
+	Tue, 30 May 2023 11:09:16 +0000 (UTC)
+Received: from [10.39.195.136] (unknown [10.39.195.136])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id D891E421C3;
+	Tue, 30 May 2023 11:09:15 +0000 (UTC)
+Message-ID: <8e0270f2-9575-13b9-9f38-9e6ab01f6e4d@redhat.com>
+Date: Tue, 30 May 2023 13:09:14 +0200
+MIME-Version: 1.0
+Subject: Re: [Libguestfs] [libnbd PATCH v3 02/22] internal: Refactor layout of
+ replies in sbuf
+To: Eric Blake <eblake@redhat.com>
 Cc: libguestfs@redhat.com, qemu-block@nongnu.org, nbd@other.debian.org
-Subject: Re: [Libguestfs] [libnbd PATCH v3 02/22] internal: Refactor layout
- of replies in sbuf
-Message-ID: <5dmg2bdgkse5loxfkqisvt3jwjjzvlrf4zzdqaj5mxsrikznwa@6jhsdkwdqum2>
 References: <20230525130108.757242-1-eblake@redhat.com>
  <20230525130108.757242-3-eblake@redhat.com>
  <1fa92626-e5ac-5e95-f697-88804020ad46@redhat.com>
- <87df235a-0e5f-8c36-bff1-15910bc3947c@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <87df235a-0e5f-8c36-bff1-15910bc3947c@redhat.com>
-User-Agent: NeoMutt/20230517
+ <4whjuq2zatnxltmrz4tjq2qey3yl5a3z42ac7vykffem47u4yr@4mmvwm2vlqaj>
+From: Laszlo Ersek <lersek@redhat.com>
+In-Reply-To: <4whjuq2zatnxltmrz4tjq2qey3yl5a3z42ac7vykffem47u4yr@4mmvwm2vlqaj>
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: multipart/mixed; boundary="------------SVzDP7UmGW0Rc0tNUvpE1Y9P"
+Content-Language: en-US
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <255_ob7STxK.A.tYE.JQSckB@bendel>
+Resent-Message-ID: <V9fNNTPIxEK.A.OZF.Q2ddkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2506
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2507
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,73 +90,137 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/5dmg2bdgkse5loxfkqisvt3jwjjzvlrf4zzdqaj5mxsrikznwa@6jhsdkwdqum2
-Resent-Date: Fri, 26 May 2023 21:26:33 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/8e0270f2-9575-13b9-9f38-9e6ab01f6e4d@redhat.com
+Resent-Date: Tue, 30 May 2023 11:27:12 +0000 (UTC)
 
-On Fri, May 26, 2023 at 06:09:00PM +0200, Laszlo Ersek wrote:
-> On 5/26/23 17:53, Laszlo Ersek wrote:
-> 
-> > Optimally, the simple reply and the structured reply should look like
-> > this:
-> > 
-> >   struct nbd_reply_header {
-> >     uint32_t magic;
-> >     union {
-> >       struct {
-> >         uint32_t error;
-> >         uint64_t handle;
-> >       } simple;
-> >       struct {
-> >         uint16_t flags;
-> >         uint16_t type;
-> >         uint64_t handle;
-> >         uint32_t length;
-> >       } structured;
-> >     } magic_specific;
-> >   };
-> > 
-> > and we should have separate automaton states for reading
-> > "magic_specific.simple" and "magic_specific.structured".
-> > 
-> > In REPLY.START, we should only read "magic".
-> > 
-> > We should have a sepate state called REPLY.SIMPLE_REPLY.START, for
-> > reading "magic_specific.simple".
-> > 
-> > In REPLY.STRUCTURED_REPLY.START, we should point h->rbuf at
-> > "magic_specific.structured", and read "sizeof magic_specific.structured"
-> > bytes.
-> 
-> This (pre-patch) part:
-> 
->   /* NB: This works for both simple and structured replies because the
->    * handle (our cookie) is stored at the same offset.
->    */
->   [...]
->   cookie = be64toh (h->sbuf.simple_reply.handle);
-> 
-> is disconcerting as well. I think it's well-defined C, but a hack
-> nonetheless.
-> 
-> IMO, unions are justified for two purposes:
-> 
-> - deliberately reinterpreting one object representation as another
-> 
-> - saving space, when at most one of N objects is expected to exist at
-> any given time.
-> 
-> Both of those uses follow from intentional elements of a design. But the
-> fact that "handle" is at the same offset in both "simple" and
-> "structured" is totally arbitrary. IMO this is a hack.
+This is a multi-part message in MIME format.
+--------------SVzDP7UmGW0Rc0tNUvpE1Y9P
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-It is not completely arbitrary: when structured replies were added to
-the NBD spec, the choice of having handle at the same offset was
-intentional.  Similarly, extended replies have it at the same offset
-as well.  But a STATIC_ASSERT proving that would go a long way to
-proving our intent, more than just a comment in the code.
+On 5/26/23 23:06, Eric Blake wrote:
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
+> I should indeed try harder to follow your useful example of generating
+> specific patches with more than the default 3 lines of context, when
+> it would make review easier.  Alas, 'git format-patch' doesn't seem to
+> have an easy way to pick a different context size on a per-patch
+> basis, so this basically implies writing (or finding and reusing
+> existing) wrapper tooling to automate that.
+
+If it's of any help, please see my script attached. It lets me put
+"context:-W" and "context:-U5" style hints in the Notes sections of the
+patches (with git-notes).
+
+>>> diff --git a/generator/states-reply-structured.c b/generator/states-reply-structured.c
+>>> index 96182222..6f96945a 100644
+>>> --- a/generator/states-reply-structured.c
+>>> +++ b/generator/states-reply-structured.c
+>>> @@ -49,9 +49,9 @@  REPLY.STRUCTURED_REPLY.START:
+>>>     * so read the remaining part.
+>>>     */
+>>>    h->rbuf = &h->sbuf;
+>>> -  h->rbuf = (char *)h->rbuf + sizeof h->sbuf.simple_reply;
+>>> -  h->rlen = sizeof h->sbuf.sr.structured_reply;
+>>> -  h->rlen -= sizeof h->sbuf.simple_reply;
+>>> +  h->rbuf = (char *)h->rbuf + sizeof h->sbuf.reply.hdr.simple;
+>>> +  h->rlen = sizeof h->sbuf.reply.hdr.structured;
+>>> +  h->rlen -= sizeof h->sbuf.reply.hdr.simple;
+>>>    SET_NEXT_STATE (%RECV_REMAINING);
+>>>    return 0;
+>>>
+>>
+>> Here I disagree with the mechanical approach.
+>>
+>> I even take issue with the pre-patch code. Pre-patch, we fill in
+>> "h->sbuf.simple_reply" (in "generator/states-reply.c"), i.e., one member
+>> of the top-level "sbuf" union, but then continue filling a member of a
+>> *different* member (i.e., "sr.structured_reply") of the "sbuf" union
+>> here. This looks undefined by the C standard, but even if it's not
+>> undefined, it's supremely confusing.
+> 
+> It happens to work, but I agree with you that we are probably
+> stretching aliasing rules about memory effective types that it is
+> shaky ground to begin with.  Even adding a STATIC_ASSERT that
+> offsetof(struct simple_reply, handle) == offsetof(struct
+> structured_reply, handle) would be helpful to show that we depend on
+> that.
+
+After I sent my comments last week, I kept pondering this topic. I now
+believe my approach to unions in this instance was too rigid. The code
+is not trivial to read for sure, but there are code comments that help
+with that. If you can introduce that STATIC_ASSERT, IMO that will
+suffice, for sticking with this patch.
+
+(
+
+Given that we already depend on (non-standard) packing, and depend on
+the accesses to those packed fields not to fault, it's mostly irrelevant
+how exactly we calculate the byte offsets.
+
+It's really difficult to use unions effectively, if one doesn't go
+beyond what the standard guarantees. :/
+
+)
+
+Thanks,
+Laszlo
+
+--------------SVzDP7UmGW0Rc0tNUvpE1Y9P
+Content-Type: text/plain; charset=UTF-8; name="git-format-series"
+Content-Disposition: attachment; filename="git-format-series"
+Content-Transfer-Encoding: base64
+
+IyEvYmluL2Jhc2gKc2V0IC1lIC11IC1DCgojIEFzc3VtZSBhbGwgYXJndW1lbnRzIGV4Y2VwdCB0
+aGUgbGFzdCBvbmUgYXJlIGdpdC1mb3JtYXQtcGF0Y2ggb3B0aW9ucy4Kb3B0aW9ucz0oIiR7QDox
+OigkIy0xKX0iKQoKIyBBc3N1bWUgdGhlIGxhc3QgYXJndW1lbnQgaXMgdGhlIG9uZSBvcGVyYW5k
+IGZvciBnaXQtZm9ybWF0LXBhdGNoOiB0aGUgcmV2aXNpb24KIyBzZXQuCnJldmlzaW9ucz0ke0A6
+KC0xKX0KCiMgRmV0Y2ggdGhlIGFycmF5IG9mIHJldmlzaW9ucyAod2l0aCBhYmJyZXZpYXRlZCBo
+YXNoZXMpIGluIGluY3JlYXNpbmcgb3JkZXIuCnJldl9saXN0PSgkKGdpdCBsb2cgLS1yZXZlcnNl
+IC0tZm9ybWF0PXRmb3JtYXQ6JWggIiRyZXZpc2lvbnMiKSkKCiMgQ3JlYXRlIHRlbXBvcmFyeSBk
+aXJlY3RvcnkuCnRtcGQ9JChta3RlbXAgLWQpCnRyYXAgJ3JtIC1yIC0tICIkdG1wZCInIEVYSVQK
+CiMgSWYgdGhlIE5vdGVzIHNlY3Rpb24gb2YgYSBwYXRjaCBjb250YWlucyAiY29udGV4dDotVTMi
+LCAiY29udGV4dDotVTgiIGV0Yywgb3IKIyAiY29udGV4dDotVyIgbGluZXMsIHJldHVybiB0aG9z
+ZSBsaW5lcy4gVGhlICJnaXQgbm90ZXMgc2hvdyIgb3V0cHV0IGlzCiMgZXhwZWN0ZWQgb24gc3Rk
+aW4uCmZpbHRlcl9jb250ZXh0X29wdHMoKQp7CiAgc2VkIC1uIC1yIC1lICdzL15jb250ZXh0Oigt
+VVswLTldK3wtVykkL1wxL3AnCn0KCiMgSW4gdGhlIGRpcmVjdG9yeSBnaXZlbiBieSAkMSwgZXhw
+YW5kICogaW50byBhbiBhcnJheSwgdGhlbiBwcmludCB0aGUgZWxlbWVudAojIHdpdGggc3Vic2Ny
+aXB0ICQyIHRvIHN0ZG91dC4gVGhlIHByaW50ZWQgZWxlbWVudCB3aWxsIGJlIHF1YWxpZmllZCB3
+aXRoIHRoZQojIGNvbnRhaW5pbmcgZGlyZWN0b3J5ICQxLgpnZXRfbnRoX2ZpbGUoKQp7CiAgbG9j
+YWwgZGlyPSQxCiAgbG9jYWwgb2ZzPSQyCiAgbG9jYWwgZmxpc3Q9KCIkZGlyIi8qKQoKICBwcmlu
+dGYgJyVzXG4nICR7Zmxpc3RbIiRvZnMiXX0KfQoKIyBDb2xsZWN0IGFsbCB0aGUgY29udGV4dCBv
+cHRpb25zIHVzZWQgb3ZlciB0aGUgc2VyaWVzIGludG8gYW4gYXJyYXkuIFRoZQojIGRlZmF1bHQg
+Ii1VMyIgY29udGV4dCBvcHRpb24gd2lsbCBiZSBmb3JjaWJseSBnZW5lcmF0ZWQuCmFsbF9jb250
+ZXh0X29wdHM9KCQoCiAgKAogICAgZm9yIHJldiBpbiAiJHtyZXZfbGlzdFtAXX0iOyBkbwogICAg
+ICBnaXQgbm90ZXMgc2hvdyAiJHJldiIgMj4vZGV2L251bGwgfHwgdHJ1ZQogICAgZG9uZSBcCiAg
+ICB8IGZpbHRlcl9jb250ZXh0X29wdHMKCiAgICBwcmludGYgJyVzXG4nIC1VMwogICkgXAogIHwg
+c29ydCAtdQopKQoKIyBGb3IgZWFjaCBmb3VuZCBjb250ZXh0IG9wdGlvbiwgZm9ybWF0IHRoZSBl
+bnRpcmUgc2VyaWVzLCBpbnRvIGEgZGVkaWNhdGVkCiMgc3ViZGlyZWN0b3J5LCB1c2luZyB0aGUg
+Y2FsbGVyLXNwZWNpZmllZCBvcHRpb25zIGFuZCByZXZpc2lvbiBzZXQuIChGb3JtYXQgYQojIGNv
+dmVyIGxldHRlciBhcyB3ZWxsLikgVW5mb3J0dW5hdGVseSwgdGhpcyBpcyBuZWNlc3NhcnkgYmVj
+YXVzZSB0aGUgIi9tIiBwYXJ0CiMgaW4gIltQQVRDSCB2MyBuL21dIiBkZXBlbmRzIG9uICphbGwq
+IHBhdGNoZXMgYmVpbmcgZm9ybWF0dGVkIGluIG9uZSBnby4KZm9yIGNvbnRleHRfb3B0IGluICIk
+e2FsbF9jb250ZXh0X29wdHNbQF19IjsgZG8KICBta2RpciAtLSAiJHRtcGQvY29udGV4dCRjb250
+ZXh0X29wdCIKICBnaXQgZm9ybWF0LXBhdGNoIC0tbm90ZXMgLS1jb3Zlci1sZXR0ZXIgLS1udW1i
+ZXJlZCAtLXN0YXQ9MTAwMCBcCiAgICAgIC0tc3RhdC1ncmFwaC13aWR0aD0yMCAtLW91dHB1dC1k
+aXJlY3RvcnkgIiR0bXBkL2NvbnRleHQkY29udGV4dF9vcHQiIFwKICAgICAgIiRjb250ZXh0X29w
+dCIgIiR7b3B0aW9uc1tAXX0iICIkcmV2aXNpb25zIiA+L2Rldi9udWxsCmRvbmUKCiMgSXRlcmF0
+ZSBvdmVyIHRoZSBjb3ZlciBsZXR0ZXIgYW5kIGFsbCB0aGUgcmV2aXNpb25zLiBGb3IgZWFjaCwg
+ZGV0ZXJtaW5lIHRoZQojIGNvbnRleHQgb3B0aW9uLiAoRm9yIHRoZSBjb3ZlciBsZXR0ZXIsIGFu
+ZCBmb3IgcmV2aXNpb25zIHdpdGhvdXQgYQojICJjb250ZXh0Oi4uLiIgbGluZSBpbiB0aGUgTm90
+ZXMgc2VjdGlvbiwgYXNzdW1lIC1VMy4gSWYgYSByZXZpc2lvbiBoYXMKIyBtdWx0aXBsZSAiY29u
+dGV4dDouLi4iIGxpbmVzIGluIHRoZSBOb3RlcyBzZWN0aW9uLCBwaWNrIHRoZSBmaXJzdCBvbmUu
+KSBPbmNlCiMgdGhlIGNvbnRleHQgb3B0aW9uIGhhcyBiZWVuIGRldGVybWluZWQsICpwb3NpdGlv
+bmFsbHkqIGxvb2sgdXAgdGhlIGZvcm1hdHRlZAojIHBhdGNoIGVtYWlsIHRoYXQgY29ycmVzcG9u
+ZHMgdG8gdGhlIGNvdmVyIGxldHRlciBvciB0aGUgcmV2aXNpb24sIGluIHRoZQojIHN1YmRpcmVj
+dG9yeSB0aGF0IGNvcnJlc3BvbmRzIHRvIHRoZSBjb250ZXh0IG9wdGlvbi4KcGF0Y2hucj0wCmZv
+ciByZXYgaW4gY292ZXJfbGV0dGVyICIke3Jldl9saXN0W0BdfSI7IGRvCiAgaWYgdGVzdCBjb3Zl
+cl9sZXR0ZXIgPSAiJHJldiI7IHRoZW4KICAgIGNvbnRleHRfb3B0PQogIGVsc2UKICAgIGNvbnRl
+eHRfb3B0PSQoCiAgICAgIGdpdCBub3RlcyBzaG93ICIkcmV2IiAyPi9kZXYvbnVsbCBcCiAgICAg
+IHwgZmlsdGVyX2NvbnRleHRfb3B0cyBcCiAgICAgIHwgaGVhZCAtMQogICAgKQogIGZpCiAgaWYg
+dGVzdCAteiAiJGNvbnRleHRfb3B0IjsgdGhlbgogICAgY29udGV4dF9vcHQ9LVUzCiAgZmkKICBm
+aWxlPSQoZ2V0X250aF9maWxlICIkdG1wZC9jb250ZXh0JGNvbnRleHRfb3B0IiAiJHBhdGNobnIi
+KQogIGNhdCAtLSAiJGZpbGUiCiAgaWYgdGVzdCAkcGF0Y2huciAtZ3QgMCAmJiB0ZXN0ICRwYXRj
+aG5yIC1sdCAkeyNyZXZfbGlzdFtAXX07IHRoZW4KICAgIHByaW50ZiAnXG4nCiAgZmkKICBwYXRj
+aG5yPSQoKCRwYXRjaG5yICsgMSkpCmRvbmUK
+--------------SVzDP7UmGW0Rc0tNUvpE1Y9P--
 
