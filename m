@@ -2,86 +2,94 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 167797280E1
-	for <lists+nbd@lfdr.de>; Thu,  8 Jun 2023 15:07:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 787007280E6
+	for <lists+nbd@lfdr.de>; Thu,  8 Jun 2023 15:10:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D730D204A0; Thu,  8 Jun 2023 13:07:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  8 13:07:11 2023
+	id 20D2E204A0; Thu,  8 Jun 2023 13:10:18 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jun  8 13:10:18 2023
 Old-Return-Path: <rjones@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.3 required=4.0 tests=DIGITS_LETTERS,
+X-Spam-Status: No, score=-11.2 required=4.0 tests=DIGITS_LETTERS,
 	DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+	FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,MURPHY_DRUGS_REL8,
+	RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BE86C20485
-	for <lists-other-nbd@bendel.debian.org>; Thu,  8 Jun 2023 13:07:00 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8BD6220480
+	for <lists-other-nbd@bendel.debian.org>; Thu,  8 Jun 2023 13:10:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.191 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-7.091 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
 	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=ham autolearn_force=no
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5, MD5_SHA1_SUM=-1,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id IIbJP63wjjvT for <lists-other-nbd@bendel.debian.org>;
-	Thu,  8 Jun 2023 13:06:56 +0000 (UTC)
+	with ESMTP id YfEA2yDuSXRn for <lists-other-nbd@bendel.debian.org>;
+	Thu,  8 Jun 2023 13:09:58 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 6EA782047A
-	for <nbd@other.debian.org>; Thu,  8 Jun 2023 13:06:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2DAD12047A
+	for <nbd@other.debian.org>; Thu,  8 Jun 2023 13:09:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1686229611;
+	s=mimecast20190719; t=1686229793;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=FD9j1RfDiDulPHuLSog257x5ougmgEez8wcCjhvRHSY=;
-	b=PiGnjD0mB0ccngTL+eBlgUEOyN/F5psVcoISkOjLv1uk7JjzmQm1UgPSYqm7ZsuAc09c6B
-	2WSXRZYS65/jHN77/vEFLApJo7zSBkFRYOsCxVjFw8ZZt0JOogpvsgzsQgmsN1BN31SCjK
-	ptEam07l+MvMc21ftJc7hLXfGreu9Lc=
+	bh=lrTRQgtNupt+apihAmgBFjJlaI9IuDo1HvhMtbxDapw=;
+	b=UjD+OVpZzyIiIs6mrQgZDi/ll7hrchzI+PFijb4dqS0E1IJJn4rPuHlxmc66hiUZBGA1xF
+	lTVR+NIMfiHaJgo5x7Afg12CzUc6PDgzCcuNSoIcSLul0hrHe9aBW7XRWj5iAk184HsBPv
+	9UVN4fXqRsJ8jLpnYyxLvp0VO3xXqOE=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-320-ZvePkVn-P3CAK9dOFuI5Mw-1; Thu, 08 Jun 2023 09:06:50 -0400
-X-MC-Unique: ZvePkVn-P3CAK9dOFuI5Mw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
+ us-mta-326-TQXzs9hcNWCl4O8sX3OerA-1; Thu, 08 Jun 2023 09:09:50 -0400
+X-MC-Unique: TQXzs9hcNWCl4O8sX3OerA-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0FAF785A5A8;
-	Thu,  8 Jun 2023 13:06:50 +0000 (UTC)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C6427811E91;
+	Thu,  8 Jun 2023 13:09:49 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.206])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id B9B8FC154D1;
-	Thu,  8 Jun 2023 13:06:49 +0000 (UTC)
-Date: Thu, 8 Jun 2023 14:06:49 +0100
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 67D1B5268C0;
+	Thu,  8 Jun 2023 13:09:49 +0000 (UTC)
+Date: Thu, 8 Jun 2023 14:09:48 +0100
 From: "Richard W.M. Jones" <rjones@redhat.com>
 To: Laszlo Ersek <lersek@redhat.com>
-Cc: Eric Blake <eblake@redhat.com>, libguestfs@redhat.com,
-	qemu-block@nongnu.org, nbd@other.debian.org
-Subject: Re: [Libguestfs] [libnbd PATCH v3 07/22] generator: Add struct
- nbd_extent in prep for 64-bit extents
-Message-ID: <20230608130649.GU7773@redhat.com>
+Cc: Wouter Verhelst <w@uter.be>, Eric Blake <eblake@redhat.com>,
+	qemu-block@nongnu.org, libguestfs@redhat.com, nbd@other.debian.org
+Subject: Re: [Libguestfs] [libnbd PATCH v3 03/22] protocol: Add definitions
+ for extended headers
+Message-ID: <20230608130948.GI7636@redhat.com>
 References: <20230525130108.757242-1-eblake@redhat.com>
- <20230525130108.757242-8-eblake@redhat.com>
- <0e4ff751-88d6-837b-15a5-6f6c370a2f09@redhat.com>
+ <20230525130108.757242-4-eblake@redhat.com>
+ <2b98a2ca-62d5-c87b-2a37-1a49af89b4b4@redhat.com>
+ <ZHYOgQAL3ELxr1S9@pc220518.home.grep.be>
+ <7f186cd0-b42e-7a20-2946-39ffecd23383@redhat.com>
+ <20230607100036.GD7773@redhat.com>
+ <152208c4-b9af-efda-8dc2-2b00e31c4586@redhat.com>
+ <20230608122034.GH7636@redhat.com>
+ <4fa9d4eb-3102-e134-245e-bdf3ab0da58d@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <0e4ff751-88d6-837b-15a5-6f6c370a2f09@redhat.com>
+In-Reply-To: <4fa9d4eb-3102-e134-245e-bdf3ab0da58d@redhat.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <oFcRZhtKIDC.A.paH._JdgkB@bendel>
+Resent-Message-ID: <c6e0kYaTPhO.A.3AB.6MdgkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2548
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2549
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,138 +99,109 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230608130649.GU7773@redhat.com
-Resent-Date: Thu,  8 Jun 2023 13:07:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230608130948.GI7636@redhat.com
+Resent-Date: Thu,  8 Jun 2023 13:10:18 +0000 (UTC)
 
-On Wed, Jun 07, 2023 at 04:23:27PM +0200, Laszlo Ersek wrote:
-[...]
-> > diff --git a/ocaml/helpers.c b/ocaml/helpers.c
-> > index 3361a696..09666daf 100644
-> > --- a/ocaml/helpers.c
-> > +++ b/ocaml/helpers.c
-> > @@ -133,6 +133,26 @@ nbd_internal_ocaml_alloc_i64_from_u32_array (uint32_t *a, size_t len)
-> >    CAMLreturn (rv);
-> >  }
-> >
-> > +value
-> > +nbd_internal_ocaml_alloc_extent64_array (nbd_extent *a, size_t len)
-> > +{
-> > +  CAMLparam0 ();
-> > +  CAMLlocal3 (s, v, rv);
-> > +  size_t i;
-> > +
-> > +  rv = caml_alloc (len, 0);
-> > +  for (i = 0; i < len; ++i) {
-> > +    s = caml_alloc (2, 0);
-> > +    v = caml_copy_int64 (a[i].length);
-> > +    Store_field (s, 0, v);
-> > +    v = caml_copy_int64 (a[i].flags);
-> > +    Store_field (s, 1, v);
-> > +    Store_field (rv, i, s);
-> > +  }
-> > +
-> > +  CAMLreturn (rv);
-> > +}
-> > +
-> >  /* Convert a Unix.sockaddr to a C struct sockaddr. */
-> >  void
-> >  nbd_internal_unix_sockaddr_to_sa (value sockaddrv,
+On Thu, Jun 08, 2023 at 02:38:40PM +0200, Laszlo Ersek wrote:
+> On 6/8/23 14:20, Richard W.M. Jones wrote:
+> > On Thu, Jun 08, 2023 at 01:48:41PM +0200, Laszlo Ersek wrote:
+> >> On 6/7/23 12:00, Richard W.M. Jones wrote:
+> >>> On Tue, May 30, 2023 at 05:48:25PM +0200, Laszlo Ersek wrote:
+> >>>> BTW I'm foreseeing a problem: if the extended block descriptor can
+> >>>> provide an unsigned 64-bit length, we're going to have trouble exposing
+> >>>> that in OCaml, because OCaml only has signed 64-bit integers. So that's
+> >>>> going to reproduce the same issue, only for OCaml callers of the *new* API.
+> >>>>
+> >>>> I can see Eric's series includes patches like "ocaml: Add example for
+> >>>> 64-bit extents" -- I've not looked at those yet; for now I'm just
+> >>>> wondering what tricks we might need in the bindings generator. The
+> >>>> method seen in the "middle patch" above won't work; we don't have a
+> >>>> native OCaml "i128" type for example that we could use as an escape
+> >>>> hatch, for representing C's uint64_t.
+> >>>
+> >>> I think that's OK because disk sizes are already limited to
+> >>> 2^63 - 1 by the kernel (and for qemu even less than that).
+> >>> The OCaml bindings return a (signed) int64 for NBD.get_size.
+> >>
+> >> Under patch#7 yesterday, I made a proposal for "armoring" at least one
+> >> instance / direction of the uint64_t <-> int64 conversion. It raised an
+> >> interesting problem: raising OCaml exceptions in such C functions that
+> >> are *not* directly called by the OCaml runtime. Comments would be much
+> >> appreciated in that subthread!
+> > 
+> > I can't seem to find that thread (but also gmail-- split the messages
+> > randomly over the 3 different mailing lists because Google don't
+> > understand how email works).  Do you have a link?
 > 
-> (19) I'd suggest the following addition:
+> It starts here (link to patch#7):
 > 
-> > diff --git a/ocaml/helpers.c b/ocaml/helpers.c
-> > index 09666dafa7d1..db652943141d 100644
-> > --- a/ocaml/helpers.c
-> > +++ b/ocaml/helpers.c
-> > @@ -25,6 +25,7 @@
-> >  #include <string.h>
-> >  #include <sys/socket.h>
-> >  #include <assert.h>
-> > +#include <inttypes.h>
-> >
-> >  #include <caml/alloc.h>
-> >  #include <caml/callback.h>
-> > @@ -140,6 +141,16 @@ nbd_internal_ocaml_alloc_extent64_array (nbd_extent *a, size_t len)
-> >    CAMLlocal3 (s, v, rv);
-> >    size_t i;
-> >
-> > +  for (i = 0; i < len; ++i)
-> > +    if (a[i].length > INT64_MAX || a[i].flags > INT64_MAX) {
-> > +      char errmsg[256];
-> > +
-> > +      snprintf (errmsg, sizeof errmsg,
-> > +                "%s: extent[%zu] = { .length = %"PRIu64", .flags = %"PRIu64"}",
-> > +                __func__, i, a[i].length, a[i].flags);
-> > +      caml_failwith (errmsg);
-> > +    }
-> > +
-> >    rv = caml_alloc (len, 0);
-> >    for (i = 0; i < len; ++i) {
-> >      s = caml_alloc (2, 0);
->
-> *However*, considering the nbd_internal_ocaml_alloc_extent64_array()
-> call site, in the generated extent64_wrapper_locked() function
-> [ocaml/nbd-c.c]:
-> 
-> > /* Wrapper for extent64 callback. */
-> > static int
-> > extent64_wrapper_locked (void *user_data, const char *metacontext,
-> >                          uint64_t offset, nbd_extent *entries,
-> >                          size_t nr_entries, int *error)
-> > {
-> >   CAMLparam0 ();
-> >   CAMLlocal4 (metacontextv, offsetv, entriesv, errorv);
-> >   CAMLlocal2 (exn, rv);
-> >   const struct user_data *data = user_data;
-> >   int r;
-> >   value args[4];
-> >
-> >   metacontextv = caml_copy_string (metacontext);
-> >   offsetv = caml_copy_int64 (offset);
-> >   entriesv = nbd_internal_ocaml_alloc_extent64_array (
-> >                entries,
-> >                nr_entries
-> >              );
-> >   errorv = caml_alloc_tuple (1);
-> >   Store_field (errorv, 0, Val_int (*error));
-> >   args[0] = metacontextv;
-> >   args[1] = offsetv;
-> >   args[2] = entriesv;
-> >   args[3] = errorv;
-> >   rv = caml_callbackN_exn (data->fnv, 4, args);
-> >   *error = Int_val (Field (errorv, 0));
-> >   if (Is_exception_result (rv)) {
-> >     nbd_internal_ocaml_exception_in_wrapper ("extent64", rv);
-> >     CAMLreturnT (int, -1);
-> >   }
-> >
-> >   r = Int_val (rv);
-> >   assert (r >= 0);
-> >   CAMLreturnT (int, r);
-> > }
-> 
-> I'm not sure if raising an OCaml exception like this, in an *inner* C
-> function, is appropriate. caml_failwith() may only be suitable for C
-> functions *directly* called by the OCaml runtime.
+> http://mid.mail-archive.com/20230525130108.757242-8-eblake@redhat.com
 
-caml_failwith is just a longjmp.  The OCaml values on the stack are
-cleaned up by following a chain of stack frames which are created by
-the CAMLparam* macros.  These macros don't need to be used in every
-function, although they should be used in functions which have OCaml
-value parameters or value local variables (but there's no harm in
-using them unnecessarily).  They can also be omitted for functions
-which do not invoke the OCaml GC (don't allocate on the OCaml heap,
-basically).
+OK I see it now (in the reply).  I have answered there.
 
-C local variables however will not be cleaned up, so if there are any
-arrays that have to be freed then it gets a bit more complicated.
+> So for example, in extent64_wrapper_locked(), if we exited the called
+> nbd_internal_ocaml_alloc_extent64_array() function with caml_failwith(),
+> the caml_copy_string() and caml_copy_int64() allocations, stored earlier
+> into "CAMLlocal"s "metacontextv" and "offsetv", would not be leaked?
+
+Correct.  When unwinding the stack, those frame structs created by
+CAML* macros are unlinked.  Then the heap variables will have no
+references and will be freed in the course of garbage collection.
+
+> > 
+> >> (On a tangent: I've also noticed we use CAMLparam0() & friends in some
+> >> of our functions that are *not* directly called by the OCaml runtime.
+> >> They certainly run on the OCaml runtime's stack, but there's at least
+> >> one intervening stack frame where the C-language function is provided by
+> >> us. Now I know we must use CAMLparam0() in our *outermost* such
+> >> function, but what about the further functions (inner C-language
+> >> functions) that our outermost function calls in turn? I think the inner
+> >> functions are at liberty not to use CAMLparam0() -- otherwise, our
+> >> functions couldn't even call normal C library functions!)
+> > 
+> > These macros just set up a linked list of frames.  You don't need to
+> > use them in every function, only ones which are using OCaml values.
+> 
+> Ah, understood.
+> 
+> > The macros are fairly easy to understand by reading them:
+> > 
+> > https://github.com/ocaml/ocaml/blob/864f772e5338dcf6be2093d5cc3ed6f7fbce16b7/runtime/caml/memory.h#L270
+> > 
+> > When the GC runs it walks up the linked list of the current thread to
+> > find roots.  The only tricky thing about it is making sure that at any
+> > point where the GC could run, each slot contains a valid entry and not
+> > some intermediate or uninitialized value, since this is precise (not
+> > conservative) garbage collection.
+> 
+> Right, <https://v2.ocaml.org/manual/intfc.html> too contains a related
+> warning:
+> 
+>   Rule 5  After a structured block (a block with tag less than
+>   No_scan_tag) is allocated with the low-level functions, all fields of
+>   this block must be filled with well-formed values before the next
+>   allocation operation. [...]
+> 
+> Thankfully it also says, "You can ignore those rules if you stick to the
+> simplified allocation function caml_alloc".
+> 
+> > 
+> > This mechanism is only used by C code.  In OCaml code there's a bitmap
+> > generated for each function showing which stack slots contain values
+> > (versus ints, return addresses, other stuff).
+> 
+> I'm slightly interested in learning the OCaml runtime details, but at
+> the same time I feel like not knowing them (and relying only on the
+> docs) might allow me to write more "portable" code...
+
+Yes the real rules are quite subtle, and following the documentation
+is a good idea.
 
 Rich.
 
 -- 
 Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
 Read my programming and virtualization blog: http://rwmj.wordpress.com
-Fedora Windows cross-compiler. Compile Windows programs, test, and
-build Windows installers. Over 100 libraries supported.
-http://fedoraproject.org/wiki/MinGW
+nbdkit - Flexible, fast NBD server with plugins
+https://gitlab.com/nbdkit/nbdkit
 
