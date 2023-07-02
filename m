@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88C8E7451DA
-	for <lists+nbd@lfdr.de>; Sun,  2 Jul 2023 21:58:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FDF37451E0
+	for <lists+nbd@lfdr.de>; Sun,  2 Jul 2023 21:58:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 68A7020F1E; Sun,  2 Jul 2023 19:58:35 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jul  2 19:58:35 2023
+	id 04BBB20F1E; Sun,  2 Jul 2023 19:58:49 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jul  2 19:58:48 2023
 Old-Return-Path: <sashal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-7.6 required=4.0 tests=DIGITS_LETTERS,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E99DE20F1C
-	for <lists-other-nbd@bendel.debian.org>; Sun,  2 Jul 2023 19:42:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id AF4F420F01
+	for <lists-other-nbd@bendel.debian.org>; Sun,  2 Jul 2023 19:42:45 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-9.491 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DIGITS_LETTERS=1, DKIMWL_WL_HIGH=-0.001,
@@ -29,33 +29,33 @@ X-Amavis-Spam-Status: No, score=-9.491 tagged_above=-10000 required=5.3
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id MSItFBiNvM_R for <lists-other-nbd@bendel.debian.org>;
-	Sun,  2 Jul 2023 19:42:27 +0000 (UTC)
+	with ESMTP id vKWlLvdRvFMP for <lists-other-nbd@bendel.debian.org>;
+	Sun,  2 Jul 2023 19:42:38 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 4534420EF9
-	for <nbd@other.debian.org>; Sun,  2 Jul 2023 19:42:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 4374720EF9
+	for <nbd@other.debian.org>; Sun,  2 Jul 2023 19:42:38 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 271D560CBB;
-	Sun,  2 Jul 2023 19:42:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AED4C433C9;
-	Sun,  2 Jul 2023 19:42:22 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 26D0660C7A;
+	Sun,  2 Jul 2023 19:42:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FF06C433CA;
+	Sun,  2 Jul 2023 19:42:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1688326943;
-	bh=zRGwIKu77q4Dz87R/hdFXM3IwpJP8FNt+IzYvxhjIMA=;
+	s=k20201202; t=1688326954;
+	bh=p//87+KLbGKiTtxFDtRhZha52okbV6Mmaq31tSEbZYk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fMVRJhTpcQqz4i/yAEOm3ISU04u3UyX6zvpJZz6i/ndGObUvWFZNjgw6NJj6rjTdd
-	 Dh6F/PhDDTd1GIQFrqjw0E2GDdhpPlJgg1SZ8/tPuglor/92rAq5iN/TorXnjguSMG
-	 9Cz0bgI6OLZ6f38l6SpIbYEQ2xj2TXPv020kzjVzSIGPXNFoXZJLJqaaNikSUDnvNS
-	 G47zZJYOmiDZ3RU7YdyLuYFMYOl7+GIwXlQvkHxFu9cmD+/xnzSKRzMPdfmUaQBpDd
-	 JmVRO2NkidP5BX7drmAgmhS1K07k0Igk9oF7eFHt3jEF8lY8QT2u2rieEV4SW+PvjD
-	 kixZ8pGG7/jDg==
+	b=ZY3VlmvBOV7O1MxNxkmSaVa6pTD9VNfzDGCg0euyx7lAaFJBCVNAwgavF54lhBWhG
+	 6A6cEMU0Fv4q9kOunf2hjNDsOE7mfy+dd9aW5HGt3htw5L2pW2wxh0il8yjVOh9pih
+	 2OotHV5gpOCVf8N8+sAp5vsD1DC08/GSX+LflHSIpGMGBrz9eXAzm8kiwXSRVpq8Ws
+	 XNO1jPqXzUGiPoBw2kyHTvkPspd+HNEszi6XkO8fCrFEhBX4wjBUnkUu5NnGMPoYVZ
+	 z6wfgeNNwBJtdwfYaDoSj2dLxewLGXWfW54j7qERGf+ItiQ7eQvDuxM3XAHHnXPd5a
+	 K4aFOQvt1tkLg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -66,23 +66,23 @@ Cc: Zhong Jinghua <zhongjinghua@huawei.com>,
 	josef@toxicpanda.com,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH AUTOSEL 4.19 2/5] nbd: Add the maximum limit of allocated index in nbd_dev_add
-Date: Sun,  2 Jul 2023 15:42:16 -0400
-Message-Id: <20230702194219.1779408-2-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 2/5] nbd: Add the maximum limit of allocated index in nbd_dev_add
+Date: Sun,  2 Jul 2023 15:42:27 -0400
+Message-Id: <20230702194230.1779535-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230702194219.1779408-1-sashal@kernel.org>
-References: <20230702194219.1779408-1-sashal@kernel.org>
+In-Reply-To: <20230702194230.1779535-1-sashal@kernel.org>
+References: <20230702194230.1779535-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 4.19.288
+X-stable-base: Linux 4.14.320
 Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <ZI6n6ddDl5K.A.azE.rbdokB@bendel>
+Resent-Message-ID: <H1zXXYH5fRN.A.g5E.4bdokB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2561
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2562
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,8 +92,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20230702194219.1779408-2-sashal@kernel.org
-Resent-Date: Sun,  2 Jul 2023 19:58:35 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20230702194230.1779535-2-sashal@kernel.org
+Resent-Date: Sun,  2 Jul 2023 19:58:49 +0000 (UTC)
 
 From: Zhong Jinghua <zhongjinghua@huawei.com>
 
@@ -115,10 +115,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 28024248a7b53..5a07964a1e676 100644
+index eb2ca7f6ab3ab..33ad48719c124 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1646,7 +1646,8 @@ static int nbd_dev_add(int index)
+@@ -1630,7 +1630,8 @@ static int nbd_dev_add(int index)
  		if (err == -ENOSPC)
  			err = -EEXIST;
  	} else {
