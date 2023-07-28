@@ -2,88 +2,87 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FB1B7622B1
-	for <lists+nbd@lfdr.de>; Tue, 25 Jul 2023 21:52:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E730376659B
+	for <lists+nbd@lfdr.de>; Fri, 28 Jul 2023 09:45:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2D396206B5; Tue, 25 Jul 2023 19:52:44 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jul 25 19:52:44 2023
-Old-Return-Path: <eblake@redhat.com>
+	id 7AC8B20882; Fri, 28 Jul 2023 07:45:08 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jul 28 07:45:08 2023
+Old-Return-Path: <yukuai1@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=4.0 tests=ATTENDEES_DBSPAM_BODY3,
-	ATTENDEES_DBSPAM_BODY6,DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H4,
-	RCVD_IN_MSPIKE_WL,SARE_MSGID_LONG45,SARE_MSGID_LONG50,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=2.3 required=4.0 tests=DIGITS_LETTERS,FOURLA,
+	MURPHY_DRUGS_REL8,NICE_REPLY_A,RDNS_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B2DAC205CB
-	for <lists-other-nbd@bendel.debian.org>; Tue, 25 Jul 2023 19:52:31 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 995C32087D
+	for <lists-other-nbd@bendel.debian.org>; Fri, 28 Jul 2023 07:29:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.57 tagged_above=-10000 required=5.3
-	tests=[ATTENDEES_DBSPAM_BODY3=1, ATTENDEES_DBSPAM_BODY6=1,
-	BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
-	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	SARE_MSGID_LONG45=0.893, SARE_MSGID_LONG50=0.726,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.17 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DIGITS_LETTERS=1, FOURLA=0.1,
+	MIME_CHARSET_FARAWAY=0.02, MURPHY_DRUGS_REL8=0.02,
+	NICE_REPLY_A=-0.093, RDNS_NONE=0.793, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 6_cmQH6js1F8 for <lists-other-nbd@bendel.debian.org>;
-	Tue, 25 Jul 2023 19:52:23 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 5E2FA204D8
-	for <nbd@other.debian.org>; Tue, 25 Jul 2023 19:52:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1690314737;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=5fjqiDf82gV2hYHKs9HcPB6nsfipqEYdGIqeNGNfIc0=;
-	b=BmxCUIh5U3G/whYBwoEhY2LuimwKDgo640Ohbr0c6Qjrc+m+vqhPR+JZxTKLY3x2K2jNSz
-	FYmY88CtcJMjK2pbO4Is0EWU79ICVa3mih1u+N6MuCX2PZzwZrWgrMouvgKv9wVZRs4Eh/
-	+SlJxT05jm8gDQyAxAMmcQ3KO9nwLNA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-103-NYtwbA5HOPOmicMQ3DzhBg-1; Tue, 25 Jul 2023 15:52:16 -0400
-X-MC-Unique: NYtwbA5HOPOmicMQ3DzhBg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3800F88D541;
-	Tue, 25 Jul 2023 19:52:16 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.93])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 6AB272166B25;
-	Tue, 25 Jul 2023 19:52:15 +0000 (UTC)
-Date: Tue, 25 Jul 2023 14:52:13 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Matt Panaro <matt.panaro@gmail.com>
-Cc: nbd@other.debian.org
-Subject: Re: patch to fix short-option for certfile (-F) in nbd-client
-Message-ID: <jd2n4koiyfufrnoxuw2um77sqgtm2fyxkzp26t6qputhf3zaxg@qx2tlt7ozthq>
-References: <CAAki=DWr+Kft898C=ABtmXdSyWhPoL55vO5fFjwoH-m6TNNoqQ@mail.gmail.com>
- <awg5aw5d357ljrbhmordwtfjmlhbqhhkqdcbv6y3femzpjq3ca@q4xlmzddloqj>
- <CAAki=DWH-BT8hJkb+n0TOhB9e7z7vAQoCWdUDgW-dT_vRF2ypA@mail.gmail.com>
+	with ESMTP id EpvyPKkM5Hkt for <lists-other-nbd@bendel.debian.org>;
+	Fri, 28 Jul 2023 07:29:29 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+X-Greylist: delayed 1122 seconds by postgrey-1.36 at bendel; Fri, 28 Jul 2023 07:29:28 UTC
+Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id B699C2087C
+	for <nbd@other.debian.org>; Fri, 28 Jul 2023 07:29:28 +0000 (UTC)
+Received: from mail02.huawei.com (unknown [172.30.67.143])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4RBzLQ4cK5z4f3jM3
+	for <nbd@other.debian.org>; Fri, 28 Jul 2023 15:10:38 +0800 (CST)
+Received: from [10.174.176.73] (unknown [10.174.176.73])
+	by APP4 (Coremail) with SMTP id gCh0CgAHoZTuacNknej3Ow--.21788S3;
+	Fri, 28 Jul 2023 15:10:39 +0800 (CST)
+Subject: Re: [PATCH -next] nbd: get config_lock before sock_shutdown
+To: Zhong Jinghua <zhongjinghua@huaweicloud.com>, josef@toxicpanda.com,
+ axboe@kernel.dk
+Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org, yi.zhang@huawei.com,
+ "yukuai (C)" <yukuai3@huawei.com>
+References: <20230707062256.1271948-1-zhongjinghua@huaweicloud.com>
+From: Yu Kuai <yukuai1@huaweicloud.com>
+Message-ID: <779966af-844a-3dba-93f8-9daabde8c85b@huaweicloud.com>
+Date: Fri, 28 Jul 2023 15:10:38 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAAki=DWH-BT8hJkb+n0TOhB9e7z7vAQoCWdUDgW-dT_vRF2ypA@mail.gmail.com>
-User-Agent: NeoMutt/20230517
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+In-Reply-To: <20230707062256.1271948-1-zhongjinghua@huaweicloud.com>
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:gCh0CgAHoZTuacNknej3Ow--.21788S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7CrWkCFWkuFWruw47uw45KFg_yoW8Cry3pF
+	4UCF4DCr4rWa1S9FZ5G34xWr1UG343Ka17Gry8Zw1qvr93CrWI93WDKF1fCFyUKwnrJr4S
+	qFyrKF95C3y3JrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUyEb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
+	0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
+	6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
+	Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxk0xIA0c2IEe2xFo4CEbIxvr21l42xK82IYc2Ij
+	64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
+	8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE
+	2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42
+	xK8VAvwI8IcIk0rVW3JVWrJr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY
+	1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IUbPEf5UUUUU==
+X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
+X-CFilter-Loop: Reflected
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <TRIZSZo-0YP.A.hAC.MgCwkB@bendel>
+Resent-Message-ID: <VR3--6I94DO.A.BGG.EI3wkB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2581
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2582
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,59 +92,74 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/jd2n4koiyfufrnoxuw2um77sqgtm2fyxkzp26t6qputhf3zaxg@qx2tlt7ozthq
-Resent-Date: Tue, 25 Jul 2023 19:52:44 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/779966af-844a-3dba-93f8-9daabde8c85b@huaweicloud.com
+Resent-Date: Fri, 28 Jul 2023 07:45:08 +0000 (UTC)
 
-On Tue, Jul 25, 2023 at 10:07:34AM -0400, Matt Panaro wrote:
-> I like the second option that avoids the #else branches, even at the cost
-> of losing the alphabetical ordering.  this is the first time I've submitted
-> a code-change through email rather than e.g. GitHub, so I'm a bit uncertain
-> about how to proceed. should I reply with an updated diff? start a new
-> thread?
+ÔÚ 2023/07/07 14:22, Zhong Jinghua Ð´µÀ:
+> Config->socks in sock_shutdown may trigger a UAF problem.
+> The reason is that sock_shutdown does not hold the config_lock,
+> so that nbd_ioctl can release config->socks at this time.
+> 
+> T0: NBD_SET_SOCK
+> T1: NBD_DO_IT
+> 
+> T0						T1
+> 
+> nbd_ioctl
+>    mutex_lock(&nbd->config_lock)
+>    // get lock
+>    __nbd_ioctl
+>      nbd_start_device_ioctl
+>        nbd_start_device
+>         mutex_unlock(&nbd->config_lock)
+>           // relase lock
+>           wait_event_interruptible
+>           (kill, enter sock_shutdown)
+>           sock_shutdown
+> 					nbd_ioctl
+> 					  mutex_lock(&nbd->config_lock)
+> 					  // get lock
+> 					  __nbd_ioctl
+> 					    nbd_add_socket
+> 					      krealloc
+> 						kfree(p)
+> 					        //config->socks is NULL
+>             nbd_sock *nsock = config->socks // error
+> 
+> Fix it by moving config_lock up before sock_shutdown.
 
-I generally start a new thread if posting a v2 patch, otherwise reply
-to the existing thread when adding more ideas on where the development
-might go.  Also, technical lists tend to favor inline replies (as I'm
-doing here), rather than top-posting.
-
-Although the project is hosted on gitlab, Wouter would be the one to
-say whether he's comfortable with gitlab's pull request model, or
-whether he still prefers patches by email (I personally find email
-easier to work with, and am not sure I have the rights to approve a
-gitlab pull request although I do have the rights to push your patch
-on your behalf if it came through email and is ready to go).  There
-are ways for a maintainer to use an email-based flow even when
-contributors prefer a gitlab-based UI flow, but not all projects are
-set up that way.
-
-> also, who would I ask for/how would I get the "signed off by"?
-
-Git has the notion of a 'Signed-off-by:' tag that can be added to a
-commit with project-dependent semantics; 'git commit --amend -s' is
-one easy way to add it to an existing patch.  The Linux kernel has
-well-defined semantics for what it means[1] (the tl;dr: "adding S-o-b
-is a legal statement that my patch won't break the kernel's license"),
-but other projects are laxer and some will accept submissions without
-S-o-b.  Given how the nbd project is at the intersection of kernel and
-userspace code, I personally use S-o-b for patches here, but Wouter as
-the project owner has final say on whether it is a hard requirement
-for NBD (you can find older commits in nbd.git that lacked one, and
-'git grep -i "certificate of origin"' has no hits yet).
-
-[1] https://www.kernel.org/doc/html/latest/process/submitting-patches.html?highlight=signed%20off#sign-your-work-the-developer-s-certificate-of-origin
+LGTM
+Reviewed-by: Yu Kuai <yukuai3@huawei.com>
 
 > 
-> one more thing: there's a slightly larger additional change/feature I'd
-> like to implement: is the correct thing to do start a codeless discussion
-> on the mailing list? or just send a larger diff (with appropriate
-> references to commit-hashes)?
-
-Either is fine for me - getting consensus on the general idea of the
-feature before spending time writing the patches may be the smoothest
-path forward, but sometimes patches speak for themselves.
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.
-Virtualization:  qemu.org | libguestfs.org
+> Signed-off-by: Zhong Jinghua <zhongjinghua@huaweicloud.com>
+> ---
+>   drivers/block/nbd.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index c410cf29fb0c..accbe99ebb7e 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -1428,13 +1428,18 @@ static int nbd_start_device_ioctl(struct nbd_device *nbd)
+>   	mutex_unlock(&nbd->config_lock);
+>   	ret = wait_event_interruptible(config->recv_wq,
+>   					 atomic_read(&config->recv_threads) == 0);
+> +
+> +	/*
+> +	 * recv_work in flush_workqueue will not get this lock, because nbd_open
+> +	 * will hold nbd->config_refs
+> +	 */
+> +	mutex_lock(&nbd->config_lock);
+>   	if (ret) {
+>   		sock_shutdown(nbd);
+>   		nbd_clear_que(nbd);
+>   	}
+>   
+>   	flush_workqueue(nbd->recv_workq);
+> -	mutex_lock(&nbd->config_lock);
+>   	nbd_bdev_reset(nbd);
+>   	/* user requested, ignore socket errors */
+>   	if (test_bit(NBD_RT_DISCONNECT_REQUESTED, &config->runtime_flags))
+> 
 
