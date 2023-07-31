@@ -1,85 +1,87 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C4ED767322
-	for <lists+nbd@lfdr.de>; Fri, 28 Jul 2023 19:21:02 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 58DD676A28D
+	for <lists+nbd@lfdr.de>; Mon, 31 Jul 2023 23:18:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E5F122086D; Fri, 28 Jul 2023 17:21:01 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jul 28 17:21:01 2023
-Old-Return-Path: <w@uter.be>
+	id 0E6712040F; Mon, 31 Jul 2023 21:18:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jul 31 21:18:13 2023
+Old-Return-Path: <matt.panaro@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-9.3 required=4.0 tests=ATTENDEES_DBSPAM_BODY3,
-	ATTENDEES_DBSPAM_BODY6,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,
-	DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,MURPHY_DRUGS_REL8,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Level: **
+X-Spam-Status: No, score=2.7 required=4.0 tests=ATTENDEES_DBSPAM_BODY3,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+	FVGT_m_MULTI_ODD,HTML_MESSAGE,MURPHY_DRUGS_REL8,RCVD_IN_DNSWL_NONE,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A24A62050C
-	for <lists-other-nbd@bendel.debian.org>; Fri, 28 Jul 2023 17:20:50 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DA48220412
+	for <lists-other-nbd@bendel.debian.org>; Mon, 31 Jul 2023 21:01:31 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-5.19 tagged_above=-10000 required=5.3
-	tests=[ATTENDEES_DBSPAM_BODY3=1, ATTENDEES_DBSPAM_BODY6=1,
-	BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5, MURPHY_DRUGS_REL8=0.02,
+X-Amavis-Spam-Status: No, score=0.831 tagged_above=-10000 required=5.3
+	tests=[ATTENDEES_DBSPAM_BODY3=1, BAYES_00=-2, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	FREEMAIL_FROM=0.001, FVGT_m_MULTI_ODD=0.02, HTML_MESSAGE=2,
+	MURPHY_DRUGS_REL8=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id cqrPETF8-9ct for <lists-other-nbd@bendel.debian.org>;
-	Fri, 28 Jul 2023 17:20:42 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E72E4204E2
-	for <nbd@other.debian.org>; Fri, 28 Jul 2023 17:20:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=L2UnYkzi451NufjBkTwxJNwjTBwJzsJ4oAmv5qhLCCs=; b=dCVtfwbSf+VqkN1fc6f3uTEsQa
-	SAZNARykGW/WIp1V14H/4ebR+yw+q1ZEfvzqDLs4n56f1RQ3ML9Dijqk0zUY7KVSfJc5SF0fUsFXe
-	EeWbx96wgcUUAQvrcMKl62n5H62TdwI4Afdei077jECz9zHgtX1splkde21wVm04eLd4XT0fXLpNy
-	rT7mrQbx5l5xNJq+iC9MtdV1dzvIaLPaLrY/l8C3KFZTRLCJ3j0UEMzyUvCL3my8vQR2MHu1cZaUa
-	1N45GL5gqjnoo9dbict+/gzU1Ytz8yAyr4ZSUAXR8ev20Zc0S3ePRgEEOKxJfSfUg2EDxWLSWU/3T
-	WUo063cg==;
-Received: from [102.39.141.34] (helo=pc220518)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <w@uter.be>)
-	id 1qPR8o-00DLch-23; Fri, 28 Jul 2023 19:20:37 +0200
-Received: from wouter by pc220518 with local (Exim 4.96)
-	(envelope-from <w@uter.be>)
-	id 1qPR8g-000Ryi-0W;
-	Fri, 28 Jul 2023 19:20:30 +0200
-Date: Fri, 28 Jul 2023 19:20:29 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Eric Blake <eblake@redhat.com>
-Cc: Matt Panaro <matt.panaro@gmail.com>, nbd@other.debian.org
-Subject: Re: patch to fix short-option for certfile (-F) in nbd-client
-Message-ID: <ZMP43TieixQqsFH5@pc220518.home.grep.be>
-References: <CAAki=DWr+Kft898C=ABtmXdSyWhPoL55vO5fFjwoH-m6TNNoqQ@mail.gmail.com>
- <awg5aw5d357ljrbhmordwtfjmlhbqhhkqdcbv6y3femzpjq3ca@q4xlmzddloqj>
- <CAAki=DWH-BT8hJkb+n0TOhB9e7z7vAQoCWdUDgW-dT_vRF2ypA@mail.gmail.com>
- <jd2n4koiyfufrnoxuw2um77sqgtm2fyxkzp26t6qputhf3zaxg@qx2tlt7ozthq>
+	with ESMTP id ElJllWZEkxof for <lists-other-nbd@bendel.debian.org>;
+	Mon, 31 Jul 2023 21:01:24 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com [IPv6:2607:f8b0:4864:20::92e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 28E4D20417
+	for <nbd@other.debian.org>; Mon, 31 Jul 2023 21:01:24 +0000 (UTC)
+Received: by mail-ua1-x92e.google.com with SMTP id a1e0cc1a2514c-791c27bb91dso3191357241.0
+        for <nbd@other.debian.org>; Mon, 31 Jul 2023 14:01:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690837281; x=1691442081;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=4IMdOk+NBKd9YqZjb1BwV94+sXazuoJnWPo/DwfOYC4=;
+        b=iB517P2uNGA7Zg0jugmQM8Eg7sz47BrIlEfhu2H0uWmjyCepTkul9Kp2gMJLGIzJvo
+         TaVmS9GFGHM7aqrtSZek/fQD2ZWT2EOZt4alwmTSjAIlxr7NiFNIlFBwDxgjszBsGM2I
+         M1zbQzp4/cQuGX2KhE89+4se7kOb87zNxNQ0oyDCFAmyrF3sLY3FQl+WRdB3zWXN8XD0
+         BaeJBE1DwT0A8L+e7GxoqzFWERXuf/MwOsyxFMRveJqtB3XQqU26FPPfxjuFDlFqdwPV
+         GH+7RtcXupprveXSjAwNHyYP8KEbBUKw2KIdFKM69q08hdVTcgEtHRH5UNSC/GwjGtxE
+         ug1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690837281; x=1691442081;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=4IMdOk+NBKd9YqZjb1BwV94+sXazuoJnWPo/DwfOYC4=;
+        b=lfErS+GzhiIZqNm2yyb6D61feAGM5uOMYzAvLRctGQc909YLP/xkVd01oH62QXZrwB
+         0EVXJGQvo2r02LELaJ/8Ts1qErxv6+4Zgbb1ANujQ1vw0hhM/l0/4oJgwXpq4GEudeZo
+         PG/igZfIW2VcQuyR71o7DjXeMP6AidseE/qcAQLvSae5Z+GWffMj8G82iUquWKuKcZib
+         0ZuRXXSvjXAYV3FK4XhYTWj8no6d19yrb5np/Q1ksJgX+zVvw/kaOn0Zfk5oZb0MeEtr
+         9aw1kGGbZ1R8pug73iyjP33gyqfCrrP9MyBcjjrdqzvPhj8VBLw2U3EO1XshBb+MoXUe
+         nYDg==
+X-Gm-Message-State: ABy/qLaUxBCh818bZgKyepgOyyIQjXm8vnkmFb2cuDjzHVLQ4RaJ2QGu
+	SpnUp84KAhKl1h9ukOAviSsLuvwSe+dDFjamsPX2xZQgM5o=
+X-Google-Smtp-Source: APBJJlEZTqu0GlSaacbhVIT3bR9qFK6RUrITsTOkOUuVR8zq7biZ/R+gMKFIJPMOczA4LpEXaq+ZE8gOreZ9jX9uphc=
+X-Received: by 2002:a67:fe0d:0:b0:444:d7f0:d27c with SMTP id
+ l13-20020a67fe0d000000b00444d7f0d27cmr293725vsr.14.1690837280549; Mon, 31 Jul
+ 2023 14:01:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <jd2n4koiyfufrnoxuw2um77sqgtm2fyxkzp26t6qputhf3zaxg@qx2tlt7ozthq>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
+From: Matt Panaro <matt.panaro@gmail.com>
+Date: Mon, 31 Jul 2023 17:01:09 -0400
+Message-ID: <CAAki=DV0ZV1SLr7GcFZ3mv5XHn342Lw+1KQsrfcE7h-Mvbvfyg@mail.gmail.com>
+Subject: [PATCH] fix missing -F short-option for certfile [version 2]
+To: nbd@other.debian.org
+Content-Type: multipart/alternative; boundary="0000000000007aef3d0601cebb0f"
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <uIRSODD9rsL.A.A3H.9j_wkB@bendel>
+Resent-Message-ID: <RROirVytM2E.A.jXC.UUCykB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2583
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2584
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,89 +91,71 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZMP43TieixQqsFH5@pc220518.home.grep.be
-Resent-Date: Fri, 28 Jul 2023 17:21:01 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAAki=DV0ZV1SLr7GcFZ3mv5XHn342Lw+1KQsrfcE7h-Mvbvfyg@mail.gmail.com
+Resent-Date: Mon, 31 Jul 2023 21:18:13 +0000 (UTC)
 
-Hi Eric,
+--0000000000007aef3d0601cebb0f
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jul 25, 2023 at 02:52:13PM -0500, Eric Blake wrote:
-> On Tue, Jul 25, 2023 at 10:07:34AM -0400, Matt Panaro wrote:
-> > I like the second option that avoids the #else branches, even at the cost
-> > of losing the alphabetical ordering.  this is the first time I've submitted
-> > a code-change through email rather than e.g. GitHub, so I'm a bit uncertain
-> > about how to proceed. should I reply with an updated diff? start a new
-> > thread?
-> 
-> I generally start a new thread if posting a v2 patch, otherwise reply
-> to the existing thread when adding more ideas on where the development
-> might go.  Also, technical lists tend to favor inline replies (as I'm
-> doing here), rather than top-posting.
-> 
-> Although the project is hosted on gitlab, Wouter would be the one to
-> say whether he's comfortable with gitlab's pull request model,
+see previous thread: https://lists.debian.org/nbd/2023/07/msg00021.html
+for the motivation behind this refactor
 
-I'm not really opposed to pull requests, but given that there are more
-people reading this mailinglist than there are who review pull requests,
-for larger patches sending them here is preferred.
+in commit 1b8615, the `-F` short-option was accidentally refactored out of
+the codebase, so that only the long-option for `-certfile` would work.
+This commit restores the `-F` short-option, as well as conditionally
+populating the `short_opts` string based on compilation-options for
+`NETLINK` and `GNUTLS`
+---
+ nbd-client.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-IOW, trivial, obviously-correct, patches like the one at the head of
-this thread are fine through the github PR workflow, but for larger
-things, send them to this list instead.
+diff --git a/nbd-client.c b/nbd-client.c
+index dae4636..ac0419d 100644
+--- a/nbd-client.c
++++ b/nbd-client.c
+@@ -896,11 +896,14 @@ void disconnect(char* device) {
+        close(nbd);
+ }
 
-> or whether he still prefers patches by email (I personally find email
-> easier to work with, and am not sure I have the rights to approve a
-> gitlab pull request although I do have the rights to push your patch
-> on your behalf if it came through email and is ready to go).
++static const char *short_opts = "-B:b:c:d:gH:hlnN:PpRSst:uVx"
+ #if HAVE_NETLINK
+-static const char *short_opts = "-A:B:b:c:C:d:gH:hK:LlnN:PpRSst:uVx";
+-#else
+-static const char *short_opts = "-A:B:b:c:C:d:gH:hK:lnN:PpRSst:uVx";
++       "L"
++#endif
++#if HAVE_GNUTLS
++       "A:C:F:K:"
+ #endif
++       ;
 
-I believe you do have the relevant rights to do that, although only you
-would be able to check :-)
+ int main(int argc, char *argv[]) {
+        char* port=NBD_DEFAULT_PORT;
 
-> There are ways for a maintainer to use an email-based flow even when
-> contributors prefer a gitlab-based UI flow, but not all projects are
-> set up that way.
+--0000000000007aef3d0601cebb0f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Github has some form of "subscribe" button somewhere in the UI which
-makes all PRs be sent through email, too. Although then you don't get
-the patch and you'll have to manually pull the branch from the PR. A bit
-more involved. I don't see it as a replacement, really.
+<div dir=3D"ltr"><div>see previous thread: <a href=3D"https://lists.debian.=
+org/nbd/2023/07/msg00021.html">https://lists.debian.org/nbd/2023/07/msg0002=
+1.html</a></div><div>for the motivation behind this refactor<br></div><div>=
+<br>in commit 1b8615, the `-F` short-option was accidentally refactored out=
+ of the codebase, so that only the long-option for `-certfile` would work.<=
+br>This commit restores the `-F` short-option, as well as conditionally pop=
+ulating the `short_opts` string based on compilation-options for `NETLINK` =
+and `GNUTLS`<br>---<br>=C2=A0nbd-client.c | 9 ++++++---<br>=C2=A01 file cha=
+nged, 6 insertions(+), 3 deletions(-)<br><br>diff --git a/nbd-client.c b/nb=
+d-client.c<br>index dae4636..ac0419d 100644<br>--- a/nbd-client.c<br>+++ b/=
+nbd-client.c<br>@@ -896,11 +896,14 @@ void disconnect(char* device) {<br>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 close(nbd);<br>=C2=A0}<br>=C2=A0<br>+static con=
+st char *short_opts =3D &quot;-B:b:c:d:gH:hlnN:PpRSst:uVx&quot;<br>=C2=A0#i=
+f HAVE_NETLINK<br>-static const char *short_opts =3D &quot;-A:B:b:c:C:d:gH:=
+hK:LlnN:PpRSst:uVx&quot;;<br>-#else<br>-static const char *short_opts =3D &=
+quot;-A:B:b:c:C:d:gH:hK:lnN:PpRSst:uVx&quot;;<br>+ =C2=A0 =C2=A0 =C2=A0 &qu=
+ot;L&quot;<br>+#endif<br>+#if HAVE_GNUTLS<br>+ =C2=A0 =C2=A0 =C2=A0 &quot;A=
+:C:F:K:&quot;<br>=C2=A0#endif<br>+ =C2=A0 =C2=A0 =C2=A0 ;<br>=C2=A0<br>=C2=
+=A0int main(int argc, char *argv[]) {<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 char* =
+port=3DNBD_DEFAULT_PORT;<br></div></div>
 
-> > also, who would I ask for/how would I get the "signed off by"?
-> 
-> Git has the notion of a 'Signed-off-by:' tag that can be added to a
-> commit with project-dependent semantics; 'git commit --amend -s' is
-> one easy way to add it to an existing patch.  The Linux kernel has
-> well-defined semantics for what it means[1] (the tl;dr: "adding S-o-b
-> is a legal statement that my patch won't break the kernel's license"),
-> but other projects are laxer and some will accept submissions without
-> S-o-b.  Given how the nbd project is at the intersection of kernel and
-> userspace code, I personally use S-o-b for patches here, but Wouter as
-> the project owner has final say on whether it is a hard requirement
-> for NBD (you can find older commits in nbd.git that lacked one, and
-> 'git grep -i "certificate of origin"' has no hits yet).
-
-I tend to agree that it's probably a good idea to have them for NBD, but
-I keep forgetting to add them myself, and so it seems... improper? to
-then require it from others ;-)
-
-[...]
-> > one more thing: there's a slightly larger additional change/feature I'd
-> > like to implement: is the correct thing to do start a codeless discussion
-> > on the mailing list? or just send a larger diff (with appropriate
-> > references to commit-hashes)?
-> 
-> Either is fine for me - getting consensus on the general idea of the
-> feature before spending time writing the patches may be the smoothest
-> path forward, but sometimes patches speak for themselves.
-
-Agreed. If you're not sure whether your patch would even be accepted and
-want to discuss the general idea first, that's certainly welcome. If you
-just send a patch and it's not quite what I would like to see, however,
-I'm happy to work with you to massage it into something that will be
-more acceptable.
-
--- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
-
-I will have a Tin-Actinium-Potassium mixture, thanks.
+--0000000000007aef3d0601cebb0f--
 
