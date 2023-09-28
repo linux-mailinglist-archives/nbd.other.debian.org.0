@@ -2,68 +2,66 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F1DE7B1334
-	for <lists+nbd@lfdr.de>; Thu, 28 Sep 2023 08:39:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 855F97B1336
+	for <lists+nbd@lfdr.de>; Thu, 28 Sep 2023 08:42:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 139FD205C5; Thu, 28 Sep 2023 06:39:33 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 28 06:39:33 2023
+	id 55D2D205C5; Thu, 28 Sep 2023 06:42:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 28 06:42:09 2023
 Old-Return-Path: <yukuai1@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=4.0 tests=FOURLA,FVGT_m_MULTI_ODD,
-	NICE_REPLY_A,RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-1.4 required=4.0 tests=FOURLA,NICE_REPLY_A,
+	RCVD_IN_MSPIKE_H2 autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D832F205C5
-	for <lists-other-nbd@bendel.debian.org>; Thu, 28 Sep 2023 06:21:28 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 11326205C3
+	for <lists-other-nbd@bendel.debian.org>; Thu, 28 Sep 2023 06:26:22 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.334 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, FVGT_m_MULTI_ODD=0.02,
-	MIME_CHARSET_FARAWAY=0.02, NICE_REPLY_A=-1.473,
-	RCVD_IN_MSPIKE_H2=-0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.354 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, MIME_CHARSET_FARAWAY=0.02,
+	NICE_REPLY_A=-1.473, RCVD_IN_MSPIKE_H2=-0.001]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WpGGoQqC486n for <lists-other-nbd@bendel.debian.org>;
-	Thu, 28 Sep 2023 06:21:21 +0000 (UTC)
+	with ESMTP id Jj2cxFYMfXVm for <lists-other-nbd@bendel.debian.org>;
+	Thu, 28 Sep 2023 06:26:18 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
-X-Greylist: delayed 1062 seconds by postgrey-1.36 at bendel; Thu, 28 Sep 2023 06:21:20 UTC
 Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id CE03B20536
-	for <nbd@other.debian.org>; Thu, 28 Sep 2023 06:21:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 1DF54204E4
+	for <nbd@other.debian.org>; Thu, 28 Sep 2023 06:26:18 +0000 (UTC)
 Received: from mail02.huawei.com (unknown [172.30.67.143])
-	by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4Rx2yS4L0Xz4f3k6V
-	for <nbd@other.debian.org>; Thu, 28 Sep 2023 14:05:20 +0800 (CST)
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4Rx2yx3Rlkz4f3mJ5
+	for <nbd@other.debian.org>; Thu, 28 Sep 2023 14:05:45 +0800 (CST)
 Received: from [10.174.176.73] (unknown [10.174.176.73])
-	by APP4 (Coremail) with SMTP id gCh0CgCHHt6hFxVlUwZWBg--.8336S3;
-	Thu, 28 Sep 2023 14:05:21 +0800 (CST)
-Subject: Re: [PATCH -next 1/3] nbd: fold nbd config initialization into
- nbd_alloc_config()
+	by APP4 (Coremail) with SMTP id gCh0CgCHHt67FxVlpAxWBg--.8358S3;
+	Thu, 28 Sep 2023 14:05:47 +0800 (CST)
+Subject: Re: [PATCH -next 2/3] nbd: factor out a helper to get nbd_config
+ without holding 'config_lock'
 To: Zhong Jinghua <zhongjinghua@huaweicloud.com>, josef@toxicpanda.com,
  axboe@kernel.dk
 Cc: linux-block@vger.kernel.org, nbd@other.debian.org,
  linux-kernel@vger.kernel.org, yi.zhang@huawei.com,
  "yukuai (C)" <yukuai3@huawei.com>
 References: <20230707031536.666482-1-zhongjinghua@huaweicloud.com>
- <20230707031536.666482-2-zhongjinghua@huaweicloud.com>
+ <20230707031536.666482-3-zhongjinghua@huaweicloud.com>
 From: Yu Kuai <yukuai1@huaweicloud.com>
-Message-ID: <6ee779eb-39e4-badb-dc41-b6a6c8eb1c7e@huaweicloud.com>
-Date: Thu, 28 Sep 2023 14:05:20 +0800
+Message-ID: <f0849d52-55b8-5771-d99a-341f6af74024@huaweicloud.com>
+Date: Thu, 28 Sep 2023 14:05:46 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20230707031536.666482-2-zhongjinghua@huaweicloud.com>
+In-Reply-To: <20230707031536.666482-3-zhongjinghua@huaweicloud.com>
 Content-Type: text/plain; charset=gbk; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:gCh0CgCHHt6hFxVlUwZWBg--.8336S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxZrW8Zw43Gry3ZFyDuw17ZFb_yoW5ZrWkpF
-	45AFWjkrWUJF43GrWkA3s7WFyaywn7KF1xGry7X3sYvr9xCrWSkr1DG34fZFyUJr9rXF45
-	JFWrWFs2ka4xKrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID:gCh0CgCHHt67FxVlpAxWBg--.8358S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZrW8Zw43Gry3ZFyDKr4xXrb_yoWrJF1DpF
+	4UAa98KrWUGF15WF4vv397WrnxKwn2gFyxGry7W3WFvr9rAryakF1kKry3Zr1xGr9rJF43
+	JFWrWFZ2ka47trDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
 	9KBjDU0xBIdaVrnRJUUUyKb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
 	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
 	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
@@ -81,9 +79,9 @@ X-CFilter-Loop: Reflected
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <1G2FlJwxjRE.A.a_F.k-RFlB@bendel>
+Resent-Message-ID: <_B8s6PQ4M5N.A.DrG.BBSFlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2646
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2647
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,117 +91,119 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6ee779eb-39e4-badb-dc41-b6a6c8eb1c7e@huaweicloud.com
-Resent-Date: Thu, 28 Sep 2023 06:39:33 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/f0849d52-55b8-5771-d99a-341f6af74024@huaweicloud.com
+Resent-Date: Thu, 28 Sep 2023 06:42:09 +0000 (UTC)
 
 ÔÚ 2023/07/07 11:15, Zhong Jinghua Ð´µÀ:
 > From: Zhong Jinghua <zhongjinghua@huawei.com>
 > 
-> There are no functional changes, make the code cleaner and prepare to
-> fix null-ptr-dereference while accessing 'nbd->config'.
+> There are no functional changes, just to make code cleaner and prepare
+> to fix null-ptr-dereference while accessing 'nbd->config'.
 > 
-
 LGTM
+
 Reviewed-by: Yu Kuai <yukuai3@huawei.com>
 
 > Signed-off-by: Zhong Jinghua <zhongjinghua@huawei.com>
 > ---
->   drivers/block/nbd.c | 41 +++++++++++++++++++----------------------
->   1 file changed, 19 insertions(+), 22 deletions(-)
+>   drivers/block/nbd.c | 27 +++++++++++++++++++--------
+>   1 file changed, 19 insertions(+), 8 deletions(-)
 > 
 > diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index cb38477f359f..cd6d78914954 100644
+> index cd6d78914954..7186a9a49445 100644
 > --- a/drivers/block/nbd.c
 > +++ b/drivers/block/nbd.c
-> @@ -1526,17 +1526,20 @@ static int nbd_ioctl(struct block_device *bdev, fmode_t mode,
->   	return error;
+> @@ -393,6 +393,14 @@ static u32 req_to_nbd_cmd_type(struct request *req)
+>   	}
 >   }
 >   
-> -static struct nbd_config *nbd_alloc_config(void)
-> +static int nbd_alloc_and_init_config(struct nbd_device *nbd)
->   {
->   	struct nbd_config *config;
->   
-> +	if (WARN_ON(nbd->config))
-> +		return -EINVAL;
+> +static struct nbd_config *nbd_get_config_unlocked(struct nbd_device *nbd)
+> +{
+> +	if (refcount_inc_not_zero(&nbd->config_refs))
+> +		return nbd->config;
 > +
->   	if (!try_module_get(THIS_MODULE))
-> -		return ERR_PTR(-ENODEV);
-> +		return -ENODEV;
->   
->   	config = kzalloc(sizeof(struct nbd_config), GFP_NOFS);
->   	if (!config) {
->   		module_put(THIS_MODULE);
-> -		return ERR_PTR(-ENOMEM);
-> +		return -ENOMEM;
+> +	return NULL;
+> +}
+> +
+>   static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req)
+>   {
+>   	struct nbd_cmd *cmd = blk_mq_rq_to_pdu(req);
+> @@ -407,13 +415,13 @@ static enum blk_eh_timer_return nbd_xmit_timeout(struct request *req)
+>   		return BLK_EH_DONE;
 >   	}
 >   
->   	atomic_set(&config->recv_threads, 0);
-> @@ -1544,7 +1547,10 @@ static struct nbd_config *nbd_alloc_config(void)
->   	init_waitqueue_head(&config->conn_wait);
->   	config->blksize_bits = NBD_DEF_BLKSIZE_BITS;
->   	atomic_set(&config->live_connections, 0);
-> -	return config;
-> +	nbd->config = config;
-> +	refcount_set(&nbd->config_refs, 1);
-> +
-> +	return 0;
->   }
+> -	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+> +	config = nbd_get_config_unlocked(nbd);
+> +	if (!config) {
+>   		cmd->status = BLK_STS_TIMEOUT;
+>   		__clear_bit(NBD_CMD_INFLIGHT, &cmd->flags);
+>   		mutex_unlock(&cmd->lock);
+>   		goto done;
+>   	}
+> -	config = nbd->config;
 >   
+>   	if (config->num_connections > 1 ||
+>   	    (config->num_connections == 1 && nbd->tag_set.timeout)) {
+> @@ -975,12 +983,12 @@ static int nbd_handle_cmd(struct nbd_cmd *cmd, int index)
+>   	struct nbd_sock *nsock;
+>   	int ret;
+>   
+> -	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+> +	config = nbd_get_config_unlocked(nbd);
+> +	if (!config) {
+>   		dev_err_ratelimited(disk_to_dev(nbd->disk),
+>   				    "Socks array is empty\n");
+>   		return -EINVAL;
+>   	}
+> -	config = nbd->config;
+>   
+>   	if (index >= config->num_connections) {
+>   		dev_err_ratelimited(disk_to_dev(nbd->disk),
+> @@ -1556,6 +1564,7 @@ static int nbd_alloc_and_init_config(struct nbd_device *nbd)
 >   static int nbd_open(struct block_device *bdev, fmode_t mode)
-> @@ -1563,21 +1569,17 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
+>   {
+>   	struct nbd_device *nbd;
+> +	struct nbd_config *config;
+>   	int ret = 0;
+>   
+>   	mutex_lock(&nbd_index_mutex);
+> @@ -1568,7 +1577,9 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
+>   		ret = -ENXIO;
 >   		goto out;
 >   	}
->   	if (!refcount_inc_not_zero(&nbd->config_refs)) {
-> -		struct nbd_config *config;
-> -
+> -	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+> +
+> +	config = nbd_get_config_unlocked(nbd);
+> +	if (!config) {
 >   		mutex_lock(&nbd->config_lock);
 >   		if (refcount_inc_not_zero(&nbd->config_refs)) {
 >   			mutex_unlock(&nbd->config_lock);
->   			goto out;
->   		}
-> -		config = nbd_alloc_config();
-> -		if (IS_ERR(config)) {
-> -			ret = PTR_ERR(config);
-> +		ret = nbd_alloc_and_init_config(nbd);
-> +		if (ret) {
->   			mutex_unlock(&nbd->config_lock);
->   			goto out;
->   		}
-> -		nbd->config = config;
-> -		refcount_set(&nbd->config_refs, 1);
-> +
->   		refcount_inc(&nbd->refs);
+> @@ -1584,7 +1595,7 @@ static int nbd_open(struct block_device *bdev, fmode_t mode)
 >   		mutex_unlock(&nbd->config_lock);
 >   		if (max_part)
-> @@ -1979,22 +1981,17 @@ static int nbd_genl_connect(struct sk_buff *skb, struct genl_info *info)
->   		pr_err("nbd%d already in use\n", index);
->   		return -EBUSY;
+>   			set_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
+> -	} else if (nbd_disconnected(nbd->config)) {
+> +	} else if (nbd_disconnected(config)) {
+>   		if (max_part)
+>   			set_bit(GD_NEED_PART_SCAN, &bdev->bd_disk->state);
 >   	}
-> -	if (WARN_ON(nbd->config)) {
-> -		mutex_unlock(&nbd->config_lock);
-> -		nbd_put(nbd);
-> -		return -EINVAL;
-> -	}
-> -	config = nbd_alloc_config();
-> -	if (IS_ERR(config)) {
-> +
-> +	ret = nbd_alloc_and_init_config(nbd);
-> +	if (ret) {
->   		mutex_unlock(&nbd->config_lock);
->   		nbd_put(nbd);
->   		pr_err("couldn't allocate config\n");
-> -		return PTR_ERR(config);
-> +		return ret;
+> @@ -2194,7 +2205,8 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
 >   	}
-> -	nbd->config = config;
-> -	refcount_set(&nbd->config_refs, 1);
-> -	set_bit(NBD_RT_BOUND, &config->runtime_flags);
+>   	mutex_unlock(&nbd_index_mutex);
 >   
-> +	config = nbd->config;
-> +	set_bit(NBD_RT_BOUND, &config->runtime_flags);
->   	ret = nbd_genl_size_set(info, nbd);
->   	if (ret)
->   		goto out;
+> -	if (!refcount_inc_not_zero(&nbd->config_refs)) {
+> +	config = nbd_get_config_unlocked(nbd);
+> +	if (!config) {
+>   		dev_err(nbd_to_dev(nbd),
+>   			"not configured, cannot reconfigure\n");
+>   		nbd_put(nbd);
+> @@ -2202,7 +2214,6 @@ static int nbd_genl_reconfigure(struct sk_buff *skb, struct genl_info *info)
+>   	}
+>   
+>   	mutex_lock(&nbd->config_lock);
+> -	config = nbd->config;
+>   	if (!test_bit(NBD_RT_BOUND, &config->runtime_flags) ||
+>   	    !nbd->pid) {
+>   		dev_err(nbd_to_dev(nbd),
 > 
 
