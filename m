@@ -1,96 +1,101 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE62E7F1A19
-	for <lists+nbd@lfdr.de>; Mon, 20 Nov 2023 18:33:28 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 237CA7F25C5
+	for <lists+nbd@lfdr.de>; Tue, 21 Nov 2023 07:33:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 8AD2120608; Mon, 20 Nov 2023 17:33:28 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 20 17:33:28 2023
-Old-Return-Path: <axboe@kernel.dk>
+	id 0516B2086A; Tue, 21 Nov 2023 06:33:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov 21 06:33:12 2023
+Old-Return-Path: <linan666@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-1.0 required=4.0 tests=CC_TOO_MANY,NICE_REPLY_A,
+	RCVD_IN_MSPIKE_H2,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 53BDC20592
-	for <lists-other-nbd@bendel.debian.org>; Mon, 20 Nov 2023 17:17:09 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id BD8502066B
+	for <lists-other-nbd@bendel.debian.org>; Tue, 21 Nov 2023 06:17:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-3.01 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, MD5_SHA1_SUM=-1,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=-2.148 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, NICE_REPLY_A=-3.137,
+	RCVD_IN_MSPIKE_H2=-0.001, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id U-Yp5RhN7i5o for <lists-other-nbd@bendel.debian.org>;
-	Mon, 20 Nov 2023 17:17:01 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-io1-xd33.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com [IPv6:2607:f8b0:4864:20::d33])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 948A02049E
-	for <nbd@other.debian.org>; Mon, 20 Nov 2023 17:17:01 +0000 (UTC)
-Received: by mail-io1-xd33.google.com with SMTP id ca18e2360f4ac-7aff7bf7dafso31257139f.0
-        for <nbd@other.debian.org>; Mon, 20 Nov 2023 09:17:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1700500618; x=1701105418; darn=other.debian.org;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eB7WfUEEaC1OvWTSK9npq8Mo0A16SnQAjvLM/HQZZuI=;
-        b=sJbwqyIpUWJe0CulEbCxAniNu0FkPiBs/35iMxLtBrPT8WHVYA1yrSRCCZO3486Yex
-         9xe6D96h7N1XfSANxihef6Cz1bGN5tb1GC90Hth083ih3bKx/MiNIy/xKODRpJbpjCJz
-         Fk1+sq5KD0AkLyX7ztutkHck7nG45yotz7I555YBYVAXcD7kf0IwTRy0ofR1fU/7TpyL
-         akhcABALoL7kKvNc9bCe51DiTrjuErw6L0dw9hOqaKQWRXc4pALFbOHB+1u9XEYtH2Ea
-         kaSTwXSbIraEuCdp2nZZEPaEfBHOJjikSLcNNH764LvUBCub+JboA/ZNRjXYfs4+m5kc
-         W8nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700500618; x=1701105418;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eB7WfUEEaC1OvWTSK9npq8Mo0A16SnQAjvLM/HQZZuI=;
-        b=RY7YTNuxsGbLOMEskUiWSrAfCXwOs8QRoFHyWLyiAl/3y41BRsuhebOaQW15qCWgZh
-         PoKd8GzmHEYkwI0Gd+9ZQHiKkD+z0PsBdohidVJR/M4Bi3aaPm1do0eK3y93YgvEQj6E
-         agtey9tqeHPMmpUXBghtHLBCJ31pRp8hHrOkkBqZ9WMYsgS/hMZbhgciLqPVo3sS7Q+h
-         ATgEm1HelEz1MKK49KZ7XPP7WSXvUaucBFrNP2mgKDX5PSGHIrVjr9QDBpmNLn1Kz4UM
-         HRqJb6FYGtCGsNThvbldEK8bksoY91XpQXvU57a/39TRXq1/wfVLAzlAlTt0p1sk+9L4
-         gTDQ==
-X-Gm-Message-State: AOJu0YyXWlqOj3izDFBgXLdDouNLbUIaBISkgERMbkOo6W4I0iZgpysh
-	fIr28wSpelRil71BN0oqYWQ4dQ==
-X-Google-Smtp-Source: AGHT+IEIoY7JzwmmB4jXQdtkfpQOU8uINar07von849M9jzHSJ+h0OJXJMILhL1W2qbS/ovZ+3bm5g==
-X-Received: by 2002:a6b:fc0b:0:b0:7b0:7a86:2952 with SMTP id r11-20020a6bfc0b000000b007b07a862952mr7278834ioh.1.1700500618197;
-        Mon, 20 Nov 2023 09:16:58 -0800 (PST)
-Received: from [127.0.0.1] ([96.43.243.2])
-        by smtp.gmail.com with ESMTPSA id ds21-20020a056638285500b004645a5d3b13sm2110468jab.19.2023.11.20.09.16.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Nov 2023 09:16:57 -0800 (PST)
-From: Jens Axboe <axboe@kernel.dk>
-To: josef@toxicpanda.com, linan666@huaweicloud.com
-Cc: linux-block@vger.kernel.org, nbd@other.debian.org, 
- linux-kernel@vger.kernel.org, linan122@huawei.com, yukuai3@huawei.com, 
- yi.zhang@huawei.com, houtao1@huawei.com, yangerkun@huawei.com
-In-Reply-To: <20231116162316.1740402-1-linan666@huaweicloud.com>
-References: <20231116162316.1740402-1-linan666@huaweicloud.com>
-Subject: Re: [PATCH 0/3] fix null-ptr-deref in nbd_open()
-Message-Id: <170050061729.96172.17600082878837866184.b4-ty@kernel.dk>
-Date: Mon, 20 Nov 2023 10:16:57 -0700
+	with ESMTP id OYzSRVfFDsU5 for <lists-other-nbd@bendel.debian.org>;
+	Tue, 21 Nov 2023 06:16:54 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 2381D2043F
+	for <nbd@other.debian.org>; Tue, 21 Nov 2023 06:16:53 +0000 (UTC)
+Received: from mail.maildlp.com (unknown [172.19.163.235])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SZDfh3hqHz4f3l8b
+	for <nbd@other.debian.org>; Tue, 21 Nov 2023 14:16:44 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.112])
+	by mail.maildlp.com (Postfix) with ESMTP id 31AA81A03FD
+	for <nbd@other.debian.org>; Tue, 21 Nov 2023 14:16:47 +0800 (CST)
+Received: from [10.174.179.247] (unknown [10.174.179.247])
+	by APP1 (Coremail) with SMTP id cCh0CgBXWhBCS1xldFINBg--.30356S3;
+	Tue, 21 Nov 2023 14:16:42 +0800 (CST)
+Message-ID: <b36401c6-36b8-3855-d7c3-9788b88e1b51@huaweicloud.com>
+Date: Tue, 21 Nov 2023 14:16:34 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13-dev-26615
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: Re: [PATCH] nbd: pass nbd_sock to nbd_read_reply() instead of index
+To: Jens Axboe <axboe@kernel.dk>
+Cc: linan666@huaweicloud.com, josef@toxicpanda.com, axboe@kernel.dk,
+ linux-block@vger.kernel.org, nbd@other.debian.org,
+ linux-kernel@vger.kernel.org, yi.zhang@huawei.com, houtao1@huawei.com,
+ yangerkun@huawei.com, "yukuai (C)" <yukuai3@huawei.com>,
+ Ming Lei <ming.lei@redhat.com>
+References: <20230911023308.3467802-1-linan666@huaweicloud.com>
+ <ZRT7cVFcE6QMHfie@fedora>
+ <47669fb6-3700-e327-11af-93a92b0984a0@huaweicloud.com>
+ <ZRUt/vAQNGNp6Ugx@fedora>
+ <41161d21-299c-3657-6020-0a3a9cf109ec@huaweicloud.com>
+ <ZRU/7Bx1ZJSX3Qg3@fedora>
+ <60f9a88b-b750-3579-bdfd-5421f2040406@huaweicloud.com>
+ <ZRVGWkCzKAVVL9bV@fedora>
+ <bbadaad4-172e-af7b-2a47-52f7e7c83423@huaweicloud.com>
+ <a6393a45-8510-5734-c174-0826c7d76675@huaweicloud.com>
+ <ZT+kzw3Zm/3XJqD7@fedora>
+ <cc6274c3-b9ba-cd6e-5ef4-af736b1a1f13@huaweicloud.com>
+From: Li Nan <linan666@huaweicloud.com>
+In-Reply-To: <cc6274c3-b9ba-cd6e-5ef4-af736b1a1f13@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:cCh0CgBXWhBCS1xldFINBg--.30356S3
+X-Coremail-Antispam: 1UD129KBjvdXoW7XrWDKF13Jr1ktrWfAw43Wrg_yoW3Zrb_WF
+	W0kr18Xw43JFnYqF9FkryfXrs3WF1Fq34rXr4Fvw45Xw13u3ykKF93X39avw18Gay8Cwn2
+	kr95W3yjg39xWjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbSxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+	A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
+	6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+	Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Gr0_Cr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIF
+	xwACI402YVCY1x02628vn2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7V
+	AKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCj
+	r7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6x
+	IIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAI
+	w20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6x
+	kF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5vtCUUUUU
+X-CM-SenderInfo: polqt0awwwqx5xdzvxpfor3voofrz/
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <9Dt3Y6xWUNN.A._dB.oh5WlB@bendel>
+Resent-Message-ID: <Af0DBId-cPM.A.U3E.o8EXlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2676
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2677
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -100,34 +105,36 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/170050061729.96172.17600082878837866184.b4-ty@kernel.dk
-Resent-Date: Mon, 20 Nov 2023 17:33:28 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/b36401c6-36b8-3855-d7c3-9788b88e1b51@huaweicloud.com
+Resent-Date: Tue, 21 Nov 2023 06:33:13 +0000 (UTC)
 
+Hi, Jens
 
-On Fri, 17 Nov 2023 00:23:13 +0800, linan666@huaweicloud.com wrote:
-> Li Nan (3):
->   nbd: fold nbd config initialization into nbd_alloc_config()
->   nbd: factor out a helper to get nbd_config without holding
->     'config_lock'
->   nbd: fix null-ptr-dereference while accessing 'nbd->config'
+This patch has been reviewed by Yu Kuai and Ming Lei. Could you please
+consider apply it?
+
+在 2023/10/30 21:16, Yu Kuai 写道:
+> 在 2023/10/30 20:42, Ming Lei 写道:
 > 
-> drivers/block/nbd.c | 82 +++++++++++++++++++++++++++++----------------
->  1 file changed, 53 insertions(+), 29 deletions(-)
+>>> After reviewing some code, I found that it's wrong to grab config_lock,
+>>> because other context will grab such lock and flush_workqueue(), and
+>>> there is no gurantee that recv_work() will grab the lock first.
+>>>
+>>> Will it be acceptable to export blk_queue_enter()? I can't think of
+>>> other way to retrieve the`nsock` reference at the entry of recv_work().
+>>
+>> Then I think it is easier to pass `nsock` from `recv_thread_args`, which
+>> can be thought as local variable too.
+>>
+>> Reviewed-by: Ming Lei <ming.lei@redhat.com>
 > 
-> [...]
+> Agreed
+> 
+> Reviewed-by: Yu Kuai <yukuai3@huawei.com>
+> 
+> .
 
-Applied, thanks!
-
-[1/3] nbd: fold nbd config initialization into nbd_alloc_config()
-      commit: 1b59860540a4018e8071dc18d4893ec389506b7d
-[2/3] nbd: factor out a helper to get nbd_config without holding 'config_lock'
-      commit: 3123ac77923341774ca3ad1196ad20bb0732bf70
-[3/3] nbd: fix null-ptr-dereference while accessing 'nbd->config'
-      commit: c2da049f419417808466c529999170f5c3ef7d3d
-
-Best regards,
 -- 
-Jens Axboe
-
-
+Thanks,
+Nan
 
