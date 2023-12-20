@@ -2,81 +2,80 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7ED28803CE2
-	for <lists+nbd@lfdr.de>; Mon,  4 Dec 2023 19:24:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FE15819991
+	for <lists+nbd@lfdr.de>; Wed, 20 Dec 2023 08:33:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3539620828; Mon,  4 Dec 2023 18:24:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Dec  4 18:24:13 2023
+	id 6C84D205BD; Wed, 20 Dec 2023 07:33:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Dec 20 07:33:12 2023
 Old-Return-Path: <htejun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: ***
-X-Spam-Status: No, score=3.4 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FOURLA,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,FVGT_m_MULTI_ODD,HEADER_FROM_DIFFERENT_DOMAINS,
-	RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=3.3 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E3C37205EC
-	for <lists-other-nbd@bendel.debian.org>; Mon,  4 Dec 2023 18:07:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 47DCF206A3
+	for <lists-other-nbd@bendel.debian.org>; Wed, 20 Dec 2023 07:15:13 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.511 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=1.391 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
-	FREEMAIL_FROM=0.001, FVGT_m_MULTI_ODD=0.02,
-	HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+	DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+	FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 4_4REo0wvhYp for <lists-other-nbd@bendel.debian.org>;
-	Mon,  4 Dec 2023 18:07:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
+	with ESMTP id M_hTlDWcm0Di for <lists-other-nbd@bendel.debian.org>;
+	Wed, 20 Dec 2023 07:15:05 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .gmail. - helo: .mail-pl1-x62b.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com [IPv6:2607:f8b0:4864:20::62b])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id DA98520563
-	for <nbd@other.debian.org>; Mon,  4 Dec 2023 18:07:13 +0000 (UTC)
-Received: by mail-pf1-x42a.google.com with SMTP id d2e1a72fcca58-6ce416a74d5so907359b3a.2
-        for <nbd@other.debian.org>; Mon, 04 Dec 2023 10:07:13 -0800 (PST)
+	by bendel.debian.org (Postfix) with ESMTPS id 9A65020706
+	for <nbd@other.debian.org>; Wed, 20 Dec 2023 07:15:05 +0000 (UTC)
+Received: by mail-pl1-x62b.google.com with SMTP id d9443c01a7336-1d3b547cd4cso15683855ad.1
+        for <nbd@other.debian.org>; Tue, 19 Dec 2023 23:15:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701713230; x=1702318030; darn=other.debian.org;
+        d=gmail.com; s=20230601; t=1703056501; x=1703661301; darn=other.debian.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vnKGL9rVmaXJ0k7UQTGGb8qgGBw3yaFYXulmlj0ClVk=;
-        b=XXJNUFLiweg6kA/GHHeTpoM+9blSCNibftL46UDAGS/8/sKaM7z64TqPgUTVmXRwfm
-         rbTUTfqaHaAvIffqDVwBq52n7HaD0jd6sJ29r0yrjX/0Lnd1NtFFH7o3PqoeE+luse3O
-         9x+yVUWrTbAPhyDFspc/DJqKNoKb94pl5e9cuyCzPTnMHrbTwVpifiaB4iRLqvvwg1H3
-         QSWiRkEZz11mr19OlCy56mpHsX8rfJdXMLEzt2C36rNcfXdINsh2h+/9c9kItdkx5j2A
-         ut8SBpPGGbGhEmWrowsmzO4k8i1Fd8xi6iCJHoSlhuhxjkFwUwWpk693suK+wCmz6VqS
-         h/jw==
+        bh=eJqWdKRl0UBq0Wj+r8chL9QmhrnrulM60eoe1tH98KY=;
+        b=IFKyIGvDs9Z6WDhnFa/Yutxtz0h9Y3BCclDsptUcyS+/bqk92fgD7v9buDSA3IC61x
+         NrtjZMyNUz2BHVR4p7GCS8tS0vPHoGyWm6NBNQieCByImdRFHFwsnb4R6j1t0iEhoJ1d
+         Pk/2dJeBIq/OLAmbzgQ3y5DMmNS5YWG+lmqT0RFlTXvVp3WESLsPhUObvZcOwrbzXEhO
+         EtYUcKDNSAQg9ceCHkxhyuhocJvcYe52HrxUEWlr551lZEnLzxNqrqS44rT9yt4ZUsaq
+         3VeWZgjHunwCJ6f2lLXkHXIUNkdWzpHRkdkUOKSY7AXjfbzGrWZGU86zde9WO4bitGU7
+         ubPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701713230; x=1702318030;
+        d=1e100.net; s=20230601; t=1703056501; x=1703661301;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vnKGL9rVmaXJ0k7UQTGGb8qgGBw3yaFYXulmlj0ClVk=;
-        b=c6ZzFOP3//1niMtKWbHaMQveIvkLxnXfTOXV5gy96iHU6gzCYZ5oICgX1zsLBz+jP4
-         tWBjikx6sQ7D+M0bN5/419BQNWRxdpF9TtBDsozbY0J89rvCdW/rHZACKuCvtJQW3jfb
-         bdGQsP0Hko8P975u3yoss/6yYvxnSZSiRMHh3l3CzFVVov8EOrZx5nEGncstrKJROfCY
-         9iy3W+aNYx53PELgYg5gbMS43dWHepJa9B16HqwjNjc6aL8C9bqOi5FBQb4llnPK66+z
-         HFHVJ2JpM+X2Ies1Y1SGDMbaFt0KVu7gtEfLxVTrcbY65ICZCZLvsCgwl4814efDe2CX
-         hV7Q==
-X-Gm-Message-State: AOJu0YxiUKKoQ4CxcmF3zet2wD5nsGhUrQn1Ys+qWpUSOKtvFaeU5r6R
-	JrOjp3wVRTdzt/VJOjJn0uA=
-X-Google-Smtp-Source: AGHT+IGDIGeeBa7UWPj4E4w2SIGHBjZgGz8oxGqwAWzNb+KD7mpnEvIno4bt3NIHORxil3wMtNwC4w==
-X-Received: by 2002:a05:6a20:1448:b0:18c:374c:6e64 with SMTP id a8-20020a056a20144800b0018c374c6e64mr27716780pzi.36.1701713229690;
-        Mon, 04 Dec 2023 10:07:09 -0800 (PST)
-Received: from localhost ([2620:10d:c090:400::4:27ef])
-        by smtp.gmail.com with ESMTPSA id u2-20020a056a00158200b006cdd507ca2esm7943470pfk.167.2023.12.04.10.07.08
+        bh=eJqWdKRl0UBq0Wj+r8chL9QmhrnrulM60eoe1tH98KY=;
+        b=Xao6Bxwmm/PdTWLy8NXx7a4ZM77/lzF3d9FySjgsyoo27TcnFTdNBBAOENoCBaOstf
+         MBDNCyWFrzMwRof9Twass5t65c/nxO8PW7rRW7iSuNIhP9S1kq+ose7Z6h6V/rahrvoS
+         aXeAZ0ytkUzCE4KFCSiAK5YFBcYN8EyApbhbLb7PFP+cpaQvzD6aSt/Uw7ZUav+wOm0S
+         ZmX+KaStem9whgi2PG3RTW49gdL4nn35E3LPQ4mzGr80nSe2Lf7MKwIlFhdW5i4UbX7H
+         /ywAYkYiHdV/6FbF5QZU3dmCxQnXz5L5vepFsrbHMqtDmGQqEtdz0yO1M0nYRanGzulu
+         oFyg==
+X-Gm-Message-State: AOJu0Yx5KkRMYsyJWuu9zfdGBXCC36TZQp2At1UOY6trS1L2YSuSKF19
+	B+YepBUzwBLt8aafrSdvhU4=
+X-Google-Smtp-Source: AGHT+IH2/KQGWsEEIk+CfQb//I/X1FN9i9PYn0R8hU2YQDfX0MobECujamcRsnvnV4o1L8WIa9T7SQ==
+X-Received: by 2002:a17:903:947:b0:1d3:be34:7862 with SMTP id ma7-20020a170903094700b001d3be347862mr3583611plb.9.1703056501427;
+        Tue, 19 Dec 2023 23:15:01 -0800 (PST)
+Received: from localhost (dhcp-72-253-202-210.hawaiiantel.net. [72.253.202.210])
+        by smtp.gmail.com with ESMTPSA id m2-20020a170902bb8200b001cfd2cb1907sm22210314pls.206.2023.12.19.23.15.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Dec 2023 10:07:09 -0800 (PST)
+        Tue, 19 Dec 2023 23:15:00 -0800 (PST)
 Sender: Tejun Heo <htejun@gmail.com>
-Date: Mon, 4 Dec 2023 08:07:07 -1000
+Date: Tue, 19 Dec 2023 21:14:59 -1000
 From: Tejun Heo <tj@kernel.org>
 To: Naohiro Aota <Naohiro.Aota@wdc.com>
 Cc: Lai Jiangshan <jiangshanlai@gmail.com>,
@@ -125,7 +124,7 @@ Cc: Lai Jiangshan <jiangshanlai@gmail.com>,
 	"wireguard@lists.zx2c4.com" <wireguard@lists.zx2c4.com>
 Subject: Re: Performance drop due to alloc_workqueue() misuse and recent
  change
-Message-ID: <ZW4VS3Z0auYCjg-W@slm.duckdns.org>
+Message-ID: <ZYKUc7MUGvre2lGQ@slm.duckdns.org>
 References: <dbu6wiwu3sdhmhikb2w6lns7b27gbobfavhjj57kwi2quafgwl@htjcc5oikcr3>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -134,9 +133,9 @@ In-Reply-To: <dbu6wiwu3sdhmhikb2w6lns7b27gbobfavhjj57kwi2quafgwl@htjcc5oikcr3>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <n0NzuItN3CG.A.C9.NlhblB@bendel>
+Resent-Message-ID: <w553AaLE2IF.A.WNC.4ipglB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2687
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2688
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -146,130 +145,21 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZW4VS3Z0auYCjg-W@slm.duckdns.org
-Resent-Date: Mon,  4 Dec 2023 18:24:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ZYKUc7MUGvre2lGQ@slm.duckdns.org
+Resent-Date: Wed, 20 Dec 2023 07:33:12 +0000 (UTC)
 
-Hello,
+Hello, again.
 
 On Mon, Dec 04, 2023 at 04:03:47PM +0000, Naohiro Aota wrote:
-> Recently, commit 636b927eba5b ("workqueue: Make unbound workqueues to use
-> per-cpu pool_workqueues") changed WQ_UNBOUND workqueue's behavior. It
-> changed the meaning of alloc_workqueue()'s max_active from an upper limit
-> imposed per NUMA node to a limit per CPU. As a result, massive number of
-> workers can be running at the same time, especially if the workqueue user
-> thinks the max_active is a global limit.
-> 
-> Actually, it is already written it is per-CPU limit in the documentation
-> before the commit. However, several callers seem to misuse max_active,
-> maybe thinking it is a global limit. It is an unexpected behavior change
-> for them.
-
-Right, and the behavior has been like that for a very long time and there
-was no other way to achieve reasonable level of concurrency, so the current
-situation is expected.
-
-> For example, these callers set max_active = num_online_cpus(), which is a
-> suspicious limit applying to per-CPU. This config means we can have nr_cpu
-> * nr_cpu active tasks working at the same time.
-
-Yeah, that sounds like a good indicator.
-
-> fs/f2fs/data.c: sbi->post_read_wq = alloc_workqueue("f2fs_post_read_wq",
-> fs/f2fs/data.c-                                          WQ_UNBOUND | WQ_HIGHPRI,
-> fs/f2fs/data.c-                                          num_online_cpus());
-> 
-> fs/crypto/crypto.c:     fscrypt_read_workqueue = alloc_workqueue("fscrypt_read_queue",
-> fs/crypto/crypto.c-                                              WQ_UNBOUND | WQ_HIGHPRI,
-> fs/crypto/crypto.c-                                              num_online_cpus());
-> 
-> fs/verity/verify.c:     fsverity_read_workqueue = alloc_workqueue("fsverity_read_queue",
-> fs/verity/verify.c-                                               WQ_HIGHPRI,
-> fs/verity/verify.c-                                               num_online_cpus());
-> 
-> drivers/crypto/hisilicon/qm.c:  qm->wq = alloc_workqueue("%s", WQ_HIGHPRI | WQ_MEM_RECLAIM |
-> drivers/crypto/hisilicon/qm.c-                           WQ_UNBOUND, num_online_cpus(),
-> drivers/crypto/hisilicon/qm.c-                           pci_name(qm->pdev));
-> 
-> block/blk-crypto-fallback.c:    blk_crypto_wq = alloc_workqueue("blk_crypto_wq",
-> block/blk-crypto-fallback.c-                                    WQ_UNBOUND | WQ_HIGHPRI |
-> block/blk-crypto-fallback.c-                                    WQ_MEM_RECLAIM, num_online_cpus());
-> 
-> drivers/md/dm-crypt.c:          cc->crypt_queue = alloc_workqueue("kcryptd/%s",
-> drivers/md/dm-crypt.c-                                            WQ_CPU_INTENSIVE | WQ_MEM_RECLAIM | WQ_UNBOUND,
-> drivers/md/dm-crypt.c-                                            num_online_cpus(), devname);
-
-Most of these work items are CPU bound but not completley so. e.g.
-kcrypt_crypt_write_continue() does wait_for_completion(), so setting
-max_active to 1 likely isn't what they want either. They mostly want some
-reasonable system-wide concurrency limit w.r.t. the CPU count while keeping
-some level of flexibility in terms of task placement.
-
-The previous max_active wasn't great for this because its meaning changed
-depending on the number of nodes. Now, the meaning doesn't change but it's
-not really useful for the above purpose. It's only useful for avoiding
-melting the system completely.
-
-One way to go about it is to declare that concurrency level management for
-unbound workqueue is on users but that seems not ideal given many use cases
-would want it anyway.
-
-Let me think it over but I think the right way to go about it is going the
-other direction - ie. making max_active apply to the whole system regardless
-of the number of nodes / ccx's / whatever.
-
-> Furthermore, the change affects performance in a certain case.
-> 
-> Btrfs creates several WQ_UNBOUND workqueues with a default max_active =
-> min(NRCPUS + 2, 8). As my machine has 96 CPUs with NUMA disabled, this
-> max_active config allows running over 700 active works. Before the commit,
-> it is limited to 8 if NUMA is disabled or limited to 16 if NUMA nodes is 2.
-> 
-> I reverted the workqueue code back to before the commit, and I ran the
-> following fio command on RAID0 btrfs on 6 SSDs.
-> 
-> fio --group_reporting --eta=always --eta-interval=30s --eta-newline=30s \
->     --rw=write --fallocate=none \
->     --direct=1 --ioengine=libaio --iodepth=32 \
->     --filesize=100G \
->     --blocksize=64k \
->     --time_based --runtime=300s \
->     --end_fsync=1 \
->     --directory=${MNT} \
->     --name=writer --numjobs=32
-> 
-> By changing workqueue's max_active, the result varies.
-> 
-> - wq max_active=8   (intended limit by btrfs?)
->   WRITE: bw=2495MiB/s (2616MB/s), 2495MiB/s-2495MiB/s (2616MB/s-2616MB/s), io=753GiB (808GB), run=308953-308953msec
-> - wq max_active=16  (actual limit on 2 NUMA nodes setup)
->   WRITE: bw=1736MiB/s (1820MB/s), 1736MiB/s-1736MiB/s (1820MB/s-1820MB/s), io=670GiB (720GB), run=395532-395532msec
-> - wq max_active=768 (simulating current limit)
->   WRITE: bw=1276MiB/s (1338MB/s), 1276MiB/s-1276MiB/s (1338MB/s-1338MB/s), io=375GiB (403GB), run=300984-300984msec
-> 
-> The current performance is slower than the previous limit (max_active=16)
-> by 27%, or it is 50% slower than the intended limit.  The performance drop
-> might be due to contention of the btrfs-endio-write works. There are over
-> 700 kworker instances were created and 100 works are on the 'D' state
-> competing for a lock.
-> 
-> More specifically, I tested the same workload on the commit.
-> 
-> - At commit 636b927eba5b ("workqueue: Make unbound workqueues to use per-cpu pool_workqueues")
->   WRITE: bw=1191MiB/s (1249MB/s), 1191MiB/s-1191MiB/s (1249MB/s-1249MB/s), io=350GiB (376GB), run=300714-300714msec
-> - At the previous commit = 4cbfd3de73 ("workqueue: Call wq_update_unbound_numa() on all CPUs in NUMA node on CPU hotplug")
->   WRITE: bw=1747MiB/s (1832MB/s), 1747MiB/s-1747MiB/s (1832MB/s-1832MB/s), io=748GiB (803GB), run=438134-438134msec
-> 
-> So, it is -31.8% performance down with the commit.
-> 
+...
 > In summary, we misuse max_active, considering it is a global limit. And,
 > the recent commit introduced a huge performance drop in some cases.  We
 > need to review alloc_workqueue() usage to check if its max_active setting
 > is proper or not.
 
-Thanks a lot for the report. I think it's a lot more reasonable to assume
-that max_active is global for unbound workqueues. The current workqueue
-behavior is not very intuitive or useful. I'll try to find something more
-reasonable. Thanks for the report and analysis. Much appreciated.
+Can you please test the following branch?
+
+ https://git.kernel.org/pub/scm/linux/kernel/git/tj/wq.git unbound-system-wide-max_active
 
 Thanks.
 
