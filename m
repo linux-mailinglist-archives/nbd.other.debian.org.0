@@ -1,97 +1,107 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5965D830A50
-	for <lists+nbd@lfdr.de>; Wed, 17 Jan 2024 17:03:30 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id B7EE3830F0E
+	for <lists+nbd@lfdr.de>; Wed, 17 Jan 2024 23:06:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 3C6022071F; Wed, 17 Jan 2024 16:03:30 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 17 16:03:30 2024
-Old-Return-Path: <axboe@kernel.dk>
+	id 847D3205FA; Wed, 17 Jan 2024 22:06:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 17 22:06:09 2024
+Old-Return-Path: <roker@pep-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE,
-	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-14.5 required=4.0 tests=KHOP_HELO_FCRDNS,
+	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE,PLING_QUERY,
+	SARE_HEAD_8BIT_SPAM,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 89FBC2082A
-	for <lists-other-nbd@bendel.debian.org>; Wed, 17 Jan 2024 15:48:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6CBFE205F2
+	for <lists-other-nbd@bendel.debian.org>; Wed, 17 Jan 2024 22:05:58 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.01 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, MD5_SHA1_SUM=-1,
-	RCVD_IN_DNSWL_NONE=-0.0001, T_SCC_BODY_TEXT_LINE=-0.01,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-11.021 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
+	PGPSIGNATURE=-5, PLING_QUERY=0.1, SARE_HEAD_8BIT_SPAM=0.888,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id RVUsF81JML2y for <lists-other-nbd@bendel.debian.org>;
-	Wed, 17 Jan 2024 15:48:06 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-io1-xd2c.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com [IPv6:2607:f8b0:4864:20::d2c])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "GTS CA 1D4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id CEF9420833
-	for <nbd@other.debian.org>; Wed, 17 Jan 2024 15:48:06 +0000 (UTC)
-Received: by mail-io1-xd2c.google.com with SMTP id ca18e2360f4ac-7bed82030faso60661539f.1
-        for <nbd@other.debian.org>; Wed, 17 Jan 2024 07:48:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1705506482; x=1706111282; darn=other.debian.org;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MBwQPpl+zXik806WtECeSYlAHrweUHc1hm7lYkwTJFs=;
-        b=ihDlJbZAVntAxWx6+JBknWko5KesBKSPtyqnRGpr2q6ADpwSLQTSSOonlUxZR9KJa8
-         D8PR8Nmh4fp7sVV14PyPHoBKHTlrGYe1BWA2FgpqXLxaO9Sb1U9FLEu9//R3Ql2gxuNM
-         jkF2RccOX56VQCwp2Jntuv9WC52ygpFCtV5zeYaY5LH6fZpW4To0scoS+xJr7bxYfxLJ
-         cRSTA/9sXeOIlRuEcBZumI2R0jXossyWlxw5AJTcZ01QtMa7DoVoAik/kZ6OeuUUWAeu
-         vtG9oQ/G09arjgR2gNZYoEVNkK75LmLx5qSv5G3/DFZ+Mf4TktY+RXgjtPbx6RiIdiKW
-         dS/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705506482; x=1706111282;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=MBwQPpl+zXik806WtECeSYlAHrweUHc1hm7lYkwTJFs=;
-        b=MgnrU0SiDjePihQ59ri2/9VR4g9m9uVahknylwYxjL69sNXutLfnGrI9GP9Rjpe0Ew
-         /8863NCfkSYUtXHZ4knjXNLgAWVuRKQ6EUZJFY2g+Jg8HQaTfcacfsUxDFY6Hg+X3UCp
-         vy/N06e6IjV4NeAkkTdQQQgTyKryjDnBh9Iu4hlH1PU9wqTX29Zdt6YkcC50WrnTOBGV
-         ArAT+2O3jVfgY+yXG8lTygPk4JDXIVpHrN8ifvTP6ykRlTTpBOl5nq0sUUL3XpvFdzWE
-         M8amkENPuuhW/TEoffiRktKDiWfM/LNU0d8631jGq/6zncFgm0N5nskhIVZpXckCTfoH
-         YC0Q==
-X-Gm-Message-State: AOJu0YxOTYqN5finbHwQ6+46XvvvvD8fbHewTEbLw5z08VfqLdjdGp4O
-	ngHGNOX12f0i55UsD/RMnShUj6zCD4TD14H7tNOiBeov57QJ4g==
-X-Google-Smtp-Source: AGHT+IFZZGSI3LvvEy+XRSDgw/MUW2O98Sa/T0cEKhvZ1zzsrKqvOW8y4/IMwgbP32kgoihbqtn42w==
-X-Received: by 2002:a6b:5803:0:b0:7bf:4758:2a12 with SMTP id m3-20020a6b5803000000b007bf47582a12mr8519442iob.0.1705506482496;
-        Wed, 17 Jan 2024 07:48:02 -0800 (PST)
-Received: from [127.0.0.1] ([96.43.243.2])
-        by smtp.gmail.com with ESMTPSA id c34-20020a029625000000b0046e4c2f9f5csm482353jai.28.2024.01.17.07.48.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jan 2024 07:48:01 -0800 (PST)
-From: Jens Axboe <axboe@kernel.dk>
-To: Eric Dumazet <edumazet@google.com>
-Cc: linux-kernel <linux-kernel@vger.kernel.org>, netdev@vger.kernel.org, 
- Eric Dumazet <eric.dumazet@gmail.com>, syzbot <syzkaller@googlegroups.com>, 
- stable@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>, 
- linux-block@vger.kernel.org, nbd@other.debian.org
-In-Reply-To: <20240112132657.647112-1-edumazet@google.com>
-References: <20240112132657.647112-1-edumazet@google.com>
-Subject: Re: [PATCH net] nbd: always initialize struct msghdr completely
-Message-Id: <170550648165.620853.7074880501945877841.b4-ty@kernel.dk>
-Date: Wed, 17 Jan 2024 08:48:01 -0700
+	with ESMTP id rlBHq00-aZQP for <lists-other-nbd@bendel.debian.org>;
+	Wed, 17 Jan 2024 22:05:50 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 2ADB4205E2
+	for <nbd@other.debian.org>; Wed, 17 Jan 2024 22:05:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dragon.pibit.ch (Postfix) with ESMTP id 848B02143980
+	for <nbd@other.debian.org>; Wed, 17 Jan 2024 23:05:47 +0100 (CET)
+Received: from pibit.ch ([127.0.0.1])
+ by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eZafBI2EyGob for <nbd@other.debian.org>;
+ Wed, 17 Jan 2024 23:05:47 +0100 (CET)
+Received: from 127.0.0.1 (pd9e55c12.dip0.t-ipconnect.de [217.229.92.18])
+	by dragon.pibit.ch (Postfix) with ESMTPSA id 5EDC52142AAC
+	for <nbd@other.debian.org>; Wed, 17 Jan 2024 23:05:47 +0100 (CET)
+Message-ID: <17bccae2-5e7e-4b00-879f-3d57d4778257@pep-project.org>
+Date: Wed, 17 Jan 2024 23:05:44 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.5-dev-2aabd
-X-Rc-Spam: 2008-11-04_01
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?Q?Re=3A_Can_dependency_to_=22docbook-utils=22_be_made_optio?=
+ =?UTF-8?Q?nal=3F_=E2=80=94_Thank_you_for_the_fixes!?=
+Content-Language: de-DE
+To: nbd@other.debian.org
+References: <19b8472a-305c-4f23-a985-c5567a10b5df@pep-project.org>
+ <ZaeZXU9HZx3IAMvS@pc220518.home.grep.be>
+From: Lars Rohwedder <roker@pep-project.org>
+Autocrypt: addr=roker@pep-project.org; keydata=
+ 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
+ GIaZVwoJisucuww=
+Organization: =?UTF-8?B?8J+Ukg==?=
+In-Reply-To: <ZaeZXU9HZx3IAMvS@pc220518.home.grep.be>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------eNoa1kBatG8B6Utkwh0N08S8"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QLhs_wEet0O.A.uUC.Sp_plB@bendel>
+Resent-Message-ID: <5nENDv-vTaE.A.pg.R9EqlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2712
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2713
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -101,42 +111,48 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/170550648165.620853.7074880501945877841.b4-ty@kernel.dk
-Resent-Date: Wed, 17 Jan 2024 16:03:30 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/17bccae2-5e7e-4b00-879f-3d57d4778257@pep-project.org
+Resent-Date: Wed, 17 Jan 2024 22:06:09 +0000 (UTC)
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------eNoa1kBatG8B6Utkwh0N08S8
+Content-Type: multipart/mixed; boundary="------------NhaUsXzAvEUo09OIyEIGUaN8";
+ protected-headers="v1"
+From: Lars Rohwedder <roker@pep-project.org>
+To: nbd@other.debian.org
+Message-ID: <17bccae2-5e7e-4b00-879f-3d57d4778257@pep-project.org>
+Subject: =?UTF-8?Q?Re=3A_Can_dependency_to_=22docbook-utils=22_be_made_optio?=
+ =?UTF-8?Q?nal=3F_=E2=80=94_Thank_you_for_the_fixes!?=
+References: <19b8472a-305c-4f23-a985-c5567a10b5df@pep-project.org>
+ <ZaeZXU9HZx3IAMvS@pc220518.home.grep.be>
+In-Reply-To: <ZaeZXU9HZx3IAMvS@pc220518.home.grep.be>
 
-On Fri, 12 Jan 2024 13:26:57 +0000, Eric Dumazet wrote:
-> syzbot complains that msg->msg_get_inq value can be uninitialized [1]
-> 
-> struct msghdr got many new fields recently, we should always make
-> sure their values is zero by default.
-> 
-> [1]
->  BUG: KMSAN: uninit-value in tcp_recvmsg+0x686/0xac0 net/ipv4/tcp.c:2571
->   tcp_recvmsg+0x686/0xac0 net/ipv4/tcp.c:2571
->   inet_recvmsg+0x131/0x580 net/ipv4/af_inet.c:879
->   sock_recvmsg_nosec net/socket.c:1044 [inline]
->   sock_recvmsg+0x12b/0x1e0 net/socket.c:1066
->   __sock_xmit+0x236/0x5c0 drivers/block/nbd.c:538
->   nbd_read_reply drivers/block/nbd.c:732 [inline]
->   recv_work+0x262/0x3100 drivers/block/nbd.c:863
->   process_one_work kernel/workqueue.c:2627 [inline]
->   process_scheduled_works+0x104e/0x1e70 kernel/workqueue.c:2700
->   worker_thread+0xf45/0x1490 kernel/workqueue.c:2781
->   kthread+0x3ed/0x540 kernel/kthread.c:388
->   ret_from_fork+0x66/0x80 arch/x86/kernel/process.c:147
->   ret_from_fork_asm+0x11/0x20 arch/x86/entry/entry_64.S:242
-> 
-> [...]
+--------------NhaUsXzAvEUo09OIyEIGUaN8
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Applied, thanks!
+DQpUaGFuayB5b3UgZm9yIGFsbCB0aGUgZml4ZXMgeW91IG1hZGUgcmVjZW50bHkhDQoNCvCf
+kY0NCg0KTC4NCg==
 
-[1/1] nbd: always initialize struct msghdr completely
-      commit: 78fbb92af27d0982634116c7a31065f24d092826
+--------------NhaUsXzAvEUo09OIyEIGUaN8--
 
-Best regards,
--- 
-Jens Axboe
+--------------eNoa1kBatG8B6Utkwh0N08S8
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmWoTzgFAwAAAAAACgkQz24L8sM/oJ6G
+zQxAr3dGiTcAUSnFKb2YcIGWM9mjYS+3z9m41a21wZ3Ovt4QqLd4A2vA6dWpfRlXBY3+vBX7ESrr
+yiJMa8oiM4KBfxf24NP2TVxn5sHeLHke8kn2AYhUZjvxdk9qL5+xRCQ50goRQmCk2HB4X7pvT+yu
+sjR1KaEvcfyyZDOvsZgDtP2XM2P5+w8dy0eMoVJRa0shvGLUQit1hAyG+dlrys1pyObl4eHO8+5H
+RzvoR3UFxjZ9G6B5AJ/PFqenHCJfs9i8pag4FIIMuJouQ4Utg7Ig5RJ072kGSuQtPw9UQ+/CGC5I
+74aUAnF3rihIGjFtmeZcp0txaGVLPWxKMUDERUyykwt6SusPRHR+p6VvGV1wcQ+CGoxe4ZdKrVcD
+jNy+rjqg2yA2D1Gc3GlpnirUtJm7kyDGqk7Sw0zAKFbRF3OEgtD0e7yGZ1YqiMRqYiHhZxHLOIxi
+zaH/ycEy1j3Jiga/14YKGoFrsKVzf8WPysQ5TIBcsBzdN99qorjX0o3hMyncxuS7yARfjh0=
+=RFOx
+-----END PGP SIGNATURE-----
+
+--------------eNoa1kBatG8B6Utkwh0N08S8--
 
