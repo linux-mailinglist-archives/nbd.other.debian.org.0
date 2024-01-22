@@ -2,102 +2,132 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1EA38316C7
-	for <lists+nbd@lfdr.de>; Thu, 18 Jan 2024 11:46:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B72E68362C1
+	for <lists+nbd@lfdr.de>; Mon, 22 Jan 2024 13:02:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6F1BE207AD; Thu, 18 Jan 2024 10:46:56 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Jan 18 10:46:56 2024
-Old-Return-Path: <roker@pep-project.org>
+	id 68B3020784; Mon, 22 Jan 2024 12:02:18 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 22 12:02:18 2024
+Old-Return-Path: <l.stelmach@samsung.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=4.0 tests=KHOP_HELO_FCRDNS,
-	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-12.6 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MD5_SHA1_SUM,PGPSIGNATURE,
+	RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id ED549207A6
-	for <lists-other-nbd@bendel.debian.org>; Thu, 18 Jan 2024 10:46:44 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 993FA20740
+	for <lists-other-nbd@bendel.debian.org>; Mon, 22 Jan 2024 12:02:07 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-12.009 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
-	PGPSIGNATURE=-5, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-15.966 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-2.758, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MD5_SHA1_SUM=-1, PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id dTVUc7nzYbXc for <lists-other-nbd@bendel.debian.org>;
-	Thu, 18 Jan 2024 10:46:41 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 1655E207A5
-	for <nbd@other.debian.org>; Thu, 18 Jan 2024 10:46:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dragon.pibit.ch (Postfix) with ESMTP id 41F092140270
-	for <nbd@other.debian.org>; Thu, 18 Jan 2024 11:46:38 +0100 (CET)
-Received: from pibit.ch ([127.0.0.1])
- by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
- id El37OqiCinUj for <nbd@other.debian.org>;
- Thu, 18 Jan 2024 11:46:38 +0100 (CET)
-Received: from 127.0.0.1 (pd9e55c12.dip0.t-ipconnect.de [217.229.92.18])
-	by dragon.pibit.ch (Postfix) with ESMTPSA id 1B1F42140268
-	for <nbd@other.debian.org>; Thu, 18 Jan 2024 11:46:38 +0100 (CET)
-Message-ID: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
-Date: Thu, 18 Jan 2024 11:46:36 +0100
+	with ESMTP id SPTjhZ45kj9d for <lists-other-nbd@bendel.debian.org>;
+	Mon, 22 Jan 2024 12:01:57 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 555 seconds by postgrey-1.36 at bendel; Mon, 22 Jan 2024 12:01:57 UTC
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mailout1.w1.samsung.com", Issuer "DigiCert Global G2 TLS RSA SHA256 2020 CA1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id DE9772071C
+	for <nbd@other.debian.org>; Mon, 22 Jan 2024 12:01:57 +0000 (UTC)
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20240122115236euoutp015a3bc37ae34ff83d7801463bdde192af~sqSncVH0m1413114131euoutp018;
+	Mon, 22 Jan 2024 11:52:36 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20240122115236euoutp015a3bc37ae34ff83d7801463bdde192af~sqSncVH0m1413114131euoutp018
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1705924356;
+	bh=UbRBr/y5QfL7rxUSOfoL88kUwX9KL2ZPAoaESJmdFVI=;
+	h=From:To:Cc:Subject:Date:References:From;
+	b=Qthss5x7DW1+1a5avqR/JZN9N6INbcVuePndq8QiEAe7t30xiKcvijGailQf5hJ1g
+	 9AJA40C4MvEstZNyXWtHrHyvO4Sbhl+KlNW/4t/P2CUxWNIFczR7Bpg7SU38AeCjgx
+	 XTH5eLfF1oY0Aw4pLRrz+CVNXw7nlfjk2fW//LGo=
+Received: from eusmges2new.samsung.com (unknown [203.254.199.244]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTP id
+	20240122115235eucas1p2700d557f8bbac64b46e16abcb25f61ea~sqSnP7YPI3041730417eucas1p2H;
+	Mon, 22 Jan 2024 11:52:35 +0000 (GMT)
+Received: from eucas1p1.samsung.com ( [182.198.249.206]) by
+	eusmges2new.samsung.com (EUCPMTA) with SMTP id 93.AA.09814.3075EA56; Mon, 22
+	Jan 2024 11:52:35 +0000 (GMT)
+Received: from eusmtrp1.samsung.com (unknown [182.198.249.138]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73~sqSmm1WLx0901909019eucas1p1D;
+	Mon, 22 Jan 2024 11:52:35 +0000 (GMT)
+Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
+	eusmtrp1.samsung.com (KnoxPortal) with ESMTP id
+	20240122115235eusmtrp15220ec75e227c7c89bc9d5499df7a1ad~sqSmlTiw-2275822758eusmtrp1k;
+	Mon, 22 Jan 2024 11:52:35 +0000 (GMT)
+X-AuditID: cbfec7f4-711ff70000002656-45-65ae57032407
+Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
+	eusmgms2.samsung.com (EUCPMTA) with SMTP id 86.49.10702.3075EA56; Mon, 22
+	Jan 2024 11:52:35 +0000 (GMT)
+Received: from localhost (unknown [106.120.51.111]) by eusmtip2.samsung.com
+	(KnoxPortal) with ESMTPA id
+	20240122115235eusmtip2eeebd7882c881fef504efaf631189d6b~sqSmaWd_t2503125031eusmtip2c;
+	Mon, 22 Jan 2024 11:52:35 +0000 (GMT)
+From: Lukasz Stelmach <l.stelmach@samsung.com>
+To: nbd@other.debian.org, Wouter Verhelst <w@uter.be>
+Cc: Karol Lewandowski <k.lewandowsk@samsung.com>,
+	=?utf-8?B?7J6s7ZuIIOyglQ==?= <jh80.chung@samsung.com>, Marek Szyprowski
+	<m.szyprowski@samsung.com>, Marek Pikula <m.pikula@partner.samsung.com>
+Subject: Fixes after static code analysis
+Date: Mon, 22 Jan 2024 12:52:23 +0100
+Message-ID: <oypijdplxttwjs.fsf%l.stelmach@samsung.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: nbd@other.debian.org
-Content-Language: de-DE, en-US
-From: Lars Rohwedder <roker@pep-project.org>
-Subject: Feature request: nbd-server serves multiple (autogenerated) files in
- directory hierarchy
-Autocrypt: addr=roker@pep-project.org; keydata=
- xsDVBGCVZYIBDECv6bZ9vWKauYcvrF3WL7qRhQOPnIjcpkxUbVZHdehM+4EY4tYrzFu1l/5l
- wr09cewM3TDoSKKmEG+rpiTMKevRg9MDidJrUeq4A34FNHnfmyzJXJf4Rm0xfE7k1OguLXDp
- EXA6SNCfpbZdBtCPuwBo/dJl4JiAAnOWh0mfrabGSU3s3AydZ9UBKzjN+e4hScpjX8HJIyXT
- V3DybSky6RQ90SYfqSHLckMhUAur1T58edrtOyl2h+39RVi6kpf8eoy1gNRzbCDE2svJ8kg0
- y6sU5iuRD6ysW4OYn8IMRXZl5pLiiV9zlbjmbQl6VxctKc8tydMecN1YPyUa3i/L1MyUXGfc
- vxliSGfUXZUw/RXxo1RGUDMffUua0D7r5NwYIlnpkA+nMC8nKe85NKV70TD/lXs1YirImONQ
- MQhMSvdS8FOBHyE/yoMlWu4RzkCwuKXrkHrrFkX+AMWoZo65YMgtO1uB6BGQbeiC8VAKwzXu
- AStbcntgayMsY9QZXrIxKgpe3xPmzGyT4QARAQABzSlMYXJzIEguIFJvaHdlZGRlciA8cm9r
- ZXJAcGVwLXByb2plY3Qub3JnPsLBHAQTAQgAPhYhBIL4Tcc44oxO3aDGo89uC/LDP6CeBQJl
- pY1qAhsDBQkI0rpuBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEM9uC/LDP6CeI6IMPi/a
- +u9eqwg9F1vDOf0DeUlhGjdneMz2+0Yw9btE8HZjo6En0sAHFxzZlrmblwt3s5TIbtnECXTi
- Aa2hEt4PbAz5Ifeb6u+H0MutgXqrh6pkOka4RMEerm1Afkfpt5ZclKEe0UQXbmwdMhdJ76Ey
- BLzoRGEDVOpJlFIbiOVBnSy4ks7FFQKoED2E7s7laFe+EBjkCuJPL1Uq5jd3PpT7z2Rvr0ui
- TXh+jTHQ35tOba5AqXVVjiY6xlEQbKawPK/aPxnmEN8w29b+nfgTJr3CPlKmRLSn/S84aKxj
- kbB/5XfFvHhGUHZoZ0CMEatE+TOx87Tytc+t6Ahm1Qer6m0omfLBt4ZtZ6ygpFbvSyCn9z/p
- yHNUEaxE35fs76pgluUj5t4yNZde/vWLf4W83xlZWjPMFFWyt31+sdooKase1MdatjAbQvYx
- m1FFNpobAt5cijlmNWYa35l/aeZvk21n1aJZBhJAShXWDl9j2+9xaEEr23TRpw/2Mrqq4B0y
- IFSg44YTSVKjaCkHzsDVBGCVZYIBDEC9jkGR4HCZvcaNT/veGmoxoDkJSWroQOjnnEtJcsey
- JgcKYHFPKyueoVRD66xb/O0kMZMClxZxpnp5vv6NKSoIs6tZftmWm5ks0P++xybS3fvivjWz
- 8ph5QUdjH1mfVFJxgvxtRlCP/KeaU5tpIFB8pZh5Qcvg/vtnvcb6jY39SQDVlkkUjKx2zSkx
- HOK2E6OWgKg+IIzGY1yBskNDvHPopzLcB8jWXE0hS6QDRtJIVaee505zN4L8I2RfV5yfoK4f
- gGshcMcYIwV8mL0Svkd1deRuBjjUGwfkiJeEPgdVCcP+KOYsT7dF0mJkDxUwRhLHwQr/Epbo
- ou19CDEnB4rs73H7nvtgjbGTc/2tS47g6mXlkQaYV7kkVsmGK5j1A0tPsw7yFPEhlg6FPWdy
- 5QbXQr9lX9KiSckm6Pzf6W4Ax88IZo3KLcf/X+Ynx9LmCe6XPng0q/dCLxqOiX8nq6hTtVad
- RSDcTw8IRCYVAfeZWoPkIwfF2IUSY2MELM0AI57H6UV2sGOQiwARAQABwsEEBBgBCAAmFiEE
- gvhNxzjijE7doMajz24L8sM/oJ4FAmWljWsCGwwFCQjSum4ACgkQz24L8sM/oJ4j/Aw+LSO3
- op62JdPBR2zX81x83lpxg2dZbvwdIbaoCrxFl1LTuiZcDHF4pA1elcuVBfG15xMZiW7/iE7M
- YqMuRmxIdBP5f2VcU14igr0Hlsg3oZiClPUH2IdXUa7ETccOR6Ixm4tt2Mei4ruomuMdDDgL
- KklZsFSUawXJfSKVRxvsgjyR4ohaJfFh3NOZHV+0i8KPMZwdS2N0WmOGYPitSCAw6N/JQsiz
- Oq7G3Sf+VF6S4+6deN8hwwbQRcp6tMLmbVjo58dsLm9we3QIhyWv8i0hA6W1PlR2m7EFZRVu
- 6o7Uh2VPx7o2VD3xl56kn5ZiENBAqzy6PFpIleSgeRQ2Fr91J/sXSIcsrpZTEoExHKnar2dL
- +J3EeMoXjEQSbq53MMq/Hl776/dVl1vQZCzzDd8sCTSX5qYpNF3FMh9EdWVj/OAXua9bI8it
- A3JE7zCQiL0HgM/Lgj5Y2l314axzq6L9YL1ZSxohPRksSUrF/Irx5u9HUn/XDC5D6fYi7L54
- GIaZVwoJisucuww=
-Organization: =?UTF-8?B?8J+Ukg==?=
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------VfwV5w54erbz50EwBMCedJbM"
+Content-Type: multipart/signed; boundary="=-=-="; micalg="pgp-sha256";
+	protocol="application/pgp-signature"
+X-Brightmail-Tracker: H4sIAAAAAAAAA01SfyyUcRjf933fe73Ozl6Xuie1lKWV1im79LZ0S2vt2lpp64cZyy3fUJx2
+	R5LWDy3HFVdU5lJLJaI7Smh+TUpyjKwIpfVD50Ja6AeiuFdb/32ez+f5PJ/n+e7LkOJsgQsT
+	rorGapUywo0WUqVPR5tXkHtMeGWiRcp1jCUKuFNDV0lu4tolmjM+6bbjxj8ZCa5Y77mBVrT9
+	OE0qHg1WEorUB/lIMdH5SuBHBQh9QnBE+GGs9pQHC8MqBuceOiM8Yv7cT59EvxgdsmeAlUHb
+	hV6BDgkZMZuH4EVBO+KLEQQ37lXMKMMIKjuNdv8sT82FBC/kIiga185YrAjysqooHWIYmpWC
+	0eg/bXBmV0P62SZbD8nWIehOS6emhVnsMjBZ7qJpTLHu0PbinS1BxK4BS8mwjZ/NroX6Ei3N
+	807QkNlj85JsJGS2DNiGAtvEQIm5meTX2wRv6rspHs+CvvoHM2vPh8b0cxRv0CJIeJkt4Ivz
+	CIaTEgi+ax28aR6jeewLKVXZtnOAdYSOL058siOklWaQPC2CpEQx370YTPrKmVwXSOnLQzxW
+	wOUms40Xs0Hw/edj+jxyNfx3j+G/ewxTU8mpdyks9+Tp5XA7u5/k8Xowmb5S15EgH0lwjCYy
+	FGu8VDhWqlFGamJUodJ9UZH30dTPaZysH3mIcvu+SWsRwaBatHjK/KGo4DlyoVRRKuzmLOqY
+	a8JiUYgy7ihWR+1Vx0RgTS2ax1BuEpF7iCsWs6HKaHwQ40NY/U8lGHuXk0TuRrX+zoDld3mr
+	Vs6dlvmSjTnEvS6Nd3/gvMkF5vZL273iW5iut/OL/F1HEqrJUEvZEqJuQjfaE+a6pjrZr3eH
+	tQzL23N8JU41Va27rL9QYAHlc72wfF1xT8FYym2HhXPqYpP2W/V2zzyeWz/vbIjzs4TIlAfO
+	xSUOyj02dqZO7uM+Mr47du9Kex1EnVjdoi0rPZvsfUt0s0VecuzZ+6Fto1fvSCwNdYuG+gx/
+	Dgz1DlL5W3VePlrd0i2yhxmZwUde1tB20SnF7u2xhH6bc/yZtia9OTlrgEu4ohwpjZ9MlQQf
+	hwDZZvuteof7fjnjH/MyHFoHBKcuWh0N/ZLlGW6UJky5yoNUa5R/AbCzVFW0AwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeLIzCtJLcpLzFFi42I5/e/4PV3m8HWpBud/sVvc+NXGatH4aS6z
+	xd95U9ks1h65y27x++laJovN/foObB5XvzUzexx8t4fJo2/LKkaPvzevswawROnZFOWXlqQq
+	ZOQXl9gqRRtaGOkZWlroGZlY6hkam8daGZkq6dvZpKTmZJalFunbJehl7H4nWdDKVXHq5Wu2
+	BsYfHF2MnBwSAiYSx06tZ+pi5OIQEljKKHFn9yzWLkYOoISUxMq56RA1whJ/rnWxgdhCAs+A
+	ap7rgpSwCehJrF0bARIWETCVmNx9hhFkDLPAcUaJzhuXwOqFBTQl1j1bwwhiswioSly9/IAd
+	xOYVMJd4tvUzWFxUwFLi+NZ2Noi4oMTJmU9YQGxmgWyJr6ufM09g5JuFJDULSWoW0BnMQCvW
+	79KHCGtLLFv4mhnCtpVYt+49ywJG1lWMIqmlxbnpucVGesWJucWleel6yfm5mxiBEbHt2M8t
+	OxhXvvqod4iRiYPxEKMKUOejDasvMEqx5OXnpSqJ8N6QXJcqxJuSWFmVWpQfX1Sak1p8iNEU
+	6J2JzFKiyfnAWM0riTc0MzA1NDGzNDC1NDNWEuf1LOhIFBJITyxJzU5NLUgtgulj4uCUamAS
+	/qUcEsTiJy4c8Xh19j2rFR4VU1IemOjwLW2bfM56nrH90fnn3tdaZF5RO3dgTpu/dZjz7Ilp
+	FpUv3wf9MTzqKiShfLIrd+Vd9WtnVi1d/CI4RO244bvHoQ/n/5X4/ypnivSuxvVhE99EveRS
+	O/pV82RojViG7Bn751eM1OZK7r6yXFol8arYxdcvvy1Xqrx3YuYqKZb+z6oVHvKzvib8lsq0
+	7zp30aZtkZ1uz+5DfY8Psi/yNWL+s2iJim1JYv3pCAkVrzjLlowtuybL/D0g9qaj6p78L+YZ
+	4Ydjsx75yU4It49ItGN99MF2p7vtwvsHGgonthbq+Sk3rnSwuM/14ItH8bIk87ZPsu+eOW9T
+	YinOSDTUYi4qTgQAcRoVFx0DAAA=
+X-CMS-MailID: 20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73
+X-Msg-Generator: CA
+X-RootMTR: 20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73
+References: <CGME20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73@eucas1p1.samsung.com>
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <zoVkIsKEZfM.A.dDE.gGQqlB@bendel>
+Resent-Message-ID: <rg87g4qOQ6M.A.N5D.KllrlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2714
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2715
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -107,83 +137,44 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org
-Resent-Date: Thu, 18 Jan 2024 10:46:56 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/oypijdplxttwjs.fsf%l.stelmach@samsung.com
+Resent-Date: Mon, 22 Jan 2024 12:02:18 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------VfwV5w54erbz50EwBMCedJbM
-Content-Type: multipart/mixed; boundary="------------9SSM0KWfqOzzNYWnuAEJeWCx";
- protected-headers="v1"
-From: Lars Rohwedder <roker@pep-project.org>
-To: nbd@other.debian.org
-Message-ID: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
-Subject: Feature request: nbd-server serves multiple (autogenerated) files in
- directory hierarchy
+--=-=-=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------9SSM0KWfqOzzNYWnuAEJeWCx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Hi,
 
-SGkgdGhlcmUsDQoNCkknZCBsaWtlIHRvIGhhdmUgKGFuZCB0byBpbXBsZW1lbnQpIHRoZSBm
-b2xsb3dpbmcgZmVhdHVyZToNCg0KbmJkLXNlcnZlciBzaGFsbCBiZSBhYmxlIHRvIHVzZSBh
-biAoYXV0by1nZW5lcmF0ZWQpIHNldCBvZiBtdWx0aXBsZSANCmZpbGVzIGluIGEgZGlyZWN0
-b3J5IGhpZXJhcmNoeS4NCg0KSW4gZGV0YWlsOg0KDQoxLiBjb25maWcgZmlsZSBjb250YWlu
-cw0KICAgKiB0aGUgYmFzZSBkaXJlY3RvcnksDQogICAqIHRoZSB0b3RhbCBzaXplIG9mIHRo
-ZSBleHBvcnRlZCBibG9jayBkZXZpY2UsDQogICAqIGhlICJjaHVuayBzaXplIiAoPXNpemUg
-b2YgZWFjaCBmaWxlKSBhbmQNCiAgICogaG93IG1hbnkgZmlsZXMvc3ViZGlycyBhcmUgc2hh
-bGwgYmUgc3RvcmVkIHBlciBkaXJlY3RvcnkgYXQgbWF4aW11bS4NCg0KMi4gSWYgdGhlIG51
-bWJlciBvZiAiY2h1bmsiIGZpbGVzIGV4Y2VlZHMgdGhlIG51bWJlciBvZiBhbGxvd2VkICJm
-aWxlcyANCnBlciBkaXJlY3RvcnkiLCB0aGV5IGFyZSBkaXN0cmlidXRlZCBpbiBzdWIgZGly
-ZWN0b3JpZXMuDQoNCjMuIHRoZSBuYmQtc2VydmVyIGNyZWF0ZXMgZmlsZXMgJiBzdWIgZGly
-ZWN0b3JpZXMgb24gZGVtYW5kIHdoZW4gZGF0YSANCmFyZSB3cml0dGVuIHRvIHRoZSBleHBv
-cnRlZCBibG9jayBkZXZpY2UuIFJlYWRzIGZyb20gbm9uLWV4aXN0ZW50IGZpbGVzIA0KYXJl
-IGNvbnNpZGVyZWQgYXMgbnVsbCBieXRlcy4NCg0KNC4gSWYgdGhlIGJsb2NrIGRldmljZSBy
-ZWdpb24gY292ZXJlZCBieSBhIGNodW5rIGZpbGUgaXMgInRyaW1tZWQiIA0KYW5kL29yIGNv
-bXBsZXRlbHkgZmlsbGVkIHdpdGggbnVsbCBieXRlcyB0aGUgY2h1bmsgZmlsZSBtaWdodCBi
-ZSBkZWxldGVkIA0KYXV0b21hdGljYWxseSBieSB0aGUgbmJkLXNlcnZlciAobWlnaHQgYmUg
-ZG9uZSBsYXp5KS4NCg0KNS4gdGhlICJuYW1pbmcgY29udmVudGlvbiIgb2YgdGhlIGZpbGUg
-YW5kIGRpcmVjdG9yeSBuYW1lcyBzaGFsbCBiZSANCmltcGxlbWVudGVkIGluIGEgc2luZ2xl
-IGZ1bmN0aW9uIGFuZCBtaWdodCBiZSBjb25maWd1cmFibGUgaW4gbGF0ZXIgDQp2ZXJzaW9u
-cy4gVGhlIGluaXRpYWwgdmVyc2lvbiBjYW4ganVzdCB1c2UgZGVjaW1hbCBudW1iZXJzIGFz
-IGRpcmVjdG9yeSANCm5hbWVzIGFuZCBudW1iZXIrIi5iaW4iIGFzIGZpbGUgbmFtZXMuDQoN
-Cg0KU29tZSBleGFtcGxlczoNCg0KQ2FzZSBBOiAxIEdpQiBkZXZpY2Ugc2l6ZSwgMSBNaUIg
-Y2h1bmsgc2l6ZSwgMjAwMCBub2RlcyBwZXIgZGlyZWN0b3J5Og0KICAgIC0+IDEwMjQgY2h1
-bmtzIC0+IGZpdCBpbiBvbmUgZGlyZWN0b3J5Lg0KICAgICRCQVNFRElSLzAwMDAuYmluDQog
-ICAgLi4uDQogICAgJEJBU0VESVIvMTAyMy5iaW4NCg0KQ2FzZSBCOiAxIFRpQiBkZXZpY2Ug
-c2l6ZSwgNCBNaUIgY2h1bmsgc2l6ZSwgMjAwMCBub2RlcyBwZXIgZGlyZWN0b3J5Og0KICAg
-IC0+IDI2MjE0NCBjaHVua3MgLT4gaGllcmFyY2h5IGRlcHRoIG9mIGNlaWwobG9nKDI2MjE0
-NCkvbG9nKDIwMDApKT0yLg0KICAgIGNodW5rICMwOiAkQkFTRURJUi8wMDAvMDAwMC5iaW4N
-CiAgICAuLi4NCiAgICBjaHVuayAjMTk5OTogJEJBU0VESVIvMDAwLzE5OTkuYmluDQogICAg
-Y2h1bmsgIzIwMDA6ICRCQVNFRElSLzAwMS8wMDAwLmJpbg0KICAgIC4uLg0KICAgIGNodW5r
-ICMzOTk5OiAkQkFTRURJUi8wMDEvMTk5OS5iaW4NCiAgICAuLi4NCiAgICBjaHVuayAjMjYy
-MTQzOiAkQkFTRURJUi8xMzEvMDE0My5iaW4gIChpZiBJIGNhbGN1bGF0ZWQgY29ycmVjdGx5
-KQ0KDQpDYXNlIEM6IDEwIFRCIGRldmljZSwgNjQgS2lCIGNodW5rcywgMTAwMCBub2RlcyBw
-ZXIgZGlyZWN0b3J5Og0KICAgIC0+IDE2Nyc3NzInMTYwIGNodW5rcyAtPiBoaWVyYXJjaHkg
-ZGVwdGg6IDMuDQogICAgY2h1bmsgIzA6ICAkQkFTRURJUi8wMDAvMDAwLzAwMC5iaW4NCiAg
-ICAuLi4NCiAgICBjaHVuayAjMTY3NzcyMTYwOiAkQkFTRURJUi8xNjcvNzcyLzE2MC5iaW4N
-Cg0KDQpQbGVhc2UgdGVsbCBtZSB5b3VyIG9waW5pb24sIGlkZWFzIGFuZCBzdWdnZXN0aW9u
-cyBmb3IgdGhpcyBmZWF0dXJlLg0KDQpHcmVldGluZ3MsDQoNCgkJTGFycyBSb2h3ZWRkZXIN
-Cg==
+Last year we decided to include nbd package in Tizen. Every package we
+use gets a periodic treatment with static analysis tools (Coverity,
+SVACE). There were some problems detected in nbd and we've developed a
+number of patches[1] to fix them. Please take a look at them as well as
+the eariler patch[1] I posted.
 
---------------9SSM0KWfqOzzNYWnuAEJeWCx--
+[1] https://git.tizen.org/cgit/platform/upstream/nbd/log/?h=3Dtizen&id=3D2c=
+54e25b0cea8d30f7958fa2d17c67b91867aff6
+[2] https://lists.debian.org/nbd/2023/08/msg00046.html
 
---------------VfwV5w54erbz50EwBMCedJbM
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Kind regards,
+=2D-=20
+=C5=81ukasz Stelmach
+Samsung R&D Institute Poland
+Samsung Electronics
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmWpAYwFAwAAAAAACgkQz24L8sM/oJ5N
-ngxAgBcHScehZ5FtPDw+XheJ7h5fnSAYyAxGog02dfLkzssAsE/0xI6PC8KvAWrctc+pyflWCS4v
-4uBSgK4y77QsaANjOCd+MBhaMHRPL+QQlrase13dsAYjQU4Ee14OWhyCiixgogu28p7dU4d6FBTz
-1iOT0RV4c6v22BHapBGOKXWdsNqDECXg8wZ57uh4i2ITGApBiYpo261ZYkjERGtf7azq5Ke5ZTJ7
-HGS/t5YgDZ9EfnB/S6RzVtOz28er3+HnsQ6ELSMM4zDwBrZWj/frQMll3CmaRjtIOrWBXFQmZ1b5
-m9D7yM4kroAtHK0H8sB4vC1a4wOhNgMS6sv9ry5N9DrKsce3cTHhVbS/Av6dhginmQi16AkRRHC2
-KDUzc0mKWmzPN8g9K1JxHmz7qnsdFFltENPpOMk1/nFzbBHWGluImYxDcioAxf2WRRXmre4Yn6xe
-DwxoflN2ZS53k563pEEqOJ5Kqk6AtD16SMgY+vJ8EBfQ+5SoSGjslxZTKSZARw5FlT92su8=
-=YEzc
+iQEzBAEBCAAdFiEEXpuyqjq9kGEVr9UQsK4enJilgBAFAmWuVvcACgkQsK4enJil
+gBBtlQgAlvhGWcPx95/y6ZGvjRq2QP+dLCxB4kdW2D55+5kXSGMWgbEqClLS3tBN
+qwm+lzoOxp45z2z5vtci6t4QfDF+bMUaeN4x6pmmrpMt693nXnHij/HXGuTLICob
+rkh/V7aSruuXBX7EXR8ZuKT8qJWvRy0/hTZkvNRaEIJu0aF5AHzgsPeuin6z1WwU
+nW+1/Jkq8cymgL/wzwsyo8gMRutC+TkcBwl0urtbgid1upR+mSGIv760NgAu2zM7
+DF/WvSZ8SV4HXfa+mJCSE/l3AzvrVZ19z3obJCO8ilzN6jbMzWTFSw0kfWm3IlhO
+320HIVQVL4adJZHAVtDk+CPo0PZZ0g==
+=LVNg
 -----END PGP SIGNATURE-----
-
---------------VfwV5w54erbz50EwBMCedJbM--
+--=-=-=--
 
