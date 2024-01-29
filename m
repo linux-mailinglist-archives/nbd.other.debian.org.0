@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A8DD8410B4
-	for <lists+nbd@lfdr.de>; Mon, 29 Jan 2024 18:30:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B01E08410AB
+	for <lists+nbd@lfdr.de>; Mon, 29 Jan 2024 18:30:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6D7FB20A5E; Mon, 29 Jan 2024 17:30:46 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 29 17:30:46 2024
+	id 7D28720A5E; Mon, 29 Jan 2024 17:30:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 29 17:30:13 2024
 Old-Return-Path: <gregkh@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=-3.8 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 9781420AF8
-	for <lists-other-nbd@bendel.debian.org>; Mon, 29 Jan 2024 17:14:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id BA6D720A98
+	for <lists-other-nbd@bendel.debian.org>; Mon, 29 Jan 2024 17:13:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-6.895 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-2.485, DKIM_SIGNED=0.1,
@@ -28,27 +28,28 @@ X-Amavis-Spam-Status: No, score=-6.895 tagged_above=-10000 required=5.3
 	WORD_WITHOUT_VOWELS=1] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id WMmjZpv5-n85 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 29 Jan 2024 17:14:17 +0000 (UTC)
+	with ESMTP id Zv_Cbwowl3e8 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 29 Jan 2024 17:12:57 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -3.5
+X-Greylist: delayed 331 seconds by postgrey-1.36 at bendel; Mon, 29 Jan 2024 17:12:57 UTC
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 888BF20AEB
-	for <nbd@other.debian.org>; Mon, 29 Jan 2024 17:14:17 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 4D11D20A8A
+	for <nbd@other.debian.org>; Mon, 29 Jan 2024 17:12:57 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 708896235D;
-	Mon, 29 Jan 2024 17:14:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F4CAC433F1;
-	Mon, 29 Jan 2024 17:14:14 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 1D038623C8;
+	Mon, 29 Jan 2024 17:12:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B35E3C43390;
+	Mon, 29 Jan 2024 17:12:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1706548454;
-	bh=RXj9HKVda3MnFL631bmhL2vw8wi4MJIzWrg6rq26JQg=;
+	s=korg; t=1706548373;
+	bh=bu6ITFeX4H3xnn8T4N9IfQ1WlQczDz+JxDyvEH+Rslk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fkllayoFUPHPKqaXSaYUARn6h0TbK0I1kChjdgfBEUMtKU9fP4pIa7yh/gLuxc01C
-	 adw2m0h+6Js78UQ6rqmdnFOKv1nvx7ImSGsazO7cab8N90sml8W2Vei8piBFrnVua+
-	 lVRP1+tzOpTaH6+u9pdq0D3UoJewAOfKUWNbRl4s=
+	b=ZiyJuN2ytXgWaCOGSRYCD8OSZDpmySgFkMlluDEMR4qKmhtiDV+GMwe2fHtDGYc8c
+	 irzT6MRX7BdhnZsGVv9uy0hy98eFX03wb05P68rBlHBa+kvVHfMkhcoBg1qXg8dDNj
+	 mJZhYked3ksCZi3ddRjpNuT5ef3JRgbeZ9MVWFyI=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -60,12 +61,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org,
 	Simon Horman <horms@kernel.org>
-Subject: [PATCH 6.6 065/331] nbd: always initialize struct msghdr completely
-Date: Mon, 29 Jan 2024 09:02:09 -0800
-Message-ID: <20240129170016.834406710@linuxfoundation.org>
+Subject: [PATCH 6.1 114/185] nbd: always initialize struct msghdr completely
+Date: Mon, 29 Jan 2024 09:05:14 -0800
+Message-ID: <20240129170002.256421367@linuxfoundation.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240129170014.969142961@linuxfoundation.org>
-References: <20240129170014.969142961@linuxfoundation.org>
+In-Reply-To: <20240129165958.589924174@linuxfoundation.org>
+References: <20240129165958.589924174@linuxfoundation.org>
 User-Agent: quilt/0.67
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -74,9 +75,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <ozfQgC05aQP.A.eGC.GD-tlB@bendel>
+Resent-Message-ID: <-rO7x8IA0PM.A.k6B.lC-tlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2721
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2719
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -86,10 +87,10 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240129170016.834406710@linuxfoundation.org
-Resent-Date: Mon, 29 Jan 2024 17:30:46 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240129170002.256421367@linuxfoundation.org
+Resent-Date: Mon, 29 Jan 2024 17:30:13 +0000 (UTC)
 
-6.6-stable review patch.  If anyone has any objections, please let me know.
+6.1-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -145,19 +146,19 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -510,7 +510,7 @@ static int __sock_xmit(struct nbd_device
+@@ -494,7 +494,7 @@ static int __sock_xmit(struct nbd_device
  		       struct iov_iter *iter, int msg_flags, int *sent)
  {
  	int result;
 -	struct msghdr msg;
-+	struct msghdr msg = {} ;
++	struct msghdr msg = { };
  	unsigned int noreclaim_flag;
  
  	if (unlikely(!sock)) {
-@@ -526,10 +526,6 @@ static int __sock_xmit(struct nbd_device
+@@ -509,10 +509,6 @@ static int __sock_xmit(struct nbd_device
+ 	noreclaim_flag = memalloc_noreclaim_save();
  	do {
  		sock->sk->sk_allocation = GFP_NOIO | __GFP_MEMALLOC;
- 		sock->sk->sk_use_task_frag = false;
 -		msg.msg_name = NULL;
 -		msg.msg_namelen = 0;
 -		msg.msg_control = NULL;
