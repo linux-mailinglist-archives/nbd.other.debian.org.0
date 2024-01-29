@@ -1,71 +1,82 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B22783F03E
-	for <lists+nbd@lfdr.de>; Sat, 27 Jan 2024 22:45:13 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00EB78410AE
+	for <lists+nbd@lfdr.de>; Mon, 29 Jan 2024 18:30:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0296F205B0; Sat, 27 Jan 2024 21:45:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Sat Jan 27 21:45:12 2024
+	id BDC8220A5C; Mon, 29 Jan 2024 17:30:31 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 29 17:30:31 2024
 Old-Return-Path: <gregkh@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=4.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	FOURLA,MD5_SHA1_SUM,RCVD_IN_DNSWL_MED,TO_TOO_MANY,T_SCC_BODY_TEXT_LINE,
-	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-3.8 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MD5_SHA1_SUM,
+	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE,WORD_WITHOUT_VOWELS
+	autolearn=no autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E8F83205BE
-	for <lists-other-nbd@bendel.debian.org>; Sat, 27 Jan 2024 21:27:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 9DC6820AC7
+	for <lists-other-nbd@bendel.debian.org>; Mon, 29 Jan 2024 17:13:41 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.168 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-2.758, DKIM_SIGNED=0.1,
+X-Amavis-Spam-Status: No, score=-6.895 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-2.485, DKIM_SIGNED=0.1,
 	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_MED=-2.3, TO_TOO_MANY=1,
-	T_SCC_BODY_TEXT_LINE=-0.01, WORD_WITHOUT_VOWELS=1]
-	autolearn=ham autolearn_force=no
+	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01,
+	WORD_WITHOUT_VOWELS=1] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id vHnLv8t_Uave for <lists-other-nbd@bendel.debian.org>;
-	Sat, 27 Jan 2024 21:27:15 +0000 (UTC)
+	with ESMTP id mVGfbNM1t1P6 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 29 Jan 2024 17:13:32 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -3.5
-Received: from sin.source.kernel.org (sin.source.kernel.org [IPv6:2604:1380:40e1:4800::1])
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id BC826205C3
-	for <nbd@other.debian.org>; Sat, 27 Jan 2024 21:27:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 497FF20ABC
+	for <nbd@other.debian.org>; Mon, 29 Jan 2024 17:13:32 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 73138CE387D;
-	Sat, 27 Jan 2024 21:27:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 984B6C433F1;
-	Sat, 27 Jan 2024 21:27:08 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 2FF6962354;
+	Mon, 29 Jan 2024 17:07:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C34DDC433C7;
+	Mon, 29 Jan 2024 17:07:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1706390828;
-	bh=s608uZb5DNPE7nAKVE+Nm9Mkl8ndi1CFd/4sH8yKdkg=;
-	h=Subject:To:Cc:From:Date:From;
-	b=wjiJmFOqa7hQkqImsOaVbMwbmBpP/j6R31E8NTBf4/odysTxEHPJmKnbQBoNpW6L1
-	 IefQt/7oAr6HGzHVQz8hQtmbubC9xzhhulqyCKpzxnDSSPHxepi3VWkcALItjO2lU6
-	 snHe8kFFLqws9+THd/fxX3pCG0gibh3Yx5FNbuq0=
-Subject: Patch "nbd: always initialize struct msghdr completely" has been added to the 6.1-stable tree
-To: axboe@kernel.dk,edumazet@google.com,gregkh@linuxfoundation.org,horms@kernel.org,josef@toxicpanda.com,nbd@other.debian.org,syzkaller@googlegroups.com
-Cc: <stable-commits@vger.kernel.org>
-From: <gregkh@linuxfoundation.org>
-Date: Sat, 27 Jan 2024 13:27:08 -0800
-Message-ID: <2024012707-spinster-coagulant-a963@gregkh>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=ANSI_X3.4-1968
-Content-Transfer-Encoding: 8bit
-X-stable: commit
+	s=korg; t=1706548042;
+	bh=yoTKsYq/z3wgpTRkPE58/HQQqIRa/ensADsU63icdgA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=KNN4/5oVNqtdDrC6xFVTcoFtA3prSCNrdahyVJP8kGtgYRGGjXOz4npxxospJGf1w
+	 qaGZQouc0j/iziDNfJYQyEHAu2Y0cdQMaHTynCx96Y+Zs9LFwqgIoeMAYRDAElA5YV
+	 lq9x75WD9OjCB3tDnfLj+vqs4m2z2PXro0g4J3t4=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	patches@lists.linux.dev,
+	syzbot <syzkaller@googlegroups.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	Simon Horman <horms@kernel.org>
+Subject: [PATCH 6.7 043/346] nbd: always initialize struct msghdr completely
+Date: Mon, 29 Jan 2024 09:01:14 -0800
+Message-ID: <20240129170017.649979424@linuxfoundation.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240129170016.356158639@linuxfoundation.org>
+References: <20240129170016.356158639@linuxfoundation.org>
+User-Agent: quilt/0.67
+X-stable: review
 X-Patchwork-Hint: ignore
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Va6k8U3TghD.A.beH.olXtlB@bendel>
+Resent-Message-ID: <eIUXh4q_CFM.A.VAC.3C-tlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2718
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2720
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -75,29 +86,12 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/2024012707-spinster-coagulant-a963@gregkh
-Resent-Date: Sat, 27 Jan 2024 21:45:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240129170017.649979424@linuxfoundation.org
+Resent-Date: Mon, 29 Jan 2024 17:30:31 +0000 (UTC)
 
+6.7-stable review patch.  If anyone has any objections, please let me know.
 
-This is a note to let you know that I've just added the patch titled
-
-    nbd: always initialize struct msghdr completely
-
-to the 6.1-stable tree which can be found at:
-    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
-
-The filename of the patch is:
-     nbd-always-initialize-struct-msghdr-completely.patch
-and it can be found in the queue-6.1 subdirectory.
-
-If you, or anyone else, feels it should not be added to the stable tree,
-please let <stable@vger.kernel.org> know about it.
-
-
->From 53a5a05195516274e37ebefa023bcaef003a1da4 Mon Sep 17 00:00:00 2001
-From: Eric Dumazet <edumazet@google.com>
-Date: Fri, 26 Jan 2024 20:59:08 -0700
-Subject: nbd: always initialize struct msghdr completely
+------------------
 
 From: Eric Dumazet <edumazet@google.com>
 
@@ -151,19 +145,19 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -494,7 +494,7 @@ static int __sock_xmit(struct nbd_device
+@@ -510,7 +510,7 @@ static int __sock_xmit(struct nbd_device
  		       struct iov_iter *iter, int msg_flags, int *sent)
  {
  	int result;
 -	struct msghdr msg;
-+	struct msghdr msg = { };
++	struct msghdr msg = {} ;
  	unsigned int noreclaim_flag;
  
  	if (unlikely(!sock)) {
-@@ -509,10 +509,6 @@ static int __sock_xmit(struct nbd_device
- 	noreclaim_flag = memalloc_noreclaim_save();
+@@ -526,10 +526,6 @@ static int __sock_xmit(struct nbd_device
  	do {
  		sock->sk->sk_allocation = GFP_NOIO | __GFP_MEMALLOC;
+ 		sock->sk->sk_use_task_frag = false;
 -		msg.msg_name = NULL;
 -		msg.msg_namelen = 0;
 -		msg.msg_control = NULL;
@@ -172,15 +166,4 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  
  		if (send)
 
-
-Patches currently in stable-queue which might be from edumazet@google.com are
-
-queue-6.1/ipv6-init-the-accept_queue-s-spinlocks-in-inet6_crea.patch
-queue-6.1/llc-make-llc_ui_sendmsg-more-robust-against-bonding-.patch
-queue-6.1/tcp-add-memory-barrier-to-tcp_push.patch
-queue-6.1/net-fix-removing-a-namespace-with-conflicting-altnam.patch
-queue-6.1/udp-fix-busy-polling.patch
-queue-6.1/llc-drop-support-for-eth_p_tr_802_2.patch
-queue-6.1/nbd-always-initialize-struct-msghdr-completely.patch
-queue-6.1/tcp-make-sure-init-the-accept_queue-s-spinlocks-once.patch
 
