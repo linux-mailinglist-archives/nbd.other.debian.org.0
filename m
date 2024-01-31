@@ -1,86 +1,106 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B20B8447D5
-	for <lists+nbd@lfdr.de>; Wed, 31 Jan 2024 20:14:43 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76CA3844A40
+	for <lists+nbd@lfdr.de>; Wed, 31 Jan 2024 22:41:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A96B320763; Wed, 31 Jan 2024 19:14:42 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 31 19:14:42 2024
-Old-Return-Path: <w@uter.be>
+	id 557362075B; Wed, 31 Jan 2024 21:41:39 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 31 21:41:39 2024
+Old-Return-Path: <roker@pep-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,
-	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-	version=3.4.2
+X-Spam-Status: No, score=-16.0 required=4.0 tests=KHOP_HELO_FCRDNS,
+	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE,T_SCC_BODY_TEXT_LINE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 52D1A20760
-	for <lists-other-nbd@bendel.debian.org>; Wed, 31 Jan 2024 19:14:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 96DE12072E
+	for <lists-other-nbd@bendel.debian.org>; Wed, 31 Jan 2024 21:41:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-8.21 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
-	MD5_SHA1_SUM=-1, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=-12.009 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
+	PGPSIGNATURE=-5, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id aZfDhTH1ujaW for <lists-other-nbd@bendel.debian.org>;
-	Wed, 31 Jan 2024 19:14:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	with ESMTP id Fqgn3xyOxKxU for <lists-other-nbd@bendel.debian.org>;
+	Wed, 31 Jan 2024 21:41:21 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 5E89F2074E
-	for <nbd@other.debian.org>; Wed, 31 Jan 2024 19:14:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=1JLgTd7EsQq2tOr7Qr3jgKrr+EQOE4Pz5LqwlI0CNYw=; b=P59shnNjHA8o2LHY6/F8TLwGHN
-	/yfBEaygAf/szTEIAwCzdLN7iOwDY/SaGtAbtaI+NVg244Y7cdmJW3r93PgWfYIyHh7Jsf85lF4re
-	HrHwZDccTuyIFfAspU5+JLSjyR+nONgmC5fZSAZBl99mPVX4iBSe0j5ihg+5R/5XvAb8VJnJsHtEV
-	nlj/0DtIAFoli9kVvJpO3FlPQ8k7cSw4vKHi5ycgikiJIQ429PuDJAa05r6LTniCOxLnWbQxHkBZL
-	Ofrq5iwbHv1puFlxlOtMqp3+84KCT+rEWm3MdafdoWT3keYh0VUhba8c4Oxbe9tCR9eUOlckl6Sdv
-	DmwJhrNQ==;
-Received: from [213.172.149.157] (helo=pc220518)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <w@uter.be>)
-	id 1rVG2M-006nNv-0j;
-	Wed, 31 Jan 2024 20:14:18 +0100
-Received: from wouter by pc220518 with local (Exim 4.97)
-	(envelope-from <w@uter.be>)
-	id 1rVG2D-00000001TNc-15HV;
-	Wed, 31 Jan 2024 21:14:09 +0200
-Date: Wed, 31 Jan 2024 21:14:09 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Lukasz Stelmach <l.stelmach@samsung.com>
-Cc: nbd@other.debian.org, Karol Lewandowski <k.lewandowsk@samsung.com>,
-	=?utf-8?B?7J6s7ZuIIOyglQ==?= <jh80.chung@samsung.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Marek Pikula <m.pikula@partner.samsung.com>
-Subject: Re: Fixes after static code analysis
-Message-ID: <ZbqcASAmWxQMuM4Q@pc220518.home.grep.be>
-References: <CGME20240122115235eucas1p1f313da18ba39fa558ccc7ff600d8ea73@eucas1p1.samsung.com>
- <oypijdplxttwjs.fsf%l.stelmach@samsung.com>
+	by bendel.debian.org (Postfix) with ESMTPS id 106C62072F
+	for <nbd@other.debian.org>; Wed, 31 Jan 2024 21:41:20 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dragon.pibit.ch (Postfix) with ESMTP id 948122143E23
+	for <nbd@other.debian.org>; Wed, 31 Jan 2024 22:41:17 +0100 (CET)
+Received: from pibit.ch ([127.0.0.1])
+ by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8eCsoovFQcPW for <nbd@other.debian.org>;
+ Wed, 31 Jan 2024 22:41:17 +0100 (CET)
+Received: from 127.0.0.1 (pd9e548ad.dip0.t-ipconnect.de [217.229.72.173])
+	by dragon.pibit.ch (Postfix) with ESMTPSA id 658C6214399C
+	for <nbd@other.debian.org>; Wed, 31 Jan 2024 22:41:17 +0100 (CET)
+Message-ID: <359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org>
+Date: Wed, 31 Jan 2024 22:41:15 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <oypijdplxttwjs.fsf%l.stelmach@samsung.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
+User-Agent: Mozilla Thunderbird
+Subject: Re: Feature request: nbd-server serves multiple (autogenerated) files
+ in directory hierarchy
+Content-Language: de-DE, en-US
+To: nbd@other.debian.org
+References: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
+ <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
+From: Lars Rohwedder <roker@pep-project.org>
+Autocrypt: addr=roker@pep-project.org; keydata=
+ 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
+ GIaZVwoJisucuww=
+Organization: =?UTF-8?B?8J+Ukg==?=
+In-Reply-To: <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------nDyzena0BSArfXh8xyYM093X"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QGIala7E1wI.A.YjD.iwpulB@bendel>
+Resent-Message-ID: <CxCcwVv5CUI.A.SjF.T6rulB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2723
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2724
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -90,48 +110,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZbqcASAmWxQMuM4Q@pc220518.home.grep.be
-Resent-Date: Wed, 31 Jan 2024 19:14:42 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org
+Resent-Date: Wed, 31 Jan 2024 21:41:39 +0000 (UTC)
 
-Hi Lukasz,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------nDyzena0BSArfXh8xyYM093X
+Content-Type: multipart/mixed; boundary="------------QVDMptjZRWGlODx8cCWLBND7";
+ protected-headers="v1"
+From: Lars Rohwedder <roker@pep-project.org>
+To: nbd@other.debian.org
+Message-ID: <359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org>
+Subject: Re: Feature request: nbd-server serves multiple (autogenerated) files
+ in directory hierarchy
+References: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
+ <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
+In-Reply-To: <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
 
-On Mon, Jan 22, 2024 at 12:52:23PM +0100, Lukasz Stelmach wrote:
-> Hi,
-> 
-> Last year we decided to include nbd package in Tizen. Every package we
-> use gets a periodic treatment with static analysis tools (Coverity,
-> SVACE). There were some problems detected in nbd and we've developed a
-> number of patches[1] to fix them. Please take a look at them as well as
-> the eariler patch[1] I posted.
-> 
-> [1] https://git.tizen.org/cgit/platform/upstream/nbd/log/?h=tizen&id=2c54e25b0cea8d30f7958fa2d17c67b91867aff6
+--------------QVDMptjZRWGlODx8cCWLBND7
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Is this available in some public repository that I can just pull from? I
-tried "https://git.tizen.org/platform/upstream/nbd", which seemed the
-most obvious, but that didn't work.
+T2ggdGhhbmsgeW91IQ0KDQpJIGRpZCBub3Qgc2VlIHRoaXMgYWxyZWFkeSBleGlzdGluZyBm
+ZWF0dXJlLCB3aGljaCBpcyB2ZXJ5IG5lYXIgdGhlIG9uZSANCkknZCBsaWtlIHRvIGhhdmUh
+DQoNCjotKQ0KDQpNeSB3aXNoZXMgKG9yZGVyZWQgYnkgZGVjcmVhc2luZyBwcmlvcml0eS9k
+ZW1hbmQpOg0KDQoxLiBtYWtlIHNpemUgb2YgdGhlICJibG9jayBmaWxlcyIgY29uZmlndXJh
+YmxlLiA0MDk2IGJ5dGVzIHNlZW1zIHRvIGJlIA0KcXVpZXQgc21hbGwsIEknZCBsaWtlIHRv
+IGV4cGVyaW1lbnQgd2l0aCA2NEtCIOKApiAxMDI0S0IsIGRlcGVuZGluZyBvbiB0aGUgDQpl
+bnZpcm9ubWVudCAobG9jYWwvcmVtb3RlIE5CRCwgYmFuZHdpdGggYW5kIHVuZGVybGF5aW5n
+IChsb2NhbCBvciANCnJlbW90ZSkgZmlsZXN5c3RlbSwgZXRjLikNCg0KMi4gbWFrZSBudW1i
+ZXIgb2YgZmlsZXMvc3ViZGlycyBwZXIgZGlyZWN0b3J5IGNvbmZpZ3VyYWJsZSAoYWxzbyB0
+byBmaW5kIA0KYW4gb3B0aW1hbCBudW1iZXIgZm9yIGEgc3BlY2lmaWMgZW52aXJvbm1lbnQp
+DQoNCjMuIG1ha2UgdGhlIGZpbGUgbmFtaW5nIGNvbnZlbnRpb24gY29uZmlndXJhYmxlDQoN
+CkdyZWV0aW5ncywNCg0KCQlMYXJzIFIuDQo=
 
-> [2] https://lists.debian.org/nbd/2023/08/msg00046.html
+--------------QVDMptjZRWGlODx8cCWLBND7--
 
-I looked at that when you sent it, didn't like it, was going to reply,
-but then apparently forgot to do that. Sorry about that.
+--------------nDyzena0BSArfXh8xyYM093X
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-I didn't like this because there are some autoconf variables that (by
-default) have other variables in them, in ways that expose them as shell
-variables; e.g., the default setting for sysconfdir is "${prefix}/etc",
-which means that if you run "./configure" with no arguments,
-nbd-server(5) will mention that the configuration file is
-"${prefix}/etc/nbd-server/config", which I think is a bit ugly.
+-----BEGIN PGP SIGNATURE-----
 
-That's why I did it that way.
+wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmW6vnsFAwAAAAAACgkQz24L8sM/oJ5s
+kgxAmaK9fF1JmfGB9qxwqUkS3CmJA/kT1ZadlIw56jo18ckNZuclABxdSg2nK3iWSItbDyv8a+bE
+6PIsSXuC4UxGt2Ngm68pEhUFhes8eTR00eEA7c7voUCMPWgBgJeSazmapKFI8Q5ZlXqi2fNxto55
+TnTtZlYggSH6FXfA2AHtBv4kyJmru/PM3sr7jVJXrE2qxcwKuONVm1gqXlRImcVf/VxlgsgC2Myo
+91UZepM8hkG8GZRtpSMzsnqMMIpuBZGxli9WqBZKKzbQx6rGD3tkTLvxjmX/HoPufDptnT0TH2Z0
+s/xUpx8oP4qGhZf/iHrxeF9Gelb/sta/IW74jA90zDbuQ2pinIqWzROb+dyT5RsimyrYfUAc97wZ
+HetpLoss0Hrlfn6D0wRsIjgYLHYKJKNM0HunGBOYIscA3b1mvGMitWbUXTGm4hsPEI0Asp8URscY
+HdZvz336XNinVS2YusYeZfQ7ji93O4N0GHIq7P2iAXDWLL+cOk6AZ935fc/5i8+2T5cXf4w=
+=DflV
+-----END PGP SIGNATURE-----
 
-I don't think your version does that? But I could be wrong, of course;
-in which case, please explain :)
-
-Thanks,
-
--- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
-
-I will have a Tin-Actinium-Potassium mixture, thanks.
+--------------nDyzena0BSArfXh8xyYM093X--
 
