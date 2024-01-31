@@ -2,82 +2,81 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id B01E08410AB
-	for <lists+nbd@lfdr.de>; Mon, 29 Jan 2024 18:30:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57E378447C3
+	for <lists+nbd@lfdr.de>; Wed, 31 Jan 2024 20:06:26 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7D28720A5E; Mon, 29 Jan 2024 17:30:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jan 29 17:30:13 2024
-Old-Return-Path: <gregkh@linuxfoundation.org>
+	id DCC5220607; Wed, 31 Jan 2024 19:06:25 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 31 19:06:25 2024
+Old-Return-Path: <w@uter.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MD5_SHA1_SUM,
-	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE,WORD_WITHOUT_VOWELS
-	autolearn=no autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id BA6D720A98
-	for <lists-other-nbd@bendel.debian.org>; Mon, 29 Jan 2024 17:13:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8769F205BA
+	for <lists-other-nbd@bendel.debian.org>; Wed, 31 Jan 2024 19:06:14 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.895 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-2.485, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01,
-	WORD_WITHOUT_VOWELS=1] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-7.21 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Zv_Cbwowl3e8 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 29 Jan 2024 17:12:57 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
-X-Greylist: delayed 331 seconds by postgrey-1.36 at bendel; Mon, 29 Jan 2024 17:12:57 UTC
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+	with ESMTP id mj3Fdf6Mlhnw for <lists-other-nbd@bendel.debian.org>;
+	Wed, 31 Jan 2024 19:06:06 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 4D11D20A8A
-	for <nbd@other.debian.org>; Mon, 29 Jan 2024 17:12:57 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 1D038623C8;
-	Mon, 29 Jan 2024 17:12:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B35E3C43390;
-	Mon, 29 Jan 2024 17:12:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1706548373;
-	bh=bu6ITFeX4H3xnn8T4N9IfQ1WlQczDz+JxDyvEH+Rslk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ZiyJuN2ytXgWaCOGSRYCD8OSZDpmySgFkMlluDEMR4qKmhtiDV+GMwe2fHtDGYc8c
-	 irzT6MRX7BdhnZsGVv9uy0hy98eFX03wb05P68rBlHBa+kvVHfMkhcoBg1qXg8dDNj
-	 mJZhYked3ksCZi3ddRjpNuT5ef3JRgbeZ9MVWFyI=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	patches@lists.linux.dev,
-	syzbot <syzkaller@googlegroups.com>,
-	Eric Dumazet <edumazet@google.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	Simon Horman <horms@kernel.org>
-Subject: [PATCH 6.1 114/185] nbd: always initialize struct msghdr completely
-Date: Mon, 29 Jan 2024 09:05:14 -0800
-Message-ID: <20240129170002.256421367@linuxfoundation.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240129165958.589924174@linuxfoundation.org>
-References: <20240129165958.589924174@linuxfoundation.org>
-User-Agent: quilt/0.67
-X-stable: review
-X-Patchwork-Hint: ignore
+	by bendel.debian.org (Postfix) with ESMTPS id 8F33520591
+	for <nbd@other.debian.org>; Wed, 31 Jan 2024 19:06:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=AzJcxUl1M3aBDpFzMl35RH1fm8XFoEZJSkP34jDGhGk=; b=kvnni60kGwU0gLbrVjJrksD7qv
+	hZQom/uOY5lewpH2NUP8tL1NUrxwNnqZmPv6J8UMlOFyhIdkphgzZZ2A8NIOX4GCI9aES9/yd1Qw9
+	wqOc4SaKS5iPv2BzYmpmV1v6ctisMZ/80G85U5cOt+gph2D/iX0OuQBMc/VlybijQP1P3OHnxIrpO
+	SY066ykQxrTMZrsuSdU/IphuJ8nNDTIq3ohB6qIZlXDS8Zp6E9Rr6SMK7PLU0YY/bgXvT8CvhbTxu
+	I9E2JvoAoIsqLfeqP/Kket3BHOYOtz+ZftKqfzhwP4/bSDwJOBEpIoPzLzNmv+R2JcitR4w0uuswJ
+	rZ+q6Tsw==;
+Received: from [213.172.149.157] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <w@uter.be>)
+	id 1rVFuN-006jUg-2i;
+	Wed, 31 Jan 2024 20:06:03 +0100
+Received: from wouter by pc220518 with local (Exim 4.97)
+	(envelope-from <w@uter.be>)
+	id 1rVFu8-00000001SZf-2G56;
+	Wed, 31 Jan 2024 21:05:48 +0200
+Date: Wed, 31 Jan 2024 21:05:48 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Lars Rohwedder <roker@pep-project.org>
+Cc: nbd@other.debian.org
+Subject: Re: Feature request: nbd-server serves multiple (autogenerated)
+ files in directory hierarchy
+Message-ID: <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
+References: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rc-Spam: 2008-11-04_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
+X-Speed: Gates' Law: Every 18 months, the speed of software halves.
+Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <-rO7x8IA0PM.A.k6B.lC-tlB@bendel>
+Resent-Message-ID: <yECygsDIDbC.A.wpD.xopulB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2719
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2722
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,84 +86,50 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240129170002.256421367@linuxfoundation.org
-Resent-Date: Mon, 29 Jan 2024 17:30:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ZbqaDMf-VqRacj4p@pc220518.home.grep.be
+Resent-Date: Wed, 31 Jan 2024 19:06:25 +0000 (UTC)
 
-6.1-stable review patch.  If anyone has any objections, please let me know.
+Hi Lars,
 
-------------------
+Sorry for the late reply; I'm a bit busy as a co-organizer of FOSDEM
+these days, and I haven't gotten around to looking at my nbd mailbox in
+a while...
 
-From: Eric Dumazet <edumazet@google.com>
+On Thu, Jan 18, 2024 at 11:46:36AM +0100, Lars Rohwedder wrote:
+> Some examples:
+> 
+> Case A: 1 GiB device size, 1 MiB chunk size, 2000 nodes per directory:
+>    -> 1024 chunks -> fit in one directory.
+>    $BASEDIR/0000.bin
+>    ...
+>    $BASEDIR/1023.bin
+> 
+> Case B: 1 TiB device size, 4 MiB chunk size, 2000 nodes per directory:
+>    -> 262144 chunks -> hierarchy depth of ceil(log(262144)/log(2000))=2.
+>    chunk #0: $BASEDIR/000/0000.bin
+>    ...
+>    chunk #1999: $BASEDIR/000/1999.bin
+>    chunk #2000: $BASEDIR/001/0000.bin
+>    ...
+>    chunk #3999: $BASEDIR/001/1999.bin
+>    ...
+>    chunk #262143: $BASEDIR/131/0143.bin  (if I calculated correctly)
+> 
+> Case C: 10 TB device, 64 KiB chunks, 1000 nodes per directory:
+>    -> 167'772'160 chunks -> hierarchy depth: 3.
+>    chunk #0:  $BASEDIR/000/000/000.bin
+>    ...
+>    chunk #167772160: $BASEDIR/167/772/160.bin
 
-commit 78fbb92af27d0982634116c7a31065f24d092826 upstream.
+This sounds a lot like the "treefiles" feature in nbd-server. Have you
+looked at that? See "man 5 nbd-server" and search for "treefiles".
 
-syzbot complains that msg->msg_get_inq value can be uninitialized [1]
+If that doesn't do what you're looking for, I'm always willing to look
+at patches ;-)
 
-struct msghdr got many new fields recently, we should always make
-sure their values is zero by default.
+-- 
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
 
-[1]
- BUG: KMSAN: uninit-value in tcp_recvmsg+0x686/0xac0 net/ipv4/tcp.c:2571
-  tcp_recvmsg+0x686/0xac0 net/ipv4/tcp.c:2571
-  inet_recvmsg+0x131/0x580 net/ipv4/af_inet.c:879
-  sock_recvmsg_nosec net/socket.c:1044 [inline]
-  sock_recvmsg+0x12b/0x1e0 net/socket.c:1066
-  __sock_xmit+0x236/0x5c0 drivers/block/nbd.c:538
-  nbd_read_reply drivers/block/nbd.c:732 [inline]
-  recv_work+0x262/0x3100 drivers/block/nbd.c:863
-  process_one_work kernel/workqueue.c:2627 [inline]
-  process_scheduled_works+0x104e/0x1e70 kernel/workqueue.c:2700
-  worker_thread+0xf45/0x1490 kernel/workqueue.c:2781
-  kthread+0x3ed/0x540 kernel/kthread.c:388
-  ret_from_fork+0x66/0x80 arch/x86/kernel/process.c:147
-  ret_from_fork_asm+0x11/0x20 arch/x86/entry/entry_64.S:242
-
-Local variable msg created at:
-  __sock_xmit+0x4c/0x5c0 drivers/block/nbd.c:513
-  nbd_read_reply drivers/block/nbd.c:732 [inline]
-  recv_work+0x262/0x3100 drivers/block/nbd.c:863
-
-CPU: 1 PID: 7465 Comm: kworker/u5:1 Not tainted 6.7.0-rc7-syzkaller-00041-gf016f7547aee #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/17/2023
-Workqueue: nbd5-recv recv_work
-
-Fixes: f94fd25cb0aa ("tcp: pass back data left in socket after receive")
-Reported-by: syzbot <syzkaller@googlegroups.com>
-Signed-off-by: Eric Dumazet <edumazet@google.com>
-Cc: stable@vger.kernel.org
-Cc: Josef Bacik <josef@toxicpanda.com>
-Cc: Jens Axboe <axboe@kernel.dk>
-Cc: linux-block@vger.kernel.org
-Cc: nbd@other.debian.org
-Reviewed-by: Simon Horman <horms@kernel.org>
-Link: https://lore.kernel.org/r/20240112132657.647112-1-edumazet@google.com
-Signed-off-by: Jens Axboe <axboe@kernel.dk>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
----
- drivers/block/nbd.c |    6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
-
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -494,7 +494,7 @@ static int __sock_xmit(struct nbd_device
- 		       struct iov_iter *iter, int msg_flags, int *sent)
- {
- 	int result;
--	struct msghdr msg;
-+	struct msghdr msg = { };
- 	unsigned int noreclaim_flag;
- 
- 	if (unlikely(!sock)) {
-@@ -509,10 +509,6 @@ static int __sock_xmit(struct nbd_device
- 	noreclaim_flag = memalloc_noreclaim_save();
- 	do {
- 		sock->sk->sk_allocation = GFP_NOIO | __GFP_MEMALLOC;
--		msg.msg_name = NULL;
--		msg.msg_namelen = 0;
--		msg.msg_control = NULL;
--		msg.msg_controllen = 0;
- 		msg.msg_flags = msg_flags | MSG_NOSIGNAL;
- 
- 		if (send)
-
+I will have a Tin-Actinium-Potassium mixture, thanks.
 
