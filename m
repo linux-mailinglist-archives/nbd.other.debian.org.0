@@ -2,105 +2,135 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76CA3844A40
-	for <lists+nbd@lfdr.de>; Wed, 31 Jan 2024 22:41:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A25818460FD
+	for <lists+nbd@lfdr.de>; Thu,  1 Feb 2024 20:31:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 557362075B; Wed, 31 Jan 2024 21:41:39 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan 31 21:41:39 2024
-Old-Return-Path: <roker@pep-project.org>
+	id 6D665205C7; Thu,  1 Feb 2024 19:31:35 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb  1 19:31:35 2024
+Old-Return-Path: <l.stelmach@samsung.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=4.0 tests=KHOP_HELO_FCRDNS,
-	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE,T_SCC_BODY_TEXT_LINE
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-12.6 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,MD5_SHA1_SUM,PGPSIGNATURE,
+	RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+	T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+	version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 96DE12072E
-	for <lists-other-nbd@bendel.debian.org>; Wed, 31 Jan 2024 21:41:28 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C88B5205B1
+	for <lists-other-nbd@bendel.debian.org>; Thu,  1 Feb 2024 19:31:23 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-12.009 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
-	PGPSIGNATURE=-5, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-14.772 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-1.564, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	MD5_SHA1_SUM=-1, PGPSIGNATURE=-5, RCVD_IN_DNSWL_HI=-5,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Fqgn3xyOxKxU for <lists-other-nbd@bendel.debian.org>;
-	Wed, 31 Jan 2024 21:41:21 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 106C62072F
-	for <nbd@other.debian.org>; Wed, 31 Jan 2024 21:41:20 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dragon.pibit.ch (Postfix) with ESMTP id 948122143E23
-	for <nbd@other.debian.org>; Wed, 31 Jan 2024 22:41:17 +0100 (CET)
-Received: from pibit.ch ([127.0.0.1])
- by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8eCsoovFQcPW for <nbd@other.debian.org>;
- Wed, 31 Jan 2024 22:41:17 +0100 (CET)
-Received: from 127.0.0.1 (pd9e548ad.dip0.t-ipconnect.de [217.229.72.173])
-	by dragon.pibit.ch (Postfix) with ESMTPSA id 658C6214399C
-	for <nbd@other.debian.org>; Wed, 31 Jan 2024 22:41:17 +0100 (CET)
-Message-ID: <359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org>
-Date: Wed, 31 Jan 2024 22:41:15 +0100
+	with ESMTP id Egu_f4feFdSZ for <lists-other-nbd@bendel.debian.org>;
+	Thu,  1 Feb 2024 19:31:13 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mailout1.w1.samsung.com", Issuer "DigiCert Global G2 TLS RSA SHA256 2020 CA1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id BBA97205BB
+	for <nbd@other.debian.org>; Thu,  1 Feb 2024 19:31:13 +0000 (UTC)
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20240201193108euoutp01253223fe4999f5bb84703d037ae008c3~v0-05kgmn2631126311euoutp01i;
+	Thu,  1 Feb 2024 19:31:08 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20240201193108euoutp01253223fe4999f5bb84703d037ae008c3~v0-05kgmn2631126311euoutp01i
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1706815868;
+	bh=OUFAtAB0Zk1c2E7BzKYkPV2d+qQuWblj4Ld8PGJBHdk=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:References:From;
+	b=N3HveUauiS26S/72ul2/gzDDl2PaWZF1LQdSn1rrIiCqiDdW0xowfLD5PHa3RtyHj
+	 dfjhNyDdbYlKNeawZGKttWpSFtFpSbxBm9YagSQONUpSh55jfWpNaKxNkYZW5IDiR0
+	 UbwutXnev+YrioKb65MdQUyhehwZkslNb4Rjk+Uo=
+Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTP id
+	20240201193107eucas1p1dff9e06967df149e72c93685d397665e~v0-0hR3x12072820728eucas1p1d;
+	Thu,  1 Feb 2024 19:31:07 +0000 (GMT)
+Received: from eucas1p1.samsung.com ( [182.198.249.206]) by
+	eusmges3new.samsung.com (EUCPMTA) with SMTP id 1A.2C.09552.B71FBB56; Thu,  1
+	Feb 2024 19:31:07 +0000 (GMT)
+Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20240201193107eucas1p2a86669add6be2a4ababb691e3cdceb4f~v0-z2ejsk1698616986eucas1p2i;
+	Thu,  1 Feb 2024 19:31:07 +0000 (GMT)
+Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
+	eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
+	20240201193107eusmtrp24f7f477ae2136d5b2bf0f6659d3226c1~v0-z19KXw2446924469eusmtrp2o;
+	Thu,  1 Feb 2024 19:31:07 +0000 (GMT)
+X-AuditID: cbfec7f5-853ff70000002550-8b-65bbf17b9c46
+Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
+	eusmgms2.samsung.com (EUCPMTA) with SMTP id BE.F1.10702.B71FBB56; Thu,  1
+	Feb 2024 19:31:07 +0000 (GMT)
+Received: from localhost (unknown [106.120.51.111]) by eusmtip2.samsung.com
+	(KnoxPortal) with ESMTPA id
+	20240201193106eusmtip253ddcc8be24d270821882a3b26cb64c0~v0-zmk7m-1067410674eusmtip2X;
+	Thu,  1 Feb 2024 19:31:06 +0000 (GMT)
+From: Lukasz Stelmach <l.stelmach@samsung.com>
+To: Wouter Verhelst <w@uter.be>
+Cc: nbd@other.debian.org,  Karol Lewandowski <k.lewandowsk@samsung.com>,
+	=?utf-8?B?7J6s7ZuIIOyglQ==?= <jh80.chung@samsung.com>,  Marek Szyprowski
+	<m.szyprowski@samsung.com>, Marek Pikula <m.pikula@partner.samsung.com>
+Subject: Re: Fixes after static code analysis
+In-Reply-To: <ZbqcASAmWxQMuM4Q@pc220518.home.grep.be> (Wouter Verhelst's
+	message of "Wed, 31 Jan 2024 21:14:09 +0200")
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+Date: Thu, 01 Feb 2024 20:30:46 +0100
+Message-ID: <oypijdplxgm17d.fsf%l.stelmach@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Feature request: nbd-server serves multiple (autogenerated) files
- in directory hierarchy
-Content-Language: de-DE, en-US
-To: nbd@other.debian.org
-References: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
- <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
-From: Lars Rohwedder <roker@pep-project.org>
-Autocrypt: addr=roker@pep-project.org; keydata=
- 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
- GIaZVwoJisucuww=
-Organization: =?UTF-8?B?8J+Ukg==?=
-In-Reply-To: <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------nDyzena0BSArfXh8xyYM093X"
+Content-Type: multipart/signed; boundary="=-=-="; micalg="pgp-sha256";
+	protocol="application/pgp-signature"
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFKsWRmVeSWpSXmKPExsWy7djPc7rVH3enGtx9Y2px41cbq0Xjp7nM
+	Fn/nTWWzWHvkLrvF76drmSw29+s7sHlc/dbM7HHw3R4mj74tqxg9/t68zhrAEsVlk5Kak1mW
+	WqRvl8CV0dy9kbHgqXRFx4nSBsYN4l2MHBwSAiYS7+aLdDFycQgJrGCUODGphRnC+cIoMff8
+	XBYI5zOjxKtTs4EcTrCOuSufsEEkljNKbP73hw0kISTwglHichcTyFg2AT2JtWsjQMIiAvIS
+	i1tvgZUwC9xllFhzJwjEFhbQlbi/byIbSDmnQIXEpJfcIGFRAUuJ41vbwcpZBFQlpp5tZQKx
+	eQXMJV7u+MkKYQtKnJz5hAViZK7EzPNvGEHOkRB4wCFxsfMp1J0uEntPzWCGsIUlXh3fwg5h
+	y0j83zmfCaKhnVGi6cpCVghnAqPE544mJogqa4k7536xQdiOEh+utDJDwotP4sZbQYjNfBKT
+	tk2HCvNKdLQJQVSrSKzr3wN1g5RE76sVjBC2h8TkHzvYIeHWwSgxs/8M2wRGhVlIHpqF5KFZ
+	QGOZBTQl1u/ShwhrSyxb+JoZwraVWLfuPcsCRtZVjOKppcW56anFxnmp5XrFibnFpXnpesn5
+	uZsYgUno9L/jX3cwrnj1Ue8QIxMH4yFGFaDmRxtWX2CUYsnLz0tVEuFdKbczVYg3JbGyKrUo
+	P76oNCe1+BCjNAeLkjivaop8qpBAemJJanZqakFqEUyWiYNTqoFJuev2jDvhWwpOPPYy3BG7
+	bCejmi+Hz7VvP8XTFnxM31N5U2D+pX8N0nse5YYbhFUtqZ1d8ifGbhLHG96ioNw0lri1pTb+
+	6cyrs4/2OJ7PCU5/E1//8d2imeKcSxol9TeZ2luubD/58sEON6PmGA6eN0dOSMvqH9dZ5vlj
+	g/7sdibT/uqW+bVGeYd2NW5N4ba8ZnNvcqEv38Tou59u24ft7+7Vmb7grGrO/AmLD0n3zYlb
+	mO+Yt/ubWS3DgylLZCQ3xwWHsaqY7H0b2qZxIe7DOdsmKTXtF2sSr3xuWq0mEHKsdv2C6ecd
+	SyxvxNzPUHt8vOKOBy8L05ptRudeXF2g/cj04tqTN2tfPN9medhSiaU4I9FQi7moOBEAkjjL
+	ir0DAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrEIsWRmVeSWpSXmKPExsVy+t/xe7rVH3enGmx9wGJx41cbq0Xjp7nM
+	Fn/nTWWzWHvkLrvF76drmSw29+s7sHlc/dbM7HHw3R4mj74tqxg9/t68zhrAEqVnU5RfWpKq
+	kJFfXGKrFG1oYaRnaGmhZ2RiqWdobB5rZWSqpG9nk5Kak1mWWqRvl6CX0dy9kbHgqXRFx4nS
+	BsYN4l2MnBwSAiYSc1c+Yeti5OIQEljKKNE2dyFzFyMHUEJKYuXcdIgaYYk/17qgap4xSpxf
+	fJgNpIZNQE9i7doIkBoRAXmJxa23wGqYBR4ySty8fZoFJCEsoCtxf99EsHpOgQqJSS+5QcJC
+	QHvv/F/JBGKLClhKHN/azgZiswioSkw92woW5xUwl3i54ycrhC0ocXLmE7CRzALZEl9XP2ee
+	wCgwC0lqFpLULKBtzAKaEut36UOEtSWWLXzNDGHbSqxb955lASPrKkaR1NLi3PTcYiO94sTc
+	4tK8dL3k/NxNjMAI2nbs55YdjCtffdQ7xMjEwXiIUQWo89GG1RcYpVjy8vNSlUR4V8rtTBXi
+	TUmsrEotyo8vKs1JLT7EaAr0wkRmKdHkfGBs55XEG5oZmBqamFkamFqaGSuJ83oWdCQKCaQn
+	lqRmp6YWpBbB9DFxcEo1MK1ff9a786isv/kUvf3Od0y35dhJfIpK+qZ2rrY6xGGl5+UT9UZT
+	9Fct9WRU/+v+6ca9W5kW2ifmO7H15P3a+/2/Iu/iYw8Nmew9n+n5+wg/mezoKnZIoqy9cpLd
+	xR1V7y7KvlZ9Z7KF5dWprih2+epNXVNkK1ke9J118X3d9iA5tqdKZYpLoHBGcX+Z4z7mw27n
+	i91nxYaLXj6za/6h92fbuwMlvryRq9/0/8CaHwKlzdudTQxy7I8q+LpyGb1M239nGsOmD8In
+	7tq8ktspw7Sm9mfjrROz3iadd0vxVZ+U7Hx5tuYTi9aJqb+e9pbo699tMhfT23m9SHrKN8F1
+	M6SXf7kS2fT8ZY3pHPOVwkosxRmJhlrMRcWJAKG/8jo1AwAA
+X-CMS-MailID: 20240201193107eucas1p2a86669add6be2a4ababb691e3cdceb4f
+X-Msg-Generator: CA
+X-RootMTR: 20240201193107eucas1p2a86669add6be2a4ababb691e3cdceb4f
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20240201193107eucas1p2a86669add6be2a4ababb691e3cdceb4f
+References: <ZbqcASAmWxQMuM4Q@pc220518.home.grep.be>
+	<CGME20240201193107eucas1p2a86669add6be2a4ababb691e3cdceb4f@eucas1p2.samsung.com>
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <CxCcwVv5CUI.A.SjF.T6rulB@bendel>
+Resent-Message-ID: <wGyL1kSln_E.A.Q4E.XG_ulB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2724
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2725
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -110,58 +140,107 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org
-Resent-Date: Wed, 31 Jan 2024 21:41:39 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/oypijdplxgm17d.fsf%l.stelmach@samsung.com
+Resent-Date: Thu,  1 Feb 2024 19:31:35 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------nDyzena0BSArfXh8xyYM093X
-Content-Type: multipart/mixed; boundary="------------QVDMptjZRWGlODx8cCWLBND7";
- protected-headers="v1"
-From: Lars Rohwedder <roker@pep-project.org>
-To: nbd@other.debian.org
-Message-ID: <359d500f-b2c5-4b3f-b4d0-9d800ae3d679@pep-project.org>
-Subject: Re: Feature request: nbd-server serves multiple (autogenerated) files
- in directory hierarchy
-References: <5dd9746e-de8b-4936-95b6-bdffb82d6fad@pep-project.org>
- <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
-In-Reply-To: <ZbqaDMf-VqRacj4p@pc220518.home.grep.be>
+--=-=-=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------QVDMptjZRWGlODx8cCWLBND7
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+It was <2024-01-31 =C5=9Bro 21:14>, when Wouter Verhelst wrote:
+> On Mon, Jan 22, 2024 at 12:52:23PM +0100, Lukasz Stelmach wrote:
+>> Hi,
+>>=20
+>> Last year we decided to include nbd package in Tizen. Every package we
+>> use gets a periodic treatment with static analysis tools (Coverity,
+>> SVACE). There were some problems detected in nbd and we've developed a
+>> number of patches[1] to fix them. Please take a look at them as well as
+>> the eariler patch[1] I posted.
+>>=20
+>> [1]
+>> https://git.tizen.org/cgit/platform/upstream/nbd/log/?h=3Dtizen&id=3D2c5=
+4e25b0cea8d30f7958fa2d17c67b91867aff6
+>
+> Is this available in some public repository that I can just pull from? I
+> tried
+> "https://git.tizen.org/platform/upstream/nbd",
+> which seemed the
+> most obvious, but that didn't work.
 
-T2ggdGhhbmsgeW91IQ0KDQpJIGRpZCBub3Qgc2VlIHRoaXMgYWxyZWFkeSBleGlzdGluZyBm
-ZWF0dXJlLCB3aGljaCBpcyB2ZXJ5IG5lYXIgdGhlIG9uZSANCkknZCBsaWtlIHRvIGhhdmUh
-DQoNCjotKQ0KDQpNeSB3aXNoZXMgKG9yZGVyZWQgYnkgZGVjcmVhc2luZyBwcmlvcml0eS9k
-ZW1hbmQpOg0KDQoxLiBtYWtlIHNpemUgb2YgdGhlICJibG9jayBmaWxlcyIgY29uZmlndXJh
-YmxlLiA0MDk2IGJ5dGVzIHNlZW1zIHRvIGJlIA0KcXVpZXQgc21hbGwsIEknZCBsaWtlIHRv
-IGV4cGVyaW1lbnQgd2l0aCA2NEtCIOKApiAxMDI0S0IsIGRlcGVuZGluZyBvbiB0aGUgDQpl
-bnZpcm9ubWVudCAobG9jYWwvcmVtb3RlIE5CRCwgYmFuZHdpdGggYW5kIHVuZGVybGF5aW5n
-IChsb2NhbCBvciANCnJlbW90ZSkgZmlsZXN5c3RlbSwgZXRjLikNCg0KMi4gbWFrZSBudW1i
-ZXIgb2YgZmlsZXMvc3ViZGlycyBwZXIgZGlyZWN0b3J5IGNvbmZpZ3VyYWJsZSAoYWxzbyB0
-byBmaW5kIA0KYW4gb3B0aW1hbCBudW1iZXIgZm9yIGEgc3BlY2lmaWMgZW52aXJvbm1lbnQp
-DQoNCjMuIG1ha2UgdGhlIGZpbGUgbmFtaW5nIGNvbnZlbnRpb24gY29uZmlndXJhYmxlDQoN
-CkdyZWV0aW5ncywNCg0KCQlMYXJzIFIuDQo=
+That's
 
---------------QVDMptjZRWGlODx8cCWLBND7--
+    git fetch https://git.tizen.org/cgit/platform/upstream/nbd 2c54e25b0cea=
+8d30f7958fa2d17c67b91867aff6
 
---------------nDyzena0BSArfXh8xyYM093X
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+with "/cgit/" between ".org" and "platform".
+
+>> [2] https://lists.debian.org/nbd/2023/08/msg00046.html
+>
+> I looked at that when you sent it, didn't like it, was going to reply,
+> but then apparently forgot to do that. Sorry about that.
+
+NP.
+
+> I didn't like this because there are some autoconf variables that (by
+> default) have other variables in them, in ways that expose them as shell
+> variables; e.g., the default setting for sysconfdir is "${prefix}/etc",
+> which means that if you run "./configure" with no arguments,
+> nbd-server(5) will mention that the configuration file is
+> "${prefix}/etc/nbd-server/config", which I think is a bit ugly.
+
+It is indeed, but I believe it's not the case.
+
+> That's why I did it that way.
+>
+> I don't think your version does that? But I could be wrong, of course;
+> in which case, please explain :)
+
+I wrote the patch some time ago (-; but I believe I haven't seen such
+effect. Let me try. I run:
+
+git checkout e0a7534c74e7e21fe0be2ad55e4cbe35cef21a07
+./autogen.sh
+configure
+grep nbd-server/config -- man/nbd-server.5.sgml
+
+  <!ENTITY dhpackage   "/usr/local/etc/nbd-server/config">
+      <filename>/usr/local/etc/nbd-server/config</filename> is the default
+
+Next
+
+make -C man/ nbd-server.5
+grep nbd-server/config -- man/nbd-server.5
+
+/usr/local/etc/nbd-server/config \- configuration file for nbd-server
+\fB/usr/local/etc/nbd-server/config \fR
+\fI/usr/local/etc/nbd-server/config\fR is the default
+
+If there are any problems, would you mind, responding to that patch and
+pointing them out? I'd like to fix them.
+
+PS. I received thee more bug reports to handle. I'll review them when I
+get back from FOSDEM, so you don't need to hurry with these.
+
+PPS. If you happen to be around, Wouter, and would like to meet, try
+reaching me via Matrix @steelman:matrix.org
+=2D-=20
+=C5=81ukasz Stelmach
+Samsung R&D Institute Poland
+Samsung Electronics
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmW6vnsFAwAAAAAACgkQz24L8sM/oJ5s
-kgxAmaK9fF1JmfGB9qxwqUkS3CmJA/kT1ZadlIw56jo18ckNZuclABxdSg2nK3iWSItbDyv8a+bE
-6PIsSXuC4UxGt2Ngm68pEhUFhes8eTR00eEA7c7voUCMPWgBgJeSazmapKFI8Q5ZlXqi2fNxto55
-TnTtZlYggSH6FXfA2AHtBv4kyJmru/PM3sr7jVJXrE2qxcwKuONVm1gqXlRImcVf/VxlgsgC2Myo
-91UZepM8hkG8GZRtpSMzsnqMMIpuBZGxli9WqBZKKzbQx6rGD3tkTLvxjmX/HoPufDptnT0TH2Z0
-s/xUpx8oP4qGhZf/iHrxeF9Gelb/sta/IW74jA90zDbuQ2pinIqWzROb+dyT5RsimyrYfUAc97wZ
-HetpLoss0Hrlfn6D0wRsIjgYLHYKJKNM0HunGBOYIscA3b1mvGMitWbUXTGm4hsPEI0Asp8URscY
-HdZvz336XNinVS2YusYeZfQ7ji93O4N0GHIq7P2iAXDWLL+cOk6AZ935fc/5i8+2T5cXf4w=
-=DflV
+iQEzBAEBCAAdFiEEXpuyqjq9kGEVr9UQsK4enJilgBAFAmW78WYACgkQsK4enJil
+gBCWYAgAirzN01aGn7mWKZZH+Kso0vbkXhJru4gsjU2ky3gJ0MOIUOadiqC6jUfV
+RLHZjWqEa8aCiGK9QzDufqGPwQjrxrpKCVsYp1RDQDLaHM1tWqBeUN/wBfyZm+ot
+/TJgSZvYDwN4Yh97GExV/NO095mumf2Ee4KVdbjeTFjrRTriqF/WkQKBU/KSNgwo
+/LgQ5zDD5INLbzFgm89YYG9VQYXVZBu+tZOvAtM01ETJ7WPJvSLHHeXBy5KDnkU5
+vsvibEKD2qwicYvUpVrlAqSB8j5SvcTtCIcsa4KLjIlh/uzVKw+KqWgrL7kbRtcx
+4eDPLUmf3BB5gI6BxVTSOa41zzVHSQ==
+=P/Rq
 -----END PGP SIGNATURE-----
-
---------------nDyzena0BSArfXh8xyYM093X--
+--=-=-=--
 
