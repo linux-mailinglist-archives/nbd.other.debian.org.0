@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F691855B8B
-	for <lists+nbd@lfdr.de>; Thu, 15 Feb 2024 08:22:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57814855B88
+	for <lists+nbd@lfdr.de>; Thu, 15 Feb 2024 08:22:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6E11A20946; Thu, 15 Feb 2024 07:22:52 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb 15 07:22:52 2024
+	id 3B5DA20947; Thu, 15 Feb 2024 07:22:21 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb 15 07:22:21 2024
 Old-Return-Path: <BATV+a252b21bd4a653ddb6e6+7480+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id CE4AC20C22
-	for <lists-other-nbd@bendel.debian.org>; Thu, 15 Feb 2024 07:03:46 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 395B620C20
+	for <lists-other-nbd@bendel.debian.org>; Thu, 15 Feb 2024 07:03:44 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.06 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -28,29 +28,29 @@ X-Amavis-Spam-Status: No, score=-1.06 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id HOqRFXw35hxC for <lists-other-nbd@bendel.debian.org>;
-	Thu, 15 Feb 2024 07:03:35 +0000 (UTC)
+	with ESMTP id NYaSmwXEh1qr for <lists-other-nbd@bendel.debian.org>;
+	Thu, 15 Feb 2024 07:03:40 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8C96220C24
-	for <nbd@other.debian.org>; Thu, 15 Feb 2024 07:03:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id B9BD620C28
+	for <nbd@other.debian.org>; Thu, 15 Feb 2024 07:03:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=DrUjq9+otlq+JZyp7sUnHxt2qvboylumMEQhRnGxK+Q=; b=Jm67qksrPHmI4UQIhva7QTKFgF
-	USOIE1dq3e4LdFpUJOiZ4Ku1Ge6o6+5xX6M1zdBAoj+GGoSBgcOs7Xt6c/FFZy1Xah/rL4XPhYHCm
-	l///ec2UpRCMrEbnXSowx8kaWKClCVzhorEMiUkXcB5SvrW/UvcX7T9woJs31wCcq8UBCNYq1Nb+v
-	hW+pqUWSC5q/zvqjj2H3LIjJQLsacEheUj/RB5pdOyj2Y8boA7RNnAUbv/5Qu2GS6qUcWdcaJhimF
-	Nyn5SKFeSmDP1iL3nKtUXaia+A3K9TOAKkN46U7FPzOqm3/Kvr2cg7sFtz3e454kxSqxIvu5aQuD8
-	W13FMWuQ==;
+	bh=1EnsEkvgD7HWr4nnx5YI4UIfs7PyaV58+s3ACjOhYUE=; b=SarH/SjFUdZkl+NMfFuvtM1/gX
+	UxgaqqLDdaaKi6J3yAlssNsysQKCpaJLio6y5rmIQxCXUx4HmkJy/pgAgiJ0OECtELFptgJeLey2U
+	HyfvPe2gmkG7LEOCw7PPCSEqv6Ugx2UK73l5AMnVl9gM2Q60K+fH/HW+E6UpImu4blbbisRj2zyEr
+	iuV5RX0i28u6W4PZgvyPRLvFecWi0be54BmhcoLKNwWhy0kRooaTKZ+iFyKtfFOxDDpKsd119nXcO
+	lz+12lcj2asO0Fnnn6nOeqodVydcC1VJMvzZJLSVSr4CWbDzsly6dRle6shwY+OiEdyHH/5xfiWCc
+	1oef4Jww==;
 Received: from 2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1raVmE-0000000FASA-3Iy0;
-	Thu, 15 Feb 2024 07:03:23 +0000
+	id 1raVmH-0000000FATJ-1il1;
+	Thu, 15 Feb 2024 07:03:25 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Richard Weinberger <richard@nod.at>,
@@ -76,9 +76,9 @@ Cc: Richard Weinberger <richard@nod.at>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 06/17] ps3disk: pass queue_limits to blk_mq_alloc_disk
-Date: Thu, 15 Feb 2024 08:02:49 +0100
-Message-Id: <20240215070300.2200308-7-hch@lst.de>
+Subject: [PATCH 07/17] rbd: pass queue_limits to blk_mq_alloc_disk
+Date: Thu, 15 Feb 2024 08:02:50 +0100
+Message-Id: <20240215070300.2200308-8-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240215070300.2200308-1-hch@lst.de>
 References: <20240215070300.2200308-1-hch@lst.de>
@@ -88,9 +88,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <uQj6gxnbgYF.A.CJB.MvbzlB@bendel>
+Resent-Message-ID: <0KHRt2NODnH.A.-7.tubzlB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2734
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2732
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -100,61 +100,71 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240215070300.2200308-7-hch@lst.de
-Resent-Date: Thu, 15 Feb 2024 07:22:52 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240215070300.2200308-8-hch@lst.de
+Resent-Date: Thu, 15 Feb 2024 07:22:21 +0000 (UTC)
 
-Pass the few limits ps3disk imposes directly to blk_mq_alloc_disk instead
+Pass the limits rbd imposes directly to blk_mq_alloc_disk instead
 of setting them one at a time.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/ps3disk.c | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+ drivers/block/rbd.c | 29 +++++++++++++++--------------
+ 1 file changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/block/ps3disk.c b/drivers/block/ps3disk.c
-index dfd3860df4f880..b810ac0a5c4b97 100644
---- a/drivers/block/ps3disk.c
-+++ b/drivers/block/ps3disk.c
-@@ -382,6 +382,14 @@ static int ps3disk_probe(struct ps3_system_bus_device *_dev)
- 	struct ps3disk_private *priv;
- 	int error;
- 	unsigned int devidx;
+diff --git a/drivers/block/rbd.c b/drivers/block/rbd.c
+index 6b4f1898a722a3..26ff5cd2bf0abc 100644
+--- a/drivers/block/rbd.c
++++ b/drivers/block/rbd.c
+@@ -4952,6 +4952,14 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
+ 	struct request_queue *q;
+ 	unsigned int objset_bytes =
+ 	    rbd_dev->layout.object_size * rbd_dev->layout.stripe_count;
 +	struct queue_limits lim = {
-+		.logical_block_size	= dev->blk_size,
-+		.max_hw_sectors		= dev->bounce_size >> 9,
-+		.max_segments		= -1,
-+		.max_segment_size	= dev->bounce_size,
-+		.dma_alignment		= dev->blk_size - 1,
++		.max_hw_sectors		= objset_bytes >> SECTOR_SHIFT,
++		.max_user_sectors	= objset_bytes >> SECTOR_SHIFT,
++		.io_min			= rbd_dev->opts->alloc_size,
++		.io_opt			= rbd_dev->opts->alloc_size,
++		.max_segments		= USHRT_MAX,
++		.max_segment_size	= UINT_MAX,
 +	};
+ 	int err;
+ 
+ 	memset(&rbd_dev->tag_set, 0, sizeof(rbd_dev->tag_set));
+@@ -4966,7 +4974,13 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
+ 	if (err)
+ 		return err;
+ 
+-	disk = blk_mq_alloc_disk(&rbd_dev->tag_set, NULL, rbd_dev);
++	if (rbd_dev->opts->trim) {
++		lim.discard_granularity = rbd_dev->opts->alloc_size;
++		lim.max_hw_discard_sectors = objset_bytes >> SECTOR_SHIFT;
++		lim.max_write_zeroes_sectors = objset_bytes >> SECTOR_SHIFT;
++	}
 +
- 	struct request_queue *queue;
- 	struct gendisk *gendisk;
++	disk = blk_mq_alloc_disk(&rbd_dev->tag_set, &lim, rbd_dev);
+ 	if (IS_ERR(disk)) {
+ 		err = PTR_ERR(disk);
+ 		goto out_tag_set;
+@@ -4987,19 +5001,6 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
+ 	blk_queue_flag_set(QUEUE_FLAG_NONROT, q);
+ 	/* QUEUE_FLAG_ADD_RANDOM is off by default for blk-mq */
  
-@@ -431,7 +439,7 @@ static int ps3disk_probe(struct ps3_system_bus_device *_dev)
- 	if (error)
- 		goto fail_teardown;
- 
--	gendisk = blk_mq_alloc_disk(&priv->tag_set, NULL, dev);
-+	gendisk = blk_mq_alloc_disk(&priv->tag_set, &lim, dev);
- 	if (IS_ERR(gendisk)) {
- 		dev_err(&dev->sbd.core, "%s:%u: blk_mq_alloc_disk failed\n",
- 			__func__, __LINE__);
-@@ -441,15 +449,8 @@ static int ps3disk_probe(struct ps3_system_bus_device *_dev)
- 
- 	queue = gendisk->queue;
- 
--	blk_queue_max_hw_sectors(queue, dev->bounce_size >> 9);
--	blk_queue_dma_alignment(queue, dev->blk_size-1);
--	blk_queue_logical_block_size(queue, dev->blk_size);
+-	blk_queue_max_hw_sectors(q, objset_bytes >> SECTOR_SHIFT);
+-	q->limits.max_sectors = queue_max_hw_sectors(q);
+-	blk_queue_max_segments(q, USHRT_MAX);
+-	blk_queue_max_segment_size(q, UINT_MAX);
+-	blk_queue_io_min(q, rbd_dev->opts->alloc_size);
+-	blk_queue_io_opt(q, rbd_dev->opts->alloc_size);
 -
- 	blk_queue_write_cache(queue, true, false);
- 
--	blk_queue_max_segments(queue, -1);
--	blk_queue_max_segment_size(queue, dev->bounce_size);
+-	if (rbd_dev->opts->trim) {
+-		q->limits.discard_granularity = rbd_dev->opts->alloc_size;
+-		blk_queue_max_discard_sectors(q, objset_bytes >> SECTOR_SHIFT);
+-		blk_queue_max_write_zeroes_sectors(q, objset_bytes >> SECTOR_SHIFT);
+-	}
 -
- 	priv->gendisk = gendisk;
- 	gendisk->major = ps3disk_major;
- 	gendisk->first_minor = devidx * PS3DISK_MINORS;
+ 	if (!ceph_test_opt(rbd_dev->rbd_client->client, NOCRC))
+ 		blk_queue_flag_set(QUEUE_FLAG_STABLE_WRITES, q);
+ 
 -- 
 2.39.2
 
