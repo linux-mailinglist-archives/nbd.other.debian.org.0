@@ -1,88 +1,90 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20E58860D53
-	for <lists+nbd@lfdr.de>; Fri, 23 Feb 2024 09:55:59 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9817586153E
+	for <lists+nbd@lfdr.de>; Fri, 23 Feb 2024 16:09:17 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D0F2A220AB; Fri, 23 Feb 2024 08:55:58 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 23 08:55:58 2024
-Old-Return-Path: <w@uter.be>
+	id 6990D21521; Fri, 23 Feb 2024 15:09:17 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 23 15:09:17 2024
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,LDO_WHITELIST,
-	MD5_SHA1_SUM,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+X-Spam-Status: No, score=-9.7 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SARE_MSGID_LONG45,
+	SARE_MSGID_LONG50,T_SCC_BODY_TEXT_LINE autolearn=unavailable
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 88B57220A9
-	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Feb 2024 08:55:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 31E672151C
+	for <lists-other-nbd@bendel.debian.org>; Fri, 23 Feb 2024 15:09:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-8.11 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
-	MD5_SHA1_SUM=-1, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.494 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.002, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id g43ScI_60mRb for <lists-other-nbd@bendel.debian.org>;
-	Fri, 23 Feb 2024 08:55:38 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	with ESMTP id 5PNDTOw9y7lG for <lists-other-nbd@bendel.debian.org>;
+	Fri, 23 Feb 2024 15:08:58 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id A061F2151A
+	for <nbd@other.debian.org>; Fri, 23 Feb 2024 15:08:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1708700933;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qaMforc6m/aogfH892FPirZl7RrSYFxGNOJLgyeUe/o=;
+	b=GoBsE6MbmFjCfsLVhF+C/umzq3eH1FmAHdylDgE8fkC+zouUSOOe2KCjTshyN9RhUiaSaY
+	qkBvnyZEe6wk8mLPvvS3hCNja0VC0AXyn6mkIkvTZmp/HGRpORNvtKJNJVCCmFkGoDKdx3
+	jTO4s9NXXcTAcTpFPpIobOVL62hlz/U=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-653-RMhqBRB8NpWOLx7ks2WJ-g-1; Fri,
+ 23 Feb 2024 10:08:49 -0500
+X-MC-Unique: RMhqBRB8NpWOLx7ks2WJ-g-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E87AE220A8
-	for <nbd@other.debian.org>; Fri, 23 Feb 2024 08:55:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=kjpyUQVsz8BiPJYM/RnTAocoHTRggvXSqrvEArM5Gsw=; b=OUChvajiWxt3lP62eFnY9nMAI1
-	JqQTkjWvmOimOIdSI1yd9Ahy5JLYzhF56h0++PGWzK1Akywl4o7DVeXjz40p6Jni4RtIb6n0RtJcd
-	aEH5y7coDOTASOgIKL87VgQ1gI5e7xVSxhRZdH4MrCInRTOq30QaPT4q2s+Ajw6MJ5YmeA1FOkfzj
-	3obuD3MRCxx9rvhHWPBMxoCnjr+tB/oJUKwmqwgpGOObXRl32cqBXzEpAiikVgTBksjeSt373KfgR
-	sQoLjaPY8ri0fyOvWshDVZMPitVvMXC8Y19FX/cWylwDhUpzKwtwMDx3CJBswT3x3Pfx9D0uUid8E
-	pSdQPFDA==;
-Received: from [102.39.148.255] (helo=pc220518)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <w@uter.be>)
-	id 1rdRLE-0093JR-0p;
-	Fri, 23 Feb 2024 09:55:36 +0100
-Received: from wouter by pc220518 with local (Exim 4.97)
-	(envelope-from <w@uter.be>)
-	id 1rdRKy-000000004qV-3mz5;
-	Fri, 23 Feb 2024 10:55:20 +0200
-Date: Fri, 23 Feb 2024 10:55:20 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Lukasz Stelmach <l.stelmach@samsung.com>
-Cc: nbd@other.debian.org, Karol Lewandowski <k.lewandowsk@samsung.com>,
-	=?utf-8?B?7J6s7ZuIIOyglQ==?= <jh80.chung@samsung.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Marek Pikula <m.pikula@partner.samsung.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 257933C0F662;
+	Fri, 23 Feb 2024 15:08:49 +0000 (UTC)
+Received: from redhat.com (unknown [10.2.16.61])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 8160040C94A7;
+	Fri, 23 Feb 2024 15:08:47 +0000 (UTC)
+Date: Fri, 23 Feb 2024 09:08:45 -0600
+From: Eric Blake <eblake@redhat.com>
+To: Wouter Verhelst <w@uter.be>
+Cc: Lukasz Stelmach <l.stelmach@samsung.com>, nbd@other.debian.org, 
+	Karol Lewandowski <k.lewandowsk@samsung.com>, =?utf-8?B?7J6s7ZuIIOyglQ==?= <jh80.chung@samsung.com>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, Marek Pikula <m.pikula@partner.samsung.com>
 Subject: Re: Fixes after static code analysis
-Message-ID: <ZdhdeAVU9u1ZWnI4@pc220518.home.grep.be>
+Message-ID: <lu32cn26bocoaeotvzi2fsfrzavit7vo7vfc7yfvyil54isx7q@h43s2jqjmqmp>
 References: <ZdSVsGq3u83Z6w-V@pc220518.home.grep.be>
  <CGME20240222113509eucas1p1f1590778e4d4144d19b6a2d6df65fba5@eucas1p1.samsung.com>
  <oypijdcysohgv1.fsf%l.stelmach@samsung.com>
+ <ZdhdeAVU9u1ZWnI4@pc220518.home.grep.be>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <ZdhdeAVU9u1ZWnI4@pc220518.home.grep.be>
+User-Agent: NeoMutt/20240201
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <oypijdcysohgv1.fsf%l.stelmach@samsung.com>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <7dDvVi79XpE.A.yfG.e2F2lB@bendel>
+Resent-Message-ID: <Sw44K5OEoHH.A.jm.dUL2lB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2768
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2769
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,60 +94,25 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ZdhdeAVU9u1ZWnI4@pc220518.home.grep.be
-Resent-Date: Fri, 23 Feb 2024 08:55:58 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/lu32cn26bocoaeotvzi2fsfrzavit7vo7vfc7yfvyil54isx7q@h43s2jqjmqmp
+Resent-Date: Fri, 23 Feb 2024 15:09:17 +0000 (UTC)
 
-Hi Lukasz,
-
-On Thu, Feb 22, 2024 at 12:34:58PM +0100, Lukasz Stelmach wrote:
-> Hello Wouter,
+On Fri, Feb 23, 2024 at 10:55:20AM +0200, Wouter Verhelst wrote:
+> Hi Lukasz,
 > 
-> It was <2024-02-20 wto 14:06>, when Wouter Verhelst wrote:
-> > I finally had time to have a look at your patches. Unfortunately, they
-> > break the test suite; if you run "make check", the result is fairly
-> > depressing :)
-> >
-> > Can you have a look at what's going wrong?
 > 
-> I "fixed" one too many memory leaks reported by Coverity. I'd reverted[1]
-> it and it helped
-> 
-> --8<---------------cut here---------------start------------->8---
-> $ make check
-> make  check-recursive
-> […]
-> ==================
-> All 5 tests passed
-> ==================
-> […]
-> ../inetd
-> Error: inetd mode not supported without syslog support
-> SKIP: inetd
-> […]
-> ====================
-> All 18 tests passed
-> (1 test was not run)
-> ====================
-> --8<---------------cut here---------------end--------------->8---
+> I've merged your branch, but removed those two commits (the original and
+> the revert).
 
-Thanks.
-
-I've merged your branch, but removed those two commits (the original and
-the revert).
-
-> >> PS. I received thee more bug reports to handle. I'll review them when I
-> >> get back from FOSDEM, so you don't need to hurry with these.
-> 
-> Below the revert there are two more commits ("Fix out-of-bounds access")
-> I created after 2c54e25b0c we talked about last time.
-> 
-> [1] https://git.tizen.org/cgit/platform/upstream/nbd/log/?id=9e25a075173345410de58ac9406a464fce929531
-
-These were merged too.
+FWIW, your branch temporarily broke the doc/proto.md rendering by
+removing trailing whitespace that was essential to a correct Markdown
+rendering; I've reverted that portion of your changes.  (Why markdown
+treats trailing whitespace as essential is beyond me - using something
+that is not visible to affect the ultimate visual layout is
+mind-boggling.)
 
 -- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
-
-I will have a Tin-Actinium-Potassium mixture, thanks.
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.
+Virtualization:  qemu.org | libguestfs.org
 
