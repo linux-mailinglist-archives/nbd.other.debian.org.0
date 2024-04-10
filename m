@@ -1,58 +1,59 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id C531589FB04
-	for <lists+nbd@lfdr.de>; Wed, 10 Apr 2024 17:05:41 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id C375889FD64
+	for <lists+nbd@lfdr.de>; Wed, 10 Apr 2024 18:46:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 9FC9F20522; Wed, 10 Apr 2024 15:05:41 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 10 15:05:41 2024
+	id 950C020523; Wed, 10 Apr 2024 16:46:29 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 10 16:46:29 2024
 Old-Return-Path: <roker@pep-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.9 required=4.0 tests=FOURLA,KHOP_HELO_FCRDNS,
-	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE autolearn=unavailable
-	autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-17.0 required=4.0 tests=KHOP_HELO_FCRDNS,
+	LDOSUBSCRIBER,LDO_WHITELIST,MD5_SHA1_SUM,PGPSIGNATURE
+	autolearn=unavailable autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 0E8B62052B
-	for <lists-other-nbd@bendel.debian.org>; Wed, 10 Apr 2024 15:05:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id AA75220519
+	for <lists-other-nbd@bendel.debian.org>; Wed, 10 Apr 2024 16:46:18 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-11.899 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, KHOP_HELO_FCRDNS=0.001,
-	LDO_WHITELIST=-5, PGPSIGNATURE=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-12.999 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
+	MD5_SHA1_SUM=-1, PGPSIGNATURE=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 5hXAKN0DPQKi for <lists-other-nbd@bendel.debian.org>;
-	Wed, 10 Apr 2024 15:05:25 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+	with ESMTP id 3pMQLb2ngbeq for <lists-other-nbd@bendel.debian.org>;
+	Wed, 10 Apr 2024 16:46:15 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
 Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id C0CE020522
-	for <nbd@other.debian.org>; Wed, 10 Apr 2024 15:05:25 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id BB60C204E4
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 16:46:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by dragon.pibit.ch (Postfix) with ESMTP id 0595C2142CB8
-	for <nbd@other.debian.org>; Wed, 10 Apr 2024 17:05:23 +0200 (CEST)
+	by dragon.pibit.ch (Postfix) with ESMTP id 330442143478
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 18:46:13 +0200 (CEST)
 Received: from pibit.ch ([127.0.0.1])
  by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TfzhAaItazyA for <nbd@other.debian.org>;
- Wed, 10 Apr 2024 17:05:22 +0200 (CEST)
+ id 8tHzSyxH-hs9 for <nbd@other.debian.org>;
+ Wed, 10 Apr 2024 18:46:13 +0200 (CEST)
 Received: from 127.0.0.1 (pd9e55069.dip0.t-ipconnect.de [217.229.80.105])
-	by dragon.pibit.ch (Postfix) with ESMTPSA id D60432142C6D
-	for <nbd@other.debian.org>; Wed, 10 Apr 2024 17:05:22 +0200 (CEST)
-Message-ID: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
-Date: Wed, 10 Apr 2024 17:05:21 +0200
+	by dragon.pibit.ch (Postfix) with ESMTPSA id 040BF2143243
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 18:46:12 +0200 (CEST)
+Message-ID: <6d12f907-978a-423a-8816-e024ad147e73@pep-project.org>
+Date: Wed, 10 Apr 2024 18:46:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: Coding style question: Are self-fulfilling headers desired? Are
+ u32/u64 or uint32_t/uint64_t preferred?
 Content-Language: de-DE, en-US
 To: nbd@other.debian.org
+References: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
 From: Lars Rohwedder <roker@pep-project.org>
-Subject: Coding style question: Are self-fulfilling headers desired? Are
- u32/u64 or uint32_t/uint64_t preferred?
 Autocrypt: addr=roker@pep-project.org; keydata=
  xsDVBGCVZYIBDECv6bZ9vWKauYcvrF3WL7qRhQOPnIjcpkxUbVZHdehM+4EY4tYrzFu1l/5l
  wr09cewM3TDoSKKmEG+rpiTMKevRg9MDidJrUeq4A34FNHnfmyzJXJf4Rm0xfE7k1OguLXDp
@@ -89,14 +90,15 @@ Autocrypt: addr=roker@pep-project.org; keydata=
  A3JE7zCQiL0HgM/Lgj5Y2l314axzq6L9YL1ZSxohPRksSUrF/Irx5u9HUn/XDC5D6fYi7L54
  GIaZVwoJisucuww=
 Organization: =?UTF-8?B?8J+Ukg==?=
+In-Reply-To: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------stvzZMrGpTK5YlyUjd4t0iKb"
+ boundary="------------0ny90Q3aioBssXZB3uzEEcuw"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <sobxWYTJUQO.A.WLD.FrqFmB@bendel>
+Resent-Message-ID: <4L1GQpteJeB.A.PdE.lJsFmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2787
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2788
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -106,65 +108,48 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org
-Resent-Date: Wed, 10 Apr 2024 15:05:41 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6d12f907-978a-423a-8816-e024ad147e73@pep-project.org
+Resent-Date: Wed, 10 Apr 2024 16:46:29 +0000 (UTC)
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------stvzZMrGpTK5YlyUjd4t0iKb
-Content-Type: multipart/mixed; boundary="------------zc0nsnLPC9vOPSXFqR4Y0Xfr";
+--------------0ny90Q3aioBssXZB3uzEEcuw
+Content-Type: multipart/mixed; boundary="------------0e3Hj9hothGxz0TAJlTskIwa";
  protected-headers="v1"
 From: Lars Rohwedder <roker@pep-project.org>
 To: nbd@other.debian.org
-Message-ID: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
-Subject: Coding style question: Are self-fulfilling headers desired? Are
+Message-ID: <6d12f907-978a-423a-8816-e024ad147e73@pep-project.org>
+Subject: Re: Coding style question: Are self-fulfilling headers desired? Are
  u32/u64 or uint32_t/uint64_t preferred?
+References: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
+In-Reply-To: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
 
---------------zc0nsnLPC9vOPSXFqR4Y0Xfr
+--------------0e3Hj9hothGxz0TAJlTskIwa
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-SGkgdGhlcmUsDQoNCnRvIGltcGxlbWVudCBteSBkZXNpcmVkIGZlYXR1cmUgaW4gTkJEIEkn
-dmUgbG9hZGVkIHRoZSBzb3VyY2VzIGludG8gbXkgDQpJREUgKFF0Q3JlYXRvcikgYW5kIGl0
-IGNvbXBsYWlucyBhYm91dCB0aGUgI2luY2x1ZGUgZmlsZXM6DQoNCjEpIGluY2x1ZGUgc3Ry
-dWN0dXJlOg0KDQpTb21lIGhlYWRlcnMgdXNlIHN5bWJvbHMgdGhhdCBhcmUgbm90IGluY2x1
-ZGVkIGluIHRoaXMgaGVhZGVyIChlLmcuIA0Kb2ZmX3QgYW5kIHB0aHJlYWRfdCBpbiB0cmVl
-ZmlsZXMuaCksIHNvIHRoZXNlIGhlYWRlcnMgZGVwZW5kIG9uIGNvcnJlY3QgDQp1c2FnZSwg
-aS5lLiBpdCBpcyBuZWNlc3NhcnkgdG8gaW5jbHVkZSBjZXJ0YWluIG90aGVyIGhlYWRlcnMg
-dG8gdXNlIA0KdGhlc2UgaGVhZGVycyBhdCBhbGwuDQoNCmFuZCBhbHNvIHRoZSBvcHBvc2l0
-ZQ0KDQpTb21lIGluY2x1ZGVzIGFyZSAidG9vIG11Y2giIGFuZCBub3QgdXNlZCBpbiBhIGhl
-YWRlciwgYnV0IG1pZ2h0IG9ubHkgYmUgDQpuZWNlc3NhcnkgYmVjYXVzZSB0aGUgdXNlcnMg
-b2YgdGhlIGhlYWRlciBhcmUgdG9vIGxhenkgdG8gaW5jbHVkZSB0aGUgDQpwcm9wZXIgaGVh
-ZGVycyB0aGV5IGRlcGVuZCBvbi4NCg0KDQpJIHRyaWVkIHRvIGNsZWFuIHVwIHRoYXQgaXNz
-dWUgYW5kIGFub3RoZXIgb2RkaXR5IG9jY3VycmVkOg0KDQoyKSBpbiBjbGlzZXJ2Lmg6DQog
-ICAqIHdoeSB1c2luZyB0aGVzZSBzdHJhbmdlICNpZi4uI2VsaWYgY2FzY2FkZSB0byBkZWZp
-bmUgdTMyIGFuZCB1NjQgDQppbnN0ZWFkIG9mIHVzaW5nIHVpbnQzMl90IGFuZCB1aW50NjRf
-dCBmcm9tIDxzdGRpbnQuaD4gYXMgdXNlZCBpbiBuZWFybHkgDQphbGwgb2YgdGhlIHJlc3Qg
-b2YgdGhlIGNvZGUgYmFzZT8NCiAgICogX19iZTMyIGFuZCBfX2JlNjQgYXJlIG5vdCB1c2Vk
-IGFuZCBtaWdodCBiZSBldmVuIG1pc2xlYWRpbmcsIA0KYmVjYXVzZSB0aGV5IGNhbWUgZnJv
-bSB0aGUgTGludXgga2VybmVsIGFuZCBkZW5vdGVzICJiaWcgZW5kaWFuIiB0eXBlcyANCmV4
-cGxpY2l0bHkuDQoNCg0KU28gbXkgcXVlc3Rpb24gaXM6IEFyZSBwYXRjaGVzIC8gR2l0aHVi
-IHB1bGwgcmVxdWVzdHMgd2VsY29tZSBvciBub3QsIHRvIA0KY2xlYW4tdXAgc3R1ZmYgbGlr
-ZSB0aGlzPw0KDQoNCkdyZWV0aW5ncywNCg0KCQlMYXJzIFIuDQo=
+WW91IG1pZ2h0IGhhdmUgYSBsb29rIHRvIHRoZSBjaGFuZ2VzIEkgbWFkZSBvbiBteSBvd24g
+Zm9yazoNCg0KaHR0cHM6Ly9naXRodWIuY29tL1Jva2VySFJPL25iZC9jb21taXQvMzNhMzJl
+M2ViZjU2ZmUwYjk4MWM4Y2IyOWQ0NzIzYWJkNDI0ZjQ0OA0KDQpMLg0K
 
---------------zc0nsnLPC9vOPSXFqR4Y0Xfr--
+--------------0e3Hj9hothGxz0TAJlTskIwa--
 
---------------stvzZMrGpTK5YlyUjd4t0iKb
+--------------0ny90Q3aioBssXZB3uzEEcuw
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmYWqrEFAwAAAAAACgkQz24L8sM/oJ6W
-+ww/c+W5gIAZHvt4GFDYr4Lh5FLjzOPEODhUBsv+iLX8JkllMVtt2sNWEQbAq9eSt9/XSTVxuckY
-o139aZVndS5QFhnOqAyb8FpOUiE+P1Rz3ka1TqaEUSIgZ+6dJF4Xo6HKwg7VA7wA5extqAxKe4Vf
-2FT9Nn1wye6MAhEv08xQ8StEALymifhz/PxQF0XWvz2y0sELUc1/S0VgmQ1eI8ieOK7y8kipPoqE
-Xtube/+LhTztxubXoJyaQRrmTX6bu2EB5+jHmm/EFi66sDIC3/peuPLEmUOG/KgDPIFHGP46EGkO
-maeGFI8UK0a6CWFUAsZZ5FgShIO2Pplxsf8FeTq8fDVn7aLJbYf+LjcdOdqCqrE/IEM/685UQBE3
-SLPhn7T2pYqkt3631SDPGp+Ah/21KDaKeyHfJt9SbUWHy1jASxAr9ANHfAi1dV0MrtlO1Jjicx93
-+GEOzt02wYniaNPGxzJJwreeIZ10RPCV13IKzBMu2kpRHN3hZDXjT7zVgKw+iOoI+ftMip0=
-=ftUC
+wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmYWwlQFAwAAAAAACgkQz24L8sM/oJ4+
+3gw7B8i3n3L6VX6R7Ovjzbr1kOcaJXTAKvK6X8ENklj7fIIso584YxGLXw+g+SDlUMurueCdqZha
+aUt0Vc7wbWLNMzGqz7q9foHvbEVP/bkWpZyi4NUyWIEY7L51RaMp0V6eLDnn3xpBrNsTzocJDFV4
+cb1+8sEraFpSwbnao4uqCkdwtUhER4R2w6CTAcrOb75NF8kiPyLG6fMboCgW11uRhOTGJBGJkj1d
+8mDV4mgFhWbSsCXdlhd3PlctQbMFU/6TtcZyQrOnRPPX3z0J2jPHpkoDVrRjlTaEypKawa7KZIvu
+EMiwZjtW6EIzoLnbYW5DSKQbnAE3/aj0cPXPpJIyoVrHsJ8sRPj+EunuAUDqZPxgOTwpoFxFlFtn
+ZVBXo3vQqMbOx3nEm5vXsCQJYMCZ76rGn3bl60sTksouD3x7wXoJIZ50KOM3KAHTs6wHmarF7Cpe
+0CqMsmxmHJr8eaTq5bAzcXHms/wIWdhZs7ZTpybZjMp8vvqWRouKh4yK0tO+DRq0TUFAbsg=
+=YImI
 -----END PGP SIGNATURE-----
 
---------------stvzZMrGpTK5YlyUjd4t0iKb--
+--------------0ny90Q3aioBssXZB3uzEEcuw--
 
