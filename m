@@ -2,87 +2,101 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 598E5898461
-	for <lists+nbd@lfdr.de>; Thu,  4 Apr 2024 11:47:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C531589FB04
+	for <lists+nbd@lfdr.de>; Wed, 10 Apr 2024 17:05:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 34928204E5; Thu,  4 Apr 2024 09:47:45 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Apr  4 09:47:45 2024
-Old-Return-Path: <rjones@redhat.com>
+	id 9FC9F20522; Wed, 10 Apr 2024 15:05:41 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 10 15:05:41 2024
+Old-Return-Path: <roker@pep-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL
-	autolearn=unavailable autolearn_force=no version=3.4.2
+X-Spam-Status: No, score=-15.9 required=4.0 tests=FOURLA,KHOP_HELO_FCRDNS,
+	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE autolearn=unavailable
+	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C3CB4205BA
-	for <lists-other-nbd@bendel.debian.org>; Thu,  4 Apr 2024 09:47:33 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0E8B62052B
+	for <lists-other-nbd@bendel.debian.org>; Wed, 10 Apr 2024 15:05:30 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.221 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01,
-	RCVD_IN_MSPIKE_WL=-0.01] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-11.899 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, KHOP_HELO_FCRDNS=0.001,
+	LDO_WHITELIST=-5, PGPSIGNATURE=-5] autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id k-y3eIl4GIr4 for <lists-other-nbd@bendel.debian.org>;
-	Thu,  4 Apr 2024 09:47:26 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id CDF64205B7
-	for <nbd@other.debian.org>; Thu,  4 Apr 2024 09:47:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1712224040;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Cv5djRzxXwx1EVfzpRDVBs3r8GSWO1UiZliAxgQMe+A=;
-	b=MJC846pvlVfmXAJU6a4SYSuqnSfDT3rttYGeWKYP8fUlHy0ldETP+KlJtZhniicK3z0cB2
-	gsB1Y/MqmOmPo34/aIOX+gUY0XCLO6Y+OsPy532jHNqdcQGrOinqxfexboDcxs3ct+M2k0
-	qQdExQQPPoqd5ulZDq3pe/6ImFyFJI8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-661-ph-s01UFOWq3Pgtfy4dBlw-1; Thu, 04 Apr 2024 05:47:16 -0400
-X-MC-Unique: ph-s01UFOWq3Pgtfy4dBlw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
+	with ESMTP id 5hXAKN0DPQKi for <lists-other-nbd@bendel.debian.org>;
+	Wed, 10 Apr 2024 15:05:25 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
+Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 752BE101A520;
-	Thu,  4 Apr 2024 09:47:16 +0000 (UTC)
-Received: from localhost (unknown [10.42.28.11])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 120952166B33;
-	Thu,  4 Apr 2024 09:47:15 +0000 (UTC)
-Date: Thu, 4 Apr 2024 10:47:11 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: Eric Blake <eblake@redhat.com>
-Cc: Thomas Huth <thuth@redhat.com>,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
-	qemu-devel@nongnu.org,
-	Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
-	qemu-block@nongnu.org, nbd@other.debian.org
-Subject: Re: [PATCH for-9.1 6/9] block/nbd: Use URI parsing code from glib
-Message-ID: <20240404094711.GJ7912@redhat.com>
-References: <20240328140607.2433889-1-thuth@redhat.com>
- <20240328140607.2433889-7-thuth@redhat.com>
- <20240328141342.GK7636@redhat.com>
- <jhweyusyjhha5hvffrtkwvuce35fajiy73dymgjre3jkjcjk7v@lrgdiintwb6i>
- <20240328164010.GM7636@redhat.com>
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id C0CE020522
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 15:05:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dragon.pibit.ch (Postfix) with ESMTP id 0595C2142CB8
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 17:05:23 +0200 (CEST)
+Received: from pibit.ch ([127.0.0.1])
+ by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TfzhAaItazyA for <nbd@other.debian.org>;
+ Wed, 10 Apr 2024 17:05:22 +0200 (CEST)
+Received: from 127.0.0.1 (pd9e55069.dip0.t-ipconnect.de [217.229.80.105])
+	by dragon.pibit.ch (Postfix) with ESMTPSA id D60432142C6D
+	for <nbd@other.debian.org>; Wed, 10 Apr 2024 17:05:22 +0200 (CEST)
+Message-ID: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
+Date: Wed, 10 Apr 2024 17:05:21 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240328164010.GM7636@redhat.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE, en-US
+To: nbd@other.debian.org
+From: Lars Rohwedder <roker@pep-project.org>
+Subject: Coding style question: Are self-fulfilling headers desired? Are
+ u32/u64 or uint32_t/uint64_t preferred?
+Autocrypt: addr=roker@pep-project.org; keydata=
+ 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
+ GIaZVwoJisucuww=
+Organization: =?UTF-8?B?8J+Ukg==?=
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------stvzZMrGpTK5YlyUjd4t0iKb"
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <As9RsHXd4d.A.JRD.AdnDmB@bendel>
+Resent-Message-ID: <sobxWYTJUQO.A.WLD.FrqFmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2786
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2787
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -92,26 +106,65 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240404094711.GJ7912@redhat.com
-Resent-Date: Thu,  4 Apr 2024 09:47:45 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org
+Resent-Date: Wed, 10 Apr 2024 15:05:41 +0000 (UTC)
 
-On Thu, Mar 28, 2024 at 04:40:10PM +0000, Richard W.M. Jones wrote:
-> libnbd absolutely does *not* get this right, eg:
-> 
->   $ nbdinfo NBD://localhost
->   nbdinfo: nbd_connect_uri: unknown NBD URI scheme: NBD: Invalid argument
-> 
-> so that's a bug too.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------stvzZMrGpTK5YlyUjd4t0iKb
+Content-Type: multipart/mixed; boundary="------------zc0nsnLPC9vOPSXFqR4Y0Xfr";
+ protected-headers="v1"
+From: Lars Rohwedder <roker@pep-project.org>
+To: nbd@other.debian.org
+Message-ID: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
+Subject: Coding style question: Are self-fulfilling headers desired? Are
+ u32/u64 or uint32_t/uint64_t preferred?
 
-Proposed fix:
-https://gitlab.com/nbdkit/libnbd/-/merge_requests/6
+--------------zc0nsnLPC9vOPSXFqR4Y0Xfr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Rich.
+SGkgdGhlcmUsDQoNCnRvIGltcGxlbWVudCBteSBkZXNpcmVkIGZlYXR1cmUgaW4gTkJEIEkn
+dmUgbG9hZGVkIHRoZSBzb3VyY2VzIGludG8gbXkgDQpJREUgKFF0Q3JlYXRvcikgYW5kIGl0
+IGNvbXBsYWlucyBhYm91dCB0aGUgI2luY2x1ZGUgZmlsZXM6DQoNCjEpIGluY2x1ZGUgc3Ry
+dWN0dXJlOg0KDQpTb21lIGhlYWRlcnMgdXNlIHN5bWJvbHMgdGhhdCBhcmUgbm90IGluY2x1
+ZGVkIGluIHRoaXMgaGVhZGVyIChlLmcuIA0Kb2ZmX3QgYW5kIHB0aHJlYWRfdCBpbiB0cmVl
+ZmlsZXMuaCksIHNvIHRoZXNlIGhlYWRlcnMgZGVwZW5kIG9uIGNvcnJlY3QgDQp1c2FnZSwg
+aS5lLiBpdCBpcyBuZWNlc3NhcnkgdG8gaW5jbHVkZSBjZXJ0YWluIG90aGVyIGhlYWRlcnMg
+dG8gdXNlIA0KdGhlc2UgaGVhZGVycyBhdCBhbGwuDQoNCmFuZCBhbHNvIHRoZSBvcHBvc2l0
+ZQ0KDQpTb21lIGluY2x1ZGVzIGFyZSAidG9vIG11Y2giIGFuZCBub3QgdXNlZCBpbiBhIGhl
+YWRlciwgYnV0IG1pZ2h0IG9ubHkgYmUgDQpuZWNlc3NhcnkgYmVjYXVzZSB0aGUgdXNlcnMg
+b2YgdGhlIGhlYWRlciBhcmUgdG9vIGxhenkgdG8gaW5jbHVkZSB0aGUgDQpwcm9wZXIgaGVh
+ZGVycyB0aGV5IGRlcGVuZCBvbi4NCg0KDQpJIHRyaWVkIHRvIGNsZWFuIHVwIHRoYXQgaXNz
+dWUgYW5kIGFub3RoZXIgb2RkaXR5IG9jY3VycmVkOg0KDQoyKSBpbiBjbGlzZXJ2Lmg6DQog
+ICAqIHdoeSB1c2luZyB0aGVzZSBzdHJhbmdlICNpZi4uI2VsaWYgY2FzY2FkZSB0byBkZWZp
+bmUgdTMyIGFuZCB1NjQgDQppbnN0ZWFkIG9mIHVzaW5nIHVpbnQzMl90IGFuZCB1aW50NjRf
+dCBmcm9tIDxzdGRpbnQuaD4gYXMgdXNlZCBpbiBuZWFybHkgDQphbGwgb2YgdGhlIHJlc3Qg
+b2YgdGhlIGNvZGUgYmFzZT8NCiAgICogX19iZTMyIGFuZCBfX2JlNjQgYXJlIG5vdCB1c2Vk
+IGFuZCBtaWdodCBiZSBldmVuIG1pc2xlYWRpbmcsIA0KYmVjYXVzZSB0aGV5IGNhbWUgZnJv
+bSB0aGUgTGludXgga2VybmVsIGFuZCBkZW5vdGVzICJiaWcgZW5kaWFuIiB0eXBlcyANCmV4
+cGxpY2l0bHkuDQoNCg0KU28gbXkgcXVlc3Rpb24gaXM6IEFyZSBwYXRjaGVzIC8gR2l0aHVi
+IHB1bGwgcmVxdWVzdHMgd2VsY29tZSBvciBub3QsIHRvIA0KY2xlYW4tdXAgc3R1ZmYgbGlr
+ZSB0aGlzPw0KDQoNCkdyZWV0aW5ncywNCg0KCQlMYXJzIFIuDQo=
 
--- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-virt-top is 'top' for virtual machines.  Tiny program with many
-powerful monitoring features, net stats, disk stats, logging, etc.
-http://people.redhat.com/~rjones/virt-top
+--------------zc0nsnLPC9vOPSXFqR4Y0Xfr--
+
+--------------stvzZMrGpTK5YlyUjd4t0iKb
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmYWqrEFAwAAAAAACgkQz24L8sM/oJ6W
++ww/c+W5gIAZHvt4GFDYr4Lh5FLjzOPEODhUBsv+iLX8JkllMVtt2sNWEQbAq9eSt9/XSTVxuckY
+o139aZVndS5QFhnOqAyb8FpOUiE+P1Rz3ka1TqaEUSIgZ+6dJF4Xo6HKwg7VA7wA5extqAxKe4Vf
+2FT9Nn1wye6MAhEv08xQ8StEALymifhz/PxQF0XWvz2y0sELUc1/S0VgmQ1eI8ieOK7y8kipPoqE
+Xtube/+LhTztxubXoJyaQRrmTX6bu2EB5+jHmm/EFi66sDIC3/peuPLEmUOG/KgDPIFHGP46EGkO
+maeGFI8UK0a6CWFUAsZZ5FgShIO2Pplxsf8FeTq8fDVn7aLJbYf+LjcdOdqCqrE/IEM/685UQBE3
+SLPhn7T2pYqkt3631SDPGp+Ah/21KDaKeyHfJt9SbUWHy1jASxAr9ANHfAi1dV0MrtlO1Jjicx93
++GEOzt02wYniaNPGxzJJwreeIZ10RPCV13IKzBMu2kpRHN3hZDXjT7zVgKw+iOoI+ftMip0=
+=ftUC
+-----END PGP SIGNATURE-----
+
+--------------stvzZMrGpTK5YlyUjd4t0iKb--
 
