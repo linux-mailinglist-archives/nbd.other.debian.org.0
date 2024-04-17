@@ -2,104 +2,53 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58A798A57FD
-	for <lists+nbd@lfdr.de>; Mon, 15 Apr 2024 18:39:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE52F8A7C59
+	for <lists+nbd@lfdr.de>; Wed, 17 Apr 2024 08:33:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 39EF0204B8; Mon, 15 Apr 2024 16:39:55 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Apr 15 16:39:55 2024
-Old-Return-Path: <roker@pep-project.org>
+	id A6B4E20730; Wed, 17 Apr 2024 06:33:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 17 06:33:12 2024
+Old-Return-Path: <reply@email-support.tradesparq.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=4.0 tests=KHOP_HELO_FCRDNS,
-	LDOSUBSCRIBER,LDO_WHITELIST,PGPSIGNATURE autolearn=unavailable
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.2 required=4.0 tests=FOURLA,FROM_EXCESS_BASE64,
+	HTML_MESSAGE,RCVD_IN_MSPIKE_H2,T_KAM_HTML_FONT_INVALID autolearn=no
 	autolearn_force=no version=3.4.2
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A7B4E2047F
-	for <lists-other-nbd@bendel.debian.org>; Mon, 15 Apr 2024 16:39:43 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3293F206C8
+	for <lists-other-nbd@bendel.debian.org>; Wed, 17 Apr 2024 06:15:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-11.999 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, KHOP_HELO_FCRDNS=0.001, LDO_WHITELIST=-5,
-	PGPSIGNATURE=-5] autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=2.11 tagged_above=-10000 required=5.3
+	tests=[FOURLA=0.1, FROM_EXCESS_BASE64=0.001, HTML_MESSAGE=2,
+	RCVD_IN_MSPIKE_H2=-0.001, T_KAM_HTML_FONT_INVALID=0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id M9GWybaaqmcp for <lists-other-nbd@bendel.debian.org>;
-	Mon, 15 Apr 2024 16:39:35 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from pibit.ch (dragon.pibit.ch [185.203.114.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id BF3CB2044E
-	for <nbd@other.debian.org>; Mon, 15 Apr 2024 16:39:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dragon.pibit.ch (Postfix) with ESMTP id 2F3662143EC1;
-	Mon, 15 Apr 2024 18:39:33 +0200 (CEST)
-Received: from pibit.ch ([127.0.0.1])
- by localhost (dragon.pibit.ch [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wmBZdBpxtfLZ; Mon, 15 Apr 2024 18:39:33 +0200 (CEST)
-Received: from 127.0.0.1 (pd9e55c4c.dip0.t-ipconnect.de [217.229.92.76])
-	by dragon.pibit.ch (Postfix) with ESMTPSA id 013C82143DD0;
-	Mon, 15 Apr 2024 18:39:32 +0200 (CEST)
-Message-ID: <5698d6de-10e5-46cb-bbd4-3fac0b6c0c72@pep-project.org>
-Date: Mon, 15 Apr 2024 18:39:31 +0200
+	with ESMTP id ijQESu8glC9m for <lists-other-nbd@bendel.debian.org>;
+	Wed, 17 Apr 2024 06:14:57 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from smtp542.submail.cn (smtp542.submail.cn [121.43.98.218])
+	by bendel.debian.org (Postfix) with SMTP id 793BB206E2
+	for <nbd@other.debian.org>; Wed, 17 Apr 2024 06:14:56 +0000 (UTC)
+Date:Wed, 17 Apr 2024 6:14:51 +0000
+From: =?UTF-8?B?amltbXlAYXJpc29uc2x0ZC5jb20=?=<reply@email-support.tradesparq.com>
+Reply-To: <jimmy@arisonsltd.com>
+To: <nbd@other.debian.org>
+Subject: =?UTF-8?B?UmU6ICBSdWJiZXIgcHJvZHVjdHMgd2l0aCBjb21wZXRpdGl2ZSBwcmljZQ==?=
+Message-ID: <6799d7d178db1e1627d9a55acffce2ae@submail.cn>
+X-SUBMAIL-send-cmd:6799d7d178db1e1627d9a55acffce2ae
+X-SUBMAIL-type:TE
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Coding style question: Are self-fulfilling headers desired? Are
- u32/u64 or uint32_t/uint64_t preferred?
-Content-Language: de-DE, en-US
-To: Wouter Verhelst <w@uter.be>
-Cc: nbd@other.debian.org
-References: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
- <Zh0vo1jP0eWrw8nP@pc220518.home.grep.be>
-From: Lars Rohwedder <roker@pep-project.org>
-Autocrypt: addr=roker@pep-project.org; keydata=
- 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
- GIaZVwoJisucuww=
-Organization: =?UTF-8?B?8J+Ukg==?=
-In-Reply-To: <Zh0vo1jP0eWrw8nP@pc220518.home.grep.be>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------fibSbFC2NdoJtgJv0tL0gOkb"
+Content-Type: multipart/alternative;
+    boundary="--====003_2024041700012047===="
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <xYEBOZhWWuN.A.aRG.bhVHmB@bendel>
+Resent-Message-ID: <f6Snd7pLqkM.A.P6H.o02HmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2790
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2791
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -109,58 +58,190 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/5698d6de-10e5-46cb-bbd4-3fac0b6c0c72@pep-project.org
-Resent-Date: Mon, 15 Apr 2024 16:39:55 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6799d7d178db1e1627d9a55acffce2ae@submail.cn
+Resent-Date: Wed, 17 Apr 2024 06:33:12 +0000 (UTC)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------fibSbFC2NdoJtgJv0tL0gOkb
-Content-Type: multipart/mixed; boundary="------------d0iSEP3pp1CbMgL2dTgnFTzw";
- protected-headers="v1"
-From: Lars Rohwedder <roker@pep-project.org>
-To: Wouter Verhelst <w@uter.be>
-Cc: nbd@other.debian.org
-Message-ID: <5698d6de-10e5-46cb-bbd4-3fac0b6c0c72@pep-project.org>
-Subject: Re: Coding style question: Are self-fulfilling headers desired? Are
- u32/u64 or uint32_t/uint64_t preferred?
-References: <ee0bb37f-9820-41d6-8303-9bcecad4f39e@pep-project.org>
- <Zh0vo1jP0eWrw8nP@pc220518.home.grep.be>
-In-Reply-To: <Zh0vo1jP0eWrw8nP@pc220518.home.grep.be>
+This is a multi-part message in MIME format.
 
---------------d0iSEP3pp1CbMgL2dTgnFTzw
-Content-Type: text/plain; charset=UTF-8; format=flowed
+----====003_2024041700012047====
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 
-DQoNCkFtIDE1LjA0LjI0IHVtIDE1OjQ2IHNjaHJpZWIgV291dGVyIFZlcmhlbHN0Og0KPiBI
-aSBMYXJzLA0KPiANCj4gT24gV2VkLCBBcHIgMTAsIDIwMjQgYXQgMDU6MDU6MjFQTSArMDIw
-MCwgTGFycyBSb2h3ZWRkZXIgd3JvdGU6DQo+PiBTbyBteSBxdWVzdGlvbiBpczogQXJlIHBh
-dGNoZXMgLyBHaXRodWIgcHVsbCByZXF1ZXN0cyB3ZWxjb21lIG9yIG5vdCwgdG8NCj4+IGNs
-ZWFuLXVwIHN0dWZmIGxpa2UgdGhpcz8NCj4gDQo+IFRoZXkgd291bGQgYWJzb2x1dGVseSBi
-ZSB3ZWxjb21lLiANCg0KVGhhbmsgeW91LiBTbyBwbGVhc2UgYXBwbHkgbWVyZ2UgcmVxdWVz
-dCAjMTYyIA0KPGh0dHBzOi8vZ2l0aHViLmNvbS9OZXR3b3JrQmxvY2tEZXZpY2UvbmJkL3B1
-bGwvMTYyPiBvciBkbyB5b3UgaW5zaXN0IG9uIA0KYSBzdHJpY3Qgc2VwYXJhdGlvbiBiZXR3
-ZWVuICJmb3JtYXQgZml4ZXMiIGFuZCAiYnVnIGZpeGVzL2NsZWFuLXVwcyIgKEkgDQp1bmZv
-cnR1bmF0ZWx5IG1peGVkIGJvdGggaW4gdGhpcyBwdWxsIHJlcXVlc3QpLg0KDQoNCkwuDQo=
+R29vZCBkYXkhVGhpcyBKaW1teSBmcm9tIEFyaXNvbnMgTmV3IFRlY2ggd2hpY2ggZm9jdXMgb24g
+Y29uc3RydWN0aW9uIGJ1c2luZXNzIGZvciB5ZWFyJ3M7V2UgZXhwb3J0IGNvbnN0cnVjdGlvbiBy
+ZWxhdGVkIHByb2R1Y3RzIHRvIE5vcnRoIEFtZXJpY2EsIEV1cm9wZSwgdGhlIE1pZGRsZSBFYXN0
+LCB0byBlc3RhYmxpc2ggYSBnb29kIGNvb3BlcmF0aXZlIHJlbGF0aW9uc2hpcE91ciBwcm9kdWN0
+cyBjb3ZlcmluZzpSdWJiZXIgc2VhbCBzdHJpcCBmb3IgY29uY3JldGUgcGlwZS9kb29yL3dpbmRv
+dyxGb2FtL1Nwb25nZSBydWJiZXIgc3RyaXBzLFN3ZWxsaW5nIHJ1YmJlciBzdHJpcCxSdWJiZXIg
+Z2Fza2V0LCZuYnNwO1dhdGVyIHN0b3Agc3RyaXAsIEVQRE0gc2hlZXQsIGV0Yy5PdXIgcXVhbGl0
+eSBwcm9kdWN0cyBhbmQgY29tcGV0aXRpdmUgcHJpY2Ugd2lsbCBicmluZyB5b3UgbW9yZSBtYXJr
+ZXQuSWYgeW91IHdhbnQgdG8ga25vdyBtb3JlIGFib3V0IG91ciBwcm9kdWN0cywgQ2F0YWxvZyBh
+bmQgZnJlZSBzYW1wbGUgd2lsbCBiZSBwcm92aWRlZFNpbmNlcmVseUppbW15R2VuZXJhbCBNYW5h
+Z2VyV2hhdHNhcHAvVGVsOiArODYgMTM5IDE0NTggNTU1NlRPIFZJUO+8m01FRVRJTkfvvJtJRDox
+ZWNkMmE1Ny1lZjgyLTQwYjktOTk4ZS05MTUzNDFiZjQ2ZGI=
 
+----====003_2024041700012047====
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
---------------d0iSEP3pp1CbMgL2dTgnFTzw--
+PGJvZHk+PHA+R29vZCBkYXkhPC9wPjxwPjxicj48L3A+PHA+VGhpcyBKaW1teSBmcm9tIEFyaXNv
+bnMgTmV3IFRlY2ggd2hpY2ggZm9jdXMgb24gY29uc3RydWN0aW9uIGJ1c2luZXNzIGZvciB5ZWFy
+J3M7PC9wPjxwPldlIGV4cG9ydCBjb25zdHJ1Y3Rpb24gcmVsYXRlZCBwcm9kdWN0cyB0byBOb3J0
+aCBBbWVyaWNhLCBFdXJvcGUsIHRoZSBNaWRkbGUgRWFzdCwgdG8gZXN0YWJsaXNoIGEgZ29vZCBj
+b29wZXJhdGl2ZSByZWxhdGlvbnNoaXA8L3A+PHA+PGJyPjwvcD48cD5PdXIgcHJvZHVjdHMgY292
+ZXJpbmc6PC9wPjxwPjxicj48L3A+PHVsPjxsaT5SdWJiZXIgc2VhbCBzdHJpcCBmb3IgY29uY3Jl
+dGUgcGlwZS9kb29yL3dpbmRvdyw8L2xpPjxsaT5Gb2FtL1Nwb25nZSBydWJiZXIgc3RyaXBzLDwv
+bGk+PGxpPlN3ZWxsaW5nIHJ1YmJlciBzdHJpcCw8L2xpPjxsaT5SdWJiZXIgZ2Fza2V0LCZuYnNw
+OzwvbGk+PGxpPldhdGVyIHN0b3Agc3RyaXAsIEVQRE0gc2hlZXQsIGV0Yy48L2xpPjwvdWw+PHA+
+PGJyPjwvcD48cD5PdXIgcXVhbGl0eSBwcm9kdWN0cyBhbmQgY29tcGV0aXRpdmUgcHJpY2Ugd2ls
+bCBicmluZyB5b3UgbW9yZSBtYXJrZXQuPC9wPjxwPjxicj48L3A+PHA+SWYgeW91IHdhbnQgdG8g
+a25vdyBtb3JlIGFib3V0IG91ciBwcm9kdWN0cywgQ2F0YWxvZyBhbmQgZnJlZSBzYW1wbGUgd2ls
+bCBiZSBwcm92aWRlZDwvcD48cD48YnI+PC9wPjxwPlNpbmNlcmVseTwvcD48cD48c3BhbiBzdHls
+ZT0iY29sb3I6IGluaGVyaXQ7IGZvbnQtc3R5bGU6IG5vcm1hbDsiPkppbW15PC9zcGFuPjwvcD48
+cD48c3BhbiBzdHlsZT0iY29sb3I6IGluaGVyaXQ7IGZvbnQtc3R5bGU6IG5vcm1hbDsiPkdlbmVy
+YWwgTWFuYWdlcjwvc3Bhbj48L3A+PHA+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+Ij48aW1nIHNyYz0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdB
+QUFISUFBQUErQ0FZQUFBRDNSMDlxQUFBQUFYTlNSMElBcnM0YzZRQUFBQVJuUVUxQkFBQ3hqd3Y4
+WVFVQUFBQUpjRWhaY3dBQURzTUFBQTdEQWNkdnFHUUFBQlZwU1VSQlZIaGU3VngzZkZSVkZ0NC9k
+RjFkZFYyN3NydjJYWGZYdGlvcTlvWWdSdWtsUkNDQTlDNjlkd2hkQ0FHTUZBTW9JTDBZcWxScGdT
+QVFXbWlocEU1SkpwbGtrc25NNU96NXpzeWJlVFB6WmxJTUpFRVB2NCtaekgzbHZ2dmRlKzQ1NTU3
+Ny9rQy95dzBoTnl5UlJVVkZaTFBicWNCYVNKYUNBc3JMejZkY1N6Nlo4eXdDZkFjcytRVnlqTTFt
+ZDUxWk5lV0dJZEphYUNORFZqWmR1SnBLUjA2ZnAyMEhmcUdZdFZzb1l2NFAxSGZxWEdvN2ZCbzE3
+ak9XUHVzeGt1b3lHdkgzMXNPblVwOHAzOURFQlQvUWR6OXVwejFIVHRESkM1Y3B6WkFwNUZZbHFk
+SkVZalNkU2JwS3NYc08wWXp2MTFLM2lObFVxOU5nZXZUamNMcWwrbWQwMDRzaGRQTkxuNVlNZk95
+Zlg2dFBMNGQycHpaTThMUkZxK2luZzBjcG5Va3RLbks0N2xoNXBjb1JhWGM0NkZKcUJ2MndlVGYx
+bURDYlB1NHlsQjcvcEEzZCtrcGRiWUxLaUZ0ZnJVZi9xZCtCUGg4MGtXTFdiYVVNWTVhckJwVlRx
+Z3lSbU9jT0hqOU4vYWJOby9lKzZFK1AxV2xOdDd6OG1TWUpnWUVSNmd1dDQ3eng5MW90NkpPdXcy
+amR6djJzd2l1bnlxM1VSRG9ORmh2dGlVK2dzQUVUNkpIYXJlaU9HZzAxRzlzYjNtU0I4SHZmYVVw
+UGZ0cVdubS9jbVY1cDNrTlU2SE9OT2ttSCtNc2JqVlRIYTEzdlUvb2pYK01mSDdXa0x5ZEhWOHJS
+V1NtSkJJRU9WcUVKNXk3S1NFQUQzeFNra1JYODBZVnFOVCtuRUQ1djlOZmYwNDY0WTJUTXpwSHI0
+YnBxOEgveWliS2s1RFQ2ZHUxV2F0WXZnaDZ0RTg3RWFkOERDQnMwZ1M2blpiaHFXem1rMGhFSkZY
+cjg3RVhxelQzLzlob05palZZN255OW9SZzM3N1h0Ui8xWjdSNU1PRTMyZ254eTVHV1QzWmhHdHRU
+elpEMy9DeFVjMzBYNWh6WlMvc0VOVGh6ZVRBVW5mcWJDcEJOa1M3OUU5bXdqRlJVV1VCR1Rtc2R1
+eVkrNzR5aTBmd1E5d2ZQdmJUeGYrdDczaXhGZjBkVjBIZnBDcFpCS1F5U01tSXM4S2lLWHJLVm5H
+M2J5YXpnMU1Gb2UvakNNTGRRaE5DanlXOXA5K0RoWlRKbGtTemxIK2ZGYktDLzJHOHFKR1VxWkkr
+dVR2dTNUbE5INFhzcG8rRmNuR3QwdFNGZitidm9BR1hxOFNxYkl6cFM3YmlZVnhHOGxtKzRxT1d4
+V3NyTWZ1aXYrT0hVWVBZUCtVYXNWMzl2VHFWQUhxTms4dHB3cmcxUUtJdUc0YjlrWFQwMzZqcU83
+Wkw3eUp3L0FYSWZSaDlFd2IvVm1TbWIxWnN1NFRKYWZWMUxPd21HVU9hWVI2Vm85emdReFdRcHBU
+SlN1elZPazcvNHFaWTZvUjZhdjJsRjJkRy9LK1hhSWtKMDlid0JsUjNXbHJQR2haT3p6TmhsNnZr
+Nm02UjBvYi9OOEp2UUtqMUE3RmRyc3RIRDlObnFmamF4YlZDb1g5WWxlRWV0NmlvcVZDaWZTYkxI
+UXFEbmZpUkdDK1UxTm5Cb1BmdENjT282T1pNdnhBT21NbVdSTlBrZm1KZU1vYzFRRDByZC9oa2Zk
+UFVJZVJwb3U5Q0V5OUhxRHN1ZjBvcnl0TVpRZkYwdldrM3ZKZHZVTTJUUFR5WkdmUzBYMlFvYWRp
+cXdGNUREemFFNVBvc0xFT0Q1MkkrVnQvSWF5Wi9lazdNZ3VWSEJzSng5bms4NFdkK0lNTmUwM1hu
+eFVwVjZZajNXWkZXLzhWQ2lSNld6OU5lZzltdTU2cXpFM2l2WmNDR3Z4N2RaOTJlbVBZMnVSQ2RT
+bjhPZ2JRWG9lT2Jxd3Z6blZwS2pMZTBqZjVsOWttdFdkcktmMk1XbUo1TWpoZVk5SFZHbWx5RlpJ
+ZGtNS1dVOGZJSFBNTUxMc1hTVUdFY2o4NWN4NThWMlYrbUVPN3hZeHkyazhWYUJVR0pHSXlMelRw
+cThRcFNiT2d4QzYvYlg2RkRGdkdXV2JjOGxtTVZQZWxtOUozL1ZsU205NnYzdXVBNEdHanM5VDdw
+cElObTVTeFdCaEtwdzMrYlVDaTdZZ2o2eG5Eb2h4NUNoeUNLRXJ0LzFNVDdFcm85VDEwZHJoRWlL
+c1NMbnVSTnBzTnRyUGp2M2JyZnNJV2Q3a09RRXI4ZVhRYm5UNndtVWVIVllxdkh5U1RGUGJPbzBX
+aGNBbTk1Ryswd3RrWGhaQjlseVQ2K3JYUmhDaXM3TVY3TWpObHI4eE1qdU1tdTZPSnNGSDNienZj
+SVdPeXV0S1pHRmhJZTFrQy9PZHR2Mzl5RlB3d1B1aFBCZk9vQ3RzeURqeWNzaXljeW5wZWNTNUNl
+UzVVTi94V1ZHaGNDK3VWK1BoUHNxOStCdkZKU1M2Um1XSWREek0zeGl0RlNYWGpVZ0hOOEtCNDZj
+a3ZLWkZJQXlkeCt1MGxwV0lkSU5SakEvejB2R1UwZXdCTm1CY0pEYXZSbGxzbWVZZldNOXpYOFdx
+c2tKV3BSKzBHeUJUQTFDYlhTR00xSXFTNjBJa2VuSlNTcG84dUJhSkFOeUtCV3MyODN4b0p1dTVl
+SFlUMmd1SnlralV0ZmtuNWN3YlNMYmt4RElaTU9VdFJZNGlHaE85eEsxZTMyTXRBM0lyU3E0NWtT
+QVJQWFYwOVBkVXA4c3dUWHpXZlFSdDJIVkFvanIyekRUS1hSdEpXUkhOWmZRQnBra3R5YkoxSVRs
+TWV0ZFZLMTd3WEloQVlXMFR6NEExejBLZS95dEtycytJNUg5WTlOVUhBTXJzZHVmOEFwL053Y2FM
+SThmZ0FmdDVSWVZXS2E5TWdzaVA4bHdtdHF3cjBnRXBOWkhvaVhnQWhOUVVsR2lTNS9OS0RCL0JQ
+ZFh3RmQveTRxQVcvS1YxakJZVTBTb3JFVnpuSzZKNVRBQ2dqZkVaU0VwTkpQSmR4czFkU3NObkxX
+WXNFa3hadUVwNnBwYmc1bmFUanF4SHRta0NzZEg4L1dzOE9QZ2pXVS91azFHSmM2R3U5c1Nmb0Ux
+N0Q3dHg0V3FhUEJod09UV0R0dXlQcDFVLzdhVVY3TjhWQjRRQ2xZNlhsV09tZ3dsbmFPMk8vWnJI
+dXJIMVo5cXdPMDZDQWZBWFVhOHJhVHJKSUZEWHF6aEFGU09GQk9lanZiYkhIYVhWMi9kcDM5TUhz
+WHgvNUIwRmtsSVJpUXFzMzNtQUozZHYvdzhyRUx2WXJRZ2tCVWUyZXR5SGtvQjl4THd0TVJKaGdj
+cDZwbUZIci90Tmpsa3A4eTZJYU5adlBOMzBvcWVzT0lRT21DRFBBVUxtcmRwRTFXcTIwRHpPSHlI
+MGROMTJ0T1BRTVhrbXhIb2YraUJNNDdqQStHTGtWNjdVa1NMSkZRb1drbFFEMGFPYTdRZEpZQ1NR
+bElySS9BS3JhMzNRLzJhOXAwUnpUOWNlK3FVbWttR2EzSnFLOG5PREVvbGxwSWMvL055ckxCait6
+UDRla3JJZ21kazUxRDFpdHM4eHdaZk1FR21DVVFQNU5VUkNJemhYVTdTUDh3Vml1OGhKQ21aTWxa
+aEk5S0s0RTRuMFY0bUxldDhJaTc3L3J0OCtZQnFFSDVIczFPdWFQVWk2NWc4N0VmcXdjMWxKZFV6
+bTZJYkZFbmtwTlozdWU3ZVpWeG5jZ1R0ZmJ5QmF3aGR2aGZlUnpnaUJnZEo1M0V5dmMyOSs2Uk82
+dlVaOXVvUFBCM0F0OWFpQjQ5OWp3aHc1MzVkSUhJZVZtd2ZmYnk0QmZuemVVdDF6THFBUUNSdmpR
+WjlPZ0pVVXJMOXExZnVaQmgwcC90Ulo0U0NRbElwSXFJTS9CVWh5UXJKU1hNSnAxOUhlNGt1a29j
+dUw3RTdFa0MzcHVLQXc4UkJsdEh6RTY1aXlFb20xdzE5T242ZWppUmY5Z0xsVkVhTXBoN3FPbitW
+MTdwMXZOSlM1N0dqaUJUcDY1Z0lOaVZyb2RmMWdSQ0pNTjJSbURDV2NTMkpjRW1CbDVDWlhPUkNN
+eUpvZEJybnU3VnZ2QzVTWWRMWFk5TXdTRTVtcU05QUxUVHA3YnM1Nlc3MTZqKzlZVWRjU1B5SzdW
+eWZyc1IydVV1NGtCUmJTaFQvaGRVeFppUndXdFVpaVNNVUppTVNxaGZyY3U5NXFKRWFNSW5PV3gz
+bzFlREFpSDN3L2xLS1dyWmN5UlJEa0tDbVJqWHFQcGN1cWU1ZFdTa1FrUmlNU2VOSERsQnMvek45
+cnRPaWxVajBoOGpCYTZ0V1B5RzR2UzdxRjNaQktEa015MlZQUGs2N2xvMTdxdFNSRUpxV0F5RkN2
+c2g0VDUwaTY1TlYwdlpBQ0tOK1RNL1R1ZWFZc1JDTHZ0ZGVrYUNrckM1SHRSazUzejVFUHNmcFZm
+Z2RnZXh3NGZzYXJ6a3E5OFZsY0prS0ppSVMxMUdMd0pIYzRDcXZrdVBGOGZwaHFLbU1ENlE5Yjl4
+OXhuZVVSUHlJN3ZVQ21LYTNKMFBacDB1RTNXZEgzbEFOWXNTK09TQ1JBUGNCemtick1hYkQ0R3kz
+UUdQZTgzVVNXb05BeEs0TElqbU1pSlFNUDkwZXFpcm9NR2c2ZnFLZGEwK0ZaTUhlT243ZE1JbCtC
+cEVSRTdqdDZpcW8zNys2K09PYVNpUXVXMCttTFZ5UThwZnlPQ2lDaDExdUtxSUI5UlRWSkNwR1NU
+NlA2M1lON3lMeGlDamtLQzRJU2lVWi9pQnRFWFZZY0hxc1RMbnMrS29USXNUTkpsMmx5V3EyMVcv
+SnYvaDB1RU83bktRUTVUWUdrV0NJeHlVNWcwdTdtM293TGdpeFU4RXpTRlFrT3dJUlhVaDlRaGx4
+UitIZUtvUGY1RXFudjhCeVpwclVqZmJ2L2VINW4zMUhTTStiMkkvUEtxWktMZzNYQVlFU2lyQjNQ
+TytyVUMxOTQ5MjVuSjB6VFoxNGJJcGV1bCtkVkpCQ1JPR2JzM0NVeTUycVM2Vk5uQUVabS9LbHpy
+aXY3UzdGRXd0SnIySHVNKzRKb21QbzlSMHREb21maGdmNzJrVWU5WWoxeHhkWTlyck9kNHF0YWtX
+T1R0MmsrR1FiVTlDeFJzVXVTT2JZSkUzaUpITllDZDRNRUl4SitLeHArODc1NFNRWEJIaEExTUsv
+WDZqalk2OXpiMmExSTFSbkxuVWlveXVnVkcwdE1KSjVySy91MHpucDcxMzM5cm9QVVpWeVUrenpn
+bHVwMTZkREpzNjRyKzB0UUluSEQ5YnNPU01xOCtxSkluVmNFNnZYTjhON3VzbHRmcVNjdWdQcUIv
+SWhrbFpxL2Z4MlpGNDhTZjFMNVhkZit2MlRadlJ3M2RwMFpuRWhGY0M4dGdMQTJ3NmQ1bmZ0cmlM
+enQxZm9CcmRacU5jUGtON1VFSWxJUlBLVld2YkVjTm0zUmFqN0hNekovRlpFd2N1QWJLUmZFYVB6
+N1J5MTRqckZJaUF1QWVtM0VJOWF6RHdQaHBJR2tWMVhZbDBpc0xZSklaTFBwT2p6clphMW1SL2VW
+ekFCRmdoRXBEODFXcUZJWFg4QVlDaDg2eGV2YzRvZzhmeVZGcGhOZ0pxdEtPUFpLZVREM283UkVJ
+c1ZTcTg0QUVxUW54YXh3bndlVW1VajBsdFBzaUw3UnlqUGFFTUY1cEZaTGFqVmtNclhpQnVyT0Q3
+WC8yR21LWExKT0hHSTVoc25HSG8wbHNSNC8wWi9JcDRSSUVKRXpmNkFYa2ZyTy8rUGp0MGtaSkJp
+Um1JdlIwVUFXNnVPTHhuM0hlU1ZKQVlqWWdFaURLVnRUZmIzN1JYL0prZ09lYWRqSk5ZODV5OHVM
+U0N4S1kzMDJmT2hVelhyRFE4RCtGT1U4b014RVlnZnZzczI3SkdTbFhBd2txWTJIeDdpaW1BOVBz
+WHBWTnhnZXVQOVg4OXpxejQ5SWR2N3o5NjZXTWx1T2tUSmFQdWJsZnVRc0dpR3JINUJnUktLc0pY
+ZXFZTmFmdXI0QVFsNnBlcU5vakU3c0RxalA5WDArMzNQTGpVanVwSU1qb2Vud3UzL2RwUjQrdjRQ
+SXcyVWhFaW96Yk9BRXI0djVBdVN0MjdGZm5OV1BPZzdpMzVTYmgxQ0RYcVBvRWp2c0VEOGlXejNP
+Uks2U01qeVUrYnN4cnR4VUovU2Qva2ZXUkdkV1dqQWlBZXlUL0F0Ym91cnlZSGl1VVdkNU5tRG96
+SVZlSTY0NHdBV1kvdjBhMURvQWtadmttUlFKUmlTQ0dmZS9oNmlVUDVFZU9NdHdEZVF6WVRkMklB
+bElKSUxLVUQwSXU0WDJuNkNKWHBPK2xtM2VxTmp5TGJ0bGljaFpGaUhXM2JIRWkzSXQ2OWw0eWh4
+VjM0MnNDV0ZrVGZCWXRyYk1kRElPcmszR2Z1K1RzVCtEUHkwN2xzb3lGbncrMUtNZVc4b0sxbXpm
+SjJFdXlObkx5YktGQU1sUHRUc05kZVBqemtQcDArNGpSTDAyNXc3Wm1sWFcwS2lGOU5QQlg2Uytz
+SGhQbkx0RUkyWXZwcm85Ui9tZDc0MGhWTC9YYVBFVEVSM0MrVmdEYlRsNHNydE9VSWxiVk1FUUhJ
+TklqcnJlczVadGtJNEpRU2ZzUFdXdTVyMUN1ZzZYcmZITkIwU0l4c0dLeStxZjlnYU50d1lrRWta
+RXVpRkxnR2lFRmtBMkxvNUtZeHQ0aHV0WVpKRHJqQ1paYVpCR3MrYVQzWmlpUXByRVZ4WEJEaWpz
+czdDejcyalhNZmpUbVNYdWtMZ3Byb2w1TFpYOVB5Q1hSeE91QzBFOVVZNEdUczR3ZUNHRkFaOFJZ
+VEdNaEp6Y1BIR1pGTUYzL0phaTh6NVBDN2cvbmhIM0JkREIwRFpLbmZCZEhVYkRNVkp2VnpuVWVW
+Wk9ydnYrS0Rld3dlVjdINFRqblBVMlNyMXhEUk9mRjJ3SkN4S1F5SktJc3pHZERlb3JVc2JBcDdQ
+eXlyRnFWRDVCWFozUHhUVjBmVllGK1ZWRXdvVEhVaEFzVmw4Z0Jvc2RURUlrajhpTWxvOUtZRnpB
+Y3lSVVoyV1RiSE1lalp5em1PNTd0Nm04VkNKWUpLV3lTWm1JUkVlRmF0bDc5S1NrTXZwUDBzNEYz
+cWlsNjV6SldYYWJhNW5LNDJia2JwaE5qbUxVeGZVVVpBd2dNQTNqQjJGRzVBQ2g3bFZGU2swa3JE
+MGtEQ0g1cWpyN09vak1heEdKbFpDQjArZExMOGVvekk3cTVrVmsxdFMyWkRja1Z3cjFkU2tsZ3da
+RkxxRGJ1UFBoVFI1d3U0cWJreXFibElwSU5EcENXRStHbE9SMUtDRVNUTUNLT2M2elhqekdCTjdq
+SmxMSHZtUEIwZTFpMEZTVW9GN0lqR3M5YktvRUN1Qk93U0t1eUl6eHNrcXBpWVRsOW1aNDRKMVVh
+c0MvVTF3RkxFbGhLN2c3aXRPUVIrV1lKazdydEFKR0pRSWVTTVQ2cU1NZ1NhcDZudjNMUFVjUzNF
+R01xaWFsVnExbzlDVWJkL3BGUGJRUlF1KzI3Y2RtdEpPc2dsUDdLYVBaUSs1UmlhV3JuTy9HeUtp
+ODFtVGkrbUtSc3NwRWZ1alhLMkxkNytxcDEyT2srS09LYTFBVnBVeEV3dDlCMXB3MmVXcUV5RnlK
+U0Q2MkJNQjZ6WXVOOXRxY2c1RnBYaG9oRzBxdkJablk4Q043TEZNdmtDWDlNcVd3bjliZ3k5SDBw
+K3AxSmVzTmFaencxYTUxUjdyV1Vtb2lJUloyOUdIaEJkNXQ3QUZHTGl4QkpEWWplT0RJelNMekR4
+UFpCWG5DR1phRHFtMThyMnhrTFV4S0lJZkZYQzZOaWpRUm0vNHFXWk5Pa0NsK095VWVQMG9UdU00
+SXF5SGo3NlZtM1NoNjVVWXk1M3FDQzFWWnlrUWtWQkRlcEloMzBJQXM1THJDc0VFYzgyYU5yRytR
+ZWZkYlRXaittaTBTckxhYk15bDMzU3d5OUhtSFNielBPVEtaVEVPUDE0Umt2Qk5Ib2oraTZvcHY1
+Q0w4NDJNZDJRWXFQQmN2TDNBb09MYURNcmN2bzhOYk5sRGtvaFh5SGdJWWFDQVNMdzFFK2twVm5R
+KzFwRXhFb2dkREhXRUpDV2w4WHkxZUxURlg3S3Y0YndQdkFMY2JUT2I5NzRWU3o0bHpKSXB2Szhn
+bks4K1plRVVLWG9taXZKRURyMVBCZXdJd1FzM0xKNUZsMnlMS1A3Uko0clcyNUxOa1Q3OUV0clNM
+Wkx0OFVsNzZrTDl2cmJ4S0pYZlZOTzRjVWZJOWE5c1NpbDIybUliTm1FZnZ0T2xIZDczcFRLcEdo
+MEpjTnRBK2xhb3NaU0lTZ3Q2TXVDQVNnckFZQ29GMWluMk9VRnQrUkxwd0IvdWRTS05FQk9YY2xS
+U3ltYlBJbWhnbmM2ZHBla2ZTZDNwZVJxZVFpbXowTnY4a2ZaY1h5Y2lqMXppb0ZobUgxQ0hqNEkv
+Sk9PQkR5aHhlVjE2amtydDJKcGwzTGFkREc1YlR4Qmx6cUVtZnNkeWhPckJMNGJNcXdrVFc3anlr
+eXI5a1YwdktUS1NXWUtUR0paeWhSMnFIZXplZ0J2QWl2My9WL1lMQ0JrMmtwWnQyVXFiUlNEYVRY
+b3dTakZUTG5wVk03dGRrWGpHWnpFdkd5alowODBvZWRSdm5rdVhuVlRJYVRlY1RhT09Qc1RRZ0lw
+SnF0dXZQL20xYlNSTFQyaHlEMFlpY0c2U2hCTnZWVkZXbDNJZ0VpZWV2cERvMzFYQ2orVFprUU9C
+WXRtd3hlbDc5dkNlcnZtazBhY0Z5V3Nia3dzL2JlZWc0NDZqa0RzMWR0WkdHUnNYSThzNkxUYnNL
+TWM3cjRIN2E5d1NCaUozMm1EaWJOWURUeGJnUmpCdGZLUmNpMFREbzVYZ0ZXYlVQdzBxMVdLc0dH
+aDJFNEJNcjVNNVZjaWRCOHBzUFlEWGY5V1lqMTJzNlBkZEJBalhtWTZSTElKVVRXd3R1VkFJVktk
+Y1JpYmxuODk3REV2TENpd0VSOWxJM01JQkcvM2U5OXJKNjdsMnVQYUo4QVlLd08rbXQxbjFrOFJX
+YmJydU9qNUlVanR0ck9IY3VJWDF6OFk4L3NVSG1YSTIva1FsVXBOem5TQUNCZFd3SXhXczNYd25y
+NFI2aGFHeThKQjY3anBadDJ1VWlZWlpFV0VwQ0pFWWZkb1JocC9DRjVGUUpiT04rU0FDRE5UcHd4
+Z0xKQUlCMitDMlFwNVp5SlZJdGFFaXNmS0NScHl4Y0tXNEFTUFBOTzhGeUdJd2VxRW90OGhTZ0hL
+TVFhNFMrSk9FYUNPYmo4N2RHb0NMWGpFaTFZUE1KWXBsSWgvQVZwRFFncVFsRzBwT2Z0cEczUk5a
+bzhTVjkwSDZnNU56Z2pjWklNb2I2Ukl3WHFSbS9pNzljRnlLRENYeFBPT2pJTnNEaUxuSlZrYU9D
+MFF6U29LWXgwcEFQQTMvMXR6cmlpcE1LSi9KM0tSLzVuY2diUkg0bjhvWVFvdjhEeUR4NVd2djRF
+cVFBQUFBQVNVVk9SSzVDWUlJPSI+PC9zcGFuPjwvcD48cD48c3BhbiBzdHlsZT0iY29sb3I6IHJn
+YigxMiwgMTAwLCAxOTIpOyBmb250LXN0eWxlOiBub3JtYWw7Ij5XaGF0c2FwcC9UZWw6ICs4NiAx
+MzkgMTQ1OCA1NTU2PC9zcGFuPjwvcD48ZGl2IHN0eWxlPSdkaXNwbGF5Om5vbmUnPlRPIFZJUO+8
+m01FRVRJTkfvvJtJRDoxZWNkMmE1Ny1lZjgyLTQwYjktOTk4ZS05MTUzNDFiZjQ2ZGI8L2Rpdj48
+ZGl2IHN0eWxlPSJ3aWR0aDowcHg7IGhlaWdodDowcHg7IGRpc3BsYXk6bm9uZTsiPjxpbWcgc3Jj
+PSJodHRwczovL3N1YnRyYWNrZXIubXlzdWJtYWlsLmNvbS90cml0cmFja2luZz90PU9aRXVlNDli
+TFc5MGJHQTVGJTJCWm5tcWs3VDA5Z1M4WWdBOCUyRkR3Y2tDQUFvJTNEJmk9SHlQYzZHRVUwTm0x
+WFhKczBVa1FpZ0FnOGZBeXUlMkZFU09XZU5rMldnbENwZ3MlMkZic096NldXbXZvb3k4TSUyQmpM
+S01CWm5OSngzb3haY3hNZ1k3M09XbUQyVyUyQlc2b3drSGdvaWRhdTE0MkdudXdweGtwMUZTNjBS
+YlV3bUtTb1glMkJJc1FNeXdrNzV4MndhcHFLYTF1eDlBQSUzRCUzRCZ2ZXJzaW9uPTIiIHdpZHRo
+PSIxIiBoZWlnaHQ9IjEiIGFsdD0ic3VidHJhY2tlciI+PC9kaXY+PC9ib2R5Pg==
 
---------------fibSbFC2NdoJtgJv0tL0gOkb
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsEBBAABCAAjFiEEgvhNxzjijE7doMajz24L8sM/oJ4FAmYdWEQFAwAAAAAACgkQz24L8sM/oJ6x
-eww+IlqxMJKxG3wavFDKwj10CcRd7yUbU7mAcIkbnQkV853NSUdB16kHHP8GZ5P34JjiQ65W8K/f
-KihLQiemWa2PseKsKx11jhGuzu8aRjAkV6vxEHWPQyD2GXej+o2SyCNxHNJMEcaAIjqJ4bLR4XAS
-iEsc5R/KU904VErjtFaCuc2lJJC88gDgEShEWrp7h1PxrU9dxzl0hjFefC78+wMwJ52lG8M1va/Q
-8DOaeTnwJvgfRLSmHL0mt3dE+1P11t7zJu3t9kN7x5/XoNfQctxWRXlXAwqDdGmjuRNEoxdAdfs6
-S8yXQ1Ue/YCB/QNb1+V6VO1gCmELT7VtNSCALHKlpvlyeof4EVaLyOokebo//kJ/Ce1evgWP0GuM
-MwXp0qhQQBhnCASOmRPRFWf3QalZhTObtGV3HeS7XKLF0lGW5drMyTnhaz0DTzii54sABKbYA2gv
-eEW+VdDj5C1KdpToA4FePJDQ6JAQb3OFigWqSn7vNTcMCmi2ccrdaSRbcw2xBCCr04bjGL4=
-=m3fH
------END PGP SIGNATURE-----
-
---------------fibSbFC2NdoJtgJv0tL0gOkb--
+----====003_2024041700012047====--
 
