@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86BE68A81A5
-	for <lists+nbd@lfdr.de>; Wed, 17 Apr 2024 13:06:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F3408A81A8
+	for <lists+nbd@lfdr.de>; Wed, 17 Apr 2024 13:06:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 75E20207F1; Wed, 17 Apr 2024 11:06:27 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 17 11:06:27 2024
+	id 14A53207F5; Wed, 17 Apr 2024 11:06:41 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Apr 17 11:06:40 2024
 Old-Return-Path: <prvs=830b8c31b=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=-2.5 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 35A04207E6
-	for <lists-other-nbd@bendel.debian.org>; Wed, 17 Apr 2024 10:49:43 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 444BE207E7
+	for <lists-other-nbd@bendel.debian.org>; Wed, 17 Apr 2024 10:50:58 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-4.4 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -26,57 +26,57 @@ X-Amavis-Spam-Status: No, score=-4.4 tagged_above=-10000 required=5.3
 	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id IPG9w28AE4D0 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 17 Apr 2024 10:49:35 +0000 (UTC)
+	with ESMTP id MyvAZaMxs7KG for <lists-other-nbd@bendel.debian.org>;
+	Wed, 17 Apr 2024 10:50:50 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from esa5.hgst.iphmx.com (esa5.hgst.iphmx.com [216.71.153.144])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 108DD207E8
-	for <nbd@other.debian.org>; Wed, 17 Apr 2024 10:49:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 2FEC5207DF
+	for <nbd@other.debian.org>; Wed, 17 Apr 2024 10:50:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1713350975; x=1744886975;
+  t=1713351050; x=1744887050;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=g3fx1ZTkHRAoDOZOkdg+UOQMZLU5smY4eolMVN8yWPg=;
-  b=oTHTZBSu8Jgy3KJ60XsbBeAS20L29DIndFKUsTzpjo0ezU7lBRcbnE7T
-   MUOJPHvpHtst2oUzr6MrQI7couTeSSX5/jyAafoP+1aET2Kza74bJZqXJ
-   kfBpnkzvRZ6ujXNRgGblq+mOG1Y3jvO6pmxAHb91VstFsSUl/CNtwT/PL
-   hnqU1IojEGADIMaCW4I0aa0Rg0W+FA52/VCtni9k3HK8magqz9T7Juj89
-   fj/GL/9Qe6BaAFZs8plvpTMDDmO071W7EImBzhO2DUlmECCCJf1JLUGfY
-   CWib2dgfkHTVcGGmFmGu3kdz/40vp9/wNP11mt/+bhjJ4a8GX0dsQB1t1
-   g==;
-X-CSE-ConnectionGUID: vimMs+jaTRKYx55ezkBCSw==
-X-CSE-MsgGUID: y4WdNi+qRaGriA/f8XfkRA==
+  bh=3roGAFq0akpy3yja+jCNy+bt+me5vr5KFtx4OdO58SQ=;
+  b=aHObhkfyUp+xwvDHoHDwmlyW6dWZ+5KLCCtt4MuyI//jQ0Hh20zH0BlD
+   CaZXdPU021BOubB5ltxMyiBj1cyBEl5Qa7uvVxmfUBDGrnYK4f/owYgSD
+   LoFGGje7XPX5qNL+Jvk3IliLIr8O2qcHr+twry/Y433SCg0meCiTGc+HT
+   RSpgaNyq+znapOuFjzNQhAAr8HfdX4diE76T0BgAEUY/2yuVirAfWlvUa
+   4MdDadBvhRirH/RmB1rAvbtLXuKMveArBhEkle6mfs5xJiP/+iiC1+njY
+   /gVLr3HFA4+cmT6BpwZkPYUpaoTJR6MfyuTWyXXghosqJgO9s9wORojTJ
+   w==;
+X-CSE-ConnectionGUID: +8SWbAaCQmWwO8T8gxEMqg==
+X-CSE-MsgGUID: y8qzAYjqTiK/TEWPH+meFQ==
 X-IronPort-AV: E=Sophos;i="6.07,209,1708358400"; 
-   d="scan'208";a="14913461"
+   d="scan'208";a="14913465"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 17 Apr 2024 18:42:12 +0800
-IronPort-SDR: USNnPTmJfklaWApEWglkWpOeS5cVuFtX2eLDbDhcEJBVBB105yzs0sPWFtlvn40WYY6DJepjtx
- 1+CkLN/agiN1S7JXqsFIK3h+QOkj2Tev/yGNagAcGEAOhBtQCSiG/BJLEh2Jjmhg36TA+Wd+Zg
- oHALgJTrsmU5vzX8DRNcXl5DBavKwC1suAYQDQ3Xh6oIYWgMb4EMQ7HNeM7mP9aafK7cUgMmG2
- gmDnZI/nc55k27ocIIP8Z9th4WLdMA2MdH0wGVtn/rnMrSju9JOBBMxGcm/Uk0Q/U09LbzAQqs
- sIo=
+  by ob1.hgst.iphmx.com with ESMTP; 17 Apr 2024 18:42:13 +0800
+IronPort-SDR: UNpRB+euB0d0UamRgZE3UJJLkLU13V6JY/069FsCpEtSIck9XyjBxPeBhyvO9hY8NsMgplY3av
+ OzANOL3r87ZrE5+goRUKpEsaYqgl5cxHLFRi+xHDXvDNVwIN882y4hhG6xE6Zd1ZrRm0wuXVS9
+ WQM+OJ53TS6XL1tvK3jOK3AFIW50kN3c5wC6cUixnGxpIW89quomd2QEUYzOI7WfuOy+8laEiG
+ QxtgVyLl2paktkWHC4l7suZS0HUTgUiNJlXSRhFPM/XP8bDk4Hch0faXyejhRXFgyEoUteL8Wm
+ eGA=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 17 Apr 2024 02:44:50 -0700
-IronPort-SDR: TgN2iPQSnxWxnpydXPHereC4u1YXV0HsheYkj204Wsc1vXCoUPopvgdAkz/ZYWifaxsk3Ui0UC
- u+BhJIfslqPozNamHXM3+uFE+6w1nLrR3mmsdu3qBf6e9u4RK/LNqS/m7oojriPRh/QmcD2fCU
- RxCrYjLIiLD4NtbYu15OU+GA1MVGtpjppTzZ0jf+BgJmYJotTsH+j1fhJh6jcfmyNgeAocLIq+
- c/UIvwLREBZQatUW4vsadPXm+3/TtegnCwucqFUdCEtq0GEs7BEHG8mrL/6ZBF3H9cSn3AEBMW
- vnQ=
+  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 17 Apr 2024 02:44:51 -0700
+IronPort-SDR: 2lueZgCJKeUgOK1iCvOdv3rtDN0qEyJDam5qcH2IIBDzHsgoBZvkQdoKLeENNXMTgu+l+hfPLD
+ 90eiTc2LV5LRzQ+tHnPEQUYCPVxSYD8Ue/3W7bP4oikLs9RdY9DQWxuALWGqecIcCUB3EdlG4/
+ l3CSbHV2XVYDC23NGZFeWUZECv4OUGXN5mDRKg0lYF2LQt+6ReOaqaoGsJLFTbmAvaGtyh/G63
+ 7HrNJV4VSZgWDYhYZKQYGGtsqa60AggHRIGo0SI38EmC/Ex55xTpHJSMkJW9ZJnARtx5LG+iyo
+ owA=
 WDCIronportException: Internal
 Received: from unknown (HELO shindev.ssa.fujisawa.hgst.com) ([10.149.66.30])
-  by uls-op-cesaip01.wdc.com with ESMTP; 17 Apr 2024 03:42:11 -0700
+  by uls-op-cesaip01.wdc.com with ESMTP; 17 Apr 2024 03:42:13 -0700
 From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 To: linux-block@vger.kernel.org
 Cc: nbd@other.debian.org,
 	Josef Bacik <josef@toxicpanda.com>,
 	Yi Zhang <yi.zhang@redhat.com>,
 	Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-Subject: [PATCH blktests v2 1/2] nbd/002: fix wrong -L/-nonetlink option usage
-Date: Wed, 17 Apr 2024 19:42:08 +0900
-Message-ID: <20240417104209.2898526-2-shinichiro.kawasaki@wdc.com>
+Subject: [PATCH blktests v2 2/2] nbd/002: repeat partition existence check for ioctl interface
+Date: Wed, 17 Apr 2024 19:42:09 +0900
+Message-ID: <20240417104209.2898526-3-shinichiro.kawasaki@wdc.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240417104209.2898526-1-shinichiro.kawasaki@wdc.com>
 References: <20240417104209.2898526-1-shinichiro.kawasaki@wdc.com>
@@ -85,9 +85,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Vgh49A6KioL.A.YsC.z06HmB@bendel>
+Resent-Message-ID: <NScHyvLN1kO.A.tyC.A16HmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2793
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2794
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -97,91 +97,54 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240417104209.2898526-2-shinichiro.kawasaki@wdc.com
-Resent-Date: Wed, 17 Apr 2024 11:06:27 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240417104209.2898526-3-shinichiro.kawasaki@wdc.com
+Resent-Date: Wed, 17 Apr 2024 11:06:41 +0000 (UTC)
 
-As the commit 3c014acd5171 ("nbd/001: use -L for nbd-client") explains,
-the nbd-client command uses the netlink interface instead of the ioctl
-interface. The default interface changed at nbd version 3.17 in March
-2018. Before that, the default was ioctl. After the change, the
-nbd-client command requires -L or -nonetlink option to use the ioctl
-interface.
+When nbd-client is set up with the ioctl interface, it takes some time
+for the nbd driver and the block layer to complete the partition read.
+The test script calls stat command for the /dev/nbd0p1 device to check
+the partition exists as expected. However, this stat command is often
+called before the partition read completion, then causes the test case
+failure.
 
-The commit 3c014acd5171 adjusted nbd/001 test script to the default
-interface change. However, it is not reflected to nbd/002. This caused
-mismatch between the comments in the test case and the actual test. The
-comments describe the first half as "Do it with ioctls", and the last
-half as "Do it with netlink". However, the test script does opposite. It
-specifies no option for the first half, then tests with netlink
-interface. It specifies -L option for the last half, then tests with the
-ioctl interface.
-
-This makes it difficult to debug the failure of the test case. Fix the
-nbd-client command option to match the comments. Also, use the long
-option -nonetlink instead of -L for easier reading.
+To avoid the test case failure, repeat the partition check a few times
+with one second wait.
 
 Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 ---
- tests/nbd/002 | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ tests/nbd/002 | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/tests/nbd/002 b/tests/nbd/002
-index fd992a0..968c9fa 100755
+index 968c9fa..8e4e062 100755
 --- a/tests/nbd/002
 +++ b/tests/nbd/002
-@@ -53,11 +53,11 @@ test() {
+@@ -21,6 +21,8 @@ requires() {
+ }
  
- 	echo "Testing IOCTL path"
- 
--	nbd-client -N export localhost /dev/nbd0 >> "$FULL" 2>&1
-+	nbd-client -nonetlink -N export localhost /dev/nbd0 >> "$FULL" 2>&1
- 
- 	if ! _wait_for_nbd_connect; then
- 		echo "Connect didn't happen?"
--		nbd-client -d /dev/nbd0 >> "$FULL" 2>&1
-+		nbd-client -nonetlink -d /dev/nbd0 >> "$FULL" 2>&1
- 		_stop_nbd_server
- 		return 1
- 	fi
-@@ -66,12 +66,12 @@ test() {
- 
- 	if ! stat /dev/nbd0p1 >> "$FULL" 2>&1; then
- 		echo "Didn't have partition on ioctl path"
--		nbd-client -d /dev/nbd0 >> "$FULL" 2>&1
-+		nbd-client -nonetlink -d /dev/nbd0 >> "$FULL" 2>&1
- 		_stop_nbd_server
- 		return 1
- 	fi
- 
--	nbd-client -d /dev/nbd0 >> "$FULL" 2>&1
-+	nbd-client -nonetlink -d /dev/nbd0 >> "$FULL" 2>&1
+ test() {
++	local pass i
++
+ 	echo "Running ${TEST_NAME}"
+ 	_start_nbd_server
+ 	{
+@@ -64,7 +66,15 @@ test() {
  
  	udevadm settle
  
-@@ -83,7 +83,7 @@ test() {
- 
- 	# Do it with netlink
- 	echo "Testing the netlink path"
--	nbd-client -L -N export localhost /dev/nbd0 >> "$FULL" 2>&1
-+	nbd-client -N export localhost /dev/nbd0 >> "$FULL" 2>&1
- 
- 	if ! _wait_for_nbd_connect; then
- 		echo "Connect didn't happen?"
-@@ -96,12 +96,12 @@ test() {
- 
- 	if  ! stat /dev/nbd0p1 >/dev/null 2>&1; then
- 		echo "Didn't have partition on the netlink path"
--		nbd-client -L -d /dev/nbd0 >> "$FULL" 2>&1
-+		nbd-client -d /dev/nbd0 >> "$FULL" 2>&1
+-	if ! stat /dev/nbd0p1 >> "$FULL" 2>&1; then
++	pass=false
++	for ((i = 0; i < 3; i++)); do
++		if stat /dev/nbd0p1 >> "$FULL" 2>&1; then
++			pass=true
++			break
++		fi
++		sleep 1
++	done
++	if [[ $pass != true ]]; then
+ 		echo "Didn't have partition on ioctl path"
+ 		nbd-client -nonetlink -d /dev/nbd0 >> "$FULL" 2>&1
  		_stop_nbd_server
- 		return 1
- 	fi
- 
--	nbd-client -L -d /dev/nbd0 >> "$FULL" 2>&1
-+	nbd-client -d /dev/nbd0 >> "$FULL" 2>&1
- 
- 	if ! _wait_for_nbd_disconnect; then
- 		echo "Disconnect didn't happen?"
 -- 
 2.44.0
 
