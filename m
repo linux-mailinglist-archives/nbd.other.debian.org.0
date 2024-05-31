@@ -2,66 +2,83 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id B13E08D5B43
-	for <lists+nbd@lfdr.de>; Fri, 31 May 2024 09:12:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0348F8D5C37
+	for <lists+nbd@lfdr.de>; Fri, 31 May 2024 10:06:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6EADD20570; Fri, 31 May 2024 07:12:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri May 31 07:12:10 2024
-Old-Return-Path: <hch@lst.de>
+	id A3E1420587; Fri, 31 May 2024 08:06:24 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri May 31 08:06:24 2024
+Old-Return-Path: <BATV+4872a67a45e6d46d0c49+7586+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: **
-X-Spam-Status: No, score=3.0 required=4.0 tests=CC_TOO_MANY,
-	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,FOURLA,HEADER_FROM_DIFFERENT_DOMAINS,
+	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 061132055C
-	for <lists-other-nbd@bendel.debian.org>; Fri, 31 May 2024 06:56:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id E1E0420572
+	for <lists-other-nbd@bendel.debian.org>; Fri, 31 May 2024 07:49:04 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.3 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_EF=-0.1, FOURLA=0.1, HEADER_FROM_DIFFERENT_DOMAINS=1,
+	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 5ZPWo4pUEkY7 for <lists-other-nbd@bendel.debian.org>;
-	Fri, 31 May 2024 06:56:06 +0000 (UTC)
+	with ESMTP id 51cZAtFqqINU for <lists-other-nbd@bendel.debian.org>;
+	Fri, 31 May 2024 07:49:01 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 72D6A20559
-	for <nbd@other.debian.org>; Fri, 31 May 2024 06:56:06 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id CC83168BEB; Fri, 31 May 2024 08:56:00 +0200 (CEST)
-Date: Fri, 31 May 2024 08:56:00 +0200
+	by bendel.debian.org (Postfix) with ESMTPS id 38CE82055B
+	for <nbd@other.debian.org>; Fri, 31 May 2024 07:48:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=X6ZSIyh1cBG1UFDOkvLStzuDyEP+AFeCGGHYkP7yPXE=; b=wh98NvxtuA1xZGSKFRioyMm51I
+	vrfovyzZnajBqXQQrJzm7vrjL319N5CmN22SqQEH5AWCG3vSYC2Ehtl5dcKGB5JTVnjGnZ5BKPqLM
+	k/8mUprcZcrR0sLsTDn+NROurZ//Aujt8btpgMENtK0/To9YThW/cFbdJDIRSieOZxuCL8t6W/I55
+	BtAv6L1mDU06KnafTVhy4T18Em8h0Ba2Y70K4JL0T5UE87wHrD0U6qXXRuxbTCgayrCNZ2qZ6PffF
+	YrCVgO4qoHmBcSzLnvh4ZzHMZzUuHyvAU4HVYk4J4d95GDSA618ThURvQ6uULdXsoDERjoAsBWfP6
+	qbtPlb0Q==;
+Received: from 2a02-8389-2341-5b80-5ba9-f4da-76fa-44a9.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:5ba9:f4da:76fa:44a9] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1sCx0C-00000009XUr-41fW;
+	Fri, 31 May 2024 07:48:43 +0000
 From: Christoph Hellwig <hch@lst.de>
-To: Ilya Dryomov <idryomov@gmail.com>
-Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Richard Weinberger <richard@nod.at>,
+To: Jens Axboe <axboe@kernel.dk>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: Richard Weinberger <richard@nod.at>,
 	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
 	Johannes Berg <johannes@sipsolutions.net>,
 	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
 	Dongsheng Yang <dongsheng.yang@easystack.cn>,
-	Roger Pau Monn?? <roger.pau@citrix.com>,
-	linux-um@lists.infradead.org, linux-block@vger.kernel.org,
-	nbd@other.debian.org, ceph-devel@vger.kernel.org,
-	xen-devel@lists.xenproject.org, linux-scsi@vger.kernel.org
-Subject: Re: [PATCH 02/12] block: take io_opt and io_min into account for
- max_sectors
-Message-ID: <20240531065600.GA18681@lst.de>
-References: <20240529050507.1392041-1-hch@lst.de> <20240529050507.1392041-3-hch@lst.de> <CAOi1vP-F0FO4WTnrEt7FC-uu2C8NTbejvJQQGdZqT475c2G1jA@mail.gmail.com> <20240531055456.GC17396@lst.de> <CAOi1vP-VXeOH-kShRKv-b=id1zN9tLiqOo8EKpOWoJuQp_Pm1g@mail.gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	linux-um@lists.infradead.org,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-scsi@vger.kernel.org
+Subject: convert the SCSI ULDs to the atomic queue limits API v2
+Date: Fri, 31 May 2024 09:47:55 +0200
+Message-ID: <20240531074837.1648501-1-hch@lst.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAOi1vP-VXeOH-kShRKv-b=id1zN9tLiqOo8EKpOWoJuQp_Pm1g@mail.gmail.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <vsyfM7YtOUE.A.JAOI.KhXWmB@bendel>
+Resent-Message-ID: <ZlbuEqquGJH.A.dAWJ.AUYWmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2856
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2858
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -71,20 +88,52 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240531065600.GA18681@lst.de
-Resent-Date: Fri, 31 May 2024 07:12:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240531074837.1648501-1-hch@lst.de
+Resent-Date: Fri, 31 May 2024 08:06:24 +0000 (UTC)
 
-On Fri, May 31, 2024 at 08:48:12AM +0200, Ilya Dryomov wrote:
-> We should revert io_opt from opts->alloc_size to objset_bytes (I think
-> it's what you meant to say but typoed).
+Hi all,
 
-Yes, sorry.
+this series converts the SCSI upper level drivers to the atomic queue
+limits API.
 
-> How do you want to handle it?  I can put together a patch, send it to
-> ceph-devel and it will be picked by linux-next sometime next week.  Then
-> this patch would grow a contextual conflict and the description would
-> need to be updated to not mention a behavior change for rbd anymore.
+The first patch is a bug fix for ubd that later patches depend on and
+might be worth picking up for 6.10.
 
-If that works for you I'd much prefer to include it with this series.
-I'd be happy to write it myself.
+The second patch changes the max_sectors calculation to take the optimal
+I/O size into account so that sd, nbd and rbd don't have to mess with
+the user max_sector value.  I'd love to see a careful review from the
+nbd and rbd maintainers for this one!
+
+The following patches clean up a few lose ends in the sd driver, and
+then convert sd and sr to the atomic queue limits API.  The final
+patches remove the now unused block APIs, and convert a few to be
+specific to their now more narrow use case.
+
+The patches are against Jens' block-6.10 tree.  Due to the amount of
+block layer changes in here, and other that will depend on it, it
+would be good if this could eventually be merged through the block
+tree, or at least a shared branch between the SCSI and block trees.
+
+Changes since v1:
+ - change the io_opt value for rbd
+ - fix a left-over direct assignent to q->limits
+ - add a new patch to refactor the ubd interrupt handler
+ - use an else if to micro-optimize the ubd error handling
+ - also remove disk_set_max_open_zones and disk_set_max_active_zones
+ - use SECTOR_SHIFT in one more place
+ - various spelling fixes
+ - comment formating fix
+
+Diffstat:
+ arch/um/drivers/ubd_kern.c   |   50 +++------
+ block/blk-settings.c         |  238 +------------------------------------------
+ drivers/block/nbd.c          |    2 
+ drivers/block/rbd.c          |    3 
+ drivers/block/xen-blkfront.c |    4 
+ drivers/scsi/sd.c            |  222 ++++++++++++++++++++--------------------
+ drivers/scsi/sd.h            |    6 -
+ drivers/scsi/sd_zbc.c        |   27 ++--
+ drivers/scsi/sr.c            |   42 ++++---
+ include/linux/blkdev.h       |   52 +++------
+ 10 files changed, 210 insertions(+), 436 deletions(-)
 
