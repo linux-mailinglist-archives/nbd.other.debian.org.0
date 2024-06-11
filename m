@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3665490315B
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 07:38:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 538D890315E
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 07:38:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 04E5B2063D; Tue, 11 Jun 2024 05:38:15 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 05:38:14 2024
+	id 3954920642; Tue, 11 Jun 2024 05:38:26 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 05:38:26 2024
 Old-Return-Path: <BATV+2fedbe304aabaf399917+7597+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=0.7 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A38FC2056A
-	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 05:20:23 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id A748D2056A
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 05:20:27 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.161 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -28,29 +28,29 @@ X-Amavis-Spam-Status: No, score=-1.161 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id vYPg8M1JaV42 for <lists-other-nbd@bendel.debian.org>;
-	Tue, 11 Jun 2024 05:20:20 +0000 (UTC)
+	with ESMTP id vH9X42SsB2sc for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 Jun 2024 05:20:24 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 4C9F52057A
-	for <nbd@other.debian.org>; Tue, 11 Jun 2024 05:20:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 452C12057A
+	for <nbd@other.debian.org>; Tue, 11 Jun 2024 05:20:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=XX8OKzSF4I8HqKWv9CPGPzdF42TlXrJn92mCb7zGUpU=; b=MgJCZXdCXtq5WcrpKLj6n44BMN
-	x7as6F25HhuflNiQsl6jB5W6Jl8Cql52H+wX7EAkBatRuj+eJQEWJ77tUg0C3taOh9WTyyJ5Bqsdi
-	RXIGXMyVTRoSsh9a4uAfJCaQK5+FHeeQHkBBZE0YZA9FygNVsS+hGq+FQgsOMtLKMq7cOPugwuWbd
-	nHgbDPqb89/cUkFHBBzn5P6ypmdPwRtPSnVwTBJUEpsncbavyujHEC5azlnNETobhWGFD7GOTUPkY
-	4mvSB/tNstXuD79kJeevqTycR98vtBAfM0kE9ci/1QpnRCn9+ZGtDS5u57IeabqphYzfqjxqKjOQg
-	V0F/xAxw==;
+	bh=Lo072dU2QpGVh/xLHOL31dXMwicRfcSfRIC85i+l4AM=; b=L+Tee0sieKd6J7cvbELhlhVaks
+	LPgpuWpIZFicteZRDgauMdYkEwQiZlmV5XX+JbDB3vC4m0KJjDG5bevXe1oDrF7Jlfr+LBmHklh7Z
+	M40vIFh7OGGJJuWxvhSfZOjx5DnhPxo/8ZdarjapcrQwl0gEEF0aMgeR7GX/Vza1VeumjCpiApl3p
+	PLelqO46Phs6ttgR0xqN2LNDZRODEhHCY/W5L7HCIbxlf4xUJx7pMbuzHT/BrilnMkwuSzhiCHprb
+	3j9JgyMjfS6K9KPGvRSqyYB7cH/3qG08T81bWKh0w5UA9xhwkAnTEMljKkuADRwOj/NUqNEybtjm0
+	nk5ysDdw==;
 Received: from 2a02-8389-2341-5b80-cdb4-8e7d-405d-6b77.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:cdb4:8e7d:405d:6b77] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1sGtvO-00000007R2v-03k6;
-	Tue, 11 Jun 2024 05:20:02 +0000
+	id 1sGtvQ-00000007R5I-2gcI;
+	Tue, 11 Jun 2024 05:20:05 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -88,9 +88,9 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org
-Subject: [PATCH 10/26] xen-blkfront: don't disable cache flushes when they fail
-Date: Tue, 11 Jun 2024 07:19:10 +0200
-Message-ID: <20240611051929.513387-11-hch@lst.de>
+Subject: [PATCH 11/26] block: freeze the queue in queue_attr_store
+Date: Tue, 11 Jun 2024 07:19:11 +0200
+Message-ID: <20240611051929.513387-12-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611051929.513387-1-hch@lst.de>
 References: <20240611051929.513387-1-hch@lst.de>
@@ -100,9 +100,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <vHL_Gq9Fj6G.A.AtTJ.GL-ZmB@bendel>
+Resent-Message-ID: <cAuO1k4xG-N.A.YvTJ.SL-ZmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2902
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2903
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -112,72 +112,103 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240611051929.513387-11-hch@lst.de
-Resent-Date: Tue, 11 Jun 2024 05:38:15 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240611051929.513387-12-hch@lst.de
+Resent-Date: Tue, 11 Jun 2024 05:38:26 +0000 (UTC)
 
-blkfront always had a robust negotiation protocol for detecting a write
-cache.  Stop simply disabling cache flushes when they fail as that is
-a grave error.
+queue_attr_store updates attributes used to control generating I/O, and
+can cause malformed bios if changed with I/O in flight.  Freeze the queue
+in common code instead of adding it to almost every attribute.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/xen-blkfront.c | 29 +++++++++--------------------
- 1 file changed, 9 insertions(+), 20 deletions(-)
+ block/blk-mq.c    | 5 +++--
+ block/blk-sysfs.c | 9 ++-------
+ 2 files changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 9b4ec3e4908cce..9794ac2d3299d1 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -982,18 +982,6 @@ static const char *flush_info(struct blkfront_info *info)
- 		return "barrier or flush: disabled;";
+diff --git a/block/blk-mq.c b/block/blk-mq.c
+index 0d4cd39c3d25da..58b0d6c7cc34d6 100644
+--- a/block/blk-mq.c
++++ b/block/blk-mq.c
+@@ -4631,13 +4631,15 @@ int blk_mq_update_nr_requests(struct request_queue *q, unsigned int nr)
+ 	int ret;
+ 	unsigned long i;
+ 
++	if (WARN_ON_ONCE(!q->mq_freeze_depth))
++		return -EINVAL;
++
+ 	if (!set)
+ 		return -EINVAL;
+ 
+ 	if (q->nr_requests == nr)
+ 		return 0;
+ 
+-	blk_mq_freeze_queue(q);
+ 	blk_mq_quiesce_queue(q);
+ 
+ 	ret = 0;
+@@ -4671,7 +4673,6 @@ int blk_mq_update_nr_requests(struct request_queue *q, unsigned int nr)
+ 	}
+ 
+ 	blk_mq_unquiesce_queue(q);
+-	blk_mq_unfreeze_queue(q);
+ 
+ 	return ret;
+ }
+diff --git a/block/blk-sysfs.c b/block/blk-sysfs.c
+index f0f9314ab65c61..5c787965b7d09e 100644
+--- a/block/blk-sysfs.c
++++ b/block/blk-sysfs.c
+@@ -189,12 +189,9 @@ static ssize_t queue_discard_max_store(struct request_queue *q,
+ 	if ((max_discard_bytes >> SECTOR_SHIFT) > UINT_MAX)
+ 		return -EINVAL;
+ 
+-	blk_mq_freeze_queue(q);
+ 	lim = queue_limits_start_update(q);
+ 	lim.max_user_discard_sectors = max_discard_bytes >> SECTOR_SHIFT;
+ 	err = queue_limits_commit_update(q, &lim);
+-	blk_mq_unfreeze_queue(q);
+-
+ 	if (err)
+ 		return err;
+ 	return ret;
+@@ -241,11 +238,9 @@ queue_max_sectors_store(struct request_queue *q, const char *page, size_t count)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	blk_mq_freeze_queue(q);
+ 	lim = queue_limits_start_update(q);
+ 	lim.max_user_sectors = max_sectors_kb << 1;
+ 	err = queue_limits_commit_update(q, &lim);
+-	blk_mq_unfreeze_queue(q);
+ 	if (err)
+ 		return err;
+ 	return ret;
+@@ -585,13 +580,11 @@ static ssize_t queue_wb_lat_store(struct request_queue *q, const char *page,
+ 	 * ends up either enabling or disabling wbt completely. We can't
+ 	 * have IO inflight if that happens.
+ 	 */
+-	blk_mq_freeze_queue(q);
+ 	blk_mq_quiesce_queue(q);
+ 
+ 	wbt_set_min_lat(q, val);
+ 
+ 	blk_mq_unquiesce_queue(q);
+-	blk_mq_unfreeze_queue(q);
+ 
+ 	return count;
+ }
+@@ -722,9 +715,11 @@ queue_attr_store(struct kobject *kobj, struct attribute *attr,
+ 	if (!entry->store)
+ 		return -EIO;
+ 
++	blk_mq_freeze_queue(q);
+ 	mutex_lock(&q->sysfs_lock);
+ 	res = entry->store(q, page, length);
+ 	mutex_unlock(&q->sysfs_lock);
++	blk_mq_unfreeze_queue(q);
+ 	return res;
  }
  
--static void xlvbd_flush(struct blkfront_info *info)
--{
--	blk_queue_write_cache(info->rq, info->feature_flush ? true : false,
--			      info->feature_fua ? true : false);
--	pr_info("blkfront: %s: %s %s %s %s %s %s %s\n",
--		info->gd->disk_name, flush_info(info),
--		"persistent grants:", info->feature_persistent ?
--		"enabled;" : "disabled;", "indirect descriptors:",
--		info->max_indirect_segments ? "enabled;" : "disabled;",
--		"bounce buffer:", info->bounce ? "enabled" : "disabled;");
--}
--
- static int xen_translate_vdev(int vdevice, int *minor, unsigned int *offset)
- {
- 	int major;
-@@ -1162,7 +1150,15 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 	info->sector_size = sector_size;
- 	info->physical_sector_size = physical_sector_size;
- 
--	xlvbd_flush(info);
-+	blk_queue_write_cache(info->rq, info->feature_flush ? true : false,
-+			      info->feature_fua ? true : false);
-+
-+	pr_info("blkfront: %s: %s %s %s %s %s %s %s\n",
-+		info->gd->disk_name, flush_info(info),
-+		"persistent grants:", info->feature_persistent ?
-+		"enabled;" : "disabled;", "indirect descriptors:",
-+		info->max_indirect_segments ? "enabled;" : "disabled;",
-+		"bounce buffer:", info->bounce ? "enabled" : "disabled;");
- 
- 	if (info->vdisk_info & VDISK_READONLY)
- 		set_disk_ro(gd, 1);
-@@ -1622,13 +1618,6 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 				       info->gd->disk_name, op_name(bret.operation));
- 				blkif_req(req)->error = BLK_STS_NOTSUPP;
- 			}
--			if (unlikely(blkif_req(req)->error)) {
--				if (blkif_req(req)->error == BLK_STS_NOTSUPP)
--					blkif_req(req)->error = BLK_STS_OK;
--				info->feature_fua = 0;
--				info->feature_flush = 0;
--				xlvbd_flush(info);
--			}
- 			fallthrough;
- 		case BLKIF_OP_READ:
- 		case BLKIF_OP_WRITE:
 -- 
 2.43.0
 
