@@ -1,56 +1,56 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C375903143
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 07:36:21 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4418F903147
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 07:36:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 4A8F120580; Tue, 11 Jun 2024 05:36:21 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 05:36:21 2024
+	id 313FD205DE; Tue, 11 Jun 2024 05:36:44 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 05:36:44 2024
 Old-Return-Path: <BATV+2fedbe304aabaf399917+7597+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FOURLA,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=0.7 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
 	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 788F7205DE
+	by bendel.debian.org (Postfix) with ESMTP id D61FB20589
 	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 05:20:05 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.061 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.161 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_EF=-0.1, FOURLA=0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+	DKIM_VALID_EF=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
 	RCVD_IN_DNSWL_MED=-2.3, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id bSX0XNcw0M2i for <lists-other-nbd@bendel.debian.org>;
+	with ESMTP id IiV3FCgHYscW for <lists-other-nbd@bendel.debian.org>;
 	Tue, 11 Jun 2024 05:19:59 +0000 (UTC)
 X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_FROM_MX=-3.1; rate: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 653522057A
+	by bendel.debian.org (Postfix) with ESMTPS id 644B42056A
 	for <nbd@other.debian.org>; Tue, 11 Jun 2024 05:19:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=lvXE5gTUk5P3TVKgX5q5Q8J1/DjEMwO75JeCg7ieY7s=; b=rUA9ZaXUx5MpyhS2j5LBHsyXxQ
-	KbTuAJUR1haH+9S1m8G4GZVBD1g7bx2ayPONElMYjcxYJ0QDJPl5o5zOp4k78Qgw0XyFdjZCPo5wp
-	vIgPX59oPcfHLDliRB8Y+Bi/vjpbtw2V1cwzkbepDA/QzMJIwAsmVAdMFC3UF8wgtmukkiprCLdOG
-	RnSyiCv+Mvh3ga6qyL+ash+wP6WvC9+JDwisvTf85QvcZuGjp66L5kSvkUkgxcMfJHjnZZ91k2qO0
-	ThG6qMn0y6iW42CQt05TqF0tEm3cI9aOk07AkgbKRZMt1CIdlg2QNDBGCgPEgHOzn7Iuc8T8ztdEX
-	0c6zkTmg==;
+	bh=LgTI+Mo1pVMP7QW3HpPljhgNIGtSuvGjjqfKNfk6Ue4=; b=T7BSPgV/QyrrcIKlwpgJzxhidX
+	awUsR5pwkW2Y+/MUO52qBbxgexFKnN5lOA2j2FyQhx+MMPXFJnlBRAC7Q73t7WcP8+sz5LnII/s8t
+	WjAaWbWnPNl4wwIf+gxy+iK9/rbGDSyhdks8mhXL++xpcrKaIympBw3/ZuRB6sO340tcY+E4rtfwn
+	TwEEHtQ3MRsu599usMYpH5vHlE7O6axb/guHQvsshFZgotq4wxafrcixMXnVqL150iG8TowKDlHNj
+	v336ivp7VUra5eU9XwMH15s+LohPlgy69vq7IBuXhmdR6+Ce7ImdHMsb7gj8BK/MgQUeBNe8bpumT
+	UBRUvVrQ==;
 Received: from 2a02-8389-2341-5b80-cdb4-8e7d-405d-6b77.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:cdb4:8e7d:405d:6b77] helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1sGtux-00000007Qnu-0nLE;
-	Tue, 11 Jun 2024 05:19:35 +0000
+	id 1sGtuz-00000007Qo9-2Hoe;
+	Tue, 11 Jun 2024 05:19:37 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -88,9 +88,9 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org
-Subject: [PATCH 01/26] sd: fix sd_is_zoned
-Date: Tue, 11 Jun 2024 07:19:01 +0200
-Message-ID: <20240611051929.513387-2-hch@lst.de>
+Subject: [PATCH 02/26] sd: move zone limits setup out of sd_read_block_characteristics
+Date: Tue, 11 Jun 2024 07:19:02 +0200
+Message-ID: <20240611051929.513387-3-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611051929.513387-1-hch@lst.de>
 References: <20240611051929.513387-1-hch@lst.de>
@@ -100,9 +100,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <LnroIPNW89K.A.lUTJ.VJ-ZmB@bendel>
+Resent-Message-ID: <17dycEzmYjP.A.yaTJ.sJ-ZmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2892
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2894
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -112,56 +112,75 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240611051929.513387-2-hch@lst.de
-Resent-Date: Tue, 11 Jun 2024 05:36:21 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240611051929.513387-3-hch@lst.de
+Resent-Date: Tue, 11 Jun 2024 05:36:44 +0000 (UTC)
 
-Since commit 7437bb73f087 ("block: remove support for the host aware zone
-model"), only ZBC devices expose a zoned access model.  sd_is_zoned is
-used to check for that and thus return false for host aware devices.
+Move a bit of code that sets up the zone flag and the write granularity
+into sd_zbc_read_zones to be with the rest of the zoned limits.
 
-Fixes: 7437bb73f087 ("block: remove support for the host aware zone model")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/scsi/sd.h     | 7 ++++++-
- drivers/scsi/sd_zbc.c | 7 +------
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/scsi/sd.c     | 21 +--------------------
+ drivers/scsi/sd_zbc.c | 13 ++++++++++++-
+ 2 files changed, 13 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/scsi/sd.h b/drivers/scsi/sd.h
-index 726f1613f6cb56..65dff3c2108926 100644
---- a/drivers/scsi/sd.h
-+++ b/drivers/scsi/sd.h
-@@ -222,9 +222,14 @@ static inline sector_t sectors_to_logical(struct scsi_device *sdev, sector_t sec
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 85b45345a27739..5bfed61c70db8f 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -3308,29 +3308,10 @@ static void sd_read_block_characteristics(struct scsi_disk *sdkp,
+ 		blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, q);
+ 	}
  
- void sd_dif_config_host(struct scsi_disk *sdkp, struct queue_limits *lim);
+-
+-#ifdef CONFIG_BLK_DEV_ZONED /* sd_probe rejects ZBD devices early otherwise */
+-	if (sdkp->device->type == TYPE_ZBC) {
+-		lim->zoned = true;
+-
+-		/*
+-		 * Per ZBC and ZAC specifications, writes in sequential write
+-		 * required zones of host-managed devices must be aligned to
+-		 * the device physical block size.
+-		 */
+-		lim->zone_write_granularity = sdkp->physical_block_size;
+-	} else {
+-		/*
+-		 * Host-aware devices are treated as conventional.
+-		 */
+-		lim->zoned = false;
+-	}
+-#endif /* CONFIG_BLK_DEV_ZONED */
+-
+ 	if (!sdkp->first_scan)
+ 		return;
  
-+/*
-+ * Check if we support a zoned model for this device.
-+ *
-+ * Note that host aware devices are treated as conventional by Linux.
-+ */
- static inline int sd_is_zoned(struct scsi_disk *sdkp)
- {
--	return sdkp->zoned == 1 || sdkp->device->type == TYPE_ZBC;
-+	return sdkp->device->type == TYPE_ZBC;
- }
- 
- #ifdef CONFIG_BLK_DEV_ZONED
+-	if (lim->zoned)
++	if (sdkp->device->type == TYPE_ZBC)
+ 		sd_printk(KERN_NOTICE, sdkp, "Host-managed zoned block device\n");
+ 	else if (sdkp->zoned == 1)
+ 		sd_printk(KERN_NOTICE, sdkp, "Host-aware SMR disk used as regular disk\n");
 diff --git a/drivers/scsi/sd_zbc.c b/drivers/scsi/sd_zbc.c
-index f685838d9ed214..422eaed8457227 100644
+index 422eaed8457227..e9501db0450be3 100644
 --- a/drivers/scsi/sd_zbc.c
 +++ b/drivers/scsi/sd_zbc.c
-@@ -598,13 +598,8 @@ int sd_zbc_read_zones(struct scsi_disk *sdkp, struct queue_limits *lim,
+@@ -598,8 +598,19 @@ int sd_zbc_read_zones(struct scsi_disk *sdkp, struct queue_limits *lim,
  	u32 zone_blocks = 0;
  	int ret;
  
--	if (!sd_is_zoned(sdkp)) {
--		/*
--		 * Device managed or normal SCSI disk, no special handling
--		 * required.
--		 */
-+	if (!sd_is_zoned(sdkp))
+-	if (!sd_is_zoned(sdkp))
++	if (!sd_is_zoned(sdkp)) {
++		lim->zoned = false;
  		return 0;
--	}
++	}
++
++	lim->zoned = true;
++
++	/*
++	 * Per ZBC and ZAC specifications, writes in sequential write required
++	 * zones of host-managed devices must be aligned to the device physical
++	 * block size.
++	 */
++	lim->zone_write_granularity = sdkp->physical_block_size;
  
  	/* READ16/WRITE16/SYNC16 is mandatory for ZBC devices */
  	sdkp->device->use_16_for_rw = 1;
