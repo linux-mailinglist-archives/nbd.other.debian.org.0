@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EEB59033D6
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 09:36:21 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1848A903403
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 09:42:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 6AB4720673; Tue, 11 Jun 2024 07:36:21 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 07:36:21 2024
+	id B470A20675; Tue, 11 Jun 2024 07:42:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 07:42:09 2024
 Old-Return-Path: <dlemoal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=0.3 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 17DAF20662
-	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 07:21:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 258B720669
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 07:25:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.411 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
@@ -28,32 +28,32 @@ X-Amavis-Spam-Status: No, score=-1.411 tagged_above=-10000 required=5.3
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id B-H6XkPld8Z4 for <lists-other-nbd@bendel.debian.org>;
-	Tue, 11 Jun 2024 07:21:06 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+	with ESMTP id maTmR1Kbu0z0 for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 Jun 2024 07:25:31 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .sin.source.kernel. - helo-domain: .kernel.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E79112065B
-	for <nbd@other.debian.org>; Tue, 11 Jun 2024 07:21:05 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 77F5C20668
+	for <nbd@other.debian.org>; Tue, 11 Jun 2024 07:25:30 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 5EAFE60C76;
-	Tue, 11 Jun 2024 07:21:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B857C2BD10;
-	Tue, 11 Jun 2024 07:20:55 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id B2D1CCE19E4;
+	Tue, 11 Jun 2024 07:25:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80F46C2BD10;
+	Tue, 11 Jun 2024 07:25:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718090461;
-	bh=SxGiXC2eXjeuicvqjgmxBbbuRkQDAALVXqGltltCvpM=;
+	s=k20201202; t=1718090724;
+	bh=SKDzpdZjTAHkWp+zsEQwH6Ky8PVIUSEQggaioawXXkU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=J9t/JghW0gR/ETwdzjpl7VD7KnwAlMW8rRhwZr9kxWhQ6tl8Phg9WjO76NiKxxgu8
-	 fLxeqF9M5t6BVVC5kK/sKL3zR1K2qLPoyVha6i0EJluUzp1kNJ5g2TNKh8g+EJPN33
-	 hrljcXVnUuN8Lr5KlIujiAJZzEJDuCsFcPLl3jPutPmhKf9R0GeNiPNem29bg2OBO7
-	 a1cFWzw0qNt9DSnc6yLqLEresNea8LBs8q7/++QEaUosyu+AjkSi/+C9VElPN9n7PP
-	 XlPsIxsXYvBqYod+WVUBRRvW1FiyVSTv+Mlz8E7DodnwczmTJdbU3tnt32fP5VZhAs
-	 3tDYxoJTsEL7w==
-Message-ID: <6bf90562-0ff9-46b6-8a58-7381332e3beb@kernel.org>
-Date: Tue, 11 Jun 2024 16:20:54 +0900
+	b=UCtiHiiw5QvJYmElyhHUIvI9qZN2kq7wHApTDMzEobrX5tFMllUF7QgwTYv0VDSQe
+	 4AvJZ9Xc1WQTZynkZ5eqZVN35p41xaFCgmlC7UMaLIvvCM36uO+T8E3D8B2kWkrwrw
+	 CxnQ5rfAOwcQk9F3stXF5NyYVqFnlDWOGrsxEQrWt2LCiqL+fvPkUXoNp9aPDrZKK/
+	 Jf1WpJR5Tfo8C4kN4+IDjAFgA3wv+/TYcPyqih/c85wJGX2v2SpjxCABdfzaKWUWw8
+	 mwFNFCAMG5oIrZT1WMKm7NaX1XpI2tHzzzRuvurRNs7Kd2xxeNWyHz9cxkpcbZ5fhc
+	 X7SraO1QML8XQ==
+Message-ID: <92df5033-5df7-4b2a-98ad-a27f8443ee6a@kernel.org>
+Date: Tue, 11 Jun 2024 16:25:18 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 02/26] sd: move zone limits setup out of
@@ -83,19 +83,19 @@ Cc: Jens Axboe <axboe@kernel.dk>, Geert Uytterhoeven <geert@linux-m68k.org>,
 References: <20240611051929.513387-1-hch@lst.de>
  <20240611051929.513387-3-hch@lst.de>
  <40ca8052-6ac1-4c1b-8c39-b0a7948839f8@kernel.org>
- <20240611055239.GA3141@lst.de>
+ <20240611055239.GA3141@lst.de> <20240611055405.GA3256@lst.de>
 Content-Language: en-US
 From: Damien Le Moal <dlemoal@kernel.org>
 Organization: Western Digital Research
-In-Reply-To: <20240611055239.GA3141@lst.de>
+In-Reply-To: <20240611055405.GA3256@lst.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <9aOkbdMUc-.A.TGON.15_ZmB@bendel>
+Resent-Message-ID: <f7_Z-yVkzwF.A.2aQN.R__ZmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2931
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2932
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -105,29 +105,23 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6bf90562-0ff9-46b6-8a58-7381332e3beb@kernel.org
-Resent-Date: Tue, 11 Jun 2024 07:36:21 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/92df5033-5df7-4b2a-98ad-a27f8443ee6a@kernel.org
+Resent-Date: Tue, 11 Jun 2024 07:42:09 +0000 (UTC)
 
-On 6/11/24 2:52 PM, Christoph Hellwig wrote:
-> On Tue, Jun 11, 2024 at 02:51:24PM +0900, Damien Le Moal wrote:
->>> -	if (lim->zoned)
->>> +	if (sdkp->device->type == TYPE_ZBC)
+On 6/11/24 2:54 PM, Christoph Hellwig wrote:
+> On Tue, Jun 11, 2024 at 07:52:39AM +0200, Christoph Hellwig wrote:
+>>> Maybe we should clear the other zone related limits here ? If the drive is
+>>> reformatted/converted from SMR to CMR (FORMAT WITH PRESET), the other zone
+>>> limits may be set already, no ?
 >>
->> Nit: use sd_is_zoned() here ?
+>> blk_validate_zoned_limits already takes care of that.
 > 
-> Yes.
-> 
->>> -	if (!sd_is_zoned(sdkp))
->>> +	if (!sd_is_zoned(sdkp)) {
->>> +		lim->zoned = false;
->>
->> Maybe we should clear the other zone related limits here ? If the drive is
->> reformatted/converted from SMR to CMR (FORMAT WITH PRESET), the other zone
->> limits may be set already, no ?
-> 
-> blk_validate_zoned_limits already takes care of that.
+> Sorry, brainfart.  The integrity code does that, but not the zoned
+> code.  I suspect the core code might be a better place for it,
+> though.
 
-I do not think it does:
+Yes. Just replied to your previous email before seeing this one.
+I think that:
 
 static int blk_validate_zoned_limits(struct queue_limits *lim)
 {
@@ -141,8 +135,23 @@ static int blk_validate_zoned_limits(struct queue_limits *lim)
         }
 	...
 
-So setting lim->zoned to false without clearing the other limits potentially
-will trigger warnings...
+could be changed into:
+
+static int blk_validate_zoned_limits(struct queue_limits *lim)
+{
+	if (!lim->zoned) {
+                lim->max_open_zones = 0;
+		lim->max_active_zones = 0;
+		lim->zone_write_granularity = 0;
+		lim->max_zone_append_sectors = 0
+		return 0;
+	}
+
+But then we would not see "bad" drivers. Could have a small
+
+blk_clear_zoned_limits(struct queue_limits *lim)
+
+helper too.
 
 -- 
 Damien Le Moal
