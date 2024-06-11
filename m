@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BA6E90451F
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 21:45:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 655D3904529
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 21:48:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0EF802069C; Tue, 11 Jun 2024 19:45:24 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 19:45:24 2024
+	id 2498B20674; Tue, 11 Jun 2024 19:48:19 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 19:48:11 2024
 Old-Return-Path: <bvanassche@acm.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: *
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=2.0 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 2DCA72067A
-	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 19:29:16 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 59B172067A
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 19:31:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=0.09 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -26,47 +26,47 @@ X-Amavis-Spam-Status: No, score=0.09 tagged_above=-10000 required=5.3
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id GNVljEJyHhVG for <lists-other-nbd@bendel.debian.org>;
-	Tue, 11 Jun 2024 19:29:12 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_MX=-3.1 (check from: .acm. - helo: .008.lax.mailroute. - helo-domain: .mailroute.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -6.6
-Received: from 008.lax.mailroute.net (008.lax.mailroute.net [199.89.1.11])
+	with ESMTP id JhZYDZUJDC0m for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 Jun 2024 19:31:44 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -6.6
+Received: from 009.lax.mailroute.net (009.lax.mailroute.net [199.89.1.12])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "mailroute.net", Issuer "R3" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id E754E20677
-	for <nbd@other.debian.org>; Tue, 11 Jun 2024 19:29:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 0168A20677
+	for <nbd@other.debian.org>; Tue, 11 Jun 2024 19:31:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by 008.lax.mailroute.net (Postfix) with ESMTP id 4VzJdH4SBmz6CmSMs;
-	Tue, 11 Jun 2024 19:29:07 +0000 (UTC)
+	by 009.lax.mailroute.net (Postfix) with ESMTP id 4VzJhC6RZtzlgMVP;
+	Tue, 11 Jun 2024 19:31:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
 	content-transfer-encoding:content-type:content-type:in-reply-to
 	:from:from:content-language:references:subject:subject
 	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1718134137; x=1720726138; bh=oG6oPhBgt1YU+3jZs6S1n+VS
-	Zh2oZl9u1VSlv448PeE=; b=Oaqg2I3+YXy1J0fPjxkC83856qeFGY4vdRjp9Qxa
-	+wJkULGln3djEGax1PdSGiMNRvHdhe9zcgKixqUsGvW/jmJutoRu16UQwdaDHriC
-	OWpW8VcZGkZ3HaBLVdmiIThIeHIstXHbEFA2s8IvfnGumvvdzyOzyjekQ8PtqMht
-	tc/Cm4NZMpZWX1ohKOFJv4ViPSVr2Wyaq1nq8MXu+VI/Wbij9MCLD6SSveQUOj+n
-	YMojTei3bCPalW8xv1DDlQMCQRyqpz8at3LNToLtEddZ3uBLR/OfbGYFrnGZBNmB
-	qMDz26SxddNWTGEqhUGD1F/cvKoCXD3FCgJCiUxU5DlHjg==
+	 s=mr01; t=1718134291; x=1720726292; bh=Cf7GcJGKcu7D5BiBoZvRx6x3
+	LTfH72Sz+jyW+IP4PGw=; b=d+QkU/8VZ6Dq+WOkUNTA34lPXUILl3LVbu6kO4uj
+	dRf9ZLceTOdlVMVrbZoxWEf4u5ywVZd7xmS7z7Qu9fGFq3c09JpTwe9Izw4JtWWY
+	tHhkQiq7BjVQmgAeymktZWCjgXvLtR18TTk9AbAP5hLoxcQzO5YN29aNyMj+6U8N
+	mnLgDc3DfcoUZU+HIpoj33PjIC9sY+avSJ5HN8s208j4yIUXD3pm8VAHyLZOImgN
+	bjIvKsv7Fn1K4+4dykzuQT4iVGBagOEJKDZaAYW7tHizV3z3TzNCBZqR7MTEAs6D
+	ikorZXLPiNhCfCU2hPtZjpFb2ahQxj4wO1mOgHFaYmHiNQ==
 X-Virus-Scanned: by MailRoute
-Received: from 008.lax.mailroute.net ([127.0.0.1])
- by localhost (008.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id Y9txyge2gF45; Tue, 11 Jun 2024 19:28:57 +0000 (UTC)
+Received: from 009.lax.mailroute.net ([127.0.0.1])
+ by localhost (009.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id DQP8SoW0yS3G; Tue, 11 Jun 2024 19:31:31 +0000 (UTC)
 Received: from [100.96.154.26] (unknown [104.132.0.90])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: bvanassche@acm.org)
-	by 008.lax.mailroute.net (Postfix) with ESMTPSA id 4VzJcx1mXLz6Cnv3g;
-	Tue, 11 Jun 2024 19:28:48 +0000 (UTC)
-Message-ID: <3697d0ed-9567-4aa9-b006-e0715d3c1e9a@acm.org>
-Date: Tue, 11 Jun 2024 12:28:47 -0700
+	by 009.lax.mailroute.net (Postfix) with ESMTPSA id 4VzJgv1SgJzlgMVN;
+	Tue, 11 Jun 2024 19:31:22 +0000 (UTC)
+Message-ID: <8206c0cf-1787-4282-bcec-746d7c7f3880@acm.org>
+Date: Tue, 11 Jun 2024 12:31:21 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/26] loop: also use the default block size from an
- underlying block device
+Subject: Re: [PATCH 07/26] loop: fold loop_update_rotational into
+ loop_reconfigure_limits
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  Richard Weinberger <richard@nod.at>,
@@ -90,18 +90,18 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
  linux-scsi@vger.kernel.org, linux-block@vger.kernel.org
 References: <20240611051929.513387-1-hch@lst.de>
- <20240611051929.513387-7-hch@lst.de>
+ <20240611051929.513387-8-hch@lst.de>
 Content-Language: en-US
 From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <20240611051929.513387-7-hch@lst.de>
+In-Reply-To: <20240611051929.513387-8-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <GSQh-xz_JzC.A.ygFI.TlKamB@bendel>
+Resent-Message-ID: <7cHmjvaW00G.A.SbGI.6nKamB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2973
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2974
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -111,14 +111,13 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/3697d0ed-9567-4aa9-b006-e0715d3c1e9a@acm.org
-Resent-Date: Tue, 11 Jun 2024 19:45:24 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/8206c0cf-1787-4282-bcec-746d7c7f3880@acm.org
+Resent-Date: Tue, 11 Jun 2024 19:48:19 +0000 (UTC)
 
 On 6/10/24 10:19 PM, Christoph Hellwig wrote:
-> Fix the code in loop_reconfigure_limits to pick a default block size for
-> O_DIRECT file descriptors to also work when the loop device sits on top
-> of a block device and not just on a regular file on a block device based
-> file system.
+> This prepares for moving the rotational flag into the queue_limits and
+> also fixes it for the case where the loop device is backed by a block
+> device.
 
 Reviewed-by: Bart Van Assche <bvanassche@acm.org>
 
