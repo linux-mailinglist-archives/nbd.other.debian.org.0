@@ -2,62 +2,60 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45048903690
-	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 10:33:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBF5490367C
+	for <lists+nbd@lfdr.de>; Tue, 11 Jun 2024 10:30:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2A73A2069C; Tue, 11 Jun 2024 08:33:54 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 08:33:54 2024
-Old-Return-Path: <hare@suse.de>
+	id 7ACA320679; Tue, 11 Jun 2024 08:30:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 11 08:30:10 2024
+Old-Return-Path: <dlemoal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
-	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Status: No, score=0.2 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 6C6582068C
-	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 08:18:28 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6E1A62066E
+	for <lists-other-nbd@bendel.debian.org>; Tue, 11 Jun 2024 08:12:55 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.21 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, RCVD_IN_DNSWL_MED=-2.3,
+X-Amavis-Spam-Status: No, score=-1.511 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
+	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+	DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id eA_MZ7QTT49g for <lists-other-nbd@bendel.debian.org>;
-	Tue, 11 Jun 2024 08:18:23 +0000 (UTC)
+	with ESMTP id W1nrvMgfG65M for <lists-other-nbd@bendel.debian.org>;
+	Tue, 11 Jun 2024 08:12:50 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2a07:de40:b251:101:10:150:64:1])
+Received: from sin.source.kernel.org (sin.source.kernel.org [IPv6:2604:1380:40e1:4800::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 74A5F20688
-	for <nbd@other.debian.org>; Tue, 11 Jun 2024 08:18:23 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id F414222D0F;
-	Tue, 11 Jun 2024 08:12:14 +0000 (UTC)
-Authentication-Results: smtp-out1.suse.de;
-	none
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EBB43137DF;
-	Tue, 11 Jun 2024 08:12:13 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id VT1AN90GaGbKWQAAD6G6ig
-	(envelope-from <hare@suse.de>); Tue, 11 Jun 2024 08:12:13 +0000
-Message-ID: <4032635d-a17f-44e5-a547-b175fa271945@suse.de>
-Date: Tue, 11 Jun 2024 10:12:13 +0200
+	by bendel.debian.org (Postfix) with ESMTPS id 9B8282066B
+	for <nbd@other.debian.org>; Tue, 11 Jun 2024 08:12:50 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sin.source.kernel.org (Postfix) with ESMTP id 3E604CE0988;
+	Tue, 11 Jun 2024 08:12:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85352C2BD10;
+	Tue, 11 Jun 2024 08:12:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1718093565;
+	bh=zMBbLHWiI0o4/6MjscYA2/ULza201WjvhSMdL22ilmQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=efMUQjqzDR6/6LZgdCczIkMTU67PAqpDM0RBu6vBwxbRTCrqV/SLQPjysAgXVIH+u
+	 Gs7FwJjGTrCL01zQP92DMiL3AF1rQHaJ0EqlTORyNynpUYXTzsuY6sJ9mfoqPT1Tvg
+	 BSo7cvDW+fM7fvH1aN5LdfHWfYWXWuQSJiOAXVL+z2KUCiOWthz8XV9sMCo6FSpXv+
+	 2SHsDignO7grM22XDSxgAJ0znadsNiLDmWusigAzWpriOV5Y9jvSmQhMPwNSEb8Bvj
+	 SvInHsx54FSttIPvfIwG30ulL5P3X40mKZipSzOnWLUzNb0kOcJMR/irZgSdTd0fnE
+	 LJc4doaBwGC7g==
+Message-ID: <a10087ad-8b2c-4a6c-accb-fb1e8015e704@kernel.org>
+Date: Tue, 11 Jun 2024 17:12:40 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/26] sd: move zone limits setup out of
- sd_read_block_characteristics
+Subject: Re: [PATCH 17/26] block: move the stable_write flag to queue_limits
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  Richard Weinberger <richard@nod.at>,
@@ -81,29 +79,19 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
  linux-scsi@vger.kernel.org, linux-block@vger.kernel.org
 References: <20240611051929.513387-1-hch@lst.de>
- <20240611051929.513387-3-hch@lst.de>
+ <20240611051929.513387-18-hch@lst.de>
 Content-Language: en-US
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20240611051929.513387-3-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Rspamd-Queue-Id: F414222D0F
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Action: no action
+From: Damien Le Moal <dlemoal@kernel.org>
+Organization: Western Digital Research
+In-Reply-To: <20240611051929.513387-18-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <lzHqC9lvI6N.A.MXMO.yvAamB@bendel>
+Resent-Message-ID: <t-BknwFxRKL.A.b_JO.SsAamB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2948
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2942
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -113,60 +101,27 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/4032635d-a17f-44e5-a547-b175fa271945@suse.de
-Resent-Date: Tue, 11 Jun 2024 08:33:54 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/a10087ad-8b2c-4a6c-accb-fb1e8015e704@kernel.org
+Resent-Date: Tue, 11 Jun 2024 08:30:10 +0000 (UTC)
 
-On 6/11/24 07:19, Christoph Hellwig wrote:
-> Move a bit of code that sets up the zone flag and the write granularity
-> into sd_zbc_read_zones to be with the rest of the zoned limits.
+On 6/11/24 2:19 PM, Christoph Hellwig wrote:
+> Move the io_stat flag into the queue_limits feature field so that it can
+
+s/io_stat/stable_write
+
+> be set atomically and all I/O is frozen when changing the flag.
+> 
+> The flag is now inherited by blk_stack_limits, which greatly simplifies
+> the code in dm, and fixed md which previously did not pass on the flag
+> set on lower devices.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   drivers/scsi/sd.c     | 21 +--------------------
->   drivers/scsi/sd_zbc.c | 13 ++++++++++++-
->   2 files changed, 13 insertions(+), 21 deletions(-)
-> 
-> diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-> index 85b45345a27739..5bfed61c70db8f 100644
-> --- a/drivers/scsi/sd.c
-> +++ b/drivers/scsi/sd.c
-> @@ -3308,29 +3308,10 @@ static void sd_read_block_characteristics(struct scsi_disk *sdkp,
->   		blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, q);
->   	}
->   
-> -
-> -#ifdef CONFIG_BLK_DEV_ZONED /* sd_probe rejects ZBD devices early otherwise */
-> -	if (sdkp->device->type == TYPE_ZBC) {
-> -		lim->zoned = true;
-> -
-> -		/*
-> -		 * Per ZBC and ZAC specifications, writes in sequential write
-> -		 * required zones of host-managed devices must be aligned to
-> -		 * the device physical block size.
-> -		 */
-> -		lim->zone_write_granularity = sdkp->physical_block_size;
-> -	} else {
-> -		/*
-> -		 * Host-aware devices are treated as conventional.
-> -		 */
-> -		lim->zoned = false;
-> -	}
-> -#endif /* CONFIG_BLK_DEV_ZONED */
-> -
->   	if (!sdkp->first_scan)
->   		return;
->   
-> -	if (lim->zoned)
-> +	if (sdkp->device->type == TYPE_ZBC)
 
-Why not sd_is_zoned()?
+Other than the nit above, looks OK to me.
 
-Cheers,
+Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 
-Hannes
 -- 
-Dr. Hannes Reinecke                  Kernel Storage Architect
-hare@suse.de                                +49 911 74053 688
-SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
-HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
+Damien Le Moal
+Western Digital Research
 
