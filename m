@@ -2,39 +2,39 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00FED904A8A
-	for <lists+nbd@lfdr.de>; Wed, 12 Jun 2024 07:03:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A096E904A9B
+	for <lists+nbd@lfdr.de>; Wed, 12 Jun 2024 07:06:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D37BE206A5; Wed, 12 Jun 2024 05:03:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun 12 05:03:09 2024
+	id 78F4A2070D; Wed, 12 Jun 2024 05:06:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun 12 05:06:14 2024
 Old-Return-Path: <hch@lst.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.1 required=4.0 tests=CC_TOO_MANY,FOURLA,
+X-Spam-Level: **
+X-Spam-Status: No, score=3.0 required=4.0 tests=CC_TOO_MANY,
 	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A6B5A2070D
-	for <lists-other-nbd@bendel.debian.org>; Wed, 12 Jun 2024 04:46:11 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 29EA7206FA
+	for <lists-other-nbd@bendel.debian.org>; Wed, 12 Jun 2024 04:50:38 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.09 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1,
-	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.99 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, T_SCC_BODY_TEXT_LINE=-0.01]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 3xYvb-xwcp11 for <lists-other-nbd@bendel.debian.org>;
-	Wed, 12 Jun 2024 04:46:06 +0000 (UTC)
+	with ESMTP id SSvm_j2rwGtu for <lists-other-nbd@bendel.debian.org>;
+	Wed, 12 Jun 2024 04:50:32 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id BDA4F206F4
-	for <nbd@other.debian.org>; Wed, 12 Jun 2024 04:46:06 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id DB22A206F5
+	for <nbd@other.debian.org>; Wed, 12 Jun 2024 04:50:32 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
-	id 2B0FA68BEB; Wed, 12 Jun 2024 06:45:59 +0200 (CEST)
-Date: Wed, 12 Jun 2024 06:45:58 +0200
+	id 27E1B68BEB; Wed, 12 Jun 2024 06:50:27 +0200 (CEST)
+Date: Wed, 12 Jun 2024 06:50:26 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Damien Le Moal <dlemoal@kernel.org>
 Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
@@ -61,21 +61,21 @@ Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
 	linux-mtd@lists.infradead.org, nvdimm@lists.linux.dev,
 	linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org, linux-block@vger.kernel.org
-Subject: Re: [PATCH 02/26] sd: move zone limits setup out of
- sd_read_block_characteristics
-Message-ID: <20240612044558.GA26468@lst.de>
-References: <20240611051929.513387-1-hch@lst.de> <20240611051929.513387-3-hch@lst.de> <40ca8052-6ac1-4c1b-8c39-b0a7948839f8@kernel.org>
+Subject: Re: [PATCH 10/26] xen-blkfront: don't disable cache flushes when
+ they fail
+Message-ID: <20240612045026.GA26653@lst.de>
+References: <20240611051929.513387-1-hch@lst.de> <20240611051929.513387-11-hch@lst.de> <fdfc024a-368a-4495-8b85-b5ab7741f6d4@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <40ca8052-6ac1-4c1b-8c39-b0a7948839f8@kernel.org>
+In-Reply-To: <fdfc024a-368a-4495-8b85-b5ab7741f6d4@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <tGO13ssFCZL.A.H76O.NwSamB@bendel>
+Resent-Message-ID: <kSnskPessnP.A.dU7O.GzSamB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/2979
+X-Mailing-List: <nbd@other.debian.org> archive/latest/2980
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,21 +85,22 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240612044558.GA26468@lst.de
-Resent-Date: Wed, 12 Jun 2024 05:03:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240612045026.GA26653@lst.de
+Resent-Date: Wed, 12 Jun 2024 05:06:14 +0000 (UTC)
 
-On Tue, Jun 11, 2024 at 02:51:24PM +0900, Damien Le Moal wrote:
-> > -	if (!sd_is_zoned(sdkp))
-> > +	if (!sd_is_zoned(sdkp)) {
-> > +		lim->zoned = false;
+On Tue, Jun 11, 2024 at 04:30:39PM +0900, Damien Le Moal wrote:
+> On 6/11/24 2:19 PM, Christoph Hellwig wrote:
+> > blkfront always had a robust negotiation protocol for detecting a write
+> > cache.  Stop simply disabling cache flushes when they fail as that is
+> > a grave error.
+> > 
+> > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > 
-> Maybe we should clear the other zone related limits here ? If the drive is
-> reformatted/converted from SMR to CMR (FORMAT WITH PRESET), the other zone
-> limits may be set already, no ?
+> Looks good to me but maybe mention that removal of xlvbd_flush() as well ?
+> And it feels like the "stop disabling cache flushes when they fail" part should
+> be a fix patch sent separately...
 
-Yes, but we would not end up here.  The device type is constant over
-the struct of the scsi_device and we'd have to fully reprobe it.
-
-So we don't need to clear any flags, including the actual zoned flag
-here.
+I'll move the patch to the front of the series to get more attention from
+the maintainers, but otherwise the xlvbd_flush remova lis the really
+trivial part here.
 
