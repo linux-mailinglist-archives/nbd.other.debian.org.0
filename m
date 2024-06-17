@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C27B90AC59
-	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 12:57:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43C1490AC5C
+	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 12:57:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 1F8AB21225; Mon, 17 Jun 2024 10:57:21 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 10:57:21 2024
+	id 2757821227; Mon, 17 Jun 2024 10:57:32 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 10:57:32 2024
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=0.5 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7F5F9211DD
-	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 10:40:55 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 0BFD6211DD
+	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 10:41:32 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.41 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -27,74 +27,74 @@ X-Amavis-Spam-Status: No, score=-1.41 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id VmNzkhKiJJL2 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 17 Jun 2024 10:40:50 +0000 (UTC)
+	with ESMTP id CzSGsX_ILF-A for <lists-other-nbd@bendel.debian.org>;
+	Mon, 17 Jun 2024 10:41:27 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -5.5
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 861DE211D0
-	for <nbd@other.debian.org>; Mon, 17 Jun 2024 10:40:50 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 3067B211D0
+	for <nbd@other.debian.org>; Mon, 17 Jun 2024 10:41:27 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 502A33803D;
-	Mon, 17 Jun 2024 10:40:48 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id EDEFF3803D;
+	Mon, 17 Jun 2024 10:41:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1718620848; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1718620885; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YRZ+MD2RD7DoqN1zKcgy+HFLwesZ3pPlf+aKbLWxjwU=;
-	b=g6i+HE7UdDx9sU/po4lLP5ccgANLhcybh16BiI+67VqBuwRwDVonJPFzOMCDdBfpbCNKBC
-	MD1s1VKGcMU3aCdrY17XV1IfskxdUXEg0QjRAJZi8F4DBktSipA264j6zDbr9/7MInSii3
-	xnuF2R+5yQTsAoOY/MXu1e+Bwa+aCec=
+	bh=jgtG6m+m1FRqVquXEHPrn3wmZaPvf3OoaYY0kuxzjZY=;
+	b=IeFJAWsH75KCYIyv8/qhBGrl5836YIwBOLXQ3jGs9AGu4tCLccHXdaOiEmZNwYilYVnXvA
+	SRmfeAJG/mJlmng7doCTF2JrMj/j1v1AtSvyaeFMA6zC9Uo8Apn9VwECptdlpKPI1o/2oN
+	26YOZad+Gw/DJeftHbAa4kTM/y28MNI=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1718620848;
+	s=susede2_ed25519; t=1718620885;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YRZ+MD2RD7DoqN1zKcgy+HFLwesZ3pPlf+aKbLWxjwU=;
-	b=DC8Hya9o4RrY68KluA6Q1U2drYPRvGd5eOn0Qpqja/t1DhzewBZPUwXN8T5m7vch3lMroJ
-	rOjFgOFCF0RfD+BA==
+	bh=jgtG6m+m1FRqVquXEHPrn3wmZaPvf3OoaYY0kuxzjZY=;
+	b=uBuChXRm9UIyUB63kLl7vU6i6aEesxd1N6Ygk5vJm28e2KE/5WoIJeYPC8888eXD55Tt/v
+	dimXmhyYdWeO0iCQ==
 Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1718620848; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1718620884; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YRZ+MD2RD7DoqN1zKcgy+HFLwesZ3pPlf+aKbLWxjwU=;
-	b=g6i+HE7UdDx9sU/po4lLP5ccgANLhcybh16BiI+67VqBuwRwDVonJPFzOMCDdBfpbCNKBC
-	MD1s1VKGcMU3aCdrY17XV1IfskxdUXEg0QjRAJZi8F4DBktSipA264j6zDbr9/7MInSii3
-	xnuF2R+5yQTsAoOY/MXu1e+Bwa+aCec=
+	bh=jgtG6m+m1FRqVquXEHPrn3wmZaPvf3OoaYY0kuxzjZY=;
+	b=tk56hY7XbD+wgCVvAVC5TAAMNdWYTqZxaVADpw5mpu/Frmc+Y8zzf8x9gaIUWi7pHO5rjZ
+	Tm01WQr3GPaAKNEgrckaVdo8Qm+/hXaj53GmO1gpM2xNwupMPVgSsIQq7PJCLZa0lbR+XN
+	ddtS7T4F7YuLIEsh0v7LCAvj96Hq13s=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1718620848;
+	s=susede2_ed25519; t=1718620884;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YRZ+MD2RD7DoqN1zKcgy+HFLwesZ3pPlf+aKbLWxjwU=;
-	b=DC8Hya9o4RrY68KluA6Q1U2drYPRvGd5eOn0Qpqja/t1DhzewBZPUwXN8T5m7vch3lMroJ
-	rOjFgOFCF0RfD+BA==
+	bh=jgtG6m+m1FRqVquXEHPrn3wmZaPvf3OoaYY0kuxzjZY=;
+	b=uAuSy9hbCb4YbUBJdXvIQbCOSketcC7FumfbAwU1hmYHwd+Jx1h140JOgS5gMLtaFdjOqr
+	qYR/OoHcbBQkZAAA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 74D3713AAA;
-	Mon, 17 Jun 2024 10:40:47 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7B5A113AAA;
+	Mon, 17 Jun 2024 10:41:24 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id TLFtGK8ScGaFDQAAD6G6ig
-	(envelope-from <hare@suse.de>); Mon, 17 Jun 2024 10:40:47 +0000
-Message-ID: <82e013f1-9029-460d-8a71-a64fd8ee58d0@suse.de>
-Date: Mon, 17 Jun 2024 12:40:47 +0200
+	id 5susHdQScGauDQAAD6G6ig
+	(envelope-from <hare@suse.de>); Mon, 17 Jun 2024 10:41:24 +0000
+Message-ID: <24322288-fd9f-4f49-9a94-e2aaf97bb700@suse.de>
+Date: Mon, 17 Jun 2024 12:41:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/26] block: move the synchronous flag to queue_limits
+Subject: Re: [PATCH 19/26] block: move the nowait flag to queue_limits
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  Richard Weinberger <richard@nod.at>,
@@ -116,13 +116,12 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  linux-raid@vger.kernel.org, linux-mmc@vger.kernel.org,
  linux-mtd@lists.infradead.org, nvdimm@lists.linux.dev,
  linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-block@vger.kernel.org,
- Damien Le Moal <dlemoal@kernel.org>
+ linux-scsi@vger.kernel.org, linux-block@vger.kernel.org
 References: <20240617060532.127975-1-hch@lst.de>
- <20240617060532.127975-19-hch@lst.de>
+ <20240617060532.127975-20-hch@lst.de>
 Content-Language: en-US
 From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20240617060532.127975-19-hch@lst.de>
+In-Reply-To: <20240617060532.127975-20-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-8.29 / 50.00];
@@ -137,7 +136,7 @@ X-Spamd-Result: default: False [-8.29 / 50.00];
 	RCVD_TLS_ALL(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
+	RCPT_COUNT_TWELVE(0.00)[37];
 	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	FUZZY_BLOCKED(0.00)[rspamd.com];
@@ -150,9 +149,9 @@ X-Spamd-Result: default: False [-8.29 / 50.00];
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <4LZKFxwKE8I.A.NbGJ.RaBcmB@bendel>
+Resent-Message-ID: <vh8yqd9Xd7J.A.WdGJ.caBcmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3054
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3055
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -162,23 +161,28 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/82e013f1-9029-460d-8a71-a64fd8ee58d0@suse.de
-Resent-Date: Mon, 17 Jun 2024 10:57:21 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/24322288-fd9f-4f49-9a94-e2aaf97bb700@suse.de
+Resent-Date: Mon, 17 Jun 2024 10:57:32 +0000 (UTC)
 
 On 6/17/24 08:04, Christoph Hellwig wrote:
-> Move the synchronous flag into the queue_limits feature field so that it
-> can be set atomically with the queue frozen.
+> Move the nowait flag into the queue_limits feature field so that it can
+> be set atomically with the queue frozen.
+> 
+> Stacking drivers are simplified in that they now can simply set the
+> flag, and blk_stack_limits will clear it when the features is not
+> supported by any of the underlying devices.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 > ---
->   block/blk-mq-debugfs.c        | 1 -
->   drivers/block/brd.c           | 2 +-
->   drivers/block/zram/zram_drv.c | 4 ++--
->   drivers/nvdimm/btt.c          | 3 +--
->   drivers/nvdimm/pmem.c         | 4 ++--
->   include/linux/blkdev.h        | 7 ++++---
->   6 files changed, 10 insertions(+), 11 deletions(-)
+>   block/blk-mq-debugfs.c        |  1 -
+>   block/blk-mq.c                |  2 +-
+>   block/blk-settings.c          |  9 +++++++++
+>   drivers/block/brd.c           |  4 ++--
+>   drivers/md/dm-table.c         | 18 +++---------------
+>   drivers/md/md.c               | 18 +-----------------
+>   drivers/nvme/host/multipath.c |  3 +--
+>   include/linux/blkdev.h        |  9 +++++----
+>   8 files changed, 22 insertions(+), 42 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
