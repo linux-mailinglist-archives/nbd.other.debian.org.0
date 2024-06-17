@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4839C90A5D1
-	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 08:30:34 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56C9290A60A
+	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 08:39:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2C2C52120E; Mon, 17 Jun 2024 06:30:34 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 06:30:34 2024
+	id 2429421200; Mon, 17 Jun 2024 06:39:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 06:39:10 2024
 Old-Return-Path: <dlemoal@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -17,8 +17,8 @@ X-Spam-Status: No, score=0.2 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 23AAE21188
-	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 06:14:33 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id D5B44211E8
+	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 06:23:43 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.511 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
@@ -27,36 +27,36 @@ X-Amavis-Spam-Status: No, score=-1.511 tagged_above=-10000 required=5.3
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id hgyJiK0rmpud for <lists-other-nbd@bendel.debian.org>;
-	Mon, 17 Jun 2024 06:14:30 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+	with ESMTP id ftlTSprrKO5K for <lists-other-nbd@bendel.debian.org>;
+	Mon, 17 Jun 2024 06:23:38 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from sin.source.kernel.org (sin.source.kernel.org [IPv6:2604:1380:40e1:4800::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 4BF322117C
-	for <nbd@other.debian.org>; Mon, 17 Jun 2024 06:14:30 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id EA5EC211E5
+	for <nbd@other.debian.org>; Mon, 17 Jun 2024 06:23:37 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id E064A61127;
-	Mon, 17 Jun 2024 06:14:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAD93C2BD10;
-	Mon, 17 Jun 2024 06:14:21 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id 93B9FCE0FF0;
+	Mon, 17 Jun 2024 06:23:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B0EEC4AF1D;
+	Mon, 17 Jun 2024 06:23:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718604866;
-	bh=0lJUnETFqPY6tW6TrXFvmKZbVynd6dSdhAW9BC6m+kE=;
+	s=k20201202; t=1718605412;
+	bh=uMvSBiMCv5pxii/WRMe23vNNUZcfAqUN7YYlV2bv5Ko=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=KOFdmVOJ7h8N9C7m0i5IH5j0T08893gjt00viGEXx0ITrjnEVSc7/n9x0PQNWhoCT
-	 R0G81HXchAoQj63QO9zRTuNrWvr+9t+JPXFgDrlIxVtX306FULncwLvEYKw7dkrJFz
-	 S6g5cy4QX7ofX49F8f+GhBjuuHoOe+F7NO0rxdIU4Xo0KJqwPt8S0uxmuFJz89cUcE
-	 b/qPpB1pTQXoj1rhBApU3rTIJGnWH/qdRZJ9WOKQ+vU7PAj3CbnFFbcYvIj/VggV6B
-	 QjSaWBl2euqvrvUDeNk514rvS2oC47UJWpHbvgG7uFw1q8j7/c3YYf4Afd7F+Ekvnv
-	 W3vwVHRQv5iRw==
-Message-ID: <d7b45e0b-68a9-4612-861a-7f192fbe6f84@kernel.org>
-Date: Mon, 17 Jun 2024 15:14:21 +0900
+	b=BLJEJwmMsCdQfpgeuSDFFhnTeYFrqXQ3GLsKdxLZUdhrqVCdlccETSs3reVgf76Rb
+	 4NtHvzGyiVxgePozGjF6t5kslEhri7LHZl0DvN4BR4smuIdi3fWqPb/I1vVcfCYeYi
+	 fiVbKgy6qBR19yAJJ+QQiLpd0oScLx6sTzGkD0QZlko71H6Yz0ku2d3RgXA7QaUtXr
+	 GCCeiq+Ax8cIg0E+JxaozXjwtykL41yfJ3EoBVzh7JOK3qIJv+ADxMbH5/c2pw1ot4
+	 Uz1JoQGCWSohEy6+TWZP70VoRi8sStV1FCojepppq975Nhv9oB4B67NtvIDhRuNUUc
+	 t0DawHP78ZCMQ==
+Message-ID: <3247433c-b356-425c-a888-8f7904351a2f@kernel.org>
+Date: Mon, 17 Jun 2024 15:23:27 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/26] loop: also use the default block size from an
- underlying block device
+Subject: Re: [PATCH 13/26] block: move cache control settings out of
+ queue->flags
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  Richard Weinberger <richard@nod.at>,
@@ -79,21 +79,21 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  linux-mtd@lists.infradead.org, nvdimm@lists.linux.dev,
  linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
  linux-scsi@vger.kernel.org, linux-block@vger.kernel.org,
- Hannes Reinecke <hare@suse.de>, Bart Van Assche <bvanassche@acm.org>
+ Ulf Hansson <ulf.hansson@linaro.org>
 References: <20240617060532.127975-1-hch@lst.de>
- <20240617060532.127975-8-hch@lst.de>
+ <20240617060532.127975-14-hch@lst.de>
 From: Damien Le Moal <dlemoal@kernel.org>
 Content-Language: en-US
 Organization: Western Digital Research
-In-Reply-To: <20240617060532.127975-8-hch@lst.de>
+In-Reply-To: <20240617060532.127975-14-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <pemPVMXOYGO.A.8ZbD.Kg9bmB@bendel>
+Resent-Message-ID: <2xKb7BJTRiE.A.EifD.Oo9bmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3042
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3043
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -103,20 +103,57 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/d7b45e0b-68a9-4612-861a-7f192fbe6f84@kernel.org
-Resent-Date: Mon, 17 Jun 2024 06:30:34 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/3247433c-b356-425c-a888-8f7904351a2f@kernel.org
+Resent-Date: Mon, 17 Jun 2024 06:39:10 +0000 (UTC)
 
 On 6/17/24 15:04, Christoph Hellwig wrote:
-> Fix the code in loop_reconfigure_limits to pick a default block size for
-> O_DIRECT file descriptors to also work when the loop device sits on top
-> of a block device and not just on a regular file on a block device based
-> file system.
+> Move the cache control settings into the queue_limits so that the flags
+> can be set atomically with the device queue frozen.
+> 
+> Add new features and flags field for the driver set flags, and internal
+> (usually sysfs-controlled) flags in the block layer.  Note that we'll
+> eventually remove enough field from queue_limits to bring it back to the
+> previous size.
+> 
+> The disable flag is inverted compared to the previous meaning, which
+> means it now survives a rescan, similar to the max_sectors and
+> max_discard_sectors user limits.
+> 
+> The FLUSH and FUA flags are now inherited by blk_stack_limits, which
+> simplified the code in dm a lot, but also causes a slight behavior
+> change in that dm-switch and dm-unstripe now advertise a write cache
+> despite setting num_flush_bios to 0.  The I/O path will handle this
+> gracefully, but as far as I can tell the lack of num_flush_bios
+> and thus flush support is a pre-existing data integrity bug in those
+> targets that really needs fixing, after which a non-zero num_flush_bios
+> should be required in dm for targets that map to underlying devices.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> Reviewed-by: Hannes Reinecke <hare@suse.de>
-> Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+> Acked-by: Ulf Hansson <ulf.hansson@linaro.org> [mmc]
+
+A few nits below. With these fixed,
 
 Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+
+> +Implementation details for bio based block drivers
+> +--------------------------------------------------
+> +
+> +For bio based drivers the REQ_PREFLUSH and REQ_FUA bit are simplify passed on
+
+...bit are simplify... -> ...bits are simply...
+
+> +to the driver if the drivers sets the BLK_FEAT_WRITE_CACHE flag and the drivers
+> +needs to handle them.
+
+s/drivers/driver (2 times)
+
+> -and the driver must handle write requests that have the REQ_FUA bit set
+> -in prep_fn/request_fn.  If the FUA bit is not natively supported the block
+> -layer turns it into an empty REQ_OP_FLUSH request after the actual write.
+> +When the BLK_FEAT_FUA flags is set, the REQ_FUA bit simplify passed on for the
+
+s/bit simplify/bit is simply
+
 
 -- 
 Damien Le Moal
