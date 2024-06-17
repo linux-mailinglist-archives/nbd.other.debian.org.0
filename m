@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DEDF90A562
-	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 08:22:54 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0CA890A563
+	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 08:23:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 603F6211E6; Mon, 17 Jun 2024 06:22:54 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 06:22:54 2024
+	id D545020AC5; Mon, 17 Jun 2024 06:23:05 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 06:23:05 2024
 Old-Return-Path: <BATV+625ba2f6da96caf54eae+7603+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=0.7 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C7D6321184
-	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 06:06:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2F6ED21184
+	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 06:06:25 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-1.161 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
@@ -28,29 +28,29 @@ X-Amavis-Spam-Status: No, score=-1.161 tagged_above=-10000 required=5.3
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id zVJ3zItpRsFW for <lists-other-nbd@bendel.debian.org>;
-	Mon, 17 Jun 2024 06:06:18 +0000 (UTC)
+	with ESMTP id 9ILT3ugdr3SB for <lists-other-nbd@bendel.debian.org>;
+	Mon, 17 Jun 2024 06:06:21 +0000 (UTC)
 X-policyd-weight: using cached result; rate:hard: -4.6
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 063DF21188
-	for <nbd@other.debian.org>; Mon, 17 Jun 2024 06:06:18 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id D641D21188
+	for <nbd@other.debian.org>; Mon, 17 Jun 2024 06:06:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=jO/BbvgdYshCVZegwApTYZew4tnox1zjQOC4cbYeSu8=; b=aj7ZQCaJ/Dw/+h4IVcq1v/5m21
-	sd6Y2Jb9o7hr0/IPKveOSVb06koCuObSZOOJJS6BaHZrJMVlgKKzavHrMLF/sMnjznKhVuicLMLke
-	v9g+0MseSnUCixJ8sOmO6tut3X5QCQCkwOdnVaTVM0xP9Q8KYLnN68GkSujOXDXYgpoq6COw9lhFA
-	AsajI2zI/HE5waax+l/bJjII8Ex/A1pXxfAuQwIIdOSj6FGB/F8zL+vLgbpFDG3rcgB9IVB40hwrn
-	Nu/xx2wm6ebX4Y16PCW+jpxcNvz7wCipxzDDnXo4ON8dGg3rMzr5qGXsWWvROR2prjhZAamPxmBfY
-	vLU/nybQ==;
+	bh=yUS2iT/5Ns+DBWa4sOqPiiTpW5do+ruhfRfUiDEShWo=; b=guhcPlS/XgOuKYq4PA9jwEJ1Mm
+	wjGQambf6XhIV/WMxs6kFqYaaHdFwvX6RWdpisscMw/wZ4WZsA+kBdl3+w11wI64QzozuUw29fCzF
+	6bcDqzUSjDf9S0c+iNFHOFpOaM4r3xPA7y9i2B22SLB/iHL8jg8OiIaZ5p0BiZ12ZoIHUAP/V5Phy
+	CaqhmT48hLkZcOQmzg39tPBxUdTSF6LnbixjqSNUesHltqV6UJpGD66vOEwdq7R391N+2LJtveGqS
+	OXm/2K7ni7fxsGeEBERanjYsCQ59EcXOvmPmxbR6wdKf8nAs0DNy0rPkfkuV/Q20bN324P+kRTZvf
+	Ns6wRmFQ==;
 Received: from [91.187.204.140] (helo=localhost)
 	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1sJ5V8-00000009IPz-27ba;
-	Mon, 17 Jun 2024 06:05:59 +0000
+	id 1sJ5VB-00000009ISa-1G1W;
+	Mon, 17 Jun 2024 06:06:01 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -88,12 +88,14 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
 	linux-s390@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org,
+	Bart Van Assche <bvanassche@acm.org>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
 	Damien Le Moal <dlemoal@kernel.org>,
 	Hannes Reinecke <hare@suse.de>,
-	Bart Van Assche <bvanassche@acm.org>
-Subject: [PATCH 08/26] loop: fold loop_update_rotational into loop_reconfigure_limits
-Date: Mon, 17 Jun 2024 08:04:35 +0200
-Message-ID: <20240617060532.127975-9-hch@lst.de>
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Subject: [PATCH 09/26] virtio_blk: remove virtblk_update_cache_mode
+Date: Mon, 17 Jun 2024 08:04:36 +0200
+Message-ID: <20240617060532.127975-10-hch@lst.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240617060532.127975-1-hch@lst.de>
 References: <20240617060532.127975-1-hch@lst.de>
@@ -103,9 +105,9 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <89Orq8Ai11F.A.ygWD.-Y9bmB@bendel>
+Resent-Message-ID: <gUoccLMl9OM.A.-nWD.JZ9bmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3021
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3022
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -115,69 +117,61 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240617060532.127975-9-hch@lst.de
-Resent-Date: Mon, 17 Jun 2024 06:22:54 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240617060532.127975-10-hch@lst.de
+Resent-Date: Mon, 17 Jun 2024 06:23:05 +0000 (UTC)
 
-This prepares for moving the rotational flag into the queue_limits and
-also fixes it for the case where the loop device is backed by a block
-device.
+virtblk_update_cache_mode boils down to a single call to
+blk_queue_write_cache.  Remove it in preparation for moving the cache
+control flags into the queue_limits.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 Reviewed-by: Hannes Reinecke <hare@suse.de>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- drivers/block/loop.c | 23 ++++-------------------
- 1 file changed, 4 insertions(+), 19 deletions(-)
+ drivers/block/virtio_blk.c | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 6a4826708a3acf..8991de8fb1bb0b 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -916,24 +916,6 @@ static void loop_free_idle_workers_timer(struct timer_list *timer)
- 	return loop_free_idle_workers(lo, false);
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 2351f411fa4680..378b241911ca87 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -1089,14 +1089,6 @@ static int virtblk_get_cache_mode(struct virtio_device *vdev)
+ 	return writeback;
  }
  
--static void loop_update_rotational(struct loop_device *lo)
+-static void virtblk_update_cache_mode(struct virtio_device *vdev)
 -{
--	struct file *file = lo->lo_backing_file;
--	struct inode *file_inode = file->f_mapping->host;
--	struct block_device *file_bdev = file_inode->i_sb->s_bdev;
--	struct request_queue *q = lo->lo_queue;
--	bool nonrot = true;
+-	u8 writeback = virtblk_get_cache_mode(vdev);
+-	struct virtio_blk *vblk = vdev->priv;
 -
--	/* not all filesystems (e.g. tmpfs) have a sb->s_bdev */
--	if (file_bdev)
--		nonrot = bdev_nonrot(file_bdev);
--
--	if (nonrot)
--		blk_queue_flag_set(QUEUE_FLAG_NONROT, q);
--	else
--		blk_queue_flag_clear(QUEUE_FLAG_NONROT, q);
+-	blk_queue_write_cache(vblk->disk->queue, writeback, false);
 -}
 -
- /**
-  * loop_set_status_from_info - configure device from loop_info
-  * @lo: struct loop_device to configure
-@@ -1003,6 +985,10 @@ static int loop_reconfigure_limits(struct loop_device *lo, unsigned short bsize)
- 	lim.logical_block_size = bsize;
- 	lim.physical_block_size = bsize;
- 	lim.io_min = bsize;
-+	if (!backing_bdev || bdev_nonrot(backing_bdev))
-+		blk_queue_flag_set(QUEUE_FLAG_NONROT, lo->lo_queue);
-+	else
-+		blk_queue_flag_clear(QUEUE_FLAG_NONROT, lo->lo_queue);
- 	loop_config_discard(lo, &lim);
- 	return queue_limits_commit_update(lo->lo_queue, &lim);
+ static const char *const virtblk_cache_types[] = {
+ 	"write through", "write back"
+ };
+@@ -1116,7 +1108,7 @@ cache_type_store(struct device *dev, struct device_attribute *attr,
+ 		return i;
+ 
+ 	virtio_cwrite8(vdev, offsetof(struct virtio_blk_config, wce), i);
+-	virtblk_update_cache_mode(vdev);
++	blk_queue_write_cache(disk->queue, virtblk_get_cache_mode(vdev), false);
+ 	return count;
  }
-@@ -1099,7 +1085,6 @@ static int loop_configure(struct loop_device *lo, blk_mode_t mode,
- 	if (WARN_ON_ONCE(error))
- 		goto out_unlock;
  
--	loop_update_rotational(lo);
- 	loop_update_dio(lo);
- 	loop_sysfs_init(lo);
+@@ -1528,7 +1520,8 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 	vblk->index = index;
  
+ 	/* configure queue flush support */
+-	virtblk_update_cache_mode(vdev);
++	blk_queue_write_cache(vblk->disk->queue, virtblk_get_cache_mode(vdev),
++			false);
+ 
+ 	/* If disk is read-only in the host, the guest should obey */
+ 	if (virtio_has_feature(vdev, VIRTIO_BLK_F_RO))
 -- 
 2.43.0
 
