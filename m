@@ -2,62 +2,61 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 934CE90AC44
-	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 12:54:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A10190AC47
+	for <lists+nbd@lfdr.de>; Mon, 17 Jun 2024 12:54:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 7685021219; Mon, 17 Jun 2024 10:54:23 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 10:54:23 2024
+	id 6DA302121C; Mon, 17 Jun 2024 10:54:34 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 17 10:54:34 2024
 Old-Return-Path: <hare@suse.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
-	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE,WORD_WITHOUT_VOWELS
-	autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=CC_TOO_MANY,FOURLA,
+	RCVD_IN_DNSWL_MED,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3D8552118C
-	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 10:36:55 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C60A2211DD
+	for <lists-other-nbd@bendel.debian.org>; Mon, 17 Jun 2024 10:38:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.21 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.21 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, FOURLA=0.1, RCVD_IN_DNSWL_MED=-2.3,
-	T_SCC_BODY_TEXT_LINE=-0.01, WORD_WITHOUT_VOWELS=1]
-	autolearn=no autolearn_force=no
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id kiaivZfjFxm6 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 17 Jun 2024 10:36:50 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	with ESMTP id Tv50pt0AxBYq for <lists-other-nbd@bendel.debian.org>;
+	Mon, 17 Jun 2024 10:38:32 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -5.5
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 67EEE20FEC
-	for <nbd@other.debian.org>; Mon, 17 Jun 2024 10:36:50 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 02FC9211D0
+	for <nbd@other.debian.org>; Mon, 17 Jun 2024 10:38:32 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id CE20A38037;
-	Mon, 17 Jun 2024 10:36:47 +0000 (UTC)
-Authentication-Results: smtp-out1.suse.de;
+	by smtp-out2.suse.de (Postfix) with ESMTPS id D55E65FCD9;
+	Mon, 17 Jun 2024 10:38:29 +0000 (UTC)
+Authentication-Results: smtp-out2.suse.de;
 	none
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 34E77139AB;
-	Mon, 17 Jun 2024 10:36:47 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 337B2139AB;
+	Mon, 17 Jun 2024 10:38:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id oblHDL8RcGZPDAAAD6G6ig
-	(envelope-from <hare@suse.de>); Mon, 17 Jun 2024 10:36:47 +0000
-Message-ID: <0f819ed5-9549-4edf-98b3-19eed8558dfe@suse.de>
-Date: Mon, 17 Jun 2024 12:36:46 +0200
+	id WyrSCyUScGbNDAAAD6G6ig
+	(envelope-from <hare@suse.de>); Mon, 17 Jun 2024 10:38:29 +0000
+Message-ID: <74df67d6-3d02-4987-becb-eebf60492d26@suse.de>
+Date: Mon, 17 Jun 2024 12:38:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/26] block: move the nonrot flag to queue_limits
+Subject: Re: [PATCH 15/26] block: move the add_random flag to queue_limits
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  Richard Weinberger <richard@nod.at>,
@@ -82,10 +81,10 @@ Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
  linux-scsi@vger.kernel.org, linux-block@vger.kernel.org,
  Damien Le Moal <dlemoal@kernel.org>
 References: <20240617060532.127975-1-hch@lst.de>
- <20240617060532.127975-15-hch@lst.de>
+ <20240617060532.127975-16-hch@lst.de>
 Content-Language: en-US
 From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20240617060532.127975-15-hch@lst.de>
+In-Reply-To: <20240617060532.127975-16-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Pre-Result: action=no action;
@@ -94,7 +93,7 @@ X-Rspamd-Pre-Result: action=no action;
 X-Rspamd-Pre-Result: action=no action;
 	module=replies;
 	Message is reply to one we originated
-X-Rspamd-Queue-Id: CE20A38037
+X-Rspamd-Queue-Id: D55E65FCD9
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-4.00 / 50.00];
 	REPLY(-4.00)[]
@@ -102,9 +101,9 @@ X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Su352cOHp5F.A.1SFJ.fXBcmB@bendel>
+Resent-Message-ID: <fI9lCfQRd4L.A.4WFJ.qXBcmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3050
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3051
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -114,31 +113,32 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/0f819ed5-9549-4edf-98b3-19eed8558dfe@suse.de
-Resent-Date: Mon, 17 Jun 2024 10:54:23 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/74df67d6-3d02-4987-becb-eebf60492d26@suse.de
+Resent-Date: Mon, 17 Jun 2024 10:54:34 +0000 (UTC)
 
 On 6/17/24 08:04, Christoph Hellwig wrote:
-> Move the nonrot flag into the queue_limits feature field so that it can
-> be set atomically with the queue frozen.
+> Move the add_random flag into the queue_limits feature field so that it
+> can be set atomically with the queue frozen.
 > 
-> Use the chance to switch to defaulting to non-rotational and require
-> the driver to opt into rotational, which matches the polarity of the
-> sysfs interface.
-> 
-> For the z2ram, ps3vram, 2x memstick, ubiblock and dcssblk the new
-> rotational flag is not set as they clearly are not rotational despite
-> this being a behavior change.  There are some other drivers that
-> unconditionally set the rotational flag to keep the existing behavior
-> as they arguably can be used on rotational devices even if that is
-> probably not their main use today (e.g. virtio_blk and drbd).
-> 
-> The flag is automatically inherited in blk_stack_limits matching the
-> existing behavior in dm and md.
+> Note that this also removes code from dm to clear the flag based on
+> the underlying devices, which can't be reached as dm devices will
+> always start out without the flag set.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 > ---
-
+>   block/blk-mq-debugfs.c            |  1 -
+>   block/blk-sysfs.c                 |  6 +++---
+>   drivers/block/mtip32xx/mtip32xx.c |  1 -
+>   drivers/md/dm-table.c             | 18 ------------------
+>   drivers/mmc/core/queue.c          |  2 --
+>   drivers/mtd/mtd_blkdevs.c         |  3 ---
+>   drivers/s390/block/scm_blk.c      |  4 ----
+>   drivers/scsi/scsi_lib.c           |  3 +--
+>   drivers/scsi/sd.c                 | 11 +++--------
+>   include/linux/blkdev.h            |  5 +++--
+>   10 files changed, 10 insertions(+), 44 deletions(-)
+> 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
 Cheers,
