@@ -2,190 +2,114 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37DCC90C34A
-	for <lists+nbd@lfdr.de>; Tue, 18 Jun 2024 07:57:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AEF690F0C3
+	for <lists+nbd@lfdr.de>; Wed, 19 Jun 2024 16:36:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id DCD28208AA; Tue, 18 Jun 2024 05:57:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Jun 18 05:57:10 2024
-Old-Return-Path: <prvs=89272eea4=shinichiro.kawasaki@wdc.com>
+	id 3117820828; Wed, 19 Jun 2024 14:36:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun 19 14:36:10 2024
+Old-Return-Path: <axboe@kernel.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SARE_MSGID_LONG45,
-	SARE_MSGID_LONG50,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Level: *
+X-Spam-Status: No, score=1.9 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE,T_SCC_BODY_TEXT_LINE
+	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1EC992088E
-	for <lists-other-nbd@bendel.debian.org>; Tue, 18 Jun 2024 05:40:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8F60420838
+	for <lists-other-nbd@bendel.debian.org>; Wed, 19 Jun 2024 14:19:01 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.891 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
-	SARE_MSGID_LONG45=0.893, SARE_MSGID_LONG50=0.726,
+X-Amavis-Spam-Status: No, score=-0.01 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_NONE=-0.0001,
 	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id bLMmEw6W4PhI for <lists-other-nbd@bendel.debian.org>;
-	Tue, 18 Jun 2024 05:40:41 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 439 seconds by postgrey-1.36 at bendel; Tue, 18 Jun 2024 05:40:40 UTC
-Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id A429420888
-	for <nbd@other.debian.org>; Tue, 18 Jun 2024 05:40:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1718689241; x=1750225241;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=rgDGrW9OyMertL5hS22pScgRSva5QrpG0esiw+1LNRE=;
-  b=ItFTO8ODw7qkR7T4o9gSH/Qps1wrUUmtLlpVXpsNwjpdkovrf+YuQ+SG
-   8yxiqt0zKh7/BTWLC4fHR/5bSykd4H6w3eAGv1VyCDCjOg+DZX1XR4j+l
-   rLdldQKDh5CtsmnUsWUORY1gK6BLkwDg5ijLnZb1XchuJw0EfKAUn2Dlo
-   y2UWJh3tKYHnxwue/Yu6s+jSZpX11cV62yIF0y1epKg0teezbs9ouaEZK
-   Hnd//IZMxd3YWFgSMdxFFBquuKXb6fYvKYeoTAQwZtgKeYdHpeWtqVzQe
-   /C1UDis8W4UIZVqjYCsfTOQuEYWQnoGRaCsA4VJ1+j6ICNsdVUsIpdrR4
-   Q==;
-X-CSE-ConnectionGUID: yv+bpyOvTfGRq0w3qNqUtw==
-X-CSE-MsgGUID: hByTKDfaTsmiHHAmwSWX8Q==
-X-IronPort-AV: E=Sophos;i="6.08,246,1712592000"; 
-   d="scan'208";a="19079827"
-Received: from mail-dm6nam11lp2169.outbound.protection.outlook.com (HELO NAM11-DM6-obe.outbound.protection.outlook.com) ([104.47.57.169])
-  by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2024 13:33:17 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IrO96Xtad3xHzs4BO9mfhnzB7NSqppaR/IzICkFFNUfofJ8nHmu+bFFWSMFvdlwA7bZ3i5W7bN8fOicTGu+YMXSeKHzgpyva2Tdjctaf/tATjEJ0vIjKZn5+lTl7Dx1eTHf8PKj6N++hslfQGkqDLNlHm80Z1pf/LZA9AwKwQkaxyqIpL7FCMD0zAAgRsd2MvwAkTqMvBho9cMqyPmKL2CXqvHAddnc8tUcQlxgi2dswFxgcxFlTegEcv06PH9A3tBg3ghkp8Xz17loW9IzHJx+KvfGOLwaPi6PpdhWxdKeTY8YwOrfnIvzZ+nm1Cl/WKoY7ebLpLKU+H27nWH8iew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=weJrIPTxvR+i5suwpk3Sm/EH8gTB/TMuH652FDeqfNs=;
- b=YA7n5djnDcwZcT2T2072AITXDnkDDbHxDqb+qO3nhPVun1E7Ech9R278utp1k+BakBdVhumkMJeMXaMTkxr3yMmqnzF4hWUJC+TjoTAo+Sh+u3v9bYfC1D7uytYACI8CrDQuapsjDalflJA44wBEV9UUJVV4k7256/+W3xSHCYozMNIxY1QKluW2lWagADTaW3CInSP0AzHysCWi9KpWTObTOFdVZQNzTB1DlqQZbAzf5MMxGqq7MW/yE7tnautwX2K7Gi4ENSNXfl70ZwatvBBGnQKhjXNz9RREP2Qn+x2lpZao2Qz6b+yu6mLkX5/pAIOkeAt+DDeRiPvrBQ+Hbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+	with ESMTP id xi2P8jf8O5eF for <lists-other-nbd@bendel.debian.org>;
+	Wed, 19 Jun 2024 14:18:47 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .kernel. - helo: .mail-pl1-x62d.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 1E2F720828
+	for <nbd@other.debian.org>; Wed, 19 Jun 2024 14:18:46 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id d9443c01a7336-1f99e2dc8cdso2191335ad.0
+        for <nbd@other.debian.org>; Wed, 19 Jun 2024 07:18:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=weJrIPTxvR+i5suwpk3Sm/EH8gTB/TMuH652FDeqfNs=;
- b=OAcN4SWIt0nBlq7tm5sEdVrHnseHdvSQ/V1TVxG+kOSHbmFyINYOvGF04VtDF0U+4kB8p21+0fFoBHJEKczb5DWKqpfOtmyj4i5xxElYFX0SMGuXTpgeBE77vZzBD5cJDrqu5YUIEp+pcw2rZVkU0dYpHbj/tQHWYzqsNNRWRQw=
-Received: from DM8PR04MB8037.namprd04.prod.outlook.com (2603:10b6:8:f::6) by
- CH2PR04MB6935.namprd04.prod.outlook.com (2603:10b6:610:a0::12) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7698.18; Tue, 18 Jun 2024 05:33:14 +0000
-Received: from DM8PR04MB8037.namprd04.prod.outlook.com
- ([fe80::b27f:cdfa:851:e89a]) by DM8PR04MB8037.namprd04.prod.outlook.com
- ([fe80::b27f:cdfa:851:e89a%3]) with mapi id 15.20.7677.030; Tue, 18 Jun 2024
- 05:33:14 +0000
-From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>
-CC: Sun Ke <sunke32@huawei.com>, Yi Zhang <yi.zhang@redhat.com>
-Subject: Re: [PATCH blktests] nbd/004: drop the check for "couldn't allocate
- config" message
-Thread-Topic: [PATCH blktests] nbd/004: drop the check for "couldn't allocate
- config" message
-Thread-Index: AQHauJuL4LVx3xX+AkKY3pUAWOknM7HNEM0A
-Date: Tue, 18 Jun 2024 05:33:13 +0000
-Message-ID: <idkqytj4mmphunrmu45nblumva3reemghwl6d2rr4jhdgi4ute@yt55yzlxlfqz>
-References: <20240607052826.249014-1-shinichiro.kawasaki@wdc.com>
-In-Reply-To: <20240607052826.249014-1-shinichiro.kawasaki@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM8PR04MB8037:EE_|CH2PR04MB6935:EE_
-x-ms-office365-filtering-correlation-id: 064d318a-efb4-4b85-0631-08dc8f58262e
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230037|366013|376011|1800799021|38070700015;
-x-microsoft-antispam-message-info:
- =?us-ascii?Q?tqziPoAC6bbv6J3mK0T9mnScoVzbV+EPjcoz6sz1fTqApM6P0P6jF6+SFJC/?=
- =?us-ascii?Q?zqaAfnW9y2NvkUn9KemwEeYQIsH1FgoeQ7nsgteCof8J2ESMCdlwXsk+8xh9?=
- =?us-ascii?Q?T1mFEeP+AiCOtzTNQ6UK08qM6MSJiRmiLzbw5aNFZOqWPNri7W+TJ3ypyNl3?=
- =?us-ascii?Q?mC9M6Irn2V+XSzCDrKv4ymmV3QOtt8fcLHYQglfioYp6szZQTqvCRbsnvjSj?=
- =?us-ascii?Q?ClC6mhS+xRM7nH0yOEARpuKIBi0CgjdiJaLKWbpz2tbkLkgQZ9S4pLyqsnX4?=
- =?us-ascii?Q?JVmhX5wmoh8bkCyAk4taTI6jCeNRfQduTW2qhym5QRM+UDqJzAxVqTTsYipT?=
- =?us-ascii?Q?D6A+TGPx8/wWQnHmfCXeHykW3P+p8x4Kk6MiHH/sp94bUaqBobIsb2xJozl8?=
- =?us-ascii?Q?g9xFBZe2gs5nJwt9lopdDnnpKLe+vPde30Wst6ZHfgw8Yu+8hinv8I3+jaiB?=
- =?us-ascii?Q?nFbPVsoD0pg71PIKs0rBxytNJgNmTCRphSbgYIM42r1dpDYW1X7LoPDi1ilo?=
- =?us-ascii?Q?lDYncARjqKi5JUV4dcEQLkrBs3UbCmNsyTRnyEqgE9/Lv4EhBlQHnRbOBbZx?=
- =?us-ascii?Q?sBJq1C9npoZcAB4Ls8AnPlWKUjwPgaFn/MMEC2jkFPo4Gfd2aZHvKPr3uykm?=
- =?us-ascii?Q?j0ODA4OidrDx5nxrPnEgMwPwZviKbA4yjSTMk0hWcxNExtpEBv5oTZVKd5fq?=
- =?us-ascii?Q?p48gFAOCO6UopBEpJlm71tLamDR9TkQSxbmOjkPadWOLo/bbOhimaU+W+I5E?=
- =?us-ascii?Q?q99dV1kBm1FBzAy48jy0MYegHsX6iv+avaMh34Pfwm9c8EvD3GQgoN+OiPCV?=
- =?us-ascii?Q?UL06SbGC49fKfJI6xRiNfV2VUyVngkbBeMBhtvXnsuc7jpgtxkqXxJf9SuX6?=
- =?us-ascii?Q?A3Hkbdydp0MKeaX1DnDeRj62p5awi8w94DtoGiwXRVdqqext4S9ijHyLxpnP?=
- =?us-ascii?Q?Fe1llJphyzW/34QGjumexF4i5hAN2KQvFc+juPe8A0a3CozgKsCPPY4P1+N1?=
- =?us-ascii?Q?Cf33qqw1DfhzV75NUnbOMrkSU2D4kOToHCfDoyYAxb4/9QZcgp9iGh6GXjX4?=
- =?us-ascii?Q?1fCBXS3jMoeoyLwQ3huC0o5ulrLo2RO7NyLTI/kHBAcOQ0Y8yd59Zvk/IJhi?=
- =?us-ascii?Q?ExF2ogtqSYgpLudJLjVx06F3FzIJcKFINL5rJgLsBZlffEMMbGScVjIOCZe6?=
- =?us-ascii?Q?b5GeK0aT20DZlc3PWesRubTVmeqC4Jiy2VLiNmueVJ5EvgYAzUM/bZGSMl6g?=
- =?us-ascii?Q?eg0gc3RlWOcYFPMJBL4rosf16GYlCKEmf9mn76cdt4IE2SQqsjOreMWSCqh1?=
- =?us-ascii?Q?k0HoCB5p1rpdoa4rdZwZDkE6?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR04MB8037.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230037)(366013)(376011)(1800799021)(38070700015);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?us-ascii?Q?VndGjTjUKBmKM9G+Hhhn7TW37fjrbFEIEw/o/fXzg0gCX6SPXy29y1tunNSF?=
- =?us-ascii?Q?sByJFZgUMW0sm9VueekRmJiETRDqV0DGlUDk7brcjJ5BigtdXq4lclsyKmMn?=
- =?us-ascii?Q?KWm7VX97DttpcIrWf8w4LwLFQX0PLDiO42GZdNr2JW333zIOki0sW7/Ig2dM?=
- =?us-ascii?Q?TN3VZXSL+w/KcE8HQ9VxW0ThSKknsI+Qa+8zhPJqC2HqnW4MAw2oWlp8ywar?=
- =?us-ascii?Q?wFFxmwockW/5pKeuj51aXj0X6bPXvH1QT/rOMHelxHkGjTy9CK5caDs3SYeI?=
- =?us-ascii?Q?lMuQxNe07gjIxtVwqmk284U/Nju37SMH+nLuuGO1Qt8ncX0kuvKUmvPnYx8S?=
- =?us-ascii?Q?X8d6XU0NAIQdO+UpIb53xkntU63K2QXV1v+FL9P61Vn0K1umymv81EQBAKbe?=
- =?us-ascii?Q?b+SLEytFuA6aEz3v72R4l1zyizDKHwgtbCJINQtizhTP4mifIgwS8HtB0MiH?=
- =?us-ascii?Q?BAIqIAJiqtA43DMnVqXEZLHPTAj6kGS4ajzHgndYRXY8uHft9+F/sScm2A5T?=
- =?us-ascii?Q?O4N/hZrg5Q5UkH+vY0sZ3CGVfc/FcEmzXvGajjWHs2sN18UKXjZ+u8kkG6KA?=
- =?us-ascii?Q?RLb09X0h0EHLUS5uDHD/4OHze4++uv3INenkNz/IDNmMxsIwgNAn5p/ZUnCO?=
- =?us-ascii?Q?kAWaJ9QwW32yq9iFwcu9yC7Y7lkDlF4BnpMdzj85nwEVlOVc2e6liHo0XAqr?=
- =?us-ascii?Q?MKgz87bhb5UI1WpDnMSX3LReheQCqmQ0mq3cA505OTE+3parLHhkNLrl0XrE?=
- =?us-ascii?Q?/Kq5no8Bax3VaHBxQb9ipNY2KjG3YErHlXI2NYUXbYQBhuW4Miiymlzz3v+7?=
- =?us-ascii?Q?3XUt/5DKVqUhfkWekSRmcWvVdfA/ECRkm2vHvOLelAog/6MlKK/P3XI79Ivq?=
- =?us-ascii?Q?JVdsYl5R1bBzkJmQj/ijeXaz06BJpkGRZLLpAu3VaMbzOEnt1dlAVOr1uFyG?=
- =?us-ascii?Q?2H2QdbHw5YUs9JKx6oGC165G1YNsMQibbac4OEqbmXRXgMI6sZ7gD9QSVbiT?=
- =?us-ascii?Q?Xkf0ICn2l9I38XL7/tOUECYd/cULN7uMWYoAxFubZdqIbhUKBmflIqrPNwHC?=
- =?us-ascii?Q?PdZbvtyuSyW3DAb1n+SwyACgI7JFjFtkxFLBvaFx1QqDd+Tq6zwn9snn0yO0?=
- =?us-ascii?Q?AyJJl30S7oXdGLPhbM/re0i+HxQI7tFkAlcuFVQ0L/8bQ41ggEDR3cGIe+Wm?=
- =?us-ascii?Q?kQqvrUOfxoPfz9KV2HbGSOieNsXPEd0R40+n1YTi+y51EyXSCOgCwQuK02Xk?=
- =?us-ascii?Q?km5njbUjvuz31FzZGJRls2zaEF7cTbZJ2r0ukBvALDH2CyFxAjZb/A76oCZG?=
- =?us-ascii?Q?acDDrkaZgDA2K5B1RhyPTpNDxu6dHf9zhS5qTtPY8kVIdrIK6AksoqwkqadN?=
- =?us-ascii?Q?1eXKvMsma2u4VmjSlVE+MqUYR5xkGUeoXn89oBbi0ZaUpGv9pAP5kG+ItmPW?=
- =?us-ascii?Q?m+/3Li5P34EI9t4YaB88VZRvSnqCfvRp5dOjcNaohYUG+pS21B57BJANEign?=
- =?us-ascii?Q?LI9jcetO5Y2dhLnlWiJce0581cIF+wUhd0c5BctkSvCT1NcIl++rthdqoJ7H?=
- =?us-ascii?Q?RBDF/atTmYg2p+P9HATfzKlmLEEeQKq3TJb7wRYVaAC549hwXXaC3v05i+uP?=
- =?us-ascii?Q?V3gpAqup8R1cQ/fJQ/PPM+s=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <0E7F42B30DD7754DBAD3E59C2578C66B@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+        d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1718806723; x=1719411523; darn=other.debian.org;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kVFpcyqMw7891fhn8oME2l6O88u8sGFZorCmmUmii2A=;
+        b=jK9crURHupbmU9DlbeS9oUx66uRmVPxswOCcUahkUrrtvw886/exAewcPeIxemEuzm
+         ZZmcu78mb6+lLUg414v0MuVS6SjCGlJ/hFbYFbk6t7u41QIJgRos/T+ywpKI3HCFJqKd
+         Lp8ZTYR7fLvmp7YX2qQe9anNMD6hBL4eAbzyZqVpIE1PQUQXCayUtee+Kt4tMYqrEckm
+         dzz+drjrwz4cF5kiPazijyLe7C7p2+s6L8hcP2IuprpW/6cdZ3Gsgnu974v+krz1LWsq
+         k++/Td+Er/SEBjwUUSwCeFwlbqNyGKnFTpmQXyOtgpwaSfziWmAqeSQDAC3o4kwjnif8
+         jmhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718806723; x=1719411523;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kVFpcyqMw7891fhn8oME2l6O88u8sGFZorCmmUmii2A=;
+        b=qVilHZMRIT4D0/QdJjiskfWYQ20V8fk2E7duDqX3mIRUtvOlf69DI6jROP3yzXRdQl
+         8HXQLF1vSCIWjopeDFp9aEZo41RhRoVDb8oakFtbYRKq0yvJogOwUg/jp3MIyYq+jp+L
+         ap/ZLwakDTVR16cGS8pREUZzkU0x7KvfG6IjyKxk0L+Xj9X0Y8PeQw+jRn4g+n9+EqDp
+         U+DefLN1ruH1t+e7ra5jQ9czd/svyBBzKG3jsmKvmGSo1cclAHYoCCTZKD2Bm1vONq3u
+         9owd1gpx55lEZnNgsIK1KPb2f2TeDOUQzu572gpA7SoOLGN90wfCBPnOeF0qhb29fwVj
+         xtTA==
+X-Forwarded-Encrypted: i=1; AJvYcCV94B13XB+UkDvyw6s2L2SxzZvR4eGOG9KNXDc3HgybgyeYqpf3vsJeyKhDrDgFcPnpdH54bOJb7wrfuytmGRD5Z27oUA==
+X-Gm-Message-State: AOJu0YzyhkDxjMASnIXqqF6ErVi4WQT9CIX4OWoQYsxKDXQZDAebUCCk
+	vc2pEK66SF7IxbcsxFt9dnp6WbI+Idb6+dgvS6RbJlC5Oz/+wPxIpUiRcy6PCEw=
+X-Google-Smtp-Source: AGHT+IEWR0naxsjqG6PjL5n5tEp1Ci8rJdxP3J1CbAApgRxLYFkmM+R0aL8qHW5Lv8+tjuuvrYAkhg==
+X-Received: by 2002:a05:6a20:3ca0:b0:1b6:fadd:8862 with SMTP id adf61e73a8af0-1bcbb8ce3e2mr2590711637.6.1718806723107;
+        Wed, 19 Jun 2024 07:18:43 -0700 (PDT)
+Received: from [127.0.0.1] ([198.8.77.157])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-705ccb3d2e8sm10689218b3a.107.2024.06.19.07.18.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Jun 2024 07:18:42 -0700 (PDT)
+From: Jens Axboe <axboe@kernel.dk>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ Philipp Reisner <philipp.reisner@linbit.com>, 
+ Lars Ellenberg <lars.ellenberg@linbit.com>, 
+ =?utf-8?q?Christoph_B=C3=B6hmwalder?= <christoph.boehmwalder@linbit.com>, 
+ Josef Bacik <josef@toxicpanda.com>, Ming Lei <ming.lei@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+ Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, 
+ Mikulas Patocka <mpatocka@redhat.com>, Song Liu <song@kernel.org>, 
+ Yu Kuai <yukuai3@huawei.com>, Vineeth Vijayan <vneethv@linux.ibm.com>, 
+ "Martin K. Petersen" <martin.petersen@oracle.com>, 
+ linux-m68k@lists.linux-m68k.org, linux-um@lists.infradead.org, 
+ drbd-dev@lists.linbit.com, nbd@other.debian.org, 
+ linuxppc-dev@lists.ozlabs.org, ceph-devel@vger.kernel.org, 
+ virtualization@lists.linux.dev, xen-devel@lists.xenproject.org, 
+ linux-bcache@vger.kernel.org, dm-devel@lists.linux.dev, 
+ linux-raid@vger.kernel.org, linux-mmc@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, nvdimm@lists.linux.dev, 
+ linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org, 
+ linux-scsi@vger.kernel.org, linux-block@vger.kernel.org
+In-Reply-To: <20240617060532.127975-1-hch@lst.de>
+References: <20240617060532.127975-1-hch@lst.de>
+Subject: Re: move features flags into queue_limits v2
+Message-Id: <171880672048.115609.5962725096227627176.b4-ty@kernel.dk>
+Date: Wed, 19 Jun 2024 08:18:40 -0600
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	T8MtGWmaCQ/ldyxiDrxbZ5WYRoShoaWJRvI2sdfXI1d3k6Ao2EzDqtiSYTEOSVUBhqs41lNRObfNru1s9AA6JjT5Dwh8EG9lzEz8Gggx7IoFaicrUDrTDjSI0J7ntE2nEoaWSQ1tgqzBCvFAGXlrF6ehxa7SQqXUXsStnlzQxFlJdHZu8LeADEIAZY1GQZuSWFQfZ9umFNS0CZHSicFCPYJgED8FjYqtaGNj5TjQV3AiXF8O+plej9iTYnOQY3al53kKJw3ekdpLBlWVmS5GkCiv7mP/ikflur2qj84ZEaIMl3afamg4+y/WQ+m/aXNgL/PFRqubKPkVpiMsZQwLL1TlBibZxj5EzwQRLmhiCcK318/tRjG67ZmkO+0XMukl6gtdQEoV8qTF0V0RFFtOR4J8J8XhOOO3tyRNOpnJ/T/2BSv9Qqbrmgbcc44f8EWixuREGFbMfmf9V2hHaAnxpJzFJ16l8N6cqpqON8JGjonstvKpzEXeghmokRPmLd7s1A3AHB8LzezV6LwI1h8U1d4to2exCVtffQd0cWPeM7Wnyijl5bVMQ7W/H7+mbUlOJIdEWStX0G9gRZZsJB8PEMBjdFGI53SbSr7y9VLVuE1YxnU/NuPlONHAOp63iA7l
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM8PR04MB8037.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 064d318a-efb4-4b85-0631-08dc8f58262e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jun 2024 05:33:13.9805
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: +qn5p28KuMQY59IhN0axGojEQu2PLZMBb5rjiM4NdhvpaSRhCwQj7BL/lHmC+e8LLcCHKpN5i2D1kZU1Rv2yltAHMBwagv6BJ0tWDo+XGNk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR04MB6935
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.0
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <o3k1VC3r8BH.A.AbCI.2GScmB@bendel>
+Resent-Message-ID: <Cegor4ZHgPJ.A.DeSG.azucmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3068
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3069
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -195,48 +119,80 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/idkqytj4mmphunrmu45nblumva3reemghwl6d2rr4jhdgi4ute@yt55yzlxlfqz
-Resent-Date: Tue, 18 Jun 2024 05:57:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/171880672048.115609.5962725096227627176.b4-ty@kernel.dk
+Resent-Date: Wed, 19 Jun 2024 14:36:10 +0000 (UTC)
 
-On Jun 07, 2024 / 14:28, Shin'ichiro Kawasaki wrote:
-> The test case nbd/004 was created to confirm the fix by the kernel
-> commit 06c4da89c24e ("nbd: call genl_unregister_family() first in
-> nbd_cleanup()"). Originally, the test case was created to check that the
-> kernel commit avoided a BUG. But the BUG was not recreated on my system
-> even without the kernel commit, so I was not able to confirm that the
-> test case was working as expected. On the other hand, I found that the
-> kernel commit avoided the two other kernel messages "couldn't allocate
-> config" and "cannot create duplicate filename" on my test system. Then I
-> suggested adding the checks for those messages to the test case, and the
-> checks were added [1].
->=20
-> However, it turned out that the kernel commit did not totally avoid the
-> message "couldn't allocate config". The test case still makes the kernel
-> report the message with a low ratio. The failure is recreated when the
-> test case is repeated around 30 times. The CKI project reported that
-> nbd/004 fails due to the message [2].
->=20
-> When the failure happens, try_module_get() fails in nbd_genl_context():
->=20
-> nbd_genl_connect()
->  nbd_alloc_and_init_config()
->   try_module_get()            ... fails
->=20
-> This try_module_get() call checks that the module is not unloaded during
-> the connect operation. The test case does "module load/unload
-> concurrently with connect/disconnect" then the try_module_get() failure
-> is expected. It means the failure is false-positive.
->=20
-> Drop the wrong check for "couldn't allocate config" message. Still keep
-> the check for "cannot create duplicate filename".
->=20
-> [1] https://lore.kernel.org/linux-block/20220707124945.c2rd677hjwkd7mim@s=
-hindev/
-> [2] https://github.com/osandov/blktests/issues/140
->=20
-> Fixes: 349eb683fd06 ("nbd: add a module load and device connect test")
-> Reported-by: Yi Zhang <yi.zhang@redhat.com>
-> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 
-FYI, this patch has got applied.=
+On Mon, 17 Jun 2024 08:04:27 +0200, Christoph Hellwig wrote:
+> this is the third and last major series to convert settings to
+> queue_limits for this merge window.  After a bunch of prep patches to
+> get various drivers in shape, it moves all the queue_flags that specify
+> driver controlled features into the queue limits so that they can be
+> set atomically and are separated from the blk-mq internal flags.
+> 
+> Note that I've only Cc'ed the maintainers for drivers with non-mechanical
+> changes as the Cc list is already huge.
+> 
+> [...]
+
+Applied, thanks!
+
+[01/26] xen-blkfront: don't disable cache flushes when they fail
+        commit: dd9300e9eaeeb212f77ffeb72d1d8756107f1f1f
+[02/26] sd: remove sd_is_zoned
+        commit: be60e7700e6df1e16a2f60f45bece08e6140a46d
+[03/26] sd: move zone limits setup out of sd_read_block_characteristics
+        commit: 308ad58af49d6c4c3b7a36b98972cc9db4d7b36a
+[04/26] loop: stop using loop_reconfigure_limits in __loop_clr_fd
+        commit: c9055b44abe60da69aa4ee4fdcb78ee7fe733335
+[05/26] loop: always update discard settings in loop_reconfigure_limits
+        commit: ae0d40ff49642651f969883ef9fc79d69c1632d7
+[06/26] loop: regularize upgrading the block size for direct I/O
+        commit: a17ece76bcfe7b86327b19cae1652d7c62068a30
+[07/26] loop: also use the default block size from an underlying block device
+        commit: 4ce37fe0938b02b7b947029c40b72d76a22a3882
+[08/26] loop: fold loop_update_rotational into loop_reconfigure_limits
+        commit: 97dd4a43d69b74a114be466d6887e257971adfe9
+[09/26] virtio_blk: remove virtblk_update_cache_mode
+        commit: bbe5c84122b35c37f2706872fe34da66f0854b56
+[10/26] nbd: move setting the cache control flags to __nbd_set_size
+        commit: 6b377787a306253111404325aee98005b361e59a
+[11/26] block: freeze the queue in queue_attr_store
+        commit: af2814149883e2c1851866ea2afcd8eadc040f79
+[12/26] block: remove blk_flush_policy
+        commit: 70905f8706b62113ae32c8df721384ff6ffb6c6a
+[13/26] block: move cache control settings out of queue->flags
+        commit: 1122c0c1cc71f740fa4d5f14f239194e06a1d5e7
+[14/26] block: move the nonrot flag to queue_limits
+        commit: bd4a633b6f7c3c6b6ebc1a07317643270e751a94
+[15/26] block: move the add_random flag to queue_limits
+        commit: 39a9f1c334f9f27b3b3e6d0005c10ed667268346
+[16/26] block: move the io_stat flag setting to queue_limits
+        commit: cdb2497918cc2929691408bac87b58433b45b6d3
+[17/26] block: move the stable_writes flag to queue_limits
+        commit: 1a02f3a73f8c670eddeb44bf52a75ae7f67cfc11
+[18/26] block: move the synchronous flag to queue_limits
+        commit: aadd5c59c910427c0464c217d5ed588ff14e2502
+[19/26] block: move the nowait flag to queue_limits
+        commit: f76af42f8bf13d2620084f305f01691de9238fc7
+[20/26] block: move the dax flag to queue_limits
+        commit: f467fee48da4500786e145489787b37adae317c3
+[21/26] block: move the poll flag to queue_limits
+        commit: 8023e144f9d6e35f8786937e2f0c2fea0aba6dbc
+[22/26] block: move the zoned flag into the features field
+        commit: b1fc937a55f5735b98d9dceae5bb6ba262501f56
+[23/26] block: move the zone_resetall flag to queue_limits
+        commit: a52758a39768f441e468a41da6c15a59d6d6011a
+[24/26] block: move the pci_p2pdma flag to queue_limits
+        commit: 9c1e42e3c876c66796eda23e79836a4d92613a61
+[25/26] block: move the skip_tagset_quiesce flag to queue_limits
+        commit: 8c8f5c85b20d0a7dc0ab9b2a17318130d69ceb5a
+[26/26] block: move the bounce flag into the features field
+        commit: 339d3948c07b4aa2940aeb874294a7d6782cec16
+
+Best regards,
+-- 
+Jens Axboe
+
+
 
