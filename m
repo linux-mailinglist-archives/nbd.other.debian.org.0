@@ -2,69 +2,79 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA29D917904
-	for <lists+nbd@lfdr.de>; Wed, 26 Jun 2024 08:33:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C1D8917B80
+	for <lists+nbd@lfdr.de>; Wed, 26 Jun 2024 10:57:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 92E7420596; Wed, 26 Jun 2024 06:33:26 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun 26 06:33:26 2024
-Old-Return-Path: <hch@lst.de>
+	id 60B202062A; Wed, 26 Jun 2024 08:57:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jun 26 08:57:10 2024
+Old-Return-Path: <ryuusei.nanoha@goo.jp>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.0 required=4.0 tests=CC_TOO_MANY autolearn=no
+X-Spam-Level: *
+X-Spam-Status: No, score=1.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,GMAIL,UNDISC_MONEY autolearn=no
 	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 539B1206BB
-	for <lists-other-nbd@bendel.debian.org>; Wed, 26 Jun 2024 06:18:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 53F252058C
+	for <lists-other-nbd@bendel.debian.org>; Wed, 26 Jun 2024 08:39:16 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.99 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, CC_TOO_MANY=3, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=3.392 tagged_above=-10000 required=5.3
+	tests=[BAYES_80=1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, GMAIL=1,
+	T_SCC_BODY_TEXT_LINE=-0.01, UNDISC_MONEY=1.102]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id vleb7VUcHjjW for <lists-other-nbd@bendel.debian.org>;
-	Wed, 26 Jun 2024 06:18:10 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+	with ESMTP id 5iv3gTv-erNr for <lists-other-nbd@bendel.debian.org>;
+	Wed, 26 Jun 2024 08:39:11 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 585 seconds by postgrey-1.36 at bendel; Wed, 26 Jun 2024 08:39:10 UTC
+Received: from mas-dfr-mts-106c2.mail.goo.jp (mas-dfr-mts-106c2.mail.goo.jp [153.128.190.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E3A7D206A0
-	for <nbd@other.debian.org>; Wed, 26 Jun 2024 06:18:10 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id 85E4B68BEB; Wed, 26 Jun 2024 08:18:04 +0200 (CEST)
-Date: Wed, 26 Jun 2024 08:18:04 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Oliver Sang <oliver.sang@intel.com>
-Cc: Christoph Hellwig <hch@lst.de>, oe-lkp@lists.linux.dev, lkp@intel.com,
-	Jens Axboe <axboe@kernel.dk>, Damien Le Moal <dlemoal@kernel.org>,
-	Hannes Reinecke <hare@suse.de>, linux-m68k@lists.linux-m68k.org,
-	linux-um@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org, drbd-dev@lists.linbit.com,
-	nbd@other.debian.org, linuxppc-dev@lists.ozlabs.org,
-	ceph-devel@vger.kernel.org, virtualization@lists.linux.dev,
-	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
-	dm-devel@lists.linux.dev, linux-raid@vger.kernel.org,
-	linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
-	nvdimm@lists.linux.dev, linux-nvme@lists.infradead.org,
-	linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
-	ying.huang@intel.com, feng.tang@intel.com, fengwei.yin@intel.com
-Subject: Re: [axboe-block:for-next] [block]  bd4a633b6f:
- fsmark.files_per_sec -64.5% regression
-Message-ID: <20240626061804.GA23481@lst.de>
-References: <202406241546.6bbd44a7-oliver.sang@intel.com> <20240624083537.GA19941@lst.de> <Znuw/4zMD4w5Oq2a@xsang-OptiPlex-9020>
+	by bendel.debian.org (Postfix) with ESMTPS id DAE5B20594
+	for <nbd@other.debian.org>; Wed, 26 Jun 2024 08:39:10 +0000 (UTC)
+Received: from mas-ckd-mts-104c5.mail.goo.jp (mas-ckd-mts-104c5.mail.goo.jp [153.128.117.70])
+	by mas-dfr-mts-106c2.mail.goo.jp (Postfix) with ESMTP id A19EE180002E7
+	for <nbd@other.debian.org>; Wed, 26 Jun 2024 17:29:19 +0900 (JST)
+Received: from mas-spm-mts-103c1.ocn.ad.jp (mas-spm-mts-103c1.ocn.ad.jp [153.153.66.227])
+	by mas-ckd-mts-104c5.mail.goo.jp (Postfix) with ESMTP id 022CA700008BC;
+	Wed, 26 Jun 2024 17:28:44 +0900 (JST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=goo.jp; s=20240118;
+	t=1719390524; bh=eMsjFSL+AROsJwtPG+4AZB8T5U0sonLijLRWgrD0/eQ=;
+	h=To:Subject:From:Date:From;
+	b=capbOvSLv2itIbEA7Dweer7hz3OSVUdY5LCai4aA3kWT6lfRbT2JSnMiR4I+lu3Pa
+	 NlMcTZDWzle6Cu+PphWHWRwfxOS1nL9G51reQIGo6nf2P7gSbROvqn0kEZ9LLdxlPp
+	 9mJQM6wEtmT4AmEc64z8r3Jf3ELKs59n+2TCfMaWui0m8hWP8Njd3fjamZOimUd+UP
+	 HFTlI85VYEBIL/0oMT9VgV+Zj+JyYC8kLlkhTo3J2oGEWfIfvDY/EyVfDJM3ZMGl7h
+	 0A6xnH1rI/qpBEh5WqJjNX7/+SAEtY/rkctnkcvyv+Nfr+Cd+IhR1+1pttihXvv7EZ
+	 6/5PDMNgTE7gw==
+Received: from mas-vc-mts-102c1.ocn.ad.jp ([153.138.237.87])
+	by mas-spm-mts-103c1.ocn.ad.jp with ESMTP
+	id MO1DssMHWhIfVMO1DsvKl9; Wed, 26 Jun 2024 17:28:43 +0900
+Received: from mas-sdpx-mts-105c2.mail.goo.jp ([153.128.117.221])
+	by mas-vc-mts-102c1.ocn.ad.jp with ESMTP
+	id MO1Bs270UR4dXMO1BsMwSG; Wed, 26 Jun 2024 17:28:43 +0900
+Received: from md-app-cb005.noc-chibaminato.ocn.ad.jp (md-app-cb005.ocn.ad.jp [153.138.211.201])
+	by mas-sdpx-mts-105c2.mail.goo.jp (Postfix) with ESMTP;
+	Wed, 26 Jun 2024 17:28:41 +0900 (JST)
+Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Znuw/4zMD4w5Oq2a@xsang-OptiPlex-9020>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 7bit
+To: undisclosed-recipients:;
+Subject: Kindly reply via abu79aziz@gmail.com
+From: Office! <ryuusei.nanoha@goo.jp>
+Message-ID: <171938987786.38638.15316714800476359904@goo.jp>
+X-Originating-IP: [102.135.174.125]
+Date: Wed, 26 Jun 2024 17:28:41 +0900
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <CKE5Dn0DDfF.A.y1SF.2Y7emB@bendel>
+Resent-Message-ID: <XG8VLCHDjuM.A.4ikJ.mf9emB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3084
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3086
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,26 +84,30 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240626061804.GA23481@lst.de
-Resent-Date: Wed, 26 Jun 2024 06:33:26 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/171938987786.38638.15316714800476359904@goo.jp
+Resent-Date: Wed, 26 Jun 2024 08:57:10 +0000 (UTC)
 
-On Wed, Jun 26, 2024 at 02:11:11PM +0800, Oliver Sang wrote:
-> hi, Christoph Hellwig,
-> 
-> On Mon, Jun 24, 2024 at 10:35:37AM +0200, Christoph Hellwig wrote:
-> > This is odd to say at least.  Any chance you can check the value
-> > of /sys/block/$DEVICE/queue/rotational for the relevant device before
-> > and after this commit?  And is this an ATA or NVMe SSD?
-> > 
-> 
-> yeah, as Niklas mentioned, it's an ATA SSD.
-> 
-> I checked the /sys/block/$DEVICE/queue/rotational before and after this commit,
-> both show '0'. not sure if this is expected.
-> 
-> anyway, I noticed you send a patch [1]
-> 
-> so I applied this patch upon bd4a633b6f, and found the performance restored.
+Greetings,
 
-Thanks for testing!
+I am Abu Aziz from Sudan,
+
+I am interested in relocating to live and invest in your country due to the current war situation in my country.
+
+I am in search of a partner to assist me to get out of Sudan safe and all my money safe where i can put all of it safe. My life here is in real danger. I can't tell how long I can manage to save my life here and my family here.
+
+I will kindly request these things from you please,  you should have an interest and good idea of investment plans like:
+
+(1) Assist in the transfer of the cash to be invested
+
+(2) Advise on lucrative areas for investment.
+
+(3) Assist me in purchase of properties and legal documents
+
+If you agree to render your service to me in this regard, 35% of the
+money to be invested will be allocated to you.
+
+Kindly reply me directly here { abu79aziz@gmail.com } if your willing to help me
+
+Thank you..
+Aziz
 
