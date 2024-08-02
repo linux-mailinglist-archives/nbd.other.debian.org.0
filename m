@@ -1,98 +1,188 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76FC993F9C8
-	for <lists+nbd@lfdr.de>; Mon, 29 Jul 2024 17:45:12 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35FE7945B0D
+	for <lists+nbd@lfdr.de>; Fri,  2 Aug 2024 11:33:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 421582088B; Mon, 29 Jul 2024 15:45:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jul 29 15:45:12 2024
-Old-Return-Path: <cipkuehl@gmail.com>
+	id E903620514; Fri,  2 Aug 2024 09:33:09 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Aug  2 09:33:09 2024
+Old-Return-Path: <prvs=9378c811c=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,LDO_WHITELIST,
-	RCVD_IN_DNSWL_NONE autolearn=unavailable autolearn_force=no
-	version=3.4.6
+X-Spam-Status: No, score=-1.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SARE_MSGID_LONG45,
+	SARE_MSGID_LONG50 autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 3019820869
-	for <lists-other-nbd@bendel.debian.org>; Mon, 29 Jul 2024 15:28:46 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 4FD09204EA
+	for <lists-other-nbd@bendel.debian.org>; Fri,  2 Aug 2024 09:17:04 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.099 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-2.881 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FREEMAIL_FROM=0.001, LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=ham autolearn_force=no
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
+	SARE_MSGID_LONG45=0.893, SARE_MSGID_LONG50=0.726]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id txI-KPkXMQrY for <lists-other-nbd@bendel.debian.org>;
-	Mon, 29 Jul 2024 15:28:39 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id D572520844
-	for <nbd@other.debian.org>; Mon, 29 Jul 2024 15:28:39 +0000 (UTC)
-Received: by mail-pl1-x62d.google.com with SMTP id d9443c01a7336-1fc49c0aaffso19369045ad.3
-        for <nbd@other.debian.org>; Mon, 29 Jul 2024 08:28:39 -0700 (PDT)
+	with ESMTP id L05WDCT_mr-w for <lists-other-nbd@bendel.debian.org>;
+	Fri,  2 Aug 2024 09:16:59 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
+X-Greylist: delayed 438 seconds by postgrey-1.36 at bendel; Fri, 02 Aug 2024 09:16:58 UTC
+Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id B9A54204E1
+	for <nbd@other.debian.org>; Fri,  2 Aug 2024 09:16:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1722590218; x=1754126218;
+  h=from:to:subject:date:message-id:content-id:
+   content-transfer-encoding:mime-version;
+  bh=Y5o4vkVdLAIy3GPjPGS+BtNMelgFnpf2W//IyPk3b9I=;
+  b=DNsOfid4G+06u6PuuZWcLhjP+tobU5HyI4kQtVQQIbhCNvyqsaLdy1f+
+   mQdtConyKmXHtUWlgj8Fcrvhe76gKIthOh4yEuTnqh57TFuoDj1M+Pr+F
+   0uq/RBUriL5oTaMS8RMuk8vtyWe6c9ys98UAqTYNEFX48JZIcYr6GzTTO
+   ljDeVfU7sAwuLf7U/rj8Kj+7yfWB8ikxgAGxDfkzLo3xupls8KiJEFwNc
+   6XkMihj7Pac/f+zCFdspsQPijpMkhC1T3DgAPSBmwdDu2NKAexBVh0QWg
+   Fd3m66mQmm7rMjgxGoJgodmAtk721YkL43pzPgg+S8FfTVSfp2TE778/h
+   w==;
+X-CSE-ConnectionGUID: mB0adR0lSVWchD2UPEyRug==
+X-CSE-MsgGUID: D5OtwO+zRGqIJLBGanM7Jw==
+X-IronPort-AV: E=Sophos;i="6.09,257,1716220800"; 
+   d="scan'208";a="23364450"
+Received: from mail-westcentralusazlp17010000.outbound.protection.outlook.com (HELO CY4PR05CU001.outbound.protection.outlook.com) ([40.93.6.0])
+  by ob1.hgst.iphmx.com with ESMTP; 02 Aug 2024 17:09:36 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=G+9FNxQIMdUZNU9ZHY/ERBPQUCtoAAsR7FXoB/0vSxq2E+CppERIZTydRBfxfjp3QUTuKezoBmdNWxSyVE+ZJAX9uwiEzN57cuqEdT0YRDdbMUwZUhYXtRUPrVWpW9Mn/xY/qDn1tMehRg4FFQmzbGS9BoI5fmLGkn0eA24rZsVsV6s+j/wlmAcpPQbu6RFHuHYIqa9uqKiegpICJQkUMbx7dO9A98CELtJ5jF6ra2eNwCIgU3Rs/UUOBcgUH+w9//E1LuZbRWRiE683q1pTqNdQxTHm/EvvOha3Pz2UoqTi80xhRjsZsSiMa9KsUQbsXv7aoQ8oBaAUP9PiFMz2Pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Hrpm4VvzBt7edfwlCanBXqSwvwiLA1e1Meeub74ld94=;
+ b=i62TjQW38TnokSGNKnyI+6bJhw4waA7fQG5oyk7WDsaCPq/IIyRjyFERgRaDqbmPlZv84HzvF+mg/Bfz+eyHAEjssXN2Yw/IadV+AHsopuho2+D6dw2QtxH3TQ5gAiciuK5okARi4h8D3e9EmLmiP2FpSzCiZKc/tOqRZTGYvlKwcpt6r3Vt3QFQe/p2FLqpRTwH8JNUQk2siMR+3BeJumZYpBVFx7aBU0ZQt+Rie4hxOEzL3vhsaruy7dSK873xa+sXKAlVKsuzbZ1xmETlMLvaLO8GG8QtSPakPyID/AIFe6ZmY3J4LZeXKX9TrcFERe0XtHnZNRYoWPWgWJ/87g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722266916; x=1722871716; darn=other.debian.org;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XTVQgRhl0pd1/+J+vt0YACXYBY1yQgtsHBbDa2uu3MI=;
-        b=aELyJlKdaZESWVDrpgxgFuY+rGRK9rzj265hycYocvcjRBe7x/ZVz2VV6Qp/rCBehl
-         4XqOPnH9hsPK9ds3JuEV21nkG6GOWngRtHpGHCIO4ivhAqzN1ipb9yKztA+KK+pfcHHq
-         PIJK5/NS73/Qa+1Z1zJ7aAPFLSKJzn6SUNEcDXCVwws3C8FnrqMXzUjbKyji5dxl3Dol
-         OD/Ri6TYsbik7+1caV+nOuGxfpbDNFhoBM+i/YFsXK+NRFnNInrlvJTf3Lcvr7K8hjf3
-         n/QL8KcCy3runtOnLUiG7W0G3FzQ4VoEp4YRKnS8OGJU2I/Okq9oUW0Y7n3IQ2FDbTlb
-         EW7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722266916; x=1722871716;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XTVQgRhl0pd1/+J+vt0YACXYBY1yQgtsHBbDa2uu3MI=;
-        b=eaHoRdkvn82jUc4qLvZclwjI54VEOJZCsl3OvB4nJl7nse1afrN4zPuv2W99Njr/Km
-         rBQVNF/9teYdQSVDfULWof77bsJq02etbPJ0whloLEkGB9Q5qksyLpQw8kgr8zSZmoBi
-         OI4pm9jt+AbBjy4SpHDjWg8JQnbBMzBrsuieESNRrf4wyQdnG84xVNV+Rl+i1BETwHRM
-         MnDhjXt68WxN2aDh/OoxNnU8RmIp0NKGS220da8ZI9bfbNkKAPDXZFopyoj8QZMtqR4n
-         XVSjicHfBZhpM/BflVztS9yaLJ2zAg6SPikBTMYd73u9comKJ4bDW8JZrWQmsZ3AnLcC
-         PJmg==
-X-Gm-Message-State: AOJu0YxNEe+jDs3t9z8evd5kxLpX6cXeNsAfV+p0YiClBpgk6/6s0gAh
-	Tp5kpMTjmqIh7mYpSJnWf6kxZ7oNUn/Y6DUfMIaIBl3IZofQkhy0
-X-Google-Smtp-Source: AGHT+IH8Uw/IkYpSXadJcw9B5k5gQyqTbTvASM2QmsC6qYV1T7afDyYbIJ7ESBdVohbREp/1+yN/7Q==
-X-Received: by 2002:a17:902:e88a:b0:1fc:327a:1f48 with SMTP id d9443c01a7336-1ff047e46f2mr62224685ad.12.1722266915886;
-        Mon, 29 Jul 2024 08:28:35 -0700 (PDT)
-Received: from smtpclient.apple ([50.53.88.240])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1fed7ca8fd5sm84287965ad.64.2024.07.29.08.28.35
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 29 Jul 2024 08:28:35 -0700 (PDT)
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.600.62\))
-Subject: Re: Status flags definition for NBD_REPLY_TYPE_BLOCK_STATUS
-From: Connor Kuehl <cipkuehl@gmail.com>
-In-Reply-To: <wljfepvxq7arxc5aawbrxuw55igjyxpdrgyqlvzonvkpdt3pef@axbpgnpevxgi>
-Date: Mon, 29 Jul 2024 08:28:24 -0700
-Cc: nbd@other.debian.org
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Hrpm4VvzBt7edfwlCanBXqSwvwiLA1e1Meeub74ld94=;
+ b=keSoDHFLTEMXDelvfAMhu7xH5uM365X2e+H8XO7x9dNrtfmzmjY7FB4jr4Sr2/LLC0eiMwM8oqC4rD++S8uvSXeQzxygNeA+d1sD34hmS/dpiXjooYp2RLrogzYHscpok9sVoWt8Guxs/v8WwpnOBYDP6DDs039CGZHr2sVua2s=
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com (2603:10b6:8:f::6) by
+ SJ0PR04MB7821.namprd04.prod.outlook.com (2603:10b6:a03:3ac::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7828.22; Fri, 2 Aug 2024 09:09:34 +0000
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a]) by DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a%4]) with mapi id 15.20.7828.023; Fri, 2 Aug 2024
+ 09:09:34 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
+Subject: blktests failures with v6.11-rc1 kernel
+Thread-Topic: blktests failures with v6.11-rc1 kernel
+Thread-Index: AQHa5LuxC+CuFbi0TEaEvvPM0kqq9g==
+Date: Fri, 2 Aug 2024 09:09:34 +0000
+Message-ID: <5yal5unzvisrvfhhvsqrsqgu4tfbjp2fsrnbuyxioaxjgbojsi@o2arvhebzes3>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM8PR04MB8037:EE_|SJ0PR04MB7821:EE_
+x-ms-office365-filtering-correlation-id: fd05aeca-d372-4fb4-6d0f-08dcb2d2d3f0
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?ukxA2Af1n8nPnhfm3E06PtScUiCrO/jVmq/STbEdDeOiHK0bMrQwZP258YCF?=
+ =?us-ascii?Q?BTrsdc82uc+XXCw/7LGB3LKiJXHctCXc4HSbE7bISq9QQpeUSETKUVymdZRe?=
+ =?us-ascii?Q?mwWpAU2X5fdZjOGqqd/XmrR7JMaBNGfiDUNwX5J8mIYW/7m/4JTrRrLSnv/D?=
+ =?us-ascii?Q?LS3k6kcB2jIGN2LO2cvGaLL8OhW6tfeAb28WgBmTn7HMTI7RqceIhYU7RS+a?=
+ =?us-ascii?Q?xhCNv0hH50Md7WyIk74q1Wf2gN9YWjElHH9zRLW3GoLcLJQBA9JGQu0pi/Pu?=
+ =?us-ascii?Q?iTJ9qeapkfF/sv9qYlzEcRfa5ldm0glXwFI6J380ke30OvnLxLhHlXBBkipw?=
+ =?us-ascii?Q?HMRg94wfOXqmDORrbDIPjopuKlvNo7Uny2ELsgv/CGzy/HqDFQAf5WhBA7LN?=
+ =?us-ascii?Q?ePE05I2ODtydX3yU1yYGBUG6FKQKz99lXOiWTKXaw55HkKe3+cV8Gs355Pcj?=
+ =?us-ascii?Q?cU6xgf8/kr1os0bJF+sZRExjNLVMwoWJQxYJi7VCG4hEQ49GRtroPW+wf0+6?=
+ =?us-ascii?Q?BUIlPj6aAi8mCdjcmWL+V5oi0hkRbW08cUSuUNo18eRnbXxfF5Nv2GIxvIiG?=
+ =?us-ascii?Q?fAD7WUho3vBHy9M5Cuc0FVaPek2+J0coEjen02JyhYXgtX7JWzTawObp1MNh?=
+ =?us-ascii?Q?I2/fFQWHRujGCcO6lKqWUr1edaTAKSoSA/16OCB4qvYrR9cOqHYgJzNyydUG?=
+ =?us-ascii?Q?0RWDVb6hU1welCcfIXaOAS2HtU10pvc1aUyWd7ICzAl1CPvdHWn8RRl9lRUX?=
+ =?us-ascii?Q?LLP8KZrt8hQsHmJyOFJ2sxz9mdHsmdef+7jrxMziQAR4VgIEm9HiGKOXTg4E?=
+ =?us-ascii?Q?PaschTKouElNxlkBdWD2KQXMXL6NqlzHlJb6fB2HQLhm8Thurk1+bhtBs7QX?=
+ =?us-ascii?Q?0z5ikuBJhkrioqPj05xXRrNbrAA+/s4souxfa5Gt67RbnXkoqTfKyncKTHiA?=
+ =?us-ascii?Q?sGrr129YTVMqFWZFUOsG5X3eIYRu2ARd22uQZXvb6BTd6KHsSVZvCcvTUu6Y?=
+ =?us-ascii?Q?gsZUzl0KEtPlwNhJiAJyr9OrBSjmKx+WsgT1UleMv6HaY9qvoucVwEHEprpl?=
+ =?us-ascii?Q?JiN6pIJf2OMtygK1UXYmjf01ZuoxWp6QhdHfCKWm+KJJTZ9qCB1pxbvM9k6v?=
+ =?us-ascii?Q?4di7YnXGNgAF/KKg5Z30HhHH2y6RWWtHDbzSAUIq7XN1KOkRRUjU7RdVSMF4?=
+ =?us-ascii?Q?dc77Be9Bl+m18BOafG4DfN7e22S5jjfvGtqZLu19uKMAX6Vb3LsvurU34ou1?=
+ =?us-ascii?Q?B5i99iU18fjoPtUUT7cyjhHTnSQ+3G1zC8Q6fAchFMvThYw0CvjeKF8ZtCjM?=
+ =?us-ascii?Q?+rPATfdFHM5ZfO1gkxp9Yyh+c4uRHxePE4XIjTKc1mpdADWoIqAPtYqAKX29?=
+ =?us-ascii?Q?qhrKSUM=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR04MB8037.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?H2k/OEX77lvek1GEi7UdgpFDpVPnJQ8XrbgaqO60Od6Bzom38NEDqordst+r?=
+ =?us-ascii?Q?OS7BP1rstERWhWXTGir+ZVHNNGKEY2xDtvLU+WYXW7B3Wnes+k9wnuAnt/pn?=
+ =?us-ascii?Q?bPOdzxlw5we5tJ+A4nqOXxID5d57ivgqJLIH4z7yKNBimeUgVfdSAmaYx5Ya?=
+ =?us-ascii?Q?cpgb6v43Q4uSlpnuDJXeQDcWhKXrdUU+B0xLajPY/zFqqpm65f8vRpe8TSWG?=
+ =?us-ascii?Q?rF+aaFYqye6+H20cd2gK2LzV5rLsRqk5kp2vYCeTQ5737DMW08VKK9pYLnCB?=
+ =?us-ascii?Q?11eoBE3rM83nqetJ+MRA4nzvLV1IBq5Zf+5+Mky4eF1pNo6kUgG9/nkg+Huc?=
+ =?us-ascii?Q?X2x29+8fuqrdnMdx1D5uuoJchAxoLLPjpT10g7NxvAlF5Y+nZsCO4UPBkzFF?=
+ =?us-ascii?Q?3tIFwQuE297DF4zaDu76M3qqK5EZhHRFHns/hJeXdZwORT8T7r6ztmhHajaO?=
+ =?us-ascii?Q?PgfCb5V9EI6GrksnSh14GFZjTuVR6/c9XvWSOX8AI+6aKV76dueE09m5lf66?=
+ =?us-ascii?Q?oJIeBrhBX9f1sdRmTJ8P1CU5QFc1KJGod6ZUW6lTFYmgqh82fTYeYyAw13Sf?=
+ =?us-ascii?Q?rPXrt5QD/10HJMbisjMR8aCBO+Iavf9LULjYp7SP68rScjRg5IjElVIGjRo+?=
+ =?us-ascii?Q?rSrk5hxLXVi/a4wL4icir8mZeIVW/uo+y+B0oqGbHA3mm3SDboatrX3W+bmW?=
+ =?us-ascii?Q?EP//FCoZJ7IZUy6+1F6pOxTiOaFjFAsGZh2qXQMU5QIDPtJAv/JZnF+fmnTF?=
+ =?us-ascii?Q?X9jncM3Nq/UdjInpaS+/uDmcWAUQEqfn0GkYogMjZvCAaP+qgxtgecv0g0rc?=
+ =?us-ascii?Q?R8/qUbBP9O+okiBI/XdgPE80veeg6eOm+RdSot5N7IAhPdydZzyCIgVt5GL5?=
+ =?us-ascii?Q?eWctaqfG1TIcOU+qL0e1nh3cvXLqWw/w9pcRjunOZRYAGpUaRjyXKbfkJD4e?=
+ =?us-ascii?Q?szwj6/AKzqleYyE6wEK0lT4CicCQD5ZfSPx5flDW8Iy19Kcm2w8nvGHPMRZ+?=
+ =?us-ascii?Q?Qs2xXE6tNpoIrp6KAG9ZWSaW9yEAk0YXCBbvC+GWjrWVTtesdrI0i9daNee4?=
+ =?us-ascii?Q?13veyUZX9qwKcWxoidlRxnD2fnjcTyXtgdKfEpsR11FAGxp1RizudJ/ALfBK?=
+ =?us-ascii?Q?SHDtq2kHn1X8aCgtR+aIF0UIiZc/jOHHd2DGQyp17qs28nJOoNj9WgyPtMBz?=
+ =?us-ascii?Q?G6v1F8TRVxx8lWKnxzZtuadQvVIrKejtr87uhfLHnCH64xtw1AbXiFg/Sy9q?=
+ =?us-ascii?Q?x3XzNeEflQKOAO8F07r4ObAg5HBjA7oaTzv45pQ0hT/5Z2g+n3GlL2uWdmYe?=
+ =?us-ascii?Q?01QlqRZXZozNex6kE+ss1sIxRXhmtVP3znVbKMGqr3lx+k6NilsVswGqXWfM?=
+ =?us-ascii?Q?6apOQU7PnDEALCVrTd9N9bgYJH8flwrevDlJEuC/5yVWkkkjmpP9Gi4mOv1Y?=
+ =?us-ascii?Q?DBOCSnRThPJ6Pzc0OygvgPwkCrHMc1oDgEW4ev3zCTsoy5+FpiAfyHvtopuU?=
+ =?us-ascii?Q?8tLb1t8/uMdsUpleLZtvaBsbmQ9W0YqDeoLwb4j/Ovq4qGl2XtpqE5/VFIEp?=
+ =?us-ascii?Q?nboImMDnmgmlNWn52pRMv0tXkCAWYfXwvDpfWtHRqiWC4ru6H183EuOGFpVl?=
+ =?us-ascii?Q?VT0hXAXyQv2Wisvg30c9V3A=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <2A17E0A46506184FB2D3AC1CD602A266@namprd04.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <E805E44E-0595-44AB-BEB6-B696C506560E@gmail.com>
-References: <2B83C3DC-D923-4D9C-94C3-66336F41FB2E@gmail.com>
- <wljfepvxq7arxc5aawbrxuw55igjyxpdrgyqlvzonvkpdt3pef@axbpgnpevxgi>
-To: Eric Blake <eblake@redhat.com>
-X-Mailer: Apple Mail (2.3774.600.62)
+MIME-Version: 1.0
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	UDjr1imysr4bcflTuWX7YeBioo9/VzCYGGF1Cb8rFnd9w6MPRG+JrFlAtUOheGAsfrd2tas6bU0U4q6ch6E06aA5AW8dZx3UByw26asUJL0ibZv7/r7WJG+4sAq5WsqOq/RS94Yq79PSrCwI/rytbAVZhHoKoB8FRMK8LrmICIFMY4Zpex61mOin2p7bHIhxjSsR0RwLAJNqqxkaxwtelfwExBfSuJc+UCfXxkoXTQpEflQB4HIeAYPdTI5OU4w6kd2JH5/mlvoYEVjpPJ6AZeqwzPFPfXa1//lf1FrltFcAODoV6n2lHV7EqboNqEqSLxMs7HoAibyOp6/ClAIh5/Sj9avBlKWF22nPGlpSr+DoXS545sNOdFkeC/z6J25l/kvdHCo2xDnNj5v9Ane5pBriqeWkzT4D94Ho+lRsdnviOxxBk0XeXbxchVIA+Tf5GeuQYTVa3Tq+bCqECJ7f7VLlW8/iErjO/sjAEaQHwcG2iZ2cm0zOyxoYCnuhuFO7DFhG/dI6ZfSG6r9UTkkXWlj+Y4erM0fVWStaODvBMId00ewm23q30udgl+C63sVmQHM9HE9h1JKaduL3R265vWgX2wk2A6DWWmJeaG4izr8lMp+uIUcXAWJbB6qCJ3a+
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR04MB8037.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd05aeca-d372-4fb4-6d0f-08dcb2d2d3f0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Aug 2024 09:09:34.7980
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: EVrzrfXx9Q5dBaDyzRDeVTRlzVoUBAoY9LrqS2+mqhkJE+WSwsZT8Ol3bhviR7eSgg7V8YWJuHozzDiDYCioUouqVGLZUTxSbl+XSfE5f88=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR04MB7821
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <boX5Bj7G3qB.A.dhoE.Ik7pmB@bendel>
+Resent-Message-ID: <WTUUpORSDo.A.hI2L.VfKrmB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3110
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3111
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -102,127 +192,87 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/E805E44E-0595-44AB-BEB6-B696C506560E@gmail.com
-Resent-Date: Mon, 29 Jul 2024 15:45:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/5yal5unzvisrvfhhvsqrsqgu4tfbjp2fsrnbuyxioaxjgbojsi@o2arvhebzes3
+Resent-Date: Fri,  2 Aug 2024 09:33:09 +0000 (UTC)
+
+Hi all,
+
+I ran the latest blktests (git hash: 25efe2a1948d) with the v6.11-rc1 kerne=
+l.
+Also I checked the CKI project run results with the kernel. In total, I obs=
+erved
+three failures as listed below.
+
+Comparing with the previous report using the v6.10 kernel [1], two failures=
+ of
+dm/002 and nbd/001,002 were addressed by blktests side fixes. The srp/002
+failure with v6.10 kernel was addressed by the kernel side fix (Thanks!).
+However, srp/002 had another new failure symptom with v6.11-rc1 kernel.
+
+[1] https://lore.kernel.org/linux-block/ym5pkn7dam4vb7zmeegba4hq2avkvirjyoj=
+o4aaveseag2xyvw@j5auxpxbdkpf/
+
+List of failures
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+#1: nvme/041 (fc transport)
+#2: srp/002
+#3: nvme/052 (CKI failure)
 
 
-> On Sat, Jul 27, 2024 at 08:02:35PM GMT, Connor Kuehl wrote:
-> > >   32 bits, length of the extent to which the status below
-> > >      applies (unsigned, MUST be nonzero) =20
-> > >   32 bits, status flags =20
-> >=20
-> > I can't seem to find the definition for these status flags. It's =
-likely
-> > I may have just missed it. Any pointers will be much appreciated.
->=20
-> The status flags are defined per-metacontext.  The spec defines the
-> "base:allocation" metacontext:
->=20
-> =
-https://github.com/NetworkBlockDevice/nbd/blob/master/doc/proto.md#baseall=
-ocation-metadata-context
->=20
-> which in turn defines flag 0x01 for NBD_STATE_HOLE (clear by default
-> or if the extent is known to be allocated, set only if the extent is
-> known to be unallocated), and flag 0x02 for NBD_STATE_ZERO (clear by
-> default or if the extent is known to contain non-zero data, set only
-> if the extent is known to read as zero).
->=20
-> If you are implementing NBD_BLOCK_STATUS on top of files,
-> lseek(SEEK_HOLE) can be used to set NBD_STATE_HOLE|NBD_STATE_ZERO in
-> parallel (either both bits are clear or both bits are set).  But there
-> are some other storage mechanisms where the distinction between bits
-> is meaningful (for example, iSCSI has the notion of some hardware that
-> supports the notion of allocation but does not promise whether
-> unallocated regions read as zero; conversely, qcow2 files have a
-> notion of regions of a disk image that read as zero but which are
-> already allocated so that writing to those regions won't expand the
-> qcow2 file size).
->=20
-> There are other defined metacontexts linked from the NBD spec; in
-> particular, QEMU defines two metacontexts at
-> =
-https://gitlab.com/qemu-project/qemu/-/blob/master/docs/interop/nbd.txt
->=20
-> where "qemu:dirty-bitmap:XXX" defines 0x01 to be set if an extent is
-> known to be dirty in the bitmap named XXX, and where "qemu:allocation"
-> is an integer representing the depth of where the allocation comes
-> from (0 for unallocated, 1 for the current image, 2 for the first
-> backing layer, 3 for the second backing layer, and so forth).
+Failure description
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Aha! Thank you very much for the doc reference and the detailed
-explanation. My main goal was to provide a higher level abstraction for
-interpreting and using the values returned by the BLOCK_STATUS command.
+#1: nvme/041 (fc transport)
 
-In any case, I can still define these as constants to make life easier
-for the library's clients, especially if they are primarily interested
-in "base:allocation" and "qemu:dirty-bitmap", as I am.
+   With the trtype=3Dfc configuration, nvme/041 fails:
 
-> There may be other NBD metacontexts out there, but so far, none of
-> them have submitted a patch to be included in the mention from the NBD
-> spec.  One proposal that I have considered (but have not actually
-> coded up) would be a series of NBD metacontexts allowing the ability
-> to expose Zoned Block Devices (ZBD,
-> https://zonedstorage.io/docs/linux/overview) across NBD; in
-> particular, this would include metacontexts that reveal information
-> such as the current 64-bit append location within a given zone
-> (getting 64-bit block status would require the use of extended
-> headers, currently mentioned as experimental in spec but currently
-> implemented by qemu and libnbd).
+  nvme/041 (Create authenticated connections)                  [failed]
+      runtime  2.677s  ...  4.823s
+      --- tests/nvme/041.out      2023-11-29 12:57:17.206898664 +0900
+      +++ /home/shin/Blktests/blktests/results/nodev/nvme/041.out.bad     2=
+024-03-19 14:50:56.399101323 +0900
+      @@ -2,5 +2,5 @@
+       Test unauthenticated connection (should fail)
+       disconnected 0 controller(s)
+       Test authenticated connection
+      -disconnected 1 controller(s)
+      +disconnected 0 controller(s)
+       Test complete
 
-Very interesting! As mentioned above, "base:allocation" and
-"qemu:dirty-bitmap" are top of mind for me today, but I'll check up on
-ZBD just out of curiosity. For now, I am targeting the base NBD
-protocol, but I may end up implementing the documented extensions.
+   nvme/044 had same failure symptom until the kernel v6.9. A solution was
+   suggested and discussed in Feb/2024 [2].
 
-> For what it's worth, the nbdkit project can be used for testing
-> interoperability with your client implementation (among other things,
-> nbdkit provides it easy to write a shell script server that advertises
-> various block status combinations for "base:allocation" for testing
-> how your client reacts).  To date, no one has contributed patches to
-> nbdkit to support the emulation of any NBD metacontext other than
-> "base:allocation", but if it would help integration testing, that may
-> be a worthwhile feature to add to nbdkit.
-> https://libguestfs.org/nbdkit.1.html
+   [2] https://lore.kernel.org/linux-nvme/20240221132404.6311-1-dwagner@sus=
+e.de/
 
-Yes! I was planning on using nbdkit as the basis of my integration
-testing.
+#2: srp/002
 
-> I can also point you to the libnbd project that may serve as a way to
-> incorporate an existing client implementation into your project rather
-> than writing a client from scratch.
-> https://libguestfs.org/libnbd.3.html
+   New "atomic queue limits API" was introduce to the scsi sd driver, and i=
+t
+   created a circular lock dependency. A fix patch candidate is available [=
+3].
 
-On the one hand I'd love to use an off-the-shelf, battle-tested, and
-mature implementation, but on the other hand I wouldn't learn nearly as
-much! lol
+   [3] https://lore.kernel.org/linux-block/20240801054234.540532-1-shinichi=
+ro.kawasaki@wdc.com/
 
-I did seriously consider it, but I am writing my client implementation
-in the Go programming language, and I would like to avoid a CGO/FFI
-dependency since those tend to complicate multi-platform builds for the
-usual suspects, adds a system dependency to the deployment target, and
-Go's runtime behavior when interacting with the FFI is somewhat strange
-and slow.
+#3: nvme/052 (CKI failure)
 
-There are some other Go projects in this space, but the ones I have
-found all seem to be some combination of:
+   The CKI project reported that nvme/052 fails occasionally [4].
+   This needs further debug effort.
 
-* Abandoned and implements only one or two parts of the client protocol,
-  mainly just opening a TCP connection and one or two NBD option verbs
-* Focused exlusively on creating NBD servers, or /dev/nbdX devices
-* Depend on CGO/FFI
+  nvme/052 (tr=3Dloop) (Test file-ns creation/deletion under one subsystem)=
+ [failed]
+      runtime    ...  22.209s
+      --- tests/nvme/052.out	2024-07-30 18:38:29.041716566 -0400
+      +++ /mnt/tests/gitlab.com/redhat/centos-stream/tests/kernel/kernel-te=
+sts/-/archive/production/kernel-tests-production.zip/storage/blktests/nvme/=
+nvme-loop/blktests/results/nodev_tr_loop/nvme/052.out.bad	2024-07-30 18:45:=
+35.438067452 -0400
+      @@ -1,2 +1,4 @@
+       Running nvme/052
+      +cat: /sys/block/nvme1n2/uuid: No such file or directory
+      +cat: /sys/block/nvme1n2/uuid: No such file or directory
+       Test complete
 
-All that said, I have basically implemented the whole thing already, and
-I am just working on polishing it up and adding automated unit testing.
-
-I suspect the last 5% of the project may be the longest though, since I
-need to go through it carefully and make sure it behaves the way the
-protocol says it should behave (for example, client MUST initiate a hard
-disconnect when server does X.)
-
-Anyways, thanks again! I really appreciate your insights.
-
-Sincerely,
-
-Connor
+   [4] https://datawarehouse.cki-project.org/kcidb/tests/13669275=
 
