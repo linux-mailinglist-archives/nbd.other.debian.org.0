@@ -2,69 +2,81 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EFF948B03
-	for <lists+nbd@lfdr.de>; Tue,  6 Aug 2024 10:15:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AC9194918B
+	for <lists+nbd@lfdr.de>; Tue,  6 Aug 2024 15:31:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0E047205F1; Tue,  6 Aug 2024 08:15:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug  6 08:15:09 2024
-Old-Return-Path: <piotr.pastuszak@totradecosts.pl>
+	id E266A205E7; Tue,  6 Aug 2024 13:31:42 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug  6 13:31:42 2024
+Old-Return-Path: <wouter@grep.be>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,META_POLISH_TO_NON_POLISH_LIST
-	autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: 
+X-Spam-Status: No, score=-10.9 required=4.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,LDOSUBSCRIBER,LDO_WHITELIST
+	autolearn=unavailable autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 220AB204EF
-	for <lists-other-nbd@bendel.debian.org>; Tue,  6 Aug 2024 07:59:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 00CB42053D
+	for <lists-other-nbd@bendel.debian.org>; Tue,  6 Aug 2024 13:31:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=3.82 tagged_above=-10000 required=5.3
-	tests=[BAYES_40=-0.01, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	META_POLISH_TO_NON_POLISH_LIST=4, UNWANTED_LANGUAGE_BODY=0.03]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-6.799 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_INVALID=0.1, DKIM_SIGNED=0.1,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.001, LDO_WHITELIST=-5]
+	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 8rIab3VN2_3t for <lists-other-nbd@bendel.debian.org>;
-	Tue,  6 Aug 2024 07:59:21 +0000 (UTC)
+	with ESMTP id pTz2-EfWpY6B for <lists-other-nbd@bendel.debian.org>;
+	Tue,  6 Aug 2024 13:31:19 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 496 seconds by postgrey-1.36 at bendel; Tue, 06 Aug 2024 07:59:21 UTC
-Received: from mail.totradecosts.pl (mail.totradecosts.pl [217.61.97.243])
+Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 7C0DE204E9
-	for <nbd@other.debian.org>; Tue,  6 Aug 2024 07:59:21 +0000 (UTC)
-Received: by mail.totradecosts.pl (Postfix, from userid 1002)
-	id 6856C829D1; Tue,  6 Aug 2024 09:50:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=totradecosts.pl;
-	s=mail; t=1722930661;
-	bh=Ob/UiIh7dvVik5hHRpcVwVnGpnuOiTO3ZZS07sdQB1Q=;
-	h=Date:From:To:Subject:From;
-	b=xCTb6D1yKZPZ4qQ5SSxjJdxMzQmr6m+0P0O2CO6XbEnFmqX64ua5Aev/kDBoOdlE7
-	 fKLnDax3qk/gvDxAsnDycuvd9zKmiMhwy1o8AaBVkyVPyGvQ9ZFI9MzlHDd9k77qL+
-	 KPEBN1o7i0twdpdx28A1QVnueYn40IGXi7arHfOm2oBfW1e72yEFhazsvsTx5BMkc7
-	 ubMHpr7uqf4w28BIZgbRE7w+F+zZksLhM6CRipv7t3Bh97z3dL5BJxOk5DuiMF+Sgk
-	 dDg7Rs3NEKRTqYs3yjw59JKKgG7tIxubFPGUpNxsQpUF3KKMN4W7akpLeka7l05YeS
-	 Uasjnu0aai0qw==
-Received: by mail.totradecosts.pl for <nbd@other.debian.org>; Tue,  6 Aug 2024 07:50:43 GMT
-Message-ID: <20240806084500-0.1.30.dfil.0.wo9njbgfym@totradecosts.pl>
-Date: Tue,  6 Aug 2024 07:50:43 GMT
-From: "Piotr Pastuszak" <piotr.pastuszak@totradecosts.pl>
-To: <nbd@other.debian.org>
-Subject: =?UTF-8?Q?Wyzerowanie_wp=C5=82at_na_PFRON?=
-X-Mailer: mail.totradecosts.pl
+	by bendel.debian.org (Postfix) with ESMTPS id 56C4B20557
+	for <nbd@other.debian.org>; Tue,  6 Aug 2024 13:31:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=grep.be;
+	s=2017.latin; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To
+	:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=4ezqpc2sp8gD3/2IUsk5Z3eEd9Ks2MQHDdk337O8ScE=; b=Qio/YNTKl3rtT6yh1SL1SIEv5x
+	412DlnJ8MEiGHSnVs88ygGJknbhqqTfC6IUSlM95ZwfdvV0S8DA79Qtq3ARBlF4A2PzmWrm+dPZ7s
+	thGp0Q4mYuRVeUTpgKdGyA3c65KT/1B3BZ4vYeep+rEWVZZRCPVK4ayAsnRNY689vGp+s+BhtVoE3
+	mhQg5kpZOZo9HC2ovqtmoSLJZECk+CDP0jP9lCUmpDvOpyp3URMSl8KhBuCwtj/+rKXTIGaHpBvwR
+	OsbAU+B5uYKeO3bV0wKDiDBuizd5SKf4YsblY5aKHPHqQePoioK9LLy0FUzb9jhsQY453ZzHm+Un0
+	WL0L5/Eg==;
+Received: from [196.251.239.242] (helo=pc220518)
+	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <wouter@grep.be>)
+	id 1sbKHT-00HZHT-2F;
+	Tue, 06 Aug 2024 15:31:15 +0200
+Received: from wouter by pc220518 with local (Exim 4.98)
+	(envelope-from <wouter@grep.be>)
+	id 1sbKHP-000000017kU-2DJf;
+	Tue, 06 Aug 2024 15:31:11 +0200
+From: Wouter Verhelst <w@uter.be>
+To: Josef Bacik <josef@toxicpanda.com>,
+	Jens Axboe <axboe@kernel.dk>
+Cc: Wouter Verhelst <w@uter.be>,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 1/3] nbd: implement the WRITE_ZEROES command
+Date: Tue,  6 Aug 2024 15:30:54 +0200
+Message-ID: <20240806133058.268058-1-w@uter.be>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240803130432.5952-1-w@uter.be>
+References: <20240803130432.5952-1-w@uter.be>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rc-Spam: 2008-11-04_01
+Content-Transfer-Encoding: 8bit
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <5tohk9L7F-B.A.lKiH.NudsmB@bendel>
+Resent-Message-ID: <JDGwpEV5sRP.A.4V6M.-WismB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3121
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3124
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -74,34 +86,88 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20240806084500-0.1.30.dfil.0.wo9njbgfym@totradecosts.pl
-Resent-Date: Tue,  6 Aug 2024 08:15:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20240806133058.268058-1-w@uter.be
+Resent-Date: Tue,  6 Aug 2024 13:31:42 +0000 (UTC)
 
-Szanowni Pa=C5=84stwo,
+The NBD protocol defines a message for zeroing out a region of an export
 
-czy wiedz=C4=85 Pa=C5=84stwo, =C5=BCe osoby z orzeczeniem o niepe=C5=82no=
-sprawno=C5=9Bci cz=C4=99sto przynosz=C4=85 nieocenione korzy=C5=9Bci dla =
-firm, nie tylko w zakresie organizacyjnym, ale r=C3=B3wnie=C5=BC finansow=
-ym?
+Add support to the kernel driver for that message.
 
-Niepe=C5=82nosprawno=C5=9Bci, z jakimi si=C4=99 spotykamy, cz=C4=99sto ni=
-e s=C4=85 widoczne, ale zawsze id=C4=85 w parze z niezwyk=C5=82=C4=85 ela=
-styczno=C5=9Bci=C4=85, kreatywno=C5=9Bci=C4=85 i zdolno=C5=9Bci=C4=85 do =
-efektywnego radzenia sobie w r=C3=B3=C5=BCnych sytuacjach. To w=C5=82a=C5=
-=9Bnie te cechy mog=C4=85 przynie=C5=9B=C4=87 nowatorskie rozwi=C4=85zani=
-a i wzmocni=C4=87 innowacyjno=C5=9B=C4=87 Pa=C5=84stwa firmy.
+Signed-off-by: Wouter Verhelst <w@uter.be>
+---
+ drivers/block/nbd.c      | 8 ++++++++
+ include/uapi/linux/nbd.h | 5 ++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
 
-Z sukcesem wspieramy przedsi=C4=99biorc=C3=B3w w redukcji koszt=C3=B3w zw=
-i=C4=85zanych z obowi=C4=85zkowymi op=C5=82atami PFRON. Zrealizowali=C5=9B=
-my setki projekt=C3=B3w, kt=C3=B3re przynios=C5=82y naszym klientom oszcz=
-=C4=99dno=C5=9Bci przekraczaj=C4=85ce 8 milion=C3=B3w z=C5=82otych.
-
-Jest to rezultat naszego zaanga=C5=BCowania w dostosowanie strategii rekr=
-utacyjnych do specyficznych potrzeb biznesowych.
-
-Czy chcieliby Pa=C5=84stwo skorzysta=C4=87 z bezp=C5=82atnej konsultacji?
-
-
-Pozdrawiam
-Piotr Pastuszak
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 5b1811b1ba5f..58221b89965d 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -352,6 +352,8 @@ static int __nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+ 	}
+ 	if (nbd->config->flags & NBD_FLAG_ROTATIONAL)
+ 		lim.features |= BLK_FEAT_ROTATIONAL;
++	if (nbd->config->flags & NBD_FLAG_SEND_WRITE_ZEROES)
++		lim.max_write_zeroes_sectors = UINT_MAX / blksize;
+ 
+ 	lim.logical_block_size = blksize;
+ 	lim.physical_block_size = blksize;
+@@ -421,6 +423,8 @@ static u32 req_to_nbd_cmd_type(struct request *req)
+ 		return NBD_CMD_WRITE;
+ 	case REQ_OP_READ:
+ 		return NBD_CMD_READ;
++	case REQ_OP_WRITE_ZEROES:
++		return NBD_CMD_WRITE_ZEROES;
+ 	default:
+ 		return U32_MAX;
+ 	}
+@@ -637,6 +641,8 @@ static blk_status_t nbd_send_cmd(struct nbd_device *nbd, struct nbd_cmd *cmd,
+ 
+ 	if (req->cmd_flags & REQ_FUA)
+ 		nbd_cmd_flags |= NBD_CMD_FLAG_FUA;
++	if ((req->cmd_flags & REQ_NOUNMAP) && (type == NBD_CMD_WRITE_ZEROES))
++		nbd_cmd_flags |= NBD_CMD_FLAG_NO_HOLE;
+ 
+ 	/* We did a partial send previously, and we at least sent the whole
+ 	 * request struct, so just go and send the rest of the pages in the
+@@ -1706,6 +1712,8 @@ static int nbd_dbg_flags_show(struct seq_file *s, void *unused)
+ 		seq_puts(s, "NBD_FLAG_SEND_FUA\n");
+ 	if (flags & NBD_FLAG_SEND_TRIM)
+ 		seq_puts(s, "NBD_FLAG_SEND_TRIM\n");
++	if (flags & NBD_FLAG_SEND_WRITE_ZEROES)
++		seq_puts(s, "NBD_FLAG_SEND_WRITE_ZEROES\n");
+ 
+ 	return 0;
+ }
+diff --git a/include/uapi/linux/nbd.h b/include/uapi/linux/nbd.h
+index d75215f2c675..f1d468acfb25 100644
+--- a/include/uapi/linux/nbd.h
++++ b/include/uapi/linux/nbd.h
+@@ -42,8 +42,9 @@ enum {
+ 	NBD_CMD_WRITE = 1,
+ 	NBD_CMD_DISC = 2,
+ 	NBD_CMD_FLUSH = 3,
+-	NBD_CMD_TRIM = 4
++	NBD_CMD_TRIM = 4,
+ 	/* userspace defines additional extension commands */
++	NBD_CMD_WRITE_ZEROES = 6,
+ };
+ 
+ /* values for flags field, these are server interaction specific. */
+@@ -53,11 +54,13 @@ enum {
+ #define NBD_FLAG_SEND_FUA	(1 << 3) /* send FUA (forced unit access) */
+ #define NBD_FLAG_ROTATIONAL	(1 << 4) /* device is rotational */
+ #define NBD_FLAG_SEND_TRIM	(1 << 5) /* send trim/discard */
++#define NBD_FLAG_SEND_WRITE_ZEROES (1 << 6) /* supports WRITE_ZEROES */
+ /* there is a gap here to match userspace */
+ #define NBD_FLAG_CAN_MULTI_CONN	(1 << 8)	/* Server supports multiple connections per export. */
+ 
+ /* values for cmd flags in the upper 16 bits of request type */
+ #define NBD_CMD_FLAG_FUA	(1 << 16) /* FUA (forced unit access) op */
++#define NBD_CMD_FLAG_NO_HOLE	(1 << 17) /* Do not punch a hole for WRITE_ZEROES */
+ 
+ /* These are client behavior specific flags. */
+ #define NBD_CFLAG_DESTROY_ON_DISCONNECT	(1 << 0) /* delete the nbd device on
+-- 
+2.43.0
 
