@@ -1,107 +1,79 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F17B957B52
-	for <lists+nbd@lfdr.de>; Tue, 20 Aug 2024 04:09:11 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CD8796C468
+	for <lists+nbd@lfdr.de>; Wed,  4 Sep 2024 18:51:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2FC0D20608; Tue, 20 Aug 2024 02:09:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Aug 20 02:09:11 2024
-Old-Return-Path: <yizhan@redhat.com>
+	id 6610820D09; Wed,  4 Sep 2024 16:51:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  4 16:51:13 2024
+Old-Return-Path: <01000191bdde2cc7-510d6542-814f-4d6e-b207-6223edeaf3b4-000000@amazonses.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,RCVD_IN_DNSWL_NONE,
-	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,T_SCC_BODY_TEXT_LINE autolearn=no
-	autolearn_force=no version=3.4.6
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.2 required=4.0 tests=CAPINIT,DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,RCVD_IN_DNSWL_NONE,
+	RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SARE_HTML_COLOR_NWHT,
+	T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1AC7D20757
-	for <lists-other-nbd@bendel.debian.org>; Tue, 20 Aug 2024 01:51:12 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 73BBE20DD8
+	for <lists-other-nbd@bendel.debian.org>; Wed,  4 Sep 2024 16:35:09 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.233 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.125, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001, T_SCC_BODY_TEXT_LINE=-0.01]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=3.285 tagged_above=-10000 required=5.3
+	tests=[CAPINIT=0.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+	HTML_MESSAGE=2, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+	RCVD_IN_MSPIKE_WL=0.001, SARE_HTML_COLOR_NWHT=0.623,
+	T_SCC_BODY_TEXT_LINE=-0.01] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id m2E6Aql0Hj1i for <lists-other-nbd@bendel.debian.org>;
-	Tue, 20 Aug 2024 01:51:07 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .redhat. - helo: .us-smtp-delivery-124.mimecast. - helo-domain: .mimecast.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 77519205E0
-	for <nbd@other.debian.org>; Tue, 20 Aug 2024 01:51:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1724118661;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zemSLB7cpZj/xdAoHKekxRhjOKghwOYrL/smZ5zzA84=;
-	b=O+0I7ry3yqRPxi/pEFeAkSx8nZfSkiGMr/L60xDuJDwQNVhOJybcj7JA+33S+UkXf2/9fF
-	E1Azo8P6XIB+RWC4XSz7ZATaIqwulh2ikWfMkpHOmPUGrTaCTVi44dcioyrtw4pFLK2A3+
-	nJx13Jh936UGE1STB/Xhcp0KPn3szTE=
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-279-o7LvVY4SNHO8GyP4YuYABA-1; Mon, 19 Aug 2024 21:51:00 -0400
-X-MC-Unique: o7LvVY4SNHO8GyP4YuYABA-1
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-2d406dc42f4so2487790a91.3
-        for <nbd@other.debian.org>; Mon, 19 Aug 2024 18:51:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724118659; x=1724723459;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zemSLB7cpZj/xdAoHKekxRhjOKghwOYrL/smZ5zzA84=;
-        b=DW2422FLvh64t9s6Mo5oP6zzV+VpJWMpFOBY52VF58gKBhHjPOjlCQjwQVS72y0t7W
-         jA1pBTUzTJ6zTagsSKEYCEYPitaM/vieTpt//9C39rIyS4pPqCOLQtONd2isIP4NGP7I
-         9kHhVKNDVYW6MvtYWgcu/c5Kj9oGJZd7iWasUwFHcg5P263UOzNYAX+YxsP264fiw2id
-         ++Mt7zBengIzkITFITyRrLxLD+O5n24vbISieics5+wsEQYJU3ft9tc/TIfat83pJFhg
-         iRysMBYQGyYV6F7nVhGLP5JHMf6CL3Aqc3XIyc6f+oCHh9v3lZbawtsrKte1WX4hfjaK
-         DhzQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUXB5JpYyOjBcghUiQnz6aKN3NKKy5PUC1yavFVhSolCzZn7+olSyy/PNi0q+uLHIsSPUU=@other.debian.org
-X-Gm-Message-State: AOJu0YyBFgRqmn3R0bB8dF3X6g901LZkpBUoKwAWf8Mak8nprDn6Y/ev
-	U6EVvcbzmhbIOHgpN91F6LHMTM0BwwmrGP4VtX3lgvalRTzTkeEDAhKbTA/X0rwilElMlDu35IY
-	5NWBlChb67GWykdybj5qj4p07uemxwo1SunxBwHNO/Uqn88ztBqvIfwu3soZzQerMBrEVFxkohE
-	QjwOnISs0XtK6g+OARdFdV1pDKug==
-X-Received: by 2002:a17:90a:8a02:b0:2c8:87e:c2d9 with SMTP id 98e67ed59e1d1-2d3e03e89dcmr12525654a91.39.1724118659445;
-        Mon, 19 Aug 2024 18:50:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF2xNwaA7efDn4iFU7NRQCn5zeIDhK2iOTMbDt+qvGPJ3lKC0GseK99B8PoX4eAcf/7EG7ilcLRq4e0JUPo6TI=
-X-Received: by 2002:a17:90a:8a02:b0:2c8:87e:c2d9 with SMTP id
- 98e67ed59e1d1-2d3e03e89dcmr12525636a91.39.1724118659021; Mon, 19 Aug 2024
- 18:50:59 -0700 (PDT)
+	with ESMTP id g1lf59Hbzw7q for <lists-other-nbd@bendel.debian.org>;
+	Wed,  4 Sep 2024 16:35:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 360 seconds by postgrey-1.36 at bendel; Wed, 04 Sep 2024 16:35:03 UTC
+Received: from a9-54.smtp-out.amazonses.com (a9-54.smtp-out.amazonses.com [54.240.9.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id C629220DD3
+	for <nbd@other.debian.org>; Wed,  4 Sep 2024 16:35:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zp24gzgnfngc654yfqkujl5bt4bc474s; d=pendletonfamilybrands.com;
+	t=1725467340;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-ID:List-Unsubscribe;
+	bh=yaInibg+BdLwK+FO+P4Zjb3RlBoYK1VJRT16HCJrx5U=;
+	b=oPloqYnu1u1cX7yFCuIciW26yEMzNGpd8bWGowhv9wK5n9MHqotam1NgNHFqoWrh
+	PGJ6/P+0va1mk8OaKusIAcGbeTTvffo/kIiqiaGF4+aaSqyjfZH1Wau1uvqX6ZmKOKf
+	FFx2vLj+pYzJoG3BjLylBy5wpWpWVH2UaIYPpdcY=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1725467340;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-ID:List-Unsubscribe:Feedback-ID;
+	bh=yaInibg+BdLwK+FO+P4Zjb3RlBoYK1VJRT16HCJrx5U=;
+	b=CjMAEFUWNRFrkOK4nSKyc+jA4gsOIjVVK31JiKZoJhe5HDSpAEFLfZhPz9G78Jqa
+	ysHmfaV+WZDL0L1gpkr4j8Hbfc3aVFA93AphvEeRpVM02cQCDwbYME76MMXJsp7lOSF
+	2M2tBKTJPAfxdnKlb2g0zlkE982qG2U3fCRQ45zc=
+Content-Type: multipart/alternative;
+ boundary="===============4917132460436416755=="
 MIME-Version: 1.0
-References: <5yal5unzvisrvfhhvsqrsqgu4tfbjp2fsrnbuyxioaxjgbojsi@o2arvhebzes3>
- <ab363932-ab3d-49b1-853d-7313f02cce9e@linux.ibm.com> <ljqlgkvhkojsmehqddmeo4dng6l3yaav6le2uslsumfxivluwu@m7lkx3j4mkkw>
- <79a7ec0d-c22d-44cf-a832-13da05a1fcbd@linux.ibm.com> <CAHj4cs-5DPDFuBzm3aymeAi6UWHhgXSYsgaCACKbjXp=i0SyTA@mail.gmail.com>
- <1f917bc1-8a6a-4c88-a619-cf8ddc4534a4@linux.ibm.com> <tczctp5tkr34o3k3f4dlyhuutgp2ycex6gdbjuqx4trn6ewm2i@qbkza3yr5wdd>
- <f2f9d5b4-3c50-41a9-bc53-49706f6f4e12@linux.ibm.com>
-In-Reply-To: <f2f9d5b4-3c50-41a9-bc53-49706f6f4e12@linux.ibm.com>
-From: Yi Zhang <yi.zhang@redhat.com>
-Date: Tue, 20 Aug 2024 09:50:47 +0800
-Message-ID: <CAHj4cs8B-Md_WnPo0Z2o6dZ3n30QqL5D-YbW9wWbCMLjxDSrsg@mail.gmail.com>
-Subject: Re: blktests failures with v6.11-rc1 kernel
-To: Nilay Shroff <nilay@linux.ibm.com>
-Cc: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>, 
-	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, 
-	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>, 
-	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>, "nbd@other.debian.org" <nbd@other.debian.org>, 
-	"linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Labor Day Special Extended
+From: Pendleton <bulletin@pendletonfamilybrands.com>
+To: nbd@other.debian.org
+Date: Wed, 4 Sep 2024 16:28:59 +0000
+Message-ID: <01000191bdde2cc7-510d6542-814f-4d6e-b207-6223edeaf3b4-000000@email.amazonses.com>
+X-Entity-Ref-ID: 11e0d0c1-cee3-47fc-b9eb-a5c5e385fd95
+X-Tenant: 508969632888
+Feedback-ID: ::1.us-east-1.8WW+rbOmWAYK89lAwGZMehvPCMaIZCDedFyFCciu3dU=:AmazonSES
+X-SES-Outgoing: 2024.09.04-54.240.9.54
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <jrc9gTCM5pB.A.2pD.Hr_wmB@bendel>
+Resent-Message-ID: <l1WK0eMTViK.A.33cB.BAJ2mB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3143
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3144
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -111,233 +83,275 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAHj4cs8B-Md_WnPo0Z2o6dZ3n30QqL5D-YbW9wWbCMLjxDSrsg@mail.gmail.com
-Resent-Date: Tue, 20 Aug 2024 02:09:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/01000191bdde2cc7-510d6542-814f-4d6e-b207-6223edeaf3b4-000000@email.amazonses.com
+Resent-Date: Wed,  4 Sep 2024 16:51:13 +0000 (UTC)
 
-On Mon, Aug 19, 2024 at 9:35=E2=80=AFPM Nilay Shroff <nilay@linux.ibm.com> =
-wrote:
->
->
->
-> On 8/19/24 18:04, Shinichiro Kawasaki wrote:
-> > On Aug 14, 2024 / 18:05, Nilay Shroff wrote:
-> >>
-> >>
-> >> On 8/13/24 12:36, Yi Zhang wrote:
-> >>> On Sat, Aug 3, 2024 at 12:49=E2=80=AFAM Nilay Shroff <nilay@linux.ibm=
-.com> wrote:
-> >>>
-> >>> There are no simultaneous tests during the CKI tests running.
-> >>> I reproduced the failure on that server and always can be reproduced
-> >>> within 5 times:
-> >>> # sh a.sh
-> >>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D0
-> >>> nvme/052 (tr=3Dloop) (Test file-ns creation/deletion under one subsys=
-tem) [passed]
-> >>>     runtime  21.496s  ...  21.398s
-> >>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D1
-> >>> nvme/052 (tr=3Dloop) (Test file-ns creation/deletion under one subsys=
-tem) [failed]
-> >>>     runtime  21.398s  ...  21.974s
-> >>>     --- tests/nvme/052.out 2024-08-10 00:30:06.989814226 -0400
-> >>>     +++ /root/blktests/results/nodev_tr_loop/nvme/052.out.bad
-> >>> 2024-08-13 02:53:51.635047928 -0400
-> >>>     @@ -1,2 +1,5 @@
-> >>>      Running nvme/052
-> >>>     +cat: /sys/block/nvme1n2/uuid: No such file or directory
-> >>>     +cat: /sys/block/nvme1n2/uuid: No such file or directory
-> >>>     +cat: /sys/block/nvme1n2/uuid: No such file or directory
-> >>>      Test complete
-> >>> # uname -r
-> >>> 6.11.0-rc3
-> >>
-> >> We may need to debug this further. Is it possible to patch blktest and
-> >> collect some details when this issue manifests? If yes then can you pl=
-ease
-> >> apply the below diff and re-run your test? This patch would capture ou=
-tput
-> >> of "nvme list" and "sysfs attribute tree created under namespace head =
-node"
-> >> and store those details in 052.full file.
-> >>
-> >> diff --git a/common/nvme b/common/nvme
-> >> index 9e78f3e..780b5e3 100644
-> >> --- a/common/nvme
-> >> +++ b/common/nvme
-> >> @@ -589,8 +589,23 @@ _find_nvme_ns() {
-> >>                 if ! [[ "${ns}" =3D~ nvme[0-9]+n[0-9]+ ]]; then
-> >>                         continue
-> >>                 fi
-> >> +               echo -e "\nBefore ${ns}/uuid check:\n" >> ${FULL}
-> >> +               echo -e "\n`nvme list -v`\n" >> ${FULL}
-> >> +               echo -e "\n`tree ${ns}`\n" >> ${FULL}
-> >> +
-> >>                 [ -e "${ns}/uuid" ] || continue
-> >>                 uuid=3D$(cat "${ns}/uuid")
-> >> +
-> >> +               if [ "$?" =3D "1" ]; then
-> >> +                       echo -e "\nFailed to read $ns/uuid\n" >> ${FUL=
-L}
-> >> +                       echo "`nvme list -v`" >> ${FULL}
-> >> +                       if [ -d "${ns}" ]; then
-> >> +                               echo -e "\n`tree ${ns}`\n" >> ${FULL}
-> >> +                       else
-> >> +                               echo -e "\n${ns} doesn't exist!\n" >> =
-${FULL}
-> >> +                       fi
-> >> +               fi
-> >> +
-> >>                 if [[ "${subsys_uuid}" =3D=3D "${uuid}" ]]; then
-> >>                         basename "${ns}"
-> >>                 fi
-> >>
-> >>
-> >> After applying the above diff, when this issue occurs on your system c=
-opy this
-> >> file "</path/to/blktests>/results/nodev_tr_loop/nvme/052.full" and sen=
-d it across.
-> >> This may give us some clue about what might be going wrong.
-> >
-> > Nilay, thank you for this suggestion. To follow it, I tried to recreate=
- the
-> > failure again, and managed to do it :) When I repeat the test case 20 o=
-r 40
-> > times one of my test machines, the failure is observed in stable manner=
-.
->
-> Shinichiro, I am glad that you were able to recreate this issue.
->
-> > I applied your debug patch above to blktests, then I repeated the test =
-case.
-> > Unfortunately, the failure disappeared. When I repeat the test case 100=
- times,
-> > the failure was not observed. I guess the echos for debug changed the t=
-iming to
-> > access the sysfs uuid file, then the failure disappeared.
->
-> Yes this could be possible. BTW, Yi tried the same patch and with the pat=
-ch applied,
-> this issue could be still reproduced on Yi's testbed!!
-> > This helped me think about the cause. The test case repeats _create_nvm=
-et_ns
-> > and _remove_nvmet_ns. Then, it repeats creating and removing the sysfs =
-uuid
-> > file. I guess when _remove_nvmet_ns echos 0 to ${nvemt_ns_path}/enable =
-to
-> > remove the namespace, it does not wait for the completion of the remova=
-l work.
-> > Then, when _find_nvme_ns() checks existence of the sysfs uuid file, it =
-refers to
-> > the sysfs uuid file that the previous _remove_nvmet_ns left. When it do=
-es cat
-> > to the sysfs uuid file, it fails because the sysfs uuid file has got re=
-moved,
-> > before recreating it for the next _create_nvmet_ns.
->
-> I agree with your assessment about the plausible cause of this issue. I j=
-ust reviewed
-> the nvme target kernel code and it's now apparent to me that we need to w=
-ait for the
-> removal of the namespace before we re-create the next namespace. I think =
-this is a miss.
-> >
-> > Based on this guess, I created a patch below. It modifies the test case=
- to wait
-> > for the namespace device disappears after calling _remove_nvmet_ns. (I =
-assume
-> > that the sysfs uuid file disappears when the device file disappears). W=
-ith
-> > this patch, the failure was not observed by repeating it 100 times. I a=
-lso
-> > reverted the kernel commit ff0ffe5b7c3c ("nvme: fix namespace removal l=
-ist")
-> > from v6.11-rc4, then confirmed that the test case with this change stil=
-l can
-> > detect the regression.
-> >
-> I am pretty sure that your patch would solve this issue.
->
-> > I will do some more confirmation. If it goes well, will post this chang=
-e as
-> > a formal patch.
-> >
-> > diff --git a/tests/nvme/052 b/tests/nvme/052
-> > index cf6061a..469cefd 100755
-> > --- a/tests/nvme/052
-> > +++ b/tests/nvme/052
-> > @@ -39,15 +39,32 @@ nvmf_wait_for_ns() {
-> >               ns=3D$(_find_nvme_ns "${uuid}")
-> >       done
-> >
-> > +     echo "$ns"
-> >       return 0
-> >  }
-> >
-> > +nvmf_wait_for_ns_removal() {
-> > +     local ns=3D$1 i
-> > +
-> > +     for ((i =3D 0; i < 10; i++)); do
-> > +             if [[ ! -e /dev/$ns ]]; then
-> > +                     return
-> > +             fi
-> > +             sleep .1
-> > +             echo "wait removal of $ns" >> "$FULL"
-> > +     done
-> > +
-> > +     if [[ -e /dev/$ns ]]; then
-> > +             echo "Failed to remove the namespace $"
-> > +     fi
-> > +}
-> > +
-> >  test() {
-> >       echo "Running ${TEST_NAME}"
-> >
-> >       _setup_nvmet
-> >
-> > -     local iterations=3D20
-> > +     local iterations=3D20 ns
-> >
-> >       _nvmet_target_setup
-> >
-> > @@ -63,7 +80,7 @@ test() {
-> >               _create_nvmet_ns "${def_subsysnqn}" "${i}" "$(_nvme_def_f=
-ile_path).$i" "${uuid}"
-> >
-> >               # wait until async request is processed and ns is created
-> > -             nvmf_wait_for_ns "${uuid}"
-> > +             ns=3D$(nvmf_wait_for_ns "${uuid}")
-> >               if [ $? -eq 1 ]; then
-> >                       echo "FAIL"
-> >                       rm "$(_nvme_def_file_path).$i"
-> > @@ -71,6 +88,7 @@ test() {
-> >               fi
-> >
-> >               _remove_nvmet_ns "${def_subsysnqn}" "${i}"
-> > +             nvmf_wait_for_ns_removal "$ns"
-> >               rm "$(_nvme_def_file_path).$i"
-> >       }
-> >       done
->
-> I think there's some formatting issue in the above patch. I see some stra=
-y characters
-> which you may cleanup/fix later when you send the formal patch.
->
-> Yi, I think you you may also try the above patch on your testbed and conf=
-irm the result.
+--===============4917132460436416755==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Nilay/Shinichiro
+#### Labor Day Special Extended
+By popular request the Labor Day Special has been extended until Tuesday 9/10. **Don&#x27;t Miss Out** - place your order **NOW** &lt;br&gt;to receive discounted pricing!
 
-Confirmed the failure cannot be reproduced with this patch now.
+| ![Tac](https://images.pendletonfamilybrands.com/ec/ec/i/6pvx0zt2r4vh8vH0LPcEZXA9Hvw=/6346536364/height-456/) | REVOLVING GUN STORAGE &lt;br&gt; AND SECURITY &lt;br&gt;&lt;br&gt; ![Pendleton Revolution Technology](https://images.pendletonfamilybrands.com/ec/ec/i/22yuepvTJAwid4goMqBbXRmHXi4=/6131103439/height-125/) &lt;br&gt;&lt;br&gt; ORDER FACTORY DIRECT &lt;br&gt; 770-466-6181 &lt;br&gt; GET IN LINE NOW  |
+| :-- | :--: |
+|  |  |
 
->
-> Thanks,
-> --Nilay
->
+![Knight Series](https://images.pendletonfamilybrands.com/ec/ec/i/ats3Ipf0591DFA2JshgCLO8CqgA=/3934644921/max-335x70/)
 
+Knight Series
 
---=20
-Best Regards,
-  Yi Zhang
+![XLs](https://images.pendletonfamilybrands.com/ec/ec/i/lSc12OXjAKes-LNqf1sK_GKdSxo=/3868209601/width-611/)
+
+![Stronghold XL](https://images.pendletonfamilybrands.com/ec/ec/i/mFLSAnqwvGn9BQPyw2E0QhqbTOo=/3785940000/max-335x70/)
+
+Stronghold XL Series
+
+![ST and DT](https://images.pendletonfamilybrands.com/ec/ec/i/Kyq0tUT6x4KugXhulcE1Pbbk8qs=/5274301271/max-780x8120/)
+
+![ST AND DT](https://images.pendletonfamilybrands.com/ec/ec/i/tRTkBmkNSrQIag1bqxR54kO3psU=/5489092324/max-335x70/)
+
+Stronghold ST+ &amp; DT+ Series
+View this email in your browser: https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/labor-day-special-extended-/i/8ce80ed4-8a9c-4a0a-a28b-f8b09d7a518c/
+Copyright © 2024 PENDLETON FAMILY BRANDS, All rights reserved.
+You are receiving this email because you've opted in for announcements and special offers
+Our mailing address is:
+PENDLETON FAMILY BRANDS
+PO BOX 2506
+LOGANVILLE, GA 30052 US
+Want to stop receiving these emails? You can unsubscribe: https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/labor-day-special-extended-/i/8ce80ed4-8a9c-4a0a-a28b-f8b09d7a518c/s/
+--===============4917132460436416755==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"en-us" style=3D"text-align:center; font-size:18px; max-width:=
+100%" align=3D"center">
+    <head style=3D"text-align:center" align=3D"center">
+        <title style=3D"text-align:center" align=3D"center">Labor Day Speci=
+al Extended</title>
+        <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Du=
+tf-8" style=3D"text-align:center" align=3D"center">
+        <meta name=3D"robots" content=3D"none" style=3D"text-align:center" =
+align=3D"center">
+        <meta name=3D"viewport" content=3D"width=3Ddevice-width" style=3D"t=
+ext-align:center" align=3D"center">
+       =20
+   =20
+       =20
+   =20
+<link rel=3D"preload" as=3D"font" href=3D"https://static.pendletonfamilybra=
+nds.com/ec/ec/f/907fff15-9764-455a-a0a2-964c3aa3a534/woff2/907fff15-9764-45=
+5a-a0a2-964c3aa3a534-a013c49b28_SdhXfP0.woff2" crossorigin style=3D"text-al=
+ign:center" align=3D"center">
+
+   =20
+    <style type=3D"text/css" style=3D"text-align:center" align=3D"center">@=
+media print {
+    *, *:before, *:after {
+        background: transparent;
+        color: #000;
+        box-shadow: none;
+        text-shadow: none
+        }
+    a, a:visited {
+        text-decoration: underline
+        }
+    a[href]:after {
+        content: " (" attr(href) ")"
+        }
+    abbr[title]:after {
+        content: " (" attr(title) ")"
+        }
+    a[href^=3D"#"]:after, a[href^=3D"javascript:"]:after {
+        content: ""
+        }
+    pre, blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid
+        }
+    thead {
+        display: table-header-group
+        }
+    tr, img {
+        page-break-inside: avoid
+        }
+    img {
+        max-width: 100%
+        }
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3
+        }
+    h2, h3 {
+        page-break-after: avoid
+        }
+    }
+@media screen and (min-width: 32rem) and (max-width: 48rem) {
+    html {
+        font-size: 15px
+        }
+    }
+@media screen and (min-width: 48rem) {
+    html {
+        font-size: 16px
+        }
+    }
+*:not(div):not(img):not(body):not(html):not(li):not(blockquote):not(p) {mar=
+gin:1rem auto 1rem;max-width:36rem;padding:0.25rem}
+a:visited {color:#3498db}
+a:hover {color:#2980b9}
+a:focus {color:#2980b9}
+a:active {color:#2980b9}</style>
+</head>
+    <body style=3D"text-align:center; line-height:1.85; color:#444; font-fa=
+mily:ForzaBold, Georgia, serif; margin:0; max-width:100%" align=3D"center">
+<span style=3D"text-align:center; display:none !important; font-size:1px; l=
+ine-height:1px; max-height:0; max-width:0; mso-hide:all; opacity:0; overflo=
+w:hidden; visibility:hidden" align=3D"center">Until Tuesday 9/10! Revolving=
+ Gun Storage On Sale</span><span style=3D"text-align:center; display:none !=
+important; font-size:1px; line-height:1px; max-height:0; max-width:0; mso-h=
+ide:all; opacity:0; overflow:hidden; visibility:hidden" align=3D"center">=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+</span><a class=3D"view-in-browser" href=3D"https://content.pendletonfamily=
+brands.com/pages/bulletin/promotions/2024/labor-day-special-extended-/i/8ce=
+80ed4-8a9c-4a0a-a28b-f8b09d7a518c/" style=3D"text-align:center; color:#3498=
+db" align=3D"center">View this email in your browser</a>
+        <img src=3D"https://content.pendletonfamilybrands.com/pt/B-MUCdIG1X=
+3taMiGhmnpTB6w8Gb3hOyBnf_3VbERK-4eGwEFMz7MbhrBfcP2IrsHimGXi3XrqLG-WufaL6eet=
+DO6R5v-72KYVsZ29BX5LN2ttuS3dzyNFZAOc1MFOHbPO_NQHAbcj0xOWVCHaDstQH_K5aGXjzGZ=
+c8v7DRbtegpUFOw=3D/" width=3D"1" height=3D"1" style=3D"text-align:center; m=
+ax-width:100%" align=3D"center"><h4 style=3D"text-align:center; font-weight=
+:inherit; line-height:1.42; font-size:1.414rem" align=3D"center">Labor Day =
+Special Extended</h4>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">By popular request the =
+Labor Day Special has been extended until Tuesday 9/10. <strong style=3D"te=
+xt-align:center" align=3D"center">Don't Miss Out</strong> - place your orde=
+r <strong style=3D"text-align:center" align=3D"center">NOW</strong> <br sty=
+le=3D"text-align:center" align=3D"center">to receive discounted pricing!</p>
+<table class=3D"wftable" style=3D"text-align:center" align=3D"center">
+<thead style=3D"text-align:center" align=3D"center">
+<tr style=3D"text-align:center" align=3D"center">
+<th style=3D"text-align:center" align=3D"center"><img alt=3D"Tac" src=3D"ht=
+tps://images.pendletonfamilybrands.com/ec/ec/i/6pvx0zt2r4vh8vH0LPcEZXA9Hvw=
+=3D/6346536364/height-456/" style=3D"text-align:center; max-width:100%" ali=
+gn=3D"center"></th>
+<th style=3D"text-align:center" align=3D"center">REVOLVING GUN STORAGE <br =
+style=3D"text-align:center" align=3D"center"> AND SECURITY <br style=3D"tex=
+t-align:center" align=3D"center"><br style=3D"text-align:center" align=3D"c=
+enter"> <img alt=3D"Pendleton Revolution Technology" src=3D"https://images.=
+pendletonfamilybrands.com/ec/ec/i/22yuepvTJAwid4goMqBbXRmHXi4=3D/6131103439=
+/height-125/" style=3D"text-align:center; max-width:100%" align=3D"center">=
+ <br style=3D"text-align:center" align=3D"center"><br style=3D"text-align:c=
+enter" align=3D"center"> ORDER FACTORY DIRECT <br style=3D"text-align:cente=
+r" align=3D"center"> 770-466-6181 <br style=3D"text-align:center" align=3D"=
+center"> GET IN LINE NOW</th>
+</tr>
+</thead>
+<tbody style=3D"text-align:center" align=3D"center">
+<tr style=3D"text-align:center" align=3D"center">
+<td style=3D"text-align:center" align=3D"center"></td>
+<td style=3D"text-align:center" align=3D"center"></td>
+</tr>
+</tbody>
+</table>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><img alt=3D"Knight Seri=
+es" src=3D"https://images.pendletonfamilybrands.com/ec/ec/i/ats3Ipf0591DFA2=
+JshgCLO8CqgA=3D/3934644921/max-335x70/" style=3D"text-align:center; max-wid=
+th:100%" align=3D"center"></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">Knight Series</p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><img alt=3D"XLs" src=3D=
+"https://images.pendletonfamilybrands.com/ec/ec/i/lSc12OXjAKes-LNqf1sK_GKdS=
+xo=3D/3868209601/width-611/" style=3D"text-align:center; max-width:100%" al=
+ign=3D"center"></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><img alt=3D"Stronghold =
+XL" src=3D"https://images.pendletonfamilybrands.com/ec/ec/i/mFLSAnqwvGn9BQP=
+yw2E0QhqbTOo=3D/3785940000/max-335x70/" style=3D"text-align:center; max-wid=
+th:100%" align=3D"center"></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">Stronghold XL Series</p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><img alt=3D"ST and DT" =
+src=3D"https://images.pendletonfamilybrands.com/ec/ec/i/Kyq0tUT6x4KugXhulcE=
+1Pbbk8qs=3D/5274301271/max-780x8120/" style=3D"text-align:center; max-width=
+:100%" align=3D"center"></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><img alt=3D"ST AND DT" =
+src=3D"https://images.pendletonfamilybrands.com/ec/ec/i/tRTkBmkNSrQIag1bqxR=
+54kO3psU=3D/5489092324/max-335x70/" style=3D"text-align:center; max-width:1=
+00%" align=3D"center"></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">Stronghold ST+ &amp; DT=
++ Series</p>
+       =20
+            <div class=3D"footer" style=3D"text-align:center; width:100%; b=
+order-top:solid 1px #000; margin-top:5em" align=3D"center" width=3D"100%">
+    <p class=3D"copyright" style=3D"text-align:center; font-size:1rem; marg=
+in-bottom:1.3rem; margin:1rem auto 1rem; max-width:36rem; padding:0.25rem; =
+color:#555; height:auto; line-height:1.45" align=3D"center" height=3D"auto">
+    Copyright =C2=A9 2024 PENDLETON FAMILY BRANDS, All rights reserved.
+</p>
+    <p class=3D"reminder" style=3D"text-align:center; font-size:1rem; margi=
+n-bottom:1.3rem; margin:1rem auto 1rem; max-width:36rem; padding:0.25rem; c=
+olor:#555; height:auto; line-height:1.45" align=3D"center" height=3D"auto">=
+You are receiving this email because you've opted in for announcements and =
+special offers</p>
+    <div class=3D"physical-location" style=3D"text-align:center; width:100%=
+" align=3D"center" width=3D"100%">
+    Our mailing address is:
+    <pre style=3D'text-align:center; font-family:Menlo, Monaco, "Courier Ne=
+w", monospace; background-color:#fafafa; font-size:0.8rem; overflow-x:scrol=
+l; padding:1.125em; background:transparent; overflow:visible; text-transfor=
+m:uppercase' align=3D"center" bgcolor=3D"#fafafa">PENDLETON FAMILY BRANDS
+PO BOX 2506
+LOGANVILLE, GA 30052 US</pre>
+</div>
+   =20
+<div class=3D"unsubscribe" style=3D"text-align:center; width:100%" align=3D=
+"center" width=3D"100%">
+    <p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; ma=
+rgin:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:a=
+uto; line-height:1.45" align=3D"center" height=3D"auto">Want to stop receiv=
+ing these emails?</p>
+    <p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; ma=
+rgin:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:a=
+uto; line-height:1.45" align=3D"center" height=3D"auto">You can <a href=3D"=
+https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/la=
+bor-day-special-extended-/i/8ce80ed4-8a9c-4a0a-a28b-f8b09d7a518c/s/" style=
+=3D"text-align:center; color:#3498db" align=3D"center">unsubscribe</a>.</p>
+</div>
+
+</div>
+       =20
+    </body>
+</html>
+
+--===============4917132460436416755==--
 
