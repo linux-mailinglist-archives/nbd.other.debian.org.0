@@ -1,83 +1,190 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A92A497AEA3
-	for <lists+nbd@lfdr.de>; Tue, 17 Sep 2024 12:21:13 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id C5EAB97C45D
+	for <lists+nbd@lfdr.de>; Thu, 19 Sep 2024 08:36:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 90A7F20664; Tue, 17 Sep 2024 10:21:13 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep 17 10:21:13 2024
-Old-Return-Path: <37lPpZgkbAHkpvwhXiiboXmmfa.dlldibrpboZlkqbkq.Zlj@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
+	id E34652076A; Thu, 19 Sep 2024 06:36:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Sep 19 06:36:10 2024
+Old-Return-Path: <prvs=985d48ec6=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.2 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
-	FVGT_m_MULTI_ODD,HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,
-	RCVD_IN_MSPIKE_H2,SORTED_RECIPS,TO_TOO_MANY autolearn=no
-	autolearn_force=no version=3.4.6
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FVGT_m_MULTI_ODD,RCVD_IN_DNSWL_MED,
+	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4B5B22066A
-	for <lists-other-nbd@bendel.debian.org>; Tue, 17 Sep 2024 10:03:42 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id BB3E120733
+	for <lists-other-nbd@bendel.debian.org>; Thu, 19 Sep 2024 06:19:56 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=1.864 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, FROM_LOCAL_HEX=0.006,
-	FVGT_m_MULTI_ODD=0.02, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
-	SORTED_RECIPS=2.499, TO_TOO_MANY=1, T_SCC_BODY_TEXT_LINE=-0.01]
+X-Amavis-Spam-Status: No, score=-2.871 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FVGT_m_MULTI_ODD=0.02,
+	RCVD_IN_DNSWL_MED=-2.3, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726, T_SCC_BODY_TEXT_LINE=-0.01]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id mXEnLnk9yb9U for <lists-other-nbd@bendel.debian.org>;
-	Tue, 17 Sep 2024 10:03:33 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-il1-f199.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
-Received: from mail-il1-f199.google.com (mail-il1-f199.google.com [209.85.166.199])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4B3E320638
-	for <nbd@other.debian.org>; Tue, 17 Sep 2024 10:03:29 +0000 (UTC)
-Received: by mail-il1-f199.google.com with SMTP id e9e14a558f8ab-3a04c2472f6so79984775ab.0
-        for <nbd@other.debian.org>; Tue, 17 Sep 2024 03:03:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726567407; x=1727172207;
-        h=to:from:subject:message-id:in-reply-to:date:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=P4PZX0METPue9cW+U6xQ2tNlECW3HyF+zXQLnkT6SHc=;
-        b=TAPXuySp/KKAZNJ6iMaB8zWv6Uogn3WHULOnlfuK1J7n6NLviDXwnc3b+CcIakG/YL
-         8e8SOVBizRI9n0fwgs+z1qFTztpQh+Lg/oaULtgKEQyv1GTem6MAp8cAGrUcy3fl/43N
-         3488LCJv/pZAhBC53NIfYzoFDA8C5xUT7i1MLVAcmyIBdtqj6InudCaafZSKSWKD/BgL
-         FAZfMiORA5s90daLIuQwJvoBLAXDIYbiIuE6oZVlfBRP6J9PZogD91bF9Kx4xHInMqpr
-         7ayECYMCzKCVdH4iU4kO7lhS3N9wdMfsiXgaFaeK84mQjpb3hOdw4pvSYe1srOG76p4u
-         7BKA==
-X-Forwarded-Encrypted: i=1; AJvYcCXFxa34mb2HO/Ln5WtVVcBfzDWkk2E2JG7dXnu3vi1JdZZ0GShZuCVjgE+2dgyEC+FW51g=@other.debian.org
-X-Gm-Message-State: AOJu0YwVuDylT5QlF0StUNPjjObxwU3oQxajE9CNpQX9bgdAFAsTNCgW
-	sdDZsxRz1XxeB1tI+eLe6zdT9GHUj+2eCPP1uukmXWcfA0Q92FwsfWD5WHXtNxKReK9ItgABJpO
-	0IvOx2JYPw+2uc/vLoCBEKoYzXk0g4AIMJr/3f1qr0OlL7uirlUCwE9M=
-X-Google-Smtp-Source: AGHT+IHf6Y+tx5aqAYlWCHBmF2LhEBb7W+HSMYRLKJZ6wl3d0RhbJF/7sMQhDczWD5MAlj3Bu+q2T5NeYwZWzWmaSyQ2pTMmSniR
+	with ESMTP id vgaWQFEORdN2 for <lists-other-nbd@bendel.debian.org>;
+	Thu, 19 Sep 2024 06:19:51 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 438 seconds by postgrey-1.36 at bendel; Thu, 19 Sep 2024 06:19:50 UTC
+Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id D1FD4206A5
+	for <nbd@other.debian.org>; Thu, 19 Sep 2024 06:19:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1726726791; x=1758262791;
+  h=from:to:subject:date:message-id:content-id:
+   content-transfer-encoding:mime-version;
+  bh=SC0vNDE7JX3yjh+BPigLI0xexSvSNSZkZImdiUZgwgE=;
+  b=pL9k/uNlO9fmXZ4j11fEkE7P5YhtZaFXuxNRCTVg/gGcEWZUF6cNT03r
+   X8vWmwM7qzJeMEX1GJWK/uEKWHGZw504zpIA4G7u8RkOefQWztHuhq8kO
+   vI3IjA2bwHLzkY5bq+ravKLxNXwy8el8ppqjCcLC2FEDInRYoLGeJYZ3+
+   xJ4VvS2V7IyVCG89bqnB7F1xU9F2QVqgaR3ZPn+0qMf8FwBOg6eCrTQdF
+   K0ucJDCx6m9AUo4wizRnEPMQBrXmm5LysuLI3vmx1xCQgv4zUzcAj3DjQ
+   JTFZMmw+RGbBZvUaTAgwrFYN7L52nSsR8iM0gFAq9c4t7eo6pcb8TP9UA
+   g==;
+X-CSE-ConnectionGUID: Y4E4jpCsR1i2ZIapY9nqBA==
+X-CSE-MsgGUID: ebm5YMBsTLiHk+bzsYbrpg==
+X-IronPort-AV: E=Sophos;i="6.10,241,1719849600"; 
+   d="scan'208";a="27894630"
+Received: from mail-eastusazlp17010003.outbound.protection.outlook.com (HELO BL2PR02CU003.outbound.protection.outlook.com) ([40.93.11.3])
+  by ob1.hgst.iphmx.com with ESMTP; 19 Sep 2024 14:12:25 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DPzgVqROukoobdvYxz3JZj50E7RTK3YWy5mXBpnvoD3PcclQ7wZ3gteYIjt0OpqCrVj5vau6+jeX9aFjYZ8mDrV+f6W8ej6ghsIfd0byGJrEAo/+M+qtp91TMaCcT/ORZrwLgDeoIADV9MQyPrzYPaERmB4RZYT5NRnlpslnKRO0qI4mxpOgDfHr9cB5UgkEdvOPKdQAVASM7tHobcbE06U3AO6+chQIgrEQqb7jExhaRi5UpmRJldKPfi1LiUiCcY9LoLYFpdE5J2por9v+fNaEuYirVxAVxtrTy0WhNc1oFgm5ePtgLhyz6NnFCi6+bKPP1OugZMVTCO8THbwTvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RUwa5MIHFhB+EjaJbbzGKnWl0ut/ljEv/mGHxoNGnzg=;
+ b=axN+8k30Jb3s8WinZNVWrB5+ImxtvmFHzx0Onmgx27u85bka5scnTCyQMTxDCHa4r/fjU4RGZ4KpYbZfkALqujHaYHnPt7XNQwSqYCddar5eyyx0E6KXDbbDhR9QE/5iDn8WT+pyP64G+PZRU3eRbONox35Tq1SkMHVEofVJ8OWsV54daKNvz+dDY2U+atElq/BD+GYEj02Qp6su9Sqtg0zzojNql0vTQD+qYiCDpC6kcAtbDLninO2lfyOEqFWv3zAA6z0i+XfSkPsVPjZ/DbuxeHi/BCdZUWDgVzchwBsSTtPzbnAEp1r+zlj9jyKSYnr2qNPp6LDC/EXnVyb5aQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RUwa5MIHFhB+EjaJbbzGKnWl0ut/ljEv/mGHxoNGnzg=;
+ b=FNS3J0F7dwhqVHJll2a7woYRjHB6B8Cpw4zbfXfLW2Mot2tGyXzzzXA7op0vsgRzvfN9aTuw/FTmNowNPAjBNSArfMTL3R4qyz1KU8D7RMGAgNXWUEV756WQ6f/8pYOa+XIfLazon8/YrA4xxQaPWWiMQQHozxrmEm/V49k3/44=
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com (2603:10b6:8:f::6) by
+ DM6PR04MB7017.namprd04.prod.outlook.com (2603:10b6:5:24e::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7982.21; Thu, 19 Sep 2024 06:12:22 +0000
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a]) by DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a%4]) with mapi id 15.20.7982.018; Thu, 19 Sep 2024
+ 06:12:13 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
+Subject: blktests failures with v6.11 kernel
+Thread-Topic: blktests failures with v6.11 kernel
+Thread-Index: AQHbClrcEmmjPrUiAkCpdRp/WaghZw==
+Date: Thu, 19 Sep 2024 06:12:10 +0000
+Message-ID: <3aydm6iazrkdxb4d5yb3tc7fjqax6nvukrn3tpvzjcom6woc5g@qbai6zlvsrbs>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM8PR04MB8037:EE_|DM6PR04MB7017:EE_
+x-ms-office365-filtering-correlation-id: 1e924fce-84d6-489b-8767-08dcd871ffa5
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?2yd6Xj1veNmH0FuiLGPJQfEFE4YahGQJ3BjttrKn2eslZ9bNGhPWi7+RCYqR?=
+ =?us-ascii?Q?pa3gnCaYIottgaLxjpdcwLeRW7wh06Lm5G77QU1XqrZ1HQYkVzF51JSUXBHs?=
+ =?us-ascii?Q?py0fpNc0UT3D2StCnm8JOTVLgX4DhelxRtV8lSeGcPHp7LI/hUMOVkqOFyc4?=
+ =?us-ascii?Q?EPelyWcHNmFAoTAKKlv1XNRbQlU2L/dplWrboZTl0MguQaFFRgec6DLsYW6u?=
+ =?us-ascii?Q?Wd7TcnaLYMAQQ/XDrH1rj9WFo+Txw4vmXBblyU9aZQv1T3nCFrLU2osUX2P7?=
+ =?us-ascii?Q?ANRW4VV208mphXqJsY4FzVLlyov9sXzDKjohkuqsgYVVFn3IFV754Wx1WnmF?=
+ =?us-ascii?Q?egH5wFhx94PDUPdVZJf8KZGZXTJv7F3YYmGIURe72A++0I7jEWShIjggtHcG?=
+ =?us-ascii?Q?x1lTe1NCU2Q0D5IE4kNg7kbZhcCNQfckfGZhEbDIqtantmwkq2ijvc07YHet?=
+ =?us-ascii?Q?nxF+/s13ZgF9snF2ywjZoQfhLmiH/Q347cx8t95vpSJgZmdLZr7JV3l0cFVf?=
+ =?us-ascii?Q?irtF+rgEYIrg7db+THkfIjrIHZ9CfRiJE+QLdbTiS5Ehyj0kT+BGJSCBKzpS?=
+ =?us-ascii?Q?mlF/+5BITfDrK4sj6vHaarjBarXitLXB+jUH1PXfsfAoz5i4iuAuHtOVOQ5t?=
+ =?us-ascii?Q?Ow52WwnXA2YF0dnHAWlugm6SmFsrLjc9MQVr3UZahkRxEdFnlw5F1tZUjZQ0?=
+ =?us-ascii?Q?dvJjo+hoq37KP5ynSBxz8BQMP8JopG+7pMt95CuMwxNXoMyaIZplGP0Zqoqp?=
+ =?us-ascii?Q?pnrEIoZbcRcUph/6Tw91cAg3Cffy+sNMjHR1zhj5+Vi8CwgSlSwu5ok++yrN?=
+ =?us-ascii?Q?dYSuAvDjvmD5hvFHSKAkczdROnul4hx0uYXgmxcDdM28PE1OqPnZE255KKRO?=
+ =?us-ascii?Q?ym5JZDOxA5HRfn9EPbWRUu0YW4A13yU2STmscMvM+X4TRCIQ/0duOoip/ErY?=
+ =?us-ascii?Q?JwF2cIs7MQYmvlDl/q5u8o2xoH5hUEFTnEk07hwftXoAqtYIFmQwf2uSXTNM?=
+ =?us-ascii?Q?K4JDf11BEY3eCDOf/Yo1DYmtjpQOiIv7tn2Y5TxdyWhJrF1VYNfY31dMLkBO?=
+ =?us-ascii?Q?+f8rwOuNQmNs7zIJr1Hr/5mY5uRRHlhrbk+1PDukRBcmZFR6P4rzWxTO2BM5?=
+ =?us-ascii?Q?/MxblWb+Pv/nNa+vOGm9+VLPDDK9yKrb6cEQZHcaiyEeAkxtgScfQTqTQT/t?=
+ =?us-ascii?Q?tGBewuypjOY/h0TTWVWq9n0d1e8Dw2lV+ol2QCuDvu/bCSY3rYVA1Y3arC0a?=
+ =?us-ascii?Q?7FhXQGp+zTtj++myXR66xOtBDGMfb/gAF6y7qh/NHPkYDEWFcCpih0O7tCM3?=
+ =?us-ascii?Q?Wst2GhforBZIq3oaVzMpA6E+slywDpCPXf5vBT6ki8ColDLjYfuGQVAR8K65?=
+ =?us-ascii?Q?2B+7Adc=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR04MB8037.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?+XRg5h4n0iBr+I4UPeh0p5vJycmJLKP7Oi2q58Qly0Mtc610RgS+PdvpPzYw?=
+ =?us-ascii?Q?volgLxxgKZBPHAYnmn1ZzAdRyGlSw7rZl+FomE+qr6xLsJ7yZKa74RaLNtfj?=
+ =?us-ascii?Q?hbpAT14up9iji+42d73EEVRdzPKWASbpu+VNi1ge8UEA5ax7lBM3ZQP7qHAQ?=
+ =?us-ascii?Q?XwBdbUV0+UddCP8SFLeU3G39kw1PrRLgFfmcFdtpH3zUGTM6/8I6MO/+Jwwc?=
+ =?us-ascii?Q?d7ROE1TU2v0y2VHzChmedVSxP5drTsigIufUIXu3Ip2VCo2bHQoHvOPIoB4k?=
+ =?us-ascii?Q?grEbjvYVycypVeWA2kZZ50yA1p+99z/zyH/0JR/p7dftMuCaMnygkjI3jNwe?=
+ =?us-ascii?Q?9ZRCtASA3cPmGSDXX8i27dlsKUl44kumMdX7LnoEDzKKLjvK31REKIZ3pGsr?=
+ =?us-ascii?Q?z4OKWmsGxYm0X6Lj8mM77Q9EWL0Lhl/ww9G92b+t70S2rmWMtjglq4jxWj5T?=
+ =?us-ascii?Q?TN4EWYqttEabhs10flBjCM78+BwqdqWzZVZrMRdyfgqZoouYYRdxAk4N7r8r?=
+ =?us-ascii?Q?ye+4nacFJ46yLN89vRf5LVMNYCczd9lLKdR7k7FZZNjZmNWUihTkdJ9wB0ZU?=
+ =?us-ascii?Q?CANiK2b/6ie1IvfxNCrmAyLVEBUwcdiGlxvSOgt//qujYWv32jU5y2MOoW1B?=
+ =?us-ascii?Q?0fbprNXJa1l64/DOid7EqMSDD0yPPjzh0gytc7DhrnvOOYDK/zPVTAULjlhc?=
+ =?us-ascii?Q?GSzE9MwLZpSTHV0Z/Gxm/nIFA9/a20qGM+w7JCi0fe7ot0H+MDnoobGe3oLL?=
+ =?us-ascii?Q?ny98kcrQ45BfVAV7uFtf7ZcpzOCjCgEMZMgjLdu7nPTQ18RvjzRL18QfeehO?=
+ =?us-ascii?Q?utkSzM5wlXlSWK1tdiKTPfU8GMmUOhPMoQGgUWHGmfxjc0A9keDFnKRy4uef?=
+ =?us-ascii?Q?INu0VJ54M7HmwscX+N2zar4vmc18W2aHEOLnx6cqCloyToAyli/eJnFRXwkL?=
+ =?us-ascii?Q?CH2E6srw6KT3Dw9KIa86sL13rPhr/RUh2OyGv/PF3Hub3LfJh1yz/szv1l8R?=
+ =?us-ascii?Q?bltGwaepIrh3SDkSaBSbdJpX4q4+CycR26PY045F3YnvvRH6elH4NXfW3SE8?=
+ =?us-ascii?Q?S+6l9JgSEhPpsGmPDIPpnGzkV00wGmthy2H2BSfYeO/QZTRPHCZgUnKZepj4?=
+ =?us-ascii?Q?Tl12BbeqUdGizH7hntxjah8Z/PImRkrArAsxrPS9XjzgVQFFxSfxekKtcYqq?=
+ =?us-ascii?Q?imYbeCtvZJ2E9XUgu4rl46lz+m1iofLZ3ApFpQwlGo7RYkvYMAwzy5dz6Vbf?=
+ =?us-ascii?Q?HDSkVpbKsILxOsQqzIKQHqLr4rzUb80aLtR8IdPGTn1C77HfC1gO2CADFVxb?=
+ =?us-ascii?Q?p6GR8eWVVBRVK0TBDiOo2NecUjMI5vClNkP0llCDeoMH9Wrxc94DItzskEjD?=
+ =?us-ascii?Q?/bDPlGerlRLv2NUGntWC8jvK0cW4AGMqQLuSUuUwJJZcQzyL0RcKwqOeNaaM?=
+ =?us-ascii?Q?ezG/qSys/KDORYNJ71mObEvM/zKMGEe2BHgYmFKXTMpZTy2nH826ywBcwnpj?=
+ =?us-ascii?Q?KXCHx95q44Gv1qgfzMwOmGcrfqorXjOCr33VTo70pOOJR/TqM+JRWKkECc5i?=
+ =?us-ascii?Q?nsT08gLeKR1C7l0s9vEeHArmVAB6tt2T9Y03nYIKKGhUshaXY8rm+dWPdBhg?=
+ =?us-ascii?Q?WUqWD21Xs8PlexM/6FbatcA=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <B1080E8D11008F4D8C7D1EA26990C868@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:168c:b0:3a0:9cd5:92f7 with SMTP id
- e9e14a558f8ab-3a09cd594d9mr60686645ab.17.1726567406600; Tue, 17 Sep 2024
- 03:03:26 -0700 (PDT)
-Date: Tue, 17 Sep 2024 03:03:26 -0700
-In-Reply-To: <0000000000009848bf0620b32ba5@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <66e953ee.050a0220.252d9a.0008.GAE@google.com>
-Subject: Re: [syzbot] [nbd?] INFO: task hung in nbd_queue_rq
-From: syzbot <syzbot+30c16035531e3248dcbc@syzkaller.appspotmail.com>
-To: axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nbd@other.debian.org, netdev@vger.kernel.org, 
-	syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	RKtUj3R89VLUyGzQ/O1LUcTe+xjKl4tDoProGhQ9HKaXUgPA4iV8JYoAuI8oL7BakkOdXXwihhU79tvzshf9z0x6rBY9ZYsRkXrzKmlI0eFBJnPFVqcfPnvKOkUBw7jOrRrulSNYtS1aYPx/HAI531vCJzK/fXIDOrmEIRgErjoyqEkORlUU0bVHffgUatZk5uhjgGiE/gsKBrozGb41xlPruoRa0dkmrcQxs//yfMEO3lXILAE8D9KBIT2sjufvNHOQJzs8R1r5WqVrOnKF9z+G8lV5CXBQuS0dTVStn5rWN/JLHHpsjmu3a23/uZr4LJQ9hKQjPZ0pdOMSQrjtiYZTJZf+gGQoUooGXNT3Rqvt+CmnRIxUW7D92xftLbLbF7R+xNZ56ZNQ2BN4r4iSp0xncSs4wCmOHw8FiB1j+uE60VLI+Y2t2T9FB9LwPXRY/uwX/dbjhGCyi6Z+4YNBS8NNOtaI+IqDj4RtsxtUZqrZvt1YsxvFdAkF5x9PlXiho02caQBqnLM+zJ2NdeBUm+qYJ4bliwY/u3XzyA6l4j0cOVlHbYs15ru3VoREw91D4AnFG0pIDAKbixU8D8hBPC5WW6YpwfOYf3EkFBpdY2Pn2HVIZMRBqa5vB4zhZy+x
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR04MB8037.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e924fce-84d6-489b-8767-08dcd871ffa5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Sep 2024 06:12:11.1192
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2O9Z7ahwCqnsQXGjo8TVKvhOKMH/h/B1ZCebctCCjIW3h9YEw+OXJw8RIOb7xBjSrCqiZHCm0Pjhea7PA9zDdeENw2YvBrgo5PxBRnaqoo8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB7017
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <UeoQc0CgRKF.A.-0UP.ZgV6mB@bendel>
+Resent-Message-ID: <Hk26pxdrveM.A.c1YB.aZ86mB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3148
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3149
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -87,385 +194,78 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/66e953ee.050a0220.252d9a.0008.GAE@google.com
-Resent-Date: Tue, 17 Sep 2024 10:21:13 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/3aydm6iazrkdxb4d5yb3tc7fjqax6nvukrn3tpvzjcom6woc5g@qbai6zlvsrbs
+Resent-Date: Thu, 19 Sep 2024 06:36:10 +0000 (UTC)
 
-syzbot has found a reproducer for the following issue on:
+Hi all,
 
-HEAD commit:    9410645520e9 Merge tag 'net-next-6.12' of git://git.kernel..
-git tree:       net-next
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=150ee29f980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=37c006d80708398d
-dashboard link: https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=16bdbc07980000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=10a368a9980000
+I ran the latest blktests (git hash: 80430afc5589) with the v6.11 kernel.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/80466d230dfb/disk-94106455.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/ba253eabab42/vmlinux-94106455.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/569982fb6c88/bzImage-94106455.xz
+  This time, failures reported by the CKI project are not included in this
+  report, since blktests run by the CKI project for the mainline kernel loo=
+ks
+  stopping since August.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+30c16035531e3248dcbc@syzkaller.appspotmail.com
+Comparing with the previous report using the v6.11-rc1 kernel [1], two fail=
+ures
+were addressed. The srp/002 failure was fixed on the kernel side, and the
+nvme/052 failure was fixed on the blktests side.
 
-INFO: task udevd:5270 blocked for more than 143 seconds.
-      Not tainted 6.11.0-syzkaller-01458-g9410645520e9 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:udevd           state:D stack:21400 pid:5270  tgid:5270  ppid:4686   flags:0x00004002
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5188 [inline]
- __schedule+0x1800/0x4a60 kernel/sched/core.c:6529
- __schedule_loop kernel/sched/core.c:6606 [inline]
- schedule+0x14b/0x320 kernel/sched/core.c:6621
- schedule_timeout+0x1be/0x310 kernel/time/timer.c:2581
- wait_for_reconnect drivers/block/nbd.c:1023 [inline]
- nbd_handle_cmd drivers/block/nbd.c:1065 [inline]
- nbd_queue_rq+0x7cd/0x2f70 drivers/block/nbd.c:1123
- blk_mq_dispatch_rq_list+0xb89/0x1b30 block/blk-mq.c:2032
- __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
- blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
- __blk_mq_sched_dispatch_requests+0xb8a/0x1840 block/blk-mq-sched.c:309
- blk_mq_sched_dispatch_requests+0xcb/0x140 block/blk-mq-sched.c:331
- blk_mq_run_hw_queue+0x576/0xae0 block/blk-mq.c:2245
- blk_mq_flush_plug_list+0x1115/0x1880 block/blk-mq.c:2794
- __blk_flush_plug+0x420/0x500 block/blk-core.c:1198
- blk_finish_plug block/blk-core.c:1225 [inline]
- __submit_bio+0x422/0x560 block/blk-core.c:623
- __submit_bio_noacct_mq block/blk-core.c:696 [inline]
- submit_bio_noacct_nocheck+0x4d3/0xe30 block/blk-core.c:725
- submit_bh fs/buffer.c:2829 [inline]
- block_read_full_folio+0x93b/0xcd0 fs/buffer.c:2456
- filemap_read_folio+0x1a0/0x790 mm/filemap.c:2355
- do_read_cache_folio+0x134/0x820 mm/filemap.c:3789
- read_mapping_folio include/linux/pagemap.h:913 [inline]
- read_part_sector+0xb3/0x330 block/partitions/core.c:712
- adfspart_check_ICS+0xd9/0x9a0 block/partitions/acorn.c:360
- check_partition block/partitions/core.c:138 [inline]
- blk_add_partitions block/partitions/core.c:579 [inline]
- bdev_disk_changed+0x72c/0x13d0 block/partitions/core.c:683
- blkdev_get_whole+0x2d2/0x450 block/bdev.c:700
- bdev_open+0x2d4/0xc60 block/bdev.c:909
- blkdev_open+0x3e8/0x570 block/fops.c:630
- do_dentry_open+0x970/0x1440 fs/open.c:959
- vfs_open+0x3e/0x330 fs/open.c:1089
- do_open fs/namei.c:3727 [inline]
- path_openat+0x2b3e/0x3470 fs/namei.c:3886
- do_filp_open+0x235/0x490 fs/namei.c:3913
- do_sys_openat2+0x13e/0x1d0 fs/open.c:1416
- do_sys_open fs/open.c:1431 [inline]
- __do_sys_openat fs/open.c:1447 [inline]
- __se_sys_openat fs/open.c:1442 [inline]
- __x64_sys_openat+0x247/0x2a0 fs/open.c:1442
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7fa51fb169a4
-RSP: 002b:00007ffc16756ab0 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
-RAX: ffffffffffffffda RBX: 0000562ce708fe10 RCX: 00007fa51fb169a4
-RDX: 00000000000a0800 RSI: 0000562ce706f750 RDI: 00000000ffffff9c
-RBP: 0000562ce706f750 R08: 00000000ffffffff R09: 7fffffffffffffff
-R10: 0000000000000000 R11: 0000000000000246 R12: 00000000000a0800
-R13: 0000562ce7081250 R14: 0000000000000001 R15: 0000562ce706e910
- </TASK>
-INFO: task udevd:5932 blocked for more than 144 seconds.
-      Not tainted 6.11.0-syzkaller-01458-g9410645520e9 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:udevd           state:D stack:22032 pid:5932  tgid:5932  ppid:4686   flags:0x00000002
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5188 [inline]
- __schedule+0x1800/0x4a60 kernel/sched/core.c:6529
- __schedule_loop kernel/sched/core.c:6606 [inline]
- schedule+0x14b/0x320 kernel/sched/core.c:6621
- schedule_timeout+0x1be/0x310 kernel/time/timer.c:2581
- wait_for_reconnect drivers/block/nbd.c:1023 [inline]
- nbd_handle_cmd drivers/block/nbd.c:1065 [inline]
- nbd_queue_rq+0x7cd/0x2f70 drivers/block/nbd.c:1123
- blk_mq_dispatch_rq_list+0xb89/0x1b30 block/blk-mq.c:2032
- __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
- blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
- __blk_mq_sched_dispatch_requests+0xb8a/0x1840 block/blk-mq-sched.c:309
- blk_mq_sched_dispatch_requests+0xcb/0x140 block/blk-mq-sched.c:331
- blk_mq_run_hw_queue+0x576/0xae0 block/blk-mq.c:2245
- blk_mq_flush_plug_list+0x1115/0x1880 block/blk-mq.c:2794
- __blk_flush_plug+0x420/0x500 block/blk-core.c:1198
- blk_finish_plug block/blk-core.c:1225 [inline]
- __submit_bio+0x422/0x560 block/blk-core.c:623
- __submit_bio_noacct_mq block/blk-core.c:696 [inline]
- submit_bio_noacct_nocheck+0x4d3/0xe30 block/blk-core.c:725
- submit_bh fs/buffer.c:2829 [inline]
- block_read_full_folio+0x93b/0xcd0 fs/buffer.c:2456
- filemap_read_folio+0x1a0/0x790 mm/filemap.c:2355
- do_read_cache_folio+0x134/0x820 mm/filemap.c:3789
- read_mapping_folio include/linux/pagemap.h:913 [inline]
- read_part_sector+0xb3/0x330 block/partitions/core.c:712
- adfspart_check_ICS+0xd9/0x9a0 block/partitions/acorn.c:360
- check_partition block/partitions/core.c:138 [inline]
- blk_add_partitions block/partitions/core.c:579 [inline]
- bdev_disk_changed+0x72c/0x13d0 block/partitions/core.c:683
- blkdev_get_whole+0x2d2/0x450 block/bdev.c:700
- bdev_open+0x2d4/0xc60 block/bdev.c:909
- blkdev_open+0x3e8/0x570 block/fops.c:630
- do_dentry_open+0x970/0x1440 fs/open.c:959
- vfs_open+0x3e/0x330 fs/open.c:1089
- do_open fs/namei.c:3727 [inline]
- path_openat+0x2b3e/0x3470 fs/namei.c:3886
- do_filp_open+0x235/0x490 fs/namei.c:3913
- do_sys_openat2+0x13e/0x1d0 fs/open.c:1416
- do_sys_open fs/open.c:1431 [inline]
- __do_sys_openat fs/open.c:1447 [inline]
- __se_sys_openat fs/open.c:1442 [inline]
- __x64_sys_openat+0x247/0x2a0 fs/open.c:1442
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7fa51fb169a4
-RSP: 002b:00007ffc16756ab0 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
-RAX: ffffffffffffffda RBX: 0000562ce7078b20 RCX: 00007fa51fb169a4
-RDX: 00000000000a0800 RSI: 0000562ce707e8b0 RDI: 00000000ffffff9c
-RBP: 0000562ce707e8b0 R08: 0000000000000001 R09: 7fffffffffffffff
-R10: 0000000000000000 R11: 0000000000000246 R12: 00000000000a0800
-R13: 0000562ce7081250 R14: 0000000000000001 R15: 0000562ce706e910
- </TASK>
-INFO: task udevd:5999 blocked for more than 144 seconds.
-      Not tainted 6.11.0-syzkaller-01458-g9410645520e9 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:udevd           state:D stack:20536 pid:5999  tgid:5999  ppid:4686   flags:0x00004002
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5188 [inline]
- __schedule+0x1800/0x4a60 kernel/sched/core.c:6529
- __schedule_loop kernel/sched/core.c:6606 [inline]
- schedule+0x14b/0x320 kernel/sched/core.c:6621
- schedule_timeout+0x1be/0x310 kernel/time/timer.c:2581
- wait_for_reconnect drivers/block/nbd.c:1023 [inline]
- nbd_handle_cmd drivers/block/nbd.c:1065 [inline]
- nbd_queue_rq+0x7cd/0x2f70 drivers/block/nbd.c:1123
- blk_mq_dispatch_rq_list+0xb89/0x1b30 block/blk-mq.c:2032
- __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
- blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
- __blk_mq_sched_dispatch_requests+0xb8a/0x1840 block/blk-mq-sched.c:309
- blk_mq_sched_dispatch_requests+0xcb/0x140 block/blk-mq-sched.c:331
- blk_mq_run_hw_queue+0x576/0xae0 block/blk-mq.c:2245
- blk_mq_flush_plug_list+0x1115/0x1880 block/blk-mq.c:2794
- __blk_flush_plug+0x420/0x500 block/blk-core.c:1198
- blk_finish_plug block/blk-core.c:1225 [inline]
- __submit_bio+0x422/0x560 block/blk-core.c:623
- __submit_bio_noacct_mq block/blk-core.c:696 [inline]
- submit_bio_noacct_nocheck+0x4d3/0xe30 block/blk-core.c:725
- submit_bh fs/buffer.c:2829 [inline]
- block_read_full_folio+0x93b/0xcd0 fs/buffer.c:2456
- filemap_read_folio+0x1a0/0x790 mm/filemap.c:2355
- do_read_cache_folio+0x134/0x820 mm/filemap.c:3789
- read_mapping_folio include/linux/pagemap.h:913 [inline]
- read_part_sector+0xb3/0x330 block/partitions/core.c:712
- adfspart_check_ICS+0xd9/0x9a0 block/partitions/acorn.c:360
- check_partition block/partitions/core.c:138 [inline]
- blk_add_partitions block/partitions/core.c:579 [inline]
- bdev_disk_changed+0x72c/0x13d0 block/partitions/core.c:683
- blkdev_get_whole+0x2d2/0x450 block/bdev.c:700
- bdev_open+0x2d4/0xc60 block/bdev.c:909
- blkdev_open+0x3e8/0x570 block/fops.c:630
- do_dentry_open+0x970/0x1440 fs/open.c:959
- vfs_open+0x3e/0x330 fs/open.c:1089
- do_open fs/namei.c:3727 [inline]
- path_openat+0x2b3e/0x3470 fs/namei.c:3886
- do_filp_open+0x235/0x490 fs/namei.c:3913
- do_sys_openat2+0x13e/0x1d0 fs/open.c:1416
- do_sys_open fs/open.c:1431 [inline]
- __do_sys_openat fs/open.c:1447 [inline]
- __se_sys_openat fs/open.c:1442 [inline]
- __x64_sys_openat+0x247/0x2a0 fs/open.c:1442
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7fa51fb169a4
-RSP: 002b:00007ffc16756ab0 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
-RAX: ffffffffffffffda RBX: 0000562ce708fe10 RCX: 00007fa51fb169a4
-RDX: 00000000000a0800 RSI: 0000562ce708d1d0 RDI: 00000000ffffff9c
-RBP: 0000562ce708d1d0 R08: 00000000ffffffff R09: 7fffffffffffffff
-R10: 0000000000000000 R11: 0000000000000246 R12: 00000000000a0800
-R13: 0000562ce7083540 R14: 0000000000000001 R15: 0000562ce706e910
- </TASK>
+[1] https://lore.kernel.org/linux-block/5yal5unzvisrvfhhvsqrsqgu4tfbjp2fsrn=
+buyxioaxjgbojsi@o2arvhebzes3/
 
-Showing all locks held in the system:
-1 lock held by khungtaskd/30:
- #0: ffffffff8e938320 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
- #0: ffffffff8e938320 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
- #0: ffffffff8e938320 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x55/0x2a0 kernel/locking/lockdep.c:6626
-6 locks held by kworker/u8:12/3029:
-2 locks held by getty/4988:
- #0: ffff88803022d0a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x25/0x70 drivers/tty/tty_ldisc.c:243
- #1: ffffc900031232f0 (&ldata->atomic_read_lock){+.+.}-{3:3}, at: n_tty_read+0x6ac/0x1e00 drivers/tty/n_tty.c:2211
-3 locks held by udevd/5270:
- #0: ffff888025c964c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888025be7a10 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888025be7a10 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888025be7a10 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025d88180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/5932:
- #0: ffff888025db24c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888025c0f090 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888025c0f090 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888025c0f090 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025e10180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/5999:
- #0: ffff8880259654c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888021fd1090 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888021fd1090 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888021fd1090 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025df0180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6117:
- #0: ffff888025d594c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888021fd1810 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888021fd1810 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888021fd1810 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025e58180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6526:
- #0: ffff888025d5d4c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888021fd1b10 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888021fd1b10 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888021fd1b10 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025eb0180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6711:
- #0: ffff888025db64c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888025c0fb90 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888025c0fb90 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888025c0fb90 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025f18180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6856:
- #0: ffff888025ee24c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888025d14090 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888025d14090 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888025d14090 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025f50180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6906:
- #0: ffff888025e914c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888022375510 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888022375510 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888022375510 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888025fc0180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/6907:
- #0: ffff888025e924c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888022375a90 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888022375a90 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888022375a90 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888026468180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/7007:
- #0: ffff8880264194c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888025d14a10 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888025d14a10 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888025d14a10 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888026490180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/7074:
- #0: ffff888025e964c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888022399110 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888022399110 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888022399110 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff8880264c0180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-3 locks held by udevd/7144:
- #0: ffff888025f924c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0xf0/0xc60 block/bdev.c:897
- #1: ffff888022399710 (set->srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:151 [inline]
- #1: ffff888022399710 (set->srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:250 [inline]
- #1: ffff888022399710 (set->srcu){.+.+}-{0:0}, at: blk_mq_run_hw_queue+0x54d/0xae0 block/blk-mq.c:2245
- #2: ffff888026528180 (&cmd->lock){+.+.}-{3:3}, at: nbd_queue_rq+0xfc/0x2f70 drivers/block/nbd.c:1115
-2 locks held by syz-executor117/13121:
- #0: ffffffff8fcee2b0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_lock net/netlink/genetlink.c:35 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_rcv_msg+0x121/0xec0 net/netlink/genetlink.c:1209
-3 locks held by syz-executor117/13119:
- #0: ffffffff8fcee2b0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_lock net/netlink/genetlink.c:35 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_rcv_msg+0x121/0xec0 net/netlink/genetlink.c:1209
- #2: ffff888027479998 (&nbd->config_lock){+.+.}-{3:3}, at: nbd_genl_connect+0xc26/0x1c80 drivers/block/nbd.c:2025
-2 locks held by syz-executor117/13122:
- #0: ffffffff8fcee2b0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_lock net/netlink/genetlink.c:35 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_rcv_msg+0x121/0xec0 net/netlink/genetlink.c:1209
-2 locks held by syz-executor117/13120:
- #0: ffffffff8fcee2b0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_lock net/netlink/genetlink.c:35 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_rcv_msg+0x121/0xec0 net/netlink/genetlink.c:1209
-2 locks held by syz-executor117/13123:
- #0: ffffffff8fcee2b0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_lock net/netlink/genetlink.c:35 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
- #1: ffffffff8fcee168 (genl_mutex){+.+.}-{3:3}, at: genl_rcv_msg+0x121/0xec0 net/netlink/genetlink.c:1209
-
-=============================================
-
-NMI backtrace for cpu 1
-CPU: 1 UID: 0 PID: 30 Comm: khungtaskd Not tainted 6.11.0-syzkaller-01458-g9410645520e9 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/06/2024
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:93 [inline]
- dump_stack_lvl+0x241/0x360 lib/dump_stack.c:119
- nmi_cpu_backtrace+0x49c/0x4d0 lib/nmi_backtrace.c:113
- nmi_trigger_cpumask_backtrace+0x198/0x320 lib/nmi_backtrace.c:62
- trigger_all_cpu_backtrace include/linux/nmi.h:162 [inline]
- check_hung_uninterruptible_tasks kernel/hung_task.c:223 [inline]
- watchdog+0xff4/0x1040 kernel/hung_task.c:379
- kthread+0x2f0/0x390 kernel/kthread.c:389
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:147
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
- </TASK>
-Sending NMI from CPU 1 to CPUs 0:
-NMI backtrace for cpu 0
-CPU: 0 UID: 0 PID: 4668 Comm: syslogd Not tainted 6.11.0-syzkaller-01458-g9410645520e9 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/06/2024
-RIP: 0010:lookup_chain_cache_add kernel/locking/lockdep.c:3781 [inline]
-RIP: 0010:validate_chain+0x1cb/0x5900 kernel/locking/lockdep.c:3836
-Code: 8d 1c c5 c0 e7 d9 93 48 89 d8 48 c1 e8 03 48 89 44 24 68 42 80 3c 20 00 74 08 48 89 df e8 bd 56 8a 00 48 89 5c 24 48 48 8b 1b <48> 85 db 74 48 48 83 c3 f8 74 42 4c 8d 7b 18 4c 89 f8 48 c1 e8 03
-RSP: 0018:ffffc9000307f500 EFLAGS: 00000046
-RAX: 1ffffffff27e4352 RBX: ffffffff94237e88 RCX: ffffffff8170803e
-RDX: 0000000000000000 RSI: 0000000000000008 RDI: ffffffff941de848
-RBP: ffffc9000307f800 R08: ffffffff941de84f R09: 1ffffffff283bd09
-R10: dffffc0000000000 R11: fffffbfff283bd0a R12: dffffc0000000000
-R13: ffff88807a406550 R14: 0df99ad215ac43a2 R15: ffff88807a406550
-FS:  00007fd2e7376380(0000) GS:ffff8880b8800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007ff85a147d30 CR3: 000000007a73a000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <NMI>
- </NMI>
- <TASK>
- __lock_acquire+0x137a/0x2040 kernel/locking/lockdep.c:5142
- lock_acquire+0x1ed/0x550 kernel/locking/lockdep.c:5759
- seqcount_lockdep_reader_access+0x13f/0x220 include/linux/seqlock.h:73
- ktime_get_coarse_real_ts64+0x3a/0x120 kernel/time/timekeeping.c:2390
- current_time+0x8f/0x2b0 fs/inode.c:2610
- inode_needs_update_time fs/inode.c:2178 [inline]
- file_update_time+0x5a/0x430 fs/inode.c:2232
- shmem_file_write_iter+0xd3/0x120 mm/shmem.c:3071
- new_sync_write fs/read_write.c:497 [inline]
- vfs_write+0xa72/0xc90 fs/read_write.c:590
- ksys_write+0x1a0/0x2c0 fs/read_write.c:643
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7fd2e74cabf2
-Code: 89 c7 48 89 44 24 08 e8 7b 34 fa ff 48 8b 44 24 08 48 83 c4 28 c3 c3 64 8b 04 25 18 00 00 00 85 c0 75 20 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 76 6f 48 8b 15 07 a2 0d 00 f7 d8 64 89 02 48 83
-RSP: 002b:00007ffc5cfee9c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
-RAX: ffffffffffffffda RBX: 0000000000000003 RCX: 00007fd2e74cabf2
-RDX: 000000000000005f RSI: 000055a451d5ec50 RDI: 0000000000000003
-RBP: 000055a451d5ec50 R08: 0000000000000001 R09: 0000000000000000
-R10: 00007fd2e76693a3 R11: 0000000000000246 R12: 000000000000005f
-R13: 00007fd2e7376300 R14: 0000000000000004 R15: 000055a451d5ea60
- </TASK>
-INFO: NMI handler (nmi_cpu_backtrace_handler) took too long to run: 1.402 msecs
+List of failures
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+#1: nvme/014 (tcp transport)
+#2: nvme/041 (fc transport)
+#3: scsi/008
 
 
----
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
+Failure description
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+#1: nvme/014 (tcp transport)
+
+   With the trtype=3Dtcp configuration, nvme/014 fails occasionally with th=
+e
+   kernel message "DEBUG_LOCKS_WARN_ON(lock->magic !=3D lock)". It is rare,=
+ and
+   200 times of repeat is required to recreate the failure. A fix patch
+   candidate was posted [2].
+
+   [2] https://lore.kernel.org/linux-nvme/20240912062707.1759715-1-shinichi=
+ro.kawasaki@wdc.com/
+
+#2: nvme/041 (fc transport)
+
+   With the trtype=3Dfc configuration, nvme/041 fails:
+
+  nvme/041 (Create authenticated connections)                  [failed]
+      runtime  2.677s  ...  4.823s
+      --- tests/nvme/041.out      2023-11-29 12:57:17.206898664 +0900
+      +++ /home/shin/Blktests/blktests/results/nodev/nvme/041.out.bad     2=
+024-03-19 14:50:56.399101323 +0900
+      @@ -2,5 +2,5 @@
+       Test unauthenticated connection (should fail)
+       disconnected 0 controller(s)
+       Test authenticated connection
+      -disconnected 1 controller(s)
+      +disconnected 0 controller(s)
+       Test complete
+
+   nvme/044 had same failure symptom until the kernel v6.9. A solution was
+   suggested and discussed in Feb/2024 [3].
+
+   [3] https://lore.kernel.org/linux-nvme/20240221132404.6311-1-dwagner@sus=
+e.de/
+
+#3: scsi/008
+
+  Due to a kernel change, IO scheduler can not be changed to "none". Then t=
+he
+  fio command with --ioscheduler=3Dnone option failed. A kernel fix patch w=
+as
+  posted [4].
+
+   [4] https://lore.kernel.org/linux-block/20240917133231.134806-1-dlemoal@=
+kernel.org/=
 
