@@ -2,86 +2,81 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2855D9D1505
-	for <lists+nbd@lfdr.de>; Mon, 18 Nov 2024 17:06:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 215249D2E6C
+	for <lists+nbd@lfdr.de>; Tue, 19 Nov 2024 19:57:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5119320EE3; Mon, 18 Nov 2024 16:06:29 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Nov 18 16:06:29 2024
-Old-Return-Path: <eblake@redhat.com>
+	id CD5662061E; Tue, 19 Nov 2024 18:57:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov 19 18:57:10 2024
+Old-Return-Path: <0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000@mail.pendletonfamilybrands.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST,
-	MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
-	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=unavailable
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.3 required=4.0 tests=AVAILABLENOW,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HTML_MESSAGE,RCVD_IN_MSPIKE_H4,
+	RCVD_IN_MSPIKE_WL,RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,SARE_HTML_COLOR_NWHT autolearn=no
 	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 8D98A20EB5
-	for <lists-other-nbd@bendel.debian.org>; Mon, 18 Nov 2024 16:06:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C285F20624
+	for <lists-other-nbd@bendel.debian.org>; Tue, 19 Nov 2024 18:39:04 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-6.917 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.34, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	LDO_WHITELIST=-5, MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+X-Amavis-Spam-Status: No, score=3.427 tagged_above=-10000 required=5.3
+	tests=[AVAILABLENOW=1, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=2,
+	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
 	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SARE_MSGID_LONG45=0.893,
-	SARE_MSGID_LONG50=0.726] autolearn=ham autolearn_force=no
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SARE_HTML_COLOR_NWHT=0.623]
+	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id QyIHtoYN-npb for <lists-other-nbd@bendel.debian.org>;
-	Mon, 18 Nov 2024 16:06:15 +0000 (UTC)
+	with ESMTP id xWH6vtqPUh4O for <lists-other-nbd@bendel.debian.org>;
+	Tue, 19 Nov 2024 18:38:54 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 5357E20E13
-	for <nbd@other.debian.org>; Mon, 18 Nov 2024 16:06:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1731945969;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9Dmzb4+cxeMVzEsNyz6tayZ5fsd2SQQrSivWHjLxk98=;
-	b=ciPDByBxBH9p/P34xl7Yi4vQQAND5700xnoNZ3PstRL8UGmpnZFM14RXT1IJ5oRUFCmBZw
-	/ycGYV44KBBQwdFNmcxXPV6ahD2KhvBTEkIGQcQI9+myF8rp/s+e701kOMsmutVX0iieG9
-	qt6B4a+EHZCPSxg6CT0Po5zx1fkA1YI=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-193-9j1azjOPN-G_rCgil3L2kQ-1; Mon,
- 18 Nov 2024 11:05:00 -0500
-X-MC-Unique: 9j1azjOPN-G_rCgil3L2kQ-1
-X-Mimecast-MFC-AGG-ID: 9j1azjOPN-G_rCgil3L2kQ
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+X-Greylist: delayed 364 seconds by postgrey-1.36 at bendel; Tue, 19 Nov 2024 18:38:54 UTC
+Received: from a9-33.smtp-out.amazonses.com (a9-33.smtp-out.amazonses.com [54.240.9.33])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C7C651955EA7;
-	Mon, 18 Nov 2024 16:04:59 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.76])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C36853003B7E;
-	Mon, 18 Nov 2024 16:04:57 +0000 (UTC)
-Date: Mon, 18 Nov 2024 10:04:55 -0600
-From: Eric Blake <eblake@redhat.com>
-To: linux-block@vger.kernel.org, nbd@other.debian.org, 
-	Kevin Wolf <kwolf@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: question on NBD idempotency
-Message-ID: <idugnvijxhmiybvyggxzeyxccbuom3pjblwhbye5fnbmp27rpj@k3lhml2c6zsh>
-References: <2i75j4d6tt6aben6au4a3s63burx3kvtywhb3ecbh3w2eoallm@ye34afaah6ih>
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 7CF47205F0
+	for <nbd@other.debian.org>; Tue, 19 Nov 2024 18:38:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=l74ybolohuee6dvnnsh3fupoedrhottp; d=pendletonfamilybrands.com;
+	t=1732041166;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-ID:List-Unsubscribe;
+	bh=y18FQFDU+nmzvYcZW/sIygzV0uXhK/tqziUeNo5k91I=;
+	b=jveo839TFp8Gjvwt5lyOGwT9wjHPpchZuoK2dvvhn8pk0H4cYPiUvPpR6uA76P0N
+	75PG6I0ss1MAjfoB4+549YbYCRNApA2TsMPnOkFP6uxKIVzSkknaWnfqBOC6mmBrK3M
+	VVWurk8PfKK7WxSnl2Rf22EyMu/Nxlmy19CWWhlykaGZ9V7pIvsRWPU1mnMOeDZIXIw
+	Y4yh0gKz9oqVqg19527t13aBCLsoWHLjn4X55XGx5qXwsTnqaJyCzPNeWBflNnxP+6X
+	ceNVt/tLp5rrWye1ZG3LNZJFIivdYhHNJ79FJJRMkcruoKQz91nGi9McLCWLak7ZsO6
+	vdYkDITb8Q==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1732041166;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-ID:List-Unsubscribe:Feedback-ID;
+	bh=y18FQFDU+nmzvYcZW/sIygzV0uXhK/tqziUeNo5k91I=;
+	b=fRasHXsqdQd3AI1Eck2WS0BFFX5hItKgk6sTvZ1Pm2elRYKGezD4BQZ1ac43JK3b
+	kD+KHf9B6NWFzYlkGxf94rO935tXqLBTU+4EJYEjaVt+Y/IKe+6kjUHMT6owG7AU+nr
+	C+FDMCIdqAWiYS44eQI6sTtO1u/Tn6omzJVD5PFM=
+Content-Type: multipart/alternative;
+ boundary="===============7912076267288228716=="
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2i75j4d6tt6aben6au4a3s63burx3kvtywhb3ecbh3w2eoallm@ye34afaah6ih>
-User-Agent: NeoMutt/20241002
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Subject: Early Black Friday. Upgrade Your Safe Game!
+From: Pendleton <bulletin@pendletonfamilybrands.com>
+To: nbd@other.debian.org
+Date: Tue, 19 Nov 2024 18:32:46 +0000
+Message-ID: <0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000@email.amazonses.com>
+X-Entity-Ref-ID: 53f6bb55-856b-437a-a394-d17737cddbdf
+X-Tenant: 508969632888
+Feedback-ID: ::1.us-east-1.8WW+rbOmWAYK89lAwGZMehvPCMaIZCDedFyFCciu3dU=:AmazonSES
+X-SES-Outgoing: 2024.11.19-54.240.9.33
+X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <2FXLtkJHtWH.A.QQxC.FY2OnB@bendel>
+Resent-Message-ID: <tTsBo0LByQJ.A.es7H.G-NPnB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3189
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3190
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,38 +86,274 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/idugnvijxhmiybvyggxzeyxccbuom3pjblwhbye5fnbmp27rpj@k3lhml2c6zsh
-Resent-Date: Mon, 18 Nov 2024 16:06:29 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000@email.amazonses.com
+Resent-Date: Tue, 19 Nov 2024 18:57:10 +0000 (UTC)
 
-On Fri, Nov 15, 2024 at 09:43:24AM -0600, Eric Blake wrote:
-> Is there an existing set of ioctls where the creation of an NBD device
-> could associate a user-space tag with the device, and I can then later
-> query the device to get the tag back?  A finite-length string would be
-> awesome (I could store "nbd://$ip:$port/$export" as the tag on
-> creation, to know precisely which server the device is talking to),
-> but even an integer tag (32- or 64-bit) might be enough (it's easier
-> to choose an integer tag in the full 2^64 namespace that is unlikely
-> to cause collisions with other processes on the system, than it is to
-> avoid collisions in the limited first few $N of the /dev/nbd$N device
-> names chosen to pick the lowest unused integer first).  If not, would
-> it be worth adding such ioctls for the NBD driver?
+--===============7912076267288228716==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Aha - Stefan pointed me to NBD_ATTR_BACKEND_IDENTIFIER, in use in
-places such as
+### [![Pendleton Family Brands](https://images.pendletonfamilybrands.com/ec/ec/i/h67sdm_3-rt9S82Dvd0tILnksW8=/3226449372/height-100/)](https://www.pendletonfamilybrands.com/discount/EBF24?redirect=%2Fproducts%2Fst-plus)&lt;br/&gt;Why Choose Pendleton?
 
-https://github.com/vitalif/vitastor/blob/156d0054129c43cc26262663ff2c1cbb5b206513/src/client/nbd_proxy.cpp#L164
-https://github.com/xdavidwu/ceph/blob/2f1768caeb96425877d3f5cbfa779c590a23e938/src/tools/rbd_nbd/rbd-nbd.cc#L1394
+[![Stronghold ST Plus Testimonial Photo](https://images.pendletonfamilybrands.com/ec/ec/i/LpwE_B9txQawm2Em3rl0SIGRAj0=/4605854065/width-600/)](https://www.pendletonfamilybrands.com/discount/EBF24?redirect=%2Fproducts%2Fst-plus)
+&gt; I&#x27;ve been on the hunt for a sturdy and reliable safe for years. I finally found what I was looking for. I couldn&#x27;t think of another brand I would trust more than Pendleton&lt;br/&gt;-- Real Customer Feedback
 
-which looks like I can associate a given string directly with the
-netlink creation, then later modification via netlink insists that the
-same backend string be present, and where sysfs can be used to grab
-the contents of nbd->backend as stored in the kernel.  The only
-problem: nbd-client does not (yet) set this netlink parameter.  Looks
-like I get to patch nbd-client, as that netlink field sounds exactly
-like what I want.
+### Stronghold ST Plus Series Safes
+Accommodates 26 Long Guns Plus Handgun Storage. Features Fast &amp; Easy Access To Your Valuables With Pendleton&#x27;s Revolving Gun Management System, Lights, Mositure Control, and Valuables Storage. Opens Quickly With An EMP-Resistant Electronic Lock So You&#x27;re Always Prepared.
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.
-Virtualization:  qemu.org | libguestfs.org
+### Order Yours Today
+Early Black Friday discount code EBF24 is available now for Stronghold ST Plus safes. [Order Factory Direct Online](https://www.pendletonfamilybrands.com/discount/EBF24?redirect=%2Fproducts%2Fst-plus) or by Phone at 770-466-6181. Discount will be shown at checkout online. Take advantage now - discount EBF24 offers the lowest price that will be available. Limited supply available so don&#x27;t miss out!
+
+### Revolving Gun Management&lt;br/&gt;Video Demonstration
+![Revolving Safe Video](https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/early-black-friday-upgrade-your-safe-game/i/c2d981c0-506b-446e-80e6-35a613393483/?loop&amp;autoplay)
+
+(*click the video above to see the concept in action*)
+View this email in your browser: https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/early-black-friday-upgrade-your-safe-game/i/c2d981c0-506b-446e-80e6-35a613393483/
+Copyright © 2024 PENDLETON FAMILY BRANDS, All rights reserved.
+You are receiving this email because you've opted in for announcements and special offers
+Our mailing address is:
+PENDLETON FAMILY BRANDS
+PO BOX 2506
+LOGANVILLE, GA 30052 US
+Want to stop receiving these emails? You can unsubscribe: https://content.pendletonfamilybrands.com/pages/bulletin/promotions/2024/early-black-friday-upgrade-your-safe-game/i/c2d981c0-506b-446e-80e6-35a613393483/s/
+--===============7912076267288228716==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"en-us" style=3D"text-align:center; font-size:18px; max-width:=
+100%" align=3D"center">
+    <head style=3D"text-align:center" align=3D"center">
+        <title style=3D"text-align:center" align=3D"center">Early Black Fri=
+day. Upgrade Your Safe Game!</title>
+        <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Du=
+tf-8" style=3D"text-align:center" align=3D"center">
+        <meta name=3D"robots" content=3D"none" style=3D"text-align:center" =
+align=3D"center">
+        <meta name=3D"viewport" content=3D"width=3Ddevice-width" style=3D"t=
+ext-align:center" align=3D"center">
+       =20
+   =20
+       =20
+   =20
+<link rel=3D"preload" as=3D"font" href=3D"https://static.pendletonfamilybra=
+nds.com/ec/ec/f/907fff15-9764-455a-a0a2-964c3aa3a534/woff2/907fff15-9764-45=
+5a-a0a2-964c3aa3a534-a013c49b28_SdhXfP0.woff2" crossorigin style=3D"text-al=
+ign:center" align=3D"center">
+
+   =20
+    <style type=3D"text/css" style=3D"text-align:center" align=3D"center">@=
+media print {
+    *, *:before, *:after {
+        background: transparent;
+        color: #000;
+        box-shadow: none;
+        text-shadow: none
+        }
+    a, a:visited {
+        text-decoration: underline
+        }
+    a[href]:after {
+        content: " (" attr(href) ")"
+        }
+    abbr[title]:after {
+        content: " (" attr(title) ")"
+        }
+    a[href^=3D"#"]:after, a[href^=3D"javascript:"]:after {
+        content: ""
+        }
+    pre, blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid
+        }
+    thead {
+        display: table-header-group
+        }
+    tr, img {
+        page-break-inside: avoid
+        }
+    img {
+        max-width: 100%
+        }
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3
+        }
+    h2, h3 {
+        page-break-after: avoid
+        }
+    }
+@media screen and (min-width: 32rem) and (max-width: 48rem) {
+    html {
+        font-size: 15px
+        }
+    }
+@media screen and (min-width: 48rem) {
+    html {
+        font-size: 16px
+        }
+    }
+*:not(div):not(img):not(body):not(html):not(li):not(blockquote):not(p) {mar=
+gin:1rem auto 1rem;max-width:36rem;padding:0.25rem}
+a:visited {color:#3498db}
+a:hover {color:#2980b9}
+a:focus {color:#2980b9}
+a:active {color:#2980b9}</style>
+</head>
+    <body style=3D"text-align:center; line-height:1.85; color:#444; font-fa=
+mily:ForzaBold, Georgia, serif; margin:0; max-width:100%" align=3D"center">
+<span style=3D"text-align:center; display:none !important; font-size:1px; l=
+ine-height:1px; max-height:0; max-width:0; mso-hide:all; opacity:0; overflo=
+w:hidden; visibility:hidden" align=3D"center">Pendleton Offers Fast &amp; E=
+asy Access To Your Collection!</span><span style=3D"text-align:center; disp=
+lay:none !important; font-size:1px; line-height:1px; max-height:0; max-widt=
+h:0; mso-hide:all; opacity:0; overflow:hidden; visibility:hidden" align=3D"=
+center">=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=
+=E2=80=8C</span><a class=3D"view-in-browser" href=3D"https://yjhwpfc5.r.us-=
+east-1.awstrack.me/L0/https:%2F%2Fcontent.pendletonfamilybrands.com%2Fpages=
+%2Fbulletin%2Fpromotions%2F2024%2Fearly-black-friday-upgrade-your-safe-game=
+%2Fi%2Fc2d981c0-506b-446e-80e6-35a613393483%2F/1/0100019345b2cf35-3f344d12-=
+0f7f-4bbd-af00-ffb229b7dcc5-000000/L4Zlwc-eke9BfL0Lah25FdRMGSs=3D401" style=
+=3D"text-align:center; color:#3498db" align=3D"center">View this email in y=
+our browser</a>
+        <img src=3D"https://content.pendletonfamilybrands.com/pt/smXjLYN3PY=
+StMfa_ccNPwFcC_Dd8lWziN57NWSKFpk7yOYW6oPWv63-JNSA29GWGd0WANA-7csM6jY_3Dxn5P=
+9a3y4wAy0OLwUFjxWTGknfHVPjJiKHmMNFX__W36sZBaFNzRkkrBJsDq6jCSGoj48R92YEycup-=
+6ORCCLPr7ODvl00=3D/" width=3D"1" height=3D"1" style=3D"text-align:center; m=
+ax-width:100%" align=3D"center"><h3 style=3D"text-align:center; font-weight=
+:inherit; line-height:1.42; font-size:1.999rem" align=3D"center">
+<a href=3D"https://yjhwpfc5.r.us-east-1.awstrack.me/L0/https:%2F%2Fwww.pend=
+letonfamilybrands.com%2Fdiscount%2FEBF24%3Fredirect=3D%252Fproducts%252Fst-=
+plus/1/0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/caF2I4S=
+NPFyJXg4N5QhzB1t-nrE=3D401" style=3D"text-align:center; color:#3498db" alig=
+n=3D"center"><img alt=3D"Pendleton Family Brands" src=3D"https://images.pen=
+dletonfamilybrands.com/ec/ec/i/h67sdm_3-rt9S82Dvd0tILnksW8=3D/3226449372/he=
+ight-100/" style=3D"text-align:center; max-width:100%" align=3D"center"></a=
+><br style=3D"text-align:center" align=3D"center">Why Choose Pendleton?</h3=
+>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><a href=3D"https://yjhw=
+pfc5.r.us-east-1.awstrack.me/L0/https:%2F%2Fwww.pendletonfamilybrands.com%2=
+Fdiscount%2FEBF24%3Fredirect=3D%252Fproducts%252Fst-plus/2/0100019345b2cf35=
+-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/AVmUKcXET6QO39QJoxBt0ve6Ulw=3D=
+401" style=3D"text-align:center; color:#3498db" align=3D"center"><img alt=
+=3D"Stronghold ST Plus Testimonial Photo" src=3D"https://images.pendletonfa=
+milybrands.com/ec/ec/i/LpwE_B9txQawm2Em3rl0SIGRAj0=3D/4605854065/width-600/=
+" style=3D"text-align:center; max-width:100%" align=3D"center"></a></p>
+<blockquote style=3D"text-align:center" align=3D"center">
+<p style=3D"text-align:center; font-size:1.5rem; margin-bottom:1.3rem; marg=
+in:1rem auto 1rem; max-width:48rem; padding:0.25rem; color:#555; height:aut=
+o; line-height:1.45; font-style:italic" align=3D"center" height=3D"auto">I'=
+ve been on the hunt for a sturdy and reliable safe for years. I finally fou=
+nd what I was looking for. I couldn't think of another brand I would trust =
+more than Pendleton<br style=3D"text-align:center" align=3D"center">-- Real=
+ Customer Feedback</p>
+</blockquote>
+<h3 style=3D"text-align:center; font-weight:inherit; line-height:1.42; font=
+-size:1.999rem" align=3D"center">Stronghold ST Plus Series Safes</h3>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">Accommodates 26 Long Gu=
+ns Plus Handgun Storage. Features Fast &amp; Easy Access To Your Valuables =
+With Pendleton's Revolving Gun Management System, Lights, Mositure Control,=
+ and Valuables Storage. Opens Quickly With An EMP-Resistant Electronic Lock=
+ So You're Always Prepared.</p>
+<h3 style=3D"text-align:center; font-weight:inherit; line-height:1.42; font=
+-size:1.999rem" align=3D"center">Order Yours Today</h3>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">Early Black Friday disc=
+ount code EBF24 is available now for Stronghold ST Plus safes. <a href=3D"h=
+ttps://yjhwpfc5.r.us-east-1.awstrack.me/L0/https:%2F%2Fwww.pendletonfamilyb=
+rands.com%2Fdiscount%2FEBF24%3Fredirect=3D%252Fproducts%252Fst-plus/3/01000=
+19345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/LwtT9FRuzNzdDkQVA4Q=
+gy98og64=3D401" style=3D"text-align:center; color:#3498db" align=3D"center"=
+>Order Factory Direct Online</a> or by Phone at 770-466-6181. Discount will=
+ be shown at checkout online. Take advantage now - discount EBF24 offers th=
+e lowest price that will be available. Limited supply available so don't mi=
+ss out!</p>
+<h3 style=3D"text-align:center; font-weight:inherit; line-height:1.42; font=
+-size:1.999rem" align=3D"center">Revolving Gun Management<br style=3D"text-=
+align:center" align=3D"center">Video Demonstration</h3>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto"><a class=3D"multimedia"=
+ href=3D"https://yjhwpfc5.r.us-east-1.awstrack.me/L0/https:%2F%2Fcontent.pe=
+ndletonfamilybrands.com%2Fpages%2Fbulletin%2Fpromotions%2F2024%2Fearly-blac=
+k-friday-upgrade-your-safe-game%2Fi%2Fc2d981c0-506b-446e-80e6-35a613393483%=
+2F/2/0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/R8DJVpkx_=
+eTZt_P7hfIhQXKubUk=3D401" style=3D"text-align:center; color:#3498db" align=
+=3D"center"><img alt=3D"Revolving Safe Video" src=3D"https://content.pendle=
+tonfamilybrands.com/ec/multimedia/embed/3724690534/inbox/" style=3D"text-al=
+ign:center; max-width:100%" align=3D"center"></a></p>
+<p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; margin=
+:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:auto;=
+ line-height:1.45" align=3D"center" height=3D"auto">(<em style=3D"text-alig=
+n:center" align=3D"center">click the video above to see the concept in acti=
+on</em>)</p>
+       =20
+            <div class=3D"footer" style=3D"text-align:center; width:100%; b=
+order-top:solid 1px #000; margin-top:5em" align=3D"center" width=3D"100%">
+    <p class=3D"copyright" style=3D"text-align:center; font-size:1rem; marg=
+in-bottom:1.3rem; margin:1rem auto 1rem; max-width:36rem; padding:0.25rem; =
+color:#555; height:auto; line-height:1.45" align=3D"center" height=3D"auto"=
+>
+    Copyright =C2=A9 2024 PENDLETON FAMILY BRANDS, All rights reserved.
+</p>
+    <p class=3D"reminder" style=3D"text-align:center; font-size:1rem; margi=
+n-bottom:1.3rem; margin:1rem auto 1rem; max-width:36rem; padding:0.25rem; c=
+olor:#555; height:auto; line-height:1.45" align=3D"center" height=3D"auto">=
+You are receiving this email because you've opted in for announcements and =
+special offers</p>
+    <div class=3D"physical-location" style=3D"text-align:center; width:100%=
+" align=3D"center" width=3D"100%">
+    Our mailing address is:
+    <pre style=3D'text-align:center; font-family:Menlo, Monaco, "Courier Ne=
+w", monospace; background-color:#fafafa; font-size:0.8rem; overflow-x:scrol=
+l; padding:1.125em; background:transparent; overflow:visible; text-transfor=
+m:uppercase' align=3D"center" bgcolor=3D"#fafafa">PENDLETON FAMILY BRANDS
+PO BOX 2506
+LOGANVILLE, GA 30052 US</pre>
+</div>
+   =20
+<div class=3D"unsubscribe" style=3D"text-align:center; width:100%" align=3D=
+"center" width=3D"100%">
+    <p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; ma=
+rgin:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:a=
+uto; line-height:1.45" align=3D"center" height=3D"auto">Want to stop receiv=
+ing these emails?</p>
+    <p style=3D"text-align:center; font-size:1rem; margin-bottom:1.3rem; ma=
+rgin:1rem auto 1rem; max-width:36rem; padding:0.25rem; color:#555; height:a=
+uto; line-height:1.45" align=3D"center" height=3D"auto">You can <a href=3D"=
+https://yjhwpfc5.r.us-east-1.awstrack.me/L0/https:%2F%2Fcontent.pendletonfa=
+milybrands.com%2Fpages%2Fbulletin%2Fpromotions%2F2024%2Fearly-black-friday-=
+upgrade-your-safe-game%2Fi%2Fc2d981c0-506b-446e-80e6-35a613393483%2Fs%2F/1/=
+0100019345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/7d0QzWc38pB8ln=
+PJ9BNMSQhhvdU=3D401" style=3D"text-align:center; color:#3498db" align=3D"ce=
+nter">unsubscribe</a>.</p>
+</div>
+
+</div>
+       =20
+    <img alt=3D"" src=3D"https://yjhwpfc5.r.us-east-1.awstrack.me/I0/010001=
+9345b2cf35-3f344d12-0f7f-4bbd-af00-ffb229b7dcc5-000000/_heG7KgSwL7tF1WoLrmz=
+crsMwKs=3D401" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>
+
+--===============7912076267288228716==--
 
