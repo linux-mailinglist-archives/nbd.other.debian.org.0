@@ -2,81 +2,90 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA82E9F90F8
-	for <lists+nbd@lfdr.de>; Fri, 20 Dec 2024 12:12:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86D989FA214
+	for <lists+nbd@lfdr.de>; Sat, 21 Dec 2024 20:00:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D32EA2055F; Fri, 20 Dec 2024 11:12:30 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec 20 11:12:30 2024
-Old-Return-Path: <w@uter.be>
+	id 68D0B206BF; Sat, 21 Dec 2024 19:00:33 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Dec 21 19:00:33 2024
+Old-Return-Path: <eblake@redhat.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,LDOSUBSCRIBER,LDO_WHITELIST
-	autolearn=unavailable autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-10.8 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,LDOSUBSCRIBER,
+	LDO_WHITELIST,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED,
+	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=unavailable
+	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 328CB20585
-	for <lists-other-nbd@bendel.debian.org>; Fri, 20 Dec 2024 11:12:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8C6952069C
+	for <lists-other-nbd@bendel.debian.org>; Sat, 21 Dec 2024 19:00:24 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-7.2 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LDO_WHITELIST=-5]
-	autolearn=ham autolearn_force=no
+X-Amavis-Spam-Status: No, score=-5.82 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.34, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	LDO_WHITELIST=-5, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id VjVOO4x1_lJJ for <lists-other-nbd@bendel.debian.org>;
-	Fri, 20 Dec 2024 11:12:16 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-X-Greylist: delayed 1125 seconds by postgrey-1.36 at bendel; Fri, 20 Dec 2024 11:12:16 UTC
-Received: from lounge.grep.be (lounge.grep.be [IPv6:2a01:4f8:200:91e8::2])
+	with ESMTP id f71UyJO39dum for <lists-other-nbd@bendel.debian.org>;
+	Sat, 21 Dec 2024 19:00:19 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by bendel.debian.org (Postfix) with ESMTP id CA8D5206B6
+	for <nbd@other.debian.org>; Sat, 21 Dec 2024 19:00:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1734807612;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rOUAki/AGY+tfzO/IRuvuqrpd2e7AIcONH3Tqqrvp10=;
+	b=driz+9HmuOZz6D9Max8Bpnfkyh9XCJhYtsrRKC0SaAPMhXc/DbuZagj5KURP9bsk+WxxmS
+	7K0cBKyRcyP9zRyehemAME1A0niAIiYOcevq0SBW/TKhbh7DvnXXHHqsnYoQ82ayH4Y+YJ
+	6wNa9GRARmMnc1p2R1KRoQr86dOKX0A=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-171-kejdBjpYNiePdbbreDdO4g-1; Sat,
+ 21 Dec 2024 14:00:06 -0500
+X-MC-Unique: kejdBjpYNiePdbbreDdO4g-1
+X-Mimecast-MFC-AGG-ID: kejdBjpYNiePdbbreDdO4g
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id B0C542056B
-	for <nbd@other.debian.org>; Fri, 20 Dec 2024 11:12:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
-	s=2021.lounge; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=5zR6+Pag9akRP1lGYZSxOvIwpSRiTlh7c808LcjVmjM=; b=NggiKMf9h+of5KJxgrMhOc+LBU
-	EkNBsdf0mUvdtbdW8bzdO2oD81yHivEbKCXI3HgVAvb8cRGaT/SxZq1y3INFbR9TT2DtWs1gDnHO0
-	/qr/otZlQvGg2a/HeDjnC09Dnh8jYRwNUXtHT+F288pkFj+FnUxKvkeqzRdcdaZPm7yk0fut4Ul/J
-	wSBmmJT/4Xcl3JIIFHg9j3DdsLO2agEYw1rTwWgLolUM4B/ETmjY/ucas5NdXauGNotgJ9tCGrtlQ
-	//c1OTNtWXxGxNQZG6uTAhh9tB3d3mW0Ash59V+35i/xtduHLwkntXaF/gQZuYBil7eBwiOv6ZAg+
-	DaOyqFsQ==;
-Received: from [102.39.140.57] (helo=pc220518)
-	by lounge.grep.be with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <w@uter.be>)
-	id 1tOadM-000387-1B;
-	Fri, 20 Dec 2024 11:53:28 +0100
-Received: from wouter by pc220518 with local (Exim 4.98)
-	(envelope-from <w@uter.be>)
-	id 1tOadD-00000000IAy-2NnG;
-	Fri, 20 Dec 2024 12:53:19 +0200
-Date: Fri, 20 Dec 2024 12:53:19 +0200
-From: Wouter Verhelst <w@uter.be>
-To: Eric Blake <eblake@redhat.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A0E081956086;
+	Sat, 21 Dec 2024 19:00:04 +0000 (UTC)
+Received: from redhat.com (unknown [10.2.16.27])
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id D016419560A2;
+	Sat, 21 Dec 2024 19:00:02 +0000 (UTC)
+Date: Sat, 21 Dec 2024 12:59:59 -0600
+From: Eric Blake <eblake@redhat.com>
+To: Wouter Verhelst <w@uter.be>
 Cc: nbd@other.debian.org, stefanha@redhat.com
 Subject: Re: [PATCH 0/2] Add support for setting netlink backend string
-Message-ID: <Z2VMn__hjblWkLx-@pc220518.home.grep.be>
+Message-ID: <ynw7fbsiuwuzl7ghuixdmkbezq4huch7yhuhi457f2iwmlirmz@fp7bavolyuda>
 References: <20241119233057.2248038-1-eblake@redhat.com>
  <eurcm2jfmaynf4ycx3qqpmiojrtaewzog3znjwnhderza7txrt@4u7mh2gt7cuh>
+ <Z2VMn__hjblWkLx-@pc220518.home.grep.be>
 MIME-Version: 1.0
+In-Reply-To: <Z2VMn__hjblWkLx-@pc220518.home.grep.be>
+User-Agent: NeoMutt/20241114
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Tk7767BdsgvApCQS80iO3bzSnVoNQblDlHj_8HhDaP8_1734807605
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <eurcm2jfmaynf4ycx3qqpmiojrtaewzog3znjwnhderza7txrt@4u7mh2gt7cuh>
-X-Speed: Gates' Law: Every 18 months, the speed of software halves.
-Organization: none
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <AieGQ70efPG.A.wZeB.eEVZnB@bendel>
+Resent-Message-ID: <xMxHQ50jMm.A.fCUK.RBxZnB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3202
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3203
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -86,59 +95,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Z2VMn__hjblWkLx-@pc220518.home.grep.be
-Resent-Date: Fri, 20 Dec 2024 11:12:30 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ynw7fbsiuwuzl7ghuixdmkbezq4huch7yhuhi457f2iwmlirmz@fp7bavolyuda
+Resent-Date: Sat, 21 Dec 2024 19:00:33 +0000 (UTC)
 
-Hi Eric,
+On Fri, Dec 20, 2024 at 12:53:19PM +0200, Wouter Verhelst wrote:
+> Hi Eric,
+> 
+> Sorry for the late reply; I was travelling a lot in the last two or so
+> months and had little time to look at things in my time off.
 
-Sorry for the late reply; I was travelling a lot in the last two or so
-months and had little time to look at things in my time off.
+No problem.  Hope you enjoyed your travels.
 
-This looks good to me; please commit.
+> 
+> This looks good to me; please commit.
 
-On Thu, Dec 12, 2024 at 12:36:22PM -0600, Eric Blake wrote:
-> ping
+Committed as cf5a7743..87c5318a
+
 > 
-> This patch series is being added as a dependency to KubeSAN:
-> https://gitlab.com/kubesan/kubesan/-/merge_requests/100/diffs?commit_id=89a370dcde
-> https://quay.io/repository/kubesan/nbd-client-i
-> 
-> so it would be nice to have it upstream instead of in a one-off fork.
-> 
-> On Tue, Nov 19, 2024 at 05:27:27PM -0600, Eric Blake wrote:
-> > Stefan Hajnoczi pointed out to me that since kernel 5.14 (commit
-> > 6497ef8d in Apr 2021), the netlink interface has allowed userspace to
-> > pass in an arbitrary backend string visible at
-> > /sys/block/nbdN/backend, and which prevents the abuse of netlink to
-> > arbitrarily reconfigure an active NBD connection to a different
-> > backend, for some added safety when multiple threads might be racing
-> > to create NBD devices.  Time to expose it in nbd-client, along with
-> > first fixing some regressions along the way.
+> On Thu, Dec 12, 2024 at 12:36:22PM -0600, Eric Blake wrote:
+> > ping
 > > 
-> > Eric Blake (2):
-> >   nbd-client: Fix use without -N
-> >   nbd-client: Add support for setting /sys/block/nbdN/backend
+> > This patch series is being added as a dependency to KubeSAN:
+> > https://gitlab.com/kubesan/kubesan/-/merge_requests/100/diffs?commit_id=89a370dcde
+> > https://quay.io/repository/kubesan/nbd-client-i
 > > 
-> >  .gitignore               |  1 +
-> >  man/nbd-client.8.sgml.in | 24 +++++++++++++++++++++++-
-> >  nbd-client.c             | 30 ++++++++++++++++++++++++------
-> >  nbd-netlink.h            |  7 +++++--
-> >  4 files changed, 53 insertions(+), 9 deletions(-)
+> > so it would be nice to have it upstream instead of in a one-off fork.
 > > 
-> > -- 
-> > 2.47.0
-> > 
-> 
-> -- 
-> Eric Blake, Principal Software Engineer
-> Red Hat, Inc.
-> Virtualization:  qemu.org | libguestfs.org
-> 
-> 
+> > On Tue, Nov 19, 2024 at 05:27:27PM -0600, Eric Blake wrote:
+> > > Stefan Hajnoczi pointed out to me that since kernel 5.14 (commit
+> > > 6497ef8d in Apr 2021), the netlink interface has allowed userspace to
+> > > pass in an arbitrary backend string visible at
+> > > /sys/block/nbdN/backend, and which prevents the abuse of netlink to
+> > > arbitrarily reconfigure an active NBD connection to a different
+> > > backend, for some added safety when multiple threads might be racing
+> > > to create NBD devices.  Time to expose it in nbd-client, along with
+> > > first fixing some regressions along the way.
+
+Interestingly, I note that while the netlink interface in the kernel
+_requires_ that if the user passed in an identifer on create, then it
+must pass in the same identifier on a reconfigure (ie. reconfigure
+will fail if the user is not attempting to reconfigure the same
+backend); but when it comes to deletion, the kernel does not check for
+any consistency, even if the user passes in an indentifier.  I
+understand that for backwards compatibility, the deletion MUST happen
+if the user does not pass in an identifier, but it would be nice if
+the kernel insisted that deletion is only possible with the same
+identifier that was used in creation if the user did bother to pass in
+an identifier at deletion.  So if I do get the kernel patched along
+those lines, this patch will need a followup to add support for
+'nbd-client -d /dev/nbd0 -i $backend_passed_to_the_create'.
 
 -- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
-
-I will have a Tin-Actinium-Potassium mixture, thanks.
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.
+Virtualization:  qemu.org | libguestfs.org
 
