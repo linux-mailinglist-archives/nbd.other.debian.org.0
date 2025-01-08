@@ -1,87 +1,77 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03056A050E9
-	for <lists+nbd@lfdr.de>; Wed,  8 Jan 2025 03:39:10 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B470A05724
+	for <lists+nbd@lfdr.de>; Wed,  8 Jan 2025 10:42:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id DC16C2062C; Wed,  8 Jan 2025 02:39:09 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan  8 02:39:09 2025
-Old-Return-Path: <ming.lei@redhat.com>
+	id 5CF93206F8; Wed,  8 Jan 2025 09:42:22 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jan  8 09:42:22 2025
+Old-Return-Path: <BATV+9e166f3f48dee24ac321+7808+infradead.org+hch@bombadil.srs.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-	RCVD_IN_MSPIKE_H2,RCVD_IN_VALIDITY_RPBL_BLOCKED,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Status: No, score=0.8 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INVOICE,RCVD_IN_DNSWL_MED
+	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A691F20625
-	for <lists-other-nbd@bendel.debian.org>; Wed,  8 Jan 2025 02:22:24 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 71D6A206E8
+	for <lists-other-nbd@bendel.debian.org>; Wed,  8 Jan 2025 09:25:36 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.539 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.34, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.151 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_EF=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249, INVOICE=3,
+	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 6FCNOi_i97kg for <lists-other-nbd@bendel.debian.org>;
-	Wed,  8 Jan 2025 02:22:18 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by bendel.debian.org (Postfix) with ESMTP id 3DC3B20628
-	for <nbd@other.debian.org>; Wed,  8 Jan 2025 02:22:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1736302932;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BUmFn0QdcbnrP+kAJCEAifsFmvKuEgoz5SMuFeJiqRM=;
-	b=I3BR51AMiRBWDqx65nOjDIlwqp50x5rWfhL/XW1XMNZHXsxOrLOBG4dLUxRX+Td5Ly3cxD
-	rztELj9Z2YYXKOQV826vvYAk1CYK7b/r7n5cfC4SmluTHje56v08VYS5SU6WtKafazwMQo
-	w03iLSneMRV0TULxyLrJu0k0Z4TFUO4=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-82-rFxU6K-JNFO5J-Hw5JdVVw-1; Tue,
- 07 Jan 2025 21:22:07 -0500
-X-MC-Unique: rFxU6K-JNFO5J-Hw5JdVVw-1
-X-Mimecast-MFC-AGG-ID: rFxU6K-JNFO5J-Hw5JdVVw
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	with ESMTP id x7jh_Vwap0fx for <lists-other-nbd@bendel.debian.org>;
+	Wed,  8 Jan 2025 09:25:31 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id D476919560BE;
-	Wed,  8 Jan 2025 02:22:04 +0000 (UTC)
-Received: from fedora (unknown [10.72.116.126])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id E153D3000197;
-	Wed,  8 Jan 2025 02:21:58 +0000 (UTC)
-Date: Wed, 8 Jan 2025 10:21:53 +0800
-From: Ming Lei <ming.lei@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Damien Le Moal <dlemoal@kernel.org>,
-	Nilay Shroff <nilay@linux.ibm.com>, linux-block@vger.kernel.org,
-	linux-nvme@lists.infradead.org, nbd@other.debian.org,
-	linux-scsi@vger.kernel.org, usb-storage@lists.one-eyed-alien.net
-Subject: Re: fix queue freeze and limit locking order
-Message-ID: <Z33hQfkbolsku7yr@fedora>
-References: <20250107063120.1011593-1-hch@lst.de>
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id AAE9A206D7
+	for <nbd@other.debian.org>; Wed,  8 Jan 2025 09:25:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=ryN0z1Pp3IvUFA7Af5iKRLT0TkpMzEngq0fQMHX47v8=; b=PbEZjoi8R7AHtgeqHEdx2xq/Y+
+	MvbTIP2dqEt3CCoyBUcO9sISsHtvySjiTKrt4IGnxQgzrtm2I9doeRxuMivSaziOhgtGysx0UUGIT
+	3U58D+fiwGqGhmH6jZ33FOXW5flKIqJCV0AKN0viQyzZur5Z+GiV/dIwx3cmYiefoiX3SQ9z4dEIN
+	ME0gTCMsStalLn9jCXgG0aUh95XTBDToq9K9VxOBlHUboRd4FjL12C+WIjJnJ9Vs3H9QvxxuhLMmb
+	aZp0MVyI0DwB2J60GQvvjnc/KAii+8YBZZJrWpqXq/EdCu2K4hc2E24PnVykOuU4sc5p2dtZSWXeS
+	e7Or5HSw==;
+Received: from 2a02-8389-2341-5b80-e44b-b36a-6403-8f06.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:e44b:b36a:6403:8f06] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+	id 1tVSJX-00000007lPb-02aU;
+	Wed, 08 Jan 2025 09:25:23 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Damien Le Moal <dlemoal@kernel.org>,
+	Ming Lei <ming.lei@redhat.com>,
+	Nilay Shroff <nilay@linux.ibm.com>,
+	linux-block@vger.kernel.org,
+	linux-nvme@lists.infradead.org,
+	nbd@other.debian.org,
+	linux-scsi@vger.kernel.org,
+	usb-storage@lists.one-eyed-alien.net
+Subject: fix queue freeze and limit locking order v2
+Date: Wed,  8 Jan 2025 10:24:57 +0100
+Message-ID: <20250108092520.1325324-1-hch@lst.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250107063120.1011593-1-hch@lst.de>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Tvvw5rRAEQK.A.bqTG.NVefnB@bendel>
+Resent-Message-ID: <kRdlNcpqHmH.A.328N.-hkfnB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3269
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3271
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,25 +81,41 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Z33hQfkbolsku7yr@fedora
-Resent-Date: Wed,  8 Jan 2025 02:39:09 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20250108092520.1325324-1-hch@lst.de
+Resent-Date: Wed,  8 Jan 2025 09:42:22 +0000 (UTC)
 
-On Tue, Jan 07, 2025 at 07:30:32AM +0100, Christoph Hellwig wrote:
-> Hi all,
-> 
-> this is my version of Damien's "Fix queue freeze and limit locking order".
-> A lot looks very similar, but it was done independently based on the
-> previous discussion.
-> 
-> Changes since RFC:
->  - fix a bizzare virtio_blk bisection snafu
->  - set BLK_FEAT_POLL a little less eagerly for blk-mq
->  - drop the loop patch just adding a comment
->  - improve various commit logs and coments
-> 
+Hi all,
 
-loop_set_block_size() needs same change, can you cover it to this series?
+this is my version of Damien's "Fix queue freeze and limit locking order".
+A lot looks very similar, but it was done independently based on the
+previous discussion.
 
-Thanks,
-Ming
+Changes since v1:
+ - more comment typo fixing
+ - fix loop as well
+ - make the poll sysfs attr show method more accurate
+ 
+Changes since RFC:
+ - fix a bizzare virtio_blk bisection snafu
+ - set BLK_FEAT_POLL a little less eagerly for blk-mq
+ - drop the loop patch just adding a comment
+ - improve various commit logs and coments
+
+Diffstat:
+ block/blk-core.c               |   17 ++++-
+ block/blk-integrity.c          |    4 -
+ block/blk-mq.c                 |   17 -----
+ block/blk-settings.c           |   27 +++++++-
+ block/blk-sysfs.c              |  134 ++++++++++++++++++++---------------------
+ block/blk-zoned.c              |    7 --
+ block/blk.h                    |    1 
+ drivers/block/loop.c           |   52 ++++++++++-----
+ drivers/block/nbd.c            |   17 -----
+ drivers/block/virtio_blk.c     |    4 -
+ drivers/nvme/host/core.c       |    9 +-
+ drivers/scsi/sd.c              |   17 +----
+ drivers/scsi/sr.c              |    5 -
+ drivers/usb/storage/scsiglue.c |    5 -
+ include/linux/blkdev.h         |    5 -
+ 15 files changed, 164 insertions(+), 157 deletions(-)
 
