@@ -1,81 +1,225 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD749A08790
-	for <lists+nbd@lfdr.de>; Fri, 10 Jan 2025 07:05:35 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60341A08AD5
+	for <lists+nbd@lfdr.de>; Fri, 10 Jan 2025 10:00:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A33DC20641; Fri, 10 Jan 2025 06:05:35 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 10 06:05:35 2025
-Old-Return-Path: <BATV+d77ff3599ace4b46004a+7810+infradead.org+hch@bombadil.srs.infradead.org>
+	id CFB72205DD; Fri, 10 Jan 2025 09:00:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jan 10 09:00:10 2025
+Old-Return-Path: <john.g.garry@oracle.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_MED
-	autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 831192058D
-	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Jan 2025 05:48:05 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 7A1F0205AF
+	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Jan 2025 08:44:10 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-4.151 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-2.896 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_EF=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
-	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id m2KkfG3_gUJE for <lists-other-nbd@bendel.debian.org>;
-	Fri, 10 Jan 2025 05:48:01 +0000 (UTC)
-X-policyd-weight: using cached result; rate:hard: -4.6
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id E5DC320597
-	for <nbd@other.debian.org>; Fri, 10 Jan 2025 05:48:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=XXeZfDK7dJVOyTo0xukyM87qHprt43czTsxZpCM1/Ns=; b=xXxPJBUyXLvo3VV5VyRYA2GbJA
-	olLJK/bw+wcxnP60YVRYtQ79DpaWB+gSqUji5RMF5qMcvfSzM1KcEqfkKYw3HLUFSWqYLGvv7/N92
-	orfUHpGt77DDa5dLCuuSVcyE7wqJckr/AZyrP6oJoeqbJiI/M5HPFPrPQcASaUqGO21z3w21p6iJj
-	CoLlRdhdNdvqG5JVVZjss/jBht02+tF5OMIgT1mUrnrTACccEem1QLG2OjduLjMS8gUzasSaPfQrJ
-	e1CXl/TRzHH7MfBGJ1s8oYwIIvOuhU1PxyN15DF+rtf1PcO0Jz/A2zU7IRYtOk94RM0GtIf5pjX+j
-	l8r8X0bQ==;
-Received: from 2a02-8389-2341-5b80-76c3-a3dc-14f6-94e8.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:76c3:a3dc:14f6:94e8] helo=localhost)
-	by bombadil.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1tW7sC-0000000E54X-3y9C;
-	Fri, 10 Jan 2025 05:47:57 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Damien Le Moal <dlemoal@kernel.org>,
-	Ming Lei <ming.lei@redhat.com>,
-	Nilay Shroff <nilay@linux.ibm.com>,
-	linux-block@vger.kernel.org,
-	linux-nvme@lists.infradead.org,
-	nbd@other.debian.org,
-	linux-scsi@vger.kernel.org,
-	usb-storage@lists.one-eyed-alien.net,
-	"Martin K . Petersen" <martin.petersen@oracle.com>,
-	Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Subject: [PATCH 11/11] loop: fix queue freeze vs limits lock order
-Date: Fri, 10 Jan 2025 06:47:19 +0100
-Message-ID: <20250110054726.1499538-12-hch@lst.de>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250110054726.1499538-1-hch@lst.de>
+	with ESMTP id LCQVTV__pBqg for <lists-other-nbd@bendel.debian.org>;
+	Fri, 10 Jan 2025 08:44:04 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "*.pphosted.com", Issuer "Sectigo RSA Organization Validation Secure Server CA" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 3B3D1205A3
+	for <nbd@other.debian.org>; Fri, 10 Jan 2025 08:44:03 +0000 (UTC)
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50A7jSkH021291;
+	Fri, 10 Jan 2025 08:43:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	corp-2023-11-20; bh=CjTryJvcvl80fKK4zh3QdAuX260pfjeaTeTGSqZEO60=; b=
+	OIpUGMHCER+N6ww7stYzOh3zt/B1n4jutQlTn3F4lgMOXoNK20nNd6D8tUi1/5eL
+	Veh9iJCXCb+P3wDle7ngAb0Hpuz9QhCTK4nVn7U7yzl3YVUr3qpmE6RYpmeY2HIc
+	4igXLCAPvhdHoWSZrNaS18Dkvwoht28HFQ5G5xy3EQHUULlPYAqqEHrExBQF3E/9
+	6WofML4x7KH4FsocKgpIo4EUbeNep6HWQzVx1jTKWeOHymU1FwtNhNQ6vMIOIwxJ
+	9KywLZajBBI+no4iKiKSMHnI10vl3FCccKzbaGhgkVIp3u6DsqlPYKDBo54Cg64N
+	N+BBK3Hte8ExZ4dq9LpaQA==
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 43xudcas4j-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 10 Jan 2025 08:43:50 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 50A8K7pr004832;
+	Fri, 10 Jan 2025 08:43:49 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2174.outbound.protection.outlook.com [104.47.58.174])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 43xuec61da-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 10 Jan 2025 08:43:49 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=y/LYG+Vc3g97RjXTs7npcCoQ6MdFJ/f5S7u1F+d6axnW5YtOx76U60yMErU2RIFAELfMMIiiL4NhPF58vHOMOwDVkHhnzMX4HROWptMnkCLdfej8ohg3Noh2MdOPly/DJEyy0t1gIqfSaQuoHbSSAaiI64zUvD4tImgyB/LqUKcxYq96iAcR4iWACTydnFdYeYSvMcHlMV62C/4MXAaed0A5Xez5RlMUtt3+IEEAqCQyh06kACZp/NaiGz6XF4z6m2w25mxBqT18dE5mzl+TgxivHObqdvk3SQ32V7B5WUgey9gNK1I6xecrmMdQhH7BfTfYCZz3PkaSn6BD/NzCCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CjTryJvcvl80fKK4zh3QdAuX260pfjeaTeTGSqZEO60=;
+ b=bqqQdORPVXSo+kvEPuq1Iet+4YButru9vBxQev3L/ksVf3QgnVgKNHjl1dfHUlVpvXMUsVlJF8tCYlNXWxJ17FlQQlSg+4N8OtVIxrw70tep//Pipl0iMVhlmgT12HiAVY0dSgqL73RDGjtGBgx8+ukMJ4rQn38cIFtuneKEMg1+6Su94x3D0puiKsf2ovtazWk8D8tf7EEFAIsbdvifT6O5Dv9d4aHme4yrjOWgDGEOdlR2WN3eqUtesYQ3lTY3obmEtdliNYacyPGWUvKpDrheIhmsBq/18E/1mnZGSFgGSPRQZ4OB7D2dg7BeNBsl/v0feeCBizT+tsHoFqvH7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CjTryJvcvl80fKK4zh3QdAuX260pfjeaTeTGSqZEO60=;
+ b=oqSJL2P/5NLlRdbyfBefkjYxOyGIlY556eEs9gTodULBgIZTJqqyUNLnHxwItYEHVL1cpA8U991sdJqUFrOMs++91evr7R4AlNF8ZTBnHDTVFEOszuEj1VIZyOR3H4iHn28lHYPauk5Et2QOYpNbzIVKOOxfVFqBXXTSf36oCtM=
+Received: from DM6PR10MB4313.namprd10.prod.outlook.com (2603:10b6:5:212::20)
+ by SJ0PR10MB5835.namprd10.prod.outlook.com (2603:10b6:a03:3ef::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.12; Fri, 10 Jan
+ 2025 08:43:46 +0000
+Received: from DM6PR10MB4313.namprd10.prod.outlook.com
+ ([fe80::4f45:f4ab:121:e088]) by DM6PR10MB4313.namprd10.prod.outlook.com
+ ([fe80::4f45:f4ab:121:e088%4]) with mapi id 15.20.8335.011; Fri, 10 Jan 2025
+ 08:43:46 +0000
+Message-ID: <8e0c6ad7-a043-4923-8a53-121f13660608@oracle.com>
+Date: Fri, 10 Jan 2025 08:43:41 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/11] block: fix docs for freezing of queue limits
+ updates
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Damien Le Moal <dlemoal@kernel.org>, Ming Lei <ming.lei@redhat.com>,
+        Nilay Shroff <nilay@linux.ibm.com>, linux-block@vger.kernel.org,
+        linux-nvme@lists.infradead.org, nbd@other.debian.org,
+        linux-scsi@vger.kernel.org, usb-storage@lists.one-eyed-alien.net,
+        "Martin K . Petersen" <martin.petersen@oracle.com>,
+        Johannes Thumshirn <johannes.thumshirn@wdc.com>
 References: <20250110054726.1499538-1-hch@lst.de>
+ <20250110054726.1499538-2-hch@lst.de>
+Content-Language: en-US
+From: John Garry <john.g.garry@oracle.com>
+Organization: Oracle Corporation
+In-Reply-To: <20250110054726.1499538-2-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LNXP265CA0038.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:5c::26) To DM6PR10MB4313.namprd10.prod.outlook.com
+ (2603:10b6:5:212::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR10MB4313:EE_|SJ0PR10MB5835:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2999b64-82cd-4bed-8112-08dd3152e53b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WDl4emE5Sk9rZG9sc1dOS09UaWtsNkZuTit5K1dKQVhtdjJLVVNpV05QK0V5?=
+ =?utf-8?B?TFkwQWZPc0twOFUxMG5qeXN5QUNYQm5rZFhITFEva3hiWWpocGNwSTJpSGdn?=
+ =?utf-8?B?RXBaSVZPV3M3cjZoYXBxRm5BSzZOY3lpcW9MdmlDZ2VQbXYxcHhrcjRMdU1r?=
+ =?utf-8?B?LzMyNGZFZTlNY3hYY3lhd0dUYTBjci8vdXIybE5ac29hS1dveUtiby9uNGFz?=
+ =?utf-8?B?eHY1V3l2bGJnWGtHTVJvMDcyU1hMb0FjYUxYYUh2NWdiRmw5VFA4WmZieEpa?=
+ =?utf-8?B?Zzc1MG5ZSllSL0VpbGliUnZybGRPUG1yeGt1N2lVN0N2VDlqcy9YWVYyVjVT?=
+ =?utf-8?B?bkVoMnROZC93c3hweDZ1VFhTb2FGSkxTc0x0TTdRTFJ3RGlGcTk0UnFQcDA5?=
+ =?utf-8?B?bjhnY3cyQ3RVbCtwQmJ4ZkNzWWd0Yk5wQjZtMWUzZlhqZk8za3FGT2VlN3JQ?=
+ =?utf-8?B?UXV6RjQyRlRSSUFRd2RaQU5CL1lQYWFkRzhOSWpxZjdiZGF6Y0FhRjF5N1Jv?=
+ =?utf-8?B?blIwR3NIejJxUVVFR21DdTY5SURMSFJlVUNJUWZhS1VnS21PMHRnRmNkbTQz?=
+ =?utf-8?B?WngvUVA2aDZSOUVoMUFmL2s5cHo1b3JKWVBWYS91WmNpcHRHb0tOL0pwaHJm?=
+ =?utf-8?B?ejdUenIxVVdzV004TWlLQ29wdFFLa2NVWElOZDdPMVhBNS9rTFFiOFJNVGtY?=
+ =?utf-8?B?NTIvL1pIV0x4dzdLTmcvb2xYdEduL2xjVTdyWU1LdjQ4bS9QM2NVMks4eEJ3?=
+ =?utf-8?B?REFJTW1XQ0FORTZKRkc5ZEtNUGRHSXIrclc3NXExZzAyRE5XUTlYaHFpVk9D?=
+ =?utf-8?B?enVNNWYvaHpqT3RZQW1FVUJpQjdMbVNtdDkwb2M4RXhqNjBoeEVLcENvSWtr?=
+ =?utf-8?B?YzRGWVBhVXdycmxVSW9qaWJnSDR2ZTA2S0oyUmZzTUpTbWVHYXN1NkU4NGo3?=
+ =?utf-8?B?WFl6TWZ6cXFjOGVsM3V6T3ZNaDdYNmVvR1VrNnp2T2JZeEpmRmwxMko1MnZC?=
+ =?utf-8?B?SkFwMVZDdEoxb0xkSmowcjk5b1czalk2RFR0WVowTTNXLzl0TG13TWFDZWlD?=
+ =?utf-8?B?ejVrWTNQMCt6OXJzWGxtUW1BZkFKcjVQUmdNSEM2dkVlbC9jNncvZDcrWjBE?=
+ =?utf-8?B?QmhXWTF3dSs0cWNoRzRUTFpURnNBYUIrVmJBSmVRNlhxSUVLbjl4VjdBbDM0?=
+ =?utf-8?B?cmM0dzgzMnlza1lYQ21QcThxbnp3Q0pNbzBYWWJXM0RMM0FkWTFZZko3enZS?=
+ =?utf-8?B?R2ZLZWtKczdzZkJ0alNIQTY3Qmc0TGRNVVdWRGh5enJlYTcxWEhRRmc2T1RT?=
+ =?utf-8?B?UWo2MWhwV3Q1V0UrQ1VTdFN4VHY2SXdiK1A1N0ZYOWNWMHFlSFdtNzV3NDQ4?=
+ =?utf-8?B?U0ZYTGdHWC82VzlXVjMxUjVucmhzTkZCUnVQeExDT1dRb0FBM08yZnlINFAy?=
+ =?utf-8?B?dVhpVlFGL2xIRDNHK1hFL1pPbUdaUkhsTlJ2SElTUXZWamRBbzY4a1hDdjVl?=
+ =?utf-8?B?K1ZyU09TazNiVWNSSGJxMXZ6Y3NqZ2pkdWtCK1lCc2VvK01wcU12Y1J4TU1O?=
+ =?utf-8?B?ekJQMGpDM1BOamt3RHEwM0g4RFJURFBtOXZFNGRzb1crYlJQaGVDekNMdDFl?=
+ =?utf-8?B?dnZMdWM3YmpmcnlUa1hBVllhRElhMk85RnBvSVQxMTVvemxNREx2U05WWTZC?=
+ =?utf-8?B?eXNpcVJsWnA4eUgvRzlxYTF1VmlBLzJzT2FzSWNZZWpZaFNUUWQyWmdFUlFN?=
+ =?utf-8?B?cTgzR1QyYkovZytxRnFmRWxVMnk4TGpHbVV3cGZzc2RocHhXcHEvMnd1Tjkw?=
+ =?utf-8?B?UjVOeVdLaGUvcXJzSXNRREt2TXo1V3dzdEoycWFkcmFKZDIzUk9wcUpqV09v?=
+ =?utf-8?Q?d6ZLuFG2NRq7m?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR10MB4313.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(376014)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UUdSS2V0L29kazRmMHpQRllWT3NVaml3QUNkeXNINlI2bG14amxNT3M1TXBU?=
+ =?utf-8?B?MktwVzIyNE8zT2xSa1lOZUNaOWl6WVZGekRxeEVWci82eCtjZVpWejhVUVNF?=
+ =?utf-8?B?SlM4YkdSaGI1Qm5LVlZkT3BYamZlREhPcXFMV3BZOGVjUTFzSEpyRFB0cUFQ?=
+ =?utf-8?B?Z09tWklrQjVaTXFqZXlWdE1iT3h6ZHpCYkZCV1VDQkdBbXB3VSsrMkp6QTB0?=
+ =?utf-8?B?RWZLUlRhVjZKUjRHcFUvMXc2WE0xRGNJRzRLTU05bjVoTGcxOXl2YkduZjA5?=
+ =?utf-8?B?dDJNVlFyM3RaRzhNb2FIVkFzREIrQ21iSjFteHErNWpCK3pDOVcvQkRoTktQ?=
+ =?utf-8?B?b3p4U1lMdEFsUGRmYmdtTWVrN1VNNkFFVTNrLzFyM1JtUE9wVjB4M2lNemFM?=
+ =?utf-8?B?M2tERGtEZHVwemM2RExhZzhjZ3JBRUl6MVRVZEdvcWRpK1F2Y2hRSTh0RHBP?=
+ =?utf-8?B?QjBZUVI5dDgyOXkzWFdnTEFSWVpzVklMUWdVUzhReENXb3MxcFlDR2huYWw1?=
+ =?utf-8?B?MmdGTkpQR1hKTWVXM0JHemtRS2FDY3d4K2N6TGxQTzRyNkd2Rlp1YjJhNlB0?=
+ =?utf-8?B?K255K29rSmxZQnZRMFBYV3ZEUkM5MWpBSGwzcU9sUlVaMGZUVENyZzUybkto?=
+ =?utf-8?B?ZnhWcGMxZlBuSGVLVGRRaVlLUHVhVGM5dTlmbk10SFJqSzdoVDlqU3l4N0E1?=
+ =?utf-8?B?S0pJOTRYWk51ME05dXF1TnJYNGRIWVgwdVE3S0VlSCtERGNXd2RzVUM0YW0w?=
+ =?utf-8?B?Z0V3SEFmMWx6aUt1QkM4cHVqdlVhVUJvS3BrVm8zbUZyYW44YVNDN3lZR29X?=
+ =?utf-8?B?YkFmeWJHY01aWlNyc3VrQkRSOXJRMlFRL2oyKzhxTXJJQ2E4OXpZOHZ5Q3dS?=
+ =?utf-8?B?WmNZZEdidkFmNjIyWFpUMTdnOFVtK2FPbTE3V0cvcDJ6MS9tSUtza0loNk1I?=
+ =?utf-8?B?NU9oVDdCdC9NYVdrYXI4Z2xVeDRnaHBPbkZycG95NVBwVFNLZTdEeXduNmo5?=
+ =?utf-8?B?QXkrNS9OMHZuUWNTR1RsbFAzVVR1L2l5THp3dUY0Vlk5M2RwdFdYK2ZacWNX?=
+ =?utf-8?B?MlhSZ3BqUTNVbUJHNjhZZ2xQYWZ6MTlVMEN1K3VyNG1KRTRiUFJmM3Rmck5K?=
+ =?utf-8?B?cVJKTTA5RFZ1bllMY2FFK0JMVXdXSktXNWl5RGlOY1RpOFZkSEoyRXVDRXov?=
+ =?utf-8?B?bUkzSG5PTkZ1dFUwbVc2dVFoMVozaWp3aktIaFh6dUV1b2t0NmcxUmFkK2ZW?=
+ =?utf-8?B?SmpvNlR1L1hVc1BuVjBYTm5EeEVaOXR2SEdiU2lLd3pHdHBUWWJraDZsYVJk?=
+ =?utf-8?B?eXhqdi9zT1dxbmE0blZDWE5xV2t5eUZNTXNGQitPeGRHN04vUm5jUGVTUlZQ?=
+ =?utf-8?B?QzEzbHRVSitQTGFZMGxSaUJmNStsVU9OdXhyeVdoNExaWjdwVXNOcUxhM0RT?=
+ =?utf-8?B?ZHlJNWdkNktNZ1J2ZnVmNHhZQ2ZMeFZ0VUxRSkZsRmJ1d3cvaERSamNIRVd2?=
+ =?utf-8?B?UE9LZFEwUHFZV0t6bHJHR0lxSko0MzlGMFNhY3dCbzRPd2xhYlZqdWRGQkZx?=
+ =?utf-8?B?bUVNTzV3R3hWMUFHTkUyNFRtYzloSGxxWjNtR0RHNXhaSlpWbEZuYU9qVU1i?=
+ =?utf-8?B?d3lqR2Q4T05XUkpHd3N2dGlxRDFLWDk3MjBwSFlsUUdWcFYweFF5SmN2TXNF?=
+ =?utf-8?B?Tit4VzNMRHQ5K1ZESzhCOWRSczdXSUdUejNWLzJRL2FjRVo5TDIwdnFTSFJY?=
+ =?utf-8?B?OXFNUTRoSUNCREZIcjRIRVczNWlJQ0pyNkFZRDloWGRYQUQvR2hER2hiM1dK?=
+ =?utf-8?B?UVVtS1J1aTA4MlNmd2wyaHp5NExlRnBGTytDbFBQc2xFVFZSZkRuQ2V2M0di?=
+ =?utf-8?B?UW1mVWEwK09KN2hlV05McHQzRzNxRHZsem9FVE1DWHdDeHlGZE1zNmQ0em5T?=
+ =?utf-8?B?dDhaQURWUW9yZjZVOGtpdzVHTHhWZHYzUmI4OUV2Nllpc2tTVU9haXVKYmdh?=
+ =?utf-8?B?WExpR1lKN0xJbGxXblBFeFdrK2IxSE5tSWRFc0FRSXJzQ3RWdDVWN1JDelUz?=
+ =?utf-8?B?SVRRSkx4RXU2WklnQU9jUjBkelJ5ZGdaNCszbjArZTBOT3M2Smd5ZTFScDNO?=
+ =?utf-8?B?SGI1Zy9RaWUzRXJYc21zcWRyODNWd240NFJJYUVYeFEyVk5XOXg3Rnp2M05U?=
+ =?utf-8?B?ZEE9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	vGYJvVBHhjqJvmgaLrBm6AjDCoyVz6AJHAWIHFpx/pYGDHc0VZvoaM/Bf6tVecIlQBEb5HAj8k9Ziv3TfBg9DzNVK+4EQ9GdPD+m8TVTO6DHT9YN0XL74mDOTmDp/QjZpX5X7aldURH2ASwT9emQcSYwnEkVkktCpiUrB8Ejzqsme1hoGFWqPNjjYmgEMv5QbFG1F7pW6qe9Kpu+XaXwMVhYctcMp6Ob+gB5WoBKNbQTTx0hYXRFZM3hcwGTR4mlLz31moWlF1ZE35UAa6tUiAbWbpMvk0FFbQyMm1Ac3qWw8H60AC/ciBgIg4bA6hZm1Hyj/X/AyO6Ah9U5gJ/oFFfjrTmiDpUPc3v8J/COCNkV2fzi6Ks+phSd6t6nXkcyaRP7/yj3L1meQd7FoWR1rtNkFrLNdmCaEbd7s76kWk8W3cmaCHZyVYmUkSERiSkUavTmgcKj6QRb/+VkFZZXMBY1q+3XM4kzEGZJauYi6GqeUhCQUf9Fa4svc+qafj/oG/jMBu6audtqvUhZyCrQG0Wp/9lMDJoqNQsFAocVC7vxmidQag8H0wp7667lJzMksGl62SQQad/iP02NS6pMDrUelmU+P7mXioyH/5vCtGo=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2999b64-82cd-4bed-8112-08dd3152e53b
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR10MB4313.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2025 08:43:46.2128
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Qqt2Gu6R+93i82o1ed+xXGT5DG/BGX3rj416R8EgygENM89T9sCgnnEjrMe6yQnV7bTySpdL6clHdO/YTGo75A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB5835
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-10_03,2025-01-09_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 bulkscore=0 suspectscore=0
+ adultscore=0 mlxlogscore=999 phishscore=0 malwarescore=0 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2411120000
+ definitions=main-2501100072
+X-Proofpoint-ORIG-GUID: uEQGqaYhKaLcfklxC6I9GCCdcmGieil_
+X-Proofpoint-GUID: uEQGqaYhKaLcfklxC6I9GCCdcmGieil_
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <C-qMZ-Iay9G.A.uGUB.viLgnB@bendel>
+Resent-Message-ID: <jafTQmYf7vG.A.TaFG.aGOgnB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3338
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3339
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,76 +229,20 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20250110054726.1499538-12-hch@lst.de
-Resent-Date: Fri, 10 Jan 2025 06:05:35 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/8e0c6ad7-a043-4923-8a53-121f13660608@oracle.com
+Resent-Date: Fri, 10 Jan 2025 09:00:10 +0000 (UTC)
 
-Match the locking order used by the core block code by only freezing
-the queue after taking the limits lock using the
-queue_limits_commit_update_frozen helper and document the callers that
-do not freeze the queue at all.
+On 10/01/2025 05:47, Christoph Hellwig wrote:
+> queue_limits_commit_update is the function that needs to operate on a
+> frozen queue, not queue_limits_start_update.  Update the kerneldoc
+> comments to reflect that.
+> 
+> Signed-off-by: Christoph Hellwig<hch@lst.de>
+> Reviewed-by: Ming Lei<ming.lei@redhat.com>
+> Reviewed-by: Damien Le Moal<dlemoal@kernel.org>
+> Reviewed-by: Martin K. Petersen<martin.petersen@oracle.com>
+> Reviewed-by: Nilay Shroff<nilay@linux.ibm.com>
+> Reviewed-by: Johannes Thumshirn<johannes.thumshirn@wdc.com>
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Ming Lei <ming.lei@redhat.com>
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
-Reviewed-by: Nilay Shroff <nilay@linux.ibm.com>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
----
- drivers/block/loop.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 560d6d5879d6..15e486baa223 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -311,6 +311,13 @@ static void loop_clear_limits(struct loop_device *lo, int mode)
- 		lim.discard_granularity = 0;
- 	}
- 
-+	/*
-+	 * XXX: this updates the queue limits without freezing the queue, which
-+	 * is against the locking protocol and dangerous.  But we can't just
-+	 * freeze the queue as we're inside the ->queue_rq method here.  So this
-+	 * should move out into a workqueue unless we get the file operations to
-+	 * advertise if they support specific fallocate operations.
-+	 */
- 	queue_limits_commit_update(lo->lo_queue, &lim);
- }
- 
-@@ -1091,6 +1098,7 @@ static int loop_configure(struct loop_device *lo, blk_mode_t mode,
- 
- 	lim = queue_limits_start_update(lo->lo_queue);
- 	loop_update_limits(lo, &lim, config->block_size);
-+	/* No need to freeze the queue as the device isn't bound yet. */
- 	error = queue_limits_commit_update(lo->lo_queue, &lim);
- 	if (error)
- 		goto out_unlock;
-@@ -1151,7 +1159,12 @@ static void __loop_clr_fd(struct loop_device *lo)
- 	lo->lo_sizelimit = 0;
- 	memset(lo->lo_file_name, 0, LO_NAME_SIZE);
- 
--	/* reset the block size to the default */
-+	/*
-+	 * Reset the block size to the default.
-+	 *
-+	 * No queue freezing needed because this is called from the final
-+	 * ->release call only, so there can't be any outstanding I/O.
-+	 */
- 	lim = queue_limits_start_update(lo->lo_queue);
- 	lim.logical_block_size = SECTOR_SIZE;
- 	lim.physical_block_size = SECTOR_SIZE;
-@@ -1471,9 +1484,10 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- 	sync_blockdev(lo->lo_device);
- 	invalidate_bdev(lo->lo_device);
- 
--	blk_mq_freeze_queue(lo->lo_queue);
- 	lim = queue_limits_start_update(lo->lo_queue);
- 	loop_update_limits(lo, &lim, arg);
-+
-+	blk_mq_freeze_queue(lo->lo_queue);
- 	err = queue_limits_commit_update(lo->lo_queue, &lim);
- 	loop_update_dio(lo);
- 	blk_mq_unfreeze_queue(lo->lo_queue);
--- 
-2.45.2
+Reviewed-by: John Garry <john.g.garry@oracle.com>
 
