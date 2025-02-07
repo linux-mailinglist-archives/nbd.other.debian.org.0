@@ -1,89 +1,198 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09074A2BECB
-	for <lists+nbd@lfdr.de>; Fri,  7 Feb 2025 10:09:12 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74968A2C2FB
+	for <lists+nbd@lfdr.de>; Fri,  7 Feb 2025 13:48:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B43FC2084D; Fri,  7 Feb 2025 09:09:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb  7 09:09:11 2025
-Old-Return-Path: <ming.lei@redhat.com>
+	id 07FBA206C2; Fri,  7 Feb 2025 12:48:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb  7 12:48:12 2025
+Old-Return-Path: <prvs=126e84886=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.9 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,RCVD_IN_DNSWL_MED,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D553020597
-	for <lists-other-nbd@bendel.debian.org>; Fri,  7 Feb 2025 08:52:36 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 55C1D20796
+	for <lists-other-nbd@bendel.debian.org>; Fri,  7 Feb 2025 12:30:02 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.416 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.34, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+X-Amavis-Spam-Status: No, score=-2.759 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_MED=-2.3,
 	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001] autolearn=no autolearn_force=no
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id W1qAm2tcMqOf for <lists-other-nbd@bendel.debian.org>;
-	Fri,  7 Feb 2025 08:52:30 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by bendel.debian.org (Postfix) with ESMTP id 59DE720517
-	for <nbd@other.debian.org>; Fri,  7 Feb 2025 08:52:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1738918344;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=s1rCOG6P1Gt1O2VVavW0dJMG1YSFwklhplJ4eTKRqnY=;
-	b=DqsAqc5ha1FOyURbHfinvlQUVySc1TwHuYqTrGpLACVLIBD/oHk+ravW8xhtGbclTUCtC/
-	Z1jb7L8wN+5g2f1BAoJEzipgadI4/Rd/4plqBDqNYr1xgOuqux2ge+ou1hQVPJZERfv5kg
-	KIDeKTEQvyG8nsO4ECokp8Cu+Mymvy4=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-39-ceeN-5uSNLSeWOOjE6MaNg-1; Fri,
- 07 Feb 2025 03:52:20 -0500
-X-MC-Unique: ceeN-5uSNLSeWOOjE6MaNg-1
-X-Mimecast-MFC-AGG-ID: ceeN-5uSNLSeWOOjE6MaNg
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A30061800875;
-	Fri,  7 Feb 2025 08:52:18 +0000 (UTC)
-Received: from fedora (unknown [10.72.116.158])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 37FC318004A7;
-	Fri,  7 Feb 2025 08:52:13 +0000 (UTC)
-Date: Fri, 7 Feb 2025 16:52:08 +0800
-From: Ming Lei <ming.lei@redhat.com>
-To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	with ESMTP id eFdh96Qu7qZz for <lists-other-nbd@bendel.debian.org>;
+	Fri,  7 Feb 2025 12:29:54 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -4.6
+X-Greylist: delayed 436 seconds by postgrey-1.36 at bendel; Fri, 07 Feb 2025 12:29:54 UTC
+Received: from esa2.hgst.iphmx.com (esa2.hgst.iphmx.com [68.232.143.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 25F2D20661
+	for <nbd@other.debian.org>; Fri,  7 Feb 2025 12:29:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1738931394; x=1770467394;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=OKtDol+GYmu1Ib3KHZQZolPs2o8Cj43AQMvDiVO3vpE=;
+  b=cOXvEg9uliHKdHtRMkdnZN2nQVP+4UtA1Sz5x82BwWQY+KyUkkYns60l
+   reMjWax1HxU5uafhBLzEUi+nEBgctXuHVFjCzv48vCBrukqVptTOAzfUT
+   zvNGA+JDIHEDut9ylBc+BEH1wjNGUbIgTlBde/gnu/cTRNu8kYdtWnsXH
+   V0H1lQxVEC+6YU/s/KKz4DhL7Y/nIVrNCUS11nXoWdaax0cm3mykh+w7W
+   9VNCM/5OwplxuvV/7c0gov/1LVFFYoO/AJtbPXKmbTdUUkx+wn7UppsLr
+   OFjFrCTpoZnfxt6N0RI/xK3Ga1Bz40WXD6BiCPyoEHLU5LGAoEsmYXA1A
+   Q==;
+X-CSE-ConnectionGUID: T+i6JeQlR7+d82wepP+dnQ==
+X-CSE-MsgGUID: 43BWpqxcSZiYo5/EmFQecA==
+X-IronPort-AV: E=Sophos;i="6.13,267,1732550400"; 
+   d="scan'208";a="38453190"
+Received: from mail-mw2nam10lp2044.outbound.protection.outlook.com (HELO NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.44])
+  by ob1.hgst.iphmx.com with ESMTP; 07 Feb 2025 20:22:34 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dAlDf5Yyg8qbpdXr+je0Ar1fV/0EA3DxSHi7hCNYpbQ51lkPryzZ0sN3Se+TuVo8cjimFpIQBKHbA13CImNvH+TCaGJTdSeDkjW8f4XgjX4es2oDuhY1BiCjavd1QT9LKG7nJnOzliAV6d39nxBMhbBzk8kPJrjqXXRr5KBlSberAWJdG1oxBddMP5kgmEEYqk6pPWBtJma2DZdTMB42qZkJSuQcOexPr3w3X2f+IBT3q6lcyOGZIw/gOAzMA7SftdidXVSCuKYD/V8vkHAHcEQpOmNR4RwETNFl/D/JWzhuYnqINUcRqm1YB3EdlyTLzulZhOYLSgBvtbHv9LlTGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MY+nV7lTTtmnJ3VeP4aC0E8+4kNsTuGZ8uK/oCTg7VA=;
+ b=tRjZmw6aqIsWrLu8vL16sN8o0Oov8usqaypZx/AhBe+XOwo0RPbhst/hZxzcy+4GePNaZuNT1whqDwLZpSswiH6loM1sEwWj2xD+TZltuU05WhmDf5mJEsj4cUd8J0NO6osxirfYnVvlmGmSruBOf+HJyA9QITQ4Za7TSO0N25mHHOFrgbk0HoGFPi+t9dkOEoXH1JRzX5Cq0g+pppxheJhNTq5r5+W2G+X8EUBdOpVD+udNWp4lAELpcghv9BSKXtUpPKLzzhzf7Aibi1PUqDShc1zanou6Ew0T1T77CjSu7RsUiSEvfiRpxf0qK/OgI4F6UQjQulb6rxCXjhgRQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MY+nV7lTTtmnJ3VeP4aC0E8+4kNsTuGZ8uK/oCTg7VA=;
+ b=HScfN40RqYdKBumraasNhP12jZSpruHvAGF2nTG66tM3GSJ4PfWOvakKVHErILdkJ7ianWR6CLvNCK66r/WZw5tQBVSQFwCr8BLpNHu1ltoSREo8kP/Ed0EsPjvUR0vRQz97bpCP3j3Ga95VAcx5fCWQE11a/06J8Qx5Gun9UNQ=
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com (2603:10b6:8:f::6) by
+ CH0PR04MB8033.namprd04.prod.outlook.com (2603:10b6:610:fe::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8422.14; Fri, 7 Feb 2025 12:22:32 +0000
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a]) by DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::b27f:cdfa:851:e89a%7]) with mapi id 15.20.8422.012; Fri, 7 Feb 2025
+ 12:22:32 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Ming Lei <ming.lei@redhat.com>
+CC: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
 	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
 	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>,
-	"linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
 Subject: Re: blktests failures with v6.14-rc1 kernel
-Message-ID: <Z6XJuIz012XATr7h@fedora>
+Thread-Topic: blktests failures with v6.14-rc1 kernel
+Thread-Index: AQHbeP78AGAfwR9brEG+YzS4r+evebM7iSUAgAA6x4A=
+Date: Fri, 7 Feb 2025 12:22:32 +0000
+Message-ID: <ougniadskhks7uyxguxihgeuh2pv4yaqv4q3emo4gwuolgzdt6@brotly74p6bs>
 References: <uyijd3ufbrfbiyyaajvhyhdyytssubekvymzgyiqjqmkh33cmi@ksqjpewsqlvw>
+ <Z6XJuIz012XATr7h@fedora>
+In-Reply-To: <Z6XJuIz012XATr7h@fedora>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM8PR04MB8037:EE_|CH0PR04MB8033:EE_
+x-ms-office365-filtering-correlation-id: d95600df-c348-4eae-38d2-08dd477218a3
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?eYxz+oOu/YmS8msw92A/x0xrTcu9lnvzYev4w4JC51jMNSc6/Vnt7Zhm8qOp?=
+ =?us-ascii?Q?qd/JQX7FgidmJgMwd44ecI7dfIJcU29/s8U4J8GwsVxGC+uSvxvEaeGp0wLV?=
+ =?us-ascii?Q?2WLxbW3eCM5bIH4KdbBhXIPeHtWq9bE9bqr8mUexcAAty4MojoGds0uFrh2f?=
+ =?us-ascii?Q?g0ukbjW/WGLNo281UNu+UwFqSbrX9fI10GKk/9VNO9LswezoHVFGo//fsW6/?=
+ =?us-ascii?Q?rmv9U3/eHLsol3LuilMaDj9spRVqmD6xefwRTvMkMyqKPwelLsLgfRTRkpYc?=
+ =?us-ascii?Q?fTjqpWhW54VEFQM+IJ9mL2QgBQOtDBD60ciBfxDJ5KPlGAD9aiOQ9K8v3V8A?=
+ =?us-ascii?Q?8Hxe0EuPcoUyjus0uZZiD9i8EAYhbnr1AIUnyd8gtuEy6HzP54XnLtqkQgNn?=
+ =?us-ascii?Q?op4UVk3tlVYPyx/d2gB60OfC1Sd56UfdeIkwO/tI+I0n+lSueDdpx2LNcRek?=
+ =?us-ascii?Q?Z1uOn7rSBt5y61PHeINUry9+RVLBwMeMtohR9S48z/0Y5MhRnhPBGh7FbFi+?=
+ =?us-ascii?Q?7EcUZULg7VkTr9n8EIyNANAD7+ktFewfsOPPuAO9aD5w3zujQy4/7kggGs9s?=
+ =?us-ascii?Q?1+7s2/FQkomMTfsBKo47twJCxVlX4+tfbKwMmXpbnz6owIs9o2GkW2xIloYC?=
+ =?us-ascii?Q?7l837p3vAtgdeMIeU+PXdWM3F1ygX09bIkjxlaH33f/rv6RIGf75p8nzREFu?=
+ =?us-ascii?Q?uhdGX38WfSiGusO/Ojumqx8xkyG/f9BKprjhoHZJO42zR+JQ5NzcbWA6mkZv?=
+ =?us-ascii?Q?q8aWADi0xeqggxw8sDrHRek8VMBDiLRbH6DSLQn9u4IrXDgIV7Vnq+GUpuDk?=
+ =?us-ascii?Q?4d5wF7bkKTa/jvyGeTHpm+/THkY8n2lxbpeRw2+/lqTwXKnp7f5Pg+FA5aqI?=
+ =?us-ascii?Q?tkeQOmaNoVayWWUoOmhH/6rSiTTV6Q6c9BX776unLOEBA6cKqqUtVL8SasnU?=
+ =?us-ascii?Q?h/bgiRmdW56Kua7Q53RJSc9gxXVW0aRtZ10ryk4c8bd8J9bZFjTYe9AKvreh?=
+ =?us-ascii?Q?WVskeJk7rzVl8h9wbnQagpgmiubRBgKVtdWAQaHygSqRsj9amPeovN2XzyvL?=
+ =?us-ascii?Q?MjZ46EHEMDxi8LrVLj1g2jhrO2Ts1ZrCFZSHAtB3kLLT3vP3PX31B0EiQaER?=
+ =?us-ascii?Q?1kJyTQ0mFcK/GXg9qFYqmhf+jJh+Yec5CgTZTa0z6oeVNrclcshyRupDfsNw?=
+ =?us-ascii?Q?LLoXuug2tPLleWa/OkXRSX5/hMCcidhMSMjt1Qf+OBSa2TUDNlyHF1LhaaZ8?=
+ =?us-ascii?Q?XVVAiGL58r/oziBE9EXbFPRY0VrQBHcvBzCv4oqqgz2gsg4NH7GylRh4IYcD?=
+ =?us-ascii?Q?szGnkR9FcwUoJXGVn4nIfxCb7GhGMEYZ2CmN7A2Y7AKuUNoYFZTJZ46kmWKf?=
+ =?us-ascii?Q?7mk6R1y41NSdB2/YROrhd7+iNChIzHTXb83HfbBRv9mFxgYlFnUqvjYlGDhJ?=
+ =?us-ascii?Q?B9NxyU6NcDdNN3tx+cdLrfzLAUta7GW+?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR04MB8037.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?ymD+s+2vV5yjQRSFCbrVhfhZXwlVv2VgE8zLKLrEfWs/S3v5YvvVeia8KZtp?=
+ =?us-ascii?Q?TPcYTDr5VX415hEwftSudp3dUmut9D2dFVkedkyrcpnl8ut3pk+pBy7lOLHN?=
+ =?us-ascii?Q?D8k8yNB8gdcfBhJWrWsAkjB6OVEGNvfrDWWZFzHPF5ZIxIyfDtnDp7yJMiRl?=
+ =?us-ascii?Q?Zpg4yKhF0JkJkhr6boFZA7qaQ2XhG7Sb8QQMhd19i55VnZ+1Dv+kHkniHGlK?=
+ =?us-ascii?Q?b4+zYWVNJv9vKpnWFrHJCMPfgjPJ2Od6ywj9MqNZW1Y15rmeRdXuPK+79NxY?=
+ =?us-ascii?Q?JATGwrDLF4M7PtIo5vNe8yFhg3pwOOWKNOHRUaZVsIq/vtdwcPawBDrLiQ+5?=
+ =?us-ascii?Q?Z+jL3JV9e6aHAPTxU7arJ72BgDpju0pCfhGTIonl7WI5CjaMglNo58P91fQG?=
+ =?us-ascii?Q?nK1ir4i0ynPat7JQv7JjdBz1oFOQym1lddm+LYSpt7sFb5iMp3Yc2Tgdy0FS?=
+ =?us-ascii?Q?JTQ8r6D8BEG3XQD3T93Lr+5OZQvOWOB15drFLUPiOypwZu45siT4WmrLWWfC?=
+ =?us-ascii?Q?3ELLVrspe+reDw9uLUPAu0h12OJ51Q22ysFMCQQzvvbC4KOB43FMx0YyGm6M?=
+ =?us-ascii?Q?r83EN0xim0dn0YR5BZ/VfVqtGT3u8VoeTongk+tgUuR77ZZdUnjpxt/++Ip7?=
+ =?us-ascii?Q?iz0w6LcZJMo6CMn13huNGFlndbBhvnASPSkNewXn3p50soTbq60kOYRCHXCr?=
+ =?us-ascii?Q?zTtDbdGVoIsQYa0ay6Zz9rwO5q0OuI5oFamq9n33v6MgIzbOOu1cTECyXSkt?=
+ =?us-ascii?Q?wVhKAsNcS+EqC1v/i6qJDfBLn5ktQUMx4dgvy6xbCj0YfxOtI04UzabiWYRP?=
+ =?us-ascii?Q?9wn4TigDFKBAplRQdCFnXf057H1Ks3LEgxysJlff4mP245TYTtFCyd92MA2o?=
+ =?us-ascii?Q?zogwm0k04zqasyJvsGn8oGo0YUXuK7pVzjCkgzETTSJ4dRHOfqVKf5kLH+WR?=
+ =?us-ascii?Q?n9ACmMZWoUJpApzo5WoQ0PdZHJpFc1Y3SaemK+Z/3bpPDwe6kz4kECs+3ZWq?=
+ =?us-ascii?Q?mM+ziW7S6KOaHAuM3k1P7LwdPXpEbgFCWJENyP17ZxZnWPA2VR4x8DTPACvL?=
+ =?us-ascii?Q?vV957cx0teBkXser9RQhe+0jCYB9GGhlAGjqzCpaXiRFph5P45R1/jcB+hDO?=
+ =?us-ascii?Q?ZFxOzMxWxCt8k7u2Jou+K6JWPDamtzQrAllsCoCk2JCinbGMJtyqMF4WQrTd?=
+ =?us-ascii?Q?L5/aDBc2c73nsPF55N4fWJ02S9wyjf2PSPMc0JwCIxuFDnkxaheEnovWcKIf?=
+ =?us-ascii?Q?UiqE3OD7EH8oVvSBs7SpScJoGrzgoG4BHpiqHp7ZkqO94ZNMdycx0aaQ3PHy?=
+ =?us-ascii?Q?4wnACYD/G7ZTnsS0ePOiMz+LJUIBxYtqPb9xGBfszVPnfcKnJ9881GYtP2rZ?=
+ =?us-ascii?Q?TJaRikFKtOHFbiWRNIBFHb3jNKdkvHNi9kxbH8qwmOhobRNylsZbgOSrtHpD?=
+ =?us-ascii?Q?oRFtoTKcRpNJgdvToJGbz3PlzbANMVBdmCDtWmncjcGZjEA913QHhgHL2/iV?=
+ =?us-ascii?Q?GsCsHcdCe5SHLM3Y4ULqQphWYq5UaqK1uN2WtsS0wPFEB7C4dlCNsX/XU6Vu?=
+ =?us-ascii?Q?itNhf0Yda/PF4TMYaUNeT3HBxAFJL0rc4QxhyAW9MNb+/qd+yCQ2YnTg0dkd?=
+ =?us-ascii?Q?o7kZZNWsOHCoJwUJY6Qd65o=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <9385DAA6D788B34DB08BC088C9A3D3EE@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <uyijd3ufbrfbiyyaajvhyhdyytssubekvymzgyiqjqmkh33cmi@ksqjpewsqlvw>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	Yz8viY4tj1Gu8O7avvoZ3xkmlyw935P1VFUoElX8OUiwZqOLB7NK2ZLdaK/GUpwSXO5wwj5sZ8qy9Ts0o6awmSZg/Q0Dn0pLJjyuv4tTdfS6UR7UDvWsDpvJPrPBCwfdjEHESKpo6zzz24ZuTrjdiIkvhuA12AvRMYHIjxOpxKffJnHMxTtzbVNWg0Vtz0W3HY0d+hw8WvO1AWt12u99bA6WmBDE+LX+tbZjemBbX4e5qYm7101iX4sfdc+Et2nJ27MpGRTthmSL3m6t4HIxU2bqidRDY6Kx2C427U/CfNNNCcIOu8sBIKvLluhUQpBbNWmGy/G51lY1PyQrVcOQg0OOOnyyEjRGdKUz1WVZteg+JazDIjqnGBUKOrELsOlzA80frZSDyRLrrKeHAzdEeOBRiYhgyn9Ffrud7DfBdfT9OWsoiQU8UPjBQiqJdZw5WfzCeimQClolG5wMzbok8hD+5/liqa+ISCU8CBABvBg7EcuRuMPg/IckW23BGflxGPkOVGP7GTlWDqXPHJLYrGRb80ikcC9uYvXgSs2KQHi/zqgPH/whHGaCgTt7tcrWZQywTgFilDGfwRXwWKhJESeAbgnFYrCOryIXplfmruQ7Aj9X7QvTaFybX8TVcC41
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR04MB8037.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d95600df-c348-4eae-38d2-08dd477218a3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Feb 2025 12:22:32.1518
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: xtAouQnC8ud1niB8XraXh//XNdbeVJT50eHtrpVSY4JxlZB4wq2Fr1M6NMl4OxxjIhP8QpwuphdOuZcDaZXJfdM4cJxs3zKzM+/jWbPtq5M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR04MB8033
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <n3J1YsfT12J.A.GHQM.32cpnB@bendel>
+Resent-Message-ID: <a4ASArRVgeN.A.gBjO.MEgpnB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3369
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3370
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -93,205 +202,274 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/Z6XJuIz012XATr7h@fedora
-Resent-Date: Fri,  7 Feb 2025 09:09:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/ougniadskhks7uyxguxihgeuh2pv4yaqv4q3emo4gwuolgzdt6@brotly74p6bs
+Resent-Date: Fri,  7 Feb 2025 12:48:13 +0000 (UTC)
 
-Hi Shinichiro,
+On Feb 07, 2025 / 16:52, Ming Lei wrote:
+> Hi Shinichiro,
 
-On Fri, Feb 07, 2025 at 01:24:09AM +0000, Shinichiro Kawasaki wrote:
-> Hi all,
-> 
-> I ran the latest blktests (git hash: 67aff550bd52) with the v6.14-rc1 kernel.
-> I observed 5 failures listed below. Comparing with the previous report with
-> the v6.13 kernel [1], one new failure was observed at zbd/009.
-> 
-> [1] https://lore.kernel.org/linux-nvme/rv3w2zcno7n3bgdy2ghxmedsqf23ptmakvjerbhopgxjsvgzmo@ioece7dyg2og/
-> 
-> List of failures
-> ================
-> #1: block/002
-> #2: nvme/037 (fc transport)
-> #3: nvme/041 (fc transport)
-> #4: nvme/058 (loop transport)
-> #5: zbd/009 (new)
-> 
-> 
-> Two failures observed with the v6.13 kernel are not observed with the v6.14-rc1.
-> 
-> Failures no longer observed
-> ===========================
-> #1: block/001:
->     It looks resolved by fixes in v6.14-rc1 kernel.
-> 
-> #2: throtl/001 (CKI project, s390 arch)
->     I was not able to find blktests runs by CKI project with the v6.14-rc1
->     kernel.
-> 
-> 
-> Failure description
-> ===================
-> 
-> #1: block/002
-> 
->     This test case fails with a lockdep WARN "possible circular locking
->     dependency detected". The lockdep splats shows q->q_usage_counter as one
->     of the involved locks. It was observed with the v6.13-rc2 kernel [2], and
->     still observed with v6.14-rc1 kernel. It needs further debug.
-> 
->     [2] https://lore.kernel.org/linux-block/qskveo3it6rqag4xyleobe5azpxu6tekihao4qpdopvk44una2@y4lkoe6y3d6z/
+Hi Ming, thanks for the comments. Let me comment on the block/002 failure.
 
-[  342.568086][ T1023] -> #0 (&mm->mmap_lock){++++}-{4:4}:
-[  342.569658][ T1023]        __lock_acquire+0x2e8b/0x6010
-[  342.570577][ T1023]        lock_acquire+0x1b1/0x540
-[  342.571463][ T1023]        __might_fault+0xb9/0x120
-[  342.572338][ T1023]        _copy_from_user+0x34/0xa0
-[  342.573231][ T1023]        __blk_trace_setup+0xa0/0x140
-[  342.574129][ T1023]        blk_trace_ioctl+0x14e/0x270
-[  342.575033][ T1023]        blkdev_ioctl+0x38f/0x5c0
-[  342.575919][ T1023]        __x64_sys_ioctl+0x130/0x190
-[  342.576824][ T1023]        do_syscall_64+0x93/0x180
-[  342.577714][ T1023]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> > Failure description
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >=20
+> > #1: block/002
+> >=20
+> >     This test case fails with a lockdep WARN "possible circular locking
+> >     dependency detected". The lockdep splats shows q->q_usage_counter a=
+s one
+> >     of the involved locks. It was observed with the v6.13-rc2 kernel [2=
+], and
+> >     still observed with v6.14-rc1 kernel. It needs further debug.
+> >=20
+> >     [2] https://lore.kernel.org/linux-block/qskveo3it6rqag4xyleobe5azpx=
+u6tekihao4qpdopvk44una2@y4lkoe6y3d6z/
+>=20
+> [  342.568086][ T1023] -> #0 (&mm->mmap_lock){++++}-{4:4}:
+> [  342.569658][ T1023]        __lock_acquire+0x2e8b/0x6010
+> [  342.570577][ T1023]        lock_acquire+0x1b1/0x540
+> [  342.571463][ T1023]        __might_fault+0xb9/0x120
+> [  342.572338][ T1023]        _copy_from_user+0x34/0xa0
+> [  342.573231][ T1023]        __blk_trace_setup+0xa0/0x140
+> [  342.574129][ T1023]        blk_trace_ioctl+0x14e/0x270
+> [  342.575033][ T1023]        blkdev_ioctl+0x38f/0x5c0
+> [  342.575919][ T1023]        __x64_sys_ioctl+0x130/0x190
+> [  342.576824][ T1023]        do_syscall_64+0x93/0x180
+> [  342.577714][ T1023]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
+>=20
+> The above dependency between ->mmap_lock and ->debugfs_mutex has been cut=
+ by
+> commit b769a2f409e7 ("blktrace: move copy_[to|from]_user() out of ->debug=
+fs_lock"),
+> so I'd suggest to double check this one.
 
-The above dependency between ->mmap_lock and ->debugfs_mutex has been cut by
-commit b769a2f409e7 ("blktrace: move copy_[to|from]_user() out of ->debugfs_lock"),
-so I'd suggest to double check this one.
+Thanks. I missed the fix. Said that, I do still see the lockdep WARN "possi=
+ble
+circular locking dependency detected" with the kernel v6.14-rc1. Then I gue=
+ss
+there are two problems and I confused them. One problem was fixed by the co=
+mmit
+b769a2f409e7, and the other problem that I still observe.
 
-You mentioned it can be reproduced in v6.14-rc1, but not see such warning
-from v6.14-rc1.
-
-> #5: zbd/009 (new)
-> 
->     This test case fails with a lockdep WARN "possible circular locking
->     dependency detected" [5]. The lockdep splats shows q->q_usage_counter as one
->     of the involved locks. This is common as the block/002 failure. It needs
->     further debug.
-> 
-> [5] kernel message during zbd/009 run
-> 
-> [  204.099296] [   T1004] run blktests zbd/009 at 2025-02-07 10:01:36
-> [  204.155021] [   T1040] sd 9:0:0:0: [sdd] Synchronizing SCSI cache
-> [  204.553613] [   T1041] scsi_debug:sdebug_driver_probe: scsi_debug: trim poll_queues to 0. poll_q/nr_hw = (0/1)
-> [  204.554438] [   T1041] scsi host9: scsi_debug: version 0191 [20210520]
->                             dev_size_mb=1024, opts=0x0, submit_queues=1, statistics=0
-> [  204.558331] [   T1041] scsi 9:0:0:0: Direct-Access-ZBC Linux    scsi_debug       0191 PQ: 0 ANSI: 7
-> [  204.560269] [      C2] scsi 9:0:0:0: Power-on or device reset occurred
-> [  204.562871] [   T1041] sd 9:0:0:0: Attached scsi generic sg3 type 20
-> [  204.563013] [    T100] sd 9:0:0:0: [sdd] Host-managed zoned block device
-> [  204.564518] [    T100] sd 9:0:0:0: [sdd] 262144 4096-byte logical blocks: (1.07 GB/1.00 GiB)
-> [  204.565477] [    T100] sd 9:0:0:0: [sdd] Write Protect is off
-> [  204.565948] [    T100] sd 9:0:0:0: [sdd] Mode Sense: 5b 00 10 08
-> [  204.566245] [    T100] sd 9:0:0:0: [sdd] Write cache: enabled, read cache: enabled, supports DPO and FUA
-> [  204.567453] [    T100] sd 9:0:0:0: [sdd] permanent stream count = 5
-> [  204.568276] [    T100] sd 9:0:0:0: [sdd] Preferred minimum I/O size 4096 bytes
-> [  204.569067] [    T100] sd 9:0:0:0: [sdd] Optimal transfer size 4194304 bytes
-> [  204.571080] [    T100] sd 9:0:0:0: [sdd] 256 zones of 1024 logical blocks
-> [  204.593822] [    T100] sd 9:0:0:0: [sdd] Attached SCSI disk
-> [  204.901514] [   T1067] BTRFS: device fsid 15196e63-e303-48ed-9dcb-9ec397479c42 devid 1 transid 8 /dev/sdd (8:48) scanned by mount (1067)
-> [  204.910330] [   T1067] BTRFS info (device sdd): first mount of filesystem 15196e63-e303-48ed-9dcb-9ec397479c42
-> [  204.913129] [   T1067] BTRFS info (device sdd): using crc32c (crc32c-generic) checksum algorithm
-> [  204.914856] [   T1067] BTRFS info (device sdd): using free-space-tree
-> [  204.925816] [   T1067] BTRFS info (device sdd): host-managed zoned block device /dev/sdd, 256 zones of 4194304 bytes
-> [  204.929320] [   T1067] BTRFS info (device sdd): zoned mode enabled with zone size 4194304
-> [  204.935403] [   T1067] BTRFS info (device sdd): checking UUID tree
-> [  215.637712] [   T1103] BTRFS info (device sdd): last unmount of filesystem 15196e63-e303-48ed-9dcb-9ec397479c42
-> 
-> [  215.762293] [   T1110] ======================================================
-> [  215.763636] [   T1110] WARNING: possible circular locking dependency detected
-> [  215.765092] [   T1110] 6.14.0-rc1 #252 Not tainted
-> [  215.766271] [   T1110] ------------------------------------------------------
-> [  215.767615] [   T1110] modprobe/1110 is trying to acquire lock:
-> [  215.768999] [   T1110] ffff888100ac83e0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: __flush_work+0x38f/0xb60
-> [  215.770700] [   T1110] 
->                           but task is already holding lock:
-> [  215.773077] [   T1110] ffff8881205b6f20 (&q->q_usage_counter(queue)#16){++++}-{0:0}, at: sd_remove+0x85/0x130
-> [  215.774685] [   T1110] 
->                           which lock already depends on the new lock.
-> 
-> [  215.778184] [   T1110] 
->                           the existing dependency chain (in reverse order) is:
-> [  215.780532] [   T1110] 
->                           -> #3 (&q->q_usage_counter(queue)#16){++++}-{0:0}:
-> [  215.782937] [   T1110]        blk_queue_enter+0x3d9/0x500
-> [  215.784175] [   T1110]        blk_mq_alloc_request+0x47d/0x8e0
-> [  215.785434] [   T1110]        scsi_execute_cmd+0x14f/0xb80
-> [  215.786662] [   T1110]        sd_zbc_do_report_zones+0x1c1/0x470
-> [  215.787989] [   T1110]        sd_zbc_report_zones+0x362/0xd60
-> [  215.789222] [   T1110]        blkdev_report_zones+0x1b1/0x2e0
-> [  215.790448] [   T1110]        btrfs_get_dev_zones+0x215/0x7e0 [btrfs]
-> [  215.791887] [   T1110]        btrfs_load_block_group_zone_info+0x6d2/0x2c10 [btrfs]
-> [  215.793342] [   T1110]        btrfs_make_block_group+0x36b/0x870 [btrfs]
-> [  215.794752] [   T1110]        btrfs_create_chunk+0x147d/0x2320 [btrfs]
-> [  215.796150] [   T1110]        btrfs_chunk_alloc+0x2ce/0xcf0 [btrfs]
-> [  215.797474] [   T1110]        start_transaction+0xce6/0x1620 [btrfs]
-> [  215.798858] [   T1110]        btrfs_uuid_scan_kthread+0x4ee/0x5b0 [btrfs]
-> [  215.800334] [   T1110]        kthread+0x39d/0x750
-> [  215.801479] [   T1110]        ret_from_fork+0x30/0x70
-> [  215.802662] [   T1110]        ret_from_fork_asm+0x1a/0x30
-
-Not sure why fs_info->dev_replace is required for reporting zones.
-
-> [  215.803902] [   T1110] 
->                           -> #2 (&fs_info->dev_replace.rwsem){++++}-{4:4}:
-> [  215.805993] [   T1110]        down_read+0x9b/0x470
-> [  215.807088] [   T1110]        btrfs_map_block+0x2ce/0x2ce0 [btrfs]
-> [  215.808366] [   T1110]        btrfs_submit_chunk+0x2d4/0x16c0 [btrfs]
-> [  215.809687] [   T1110]        btrfs_submit_bbio+0x16/0x30 [btrfs]
-> [  215.810983] [   T1110]        btree_write_cache_pages+0xb5a/0xf90 [btrfs]
-> [  215.812295] [   T1110]        do_writepages+0x17f/0x7b0
-> [  215.813416] [   T1110]        __writeback_single_inode+0x114/0xb00
-> [  215.814575] [   T1110]        writeback_sb_inodes+0x52b/0xe00
-> [  215.815717] [   T1110]        wb_writeback+0x1a7/0x800
-> [  215.816924] [   T1110]        wb_workfn+0x12a/0xbd0
-> [  215.817951] [   T1110]        process_one_work+0x85a/0x1460
-> [  215.818985] [   T1110]        worker_thread+0x5e2/0xfc0
-> [  215.820013] [   T1110]        kthread+0x39d/0x750
-> [  215.821000] [   T1110]        ret_from_fork+0x30/0x70
-> [  215.822010] [   T1110]        ret_from_fork_asm+0x1a/0x30
-> [  215.822988] [   T1110] 
->                           -> #1 (&fs_info->zoned_meta_io_lock){+.+.}-{4:4}:
-> [  215.824855] [   T1110]        __mutex_lock+0x1aa/0x1360
-> [  215.825856] [   T1110]        btree_write_cache_pages+0x252/0xf90 [btrfs]
-> [  215.827089] [   T1110]        do_writepages+0x17f/0x7b0
-> [  215.828027] [   T1110]        __writeback_single_inode+0x114/0xb00
-> [  215.829141] [   T1110]        writeback_sb_inodes+0x52b/0xe00
-> [  215.830129] [   T1110]        wb_writeback+0x1a7/0x800
-> [  215.831084] [   T1110]        wb_workfn+0x12a/0xbd0
-> [  215.831950] [   T1110]        process_one_work+0x85a/0x1460
-> [  215.832862] [   T1110]        worker_thread+0x5e2/0xfc0
-> [  215.833826] [   T1110]        kthread+0x39d/0x750
-> [  215.834715] [   T1110]        ret_from_fork+0x30/0x70
-> [  215.835669] [   T1110]        ret_from_fork_asm+0x1a/0x30
-> [  215.836594] [   T1110] 
->                           -> #0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}:
-> [  215.838347] [   T1110]        __lock_acquire+0x2f52/0x5ea0
-> [  215.839258] [   T1110]        lock_acquire+0x1b1/0x540
-> [  215.840156] [   T1110]        __flush_work+0x3ac/0xb60
-> [  215.841041] [   T1110]        wb_shutdown+0x15b/0x1f0
-> [  215.841915] [   T1110]        bdi_unregister+0x172/0x5b0
-> [  215.842793] [   T1110]        del_gendisk+0x841/0xa20
-> [  215.843724] [   T1110]        sd_remove+0x85/0x130
-> [  215.844660] [   T1110]        device_release_driver_internal+0x368/0x520
-> [  215.845757] [   T1110]        bus_remove_device+0x1f1/0x3f0
-> [  215.846755] [   T1110]        device_del+0x3bd/0x9c0
-> [  215.847712] [   T1110]        __scsi_remove_device+0x272/0x340
-> [  215.848727] [   T1110]        scsi_forget_host+0xf7/0x170
-> [  215.849710] [   T1110]        scsi_remove_host+0xd2/0x2a0
-> [  215.850682] [   T1110]        sdebug_driver_remove+0x52/0x2f0 [scsi_debug]
-> [  215.851788] [   T1110]        device_release_driver_internal+0x368/0x520
-> [  215.852853] [   T1110]        bus_remove_device+0x1f1/0x3f0
-> [  215.853885] [   T1110]        device_del+0x3bd/0x9c0
-> [  215.854840] [   T1110]        device_unregister+0x13/0xa0
-> [  215.855850] [   T1110]        sdebug_do_remove_host+0x1fb/0x290 [scsi_debug]
-> [  215.856947] [   T1110]        scsi_debug_exit+0x17/0x70 [scsi_debug]
-> [  215.857968] [   T1110]        __do_sys_delete_module.isra.0+0x321/0x520
-> [  215.858999] [   T1110]        do_syscall_64+0x93/0x180
-> [  215.859930] [   T1110]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
-> [  215.860974] [   T1110] 
->                           other info that might help us debug this:
-
-This warning looks one real issue.
+Please take a look in the kernel message below, which was observed at the
+block/002 failure I have just recreated on my test node. The splat indicate=
+s the
+dependency different from that observed with v6.13-rc2 kernel.
 
 
-Thanks,
-Ming
+[  165.526908] [   T1103] run blktests block/002 at 2025-02-07 21:02:22
+[  165.814157] [   T1134] sd 9:0:0:0: [sdd] Synchronizing SCSI cache
+[  166.031013] [   T1135] scsi_debug:sdebug_driver_probe: scsi_debug: trim =
+poll_queues to 0. poll_q/nr_hw =3D (0/1)
+[  166.031986] [   T1135] scsi host9: scsi_debug: version 0191 [20210520]
+                            dev_size_mb=3D8, opts=3D0x0, submit_queues=3D1,=
+ statistics=3D0
+[  166.035727] [   T1135] scsi 9:0:0:0: Direct-Access     Linux    scsi_deb=
+ug       0191 PQ: 0 ANSI: 7
+[  166.038449] [      C1] scsi 9:0:0:0: Power-on or device reset occurred
+[  166.045105] [   T1135] sd 9:0:0:0: Attached scsi generic sg3 type 0
+[  166.046426] [     T94] sd 9:0:0:0: [sdd] 16384 512-byte logical blocks: =
+(8.39 MB/8.00 MiB)
+[  166.048275] [     T94] sd 9:0:0:0: [sdd] Write Protect is off
+[  166.048854] [     T94] sd 9:0:0:0: [sdd] Mode Sense: 73 00 10 08
+[  166.051019] [     T94] sd 9:0:0:0: [sdd] Write cache: enabled, read cach=
+e: enabled, supports DPO and FUA
+[  166.059601] [     T94] sd 9:0:0:0: [sdd] permanent stream count =3D 5
+[  166.063623] [     T94] sd 9:0:0:0: [sdd] Preferred minimum I/O size 512 =
+bytes
+[  166.064329] [     T94] sd 9:0:0:0: [sdd] Optimal transfer size 524288 by=
+tes
+[  166.094781] [     T94] sd 9:0:0:0: [sdd] Attached SCSI disk
+
+[  166.855819] [   T1161] =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+[  166.856339] [   T1161] WARNING: possible circular locking dependency det=
+ected
+[  166.856945] [   T1161] 6.14.0-rc1 #252 Not tainted
+[  166.857292] [   T1161] -------------------------------------------------=
+-----
+[  166.857874] [   T1161] blktrace/1161 is trying to acquire lock:
+[  166.858310] [   T1161] ffff88811dbfe5e0 (&mm->mmap_lock){++++}-{4:4}, at=
+: __might_fault+0x99/0x120
+[  166.859053] [   T1161]=20
+                          but task is already holding lock:
+[  166.859593] [   T1161] ffff8881082a1078 (&sb->s_type->i_mutex_key#3){+++=
++}-{4:4}, at: relay_file_read+0xa3/0x8a0
+[  166.860410] [   T1161]=20
+                          which lock already depends on the new lock.
+
+[  166.861269] [   T1161]=20
+                          the existing dependency chain (in reverse order) =
+is:
+[  166.863693] [   T1161]=20
+                          -> #5 (&sb->s_type->i_mutex_key#3){++++}-{4:4}:
+[  166.866064] [   T1161]        down_write+0x8d/0x200
+[  166.867266] [   T1161]        start_creating.part.0+0x82/0x230
+[  166.868544] [   T1161]        debugfs_create_dir+0x3a/0x4c0
+[  166.869797] [   T1161]        blk_register_queue+0x12d/0x430
+[  166.870986] [   T1161]        add_disk_fwnode+0x6b1/0x1010
+[  166.872144] [   T1161]        sd_probe+0x94e/0xf30
+[  166.873262] [   T1161]        really_probe+0x1e3/0x8a0
+[  166.874372] [   T1161]        __driver_probe_device+0x18c/0x370
+[  166.875544] [   T1161]        driver_probe_device+0x4a/0x120
+[  166.876715] [   T1161]        __device_attach_driver+0x15e/0x270
+[  166.877890] [   T1161]        bus_for_each_drv+0x114/0x1a0
+[  166.878999] [   T1161]        __device_attach_async_helper+0x19c/0x240
+[  166.880180] [   T1161]        async_run_entry_fn+0x96/0x4f0
+[  166.881312] [   T1161]        process_one_work+0x85a/0x1460
+[  166.882411] [   T1161]        worker_thread+0x5e2/0xfc0
+[  166.883483] [   T1161]        kthread+0x39d/0x750
+[  166.884548] [   T1161]        ret_from_fork+0x30/0x70
+[  166.885629] [   T1161]        ret_from_fork_asm+0x1a/0x30
+[  166.886728] [   T1161]=20
+                          -> #4 (&q->debugfs_mutex){+.+.}-{4:4}:
+[  166.888799] [   T1161]        __mutex_lock+0x1aa/0x1360
+[  166.889863] [   T1161]        blk_mq_init_sched+0x3b5/0x5e0
+[  166.890907] [   T1161]        elevator_switch+0x149/0x4b0
+[  166.891928] [   T1161]        elv_iosched_store+0x29f/0x380
+[  166.892966] [   T1161]        queue_attr_store+0x313/0x480
+[  166.893976] [   T1161]        kernfs_fop_write_iter+0x39e/0x5a0
+[  166.895012] [   T1161]        vfs_write+0x5f9/0xe90
+[  166.895970] [   T1161]        ksys_write+0xf6/0x1c0
+[  166.896931] [   T1161]        do_syscall_64+0x93/0x180
+[  166.897886] [   T1161]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[  166.898945] [   T1161]=20
+                          -> #3 (&q->q_usage_counter(io)#2){++++}-{0:0}:
+[  166.900757] [   T1161]        blk_mq_submit_bio+0x19b8/0x2070
+[  166.901784] [   T1161]        __submit_bio+0x36b/0x6d0
+[  166.902748] [   T1161]        submit_bio_noacct_nocheck+0x542/0xca0
+[  166.903796] [   T1161]        iomap_readahead+0x4c4/0x7e0
+[  166.904778] [   T1161]        read_pages+0x198/0xaf0
+[  166.905718] [   T1161]        page_cache_ra_order+0x4d3/0xb50
+[  166.906709] [   T1161]        filemap_get_pages+0x2c7/0x1850
+[  166.907684] [   T1161]        filemap_read+0x31d/0xc30
+[  166.908617] [   T1161]        xfs_file_buffered_read+0x1e9/0x2a0 [xfs]
+[  166.909910] [   T1161]        xfs_file_read_iter+0x25f/0x4a0 [xfs]
+[  166.911131] [   T1161]        vfs_read+0x6bc/0xa20
+[  166.911994] [   T1161]        ksys_read+0xf6/0x1c0
+[  166.912862] [   T1161]        do_syscall_64+0x93/0x180
+[  166.913736] [   T1161]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[  166.914751] [   T1161]=20
+                          -> #2 (mapping.invalidate_lock#2){++++}-{4:4}:
+[  166.916401] [   T1161]        down_read+0x9b/0x470
+[  166.917285] [   T1161]        filemap_fault+0x231/0x2ac0
+[  166.918179] [   T1161]        __do_fault+0xf4/0x5d0
+[  166.919039] [   T1161]        do_fault+0x965/0x11d0
+[  166.919895] [   T1161]        __handle_mm_fault+0x1060/0x1f40
+[  166.920829] [   T1161]        handle_mm_fault+0x21a/0x6b0
+[  166.921722] [   T1161]        do_user_addr_fault+0x322/0xaa0
+[  166.922648] [   T1161]        exc_page_fault+0x7a/0x110
+[  166.923540] [   T1161]        asm_exc_page_fault+0x22/0x30
+[  166.924466] [   T1161]=20
+                          -> #1 (&vma->vm_lock->lock){++++}-{4:4}:
+[  166.926085] [   T1161]        down_write+0x8d/0x200
+[  166.926943] [   T1161]        vma_link+0x1ff/0x590
+[  166.927794] [   T1161]        insert_vm_struct+0x15a/0x340
+[  166.928713] [   T1161]        alloc_bprm+0x626/0xbf0
+[  166.929578] [   T1161]        kernel_execve+0x85/0x2f0
+[  166.930476] [   T1161]        call_usermodehelper_exec_async+0x21b/0x430
+[  166.931481] [   T1161]        ret_from_fork+0x30/0x70
+[  166.932371] [   T1161]        ret_from_fork_asm+0x1a/0x30
+[  166.933291] [   T1161]=20
+                          -> #0 (&mm->mmap_lock){++++}-{4:4}:
+[  166.934868] [   T1161]        __lock_acquire+0x2f52/0x5ea0
+[  166.935768] [   T1161]        lock_acquire+0x1b1/0x540
+[  166.936678] [   T1161]        __might_fault+0xb9/0x120
+[  166.937563] [   T1161]        _copy_to_user+0x1e/0x80
+[  166.938438] [   T1161]        relay_file_read+0x149/0x8a0
+[  166.939343] [   T1161]        full_proxy_read+0x110/0x1d0
+[  166.940224] [   T1161]        vfs_read+0x1bb/0xa20
+[  166.941082] [   T1161]        ksys_read+0xf6/0x1c0
+[  166.941920] [   T1161]        do_syscall_64+0x93/0x180
+[  166.942780] [   T1161]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[  166.943755] [   T1161]=20
+                          other info that might help us debug this:
+
+[  166.945985] [   T1161] Chain exists of:
+                            &mm->mmap_lock --> &q->debugfs_mutex --> &sb->s=
+_type->i_mutex_key#3
+
+[  166.948504] [   T1161]  Possible unsafe locking scenario:
+
+[  166.950078] [   T1161]        CPU0                    CPU1
+[  166.950965] [   T1161]        ----                    ----
+[  166.951849] [   T1161]   lock(&sb->s_type->i_mutex_key#3);
+[  166.952751] [   T1161]                                lock(&q->debugfs_m=
+utex);
+[  166.953789] [   T1161]                                lock(&sb->s_type->=
+i_mutex_key#3);
+[  166.954860] [   T1161]   rlock(&mm->mmap_lock);
+[  166.955689] [   T1161]=20
+                           *** DEADLOCK ***
+
+[  166.957776] [   T1161] 2 locks held by blktrace/1161:
+[  166.958623] [   T1161]  #0: ffff88813c9ebcf8 (&f->f_pos_lock){+.+.}-{4:4=
+}, at: fdget_pos+0x233/0x2f0
+[  166.959808] [   T1161]  #1: ffff8881082a1078 (&sb->s_type->i_mutex_key#3=
+){++++}-{4:4}, at: relay_file_read+0xa3/0x8a0
+[  166.961118] [   T1161]=20
+                          stack backtrace:
+[  166.962578] [   T1161] CPU: 2 UID: 0 PID: 1161 Comm: blktrace Not tainte=
+d 6.14.0-rc1 #252
+[  166.962582] [   T1161] Hardware name: QEMU Standard PC (i440FX + PIIX, 1=
+996), BIOS 1.16.3-3.fc41 04/01/2014
+[  166.962585] [   T1161] Call Trace:
+[  166.962586] [   T1161]  <TASK>
+p[  166.962588] [   T1161]  dump_stack_lvl+0x6a/0x90
+[  166.962593] [   T1161]  print_circular_bug.cold+0x1e0/0x274
+[  166.962597] [   T1161]  check_noncircular+0x306/0x3f0
+[  166.962600] [   T1161]  ? __pfx_check_noncircular+0x10/0x10
+[  166.962605] [   T1161]  ? lockdep_lock+0xca/0x1c0
+[  166.962607] [   T1161]  ? __pfx_lockdep_lock+0x10/0x10
+[  166.962611] [   T1161]  __lock_acquire+0x2f52/0x5ea0
+[  166.962616] [   T1161]  ? __pfx___lock_acquire+0x10/0x10
+[  166.962619] [   T1161]  ? lock_acquire+0x1b1/0x540
+[  166.962623] [   T1161]  lock_acquire+0x1b1/0x540
+[  166.962625] [   T1161]  ? __might_fault+0x99/0x120
+[  166.962628] [   T1161]  ? __pfx_lock_acquire+0x10/0x10
+[  166.962631] [   T1161]  ? lock_is_held_type+0xd5/0x130
+[  166.962635] [   T1161]  ? __pfx___might_resched+0x10/0x10
+[  166.962637] [   T1161]  ? _raw_spin_unlock+0x29/0x50
+[  166.962640] [   T1161]  ? __might_fault+0x99/0x120
+[  166.962642] [   T1161]  __might_fault+0xb9/0x120
+[  166.962649] [   T1161]  ? __might_fault+0x99/0x120
+[  166.962651] [   T1161]  ? __check_object_size+0x3f3/0x540
+[  166.962654] [   T1161]  _copy_to_user+0x1e/0x80
+[  166.962656] [   T1161]  relay_file_read+0x149/0x8a0
+[  166.962661] [   T1161]  ? selinux_file_permission+0x36d/0x420
+[  166.962665] [   T1161]  full_proxy_read+0x110/0x1d0
+[  166.962667] [   T1161]  ? rw_verify_area+0x2f7/0x520
+[  166.962670] [   T1161]  vfs_read+0x1bb/0xa20
+[  166.962672] [   T1161]  ? __pfx___mutex_lock+0x10/0x10
+[  166.962674] [   T1161]  ? __pfx_lock_release+0x10/0x10
+[  166.962677] [   T1161]  ? __pfx_vfs_read+0x10/0x10
+[  166.962683] [   T1161]  ? __fget_files+0x1ae/0x2e0
+[  166.962687] [   T1161]  ksys_read+0xf6/0x1c0
+[  166.962689] [   T1161]  ? __pfx_ksys_read+0x10/0x10
+[  166.962693] [   T1161]  do_syscall_64+0x93/0x180
+[  166.962697] [   T1161]  ? lockdep_hardirqs_on_prepare+0x16d/0x400
+[  166.962700] [   T1161]  ? do_syscall_64+0x9f/0x180
+[  166.962702] [   T1161]  ? lockdep_hardirqs_on+0x78/0x100
+[  166.962704] [   T1161]  ? do_syscall_64+0x9f/0x180
+[  166.962708] [   T1161]  ? lockdep_hardirqs_on_prepare+0x16d/0x400
+[  166.962711] [   T1161]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[  166.962714] [   T1161] RIP: 0033:0x7fdddfde0e4a
+[  166.962719] [   T1161] Code: 55 48 89 e5 48 83 ec 20 48 89 55 e8 48 89 7=
+5 f0 89 7d f8 e8 28 58 f8 ff 48 8b 55 e8 48 8b 75 f0 41 89 c0 8b 7d f8 31 c=
+0 0f 05 <48> 3d 00 f0 ff ff 77 2e 44 89 c7 48 89 45 f8 e8 82 58 f8 ff 48 8b
+[  166.962721] [   T1161] RSP: 002b:00007fdddecccd80 EFLAGS: 00000246 ORIG_=
+RAX: 0000000000000000
+[  166.962726] [   T1161] RAX: ffffffffffffffda RBX: 00007fddd4000bb0 RCX: =
+00007fdddfde0e4a
+[  166.962727] [   T1161] RDX: 0000000000080000 RSI: 00007fdddc400000 RDI: =
+0000000000000006
+[  166.962729] [   T1161] RBP: 00007fdddecccda0 R08: 0000000000000000 R09: =
+0000000000000000
+[  166.962730] [   T1161] R10: 0000000000000001 R11: 0000000000000246 R12: =
+0000000000000000
+[  166.962731] [   T1161] R13: 000056530426caa0 R14: 0000000000000000 R15: =
+00007fddd4002c90
+[  166.962735] [   T1161]  </TASK>
+[  167.066759] [   T1103] sd 9:0:0:0: [sdd] Synchronizing SCSI cache=
 
