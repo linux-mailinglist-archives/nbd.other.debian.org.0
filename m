@@ -1,13 +1,13 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4579AAA98A0
-	for <lists+nbd@lfdr.de>; Mon,  5 May 2025 18:20:23 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AAD4AA98C6
+	for <lists+nbd@lfdr.de>; Mon,  5 May 2025 18:24:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 24EDD20494; Mon,  5 May 2025 16:20:23 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon May  5 16:20:23 2025
+	id E32522049B; Mon,  5 May 2025 16:24:40 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon May  5 16:24:40 2025
 Old-Return-Path: <berend@deschouwer.co.za>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -19,11 +19,11 @@ X-Spam-Status: No, score=-15.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4804420483
-	for <lists-other-nbd@bendel.debian.org>; Mon,  5 May 2025 16:20:14 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id F375E20494
+	for <lists-other-nbd@bendel.debian.org>; Mon,  5 May 2025 16:24:28 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-11.461 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+X-Amavis-Spam-Status: No, score=-9.961 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
 	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1, LDO_WHITELIST=-5,
 	PGPSIGNATURE=-5, RCVD_IN_DNSWL_NONE=-0.0001,
 	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
@@ -31,42 +31,44 @@ X-Amavis-Spam-Status: No, score=-11.461 tagged_above=-10000 required=5.3
 	autolearn=ham autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ms9MI57RAMsK for <lists-other-nbd@bendel.debian.org>;
-	Mon,  5 May 2025 16:20:07 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -3.5
+	with ESMTP id V34nJWyhaKCi for <lists-other-nbd@bendel.debian.org>;
+	Mon,  5 May 2025 16:24:22 +0000 (UTC)
+X-policyd-weight: using cached result; rate:hard: -3.5
 Received: from mail-0301.mail-europe.com (mail-0301.mail-europe.com [188.165.51.139])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits)
+	 client-signature RSA-PSS (4096 bits))
 	(Client CN "mailout.proton.ch", Issuer "mailout.proton.ch" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 4DFAB2048B
-	for <nbd@other.debian.org>; Mon,  5 May 2025 16:20:07 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 4DE8020457
+	for <nbd@other.debian.org>; Mon,  5 May 2025 16:24:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=deschouwer.co.za;
-	s=protonmail3; t=1746461979; x=1746721179;
-	bh=CeXVPJfBCH/mqS8rLxe564xAXTXRh6O6nwS6bThRe4w=;
-	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=xoxAeFctcKxy771WxgPR1kOOF/u6C7dxdAAnUub10RENuuuVBQIBmkjkAd8ZCqa7w
-	 X808QIpWAS2d0dHxm5iyQH4GxGYyy8bWvJJvxHpl2WES00RrFgcEflwBWxpHi48mKX
-	 XexXsvB1VR4vD0yVHhHEkHMj09n7Vy78ERzcd4DJnywZkIUqF3xrlzaH9SnYamGFzF
-	 40tfCxTg3BjrB2jdi9N+FNruta0H4XkGu6O4+U4kVH6I2jSNSLsWnWTDtPGZfYXT4t
-	 P7uKzA8fkjj4MjOIkvJYMPGF1ptER9G/uaonrZ7GGn+1aMzRbo4Kbp5lp6iGYgKztY
-	 6lqEEKOqyT4pw==
-Date: Mon, 05 May 2025 16:19:35 +0000
+	s=protonmail3; t=1746462222; x=1746721422;
+	bh=2UQER3QNDe1LcOya6BZrc7aMTZtkWEV83SnVgg76+dA=;
+	h=Date:To:From:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=CWNbIeezJJeEMdRJfJaBy4zG4m7YpjqYLXMzf7EY+5XSqoCNHs1D1VEgfFs8rnz7o
+	 8n7l91bM5WgVDu/jmD4vf1Q1kUrcP9i7+wSgOzz4xbVSatnQd7cka+j140PK6u+mPf
+	 OF2DNOQ9vIONbrcdOQMXRDnNUGvLMklwGzJGm3LhJOHVeTm2GgCPMLAbOO4rq2nStD
+	 UVlictA/W//+3EY8+KAFMOktwCWelWljcawcH8RV9kZVUNc3w5Z8aCI5gLIU45cHyp
+	 YHYfjmQjhwxS8D21uKnQa2vnrzshgc4vEGyxIW5PONfb3+Nn9aL/ZrO9XamnCdFhhU
+	 MK0tWZzQzUDIg==
+Date: Mon, 05 May 2025 16:23:39 +0000
 To: nbd@other.debian.org
 From: berend <berend@deschouwer.co.za>
-Subject: nbd copy-on-write corruption
-Message-ID: <1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
+Subject: Re: nbd copy-on-write corruption
+Message-ID: <7113227fb3a6a9cd7a3cf13f76ff1119bdc6438a.camel@deschouwer.co.za>
+In-Reply-To: <1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
+References: <1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
 Feedback-ID: 50941660:user:proton
-X-Pm-Message-ID: 2680026e01a4b8804d6acd10b18c0ebb145173c5
+X-Pm-Message-ID: 250b8e0cd252fce6615b1228190cc96b1ce73459
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha256; boundary="------84c79caabcbe2db15b65db0f5c6707ddef25aa1596c386cb9406a4f6f891f9ca"; charset=utf-8
+Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha256; boundary="------1f6e4b6d5ab22fecdd1672640de7fb6407a3c7f4e578be6aa9422e8119fe1466"; charset=utf-8
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <wNx72jOE00K.A.qhGG.HVOGoB@bendel>
+Resent-Message-ID: <4zqnTZSMj5C.A.JoHG.IZOGoB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3374
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3375
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -76,133 +78,58 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za
-Resent-Date: Mon,  5 May 2025 16:20:23 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/7113227fb3a6a9cd7a3cf13f76ff1119bdc6438a.camel@deschouwer.co.za
+Resent-Date: Mon,  5 May 2025 16:24:40 +0000 (UTC)
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------84c79caabcbe2db15b65db0f5c6707ddef25aa1596c386cb9406a4f6f891f9ca
+--------1f6e4b6d5ab22fecdd1672640de7fb6407a3c7f4e578be6aa9422e8119fe1466
 Content-Type: multipart/mixed;
- boundary=9eaffb7cc3902957a7a98ec6e210bdceb0a6e910934e03ad62b2dbbaa959
-Message-ID: <1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
-Subject: nbd copy-on-write corruption
+ boundary=bba985c1e4365eb34fade835b0f23dce6f20c19b61ea82a8097604b203dd
+Message-ID: <7113227fb3a6a9cd7a3cf13f76ff1119bdc6438a.camel@deschouwer.co.za>
+Subject: Re: nbd copy-on-write corruption
 From: berend <berend@deschouwer.co.za>
 To: nbd@other.debian.org
-Date: Mon, 05 May 2025 18:19:27 +0200
-Autocrypt: addr=berend@deschouwer.co.za; prefer-encrypt=mutual;
- keydata=mQINBFWKkUEBEADXuiEYW1YIgNnrazEo/0zelTzxbHCG/wWxn7ASud8xHL1jqZK5qxQS/
- 6WRbnQv5c5DPvk1Of6E/2XVsFUQJgR1YFxGtNt1QAl5R0vj7rvr8nBbeQhcmHsvwGpT7abkevWFvm
- cHbNKfXbc/sfDrCMotRFQBohc7oyo+NzOJOQpJqCbzwk+kVmVhVHpw8YzvnD2sVDqbQOxtWmrcofm
- 9Db28NE0NcN2P9ABbNJut1QUZWtZ1lmW6ryhgKrC4uxSz/YNcc5zs2Z761SGKOSY8PVzvVkLbK9fb
- dY7jcgGCFd6GRYOB2I3B7CO9uafuToCDyhlqlugWXpGoA5B7o/a4Z1b7qlNsEmqlGh+eD94H8M/LW
- 8dwYNRIoUNYIayRF1OQprc5Pz3iCxaonoIiGfxGZqNKT9QWoIg8rOC08tcr8uj4m1RjJrszSjtkws
- om0UwpBygHe/3Bp4xZSxgafMw6dGSKRsDTAHj2FJFWctNluY4jvxRX7CuW59Q35JIE8m+OgYbgLkG
- QfEdUyhcRqB0+VR2WRlX5sKUZkWg1AhgcL7FimNll3f06ye/uzbraUYHX7xc3v5CJ2Z6wx6MphZzh
- hxuBqLcYJEbN9fNsevTOYkEQIsGC7NWoT2hy3ujeYBPj3co2Nd4iWO9tpysLZ8gK15/dNjMBTsprS
- +9RPqgz5BtFmwARAQABtCxCZXJlbmQgRGUgU2Nob3V3ZXIgPGJlcmVuZEBkZXNjaG91d2VyLmNvLn
- phPokCOAQTAQIAIgUCVYqRQQIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQ227gcZOAoOn
- Xdg/9EFdRr/XtOYbBeltb0sNHaSP7S4vklqcAtOntTYV3yMFNv9XBXXvFSKaGl0m5LheNAkIu/YbA
- dGXySzNUd7Wsfyb+23iq5UKGt+wD+RocLZY094uAKcQQTZwJKTw4tKIgN4qBtOaNiJwLursNZYAP7
- JIJFPQY55pa+yec3jxfTX0a7ruiecosmzavQ182V+Ldev2korGvY1cz43rP8xiL1DjtcBUneigbj5
- +N0Z8UljnR6QkSRuajdsGBAXHmkOsBV/o8M8vFWa8N83us1Gky5K54xQOaVyNRVrR4EISv8y0i33r
- wGYvPBD+RKaLacuKb8+8KNVuQ5M0v+4pGr/FeXpP+nPzVDfbZZhX1iweQ069LKa9ref8qEw4VVt7A
- uYFSweHVMICA0ZGyKJ5hZz7LdI0vAFANyUt0KoWeeK69xik8rvF75eo4fz/WJtf/AdnCuYp60obox
- /sJA7KrZrWQNbDclJefiSZV7tuHh7jLJqQufkm5D5gowAAo5grM/6WANHVw5iojM/UG6f0+tFZXgF
- Myk2JZy9c2s8VQgI2UzrbU8JsCtdDjBUSTC64R7klvV5bku31Am3RPC29l1hfY+3ULg4w8mmpJ28p
- q+/z0oKH8CwyicuFPFBG95ln/7tte4ifWkfzML8Oh2bpuKEb2PWR44sQ1Zq8+IAjS2XwL454=
+Date: Mon, 05 May 2025 18:23:33 +0200
+In-Reply-To: <1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
+References: 
+	<1b35de1e82510f089317f722252ddba8502261c3.camel@deschouwer.co.za>
 User-Agent: Evolution 3.56.1 (3.56.1-1.fc42) 
 MIME-Version: 1.0
 
---9eaffb7cc3902957a7a98ec6e210bdceb0a6e910934e03ad62b2dbbaa959
+--bba985c1e4365eb34fade835b0f23dce6f20c19b61ea82a8097604b203dd
+Content-Transfer-Encoding: base64
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-I have a simple test case where nbd corrupts the date read back if
-copyonwrite=3Dtrue, and another one if sparse_cow=3Dtrue.
-
-I also have patches that I believe fix this.
-
-
-For the first case, it's enough to read and write more than one
-sequential block.  The second and subsequent blocks read will read into
-the wrong offset of the buffer, and copy invalid data to the client.
-
-I use a 4096 block size in this example, but I've used others.  I did
-that to match the filesystem, but for the test I don't even need a
-filesystem.
-
-The test:
-
-export OFFSET=3D0
-export COUNT=3D3 # anything >=3D 1
-dd if=3D/dev/urandom of=3Dtestdata bs=3D4096 count=3D$COUNT # random data
-dd if=3Dtestdata of=3D/dev/nbd0 bs=3D4096 seek=3D$OFFSET count=3D$COUNT
-dd if=3D/dev/nbd0 of=3Dcompdata bs=3D4096 skip=3D$OFFSET count=3D$COUNT
-sum testdata compdata
-
-The data will be different.
-
-If the kernel does a partition check on /dev/nbd0 it will fail with
-COUNT=3D1 as well.
-
-
-For the second case, with sparse_cow=3Dtrue, we need to repeat the test
-with an offset > 0.  expwrite() calls write() instead of pwrite().
-
-export OFFSET=3D100
-export COUNT=3D3 # anything >=3D 1
-dd if=3D/dev/urandom of=3Dtestdata bs=3D4096 count=3D$COUNT # random data
-dd if=3Dtestdata of=3D/dev/nbd0 bs=3D4096 seek=3D$OFFSET count=3D$COUNT
-dd if=3D/dev/nbd0 of=3Dcompdata bs=3D4096 skip=3D$OFFSET count=3D$COUNT
-sum testdata compdata
-
-The first time it's run, it will result in an Input/Output error.
-
-The second time it's run, it will work.
-
-
-First patch:
-
-diff --git a/nbd-orig/nbd-server.c b/nbd-patched/nbd-server.c
-index 92fd141..d1d45b2 100644
---- a/nbd-orig/nbd-server.c
-+++ b/nbd-patched/nbd-server.c
-@@ -1583,6 +1583,7 @@ int expread(READ_CTX *ctx, CLIENT *client) {
-                                goto fail;
-                        }
-                        confirm_read(client, ctx, rdlen);
-+                       ctx->current_offset +=3D rdlen;
-                } else { /* the block is not there */
-                        if ((client->server->flags & F_WAIT) &&
-(client->export =3D=3D NULL)){
-                                DEBUG("Page %llu is not here, and
-waiting for file\n",
-
-
-Second patch:
-
-diff --git a/nbd-orig/nbd-server.c b/nbd-patched/nbd-server.c
-index 92fd141..9a57ad5 100644
---- a/nbd-orig/nbd-server.c
-+++ b/nbd-patched/nbd-server.c
-@@ -1669,7 +1669,7 @@ int expwrite(off_t a, char *buf, size_t len,
-CLIENT *client, int fua) {
-                                if(ret < 0 ) goto fail;
-                        }
-                        memcpy(pagebuf+offset,buf,wrlen) ;
--                       if (write(client->difffile, pagebuf,
-DIFFPAGESIZE) !=3D DIFFPAGESIZE)
-+                       if (pwrite(client->difffile, pagebuf,
-DIFFPAGESIZE, client->difmap[mapcnt]*DIFFPAGESIZE) !=3D DIFFPAGESIZE)
-                                goto fail;
-                }
-                if (!(client->server->flags & F_COPYONWRITE))
-
-
-Berend
-
---9eaffb7cc3902957a7a98ec6e210bdceb0a6e910934e03ad62b2dbbaa959
+T24gTW9uLCAyMDI1LTA1LTA1IGF0IDE4OjE5ICswMjAwLCBiZXJlbmQgd3JvdGU6Cj4gRmlyc3Qg
+cGF0Y2g6Cj4gCj4gZGlmZiAtLWdpdCBhL25iZC1vcmlnL25iZC1zZXJ2ZXIuYyBiL25iZC1wYXRj
+aGVkL25iZC1zZXJ2ZXIuYwo+IGluZGV4IDkyZmQxNDEuLmQxZDQ1YjIgMTAwNjQ0Cj4gLS0tIGEv
+bmJkLW9yaWcvbmJkLXNlcnZlci5jCj4gKysrIGIvbmJkLXBhdGNoZWQvbmJkLXNlcnZlci5jCj4g
+QEAgLTE1ODMsNiArMTU4Myw3IEBAIGludCBleHByZWFkKFJFQURfQ1RYICpjdHgsIENMSUVOVCAq
+Y2xpZW50KSB7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgZ290byBmYWlsOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgY29uZmlybV9yZWFkKGNsaWVudCwgY3R4LCByZGxlbik7Cj4gK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGN0eC0+Y3VycmVudF9vZmZz
+ZXQgKz0gcmRsZW47Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxzZSB7IC8q
+IHRoZSBibG9jayBpcyBub3QgdGhlcmUgKi8KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIGlmICgoY2xpZW50LT5zZXJ2ZXItPmZsYWdzICYgRl9XQUlUKSAm
+Jgo+IChjbGllbnQtPmV4cG9ydCA9PSBOVUxMKSl7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgREVCVUcoIlBhZ2UgJWxsdSBp
+cyBub3QgaGVyZSwgYW5kCj4gd2FpdGluZyBmb3IgZmlsZVxuIiwKCgouLi4gYW5kIEkgc3dhcHBl
+ZCB0aGUgbGluZXMsIHNvIEkgaGF2ZSB0byByZXNwb25kIHRvIG15IG93biBtYWlsIC4uLgoKZGlm
+ZiAtLWdpdCBhL25iZC1vcmlnL25iZC1zZXJ2ZXIuYyBiL25iZC1wYXRjaGVkL25iZC1zZXJ2ZXIu
+YwppbmRleCA5MmZkMTQxLi4xOGU1ZGRkIDEwMDY0NAotLS0gYS9uYmQtb3JpZy9uYmQtc2VydmVy
+LmMKKysrIGIvbmJkLXBhdGNoZWQvbmJkLXNlcnZlci5jCkBAIC0xNTgyLDYgKzE1ODIsNyBAQCBp
+bnQgZXhwcmVhZChSRUFEX0NUWCAqY3R4LCBDTElFTlQgKmNsaWVudCkgewogICAgICAgICAgICAg
+ICAgICAgICAgICBpZiAocHJlYWQoY2xpZW50LT5kaWZmZmlsZSwgYnVmLCByZGxlbiwgY2xpZW50
+LQo+ZGlmbWFwW21hcGNudF0qRElGRlBBR0VTSVpFK29mZnNldCkgIT0gcmRsZW4pIHsKICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBnb3RvIGZhaWw7CiAgICAgICAgICAgICAgICAgICAg
+ICAgIH0KKyAgICAgICAgICAgICAgICAgICAgICAgY3R4LT5jdXJyZW50X29mZnNldCArPSByZGxl
+bjsKICAgICAgICAgICAgICAgICAgICAgICAgY29uZmlybV9yZWFkKGNsaWVudCwgY3R4LCByZGxl
+bik7CiAgICAgICAgICAgICAgICB9IGVsc2UgeyAvKiB0aGUgYmxvY2sgaXMgbm90IHRoZXJlICov
+CiAgICAgICAgICAgICAgICAgICAgICAgIGlmICgoY2xpZW50LT5zZXJ2ZXItPmZsYWdzICYgRl9X
+QUlUKSAmJgooY2xpZW50LT5leHBvcnQgPT0gTlVMTCkpewoKCg==
+--bba985c1e4365eb34fade835b0f23dce6f20c19b61ea82a8097604b203dd
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="publickey - Berend De Schouwer -
  0x128CD671.asc"; name="publickey - Berend De Schouwer - 0x128CD671.asc"
@@ -265,9 +192,9 @@ WGcxWlBqSEo4TGo3Qms3RTJGN0YzVlUwSXFCSVVsc1J5eUJvMUs3SDdRT1pwdmJFeERRSgpnMWx4
 YlhhS1lrRFEwREdhb2FnT3pVYVo5ckxCdkpFNHo3QzBTZ3BjWFpaMHJuT3lkdm5GMGhCWG93djdX
 YkYrCmk0WlB5REJjM242OHJxcz0KPTlTWGwKLS0tLS1FTkQgUEdQIFBVQkxJQyBLRVkgQkxPQ0st
 LS0tLQ==
---9eaffb7cc3902957a7a98ec6e210bdceb0a6e910934e03ad62b2dbbaa959--
+--bba985c1e4365eb34fade835b0f23dce6f20c19b61ea82a8097604b203dd--
 
---------84c79caabcbe2db15b65db0f5c6707ddef25aa1596c386cb9406a4f6f891f9ca
+--------1f6e4b6d5ab22fecdd1672640de7fb6407a3c7f4e578be6aa9422e8119fe1466
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -275,23 +202,23 @@ Content-Disposition: attachment; filename="signature.asc"
 -----BEGIN PGP SIGNATURE-----
 Version: ProtonMail
 
-wsGpBAEBCABdBYJoGOUWCZDbbuBxk4Cg6TUUAAAAAAAcABBzYWx0QG5vdGF0
-aW9ucy5vcGVucGdwanMub3JnBWE7rTjB515wlBB+v7XP+xYhBBKM1nGLSON6
-q6UFAttu4HGTgKDpAAC56BAAuTmpJiwrBgZmal7e7NvEAxlnkk/Gq64CJu7+
-FbWAGTZ69I2F1FBD0QscqgEnUkKJQu6F6fCWFfyXOiO46FM+1TmgX3kUeIk1
-Qajd9BnA7X/9Va6vxc0eaJh0HE2SYt2GTeo65Zw9Qm3Y61bF1rmOw6aZpxdZ
-iYGioyj8j/C7XwbyXFfIAFy6UFiMz9ciySEWnftNp6wppCOcq8auOvZwsFYb
-4BvgmACgLil28BQnL1lqg7BAjhgl//cySekUOIL7fPk5JvgbQJZHJygYvKFJ
-nh2NN4YZUo2vS5rVSwalmXhOviN+Ea+LfdwqLZ2bDmlQVzH/BQvxoGtHKhO2
-Rv/ik5BrtIERGqm31XQ/v25FK0Rb3RQKgfzjKRT43DDcfTT2JjQr2eHoWIm8
-J+BgUnqTXUSHESb/7H//0/UgqNhvL9SWxp7ntUVP18CG7rPbwZ7NDUG8nwb9
-yNeETO4uR+7c1mR1JsHvz4cxUC3yGLdjqlMjua0jNXWl8rUN8HoBTUhXBFnu
-Hice/qreubnHJC+HTT8CEA0h89qXftxjS3AgS+jxQKT30IfTJw2//Vem0ZBB
-UunKEKXVXK3YPHvDDvXKAhsl67DC8cDn9tZguccYZUbc7UniVgiCQLwW2NFq
-o6lw34pZAP0FoTzgz3myljBtXBtCqtKntua2hbfvYadp9tU=
-=3uer
+wsGpBAEBCABdBYJoGOYKCZDbbuBxk4Cg6TUUAAAAAAAcABBzYWx0QG5vdGF0
+aW9ucy5vcGVucGdwanMub3JnHaUspD/2kz5WimZe9fmtHBYhBBKM1nGLSON6
+q6UFAttu4HGTgKDpAACbphAApCOk9N0DGqt9OL2gDZe65zWd938DeRqMLJlh
+UXVMdWukNejzkgLkEcxcIVaFqZVMMyGn/G4tV6BiYSgTiOXIfKca4Lz1QU+O
+krsrY5Xp2QtUNn+MDqJ00mSN1xns79zsyhHbIJFMDI4MDYOQiSPtF5uG10SQ
+gyhYsNDQ11qsN8431O2kUlCvOOlULOuzVIv4RdRvmGIACpmW1tTgCAqlQg/K
+5BMwexfBItzVnfLvr1Cy2CZujH7CHfzDb7jAF/eqtZx6oVJtwrjS7WxO4ORs
+OcfmOfWZkxjeYOErsksetCGm2B5FxeHA0yTJxNYckp0EvUfpgHPF3FZn/bTj
+SvUlTyBs885rZ0HVejIH2M6lUJDLPq4KXh/w+eO5zfWehVTJkzTaR1j+cAuL
+X0tgJq5uUPtyzZbZDcuIqNvQKCQGmRbiJao6Q1lYk0l9YZghWfzjgcPh3Qkn
+yu2AOSL8qFmRcTu2Aqg4fV92hPmBBFYi7CU1l7ilHscqOQXFdeDjqT+1Vi4M
+3trLrRN1UvFkd2JGX+z0N5TJxVwubCalsITr5x1d5zFKRsp+DegRQFryzxq3
+PvaTbWjy5ROZtITrxHb9u/jlXk1W5yf5XvNao7vUwd8e5Odio2Ll3VYqTGu8
+8UNMGhS3MgEk/m0W7BzCOB1ByWv3akypoZ2xOXHacvl7Zt8=
+=YXlu
 -----END PGP SIGNATURE-----
 
 
---------84c79caabcbe2db15b65db0f5c6707ddef25aa1596c386cb9406a4f6f891f9ca--
+--------1f6e4b6d5ab22fecdd1672640de7fb6407a3c7f4e578be6aa9422e8119fe1466--
 
