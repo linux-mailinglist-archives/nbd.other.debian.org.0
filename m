@@ -2,83 +2,192 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8781DAB47C4
-	for <lists+nbd@lfdr.de>; Tue, 13 May 2025 01:03:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5424ABFEF9
+	for <lists+nbd@lfdr.de>; Wed, 21 May 2025 23:33:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5D48420576; Mon, 12 May 2025 23:03:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon May 12 23:03:12 2025
-Old-Return-Path: <3BHoiaAkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
+	id A5FDF20B4A; Wed, 21 May 2025 21:33:13 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed May 21 21:33:13 2025
+Old-Return-Path: <prvs=229f646d3=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.5 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
-	FVGT_m_MULTI_ODD,HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,
-	RCVD_IN_MSPIKE_H2,RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED,TO_TOO_MANY,WORD_WITHOUT_VOWELS
-	autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	SARE_MSGID_LONG45,SARE_MSGID_LONG50 autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C15D22052C
-	for <lists-other-nbd@bendel.debian.org>; Mon, 12 May 2025 22:45:39 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 221F620B30
+	for <lists-other-nbd@bendel.debian.org>; Wed, 21 May 2025 21:15:59 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.23 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, FOURLA=0.1, FROM_LOCAL_HEX=0.006,
-	FVGT_m_MULTI_ODD=0.02, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
-	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
+X-Amavis-Spam-Status: No, score=-0.889 tagged_above=-10000 required=5.3
+	tests=[BAYES_40=-0.01, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
 	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, TO_TOO_MANY=1, URIBL_SBL_A=0.1,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SARE_MSGID_LONG45=0.893,
+	SARE_MSGID_LONG50=0.726] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id 1LvLJ5KVg06W for <lists-other-nbd@bendel.debian.org>;
-	Mon, 12 May 2025 22:45:33 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-il1-f207.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
-Received: from mail-il1-f207.google.com (mail-il1-f207.google.com [209.85.166.207])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 0F7D920515
-	for <nbd@other.debian.org>; Mon, 12 May 2025 22:45:27 +0000 (UTC)
-Received: by mail-il1-f207.google.com with SMTP id e9e14a558f8ab-3da731b7df8so48709155ab.1
-        for <nbd@other.debian.org>; Mon, 12 May 2025 15:45:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747089924; x=1747694724;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=hqbhKFiX0gkaWgzt5g7mGnx9EKqaLGog2TNAwQZBVGM=;
-        b=OlCfwxa2MlL5GccIv00xhPr7kEsdMcRJfQdFPhg6a8Zfne9IxOu/HVO+yXcSwrBcPf
-         e04vV0LDjdmRYp3LI7ofs1vOYoHJZUYCDJN37PGwLc0vrwwvDSu1FbEpi29lIuMRXAlB
-         1kXB/Ole5L+nVgy+Ya3ish9laKt6sKBxFL6FGIOi8ypRqFBi+/WQzLzu/rBXcOV6HRo4
-         Tz8GT2L/FaCavz6RpG3bK6pXurdubzSZLg4iTrdCcquiUcpAqj1eSkgH0ny8kte++UvT
-         Jlzt6gDVvYFCq/uYLVRLAwu+o28Si77VE7n5RmCcPxcxDM93O6DutZ0uACf+g2OVJNyt
-         j69Q==
-X-Forwarded-Encrypted: i=1; AJvYcCXw3PXVrDQgoLtG/OWka5ZSQwa7lEvrnhWkyoj3xLSADT2WL6JGlKTCjHH/3wsCHZQO2LA=@other.debian.org
-X-Gm-Message-State: AOJu0YykYmoW6kg5V1jV6gV9kkUYyu5k62fqudPZOWM5O+AcozCT+qR/
-	3Lgs/VX5/gjRn0c0HVfng4zNZsuGIjkZYKd9TIIHgjqQqOLx3aX57t7vDCtcthYOmwdQ152gRji
-	QPY+zByUW9tAi0CRGONwR2aNVTxs7eUAAobliq4dZMrjCSx+awMsecEU=
-X-Google-Smtp-Source: AGHT+IEwmwUiXthAE0Eb4/SyWnRzE1nYBkFptOFOiTynfSoqxDq5YXpRpAGxRrkepKJ1TPB79Fc2ZO+VeHWofvsDAammt/5RywVx
+	with ESMTP id 9becd87yr7rb for <lists-other-nbd@bendel.debian.org>;
+	Wed, 21 May 2025 21:15:55 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 438 seconds by postgrey-1.36 at bendel; Wed, 21 May 2025 21:15:54 UTC
+Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id B9D1220B2E
+	for <nbd@other.debian.org>; Wed, 21 May 2025 21:15:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1747862154; x=1779398154;
+  h=from:to:subject:date:message-id:content-id:
+   content-transfer-encoding:mime-version;
+  bh=VRGSvXFr24b1p0+bA4eijRSBeznJQFt1J6YZMY90Ht8=;
+  b=IctpbEK3PVvvwRbPPsnYcaO0gTCf08/En1g1Mr/V9epxE80TZ0UEugfy
+   QkH6etahTYUywhd5qRkXhUekPVcGIKc8ZggeWcrQJ2qaTpQaUfouQ/sH5
+   PfcxdKvtYJs3JXpxLIw+fEJOAtD176dArfAAJTEWieWzETHy4iDOGFevj
+   lnsXwGiYdlgUkpBXkCZOJdEIX3HDIxjLDj4jEK400BmHexB2H+1QAa88/
+   shLu+vbTgzfzGqYQHGACmGMy7e7mRmaidgovNtX7kfZyvcyO2NwaWxDO9
+   FzyhI3pkSni+boIdus74oYjxba4cFWvhHU4zkZkrvz5qk57MsVqlLp3dY
+   Q==;
+X-CSE-ConnectionGUID: HDmNOXTjSzOclgecJZGyyw==
+X-CSE-MsgGUID: cXWL3w5VTWy2h50vLgZlJA==
+X-IronPort-AV: E=Sophos;i="6.15,304,1739808000"; 
+   d="scan'208";a="82189951"
+Received: from mail-co1nam11lp2177.outbound.protection.outlook.com (HELO NAM11-CO1-obe.outbound.protection.outlook.com) ([104.47.56.177])
+  by ob1.hgst.iphmx.com with ESMTP; 22 May 2025 05:08:31 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gUsmdlL76x7PXODxTqlka6W3RBNLnn8n0ENFM5n2HKCuX7MNB8UF8Zqo0swNe3PaoKMOrm8RLwzRpOz2AY7nJjNb4n3Z55sbVZMbKGpev+IholXapRqZr7w6Tjp3GBokNa3EdUUw1OWopC030hDroTObab9hCmOGg6ePdAlDGghpJ1XVlMTYpnYo3W3HlQaa4ETYG/bWhywiIlX8x2++g+2zi0oLg2xBMvH4DwLfwpzvhIQmdIXPgmzorTX5Ui2cJgnWLmj7QlWw/LRkc4fKnLEx6EQ+/4PypHPXXrPWBQvm6R8tIapXQhb9hEXjJIuHEFWz9cYOBOYfEa/vqsdQUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k7qkFDXAucTi4Y9JjWmEbLAclcjvIkmn+WFX/gQ+z2w=;
+ b=uoOKuo8iLlMzOGgAWs1wh7/WohmULzOBI47EvpAEREnvJT1uU/xXUpZM2MGSQP9Jj3dcu6KruWSm3GgHb43UmtuI83XSL8Zir6vH3lgXrvttZyMX78B6T7iI2Pl3ga9YSuBnvzuioIwi1wnglUmk7hfMIRe57K8w9ytUQXWHwSWIxE+cBUqBd2cCeHKR85C+nbhmSzGSQzIluQ+GkbHciQvM4okwAzGmjroZISKR8HGRZ39ZnSVwra2q+uyaiNuquVT75yIoFyM198zGplKiVinRDG+mrmXBB6QXdYpqYTBevx8REGcHg83ESnpSf087CGpzOrYlopxhUu2b1ZrVAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k7qkFDXAucTi4Y9JjWmEbLAclcjvIkmn+WFX/gQ+z2w=;
+ b=n5QyATp3ZTTsyKwUvv4rVkb+auixjwcuEhBm8q/R8se9icJa5p2R/iaHcE9Rpmwbh9pSKuV9Ubak8Ek6vd79fyRaPqDvyYRifeThWrztMgbrZVtDIkwI+fvGB5JJoP5l/iZiad/6fdtqWkoxo3b2yCSO+qFSqzmOhG0jZkkhXVI=
+Received: from SN7PR04MB8532.namprd04.prod.outlook.com (2603:10b6:806:350::6)
+ by SA1PR04MB9020.namprd04.prod.outlook.com (2603:10b6:806:37b::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.20; Wed, 21 May
+ 2025 21:08:30 +0000
+Received: from SN7PR04MB8532.namprd04.prod.outlook.com
+ ([fe80::4e14:94e7:a9b3:a4d4]) by SN7PR04MB8532.namprd04.prod.outlook.com
+ ([fe80::4e14:94e7:a9b3:a4d4%5]) with mapi id 15.20.8746.030; Wed, 21 May 2025
+ 21:08:29 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
+Subject: [ANNOUNCE] blktests repoistory move
+Thread-Topic: [ANNOUNCE] blktests repoistory move
+Thread-Index: AQHbypSA/Tc20EMek0i3PG4ZJvL8AA==
+Date: Wed, 21 May 2025 21:08:29 +0000
+Message-ID: <rl6mkqchfjfzylyrfie7d52gxetnvh6r2wpgwi3pflbl3v3duf@cjielnfb5rht>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR04MB8532:EE_|SA1PR04MB9020:EE_
+x-ms-office365-filtering-correlation-id: 4bfaae8d-d982-4a67-e579-08dd98aba2f1
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?I80GZkA3mwr1goThqhkr9WrIpPSKb59AbDv4eZDnA9dlAqjPEvvan0attWfk?=
+ =?us-ascii?Q?llTnui/oAan7DoGNVdJv2Or3x6uq2dqZFyC4+qVCFQpd8YmVmf4KVbpVH+BF?=
+ =?us-ascii?Q?f2d6DsiGkSTYO0O6e6Q1qvigGXPg4AawJObRYdynUnVtWWTqF38gIxEcLfvu?=
+ =?us-ascii?Q?aj6ijC8VddN9QWdLJuZNIQCBaP5nIAdb0IFskO5BYxStrsuGeI8QdsBBj1OD?=
+ =?us-ascii?Q?YLv36aQMzZXv/t+fFbHQM1/EWZgr2NXtDV/mYPnWVSjSWVf3y3NHa1o2OvVk?=
+ =?us-ascii?Q?UbzoJuaFxevn9vbLV8BGdzqsuc1kAuhqCE19GhWUkef8Il1LOoItak012Zg/?=
+ =?us-ascii?Q?eao2oX8iqPjB2sK+UYc8P46GtdKhF5SVFdOZMlMHNDkC+P4dmTgWCNfJpLIK?=
+ =?us-ascii?Q?NR77hR1vsr3LxM01iN6clTxidrCt4pH7wGtBVyDEnIUneD2Kh6gNpe5n7iFp?=
+ =?us-ascii?Q?O9cAc3Cf3vdZxmLIOsaqns5cOIRVYztByUPQGfO1ZKVJd/aHDtjEeLfm73bb?=
+ =?us-ascii?Q?dYX/lq9a/YFhMSgoa/ZZO2KB1JFImA41DeaHkN5EDIpwxsHADxuj9ioLOUjQ?=
+ =?us-ascii?Q?9WMbTO2ztVE0Rq0mpuJC8C3HgTYGJh4ZogyLFnr70pah0EJi4nBYV2oqDfSm?=
+ =?us-ascii?Q?8cqePHBjhddVHEvV213m2+rBVAbRmCEPHb38hkqOBueYCVPZme+o02vypUh5?=
+ =?us-ascii?Q?E51YdNTDutR3iF3b/1HQOJ0WOPNewBZsStA2HrHaMzSaifuD4lHNMArBslKe?=
+ =?us-ascii?Q?0HYcV58UCZatzMT6XEWR8eEBWQWXE7nadAydUGsrAEGabz0qKhAG/cvfQ7up?=
+ =?us-ascii?Q?5P2mDHsU7CQAs3Niq1TYFVksQOAG54gnGPRzQKZsnTS6Iu/MldZEpTYRCLSQ?=
+ =?us-ascii?Q?NdE3j6mydXlErG5chK5cJ9omeHHSDmeGi/UeC/67Mm71BN5YJv2ElIYXUIr1?=
+ =?us-ascii?Q?wcckDVcRcw8fQJdW6U4rBeHzX22+Z74IIOgKfpaDhW8OBM1CrwEfnmrPkvKD?=
+ =?us-ascii?Q?l/K3ATZ1ZIsej6MAgGisMfyrXrKtt73/OQGwdnlB9xFjoNDfNBHg7cPJ0lSZ?=
+ =?us-ascii?Q?lZXhCpnTL2ve3DlHQi2jyOZl2SlzjRMOKPKCmA6LlRtexaLXrRV5dDOHNf4R?=
+ =?us-ascii?Q?iOWLnWF0vvWG8CWn2zrnSvAE313guRIyd7zwzeZz2LISWIsW0c4wSaa4wlpm?=
+ =?us-ascii?Q?IDpkCaieBRZbf2f9XI9zvGYrpdrr3LYEvvR2jt7td3UJ5/rNjjylvJvy8gbk?=
+ =?us-ascii?Q?sizIZH6dzBZcMpGyaDTFi981H0MmZaXNTNh9iej5k0YopqcH4aMR0wlm2KkV?=
+ =?us-ascii?Q?TLU+GZkoWUpMnJpoRg8WFqALdrJDXJBEgRSCZA7JHg505HqGkUm5oJEDev17?=
+ =?us-ascii?Q?qnaS9JUqRz3a6PzcGjnOzKR7n9+0ar5qe/RWPX8izXXd+CZUgif+o7O/Ui8g?=
+ =?us-ascii?Q?BdZoF5d2ldLJMnObTmyr9/uiiPl8s/uG?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR04MB8532.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?cfL7PH3xzUaMsDOc13+KyLpOflxijRrf4FXHVeFJaCh2gj2PbBvxtqGD864R?=
+ =?us-ascii?Q?DoInZG/AdDnRgGy7d/CTczQ0bclrHl1CwRRMCGQu0F7MSljDQJuDlyNSlbr2?=
+ =?us-ascii?Q?QTus6n9YxgZLGL02s0aZkaY8ok+zMi/QBc73ueIkUXez+NTq4MyakSqDRBg6?=
+ =?us-ascii?Q?gasOMEsXAxF2AHjg7c2O4B3sGnbE6rKHCWhTciJVK7hBR1rvaR7KqrdWorDj?=
+ =?us-ascii?Q?x7KdtQKmI8fi+F7h2Ez5bGvGKxho1pnAaK/rGBqt3dfvpbY0xBEUg72xTRqu?=
+ =?us-ascii?Q?Df6V+37mx5bdgBR8PIGEXHwAkr4tOrbD2zMguI+KMDAmxOvpiPsA3jSMvfAh?=
+ =?us-ascii?Q?NJasvsIl9ye9dQFjjRFdRnYOr06/D1yod2NAMPfnCGfCijN3/Gjk0R8WJHN2?=
+ =?us-ascii?Q?y4eaisgfRbM05jWSUcfJMOXC5x8kdUmg3ybi9CL2tCu1kyo/gwP3EztAX4LC?=
+ =?us-ascii?Q?gwDlsxcYR6n1p/Je640ItNb2CVX/UXawiX/qDgXUTLuepxV2ghMUMiEYAlOZ?=
+ =?us-ascii?Q?qncexkiT2mlLddN8ML5kvyrT32H7v5mU77x+y2tfa0kQFbho1HpxguvEEsV7?=
+ =?us-ascii?Q?IXSUq/A+shyKF1kw0ttoHc+V2vo9MqPxf8rkKJUP6+JFwFL7vxP9qilX8G1s?=
+ =?us-ascii?Q?PVIqSPc2irZpfejPX7OFngmJ1XvreNNtOVsJJ3Xp6wNe57wul0z9GeCM0kmL?=
+ =?us-ascii?Q?6LFW+RrmaUOuS9dPRzKPisO+SpTMY+tmAQyJdfBo/y3rTHsTMTuBGYzamkxl?=
+ =?us-ascii?Q?u4DcRtIVgpShHJcxTY+RY8lwXfRNnTTmToo8oI8MDcKcBzScpi9dqf8c+RgO?=
+ =?us-ascii?Q?bOHnh5lhrwGj9l47m/dh423mN8bYrf5TSKfzwfWc4CIGNGl2Oj1xNweCinqb?=
+ =?us-ascii?Q?qREzRrnxDYrhhCFTkxt9sJle4oRdsBHhFJdT6eBtozyf60CqKlRKRYrcHOZB?=
+ =?us-ascii?Q?O7GiQaE10+NwWDJt3/pBEnvzvq3WZYUNXidcXBL+CkU26CL25yOQbUYm5XFb?=
+ =?us-ascii?Q?BupsgmZePWOswqRUkIST5Ra+fbCpSgFYrTecUXMOUf0sypmheuJpVjBhZklA?=
+ =?us-ascii?Q?sEzNeImlQn4pBCv9XLDpq12L3/iFdD0PbFB125CymqKkWrskSfpXb3Mj0RaH?=
+ =?us-ascii?Q?vGJC16K51fro9YHb9lfdtmrTdF+WYWQPd/5GLrBH5DiDECXQyL0llscURg+Y?=
+ =?us-ascii?Q?+seW5Fe74Dn8HOlJlFUlDyykLxd5GRDneP2bZ4Rx+FbmN4fnWMGZNx5+XjY/?=
+ =?us-ascii?Q?VbQZdIhN2vThYBq+D/kZOXek65RBPi24+6UpJ57+x6TIb56IOdvTGrbS3TaT?=
+ =?us-ascii?Q?3GbgC4UBNzHOV/CZq5Y7b/EKLLeromJpVogxRD69PYwzC7xDqhwcYgXqzc+6?=
+ =?us-ascii?Q?Qrt9uEjlo/JGaPTVytJPWSDRRuHM0LZBcTF1Dy6EMcgRDktsF1YV3/cOuXQv?=
+ =?us-ascii?Q?827t/lM6+ERxKZpVKLc6aTDUV5I+tiWDsBpZm+J60NUPbnQ6/tVs0SGvXVAA?=
+ =?us-ascii?Q?l8aUPUdK5rXEKvdGXUWpjvgeTtFPCsyCk5JihW2t9CZRzIGxyiX154QUYq4T?=
+ =?us-ascii?Q?yDvhpv4DIDBX8jtOyHkuo5jyeNmkos+NVwTSw3ddEvi0GZE4Yq2BxGbOPGmq?=
+ =?us-ascii?Q?tkfacOx42mwIXPWiqGFxLB4=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <433BD22693C3AB4FAEE35EDB67ABF90C@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:3b09:b0:3d3:fa69:6755 with SMTP id
- e9e14a558f8ab-3db663b8eb2mr14244235ab.5.1747089924226; Mon, 12 May 2025
- 15:45:24 -0700 (PDT)
-Date: Mon, 12 May 2025 15:45:24 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <68227a04.050a0220.f2294.00b5.GAE@google.com>
-Subject: [syzbot] [nbd?] KASAN: slab-use-after-free Write in recv_work (2)
-From: syzbot <syzbot+48240bab47e705c53126@syzkaller.appspotmail.com>
-To: axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
-	syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	/e+Ru0N8VZ/aQIYLruUwm8FfNLOrV0ivAgYA+tzU+5NsqcZOdrvk3Wre10pqbr9GKAhMeZYpf0KXKCi9GWJ/hOaKUCXV0FiU0JK+y31zqlLojMBKmMVAWR/Fs7ElFJC1gCuNlxkQYH0zk22EAk6mGYdJ3TXAyEbI5Hkv3REwJnKmR/QAkfF1N/wQuGrAsiADzXbDgimreJU/ppArkMznE890ZF+Qf+X9VpsZaInXQ+788zT2F9MoIEx8U0L0+MMuI0RBLlrsF+mzEpA1xvWOvhLkndHo5dB9/9hnnGtcKBrQcgwEkUGnibDko3GH3r5e7iayeZjRt3zyMLqzHbXbgVnR5Yp6NHtEvLHGkuTGirBz+9ZUK/UliUUkn1O7mm3piRaLnvep11GakfFNSI4Uw+rYoJpv4UAwaBxwSyi+4XxQgdFYmXWzDhddKMh68sTACU0YSvsmzT5XvLG9Z7BN8uk1sYWLul32DZBUPyOKN11alAHYOCQxxegWaJ0IJv281+GbmzKyggG9mS7WyS5wFOyH0iwB6mVbROV0pZaDJ1HMBzU0h5gmlIL1HInfOJMa+NxpdjSJby1mE3tUexwfcEfiIYz5anhCYntNRS/3hh3f0A4UhJj6lgCNt93ryz54
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR04MB8532.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4bfaae8d-d982-4a67-e579-08dd98aba2f1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 May 2025 21:08:29.5744
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: B4dUejiOJUlTFBJ7UWLw/y1TjRaD7L7/wKDpFyY2mlXz2wTqcJsNbxSNOUo0uAleSfudySvAtOZndL+zXEphRAn7lSMvMovzxzt6QOYnXPk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR04MB9020
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <7DX26GYX06K.A.RsiO.w4nIoB@bendel>
+Resent-Message-ID: <VENAKWoxMJF.A.vc8L.ZakLoB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3376
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3377
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -88,187 +197,29 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/68227a04.050a0220.f2294.00b5.GAE@google.com
-Resent-Date: Mon, 12 May 2025 23:03:12 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/rl6mkqchfjfzylyrfie7d52gxetnvh6r2wpgwi3pflbl3v3duf@cjielnfb5rht
+Resent-Date: Wed, 21 May 2025 21:33:13 +0000 (UTC)
 
-Hello,
+Hello all,
 
-syzbot found the following issue on:
+FYI, as a preparation to set up blktests CI, we are going to move the blkte=
+sts
+repository,
 
-HEAD commit:    2c89c1b655c0 Merge tag 'net-6.15-rc6' of git://git.kernel...
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=10a38768580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=b39cb28b0a399ed3
-dashboard link: https://syzkaller.appspot.com/bug?extid=48240bab47e705c53126
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=154bd4f4580000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1578c670580000
+ from: https://github.com/osandov/blktests
+ to:   https://github.com/linux-blktests/blktests
 
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/d900f083ada3/non_bootable_disk-2c89c1b6.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/597b69724951/vmlinux-2c89c1b6.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/ff3b903b9d6f/bzImage-2c89c1b6.xz
+The move is planned early next week, around May/27.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+48240bab47e705c53126@syzkaller.appspotmail.com
+The move will be served by the GitHub repository transfer feature [1], so n=
+o
+impact is expected for blktests users. Old repository addresses should be u=
+sable
+after the move since they are redirected to the new repository. Just to avo=
+id
+confusion, it is recommended to update the remote URLs in your local clones
+after the move.
 
-block nbd6: Receive control failed (result -104)
-block nbd6: shutting down sockets
-==================================================================
-BUG: KASAN: slab-use-after-free in instrument_atomic_read_write include/linux/instrumented.h:96 [inline]
-BUG: KASAN: slab-use-after-free in atomic_dec include/linux/atomic/atomic-instrumented.h:592 [inline]
-BUG: KASAN: slab-use-after-free in recv_work+0x694/0xa80 drivers/block/nbd.c:1022
-Write of size 4 at addr ffff8880295de478 by task kworker/u33:0/67
-
-CPU: 2 UID: 0 PID: 67 Comm: kworker/u33:0 Not tainted 6.15.0-rc5-syzkaller-00123-g2c89c1b655c0 #0 PREEMPT(full) 
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-Workqueue: nbd6-recv recv_work
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:94 [inline]
- dump_stack_lvl+0x116/0x1f0 lib/dump_stack.c:120
- print_address_description mm/kasan/report.c:408 [inline]
- print_report+0xc3/0x670 mm/kasan/report.c:521
- kasan_report+0xe0/0x110 mm/kasan/report.c:634
- check_region_inline mm/kasan/generic.c:183 [inline]
- kasan_check_range+0xef/0x1a0 mm/kasan/generic.c:189
- instrument_atomic_read_write include/linux/instrumented.h:96 [inline]
- atomic_dec include/linux/atomic/atomic-instrumented.h:592 [inline]
- recv_work+0x694/0xa80 drivers/block/nbd.c:1022
- process_one_work+0x9cc/0x1b70 kernel/workqueue.c:3238
- process_scheduled_works kernel/workqueue.c:3319 [inline]
- worker_thread+0x6c8/0xf10 kernel/workqueue.c:3400
- kthread+0x3c2/0x780 kernel/kthread.c:464
- ret_from_fork+0x45/0x80 arch/x86/kernel/process.c:153
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
- </TASK>
-
-Allocated by task 5940:
- kasan_save_stack+0x33/0x60 mm/kasan/common.c:47
- kasan_save_track+0x14/0x30 mm/kasan/common.c:68
- poison_kmalloc_redzone mm/kasan/common.c:377 [inline]
- __kasan_kmalloc+0xaa/0xb0 mm/kasan/common.c:394
- kmalloc_noprof include/linux/slab.h:905 [inline]
- kzalloc_noprof include/linux/slab.h:1039 [inline]
- nbd_alloc_and_init_config+0x97/0x2a0 drivers/block/nbd.c:1659
- nbd_genl_connect+0x490/0x1c20 drivers/block/nbd.c:2121
- genl_family_rcv_msg_doit+0x206/0x2f0 net/netlink/genetlink.c:1115
- genl_family_rcv_msg net/netlink/genetlink.c:1195 [inline]
- genl_rcv_msg+0x55c/0x800 net/netlink/genetlink.c:1210
- netlink_rcv_skb+0x16a/0x440 net/netlink/af_netlink.c:2534
- genl_rcv+0x28/0x40 net/netlink/genetlink.c:1219
- netlink_unicast_kernel net/netlink/af_netlink.c:1313 [inline]
- netlink_unicast+0x53a/0x7f0 net/netlink/af_netlink.c:1339
- netlink_sendmsg+0x8d1/0xdd0 net/netlink/af_netlink.c:1883
- sock_sendmsg_nosec net/socket.c:712 [inline]
- __sock_sendmsg net/socket.c:727 [inline]
- ____sys_sendmsg+0xa95/0xc70 net/socket.c:2566
- ___sys_sendmsg+0x134/0x1d0 net/socket.c:2620
- __sys_sendmsg+0x16d/0x220 net/socket.c:2652
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xcd/0x260 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-
-Freed by task 67:
- kasan_save_stack+0x33/0x60 mm/kasan/common.c:47
- kasan_save_track+0x14/0x30 mm/kasan/common.c:68
- kasan_save_free_info+0x3b/0x60 mm/kasan/generic.c:576
- poison_slab_object mm/kasan/common.c:247 [inline]
- __kasan_slab_free+0x51/0x70 mm/kasan/common.c:264
- kasan_slab_free include/linux/kasan.h:233 [inline]
- slab_free_hook mm/slub.c:2380 [inline]
- slab_free mm/slub.c:4642 [inline]
- kfree+0x2b6/0x4d0 mm/slub.c:4841
- nbd_config_put+0x3c1/0x750 drivers/block/nbd.c:1449
- recv_work+0x681/0xa80 drivers/block/nbd.c:1021
- process_one_work+0x9cc/0x1b70 kernel/workqueue.c:3238
- process_scheduled_works kernel/workqueue.c:3319 [inline]
- worker_thread+0x6c8/0xf10 kernel/workqueue.c:3400
- kthread+0x3c2/0x780 kernel/kthread.c:464
- ret_from_fork+0x45/0x80 arch/x86/kernel/process.c:153
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
-
-The buggy address belongs to the object at ffff8880295de400
- which belongs to the cache kmalloc-256 of size 256
-The buggy address is located 120 bytes inside of
- freed 256-byte region [ffff8880295de400, ffff8880295de500)
-
-The buggy address belongs to the physical page:
-page: refcount:0 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x295de
-head: order:1 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
-anon flags: 0xfff00000000040(head|node=0|zone=1|lastcpupid=0x7ff)
-page_type: f5(slab)
-raw: 00fff00000000040 ffff88801b442b40 0000000000000000 dead000000000001
-raw: 0000000000000000 0000000000100010 00000000f5000000 0000000000000000
-head: 00fff00000000040 ffff88801b442b40 0000000000000000 dead000000000001
-head: 0000000000000000 0000000000100010 00000000f5000000 0000000000000000
-head: 00fff00000000001 ffffea0000a57781 00000000ffffffff 00000000ffffffff
-head: ffffffffffffffff 0000000000000000 00000000ffffffff 0000000000000002
-page dumped because: kasan: bad access detected
-page_owner tracks the page as allocated
-page last allocated via order 1, migratetype Unmovable, gfp_mask 0xd20c0(__GFP_IO|__GFP_FS|__GFP_NOWARN|__GFP_NORETRY|__GFP_COMP|__GFP_NOMEMALLOC), pid 1, tgid 1 (swapper/0), ts 13520876544, free_ts 0
- set_page_owner include/linux/page_owner.h:32 [inline]
- post_alloc_hook+0x181/0x1b0 mm/page_alloc.c:1718
- prep_new_page mm/page_alloc.c:1726 [inline]
- get_page_from_freelist+0x135c/0x3920 mm/page_alloc.c:3688
- __alloc_frozen_pages_noprof+0x263/0x23a0 mm/page_alloc.c:4970
- alloc_pages_mpol+0x1fb/0x550 mm/mempolicy.c:2301
- alloc_slab_page mm/slub.c:2450 [inline]
- allocate_slab mm/slub.c:2618 [inline]
- new_slab+0x244/0x340 mm/slub.c:2672
- ___slab_alloc+0xd9c/0x1940 mm/slub.c:3858
- __slab_alloc.constprop.0+0x56/0xb0 mm/slub.c:3948
- __slab_alloc_node mm/slub.c:4023 [inline]
- slab_alloc_node mm/slub.c:4184 [inline]
- __do_kmalloc_node mm/slub.c:4326 [inline]
- __kmalloc_noprof+0x2f2/0x510 mm/slub.c:4339
- kmalloc_noprof include/linux/slab.h:909 [inline]
- kzalloc_noprof include/linux/slab.h:1039 [inline]
- rh_call_control drivers/usb/core/hcd.c:491 [inline]
- rh_urb_enqueue drivers/usb/core/hcd.c:821 [inline]
- usb_hcd_submit_urb+0x5cf/0x1c60 drivers/usb/core/hcd.c:1529
- usb_submit_urb+0x87c/0x1730 drivers/usb/core/urb.c:581
- usb_start_wait_urb+0x104/0x4b0 drivers/usb/core/message.c:59
- usb_internal_control_msg drivers/usb/core/message.c:103 [inline]
- usb_control_msg+0x326/0x4a0 drivers/usb/core/message.c:154
- usb_get_string+0xab/0x1a0 drivers/usb/core/message.c:844
- usb_string_sub+0x107/0x390 drivers/usb/core/message.c:883
- usb_string+0x307/0x670 drivers/usb/core/message.c:988
- usb_cache_string+0x80/0x150 drivers/usb/core/message.c:1030
-page_owner free stack trace missing
-
-Memory state around the buggy address:
- ffff8880295de300: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
- ffff8880295de380: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
->ffff8880295de400: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
-                                                                ^
- ffff8880295de480: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
- ffff8880295de500: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
-==================================================================
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+[1] https://docs.github.com/en/repositories/creating-and-managing-repositor=
+ies/transferring-a-repository=
 
