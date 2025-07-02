@@ -1,98 +1,81 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C4A4AF0CF0
-	for <lists+nbd@lfdr.de>; Wed,  2 Jul 2025 09:48:16 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 25028AF59F6
+	for <lists+nbd@lfdr.de>; Wed,  2 Jul 2025 15:48:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B4F022054A; Wed,  2 Jul 2025 07:48:15 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jul  2 07:48:15 2025
-Old-Return-Path: <yukuai1@huaweicloud.com>
+	id 757A920571; Wed,  2 Jul 2025 13:48:15 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Jul  2 13:48:15 2025
+Old-Return-Path: <37jRlaAkbADclrsdTeeXkTiibW.ZhhZeXnlXkVhgmXgm.Vhf@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=4.0 tests=CC_TOO_MANY,FOURLA,
-	NICE_REPLY_A,RCVD_IN_DNSWL_MED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
+	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED,
+	URIBL_SBL_A autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D74AA2052A
-	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jul 2025 07:31:09 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id C24F620566
+	for <lists-other-nbd@bendel.debian.org>; Wed,  2 Jul 2025 13:32:44 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.899 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, CC_TOO_MANY=3, FOURLA=0.1,
-	NICE_REPLY_A=-1.201, RCVD_IN_DNSWL_MED=-2.3,
+X-Amavis-Spam-Status: No, score=-1.89 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, FROM_LOCAL_HEX=0.006,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_MSPIKE_H2=0.001,
 	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
 	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Y3WBX8lQHX9L for <lists-other-nbd@bendel.debian.org>;
-	Wed,  2 Jul 2025 07:31:02 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com [45.249.212.56])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id D021E2050C
-	for <nbd@other.debian.org>; Wed,  2 Jul 2025 07:31:01 +0000 (UTC)
-Received: from mail.maildlp.com (unknown [172.19.93.142])
-	by dggsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4bXBQV0lSszKHMqY
-	for <nbd@other.debian.org>; Wed,  2 Jul 2025 15:30:58 +0800 (CST)
-Received: from mail02.huawei.com (unknown [10.116.40.252])
-	by mail.maildlp.com (Postfix) with ESMTP id 7EFD31A121E
-	for <nbd@other.debian.org>; Wed,  2 Jul 2025 15:30:56 +0800 (CST)
-Received: from [10.174.179.143] (unknown [10.174.179.143])
-	by APP3 (Coremail) with SMTP id _Ch0CgAHaCUs4GRo5NyXAQ--.46013S3;
-	Wed, 02 Jul 2025 15:30:54 +0800 (CST)
-Subject: Re: [PATCH] nbd: fix false lockdep deadlock warning
-To: Nilay Shroff <nilay@linux.ibm.com>, Ming Lei <ming.lei@redhat.com>,
- Yu Kuai <yukuai1@huaweicloud.com>
-Cc: josef@toxicpanda.com, axboe@kernel.dk, hch@infradead.org, hare@suse.de,
- linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org, yi.zhang@huawei.com, yangerkun@huawei.com,
- johnny.chenyi@huawei.com, "yukuai (C)" <yukuai3@huawei.com>
-References: <20250627092348.1527323-1-yukuai1@huaweicloud.com>
- <aF56oVEzTygIOUTN@fedora>
- <c2fbaacc-62a1-4a98-4157-2637b7f242b7@huaweicloud.com>
- <197b6dca-56be-438d-a60f-21011367c5ed@linux.ibm.com>
- <99b4afce-de05-ddcb-2634-b19214cf4534@huaweicloud.com>
- <aGSaVhiH2DeTvtdr@fedora>
- <7b09167f-bf8d-4d94-9317-3cfbb4f83cd8@linux.ibm.com>
-From: Yu Kuai <yukuai1@huaweicloud.com>
-Message-ID: <bc3f20c3-21f8-443b-619f-da7569b37aaf@huaweicloud.com>
-Date: Wed, 2 Jul 2025 15:30:52 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.1
+	with ESMTP id mVrb3uIXTY8h for <lists-other-nbd@bendel.debian.org>;
+	Wed,  2 Jul 2025 13:32:37 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-il1-f200.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
+Received: from mail-il1-f200.google.com (mail-il1-f200.google.com [209.85.166.200])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id BFD32204CC
+	for <nbd@other.debian.org>; Wed,  2 Jul 2025 13:32:34 +0000 (UTC)
+Received: by mail-il1-f200.google.com with SMTP id e9e14a558f8ab-3df2d0b7c7eso47511665ab.2
+        for <nbd@other.debian.org>; Wed, 02 Jul 2025 06:32:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751463151; x=1752067951;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=BubBoaagMLzEv8l+ERjtuMPNq+Ob+FgzeUx4GVvJZL4=;
+        b=BG84T6NNJ4h+aV32aHZREhXETPm0ZHqA55/PyCN3Qen/usFoejYf2bPocZ/22R0IYE
+         Pnmr23XVtk+GbIQiE/G4YyNsT6yJqNfIaAKn18U9MJDFT73TohEvX5jRbrrGZ6kWYVEh
+         D+WsZWI1VmcKaenNoRBuvzMpsBrEgII5GyOZzoXMR9tYR3IvnAzPxWOVE0GSOIFHYP1F
+         GRLTKNDt2h+KjrfaSxkSfel3Z3PyI5Cblz/UWUxHMtPDb9yc2MX3FGPKi3MFoNAWZNC7
+         avLcjItemnj/Q4VMyIcKKDSueaqwe+LNjOE1qNTOm8/Fwek7oJmyox2sOmYX0clOyQSv
+         igRA==
+X-Forwarded-Encrypted: i=1; AJvYcCX7G8yxqNnRVgqL0wEVKM/7QT9sJyWgRtkmx94F9Xm88E3jzq2t/Isk5IhhN5htZQ0qDLU=@other.debian.org
+X-Gm-Message-State: AOJu0YxqCHPeefIJYwgE9J7LuxZqIzmjQXuw+Z1jCCGyCTgONqF8GsMV
+	GslG6dSmRyKy/kLTqYVZTCH0qL1yErUGukKGw1tfrEOZgBAwdcbyYQe6sl7TREEsfKTUOIvvWqW
+	kkR52T+wI3m6GMDwG2B7e9zb0inW2BJwzSawaygyDiA16wUczQ/Otunjw1hc=
+X-Google-Smtp-Source: AGHT+IHrimW8AKa/QhbwsVFAuzkmWEJwu5jAAhd5cDMyuxLiN0due4eoa8Liqe22LG8AEgSEqp6N1ctGEi1FXIX6eNNGIE53a9al
 MIME-Version: 1.0
-In-Reply-To: <7b09167f-bf8d-4d94-9317-3cfbb4f83cd8@linux.ibm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_Ch0CgAHaCUs4GRo5NyXAQ--.46013S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxCryUAw1UCw1DKF18uFyxGrg_yoW5ZrWrpr
-	WkCFWxGrZ8Gw4Fgw1jkw43WFWFyrnrJ3W5Xr18Ga48CrWqvr9Yqr4Fqrs09ryDJrZ3Jr1U
-	tayYyF1xZr1UArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
-	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
-	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-	2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
-	W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
-	0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x
-	0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E
-	7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcV
-	C0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
-	04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7
-	CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd-B_UUUUU=
-X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
+X-Received: by 2002:a05:6e02:214f:b0:3dc:8b29:3092 with SMTP id
+ e9e14a558f8ab-3e054935199mr29220845ab.5.1751463150832; Wed, 02 Jul 2025
+ 06:32:30 -0700 (PDT)
+Date: Wed, 02 Jul 2025 06:32:30 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <686534ee.a70a0220.3b7e22.245a.GAE@google.com>
+Subject: [syzbot] Monthly nbd report (Jul 2025)
+From: syzbot <syzbot+list09715b34c25b498d986f@syzkaller.appspotmail.com>
+To: josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <LE6BJ3C7AnI.A.3OeE._QOZoB@bendel>
+Resent-Message-ID: <BYb4yGGA3LM.A.OT7K.fiTZoB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3401
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3402
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -102,98 +85,40 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/bc3f20c3-21f8-443b-619f-da7569b37aaf@huaweicloud.com
-Resent-Date: Wed,  2 Jul 2025 07:48:15 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/686534ee.a70a0220.3b7e22.245a.GAE@google.com
+Resent-Date: Wed,  2 Jul 2025 13:48:15 +0000 (UTC)
 
-Hi,
+Hello nbd maintainers/developers,
 
-在 2025/07/02 14:22, Nilay Shroff 写道:
-> 
-> 
-> On 7/2/25 8:02 AM, Ming Lei wrote:
->> On Wed, Jul 02, 2025 at 09:12:09AM +0800, Yu Kuai wrote:
->>> Hi,
->>>
->>> 在 2025/07/01 21:28, Nilay Shroff 写道:
->>>>
->>>>
->>>> On 6/28/25 6:18 AM, Yu Kuai wrote:
->>>>> Hi,
->>>>>
->>>>> 在 2025/06/27 19:04, Ming Lei 写道:
->>>>>> I guess the patch in the following link may be simper, both two take
->>>>>> similar approach:
->>>>>>
->>>>>> https://lore.kernel.org/linux-block/aFjbavzLAFO0Q7n1@fedora/
->>>>>
->>>>> I this the above approach has concurrent problems if nbd_start_device
->>>>> concurrent with nbd_start_device:
->>>>>
->>>>> t1:
->>>>> nbd_start_device
->>>>> lock
->>>>> num_connections = 1
->>>>> unlock
->>>>>       t2:
->>>>>       nbd_add_socket
->>>>>       lock
->>>>>       config->num_connections++
->>>>>       unlock
->>>>>           t3:
->>>>>           nbd_start_device
->>>>>           lock
->>>>>           num_connections = 2
->>>>>           unlock
->>>>>           blk_mq_update_nr_hw_queues
->>>>>
->>>>> blk_mq_update_nr_hw_queues
->>>>> //nr_hw_queues updated to 1 before failure
->>>>> return -EINVAL
->>>>>
->>>>
->>>> In the above case, yes I see that t1 would return -EINVAL (as
->>>> config->num_connections doesn't match with num_connections)
->>>> but then t3 would succeed to update nr_hw_queue (as both
->>>> config->num_connections and num_connections set to 2 this
->>>> time). Isn't it? If yes, then the above patch (from Ming)
->>>> seems good.
->>>
->>> Emm, I'm confused, If you agree with the concurrent process, then
->>> t3 update nr_hw_queues to 2 first and return sucess, later t1 update
->>> nr_hw_queues back to 1 and return failure.
->>
->> It should be easy to avoid failure by simple retrying.
->>
-> Yeah I think retry should be a safe bet here.
-> 
+This is a 31-day syzbot report for the nbd subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/nbd
 
-I really not sure about the retry, the above is just a scenario that I
-think of with a quick review, and there are still many concurrent
-scenarios that need to be checked, I'm kind of lost here.
+During the period, 1 new issues were detected and 0 were fixed.
+In total, 6 issues are still open and 7 have already been fixed.
 
-Except nbd_start_device() and nbd_add_socked(), I'm not confident
-other context that is synchronized with config_lock is not broken.
-However, I'm ok with the bet.
+Some of the still happening issues:
 
-> On another note, synchronizing nbd_start_device and nbd_add_socket
-> using nbd->task_setup looks more complex and rather we may use
-> nbd->pid to synchronize both. We need to move setting of nbd->pid
-> before we invoke blk_mq_update_nr_hw_queues in nbd_start_device.
-> Then in nbd_add_socket we can evaluate nbd->pid and if it's
-> non-NULL then we could assume that either nr_hw_queues update is in
-> progress or device has been setup and so return -EBUSY. I think
-> anyways updating number of connections once device is configured
-> would not be possible, so once nbd_start_device is initiated, we
-> shall prevent user adding more connections. If we follow this
-> approach then IMO we don't need to add retry discussed above.
+Ref Crashes Repro Title
+<1> 288     Yes   INFO: task hung in nbd_queue_rq
+                  https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
+<2> 141     Yes   INFO: task hung in nbd_ioctl (3)
+                  https://syzkaller.appspot.com/bug?extid=fe03c50d25c0188f7487
+<3> 12      No    possible deadlock in nbd_open
+                  https://syzkaller.appspot.com/bug?extid=ea702c2366971b7fc6e4
+<4> 7       Yes   INFO: task can't die in nbd_ioctl
+                  https://syzkaller.appspot.com/bug?extid=69a90a5e8f6b59086b2a
 
-It's ok for me to forbit nbd_add_socked after nbd is configured, there
-is nowhere to use the added sock. And if there really are other contexts
-need to be synchronized, I think nbd->pid can be used as well.
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-> 
-> Thanks,
-> --Nilay
-> .
-> 
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
+
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
