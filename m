@@ -1,147 +1,81 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52FCCB3F774
-	for <lists+nbd@lfdr.de>; Tue,  2 Sep 2025 10:03:10 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B38BB42015
+	for <lists+nbd@lfdr.de>; Wed,  3 Sep 2025 14:54:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 093A020826; Tue,  2 Sep 2025 08:03:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Sep  2 08:03:09 2025
-Old-Return-Path: <dwagner@suse.de>
+	id 19AB220573; Wed,  3 Sep 2025 12:54:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Sep  3 12:54:14 2025
+Old-Return-Path: <3Uza4aAkbAOwgmnYOZZSfOddWR.UccUZSigSfQcbhSbh.Qca@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED autolearn=no
-	autolearn_force=no version=3.4.6
+X-Spam-Level: *
+X-Spam-Status: No, score=1.4 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
+	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id A264A20857
-	for <lists-other-nbd@bendel.debian.org>; Tue,  2 Sep 2025 07:45:10 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 4B5B92057A
+	for <lists-other-nbd@bendel.debian.org>; Wed,  3 Sep 2025 12:36:48 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.51 tagged_above=-10000 required=5.3
-	tests=[BAYES_40=-0.01, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-0.89 tagged_above=-10000 required=5.3
+	tests=[BAYES_20=-1, FOURLA=0.1, FROM_LOCAL_HEX=0.006,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_MSPIKE_H2=0.001,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id EFBo2Xc-sIDf for <lists-other-nbd@bendel.debian.org>;
-	Tue,  2 Sep 2025 07:45:07 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2a07:de40:b251:101:10:150:64:2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 28B822085A
-	for <nbd@other.debian.org>; Tue,  2 Sep 2025 07:45:07 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 8E52B1F445;
-	Tue,  2 Sep 2025 07:45:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1756799103; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=URGa8t5drl+ELX2V8kqt0UagmCmmkJrjqls7W38gxrM=;
-	b=t6pCIJSQX3mRgy/0TSyST+5JYrWpXjgi5574pSBZgKMcrtNnjsTjWtq1cVf6idynlI7Fb6
-	99KlqZHp2vszrSz9i8XJ9GeQSXCB6IWgH8zgTMEoA8wseOUBVc2UtdzZR2gIR2SPzkQheI
-	iVxa0N2FDt7xEWElf9DNRjkWg/18O3g=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1756799103;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=URGa8t5drl+ELX2V8kqt0UagmCmmkJrjqls7W38gxrM=;
-	b=hYZJUdCz5rX52fRxqzTQTdPMhgyUUPyEMnzxUd18ameGZ+O/DZXPMlWrVXpO/0m6voEC6X
-	HeGjl2xFHUqRybAQ==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=t6pCIJSQ;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=hYZJUdCz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1756799103; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=URGa8t5drl+ELX2V8kqt0UagmCmmkJrjqls7W38gxrM=;
-	b=t6pCIJSQX3mRgy/0TSyST+5JYrWpXjgi5574pSBZgKMcrtNnjsTjWtq1cVf6idynlI7Fb6
-	99KlqZHp2vszrSz9i8XJ9GeQSXCB6IWgH8zgTMEoA8wseOUBVc2UtdzZR2gIR2SPzkQheI
-	iVxa0N2FDt7xEWElf9DNRjkWg/18O3g=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1756799103;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=URGa8t5drl+ELX2V8kqt0UagmCmmkJrjqls7W38gxrM=;
-	b=hYZJUdCz5rX52fRxqzTQTdPMhgyUUPyEMnzxUd18ameGZ+O/DZXPMlWrVXpO/0m6voEC6X
-	HeGjl2xFHUqRybAQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7C98913882;
-	Tue,  2 Sep 2025 07:45:03 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id +DEhHn+gtmhLZwAAD6G6ig
-	(envelope-from <dwagner@suse.de>); Tue, 02 Sep 2025 07:45:03 +0000
-Date: Tue, 2 Sep 2025 09:44:55 +0200
-From: Daniel Wagner <dwagner@suse.de>
-To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, 
-	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>, "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>, 
-	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
-Subject: Re: blktests failures with v6.17-rc1 kernel
-Message-ID: <9eef8b8a-a186-4619-91e3-e888d1530c17@flourine.local>
-References: <suhzith2uj75uiprq4m3cglvr7qwm3d7gi4tmjeohlxl6fcmv3@zu6zym6nmvun>
- <ff748a3f-9f07-4933-b4b3-b4f58aacac5b@flourine.local>
- <rsdinhafrtlguauhesmrrzkybpnvwantwmyfq2ih5aregghax5@mhr7v3eryci3>
- <6ef89cb5-1745-4b98-9203-51ba6de40799@flourine.local>
- <u4ttvhnn7lark5w3sgrbuy2rxupcvosp4qmvj46nwzgeo5ausc@uyrkdls2muwx>
- <629ddb72-c10d-4930-9d81-61d7322ed3b0@flourine.local>
- <7a773833-a193-4243-80f4-fc52243883a9@flourine.local>
- <ldr3xa4muogowu2xeh3uq3xcifljfftssydgnhjdarfre4kg4p@midqloza2ayz>
+	with ESMTP id b9pFZIORYVdJ for <lists-other-nbd@bendel.debian.org>;
+	Wed,  3 Sep 2025 12:36:42 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-io1-f71.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-io1-f71.google.com (mail-io1-f71.google.com [209.85.166.71])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 9DB3B20544
+	for <nbd@other.debian.org>; Wed,  3 Sep 2025 12:36:39 +0000 (UTC)
+Received: by mail-io1-f71.google.com with SMTP id ca18e2360f4ac-886e91263aeso1338602239f.3
+        for <nbd@other.debian.org>; Wed, 03 Sep 2025 05:36:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756902996; x=1757507796;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=2LHOUvTxUHRDZHTuy2WgSxf7xJT4vtu2i2hgQBjuX7w=;
+        b=XJKkOffaywtyB5WG/5FQQ98EV1wZqNSkzey0NziIBgpglBuVwuUQL0SQczQ4AeEhBz
+         GVkSf7OZnQjD3ouFQd9MPeJ3r+LSTSFzkYHvH3intSd6IU1iP031/XWxafEKSuyxjyaI
+         T5hXRNqWeMTQGgVxK5R28/RgJWpg9YmJOXj9K1ptGXTjHnDbkJSXj16iuiEhiz2A+9/6
+         lqsikqdRESpuyXXSVzViF6qY0cglFMYZxxPpj1aSixAr6W2lYSt/PwBQdqW5xIxzn7yz
+         a45L6cwCmKq8mXMtB5k+172OywnP4F1iU6aYpVwiF0RGfWI/cJ3ZYIjDJKHTR3zQ6e6M
+         u8Fw==
+X-Forwarded-Encrypted: i=1; AJvYcCW9+lW6gV/myDamVQwhYbrAvjt1/ND6YLX1Rp3rGYSaZ2amYf7wpa/KM+pGW74vAfLvTWE=@other.debian.org
+X-Gm-Message-State: AOJu0YzwhZw5XD63RPgBtjmwMQfGtHQpngFhVOP474pHki8JJuz3wowx
+	cHTeiXjrCOtkUBGiYmr6K+o+5WcmD5zLQWY+nNtYveL4CwUvosvQabMJrwgxyRNss/hZjESamui
+	KeFQedtHO2P6PeCC0RbCcd5IOv9LW6qX1aAlFLhmYXCJFLhvUURt4ZP7dwH8=
+X-Google-Smtp-Source: AGHT+IETUswS2yDFuaaHHg2PyJKvgAiFrqCIYR4tRHFKt9SSy6k3VMVIe6nukUo/0neTzFmx7S3M8oMr51X9urYuFi1S6OfiVxkd
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ldr3xa4muogowu2xeh3uq3xcifljfftssydgnhjdarfre4kg4p@midqloza2ayz>
-X-Spamd-Result: default: False [-4.51 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_TRACE(0.00)[0:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim]
-X-Rspamd-Queue-Id: 8E52B1F445
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+X-Received: by 2002:a05:6e02:1488:b0:3f1:a5b9:4a32 with SMTP id
+ e9e14a558f8ab-3f3ffda5bacmr225600425ab.1.1756902995790; Wed, 03 Sep 2025
+ 05:36:35 -0700 (PDT)
+Date: Wed, 03 Sep 2025 05:36:35 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <68b83653.050a0220.3db4df.01ef.GAE@google.com>
+Subject: [syzbot] Monthly nbd report (Sep 2025)
+From: syzbot <syzbot+liste8f48e3526c73d4bcab4@syzkaller.appspotmail.com>
+To: josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <pM_r616ThzJ.A.tQxO.9SqtoB@bendel>
+Resent-Message-ID: <xTG-PKNw_MJ.A.QseG.2pDuoB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3429
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3430
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -151,21 +85,42 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/9eef8b8a-a186-4619-91e3-e888d1530c17@flourine.local
-Resent-Date: Tue,  2 Sep 2025 08:03:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/68b83653.050a0220.3db4df.01ef.GAE@google.com
+Resent-Date: Wed,  3 Sep 2025 12:54:14 +0000 (UTC)
 
-Hi Shinichiro,
+Hello nbd maintainers/developers,
 
-On Tue, Sep 02, 2025 at 06:00:17AM +0000, Shinichiro Kawasaki wrote:
-> > I'll to reproduce it and see if this patch does make a difference.
-> 
-> I applied the fix patch above together with the previous fix patch on top of
-> v6.17-rc3, then I repeated nvme/061 with fc transport hundreds of times. I
-> did not observed the KASAN suaf. The fix patch looks working good. Thanks!
+This is a 31-day syzbot report for the nbd subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/nbd
 
-Thanks for testing. I was not able to trigger the bug. Let me cleanup it
-and post it.
+During the period, 0 new issues were detected and 0 were fixed.
+In total, 8 issues are still open and 8 have already been fixed.
 
-Thanks,
-Daniel
+Some of the still happening issues:
+
+Ref Crashes Repro Title
+<1> 861     Yes   possible deadlock in pcpu_alloc_noprof (2)
+                  https://syzkaller.appspot.com/bug?extid=91771b3fb86ec2dd7227
+<2> 304     Yes   INFO: task hung in nbd_queue_rq
+                  https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
+<3> 143     Yes   INFO: task hung in nbd_ioctl (3)
+                  https://syzkaller.appspot.com/bug?extid=fe03c50d25c0188f7487
+<4> 55      No    INFO: task hung in nbd_disconnect_and_put
+                  https://syzkaller.appspot.com/bug?extid=aa56a8f25e07970eef7f
+<5> 6       No    possible deadlock in nbd_queue_rq
+                  https://syzkaller.appspot.com/bug?extid=3dbc6142c85cc77eaf04
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
+
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
