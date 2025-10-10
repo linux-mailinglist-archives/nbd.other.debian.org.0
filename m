@@ -2,86 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19E0EBCCDDA
-	for <lists+nbd@lfdr.de>; Fri, 10 Oct 2025 14:24:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52876BCDC37
+	for <lists+nbd@lfdr.de>; Fri, 10 Oct 2025 17:18:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id EAE94205EB; Fri, 10 Oct 2025 12:24:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Oct 10 12:24:10 2025
-Old-Return-Path: <stephen.smalley.work@gmail.com>
+	id EF53120687; Fri, 10 Oct 2025 15:18:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Oct 10 15:18:10 2025
+Old-Return-Path: <paul@paul-moore.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,
-	WORD_WITHOUT_VOWELS autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,RCVD_IN_DNSWL_NONE autolearn=no
+	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1C8B120645
-	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Oct 2025 12:08:34 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 5E3F4205FF
+	for <lists-other-nbd@bendel.debian.org>; Fri, 10 Oct 2025 15:01:00 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.099 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-2.1 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
 	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
-	WORD_WITHOUT_VOWELS=1] autolearn=no autolearn_force=no
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id iESXoFR-nQfn for <lists-other-nbd@bendel.debian.org>;
-	Fri, 10 Oct 2025 12:08:29 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
+	with ESMTP id udLhukUdPtD4 for <lists-other-nbd@bendel.debian.org>;
+	Fri, 10 Oct 2025 15:00:53 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .paul-moore. - helo: .mail-pj1-x102b.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com [IPv6:2607:f8b0:4864:20::102b])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id E71B0205C6
-	for <nbd@other.debian.org>; Fri, 10 Oct 2025 12:08:29 +0000 (UTC)
-Received: by mail-pj1-x102c.google.com with SMTP id 98e67ed59e1d1-3306b83ebdaso1766176a91.3
-        for <nbd@other.debian.org>; Fri, 10 Oct 2025 05:08:29 -0700 (PDT)
+	by bendel.debian.org (Postfix) with ESMTPS id D0E52205E2
+	for <nbd@other.debian.org>; Fri, 10 Oct 2025 15:00:53 +0000 (UTC)
+Received: by mail-pj1-x102b.google.com with SMTP id 98e67ed59e1d1-33082c95fd0so2799789a91.1
+        for <nbd@other.debian.org>; Fri, 10 Oct 2025 08:00:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760098106; x=1760702906; darn=other.debian.org;
+        d=paul-moore.com; s=google; t=1760108449; x=1760713249; darn=other.debian.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gyN7lXnTaK8IaXEFqCkUb5h/ibnrqzy+7MVgC3+77oo=;
-        b=iZKLfI6kiF/yBPFfNhQTpuwj07DF8V+5OB70ZWs50cJvQJiIUwecdoQ/++YN9z59rk
-         BWsCif39fQY3XjBNsqlnaAbLiJOVh3aF1y8waMrvwJt5ncHLIzukeY8R2GXab6PsAwsH
-         LmyqU+43xNzA7NO6uBvW41qdGf3Rqa5Ny1CfSg4wkQczhwRZd7o/MniyI4in2Vjssx4j
-         1j/u5E7tA+hpqm7G8H/00zYdXafGeK9v6eMRXCRFM5SPE4pGqYfuTOt31ZHZyMrutJa5
-         hSZ0Y1ANQm7PgU6yd5A+Onjc2MMeEeaUceuUQJmLQnweGTqcqun/Pxi58w4aTSXW5xj1
-         998A==
+        bh=PrnkWgVz/Z49/J8nG6GzbbPnjpZrG1a+SrZMq+zyDL0=;
+        b=K++A2hw4gVcNibmDXWj6sTVbay8KIUD7oWpWcroo1Fav32yke8nBsufhiFTcc49CZ4
+         RGkwtClBKxqUn6kRVH5/7YoW9g+hSm9tBuQU9TWo7v3GBKqvS4tak4I3GCeyofCIaCYC
+         Vvnw5PK5BXZnCjqprwYE97AfZLgj97OHYkh+UoDo8A2w9zSP9FzwCVDXXXdL6szUIPka
+         +qVgHTpgutJ81gtM2Xf5cyMhQ/v78WKqABrVqB/89+7vh/4lqVE7yeNPjJ8S5Z/NzLpU
+         Amrnk968XLaZMgKD498p/xpnV1mdQ5HBaoidb4GFY8qwg1drKLnLc7izBxJBuhqiYyhG
+         MMpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760098106; x=1760702906;
+        d=1e100.net; s=20230601; t=1760108449; x=1760713249;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=gyN7lXnTaK8IaXEFqCkUb5h/ibnrqzy+7MVgC3+77oo=;
-        b=Vmc7ciLvHyPqHvJuaAbVELa0MeHVLKE/psW5wuQRjQ+dPr8a9nWZINtDEIBo/zEZBi
-         2qdeiqEBe48RZRg3lty91vHX3cC8X6JdcBIaDkpHp/p9oqzoJiuprRlpVSDh9N6QZbAe
-         TdysCJ21qBKn0A0PaXifghSSDYyWbSUBOIBJlBFfe0xGyH49Heh9C0wQs5dk8xenHmrU
-         vJGr5TeSBGxcV/ylw2Ry7EDCWG6EFO/Z3o2PudgreL0AzT5uj0y5SrqJsNKiaKynaa2Q
-         LajVSandqL0tM5rtc/uLnkVB/lyo4+5c93Hv+gQBcu14mE8/f2Rr5Ikc78LT97IL/X+d
-         dIWw==
-X-Forwarded-Encrypted: i=1; AJvYcCUgVV5CUwp1P0Zb+b+cxYT6/l2UaSW8kJeDgHxaO1dHD//98520e5AAHRdT/YQsw5a9CaU=@other.debian.org
-X-Gm-Message-State: AOJu0Yy+0kaPsyabz+Z/QaSrtW+j5GAik8bPskjlsqyjyGuY92EBkhDU
-	czntd+E0m+Eov8daD0zVjkKLPK7XuSC6hsKh2TtlSNl/v1GcxyEGcOP+s8lNA9WDroCpPMX1hIE
-	IskXKgh/p9G65xkiDuBty/imAn6ig788=
-X-Gm-Gg: ASbGncu5IPZSw1BfGCafRvau6XcVdb6OTsaPeJ7IrpX1xFbXVpshrWX8NiacY++NFcJ
-	RB44zko1s/YlnlcqWszR+hVbI65xoOECGj0BfJJSldMrXqp3L4iW96eWGSBnA0zQ1PwcxCSsDNO
-	GyU8bjZuXmlNDot8HyZE/24M5r2V+ovO+HcbzoyKKvuHSfy37DJD5QbzI3G1JzTVm198QXcVbSv
-	LeN7rxVQ4padrrIYLawb6xFMA==
-X-Google-Smtp-Source: AGHT+IFKYzOMQc122jmlre5WJIXFEi/4+PfvNDcYAbH1vr/MLmoCXHZvxwb00ePPpGWd+GqkYLTKVWQTMxl08jlTSTg=
-X-Received: by 2002:a17:90b:1b11:b0:330:7f80:bbd9 with SMTP id
- 98e67ed59e1d1-33b5139a422mr13988155a91.31.1760098105906; Fri, 10 Oct 2025
- 05:08:25 -0700 (PDT)
+        bh=PrnkWgVz/Z49/J8nG6GzbbPnjpZrG1a+SrZMq+zyDL0=;
+        b=V7dxAM6KXQdMAnq76QRilNT3Ix39XqFvAYXB+DkdlWgOFXuwcHcUjFF7JTlwP3VWO5
+         Ho/4pIUXGg8his7ZgyfKTcPMF3LuneHP/5DY+uTPl4E2Aw7LCZqEkkgTFhdyv0y5c8Fm
+         12OWbbH8khzGSpqpFFD/DGZpNcyEFsh42YsssmzlJWmt+R3wjkGJb0ld6sztc/aZAZUW
+         zUxhPJe4yn+HjLKLscuT8hqJd/F8Q/g7fY7DToRIEPK93cNAtGNiTIXa0JeDeSpPROk5
+         XYP1aGCgY7wLcch5qUVIOgv8K32g89lBTHlXToYnz8fFb/39xvZxVZXiHA/jNzZj8eej
+         kWxg==
+X-Forwarded-Encrypted: i=1; AJvYcCWoIyXzhCImBtfPi09WtSS1TO4lLlK1aJ+A3I7pJik56HU9KW6vmr6cl35GzhXarBABK/k=@other.debian.org
+X-Gm-Message-State: AOJu0YydSR76qJqbCzY/9n7wcZXrGwyt2/HlOBIB20gZaMKVtV8u/X6U
+	uTFUyAZyABwsayzq7gGQVykae5tR8k6qiGQejHwhx71fugjt70aOu1nZr4jeiX72AiZxZ2dbwjs
+	fyN3ZJqTe75cjGlMZF28yCYUpozzCZdinknzkpjOn
+X-Gm-Gg: ASbGnct2ZYH/6uISA4VeonCywehjJdjHWQCz5AVcPS/wMsA12+XZONemCAOQb5hGVVN
+	ieq4I3uhbNtVf/emByOlJRV6Z5Sk3wLeyOyxRX/WB/LGbuu1ZZpD5xmipk7vgwcgvjXXMCLORAK
+	UxOTwQ/wAQQTIsjC5RQaIFBi7UcLYIv3152/AoTOHAv3wwxPnseDNpQoqu+Cv8fx3vHNTEB7igE
+	BlPTmjemwCAyJ3dBeDQqc8iSg==
+X-Google-Smtp-Source: AGHT+IHTYyhEFkKDD3X150o5MD7ZP8eFJxfaJJZoy46BgzM/dN96rHz0DqKMzJSZ8COyShPASIiBWoiLtZwKUFbGRtg=
+X-Received: by 2002:a17:90b:1d8b:b0:32b:355a:9de with SMTP id
+ 98e67ed59e1d1-33b513d005amr16427754a91.32.1760108448726; Fri, 10 Oct 2025
+ 08:00:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251010080900.1680512-1-omosnace@redhat.com>
 In-Reply-To: <20251010080900.1680512-1-omosnace@redhat.com>
-From: Stephen Smalley <stephen.smalley.work@gmail.com>
-Date: Fri, 10 Oct 2025 08:08:14 -0400
-X-Gm-Features: AS18NWDxhhZAS1kvm57-iPhBXV02-sgGciufiPMvEf50RLd-mNe42UizpQ0NPWU
-Message-ID: <CAEjxPJ4bpznYK+MvFOseq84oGPexcE3SKaUDv-S97-s1nRROow@mail.gmail.com>
+From: Paul Moore <paul@paul-moore.com>
+Date: Fri, 10 Oct 2025 11:00:37 -0400
+X-Gm-Features: AS18NWDk8nitfjQpo1v3aBdPKBaoi907QLUPlKp_SF-2hEkCLZTSq-1OKrB7XMM
+Message-ID: <CAHC9VhQxnTsZV=vjf1Wk5po16mLuKNPoi3UR-7gN6PxodncgxQ@mail.gmail.com>
 Subject: Re: [PATCH v2] nbd: override creds to kernel when calling sock_{send,recv}msg()
 To: Ondrej Mosnacek <omosnace@redhat.com>
 Cc: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org, 
@@ -92,9 +91,9 @@ Content-Transfer-Encoding: quoted-printable
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <VcqzwwEfyqD.A.ceKC.qrP6oB@bendel>
+Resent-Message-ID: <eufRjO5XSBG.A.vUIF.yOS6oB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3454
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3455
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -104,8 +103,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CAEjxPJ4bpznYK+MvFOseq84oGPexcE3SKaUDv-S97-s1nRROow@mail.gmail.com
-Resent-Date: Fri, 10 Oct 2025 12:24:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/CAHC9VhQxnTsZV=vjf1Wk5po16mLuKNPoi3UR-7gN6PxodncgxQ@mail.gmail.com
+Resent-Date: Fri, 10 Oct 2025 15:18:10 +0000 (UTC)
 
 On Fri, Oct 10, 2025 at 4:09=E2=80=AFAM Ondrej Mosnacek <omosnace@redhat.co=
 m> wrote:
@@ -241,9 +240,6 @@ d_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 tclass=3Dtcp_socket permissive=
 > Link: https://bugzilla.redhat.com/show_bug.cgi?id=3D2348878
 > Fixes: 060406c61c7c ("block: add plug while submitting IO")
 > Signed-off-by: Ondrej Mosnacek <omosnace@redhat.com>
-
-Acked-by: Stephen Smalley <stephen.smalley.work@gmail.com>
-
 > ---
 >
 > Changes in v2:
@@ -257,74 +253,9 @@ UAF
 >
 >  drivers/block/nbd.c | 15 +++++++++++++++
 >  1 file changed, 15 insertions(+)
->
-> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-> index 6463d0e8d0cef..3903186e8a4e4 100644
-> --- a/drivers/block/nbd.c
-> +++ b/drivers/block/nbd.c
-> @@ -52,6 +52,7 @@
->  static DEFINE_IDR(nbd_index_idr);
->  static DEFINE_MUTEX(nbd_index_mutex);
->  static struct workqueue_struct *nbd_del_wq;
-> +static struct cred *nbd_cred;
->  static int nbd_total_devices =3D 0;
->
->  struct nbd_sock {
-> @@ -554,6 +555,7 @@ static int __sock_xmit(struct nbd_device *nbd, struct=
- socket *sock, int send,
->         int result;
->         struct msghdr msg =3D {} ;
->         unsigned int noreclaim_flag;
-> +       const struct cred *old_cred;
->
->         if (unlikely(!sock)) {
->                 dev_err_ratelimited(disk_to_dev(nbd->disk),
-> @@ -562,6 +564,8 @@ static int __sock_xmit(struct nbd_device *nbd, struct=
- socket *sock, int send,
->                 return -EINVAL;
->         }
->
-> +       old_cred =3D override_creds(nbd_cred);
-> +
->         msg.msg_iter =3D *iter;
->
->         noreclaim_flag =3D memalloc_noreclaim_save();
-> @@ -586,6 +590,8 @@ static int __sock_xmit(struct nbd_device *nbd, struct=
- socket *sock, int send,
->
->         memalloc_noreclaim_restore(noreclaim_flag);
->
-> +       revert_creds(old_cred);
-> +
->         return result;
->  }
->
-> @@ -2669,7 +2675,15 @@ static int __init nbd_init(void)
->                 return -ENOMEM;
->         }
->
-> +       nbd_cred =3D prepare_kernel_cred(&init_task);
-> +       if (!nbd_cred) {
-> +               destroy_workqueue(nbd_del_wq);
-> +               unregister_blkdev(NBD_MAJOR, "nbd");
-> +               return -ENOMEM;
-> +       }
-> +
->         if (genl_register_family(&nbd_genl_family)) {
-> +               put_cred(nbd_cred);
->                 destroy_workqueue(nbd_del_wq);
->                 unregister_blkdev(NBD_MAJOR, "nbd");
->                 return -EINVAL;
-> @@ -2724,6 +2738,7 @@ static void __exit nbd_cleanup(void)
->         /* Also wait for nbd_dev_remove_work() completes */
->         destroy_workqueue(nbd_del_wq);
->
-> +       put_cred(nbd_cred);
->         idr_destroy(&nbd_index_idr);
->         unregister_blkdev(NBD_MAJOR, "nbd");
->  }
-> --
-> 2.51.0
->
->
+
+Acked-by: Paul Moore <paul@paul-moore.com>
+
+--=20
+paul-moore.com
 
