@@ -2,12 +2,12 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06F56BD4691
-	for <lists+nbd@lfdr.de>; Mon, 13 Oct 2025 17:42:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 756A6BD4186
+	for <lists+nbd@lfdr.de>; Mon, 13 Oct 2025 17:24:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id D3CF5205AE; Mon, 13 Oct 2025 15:42:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 13 15:42:11 2025
+	id 340C52057B; Mon, 13 Oct 2025 15:24:11 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Oct 13 15:24:11 2025
 Old-Return-Path: <gregkh@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: *
@@ -18,8 +18,8 @@ X-Spam-Status: No, score=1.8 required=4.0 tests=CC_TOO_MANY,DKIMWL_WL_HIGH,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 13F09204B6
-	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Oct 2025 15:24:29 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 09338204F5
+	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Oct 2025 15:08:57 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-0.099 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIMWL_WL_HIGH=-0.001,
@@ -29,27 +29,27 @@ X-Amavis-Spam-Status: No, score=-0.099 tagged_above=-10000 required=5.3
 	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id Z-KS0BH6vQn9 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 13 Oct 2025 15:24:22 +0000 (UTC)
+	with ESMTP id lzH_qPAM1g29 for <lists-other-nbd@bendel.debian.org>;
+	Mon, 13 Oct 2025 15:08:50 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -3.5
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 03E5720492
-	for <nbd@other.debian.org>; Mon, 13 Oct 2025 15:24:21 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id BF81D204E1
+	for <nbd@other.debian.org>; Mon, 13 Oct 2025 15:08:50 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 9D1E8489DD;
-	Mon, 13 Oct 2025 15:24:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1821FC4CEFE;
-	Mon, 13 Oct 2025 15:24:17 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 6DAB144D68;
+	Mon, 13 Oct 2025 15:08:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E984AC4CEE7;
+	Mon, 13 Oct 2025 15:08:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1760369058;
-	bh=s/03muLX84TLkR0AqENV0+EaulM58z/rfNsu6M2LL1Y=;
+	s=korg; t=1760368127;
+	bh=c52cp2Mq362xHgpMzwKWS5joqtAlHPq8sZ/xvOXwK24=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Os6/gFKUs93jZPTKOHpunX+6RoINl3P4beaa1O98PObuyaQ+BWotR7ZqINdGcxiB2
-	 e5QaGaT0hiTKFoQ6AZbJfzYqbnk4+gJIvr4vLfLXQKxo2oUZ6n32MFH39vghmYOj/W
-	 zCyvwuR6i2dgPDy3d//esWNCQHYXjTQzyyOzqZ20=
+	b=aJxKLbA0nWhBNpVz99PKT3emcCD1IRwFkbkumzSCbivaqleU6SVLi1yxySlleW2ck
+	 k80O2909vWIlR3zTwU8VBB6iVWNv3fvnldKsLyuFtKt/pNrOhtEzPrMwcHRniXvlyJ
+	 a/o40+blZ1pSwEREqTzpuJB7f5A6SnmFvo8zXmLk=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -63,12 +63,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org,
 	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 6.17 113/563] nbd: restrict sockets to TCP and UDP
-Date: Mon, 13 Oct 2025 16:39:34 +0200
-Message-ID: <20251013144415.389676652@linuxfoundation.org>
+Subject: [PATCH 6.12 053/262] nbd: restrict sockets to TCP and UDP
+Date: Mon, 13 Oct 2025 16:43:15 +0200
+Message-ID: <20251013144328.039218970@linuxfoundation.org>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251013144411.274874080@linuxfoundation.org>
-References: <20251013144411.274874080@linuxfoundation.org>
+In-Reply-To: <20251013144326.116493600@linuxfoundation.org>
+References: <20251013144326.116493600@linuxfoundation.org>
 User-Agent: quilt/0.69
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -77,9 +77,9 @@ Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <an-mY6HKPAH.A.il1D.T3R7oB@bendel>
+Resent-Message-ID: <eqj8pfZjFbL.A.phxD.bmR7oB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3459
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3457
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -89,10 +89,10 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20251013144415.389676652@linuxfoundation.org
-Resent-Date: Mon, 13 Oct 2025 15:42:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20251013144328.039218970@linuxfoundation.org
+Resent-Date: Mon, 13 Oct 2025 15:24:11 +0000 (UTC)
 
-6.17-stable review patch.  If anyone has any objections, please let me know.
+6.12-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -124,10 +124,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 8 insertions(+)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 6463d0e8d0cef..87b0b78249da3 100644
+index c705acc4d6f4b..de692eed98740 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -1217,6 +1217,14 @@ static struct socket *nbd_get_socket(struct nbd_device *nbd, unsigned long fd,
+@@ -1156,6 +1156,14 @@ static struct socket *nbd_get_socket(struct nbd_device *nbd, unsigned long fd,
  	if (!sock)
  		return NULL;
  
