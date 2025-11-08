@@ -2,81 +2,91 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73746C318F3
-	for <lists+nbd@lfdr.de>; Tue, 04 Nov 2025 15:37:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01501C428E8
+	for <lists+nbd@lfdr.de>; Sat, 08 Nov 2025 08:45:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 52E3920994; Tue,  4 Nov 2025 14:37:43 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Nov  4 14:37:43 2025
-Old-Return-Path: <36wsKaQkbAHoqwxiYjjcpYnngb.emmejcsqcpamlrclr.amk@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
+	id 823A9204EB; Sat,  8 Nov 2025 07:45:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sat Nov  8 07:45:12 2025
+Old-Return-Path: <zhengqixing@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
-	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.7 required=4.0 tests=RCVD_IN_DNSWL_LOW,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED
 	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id D53F8208E6
-	for <lists-other-nbd@bendel.debian.org>; Tue,  4 Nov 2025 14:21:44 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 8E57F204E9
+	for <lists-other-nbd@bendel.debian.org>; Sat,  8 Nov 2025 07:29:51 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=2.81 tagged_above=-10000 required=5.3
-	tests=[FOURLA=0.1, FROM_LOCAL_HEX=0.006,
-	HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
-	RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_PSBL=2.7,
+X-Amavis-Spam-Status: No, score=-2.698 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, RCVD_IN_DNSWL_LOW=-0.7,
 	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
 	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id i5csY3tvMe3X for <lists-other-nbd@bendel.debian.org>;
-	Tue,  4 Nov 2025 14:21:39 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-io1-f69.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
-Received: from mail-io1-f69.google.com (mail-io1-f69.google.com [209.85.166.69])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 219A420956
-	for <nbd@other.debian.org>; Tue,  4 Nov 2025 14:21:35 +0000 (UTC)
-Received: by mail-io1-f69.google.com with SMTP id ca18e2360f4ac-927b19c5023so461257739f.1
-        for <nbd@other.debian.org>; Tue, 04 Nov 2025 06:21:35 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762266092; x=1762870892;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=7L/jSGya7egt/NiedCx/1BfP1PKnwqFiSMxG2dzvm6E=;
-        b=pILqJlXrVnGPzU4uChQtNpPUi75EuKA9DmBb2huQeX9jaTdcIJyHF+HGtCtVjKYUto
-         Hc+i2bENcRXpXou/OFeaV1zxvVjEs/yUJO+8vRucLibKQH7q4PUK0UdCsKJBSRZAeEZs
-         8PbQx7Mp1chgvx8KOmNq8Gz5ccFGP47gzITC/wr1cp2L+MpS9AeMcELRb2EqxHcSIHhY
-         biSnB5JG4yLGIXm9Tsvlq15szgZQQ62giaWA0JEU+ESscZdMDWzB2U8s4RWbnDqJqiI8
-         Y/SZ9MmMzRBVyx82imW6t4TP2E+XFFfy8PjV6EERfcXX1sfJq6W4c0jn1Qd6JU+qhOQk
-         ZUYA==
-X-Forwarded-Encrypted: i=1; AJvYcCXdPuMiii5hEsk3o+Ti6Fza6UvZ/MnCmbm68fbqj8cOA0JXO1SjzFIsTeDcM+8e+zu12G8=@other.debian.org
-X-Gm-Message-State: AOJu0YzaFvlC0Zq5gUqwFakThXlMHsAtlgcJ+e6AH/S45MZRzqYzbDNg
-	k43JEixCkAHucP3g29TQQzqy659hojLzIakxnWzUhPVdvRGt25Wc62ciZlgF4Pns8xxFYXldsJU
-	5EfxC3K+3f1IZh5H07EHkqiV3M0rznA3qMXOYvKH/ORGY8xh7n+vZRuIiFkM=
-X-Google-Smtp-Source: AGHT+IHmghhbRbHc2151lEMdR+Fkctnu2OMAFAv+53FJy/pwcW/nqwYE+rSNRwYm8lpm9Ln89ZBat27dAoQpv/kgtCP6eb3W0aQ4
+	with ESMTP id hyjzFAN88FvK for <lists-other-nbd@bendel.debian.org>;
+	Sat,  8 Nov 2025 07:29:44 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 1139 seconds by postgrey-1.36 at bendel; Sat, 08 Nov 2025 07:29:44 UTC
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 387B6204DE
+	for <nbd@other.debian.org>; Sat,  8 Nov 2025 07:29:43 +0000 (UTC)
+Received: from mail.maildlp.com (unknown [172.19.163.216])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4d3Rs35YzmzYQtxl
+	for <nbd@other.debian.org>; Sat,  8 Nov 2025 15:10:15 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.75])
+	by mail.maildlp.com (Postfix) with ESMTP id 1BE561A135D
+	for <nbd@other.debian.org>; Sat,  8 Nov 2025 15:10:37 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.50.87.129])
+	by APP2 (Coremail) with SMTP id Syh0CgAHZXvp7A5pbSoQAA--.5961S4;
+	Sat, 08 Nov 2025 15:10:34 +0800 (CST)
+From: Zheng Qixing <zhengqixing@huaweicloud.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk,
+	xiubli@redhat.com
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	linux-kernel@vger.kernel.org,
+	yi.zhang@huawei.com,
+	yangerkun@huawei.com,
+	houtao1@huawei.com,
+	linan122@h-partners.com,
+	zhengqixing@huawei.com
+Subject: [PATCH] nbd: defer config put in recv_work
+Date: Sat,  8 Nov 2025 15:02:02 +0800
+Message-Id: <20251108070202.1816004-1-zhengqixing@huaweicloud.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Received: by 2002:a05:6602:718b:b0:945:cbd9:55cc with SMTP id
- ca18e2360f4ac-948229840a8mr2134810839f.15.1762266091838; Tue, 04 Nov 2025
- 06:21:31 -0800 (PST)
-Date: Tue, 04 Nov 2025 06:21:31 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <690a0beb.050a0220.98a6.00af.GAE@google.com>
-Subject: [syzbot] Monthly nbd report (Nov 2025)
-From: syzbot <syzbot+listc0bf6fe607a7f411a734@syzkaller.appspotmail.com>
-To: josef@toxicpanda.com, linux-block@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
-	syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:Syh0CgAHZXvp7A5pbSoQAA--.5961S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxJFykJw43Jw18tFyUAr1xuFg_yoW5CFWDpF
+	WS9F4DKF48Wrn5CF4kX34UW34DGasFgr9rW3yxA34YyrWfA3yIyrsrK3WftF1UXr1kJ3yU
+	ZrWrGa42ka15GFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvIb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7
+	CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8C
+	rVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4
+	IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x02
+	62kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s
+	026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
+	Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20x
+	vEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE
+	14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
+	9x07UEZXOUUUUU=
+X-CM-SenderInfo: x2kh0wptl0x03j6k3tpzhluzxrxghudrp/
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <HAcGLkCjkjL.A.NSw.3-gCpB@bendel>
+Resent-Message-ID: <cTJ7V3Yja1E.A.v3mO.IUvDpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3465
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3466
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -86,40 +96,99 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/690a0beb.050a0220.98a6.00af.GAE@google.com
-Resent-Date: Tue,  4 Nov 2025 14:37:43 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20251108070202.1816004-1-zhengqixing@huaweicloud.com
+Resent-Date: Sat,  8 Nov 2025 07:45:12 +0000 (UTC)
 
-Hello nbd maintainers/developers,
+From: Zheng Qixing <zhengqixing@huawei.com>
 
-This is a 31-day syzbot report for the nbd subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/nbd
+There is one uaf issue in recv_work when running NBD_CLEAR_SOCK and
+NBD_CMD_RECONFIGURE:
+  nbd_genl_connect     // conf_ref=2 (connect and recv_work A)
+  nbd_open	       // conf_ref=3
+  recv_work A done     // conf_ref=2
+  NBD_CLEAR_SOCK       // conf_ref=1
+  nbd_genl_reconfigure // conf_ref=2 (trigger recv_work B)
+  close nbd	       // conf_ref=1
+  recv_work B
+    config_put         // conf_ref=0
+    atomic_dec(&config->recv_threads); -> UAF
 
-During the period, 1 new issues were detected and 0 were fixed.
-In total, 7 issues are still open and 8 have already been fixed.
+Or only running NBD_CLEAR_SOCK:
+  nbd_genl_connect   // conf_ref=2
+  nbd_open 	     // conf_ref=3
+  NBD_CLEAR_SOCK     // conf_ref=2
+  close nbd
+    nbd_release
+      config_put     // conf_ref=1
+  recv_work
+    config_put 	     // conf_ref=0
+    atomic_dec(&config->recv_threads); -> UAF
 
-Some of the still happening issues:
+Commit 87aac3a80af5 ("nbd: call nbd_config_put() before notifying the
+waiter") moved nbd_config_put() to run before waking up the waiter in
+recv_work, in order to ensure that nbd_start_device_ioctl() would not
+be woken up while nbd->task_recv was still uncleared.
 
-Ref Crashes Repro Title
-<1> 2373    Yes   possible deadlock in pcpu_alloc_noprof (2)
-                  https://syzkaller.appspot.com/bug?extid=91771b3fb86ec2dd7227
-<2> 339     Yes   INFO: task hung in nbd_queue_rq
-                  https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
-<3> 64      Yes   possible deadlock in nbd_queue_rq
-                  https://syzkaller.appspot.com/bug?extid=3dbc6142c85cc77eaf04
-<4> 4       Yes   KASAN: slab-use-after-free Write in recv_work (3)
-                  https://syzkaller.appspot.com/bug?extid=56fbf4c7ddf65e95c7cc
+However, in nbd_start_device_ioctl(), after being woken up it explicitly
+calls flush_workqueue() to make sure all current works are finished.
+Therefore, there is no need to move the config put ahead of the wakeup.
 
+Move nbd_config_put() to the end of recv_work, so that the reference is
+held for the whole lifetime of the worker thread. This makes sure the
+config cannot be freed while recv_work is still running, even if clear
++ reconfigure interleave.
+
+In addition, we don't need to worry about recv_work dropping the last
+nbd_put (which causes deadlock):
+
+path A (netlink with NBD_CFLAG_DESTROY_ON_DISCONNECT):
+  connect  // nbd_refs=1 (trigger recv_work)
+  open nbd // nbd_refs=2
+  NBD_CLEAR_SOCK
+  close nbd
+    nbd_release
+      nbd_disconnect_and_put
+        flush_workqueue // recv_work done
+      nbd_config_put
+        nbd_put // nbd_refs=1
+      nbd_put // nbd_refs=0
+        queue_work
+
+path B (netlink without NBD_CFLAG_DESTROY_ON_DISCONNECT):
+  connect  // nbd_refs=2 (trigger recv_work)
+  open nbd // nbd_refs=3
+  NBD_CLEAR_SOCK // conf_refs=2
+  close nbd
+    nbd_release
+      nbd_config_put // conf_refs=1
+      nbd_put // nbd_refs=2
+  recv_work done // conf_refs=0, nbd_refs=1
+  rmmod // nbd_refs=0
+
+Reported-by: syzbot+56fbf4c7ddf65e95c7cc@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/all/6907edce.a70a0220.37351b.0014.GAE@google.com/T/
+Fixes: 87aac3a80af5 ("nbd: make the config put is called before the notifying the waiter")
+Depends-on: e2daec488c57 ("nbd: Fix hungtask when nbd_config_put")
+Signed-off-by: Zheng Qixing <zhengqixing@huawei.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ drivers/block/nbd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
-
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
-
-You may send multiple commands in a single email message.
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index a853c65ac65d..215fc18115b7 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -1024,9 +1024,9 @@ static void recv_work(struct work_struct *work)
+ 	nbd_mark_nsock_dead(nbd, nsock, 1);
+ 	mutex_unlock(&nsock->tx_lock);
+ 
+-	nbd_config_put(nbd);
+ 	atomic_dec(&config->recv_threads);
+ 	wake_up(&config->recv_wq);
++	nbd_config_put(nbd);
+ 	kfree(args);
+ }
+ 
+-- 
+2.39.2
 
