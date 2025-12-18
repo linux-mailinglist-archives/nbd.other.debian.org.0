@@ -1,81 +1,213 @@
 Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 X-Original-To: lists+nbd@lfdr.de
 Delivered-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FB34CA7E56
-	for <lists+nbd@lfdr.de>; Fri, 05 Dec 2025 15:09:12 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE813CCB989
+	for <lists+nbd@lfdr.de>; Thu, 18 Dec 2025 12:24:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 21F5E20577; Fri,  5 Dec 2025 14:09:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Dec  5 14:09:11 2025
-Old-Return-Path: <3oOMyaQkbAIMz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
+	id AD9A920602; Thu, 18 Dec 2025 11:24:11 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Dec 18 11:24:11 2025
+Old-Return-Path: <prvs=440070285=shinichiro.kawasaki@wdc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
-	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_MSPIKE_H2,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,RCVD_IN_DNSWL_MED,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED
 	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id E5281205B1
-	for <lists-other-nbd@bendel.debian.org>; Fri,  5 Dec 2025 13:52:44 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3D5EE204DF
+	for <lists-other-nbd@bendel.debian.org>; Thu, 18 Dec 2025 11:07:06 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=0.31 tagged_above=-10000 required=5.3
-	tests=[FOURLA=0.1, FROM_LOCAL_HEX=0.006,
-	HEADER_FROM_DIFFERENT_DOMAINS=0.212, RCVD_IN_MSPIKE_H2=-0.01,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001] autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-3.878 tagged_above=-10000 required=5.3
+	tests=[BAYES_05=-1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_MED=-2.3,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id ELK55aAsLZLW for <lists-other-nbd@bendel.debian.org>;
-	Fri,  5 Dec 2025 13:52:39 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-oi1-f200.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com [209.85.167.200])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id EE516205AE
-	for <nbd@other.debian.org>; Fri,  5 Dec 2025 13:52:35 +0000 (UTC)
-Received: by mail-oi1-f200.google.com with SMTP id 5614622812f47-4509d3ce317so1484184b6e.1
-        for <nbd@other.debian.org>; Fri, 05 Dec 2025 05:52:35 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764942752; x=1765547552;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=v2NJsbOFgjDMjMXuTTthPeUQ4SXsnG37aVsP6Rf2Hfw=;
-        b=VOPC1Krwr30A7+Xj6JIA8DW18ehfln0x1oW9Mq1PfMWj2VBBTgCl+8tk7OX2PgeohN
-         VDOeQCECSIsWlEap2mLUv+Se0406vtXbi1TDkDxte2uAVlXKA/i4r7CMbVC2Vt7fx4sg
-         TsZkRorB5hZQ/KAnVpFcrPxSRYxoraUy0JsDWhjDl1yGgQQ7TIQoRHeCU97hbQdhH6RX
-         BzOQVGU23jzqp5PgUYJI8u1btv+ofSct66Risl+zB0ieHKNtdeFwsSj3A1kbcEyYOoui
-         jx7DcY9qmy9RBFj6TbuEy2L4ac4NhsJfiBGgcSD3LadvtiqvMVcWB9UGb8lzzk26G8Fd
-         cjvw==
-X-Forwarded-Encrypted: i=1; AJvYcCXe6UDo0FvS4U9TYPtTkXdyTQJSxFID1f+t0xb811z0K1hRjiXlGJJ0H9XmX9hDuMoT2Eg=@other.debian.org
-X-Gm-Message-State: AOJu0YyJWcgyLZIkFL2p7fwx/0o01eIVI4FuWjlB+KEBgNzOAyU5nx4t
-	c6t++C4IQzM41JcUyfE3gF85Jr8qhwdkmCbIQRUVZpYpnYIOAHAnc6YZ9vA/fg/YorlCEmlcsZ+
-	9VbzI4RBDxgbdV9VwQRhZyKVSTVKFAP+EQHupXPiNCrF+40r9SA4gleG+GvE=
-X-Google-Smtp-Source: AGHT+IHWFKnCnOqu89ScSwCSTHdi2z9hmBNOjlHIHVufF/6YxQ2sdGEhrDokhnEXojx9qkfHff8TrfeUNSK2uLZcRH4nqUL/6+jr
+	with ESMTP id H91rkCM0JF8p for <lists-other-nbd@bendel.debian.org>;
+	Thu, 18 Dec 2025 11:07:00 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+X-Greylist: delayed 437 seconds by postgrey-1.36 at bendel; Thu, 18 Dec 2025 11:06:59 UTC
+Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "mx1.hgst.iphmx.com", Issuer "HydrantID Server CA O1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id C87822049C
+	for <nbd@other.debian.org>; Thu, 18 Dec 2025 11:06:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1766056020; x=1797592020;
+  h=from:to:subject:date:message-id:content-id:
+   content-transfer-encoding:mime-version;
+  bh=JJi/P79eEKukUH3lSrAi86s6HvctKNkeVCTOIPA/IhY=;
+  b=AjwYZ+QsrJAPROdw4FbCNSmnAfrRUg8vmtNxTlHcLatdtvDIOcF8so79
+   pcXTRD23s/psZNQ9tbelAMoylIAZtoeOORu+4uDdNQWVIYR+B+xZP5EUK
+   ojJ45Xk3nGnInAeZlMAH28wr/TxZGgx58PO5vkcaPvxNxFq2RJ8xThnVi
+   yrfKszEAgCaDemMqyylJKMc3PGCATE0dA++mH5sSY/l+0UPTHYAev8UPu
+   9OpCnE9c2bEBeOAeu99PjLt8KepSrhranv5WW8WlY7KopWBEaKupSnyV2
+   46WqlW4hQETneC/X+ZKx/4hd6IXCBCCjMtcugircfddFLEKNqSNy8HZQS
+   g==;
+X-CSE-ConnectionGUID: TWq4IM5lQnm08BIvcpX3TQ==
+X-CSE-MsgGUID: my+XgFtuRBqwRs7NfLHyBA==
+X-IronPort-AV: E=Sophos;i="6.21,158,1763395200"; 
+   d="scan'208";a="138126728"
+Received: from mail-westusazon11010024.outbound.protection.outlook.com (HELO BYAPR05CU005.outbound.protection.outlook.com) ([52.101.85.24])
+  by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 18 Dec 2025 18:59:32 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ENJWRvhmwp5KCce14LgvOlwey+oJVWuj2XG8oZLv9sikjBXPonHbkgS4SigygNnNDhBz0QqO5XRWKoAjIiJk7losByX2nk4c2T/iCWKgbuotMrPv30+K54o3WOOv4p7WEXDNl+1eki5DDbdT77iAr/S9o2TiyNxGanknFz0gXMReoMUGyXyJT8b/mNcgUxWdrU7duF3LD1hZEazd6XRDp1ur2CmiNpbb6tU+HwnjY0qokU4KBhXq2koaiyPD5ULoUcI3GHrdXpIGmV3Bg1mVlRCobsHkP3NL2Ht4zN2Tn2wM7/4CK6TR7tWgNqWMPzQFAaXA12NzFBdpMr4hv7yO4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JJi/P79eEKukUH3lSrAi86s6HvctKNkeVCTOIPA/IhY=;
+ b=WV6BccteWEhangoR92pMm2/4iy24pjHq9zvGktJKz0AmWtaAZZiG0HyINEENIlR3yXxV2oryj3kREG0vu5Wew9Xh0nqxqukqK7HwNo6dZ8RUls1jpLmceLRnBVjJkCZLCkJnrKdmigJ75CR8SGkcOoNlitLFfXvIzWyhYAGk0oDWJj4U3vo+boFq5JYdBwTvhxsPWAZgZY9q8z8VyGtKKJhm4wBa9cDgb0HAJc7ZyAstH/8x7RGBz0+Ddgv3PF8W1aiy4Sy4s9898564xpkX6/t+tjbgVPa8F+Q/Bu7MPr5sG20o1SR3rVM/ut1bOfD2JHJpTi8i0vAw2mlauRuz6Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JJi/P79eEKukUH3lSrAi86s6HvctKNkeVCTOIPA/IhY=;
+ b=Lxf/hpJYrIgdWLAVSEZIT1o7weDa6YKPin/DidMED68PI+Ugyp3g6lqM+E4Z9DQ8p9wmJtPokCc0JE8pwpB7yOL9Z6QXroDHPirFnoFHp2jugQrpKIqUOf8khV11oKc2xdwhaBIIox9Lr7x+Z1mT7kizwYuVW5OzTmGy+3oh3UQ=
+Received: from SN7PR04MB8532.namprd04.prod.outlook.com (2603:10b6:806:350::6)
+ by PH7PR04MB8974.namprd04.prod.outlook.com (2603:10b6:510:2f7::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Thu, 18 Dec
+ 2025 10:59:30 +0000
+Received: from SN7PR04MB8532.namprd04.prod.outlook.com
+ ([fe80::4e14:94e7:a9b3:a4d4]) by SN7PR04MB8532.namprd04.prod.outlook.com
+ ([fe80::4e14:94e7:a9b3:a4d4%7]) with mapi id 15.20.9434.001; Thu, 18 Dec 2025
+ 10:59:30 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
+Subject: blktests failures with v6.18 kernel
+Thread-Topic: blktests failures with v6.18 kernel
+Thread-Index: AQHccA1irokedhVZcEmLqK3rVMow6Q==
+Date: Thu, 18 Dec 2025 10:59:29 +0000
+Message-ID: <5b023828-b03d-4351-b6f0-e13d0df8c446@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla Thunderbird
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR04MB8532:EE_|PH7PR04MB8974:EE_
+x-ms-office365-filtering-correlation-id: 060bf4b6-b2b8-4372-2973-08de3e2484d1
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|366016|376014|19092799006|38070700021;
+x-microsoft-antispam-message-info:
+ =?utf-8?B?UlQvV3JYOHFFc0psOTdLTlFJZEJVYTcvdm01Z09heUFQZ3BiNld2WHVxMW5U?=
+ =?utf-8?B?MnZtTm5rTGhvTzNxbmNxVG1uc1BGRzMreDZNOUl1M05TME5ONTB3dmp6WW9w?=
+ =?utf-8?B?ZDVsVGtuelB4OXBEUHJvZ0xSakZ0T29HZWtpOThId01rVWJnSkpYMGhmbnBj?=
+ =?utf-8?B?WDB5NUFwNmJ4b3dieDlzTWUxZTQ3UFN3QkVWZVBKclVSUzNvQmkrUmFQMnhO?=
+ =?utf-8?B?UFUwZjAyKzZlM0l1LzhSb1NwL3piRTQzUkhwK3VNeHpHMFlxakwyVStvZTZB?=
+ =?utf-8?B?dndnNVF3U1ZFVkNmVVIwajRUdkJMMGVTcksxWCtFaTZ2OG1RbUh3cE40Vk9Z?=
+ =?utf-8?B?STNpQy9sLytWeitScE1wWVgwVzVGTDZvMGJnY2krcFl5WUxLZFRHQWt0UWdG?=
+ =?utf-8?B?TDM1cHZEM3dwZ1NPYWNtY1JTbmpRd1R3dTJURHJzUWszbHJXOCtKTkxBdHpl?=
+ =?utf-8?B?dFhOTndzT3VkL3lxQ3FKdXZmdXFEbzdwbS90dFZIVkRUQ0dENjE3WHlmZlVH?=
+ =?utf-8?B?WUI4YnJ0MjhZeG1hMlF6VEVWdmhEWEluTzRvTUlka040eGdmSkR1dnZJeWp2?=
+ =?utf-8?B?aFJycXBGeTAyUm5GRUkyTFpQNFovVVg5ekxQRGFtcFIveVc0Wlc1NTBpbStY?=
+ =?utf-8?B?c2ljNGhKZjFPRXJRYUJOR2ZqbFUrcytrQUZuaGpVTVowdWdGQm5XTkd3T2o4?=
+ =?utf-8?B?TzV5R2g2VklxMkxzZXNZWGpBZXBUOStGNW1SSU15MHU4VGplUjd3TGlRV2NR?=
+ =?utf-8?B?d2RNUXpRekppR2tmSVM3RGdvWlhlZ3FjSFd6cjdTeFlJY3M4Ykd6SmZxSzIr?=
+ =?utf-8?B?Kzg4OFJ4OUliZlRLVUkrK1BVOXFHRGE2VU9FVmwvSk5CVEY3VisyVUFCRk9N?=
+ =?utf-8?B?Y2VIeVhLNHJKVHJoNzM0Q3JoajFMQm80UHVoeXRwVlVDcDJJbEJuTStGdjY3?=
+ =?utf-8?B?SFdUanJLcHJZMHFid0pVZHF3emNNa0hZck52OUZKNE9tOUtyQ01sc2F4c2JG?=
+ =?utf-8?B?MGJIenoyVndDS096NG9PaEVuRTVTbEdVcUc2dzZvcUY3azRnTHpETkVBbEZk?=
+ =?utf-8?B?OHM5aEk5NlBjenUwZ2RuaUhpL2R4aGJjczdxdVJTNzdZNmtRT2lmTkVMbjhE?=
+ =?utf-8?B?Z3phR3RCc1RpYWhqWjFaakFYWVN0cG9ieTN6Z0l4NkFQSCtFQ2VtVjlKVWFj?=
+ =?utf-8?B?YnN0MFpJTThYMVc3ZG5rc3FRdGhvN1Q0TkhJandkZXpUQWFPTDB1Zmh1TG5G?=
+ =?utf-8?B?UVVTVkNDaU40STlzcjZQWWt6eHlVSmY2SElWWDBoakQ5cmhUdXVMVlgwY1E0?=
+ =?utf-8?B?eXdjYnlpZWRYN09WOFc0ZlMveU0zQzVIYUZMRFdKSzdaaEMwdy9PTUJsdE9l?=
+ =?utf-8?B?aXJIbzNNelovM28yQ01SemJ1b1pyc1F0cEdOamd6RmRVRkFIZkZQSXRjaGE3?=
+ =?utf-8?B?WFNIaDVsNzhUOElidXh1dVZHMmUzY2h0MVZ6cVVSd1kyYko2UEorYTRvbS9C?=
+ =?utf-8?B?c2lUZml2c093bjZnWVJtREI0WG9kZ0cwVDNSeXJGbDJUWERCeUkva2IzMjBG?=
+ =?utf-8?B?MzlPS29NalczcVdlbDVjNENpWm1nWHlrYzJHYnRWdEZFOHgwbENjRjdFNVh1?=
+ =?utf-8?B?b2M3TXdGMmUvZmh6RzR5aUZrV1dvN1FCc043QWVqdnVxSUlzWnRNOERQaDV0?=
+ =?utf-8?B?SWk5SVVDNkM2c3VzcFFDbEIxQXZVc3YzTzAwTlVTMnY1M01mM241SXdmVy9n?=
+ =?utf-8?B?M0RaZnFlQlVGaHZadWtTdG9WbzFGVEEyaWRJZkJVbzFYd3VtallrNTdLSm1M?=
+ =?utf-8?B?NUNtaS84QkpZUFIvK0dzOWlVZzk3MXhFb0VRa0NtOUxsT3EyeDRudEFEVmNZ?=
+ =?utf-8?B?WmNPNHVnU09wSC9TQUpPRHgxUGZPNzJ3QmFnSHE0cDdjU2pudEx2aFB1NHRR?=
+ =?utf-8?B?ZE16NTdyaW5keGRjSDhxRGxHckI2NndlKzBpTG5oUTlKQmhZTzU1VHpGVlJm?=
+ =?utf-8?B?YllWV1JjTWY3WFJyZndjUUxpM2NpNHk4U003YmVCMllkalc3OFBQNVo0bG1x?=
+ =?utf-8?B?SytpV3pLMDlMSENhRlpueVEyL1d5dGNFOFlXQT09?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR04MB8532.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?d3kzMW0wUUVaQlZnYjhPZHBqYVhWcWo5T2Y3UW5hZERMNXNDQ3lMRU1LaE0w?=
+ =?utf-8?B?UktlYldwb0FnM3A0VHRNUmJCV2lYc1BBazJEZnlkYVNORnFFd1RVK3dNTGVZ?=
+ =?utf-8?B?THFGdzBRNU1oWXFhZk5aaTU5S0srTGNjVVdTbEIvenZDZEFGY2c5azNDS0lS?=
+ =?utf-8?B?M1JGazVmVXRCeUtFdFVaUWdZMjRYaFFzbmRGTUZBNjgvT05MNjFPT0dWTVdH?=
+ =?utf-8?B?azg3b004OU5YOXV6RjlueVRJOUdYOXBCZG9BREJhS2JyanFiYjBHSVlMQk5a?=
+ =?utf-8?B?Si9CRjl4R0VRMGZieGhQNGlZditHV2NBOVpYMFI0Z3NSTENmUHlvVi9abWNR?=
+ =?utf-8?B?eEZ5aEowbUtPdGZVZ25xcUlLTzljd3JxSXJQVk4yd29FNXd3VWNEZmtXYVRh?=
+ =?utf-8?B?SVBQeHRXdnZ5T0ppWjFWYTg5TXduRldGa0Y0OGRYNWlsM3lCMEkvUlBhQzVt?=
+ =?utf-8?B?N1F5SnNOT0V2UkNVT25YMENhVUZGTFJQOTFHMUp3aDhmUnRUbFJUVlV0Smh1?=
+ =?utf-8?B?bEtHWjFHSElBQm1lMnphMVFPZUxxVmpOc1RVQTJHRWtnYnJtM0RNQXg1UHhk?=
+ =?utf-8?B?dVN3ek5yYnRCTVNrRk5wSmV2YXB1RDF2ZEFJTS8vcnlsK1BFeWk0R2RzMEg3?=
+ =?utf-8?B?MXpRRG5nOW9UdjBPSjJLUHIrRGhwL3dJcEt1akNRRFFSZGVuOHdQNmlZQTgz?=
+ =?utf-8?B?Szd3U2tRdklhajRRYTRud0JqblBTdk0xT2Q5RGVibmJScG9XL0RSUU0yYkFp?=
+ =?utf-8?B?SjVLZWFYKzZBTmFvQUpxNU9Ecy9telRIQlVOdjlRR0RFMWxnVkE2UFZJN21J?=
+ =?utf-8?B?dmR2TVBYTzQ2MU5pcklHVnJxcTFpM1Z5YzgyelJrSE1TT2FQY1ozSDlFejZ4?=
+ =?utf-8?B?SXpFbVJDRG5YVkpZSUZ4QlVjV1E3YUFIZnEvZWd1TVZ1cjhZZWxIaU9QSytX?=
+ =?utf-8?B?MklmM2hva1hkYUJ1Y0lWQzEvSy9RMEVLOFp2TDBORWVpSHZiUjhHeFVTVUls?=
+ =?utf-8?B?QVdTOS9FK0hzYlF0SnRsSjBNdGFraWpya0k5SjRYUE9qS1NTRFp5Vmw3TWtD?=
+ =?utf-8?B?UlJvcmdhMnlFRWdFQ2xscTNET0VqMnFFQiswQjA3ZWNCM2I3SUlGL09vZkoz?=
+ =?utf-8?B?dTVSMlM3eFZIUHozelZ6dTJkZVpVd1greTNFUWN6WTZHQ0NzZEQ2R2JhdzIw?=
+ =?utf-8?B?RmpKdmF0R0pDMFlzL3h5MTF6Q1Q5cE5NWkdEMnZEUFRhbXRvTTdUS0RWOUUz?=
+ =?utf-8?B?MWhLR1N3UkdSc3BUaDNlRU5WaE9LWTlrSjlaZXNEdTdDOTZYQkRjdC9FOUdG?=
+ =?utf-8?B?U0dCeDBHU1gyYkVpUi9NV2FxVDBtQUZ6QWFZMWJtdWE0TkpQZEFzRWZGeWl5?=
+ =?utf-8?B?WWZucGJNTG91ZUhPSm92VUoyVDh5dVJtQ1puK3NvNnBIRzNxYnRlVWcxTnFZ?=
+ =?utf-8?B?bHhrSkdWREd4Yk1Pbi84V293T3JoSFBpV1U4dDRxRmdzcFRiRUtzTHduQTlw?=
+ =?utf-8?B?a0w5SHpDR0dmTFBUWGtuL1l1TUhxanVTMmZHZHZtUnJsNFNEcHdBOUh5QlZ5?=
+ =?utf-8?B?bExLbzJ4YUZSR3JkcTgvWWprM3F1WWZUa1c3QTdoZnVFbHBxdEhWamZJdzNE?=
+ =?utf-8?B?ZDJVN08vWGgwVXFPSjgyWERMQ1hqNkd6RzN5dUszNWpZZ1RNRHNnM0JKRTlQ?=
+ =?utf-8?B?R0wrRnAyWFpGOXk1Rlk1NHlxVVczT1ArUW90MWV5MFZoWEljTFlzRWFMWldi?=
+ =?utf-8?B?RUtDYmVDWlpLNHhTcmZaK2REWFA2MmdXSGk0T3hseWhxUnIvYWdkOWFJRVhR?=
+ =?utf-8?B?bHcvL3krMUVTQVd5Uk5vTXByUWVDYnVYNE9zVlBGOEpLK3NUemlSM2o2SmtH?=
+ =?utf-8?B?R0lBaXpOYlN3T243WVpzM1RrbUljcmY4bWRQdkE5VmpXRHlEc1hYT2N4MFVa?=
+ =?utf-8?B?SVhEZjNqR0ZGVTZvb1QzNDd5Y1N2dHNPaGZjdGhtOWErakpXcWVTWGUwdHZS?=
+ =?utf-8?B?Z2paL3R3MnJCbXE1ZEdlZXovTUtPeGpZRXorR0JOS3BXdEtkUGhZdmx3Z2Rp?=
+ =?utf-8?B?aWZWajQ4YWp2YnJxUjliSjJlZ0dzc3J5QjNOZitpWXV0SElzbVpvSXdtVlpw?=
+ =?utf-8?B?cEtvVVNUdFlzaFc4RnBYQ0d1cDhkVlQxbHdlNEFGa1dPYVlobVd0emV0OTht?=
+ =?utf-8?Q?DpYpzfPe8/SooIKFXt9wAGg=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <99F985D9D912A544B197E81DCFC083ED@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Received: by 2002:a05:6808:221a:b0:442:522:41a3 with SMTP id
- 5614622812f47-4536e5de194mr5174327b6e.60.1764942752324; Fri, 05 Dec 2025
- 05:52:32 -0800 (PST)
-Date: Fri, 05 Dec 2025 05:52:32 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <6932e3a0.a70a0220.243dc6.000a.GAE@google.com>
-Subject: [syzbot] Monthly nbd report (Dec 2025)
-From: syzbot <syzbot+list151df4a5fb9739ee568a@syzkaller.appspotmail.com>
-To: josef@toxicpanda.com, linux-block@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
-	syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	DP8gw4C3qF3b15tnvclQI7Hg7bfN//9eq7XF3t+/as9P37tjJSf/4xjKrCXf6zaIgwUDGTsUxQFDEfWnGbtGWEVOHWNgSpl/9q2bt4oTn5EEIyd0ATI0Upv2B/PfADnFDilFgFJBFCaYaSX1VmpJ69QJl1S3EP9fsyT0SU5puA7UrQwTJitlyRYKlPDR650jQY+ooGSRWVI0AyTnkkqnmdzScAtcS8kPCuLjutDPVYEV/pPZWreb05JVyvgJWZLPC8/Ufw0tzObAGbmmeJMow/A3TKWok+YuPlaeMkL7BeIYzHIVU/S1+yuL2yS2j5Ls89WH/1yRmJstsYWzL8s1WhcwScAaks2TBlrMeh+AIw+Yb22RDB5EknFsPrImKA/hQPtcXR2nDUjrK9BUqPJo7mREYBk09hKAFTb+37MU+OJNr02yS2A/Ix3IEjV4g31du3Kw5gLcN0Xs1BhmmupGtQVzDyTrrO/kvOsLvgrSPHwnAlXwxrjM3Mcm+S+Uh3ydQpwR2LucT7S1Wp3NPuZV0ogX1Yw08BV0Va7Kn0swA6kFG19ANGNv2Jrewmde65ChP2A0tL1V7HD12TIbtybeuUvcryZEtSl6jp1zMeOnYKSSv53n+kxQIKsLhmOCtKl2
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR04MB8532.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 060bf4b6-b2b8-4372-2973-08de3e2484d1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Dec 2025 10:59:30.0884
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: lvH4n6ymtBFBQS7NoaKh3fJqRxK3JhaLCxCW8RPvSEk80I1YEDOWVosJ9rx1Dc0NMV2xrbn2673wT+owwvXWlaRzoaap4alJk+mSAMX4HVc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR04MB8974
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <EiLyxG5PrGE.A.OS6M.HeuMpB@bendel>
+Resent-Message-ID: <R4JfI1SpVqE.A.nxLE.bR-QpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3478
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3479
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -85,38 +217,35 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6932e3a0.a70a0220.243dc6.000a.GAE@google.com
-Resent-Date: Fri,  5 Dec 2025 14:09:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/5b023828-b03d-4351-b6f0-e13d0df8c446@wdc.com
+Resent-Date: Thu, 18 Dec 2025 11:24:11 +0000 (UTC)
 
-Hello nbd maintainers/developers,
-
-This is a 31-day syzbot report for the nbd subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/nbd
-
-During the period, 0 new issues were detected and 0 were fixed.
-In total, 5 issues are still open and 8 have already been fixed.
-
-Some of the still happening issues:
-
-Ref Crashes Repro Title
-<1> 2556    Yes   possible deadlock in pcpu_alloc_noprof (2)
-                  https://syzkaller.appspot.com/bug?extid=91771b3fb86ec2dd7227
-<2> 353     Yes   INFO: task hung in nbd_queue_rq
-                  https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
-<3> 67      Yes   possible deadlock in nbd_queue_rq
-                  https://syzkaller.appspot.com/bug?extid=3dbc6142c85cc77eaf04
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
-
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
-
-You may send multiple commands in a single email message.
+SGkgYWxsLA0KDQpJdCdzIGEgYml0IGxhdGUsIGJ1dCBJIHJhbiB0aGUgbGF0ZXN0IGJsa3Rlc3Rz
+IChnaXQgaGFzaDogOThkYzZhZDY0Yzc5KSB3aXRoIHRoZQ0KdjYuMTgga2VybmVsLiBJIG9ic2Vy
+dmVkIDMgZmFpbHVyZXMgbGlzdGVkIGJlbG93LiBDb21wYXJpbmcgd2l0aCB0aGUgcHJldmlvdXMN
+CnJlcG9ydCB3aXRoIHRoZSB2Ni4xOC1yYzEga2VybmVsIFsxXSwgMSBmYWlsdXJlIHdhcyBmaXhl
+ZCAobnZtZS8wMTQsMDU3LDA1OCkgYW5kDQpubyBuZXcgb3RoZXIgZmFpbHVyZSB3YXMgb2JzZXJ2
+ZWQuDQoNClsxXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1ibG9jay95bm1pNzJ4NXd0
+NW9vbGpqYWZlYmhjYXJpdDNwdnU2YXhrc2xxZW5pa2IycDV0eGU1N0BsZHl0cWEydDRpMngvDQoN
+Cg0KTGlzdCBvZiBmYWlsdXJlcw0KPT09PT09PT09PT09PT09PQ0KIzE6IG52bWUvMDA1LDA2MyAo
+dGNwIHRyYW5zcG9ydCkNCiMyOiBudm1lLzA0MSAoZmMgdHJhbnNwb3J0KQ0KIzM6IG5iZC8wMDIN
+Cg0KDQpGYWlsdXJlIGRlc2NyaXB0aW9uDQo9PT09PT09PT09PT09PT09PT09DQoNCiMxOiBudm1l
+LzAwNSwwNjMgKHRjcCB0cmFuc3BvcnQpDQoNCiAgICAgVGhlIHRlc3QgY2FzZSBudm1lLzAwNSBh
+bmQgMDYzIGZhaWwgZm9yIHRjcCB0cmFuc3BvcnQgZHVlIHRvIHRoZSBsb2NrZGVwDQogICAgIFdB
+Uk4gcmVsYXRlZCB0byB0aGUgdGhyZWUgbG9ja3MgcS0+cV91c2FnZV9jb3VudGVyLCBxLT5lbGV2
+YXRvcl9sb2NrIGFuZA0KICAgICBzZXQtPnNyY3UuIFJlZmVyIHRvIHRoZSBudm1lLzA2MyBmYWls
+dXJlIHJlcG9ydCBmb3IgdjYuMTYtcmMxIGtlcm5lbCBbMl0uDQoNCiAgICAgWzJdIGh0dHBzOi8v
+bG9yZS5rZXJuZWwub3JnL2xpbnV4LWJsb2NrLzRmZG0zN3NvM280eHJpY2RnZm9zZ21vaG42M2Fh
+N3dqM3VhNGU1dnBpaG9hbXdnM3VpQGZxNDJmNXE1dDVpYy8NCg0KIzI6IG52bWUvMDQxIChmYyB0
+cmFuc3BvcnQpDQoNCiAgICAgVGhlIHRlc3QgY2FzZSBudm1lLzA0MSBmYWlscyBmb3IgZmMgdHJh
+bnNwb3J0LiBSZWZlciB0byB0aGUgcmVwb3J0IGZvciB0aGUNCiAgICAgdjYuMTIga2VybmVsIFsz
+XS4gRGFuaWVsIHBvc3RlZCB0aGUgZml4IHBhdGNoIHNlcmllcyBbNF0uDQoNCiAgICAgWzNdIGh0
+dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LW52bWUvNmNyeWRrb2Rzeng1dnE0aWVveDNqanB3
+a3h0dTdtaGJvaHlweTI0YXdsbzV3N2Y0azZAdG8zZGNuZzI0cmQ0Lw0KICAgICBbNF0gaHR0cHM6
+Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtbnZtZS8yMDI1MDgyOS1udm1lLWZjLXN5bmMtdjMtMC1k
+NjljODdlNjNhZWVAa2VybmVsLm9yZy8NCg0KIzM6IG5iZC8wMDINCg0KICAgICBUaGUgdGVzdCBj
+YXNlIG5iZC8wMDIgZmFpbHMgZHVlIHRvIHRoZSBsb2NrZGVwIFdBUk4gcmVsYXRlZCB0bw0KICAg
+ICBtbS0+bW1hcF9sb2NrLCBza19sb2NrLUFGX0lORVQ2IGFuZCBmc19yZWNsYWltLiBSZWZlciB0
+byB0aGUgbmJkLzAwMiBmYWlsdXJlDQogICAgIHJlcG9ydCBmb3IgdjYuMTgtcmMxIGtlcm5lbCBb
+MV0uDQo=
 
