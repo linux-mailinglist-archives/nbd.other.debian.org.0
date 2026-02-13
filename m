@@ -2,115 +2,97 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +F4rKHr6jmljGwEAu9opvQ
+	id 4HCIJsdoj2lHQwEAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Fri, 13 Feb 2026 11:18:34 +0100
+	for <lists+nbd@lfdr.de>; Fri, 13 Feb 2026 19:09:11 +0100
 X-Original-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6477B134F8A
-	for <lists+nbd@lfdr.de>; Fri, 13 Feb 2026 11:18:34 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 47ECF138D21
+	for <lists+nbd@lfdr.de>; Fri, 13 Feb 2026 19:09:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 0A47C20878; Fri, 13 Feb 2026 10:18:34 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 13 10:18:33 2026
-Old-Return-Path: <dwagner@suse.de>
+	id E9F6020673; Fri, 13 Feb 2026 18:09:10 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Fri Feb 13 18:09:10 2026
+Old-Return-Path: <bvanassche@acm.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Status: No, score=0.1 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,RCVD_IN_DNSWL_LOW,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	TO_TOO_MANY autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 04A1B20829
-	for <lists-other-nbd@bendel.debian.org>; Fri, 13 Feb 2026 10:02:22 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DDB9420705
+	for <lists-other-nbd@bendel.debian.org>; Fri, 13 Feb 2026 17:51:16 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.1 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.798 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1]
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, TO_TOO_MANY=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id M85CZcGsKGlt for <lists-other-nbd@bendel.debian.org>;
-	Fri, 13 Feb 2026 10:02:14 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 358 seconds by postgrey-1.36 at bendel; Fri, 13 Feb 2026 10:02:14 UTC
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2a07:de40:b251:101:10:150:64:2])
+	with ESMTP id UhU5jjb7FR_h for <lists-other-nbd@bendel.debian.org>;
+	Fri, 13 Feb 2026 17:51:09 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -6.6
+X-Greylist: delayed 414 seconds by postgrey-1.36 at bendel; Fri, 13 Feb 2026 17:51:08 UTC
+Received: from 013.lax.mailroute.net (013.lax.mailroute.net [199.89.1.16])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "mailroute.net", Issuer "R13" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id ED09920793
+	for <nbd@other.debian.org>; Fri, 13 Feb 2026 17:51:08 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by 013.lax.mailroute.net (Postfix) with ESMTP id 4fCKKj6mlFzlgqwF;
+	Fri, 13 Feb 2026 17:44:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
+	content-transfer-encoding:content-type:content-type:in-reply-to
+	:from:from:content-language:references:subject:subject
+	:user-agent:mime-version:date:date:message-id:received:received;
+	 s=mr01; t=1771004648; x=1773596649; bh=t9RzRfvwbSgpAAn+57L/twMb
+	K6THI0fSwkzw1UKZRes=; b=QzNyeC+78j+FCizjBSZLWJPixMNPatJ8HNzEwubp
+	yRQdiq+UcNG4TgXbrCcSBO+1U5RLvQF2JDPAWNVvrEr9kjznYAo+foAHwGGzPjK2
+	8iNettCMNTrcbNYGdjuD6pbrRwHvT07kkG+TTiCX6wWnUDwHG+0J+H4goOL9P1lh
+	ey4fyk4jg112tX+f2Ac+RqUjOivwmP4IltVmK6Fk1BvJjCIe418yhhV7GOZV7IK0
+	GF7K2kY2+RDX9ynJ2WTrhSKVHXX2gD16iDiIbiXGi7BvEh0+Zgid3FSsfUv10bFq
+	Snt3Pp7CNxP2zBTqV4ydz3FCoyDTnnOozvhyQU0r7U2m/A==
+X-Virus-Scanned: by MailRoute
+Received: from 013.lax.mailroute.net ([127.0.0.1])
+ by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id 8XnJ08o8QUxG; Fri, 13 Feb 2026 17:44:08 +0000 (UTC)
+Received: from [100.119.48.131] (unknown [104.135.180.219])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id BA93F20703
-	for <nbd@other.debian.org>; Fri, 13 Feb 2026 10:02:14 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 9ADC45BCC4;
-	Fri, 13 Feb 2026 09:56:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1770976572; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qBJp+W6+w4hpK1AOjuJLBK8cne5W/Y5VssQKf43ZEcM=;
-	b=BUrXuVrU4Uj6JeWVtHNxu88KEqTAApBzpLUGAKfVFe2/TCfmIgy6NE5QzmaDN7DKMBOsGG
-	ZckVaiWgkkpXmcY97TGZ4774iAyr3Var34MEz9aYElUmwWpVZkMwG/fGjrNKdd43FcMP0X
-	bKV/xb9tVwCcknG0GeL6ZpYq+lL8Y5M=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1770976572;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qBJp+W6+w4hpK1AOjuJLBK8cne5W/Y5VssQKf43ZEcM=;
-	b=Ds5zlB7bv4vIWUQYT40lau/zwk7JiXqptX+FGL1vAdKrX94QpSG11m2XlfY0lzWbZ059rP
-	xa9emAAylTWn18Dw==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=BUrXuVrU;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Ds5zlB7b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1770976572; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qBJp+W6+w4hpK1AOjuJLBK8cne5W/Y5VssQKf43ZEcM=;
-	b=BUrXuVrU4Uj6JeWVtHNxu88KEqTAApBzpLUGAKfVFe2/TCfmIgy6NE5QzmaDN7DKMBOsGG
-	ZckVaiWgkkpXmcY97TGZ4774iAyr3Var34MEz9aYElUmwWpVZkMwG/fGjrNKdd43FcMP0X
-	bKV/xb9tVwCcknG0GeL6ZpYq+lL8Y5M=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1770976572;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qBJp+W6+w4hpK1AOjuJLBK8cne5W/Y5VssQKf43ZEcM=;
-	b=Ds5zlB7bv4vIWUQYT40lau/zwk7JiXqptX+FGL1vAdKrX94QpSG11m2XlfY0lzWbZ059rP
-	xa9emAAylTWn18Dw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 813873EA62;
-	Fri, 13 Feb 2026 09:56:12 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 5S3eHjz1jmngDgAAD6G6ig
-	(envelope-from <dwagner@suse.de>); Fri, 13 Feb 2026 09:56:12 +0000
-Date: Fri, 13 Feb 2026 10:56:11 +0100
-From: Daniel Wagner <dwagner@suse.de>
-To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, 
-	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>, "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>, 
-	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
-Subject: Re: blktests failures with v6.19 kernel
-Message-ID: <6ad314f7-f3d2-495a-b1ef-a81a06498952@flourine.local>
-References: <aY7ZBfMjVIhe_wh3@shinmob>
+	(Authenticated sender: bvanassche@acm.org)
+	by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4fCKKg1FjCzlfgPZ;
+	Fri, 13 Feb 2026 17:44:06 +0000 (UTC)
+Message-ID: <5157497a-3536-4187-883e-19a54167955a@acm.org>
+Date: Fri, 13 Feb 2026 09:44:06 -0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: blktests failures with v6.19 kernel
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ "nbd@other.debian.org" <nbd@other.debian.org>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
+References: <aY7ZBfMjVIhe_wh3@shinmob>
+Content-Language: en-US
+From: Bart Van Assche <bvanassche@acm.org>
 In-Reply-To: <aY7ZBfMjVIhe_wh3@shinmob>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <Bn1i0-vhOkM.A.SydN.5pvjpB@bendel>
+Resent-Message-ID: <3W6AV3GSwfJ.A.pa8D.Gj2jpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3486
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3487
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -120,157 +102,115 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6ad314f7-f3d2-495a-b1ef-a81a06498952@flourine.local
-Resent-Date: Fri, 13 Feb 2026 10:18:34 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/5157497a-3536-4187-883e-19a54167955a@acm.org
+Resent-Date: Fri, 13 Feb 2026 18:09:10 +0000 (UTC)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.11 / 15.00];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+X-Spamd-Result: default: False [-1.01 / 15.00];
+	DMARC_POLICY_ALLOW(-0.50)[acm.org,reject];
+	R_DKIM_ALLOW(-0.20)[acm.org:s=mr01];
 	MAILLIST(-0.20)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER(0.00)[bvanassche@acm.org,bounce-nbd=lists@other.debian.org];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	R_SPF_NA(0.00)[no SPF record];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	FORGED_SENDER(0.00)[dwagner@suse.de,bounce-nbd=lists@other.debian.org];
 	ARC_NA(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
 	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	DKIM_TRACE(0.00)[suse.de:+];
+	R_SPF_NA(0.00)[no SPF record];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwagner@suse.de,bounce-nbd=lists@other.debian.org];
-	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:helo,bendel.debian.org:rdns,acm.org:mid,acm.org:dkim];
+	FROM_NEQ_ENVFROM(0.00)[bvanassche@acm.org,bounce-nbd=lists@other.debian.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[acm.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[nbd];
+	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[nbd];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 6477B134F8A
+X-Rspamd-Queue-Id: 47ECF138D21
 X-Rspamd-Action: no action
 
-On Fri, Feb 13, 2026 at 07:57:58AM +0000, Shinichiro Kawasaki wrote:
-> [3] lockdep WARN during nvme/058 with fc transport
+On 2/12/26 11:57 PM, Shinichiro Kawasaki wrote:
+> [5] kmemleak at nvme/061 wiht rdma transport and siw driver
 > 
-> [  409.028219] [     T95] ============================================
-> [  409.029133] [     T95] WARNING: possible recursive locking detected
-> [  409.030058] [     T95] 6.19.0+ #575 Not tainted
-> [  409.030892] [     T95] --------------------------------------------
-> [  409.031801] [     T95] kworker/u16:9/95 is trying to acquire lock:
-> [  409.032691] [     T95] ffff88813ba54948 ((wq_completion)nvmet-wq){+.+.}-{0:0}, at: touch_wq_lockdep_map+0x7e/0x1a0
-> [  409.033869] [     T95] 
->                           but task is already holding lock:
-> [  409.035254] [     T95] ffff88813ba54948 ((wq_completion)nvmet-wq){+.+.}-{0:0}, at: process_one_work+0xeef/0x1480
-> [  409.036383] [     T95] 
->                           other info that might help us debug this:
-> [  409.037769] [     T95]  Possible unsafe locking scenario:
+> unreferenced object 0xffff888114792600 (size 32):
+>    comm "kworker/2:1H", pid 66, jiffies 4295489358
+>    hex dump (first 32 bytes):
+>      c2 f6 83 05 00 ea ff ff 00 00 00 00 00 10 00 00  ................
+>      00 b0 fd 60 81 88 ff ff 00 10 00 00 00 00 00 00  ...`............
+>    backtrace (crc 3dbac61d):
+>      __kmalloc_noprof+0x62f/0x8b0
+>      sgl_alloc_order+0x74/0x330
+>      0xffffffffc1b73433
+>      0xffffffffc1bc1f0d
+>      0xffffffffc1bc8064
+>      __ib_process_cq+0x14f/0x3e0 [ib_core]
+>      ib_cq_poll_work+0x49/0x160 [ib_core]
+>      process_one_work+0x868/0x1480
+>      worker_thread+0x5ee/0xfd0
+>      kthread+0x3af/0x770
+>      ret_from_fork+0x55c/0x810
+>      ret_from_fork_asm+0x1a/0x30
+
+There are no sgl_alloc() calls in the RDMA subsystem. I think the above
+indicates a memory leak in either the RDMA NVMe target driver or in the
+NVMe target core.
+
+> [7] kmemleak at zbd/009
 > 
-> [  409.039113] [     T95]        CPU0
-> [  409.039781] [     T95]        ----
-> [  409.040406] [     T95]   lock((wq_completion)nvmet-wq);
-> [  409.041154] [     T95]   lock((wq_completion)nvmet-wq);
-> [  409.041898] [     T95] 
->                            *** DEADLOCK ***
-> 
-> [  409.043609] [     T95]  May be due to missing lock nesting notation
-> 
-> [  409.044960] [     T95] 3 locks held by kworker/u16:9/95:
-> [  409.045721] [     T95]  #0: ffff88813ba54948 ((wq_completion)nvmet-wq){+.+.}-{0:0}, at: process_one_work+0xeef/0x1480
-> [  409.046845] [     T95]  #1: ffff888109797ca8 ((work_completion)(&assoc->del_work)){+.+.}-{0:0}, at: process_one_work+0x7e4/0x1480
-> [  409.048063] [     T95]  #2: ffffffffac481480 (rcu_read_lock){....}-{1:3}, at: __flush_work+0xe3/0xc70
-> [  409.049128] [     T95] 
->                           stack backtrace:
-> [  409.050366] [     T95] CPU: 1 UID: 0 PID: 95 Comm: kworker/u16:9 Not tainted 6.19.0+ #575 PREEMPT(voluntary) 
-> [  409.050370] [     T95] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.3-4.fc42 04/01/2014
-> [  409.050373] [     T95] Workqueue: nvmet-wq nvmet_fc_delete_assoc_work [nvmet_fc]
-> [  409.050384] [     T95] Call Trace:
-> [  409.050386] [     T95]  <TASK>
-> [  409.050388] [     T95]  dump_stack_lvl+0x6a/0x90
-> [  409.050393] [     T95]  print_deadlock_bug.cold+0xc0/0xcd
-> [  409.050401] [     T95]  __lock_acquire+0x1312/0x2230
-> [  409.050408] [     T95]  ? lockdep_unlock+0x5e/0xc0
-> [  409.050410] [     T95]  ? __lock_acquire+0xd03/0x2230
-> [  409.050413] [     T95]  lock_acquire+0x170/0x300
-> [  409.050415] [     T95]  ? touch_wq_lockdep_map+0x7e/0x1a0
-> [  409.050418] [     T95]  ? __flush_work+0x4e8/0xc70
-> [  409.050420] [     T95]  ? find_held_lock+0x2b/0x80
-> [  409.050423] [     T95]  ? touch_wq_lockdep_map+0x7e/0x1a0
-> [  409.050425] [     T95]  touch_wq_lockdep_map+0x97/0x1a0
-> [  409.050428] [     T95]  ? touch_wq_lockdep_map+0x7e/0x1a0
-> [  409.050430] [     T95]  ? __flush_work+0x4e8/0xc70
-> [  409.050432] [     T95]  __flush_work+0x5c1/0xc70
-> [  409.050434] [     T95]  ? __pfx___flush_work+0x10/0x10
-> [  409.050436] [     T95]  ? __pfx___flush_work+0x10/0x10
-> [  409.050439] [     T95]  ? __pfx_wq_barrier_func+0x10/0x10
-> [  409.050444] [     T95]  ? __pfx___might_resched+0x10/0x10
-> [  409.050454] [     T95]  nvmet_ctrl_free+0x2e9/0x810 [nvmet]
-> [  409.050474] [     T95]  ? __pfx___cancel_work+0x10/0x10
-> [  409.050479] [     T95]  ? __pfx_nvmet_ctrl_free+0x10/0x10 [nvmet]
-> [  409.050498] [     T95]  nvmet_cq_put+0x136/0x180 [nvmet]
-> [  409.050515] [     T95]  nvmet_fc_target_assoc_free+0x398/0x2040 [nvmet_fc]
-> [  409.050522] [     T95]  ? __pfx_nvmet_fc_target_assoc_free+0x10/0x10 [nvmet_fc]
-> [  409.050528] [     T95]  nvmet_fc_delete_assoc_work.cold+0x82/0xff [nvmet_fc]
-> [  409.050533] [     T95]  process_one_work+0x868/0x1480
-> [  409.050538] [     T95]  ? __pfx_process_one_work+0x10/0x10
-> [  409.050541] [     T95]  ? lock_acquire+0x170/0x300
-> [  409.050545] [     T95]  ? assign_work+0x156/0x390
-> [  409.050548] [     T95]  worker_thread+0x5ee/0xfd0
-> [  409.050553] [     T95]  ? __pfx_worker_thread+0x10/0x10
-> [  409.050555] [     T95]  kthread+0x3af/0x770
-> [  409.050560] [     T95]  ? lock_acquire+0x180/0x300
-> [  409.050563] [     T95]  ? __pfx_kthread+0x10/0x10
-> [  409.050565] [     T95]  ? __pfx_kthread+0x10/0x10
-> [  409.050568] [     T95]  ? ret_from_fork+0x6e/0x810
-> [  409.050576] [     T95]  ? lock_release+0x1ab/0x2f0
-> [  409.050578] [     T95]  ? rcu_is_watching+0x11/0xb0
-> [  409.050582] [     T95]  ? __pfx_kthread+0x10/0x10
-> [  409.050585] [     T95]  ret_from_fork+0x55c/0x810
-> [  409.050588] [     T95]  ? __pfx_ret_from_fork+0x10/0x10
-> [  409.050590] [     T95]  ? __switch_to+0x10a/0xda0
-> [  409.050598] [     T95]  ? __switch_to_asm+0x33/0x70
-> [  409.050602] [     T95]  ? __pfx_kthread+0x10/0x10
-> [  409.050605] [     T95]  ret_from_fork_asm+0x1a/0x30
-> [  409.050610] [     T95]  </TASK>
+> unreferenced object 0xffff88815f1f1280 (size 32):
+>    comm "mount", pid 1745, jiffies 4294866235
+>    hex dump (first 32 bytes):
+>      6d 65 74 61 64 61 74 61 2d 74 72 65 65 6c 6f 67  metadata-treelog
+>      00 93 9c fb af bb ae 00 00 00 00 00 00 00 00 00  ................
+>    backtrace (crc 2ee03cc2):
+>      __kmalloc_node_track_caller_noprof+0x66b/0x8c0
+>      kstrdup+0x42/0xc0
+>      kobject_set_name_vargs+0x44/0x110
+>      kobject_init_and_add+0xcf/0x140
+>      btrfs_sysfs_add_space_info_type+0xf2/0x200 [btrfs]
+>      create_space_info_sub_group.constprop.0+0xfb/0x1b0 [btrfs]
+>      create_space_info+0x247/0x320 [btrfs]
+>      btrfs_init_space_info+0x143/0x1b0 [btrfs]
+>      open_ctree+0x2eed/0x43fe [btrfs]
+>      btrfs_get_tree.cold+0x90/0x1da [btrfs]
+>      vfs_get_tree+0x87/0x2f0
+>      vfs_cmd_create+0xbd/0x280
+>      __do_sys_fsconfig+0x64f/0xa30
+>      do_syscall_64+0x95/0x540
+>      entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> unreferenced object 0xffff888128d80000 (size 16):
+>    comm "mount", pid 1745, jiffies 4294866237
+>    hex dump (first 16 bytes):
+>      64 61 74 61 2d 72 65 6c 6f 63 00 4b 96 f6 48 82  data-reloc.K..H.
+>    backtrace (crc 1598f702):
+>      __kmalloc_node_track_caller_noprof+0x66b/0x8c0
+>      kstrdup+0x42/0xc0
+>      kobject_set_name_vargs+0x44/0x110
+>      kobject_init_and_add+0xcf/0x140
+>      btrfs_sysfs_add_space_info_type+0xf2/0x200 [btrfs]
+>      create_space_info_sub_group.constprop.0+0xfb/0x1b0 [btrfs]
+>      create_space_info+0x211/0x320 [btrfs]
+>      open_ctree+0x2eed/0x43fe [btrfs]
+>      btrfs_get_tree.cold+0x90/0x1da [btrfs]
+>      vfs_get_tree+0x87/0x2f0
+>      vfs_cmd_create+0xbd/0x280
+>      __do_sys_fsconfig+0x64f/0xa30
+>      do_syscall_64+0x95/0x540
+>      entry_SYSCALL_64_after_hwframe+0x76/0x7e
 
-nvmet_fc_target_assoc_free runs in the nvmet_wq context and calls
+Please report the above to the BTRFS maintainers.
 
-  nvmet_fc_delete_target_queue
-    nvmet_cq_put
-      nvmet_cq_destroy
-        nvmet_ctrl_put
-         nvmet_ctrl_free
-           flush_work(&ctrl->async_event_work);
-           cancel_work_sync(&ctrl->fatal_err_work);
- 
-The async_event_work could be running on nvmet_wq. So this deadlock is
-real. No idea how to fix it yet.
+Thanks,
 
-> [4] WARN during nvme/058 fc transport
-> 
-> [ 1410.913156] [   T1369] WARNING: block/genhd.c:463 at __add_disk+0x87b/0xd50, CPU#0: kworker/u16:12/1369
-
-	/*
-	 * If the driver provides an explicit major number it also must provide
-	 * the number of minors numbers supported, and those will be used to
-	 * setup the gendisk.
-	 * Otherwise just allocate the device numbers for both the whole device
-	 * and all partitions from the extended dev_t space.
-	 */
-	ret = -EINVAL;
-	if (disk->major) {
-		if (WARN_ON(!disk->minors))
-			goto out;
-
-If I read the correct, the gendisk is allocated in nvme_mpath_alloc_disk
-and then added due the ANA change in nvme_update_ana_state. Not sure if
-this is really fc related but I haven't really figured out how this part
-of the code yet.
+Bart.
 
