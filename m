@@ -2,125 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YDYMA/urlGl7GQIAu9opvQ
+	id eJ4jETfKlGmEHwIAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 18:57:15 +0100
+	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 21:06:15 +0100
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id A028114ECC3
-	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 18:57:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0DB714FD07
+	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 21:06:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 68F31205DA; Tue, 17 Feb 2026 17:57:14 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 17 17:57:14 2026
-Old-Return-Path: <hristo@venev.name>
+	id 74D5A205A0; Tue, 17 Feb 2026 20:06:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 17 20:06:14 2026
+Old-Return-Path: <3S8aUaQkbAH4u01mcnngtcrrkf.iqqingwugteqpvgpv.eqo@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_VALIDITY_RPBL_BLOCKED,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED,SARE_MSGID_LONG40 autolearn=no
-	autolearn_force=no version=3.4.6
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
+	FVGT_m_MULTI_ODD,HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	TO_TOO_MANY autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 53125205C6
-	for <lists-other-nbd@bendel.debian.org>; Tue, 17 Feb 2026 17:40:56 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 043F82053D
+	for <lists-other-nbd@bendel.debian.org>; Tue, 17 Feb 2026 19:49:52 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.061 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SARE_MSGID_LONG40=0.637]
+X-Amavis-Spam-Status: No, score=-0.87 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, FOURLA=0.1, FROM_LOCAL_HEX=0.006,
+	FVGT_m_MULTI_ODD=0.02, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+	RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, TO_TOO_MANY=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id YIieLtaw03ZE for <lists-other-nbd@bendel.debian.org>;
-	Tue, 17 Feb 2026 17:40:48 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -4.6
-Received: from a1-bg02.venev.name (a1-bg02.venev.name [213.240.239.49])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 66FC5205C3
-	for <nbd@other.debian.org>; Tue, 17 Feb 2026 17:40:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=venev.name;
-	s=default; h=Content-Transfer-Encoding:Content-Type:Date:To:From:Subject:
-	Message-ID:Reply-To:Sender; bh=bx8ltbMTWp0UveWQZhheXSavSfUUgDZEwTgmD9Qwd3Y=; 
-	b=DTcF0Yy0rXsDwsUQfNzovoYC28DkESS92+TD0RHEkAkgJqacalxbwWzjp8eZX5JsOquyxk270UC
-	URVGDI+DJuSmz3qVtJjpklrGPCeWPl/LCoveJXrmfSvmIZc03Pleiiy8eXMF70HF0L9ALRnv7udpF
-	iaP8fyAyGEIQbmdbpjybubn/+MKm56M7eqgabj3mIFide+zHxHvMS0pgsWPV9EjYkALu4T4ZktKXV
-	XfeBUG8DyuAseVFwSIczwF6j7TV88AHBVEBqcRv04nJuDrkaddK3I/bHTKyk3NSAUQ8Ss8o2pMfmD
-	m8+UQ0ekuXF4L8ShUZV/fVSNwWsgOR4uNuxwaapuY/uOlFHrLscWmjV73boY3WK9m779sB8T3n+Gt
-	O26QNNe2tUFb9NcYfwDmHOO1E0ABZu/h9Al9ah4Roh6+w+vhYkzo5xDiUjZD6psvX4YFtjjEMvI7s
-	uQXiq412q66WsaZQpvnoS0yNiR2DNQhZ4Guk9sb8/HXeWMNdn8uRpJ/9rZBpvMoXEbnzJbxT0ui2H
-	LbRW6vXGg0iDLXaF+f/GuThGxxvRD5iJyJZ0b2U4deQzy8nnDUMpkC9lPNHuiRqCH4wEeGNBwFEvK
-	CMgQ6Oj6reAlVAs/Nlxfr/fatoxnjv3IpCTpOkrLqZj2OQi7baltxvvnqJlK4ugokNDbM=;
-Received: from a1-bg02.venev.name ([213.240.239.49] helo=pmx1.venev.name)
-	by a1-bg02.venev.name with esmtps
-	id 1vsP3r-0000000EX02-2lII
-	(TLS1.3:TLS_AES_256_GCM_SHA384:256)
-	(envelope-from <hristo@venev.name>);
-	Tue, 17 Feb 2026 17:40:35 +0000
-Received: from box.m.venev.name ([213.240.239.49])
-	by pmx1.venev.name with ESMTPSA
-	id AbcRMxGolGkU2TQAdB6GMg
-	(envelope-from <hristo@venev.name>); Tue, 17 Feb 2026 17:40:35 +0000
-Message-ID: <6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name>
-Subject: Re: [PATCH] netlink: specs: add specification for NBD
-From: Hristo Venev <hristo@venev.name>
-To: Donald Hunter <donald.hunter@gmail.com>
-Cc: Jakub Kicinski <kuba@kernel.org>, "David S. Miller"
- <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>, Paolo Abeni
- <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	netdev@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>, Jens Axboe	
- <axboe@kernel.dk>, linux-block@vger.kernel.org, nbd@other.debian.org
-Date: Tue, 17 Feb 2026 19:40:33 +0200
-In-Reply-To: <m2o6lnlg2y.fsf@gmail.com>
-References: <20260215180309.2255721-3-hristo@venev.name>
-	 <m2o6lnlg2y.fsf@gmail.com>
-Autocrypt: addr=hristo@venev.name; prefer-encrypt=mutual;
- keydata=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
- AjQ6o01lu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+	with ESMTP id zhBUFhKxoEUA for <lists-other-nbd@bendel.debian.org>;
+	Tue, 17 Feb 2026 19:49:44 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 IX_MANITU=ERR(0) CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-oi1-f200.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
+Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com [209.85.167.200])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 4CA5C2051C
+	for <nbd@other.debian.org>; Tue, 17 Feb 2026 19:49:34 +0000 (UTC)
+Received: by mail-oi1-f200.google.com with SMTP id 5614622812f47-463a075e0f5so1835637b6e.1
+        for <nbd@other.debian.org>; Tue, 17 Feb 2026 11:49:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771357771; x=1771962571;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=J7oG1PEXR6aRwD08qjBpn3IaU8PvlEnIDt61McOrYLU=;
+        b=rpolJNZPObjtSABrTJxWrpPFVer215cMRDxJa+aj/HukFbgdHe6j4pnM7+801Kh8yX
+         SkCSNteg/z4mxDo/K9ybSJKKFEXCEtfanDFwLvQHxVpazAU3DcMgXtDwCgmJ4sOheOlp
+         QObjIygIOfIev1vfvrZrIoEL4/P3z5AVBG65PwX4EHQO9XWE0UUYPrS9noqm+CcsVPyb
+         A/hnEXOHT6uFs9tQ8tkp9iRlUKBueuk+pnLSxGphBkzzi/HTSjNOemm2kpO6U7VhVar+
+         Ig4LZwWK/ZfwXhI9PpGkCGKS8cn5o3F8QdUvuPsgGt6ujCZoOzhvtEH50ZKq+JcL4+XO
+         HgDg==
+X-Forwarded-Encrypted: i=1; AJvYcCUi+vlh3fjpoQgKNHA96XwkqqppUzDbydJqc2qsIZU9Ew8+wIeGysEPUdKCBhwlAgV0PaI=@other.debian.org
+X-Gm-Message-State: AOJu0YxuLvspFhgyeDLc5xaIlTZAnUEqyNAm0wF6M8E+eHNttMawsSG+
+	c4YL2dMTdszim0juzFltppv6aobH6O2vFWG7vfG9JSq8ajhUeD8qFpPXZf9YQ7l3NOCF5I3r6sv
+	DT2P+kCc0ThC9HDJ1I88NqWfXX4secusbHzm+tAhxYOfQUJDKS3CNMS+5Pyg=
 MIME-Version: 1.0
+X-Received: by 2002:a05:6808:86d7:b0:464:5a7:7cd6 with SMTP id
+ 5614622812f47-46405a7c2famr715814b6e.15.1771357771631; Tue, 17 Feb 2026
+ 11:49:31 -0800 (PST)
+Date: Tue, 17 Feb 2026 11:49:31 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6994c64b.a70a0220.2c38d7.010a.GAE@google.com>
+Subject: [syzbot] [nbd?] possible deadlock in nbd_disconnect_and_put
+From: syzbot <syzbot+3add0454d5a2619b8e80@syzkaller.appspotmail.com>
+To: axboe@kernel.dk, josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <EFI1wqse_BJ.A.qQGM.6vKlpB@bendel>
+Resent-Message-ID: <TX4YlxSp5UI.A.WXgP.2oMlpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3495
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3496
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -130,198 +90,222 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name
-Resent-Date: Tue, 17 Feb 2026 17:57:14 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6994c64b.a70a0220.2c38d7.010a.GAE@google.com
+Resent-Date: Tue, 17 Feb 2026 20:06:14 +0000 (UTC)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.39 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[venev.name,quarantine];
-	R_DKIM_ALLOW(-0.20)[venev.name:s=default];
+X-Spamd-Result: default: False [0.69 / 15.00];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=61690c38d1398936];
 	MAILLIST(-0.20)[generic];
-	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : No valid SPF, No valid DKIM,none];
 	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:netdev@vger.kernel.org,m:josef@toxicpanda.com,m:axboe@kernel.dk,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,m:donaldhunter@gmail.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[hristo@venev.name,bounce-nbd=lists@other.debian.org];
+	TAGGED_FROM(0.00)[nbd=lfdr.de,3add0454d5a2619b8e80];
+	FORGED_RECIPIENTS(0.00)[m:axboe@kernel.dk,m:josef@toxicpanda.com,m:linux-block@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:nbd@other.debian.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
+	R_SPF_NA(0.00)[no SPF record];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,bounce-nbd=lists@other.debian.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	R_SPF_NA(0.00)[no SPF record];
-	DKIM_TRACE(0.00)[venev.name:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[hristo@venev.name,bounce-nbd=lists@other.debian.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,bounce-nbd=lists@other.debian.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,appspotmail.com:email,googlegroups.com:email,storage.googleapis.com:url,goo.gl:url,bendel.debian.org:helo,bendel.debian.org:rdns];
 	TAGGED_RCPT(0.00)[nbd];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:helo,bendel.debian.org:rdns]
-X-Rspamd-Queue-Id: A028114ECC3
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	SUBJECT_HAS_QUESTION(0.00)[]
+X-Rspamd-Queue-Id: E0DB714FD07
 X-Rspamd-Action: no action
 
-On Tue, 2026-02-17 at 12:17 +0000, Donald Hunter wrote:
-> There are yamllint errors:
->=20
-> make -C tools/net/ynl lint
-> make: Entering directory '/home/donaldh/net-next/tools/net/ynl'
-> yamllint ../../../Documentation/netlink/specs
-> ../../../Documentation/netlink/specs/nbd.yaml
-> =C2=A0 159:81=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 line too long (10=
-4 > 80 characters)=C2=A0 (line-
-> length)
-> =C2=A0 169:6=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 syntax error=
-: expected <block end>, but found
-> '<block mapping start>' (syntax)
-> =C2=A0 170:7=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 wrong indent=
-ation: expected 5 but found 6=C2=A0
-> (indentation)
+Hello,
 
-Thanks, I will fix the lint errors in v2.
+syzbot found the following issue on:
 
-> > +doc: See :file:`drivers/block/nbd.c`
->=20
-> Prefer to see a meaningful doc string here.
+HEAD commit:    635c467cc14e Add linux-next specific files for 20260213
+git tree:       linux-next
+console output: https://syzkaller.appspot.com/x/log.txt?x=136df15a580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=61690c38d1398936
+dashboard link: https://syzkaller.appspot.com/bug?extid=3add0454d5a2619b8e80
+compiler:       Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp1~20251221153213.50), Debian LLD 21.1.8
 
-I will add more proper documentation in v2. I couldn't find any
-existing documentation of this netlink interface, so I guess I will
-write it myself.
+Unfortunately, I don't have any reproducer for this issue yet.
 
-> > +attribute-sets:
-> > +=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0 name: nbd-attrs
-> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-attr-
-> > +=C2=A0=C2=A0=C2=A0 doc: Configuration policy attributes, used for CONN=
-ECT
-> > +=C2=A0=C2=A0=C2=A0 attributes:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->=20
-> No need for unspec in the attribute list, ynl codegen does the right
-> thing.
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/78b3d15ca8e6/disk-635c467c.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/a95f3d108ef4/vmlinux-635c467c.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/e58086838b24/bzImage-635c467c.xz
 
-For me `pyynl.ynl_gen_c --mode uapi --header` no longer generates
-`NBD_ATTR_UNSPEC` if I remove this. Is there a YNL property to specify
-the name of the zero value of the attribute set? If not, should I
-remove it anyway, changing the generated header?
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+3add0454d5a2619b8e80@syzkaller.appspotmail.com
 
-> > +=C2=A0=C2=A0=C2=A0 name: device-item-attrs
-> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-device-item-
-> > +=C2=A0=C2=A0=C2=A0 doc: |
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 This is the format for multiple devices=
- with
-> > :code:`NBD_ATTR_DEVICE_LIST`
-> > +
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .. code-block::
-> > +
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_ATTR_DEVICE_LIST]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_DEVICE_ITE=
-M]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
-D_DEVICE_INDEX]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
-D_DEVICE_CONNECTED]
-> > +=C2=A0=C2=A0=C2=A0 attributes:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->=20
-> Not required.
+block nbd1: NBD_DISCONNECT
+block nbd1: Disconnected due to user request.
+block nbd1: shutting down sockets
+======================================================
+WARNING: possible circular locking dependency detected
+syzkaller #0 Not tainted
+------------------------------------------------------
+syz.1.1462/9805 is trying to acquire lock:
+ffff8880271c7948 ((wq_completion)nbd1-recv){+.+.}-{0:0}, at: touch_wq_lockdep_map+0xb5/0x180 kernel/workqueue.c:3994
 
-The same question applies here.
+but task is already holding lock:
+ffff888027014278 (&nbd->config_lock){+.+.}-{4:4}, at: nbd_disconnect_and_put+0x2f/0x2c0 drivers/block/nbd.c:2256
 
-> > +=C2=A0=C2=A0=C2=A0 name: device-attrs
-> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-device-
-> > +=C2=A0=C2=A0=C2=A0 attr-max-name: nbd-device-attr-max
-> > +=C2=A0=C2=A0=C2=A0 attributes:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->=20
-> Not required.
+which lock already depends on the new lock.
 
-The same question applies here.
 
-> > +=C2=A0=C2=A0=C2=A0 name: sock-item-attrs
-> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-sock-item-
-> > +=C2=A0=C2=A0=C2=A0 doc: |
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 This is the format for multiple sockets=
- with
-> > :code:`NBD_ATTR_SOCKETS`
-> > +
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .. code-block::
-> > +
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_ATTR_SOCKETS]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_SOCK_ITEM]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
-D_SOCK_FD]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_SOCK_ITEM]
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
-D_SOCK_FD]
-> > +=C2=A0=C2=A0=C2=A0 attributes:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->=20
-> Not required.
+the existing dependency chain (in reverse order) is:
 
-The same question applies here.
+-> #2 (&nbd->config_lock){+.+.}-{4:4}:
+       __mutex_lock_common kernel/locking/mutex.c:614 [inline]
+       __mutex_lock+0x19f/0x1300 kernel/locking/mutex.c:776
+       refcount_dec_and_mutex_lock+0x30/0xa0 lib/refcount.c:118
+       nbd_config_put+0x2c/0x580 drivers/block/nbd.c:1434
+       recv_work+0x1cc1/0x1d90 drivers/block/nbd.c:1026
+       process_one_work+0x949/0x1650 kernel/workqueue.c:3279
+       process_scheduled_works kernel/workqueue.c:3362 [inline]
+       worker_thread+0xb46/0x1140 kernel/workqueue.c:3443
+       kthread+0x388/0x470 kernel/kthread.c:467
+       ret_from_fork+0x51e/0xb90 arch/x86/kernel/process.c:158
+       ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
 
-> > +=C2=A0=C2=A0=C2=A0 name: sock-attrs
-> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-sock-
-> > +=C2=A0=C2=A0=C2=A0 attributes:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->=20
-> Not required.
+-> #1 ((work_completion)(&args->work)#3){+.+.}-{0:0}:
+       process_one_work+0x895/0x1650 kernel/workqueue.c:3255
+       process_scheduled_works kernel/workqueue.c:3362 [inline]
+       worker_thread+0xb46/0x1140 kernel/workqueue.c:3443
+       kthread+0x388/0x470 kernel/kthread.c:467
+       ret_from_fork+0x51e/0xb90 arch/x86/kernel/process.c:158
+       ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
 
-The same question applies here.
+-> #0 ((wq_completion)nbd1-recv){+.+.}-{0:0}:
+       check_prev_add kernel/locking/lockdep.c:3165 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3284 [inline]
+       validate_chain kernel/locking/lockdep.c:3908 [inline]
+       __lock_acquire+0x15a5/0x2cf0 kernel/locking/lockdep.c:5237
+       lock_acquire+0xf0/0x2e0 kernel/locking/lockdep.c:5868
+       touch_wq_lockdep_map+0xcb/0x180 kernel/workqueue.c:3994
+       __flush_workqueue+0x14b/0x14f0 kernel/workqueue.c:4036
+       nbd_disconnect_and_put+0x9e/0x2c0 drivers/block/nbd.c:2264
+       nbd_genl_disconnect+0x4a9/0x590 drivers/block/nbd.c:2303
+       genl_family_rcv_msg_doit+0x22a/0x330 net/netlink/genetlink.c:1115
+       genl_family_rcv_msg net/netlink/genetlink.c:1195 [inline]
+       genl_rcv_msg+0x61c/0x7a0 net/netlink/genetlink.c:1210
+       netlink_rcv_skb+0x232/0x4b0 net/netlink/af_netlink.c:2550
+       genl_rcv+0x28/0x40 net/netlink/genetlink.c:1219
+       netlink_unicast_kernel net/netlink/af_netlink.c:1318 [inline]
+       netlink_unicast+0x80f/0x9b0 net/netlink/af_netlink.c:1344
+       netlink_sendmsg+0x813/0xb40 net/netlink/af_netlink.c:1894
+       sock_sendmsg_nosec+0x18f/0x1d0 net/socket.c:737
+       __sock_sendmsg net/socket.c:752 [inline]
+       ____sys_sendmsg+0x589/0x8c0 net/socket.c:2610
+       ___sys_sendmsg+0x2a5/0x360 net/socket.c:2664
+       __sys_sendmsg net/socket.c:2696 [inline]
+       __do_sys_sendmsg net/socket.c:2701 [inline]
+       __se_sys_sendmsg net/socket.c:2699 [inline]
+       __x64_sys_sendmsg+0x1bd/0x2a0 net/socket.c:2699
+       do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+       do_syscall_64+0x14d/0xf80 arch/x86/entry/syscall_64.c:94
+       entry_SYSCALL_64_after_hwframe+0x77/0x7f
 
-> > +operations:
-> > +=C2=A0 enum-model: unified
-> > +=C2=A0 name-prefix: nbd-cmd-
-> > +=C2=A0 list:
-> > +=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: NBD_CMD_UNSPEC
+other info that might help us debug this:
 
-A similar question applies here. If I remove this, `pyynl.ynl_gen_c
---mode uapi --header` no longer generates `NBD_CMD_UNSPEC`. Is there a
-YNL property to generate it? If not, should I remove it anyway?
+Chain exists of:
+  (wq_completion)nbd1-recv --> (work_completion)(&args->work)#3 --> &nbd->config_lock
 
-> > +=C2=A0=C2=A0=C2=A0 -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: connect
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: See :file:`drivers/block/nbd.c`,
-> > :code:`nbd_genl_connect()`
->=20
-> Prefer to see meaningful doc string (same for other ops)
+ Possible unsafe locking scenario:
 
-I guess I will have to document the four operations in v2 as well.
+       CPU0                    CPU1
+       ----                    ----
+  lock(&nbd->config_lock);
+                               lock((work_completion)(&args->work)#3);
+                               lock(&nbd->config_lock);
+  lock((wq_completion)nbd1-recv);
 
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 attribute-set: nbd-attrs
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dont-validate: [strict]
->
-> nbd.c has strict & dump, should this be [strict, dump] ? (same for
-> other ops)
+ *** DEADLOCK ***
 
-The NBD operations don't have `dump`, only `do`, so adding `dump` to
-`dont-validate` does not change the output of `pyynl.ynl_gen_c --mode
-kernel --source`. Should I add it anyway?
+3 locks held by syz.1.1462/9805:
+ #0: ffffffff8fe5ba70 (cb_lock){++++}-{4:4}, at: genl_rcv+0x19/0x40 net/netlink/genetlink.c:1218
+ #1: ffffffff8fe5b888 (genl_mutex){+.+.}-{4:4}, at: genl_lock net/netlink/genetlink.c:35 [inline]
+ #1: ffffffff8fe5b888 (genl_mutex){+.+.}-{4:4}, at: genl_op_lock net/netlink/genetlink.c:60 [inline]
+ #1: ffffffff8fe5b888 (genl_mutex){+.+.}-{4:4}, at: genl_rcv_msg+0x10b/0x7a0 net/netlink/genetlink.c:1209
+ #2: ffff888027014278 (&nbd->config_lock){+.+.}-{4:4}, at: nbd_disconnect_and_put+0x2f/0x2c0 drivers/block/nbd.c:2256
+
+stack backtrace:
+CPU: 0 UID: 0 PID: 9805 Comm: syz.1.1462 Not tainted syzkaller #0 PREEMPT(full) 
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 02/12/2026
+Call Trace:
+ <TASK>
+ dump_stack_lvl+0xe8/0x150 lib/dump_stack.c:120
+ print_circular_bug+0x2e1/0x300 kernel/locking/lockdep.c:2043
+ check_noncircular+0x12e/0x150 kernel/locking/lockdep.c:2175
+ check_prev_add kernel/locking/lockdep.c:3165 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3284 [inline]
+ validate_chain kernel/locking/lockdep.c:3908 [inline]
+ __lock_acquire+0x15a5/0x2cf0 kernel/locking/lockdep.c:5237
+ lock_acquire+0xf0/0x2e0 kernel/locking/lockdep.c:5868
+ touch_wq_lockdep_map+0xcb/0x180 kernel/workqueue.c:3994
+ __flush_workqueue+0x14b/0x14f0 kernel/workqueue.c:4036
+ nbd_disconnect_and_put+0x9e/0x2c0 drivers/block/nbd.c:2264
+ nbd_genl_disconnect+0x4a9/0x590 drivers/block/nbd.c:2303
+ genl_family_rcv_msg_doit+0x22a/0x330 net/netlink/genetlink.c:1115
+ genl_family_rcv_msg net/netlink/genetlink.c:1195 [inline]
+ genl_rcv_msg+0x61c/0x7a0 net/netlink/genetlink.c:1210
+ netlink_rcv_skb+0x232/0x4b0 net/netlink/af_netlink.c:2550
+ genl_rcv+0x28/0x40 net/netlink/genetlink.c:1219
+ netlink_unicast_kernel net/netlink/af_netlink.c:1318 [inline]
+ netlink_unicast+0x80f/0x9b0 net/netlink/af_netlink.c:1344
+ netlink_sendmsg+0x813/0xb40 net/netlink/af_netlink.c:1894
+ sock_sendmsg_nosec+0x18f/0x1d0 net/socket.c:737
+ __sock_sendmsg net/socket.c:752 [inline]
+ ____sys_sendmsg+0x589/0x8c0 net/socket.c:2610
+ ___sys_sendmsg+0x2a5/0x360 net/socket.c:2664
+ __sys_sendmsg net/socket.c:2696 [inline]
+ __do_sys_sendmsg net/socket.c:2701 [inline]
+ __se_sys_sendmsg net/socket.c:2699 [inline]
+ __x64_sys_sendmsg+0x1bd/0x2a0 net/socket.c:2699
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x14d/0xf80 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f496959bf79
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 e8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f496a4cd028 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
+RAX: ffffffffffffffda RBX: 00007f4969816090 RCX: 00007f496959bf79
+RDX: 00000000000000c0 RSI: 0000200000000280 RDI: 0000000000000004
+RBP: 00007f49696327e0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f4969816128 R14: 00007f4969816090 R15: 00007ffd35895958
+ </TASK>
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
