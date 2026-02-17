@@ -2,108 +2,125 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id itFqGrxglGk6DQIAu9opvQ
+	id YDYMA/urlGl7GQIAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 13:36:12 +0100
+	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 18:57:15 +0100
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 146EC14C03B
-	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 13:36:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A028114ECC3
+	for <lists+nbd@lfdr.de>; Tue, 17 Feb 2026 18:57:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id A86F12059D; Tue, 17 Feb 2026 12:36:11 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 17 12:36:11 2026
-Old-Return-Path: <donald.hunter@gmail.com>
+	id 68F31205DA; Tue, 17 Feb 2026 17:57:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Feb 17 17:57:14 2026
+Old-Return-Path: <hristo@venev.name>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FREEMAIL_FROM,GB_FAKE_RF,
-	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=0.3 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED,SARE_MSGID_LONG40 autolearn=no
+	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id B3EBA205CC
-	for <lists-other-nbd@bendel.debian.org>; Tue, 17 Feb 2026 12:18:20 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 53125205C6
+	for <lists-other-nbd@bendel.debian.org>; Tue, 17 Feb 2026 17:40:56 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.099 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001]
+X-Amavis-Spam-Status: No, score=-0.061 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, BODY_8BITS=1.5, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SARE_MSGID_LONG40=0.637]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id evjqnJLRoe9U for <lists-other-nbd@bendel.debian.org>;
-	Tue, 17 Feb 2026 12:18:14 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com [IPv6:2a00:1450:4864:20::336])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id E5DF7205C9
-	for <nbd@other.debian.org>; Tue, 17 Feb 2026 12:18:10 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id 5b1f17b1804b1-4836f363ad2so46467835e9.1
-        for <nbd@other.debian.org>; Tue, 17 Feb 2026 04:18:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771330688; x=1771935488; darn=other.debian.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QTONtFoNtbkbeYo5PUcTqFHZpngRg049E98Be51k7a0=;
-        b=hFVbPo1CPGuZt0LXdnrY6ivKU3fsBPibj5JSM8vX2GJZ4il2+NXu8bVkeiowbk0BRV
-         eG//i7IadK4ZT1Nbz6JDUvbzDbpN45G2VtyE027wg0cXxsWTCf4n3mXscYI1PdY92y4Y
-         7XjyOAnlncplF340pujZJkUHH0GpSRQMavtpdO537HUgurxU5v2qgb7rCZJgFtUr7I98
-         WQus45yBbavJKXTK1RDHqUBxRcI2nvxPaSXmBYGNuYpDvAy6YmEFWje/g1k26tNVsgnE
-         Q8zQl5h4eEyXjNqamgRWKxsZWwPDM0/yP5rux/3Nv9m6hCXmiES18rFilv1KglZAWEiq
-         LyZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771330688; x=1771935488;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=QTONtFoNtbkbeYo5PUcTqFHZpngRg049E98Be51k7a0=;
-        b=NwrjukDoKqnupmPyh3/dkZvTCKTi5O9UfDCEJkuxVXOjIlk96SjIlROl8NTutv4GUC
-         Z1h5Bv+ZfA7CDImcnRDvO41o+O1ZWwjJrNMmyAzxpXBDRSPOqXZap5PHhBnMl12qVMXS
-         NmtddaSueh8vFqVpUK1OyhE5UzldlzqcPniLuO929KyzdcXhmlXRu3bCGjzmVmwkAroV
-         aheBJ+JsJE1P491ahEKeSZfn0AZuUlW9tiiTUDgY2/ZBRMsnW0GpP8g6FNJ5x+IwAhr8
-         x5wC07bkAqSdiNVacR4CWxzBU8dlHOpcCI3wiEHfD84TFTGZ7II19dP5A08AvQJJRQmX
-         INfg==
-X-Forwarded-Encrypted: i=1; AJvYcCXA/nn/3no86RxWgC1xcr5kVLS4xL1YaqFjMx/FUZehp0TFREGG6naMPzIzfc+qQCEkGhM=@other.debian.org
-X-Gm-Message-State: AOJu0YyOJDVLgexix4DDJylUYhGL2kGKe+TbFOC9SWPnp/jgDp0F7xqU
-	QKMZTHVGas7zYxsJ9GLnwKj5NO/H/nM6I57m886vyH+aMv4LSewDI7py0X0O9Q==
-X-Gm-Gg: AZuq6aIFpJE/wBnSwhcyNwEyIVcQ3VWPGjCRYe1vFonJq4fXCo7TDGvMHIxhRfQYeC8
-	VGc2xDwDSalCtBl1V2sH6RH+kKrQ9ufRkJ+yTvjcpMpuwOQLA6SEldB+87f+6Ik8pcjZQ3Hwz9H
-	vcsbL5meJ6b+RYIO5v4S9+QlStFNnrcrH06K+MDzqktBYd/+1F2ygfh5XNXtbe+KU+HFzGLS0wi
-	VbBZv/zuNeGYYld7lnWU5lF/4t1qGyzNL2qUDfciv/4tRjcgIrp2Ks/YHc0zQkQsk1a+OD6GJkc
-	V2QwNGUfFdm1onFsTtQYgB/joTTNGRmmb0jDLeO5p1l9j9a1tbJuf7bNMnhM7LE7SFCj+DgCdIi
-	X4JmsewFbsth7C+pwUU5AC8cTRvsaPQ1mhXcaPqtatZrW1IdD/CDpuXdJWWh0GgG+xqVHFQ5O/Z
-	1WSPU/nk51W9ZxBksFXvZazoTZDG0ZjomU67EH0EwQpZYEzA==
-X-Received: by 2002:a05:600c:6990:b0:483:8f38:a928 with SMTP id 5b1f17b1804b1-4838f38a961mr40324805e9.34.1771330687636;
-        Tue, 17 Feb 2026 04:18:07 -0800 (PST)
-Received: from imac ([2a02:8010:60a0:0:7dc3:4609:42c2:f18f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d834ebesm525985725e9.13.2026.02.17.04.18.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Feb 2026 04:18:07 -0800 (PST)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Hristo Venev <hristo@venev.name>
-Cc: Jakub Kicinski <kuba@kernel.org>,  "David S. Miller"
- <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>,  Paolo Abeni
- <pabeni@redhat.com>,  Simon Horman <horms@kernel.org>,
-  netdev@vger.kernel.org,  Josef Bacik <josef@toxicpanda.com>,  Jens Axboe
- <axboe@kernel.dk>,  linux-block@vger.kernel.org,  nbd@other.debian.org
+	with ESMTP id YIieLtaw03ZE for <lists-other-nbd@bendel.debian.org>;
+	Tue, 17 Feb 2026 17:40:48 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -4.6
+Received: from a1-bg02.venev.name (a1-bg02.venev.name [213.240.239.49])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 66FC5205C3
+	for <nbd@other.debian.org>; Tue, 17 Feb 2026 17:40:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=venev.name;
+	s=default; h=Content-Transfer-Encoding:Content-Type:Date:To:From:Subject:
+	Message-ID:Reply-To:Sender; bh=bx8ltbMTWp0UveWQZhheXSavSfUUgDZEwTgmD9Qwd3Y=; 
+	b=DTcF0Yy0rXsDwsUQfNzovoYC28DkESS92+TD0RHEkAkgJqacalxbwWzjp8eZX5JsOquyxk270UC
+	URVGDI+DJuSmz3qVtJjpklrGPCeWPl/LCoveJXrmfSvmIZc03Pleiiy8eXMF70HF0L9ALRnv7udpF
+	iaP8fyAyGEIQbmdbpjybubn/+MKm56M7eqgabj3mIFide+zHxHvMS0pgsWPV9EjYkALu4T4ZktKXV
+	XfeBUG8DyuAseVFwSIczwF6j7TV88AHBVEBqcRv04nJuDrkaddK3I/bHTKyk3NSAUQ8Ss8o2pMfmD
+	m8+UQ0ekuXF4L8ShUZV/fVSNwWsgOR4uNuxwaapuY/uOlFHrLscWmjV73boY3WK9m779sB8T3n+Gt
+	O26QNNe2tUFb9NcYfwDmHOO1E0ABZu/h9Al9ah4Roh6+w+vhYkzo5xDiUjZD6psvX4YFtjjEMvI7s
+	uQXiq412q66WsaZQpvnoS0yNiR2DNQhZ4Guk9sb8/HXeWMNdn8uRpJ/9rZBpvMoXEbnzJbxT0ui2H
+	LbRW6vXGg0iDLXaF+f/GuThGxxvRD5iJyJZ0b2U4deQzy8nnDUMpkC9lPNHuiRqCH4wEeGNBwFEvK
+	CMgQ6Oj6reAlVAs/Nlxfr/fatoxnjv3IpCTpOkrLqZj2OQi7baltxvvnqJlK4ugokNDbM=;
+Received: from a1-bg02.venev.name ([213.240.239.49] helo=pmx1.venev.name)
+	by a1-bg02.venev.name with esmtps
+	id 1vsP3r-0000000EX02-2lII
+	(TLS1.3:TLS_AES_256_GCM_SHA384:256)
+	(envelope-from <hristo@venev.name>);
+	Tue, 17 Feb 2026 17:40:35 +0000
+Received: from box.m.venev.name ([213.240.239.49])
+	by pmx1.venev.name with ESMTPSA
+	id AbcRMxGolGkU2TQAdB6GMg
+	(envelope-from <hristo@venev.name>); Tue, 17 Feb 2026 17:40:35 +0000
+Message-ID: <6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name>
 Subject: Re: [PATCH] netlink: specs: add specification for NBD
-In-Reply-To: <20260215180309.2255721-3-hristo@venev.name>
-Date: Tue, 17 Feb 2026 12:17:25 +0000
-Message-ID: <m2o6lnlg2y.fsf@gmail.com>
+From: Hristo Venev <hristo@venev.name>
+To: Donald Hunter <donald.hunter@gmail.com>
+Cc: Jakub Kicinski <kuba@kernel.org>, "David S. Miller"
+ <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>, Paolo Abeni
+ <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	netdev@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>, Jens Axboe	
+ <axboe@kernel.dk>, linux-block@vger.kernel.org, nbd@other.debian.org
+Date: Tue, 17 Feb 2026 19:40:33 +0200
+In-Reply-To: <m2o6lnlg2y.fsf@gmail.com>
 References: <20260215180309.2255721-3-hristo@venev.name>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	 <m2o6lnlg2y.fsf@gmail.com>
+Autocrypt: addr=hristo@venev.name; prefer-encrypt=mutual;
+ keydata=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
+ AjQ6o01lu
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 MIME-Version: 1.0
-Content-Type: text/plain
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <R6S6SHltiZL.A.-eJH.7CGlpB@bendel>
+Resent-Message-ID: <EFI1wqse_BJ.A.qQGM.6vKlpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3494
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3495
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -113,308 +130,198 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/m2o6lnlg2y.fsf@gmail.com
-Resent-Date: Tue, 17 Feb 2026 12:36:11 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name
+Resent-Date: Tue, 17 Feb 2026 17:57:14 +0000 (UTC)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.61 / 15.00];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+X-Spamd-Result: default: False [0.39 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[venev.name,quarantine];
+	R_DKIM_ALLOW(-0.20)[venev.name:s=default];
 	MAILLIST(-0.20)[generic];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
 	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:hristo@venev.name,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:netdev@vger.kernel.org,m:josef@toxicpanda.com,m:axboe@kernel.dk,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:netdev@vger.kernel.org,m:josef@toxicpanda.com,m:axboe@kernel.dk,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,m:donaldhunter@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[donaldhunter@gmail.com,bounce-nbd=lists@other.debian.org];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	FORGED_SENDER(0.00)[hristo@venev.name,bounce-nbd=lists@other.debian.org];
 	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	R_SPF_NA(0.00)[no SPF record];
+	DKIM_TRACE(0.00)[venev.name:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[venev.name:email,bendel.debian.org:helo,bendel.debian.org:rdns];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[hristo@venev.name,bounce-nbd=lists@other.debian.org];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[donaldhunter@gmail.com,bounce-nbd=lists@other.debian.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
 	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[nbd];
-	R_SPF_NA(0.00)[no SPF record]
-X-Rspamd-Queue-Id: 146EC14C03B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:helo,bendel.debian.org:rdns]
+X-Rspamd-Queue-Id: A028114ECC3
 X-Rspamd-Action: no action
 
-Hristo Venev <hristo@venev.name> writes:
+On Tue, 2026-02-17 at 12:17 +0000, Donald Hunter wrote:
+> There are yamllint errors:
+>=20
+> make -C tools/net/ynl lint
+> make: Entering directory '/home/donaldh/net-next/tools/net/ynl'
+> yamllint ../../../Documentation/netlink/specs
+> ../../../Documentation/netlink/specs/nbd.yaml
+> =C2=A0 159:81=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 line too long (10=
+4 > 80 characters)=C2=A0 (line-
+> length)
+> =C2=A0 169:6=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 syntax error=
+: expected <block end>, but found
+> '<block mapping start>' (syntax)
+> =C2=A0 170:7=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 wrong indent=
+ation: expected 5 but found 6=C2=A0
+> (indentation)
 
-> This patch adds an initial YNL specification for NBD. The specification
-> can be used to produce a UAPI header that is equivalent to the one
-> currently shipped in the kernel.
+Thanks, I will fix the lint errors in v2.
+
+> > +doc: See :file:`drivers/block/nbd.c`
+>=20
+> Prefer to see a meaningful doc string here.
+
+I will add more proper documentation in v2. I couldn't find any
+existing documentation of this netlink interface, so I guess I will
+write it myself.
+
+> > +attribute-sets:
+> > +=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0 name: nbd-attrs
+> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-attr-
+> > +=C2=A0=C2=A0=C2=A0 doc: Configuration policy attributes, used for CONN=
+ECT
+> > +=C2=A0=C2=A0=C2=A0 attributes:
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
+>=20
+> No need for unspec in the attribute list, ynl codegen does the right
+> thing.
+
+For me `pyynl.ynl_gen_c --mode uapi --header` no longer generates
+`NBD_ATTR_UNSPEC` if I remove this. Is there a YNL property to specify
+the name of the zero value of the attribute set? If not, should I
+remove it anyway, changing the generated header?
+
+> > +=C2=A0=C2=A0=C2=A0 name: device-item-attrs
+> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-device-item-
+> > +=C2=A0=C2=A0=C2=A0 doc: |
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 This is the format for multiple devices=
+ with
+> > :code:`NBD_ATTR_DEVICE_LIST`
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .. code-block::
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_ATTR_DEVICE_LIST]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_DEVICE_ITE=
+M]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
+D_DEVICE_INDEX]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
+D_DEVICE_CONNECTED]
+> > +=C2=A0=C2=A0=C2=A0 attributes:
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
+>=20
+> Not required.
+
+The same question applies here.
+
+> > +=C2=A0=C2=A0=C2=A0 name: device-attrs
+> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-device-
+> > +=C2=A0=C2=A0=C2=A0 attr-max-name: nbd-device-attr-max
+> > +=C2=A0=C2=A0=C2=A0 attributes:
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
+>=20
+> Not required.
+
+The same question applies here.
+
+> > +=C2=A0=C2=A0=C2=A0 name: sock-item-attrs
+> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-sock-item-
+> > +=C2=A0=C2=A0=C2=A0 doc: |
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 This is the format for multiple sockets=
+ with
+> > :code:`NBD_ATTR_SOCKETS`
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .. code-block::
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_ATTR_SOCKETS]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_SOCK_ITEM]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
+D_SOCK_FD]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NBD_SOCK_ITEM]
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 [NB=
+D_SOCK_FD]
+> > +=C2=A0=C2=A0=C2=A0 attributes:
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
+>=20
+> Not required.
+
+The same question applies here.
+
+> > +=C2=A0=C2=A0=C2=A0 name: sock-attrs
+> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-sock-
+> > +=C2=A0=C2=A0=C2=A0 attributes:
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
+>=20
+> Not required.
+
+The same question applies here.
+
+> > +operations:
+> > +=C2=A0 enum-model: unified
+> > +=C2=A0 name-prefix: nbd-cmd-
+> > +=C2=A0 list:
+> > +=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: NBD_CMD_UNSPEC
+
+A similar question applies here. If I remove this, `pyynl.ynl_gen_c
+--mode uapi --header` no longer generates `NBD_CMD_UNSPEC`. Is there a
+YNL property to generate it? If not, should I remove it anyway?
+
+> > +=C2=A0=C2=A0=C2=A0 -
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: connect
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: See :file:`drivers/block/nbd.c`,
+> > :code:`nbd_genl_connect()`
+>=20
+> Prefer to see meaningful doc string (same for other ops)
+
+I guess I will have to document the four operations in v2 as well.
+
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 attribute-set: nbd-attrs
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dont-validate: [strict]
 >
-> The spec appears to be accurate enough so that commands can be issued
-> with pyynl.
->
-> Signed-off-by: Hristo Venev <hristo@venev.name>
-> ---
->  Documentation/netlink/specs/nbd.yaml | 206 +++++++++++++++++++++++++++
->  1 file changed, 206 insertions(+)
->  create mode 100644 Documentation/netlink/specs/nbd.yaml
+> nbd.c has strict & dump, should this be [strict, dump] ? (same for
+> other ops)
 
-There are yamllint errors:
-
-make -C tools/net/ynl lint
-make: Entering directory '/home/donaldh/net-next/tools/net/ynl'
-yamllint ../../../Documentation/netlink/specs
-../../../Documentation/netlink/specs/nbd.yaml
-  159:81    error    line too long (104 > 80 characters)  (line-length)
-  169:6     error    syntax error: expected <block end>, but found '<block mapping start>' (syntax)
-  170:7     error    wrong indentation: expected 5 but found 6  (indentation)
-
->
-> diff --git a/Documentation/netlink/specs/nbd.yaml b/Documentation/netlink/specs/nbd.yaml
-> new file mode 100644
-> index 0000000000000..a84912a867d91
-> --- /dev/null
-> +++ b/Documentation/netlink/specs/nbd.yaml
-> @@ -0,0 +1,206 @@
-> +# SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause)
-> +---
-> +name: nbd
-> +protocol: genetlink-c
-> +uapi-header: linux/nbd-netlink.h
-> +doc: See :file:`drivers/block/nbd.c`
-
-Prefer to see a meaningful doc string here.
-
-> +
-> +c-family-name: nbd-genl-family-name
-> +c-version-name: nbd-genl-version
-> +max-by-define: true
-> +
-> +attribute-sets:
-> +  -
-> +    name: nbd-attrs
-> +    name-prefix: nbd-attr-
-> +    doc: Configuration policy attributes, used for CONNECT
-> +    attributes:
-> +      -
-> +        name: unspec
-> +        value: 0
-> +        type: unused
-
-No need for unspec in the attribute list, ynl codegen does the right thing.
-
-> +      -
-> +        name: index
-> +        type: u32
-> +      -
-> +        name: size-bytes
-> +        type: u64
-> +      -
-> +        name: block-size-bytes
-> +        type: u64
-> +      -
-> +        name: timeout
-> +        type: u64
-> +      -
-> +        name: server-flags
-> +        type: u64
-> +      -
-> +        name: client-flags
-> +        type: u64
-> +      -
-> +        name: sockets
-> +        type: nest
-> +        nested-attributes: sock-item-attrs
-> +      -
-> +        name: dead-conn-timeout
-> +        type: u64
-> +      -
-> +        name: device-list
-> +        type: nest
-> +        nested-attributes: device-item-attrs
-> +      -
-> +        name: backend-identifier
-> +        type: string
-> +  -
-> +    name: device-item-attrs
-> +    name-prefix: nbd-device-item-
-> +    doc: |
-> +      This is the format for multiple devices with :code:`NBD_ATTR_DEVICE_LIST`
-> +
-> +      .. code-block::
-> +
-> +        [NBD_ATTR_DEVICE_LIST]
-> +          [NBD_DEVICE_ITEM]
-> +            [NBD_DEVICE_INDEX]
-> +            [NBD_DEVICE_CONNECTED]
-> +    attributes:
-> +      -
-> +        name: unspec
-> +        value: 0
-> +        type: unused
-
-Not required.
-
-> +      -
-> +        name: item
-> +        name-prefix: nbd-device-
-> +        type: nest
-> +        nested-attributes: device-attrs
-> +        multi-attr: true
-> +  -
-> +    name: device-attrs
-> +    name-prefix: nbd-device-
-> +    attr-max-name: nbd-device-attr-max
-> +    attributes:
-> +      -
-> +        name: unspec
-> +        value: 0
-> +        type: unused
-
-Not required.
-
-> +      -
-> +        name: index
-> +        type: u32
-> +      -
-> +        name: connected
-> +        type: u8
-> +  -
-> +    name: sock-item-attrs
-> +    name-prefix: nbd-sock-item-
-> +    doc: |
-> +      This is the format for multiple sockets with :code:`NBD_ATTR_SOCKETS`
-> +
-> +      .. code-block::
-> +
-> +        [NBD_ATTR_SOCKETS]
-> +          [NBD_SOCK_ITEM]
-> +            [NBD_SOCK_FD]
-> +          [NBD_SOCK_ITEM]
-> +            [NBD_SOCK_FD]
-> +    attributes:
-> +      -
-> +        name: unspec
-> +        value: 0
-> +        type: unused
-
-Not required.
-
-> +      -
-> +        name: item
-> +        name-prefix: nbd-sock-
-> +        type: nest
-> +        nested-attributes: sock-attrs
-> +        multi-attr: true
-> +  -
-> +    name: sock-attrs
-> +    name-prefix: nbd-sock-
-> +    attributes:
-> +      -
-> +        name: unspec
-> +        value: 0
-> +        type: unused
-
-Not required.
-
-> +      -
-> +        name: fd
-> +        type: u32
-> +
-> +operations:
-> +  enum-model: unified
-> +  name-prefix: nbd-cmd-
-> +  list:
-> +    -
-> +      name: unspec
-> +      value: 0
-> +      doc: NBD_CMD_UNSPEC
-
-Not required.
-
-> +    -
-> +      name: connect
-> +      doc: See :file:`drivers/block/nbd.c`, :code:`nbd_genl_connect()`
-
-Prefer to see meaningful doc string (same for other ops)
-
-> +      attribute-set: nbd-attrs
-> +      dont-validate: [strict]
-
-nbd.c has strict & dump, should this be [strict, dump] ? (same for other ops)
-
-> +      do:
-> +        request:
-> +          attributes:
-> +            - index
-> +            - size-bytes
-> +            - block-size-bytes
-> +            - timeout
-> +            - server-flags
-> +            - client-flags
-> +            - sockets
-> +            - dead-conn-timeout
-> +            - backend-identifier
-> +        reply:
-> +          attributes:
-> +            - index
-> +    -
-> +      name: disconnect
-> +      doc: See :file:`drivers/block/nbd.c`, :code:`nbd_genl_disconnect()`
-> +      attribute-set: nbd-attrs
-> +      dont-validate: [strict]
-> +      do:
-> +        request:
-> +          attributes:
-> +            - index
-> +    -
-> +      name: reconfigure
-> +      doc: See :file:`drivers/block/nbd.c`, :code:`nbd_genl_reconfigure()`
-> +      attribute-set: nbd-attrs
-> +      dont-validate: [strict]
-> +      do:
-> +        request:
-> +          attributes:
-> +            - index
-> +            - size-bytes
-> +            - block-size-bytes
-> +            - timeout
-> +            - client-flags
-> +            - sockets
-> +            - dead-conn-timeout
-> +            - backend-identifier
-> +    -
-> +      name: link-dead
-> +      doc: See :file:`drivers/block/nbd.c`, :code:`nbd_mark_nsock_dead()` / :code:`nbd_dead_link_work()`
-> +      attribute-set: nbd-attrs
-> +      event:
-> +        attributes:
-> +          - index
-> +      mcgrp: nbd_mc_group
-> +    -
-> +      name: status
-> +      doc: See :file:`drivers/block/nbd.c`, :code:`nbd_genl_status()`
-> +      attribute-set: nbd-attrs
-> +      dont-validate: [strict]
-> +      do:
-> +        request:
-> +          attributes:
-> +            - index
-> +        reply:
-> +          attributes:
-> +            - device-list
-> +
-> +mcast-groups:
-> +  list:
-> +    -
-> +      name: nbd_mc_group
-> +      c-define-name: nbd-genl-mcast-group-name
+The NBD operations don't have `dump`, only `do`, so adding `dump` to
+`dont-validate` does not change the output of `pyynl.ynl_gen_c --mode
+kernel --source`. Should I add it anyway?
 
