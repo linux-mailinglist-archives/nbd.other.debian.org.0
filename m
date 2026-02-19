@@ -2,112 +2,86 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8H1MDtclqGlhowAAu9opvQ
+	id AD06BqbUlmmVowIAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Wed, 04 Mar 2026 13:30:15 +0100
+	for <lists+nbd@lfdr.de>; Thu, 19 Feb 2026 10:15:18 +0100
 X-Original-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEC021FFB27
-	for <lists+nbd@lfdr.de>; Wed, 04 Mar 2026 13:30:14 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F8715D3FF
+	for <lists+nbd@lfdr.de>; Thu, 19 Feb 2026 10:15:17 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 69EFC20629; Wed,  4 Mar 2026 12:30:14 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar  4 12:30:14 2026
-Old-Return-Path: <donald.hunter@gmail.com>
+	id 22B3020539; Thu, 19 Feb 2026 09:15:17 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb 19 09:15:17 2026
+Old-Return-Path: <37NCWaQkbAD0rxyjZkkdqZoohc.fnnfkdtrdqbnmsdms.bnl@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: *
-X-Spam-Status: No, score=1.3 required=4.0 tests=DATE_IN_PAST_96_XX,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=1.4 required=4.0 tests=FOURLA,FROM_LOCAL_HEX,
+	HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,RCVD_IN_VALIDITY_RPBL_BLOCKED,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 6D9C92064F
-	for <lists-other-nbd@bendel.debian.org>; Wed,  4 Mar 2026 12:12:33 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 45D7E204FD
+	for <lists-other-nbd@bendel.debian.org>; Thu, 19 Feb 2026 08:59:38 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=2.706 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, BODY_8BITS=1.5, DATE_IN_PAST_96_XX=3.405,
-	DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
-	DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=0.111 tagged_above=-10000 required=5.3
+	tests=[FOURLA=0.1, FROM_LOCAL_HEX=0.006,
+	HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+	RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id YVIzHrbcFQkN for <lists-other-nbd@bendel.debian.org>;
-	Wed,  4 Mar 2026 12:12:26 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com [IPv6:2a00:1450:4864:20::32c])
+	with ESMTP id b1lgtT9E0NGh for <lists-other-nbd@bendel.debian.org>;
+	Thu, 19 Feb 2026 08:59:31 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-oo1-f71.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2 RANDOM_SENDER=0.25; rate: -5.25
+Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com [209.85.161.71])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id E14A22065E
-	for <nbd@other.debian.org>; Wed,  4 Mar 2026 12:12:26 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id 5b1f17b1804b1-48371119eacso82384195e9.2
-        for <nbd@other.debian.org>; Wed, 04 Mar 2026 04:12:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772626343; x=1773231143; darn=other.debian.org;
-        h=content-transfer-encoding:mime-version:user-agent:references
-         :message-id:date:in-reply-to:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=5PBIpDZUoWmzMLSSr4AMFrJThU2kmJNnnlCij9fJqvY=;
-        b=WHi2VYCtPO5E6Wk+bnBdDWLGNlOeLOXQI9v7erPdPJyQ+qTB74PPnLjwwVv/KGvlCa
-         Pd0GyVem6PNwB4Ruvq1rLG472E8C8A2fuIYgZlaUP1U5PBfns7ZPPw0xYGXU386lrCK+
-         rkKSeZB+wxtvQxUEyViSL6L9NE9jAbG+ELQckvlHGhkc5OeZgVoTp3eD3Gj0RcO20Ajv
-         7nI4TF74+9ymfg7gX9eXHJimue1an7ONT3dRTJbe05BIP0WrM/JOKu7LMo/N6C59euxC
-         tqsfSegnrcmUIoPcbuYM2F/v3qoN3T7o/8OH0DD2Ti/5os6n7hKqDpQCEQlyyfVvoKJB
-         hWmg==
+	by bendel.debian.org (Postfix) with ESMTPS id 1E8B6204CE
+	for <nbd@other.debian.org>; Thu, 19 Feb 2026 08:59:27 +0000 (UTC)
+Received: by mail-oo1-f71.google.com with SMTP id 006d021491bc7-678f3fef828so11182652eaf.1
+        for <nbd@other.debian.org>; Thu, 19 Feb 2026 00:59:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772626343; x=1773231143;
-        h=content-transfer-encoding:mime-version:user-agent:references
-         :message-id:date:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5PBIpDZUoWmzMLSSr4AMFrJThU2kmJNnnlCij9fJqvY=;
-        b=rabAQBaa3vi4CRIzUbW1DzehZ09lNN2X2RqaRHqdT3utKUKwHPPbfZ0pPuxKZabEyl
-         11AHnnXmGjuXhmM3SH5fkm6tMn64TmaJmsdHbFJ+yGcaIYv1Y/YmCVYvCgQ9MlV9sRCK
-         LfcOzMXWDjm8YFaGgY+6BTlUNhOvC+qMnxrwkYODRmZsR6F6lacFL2Z3g8bpjGIr9ufY
-         nsGNr6eck+BggVtHPpJvE8RuozzTAaWqP+4DJhEivO0kirLWXE0du/rNm/L/qAuRnlDK
-         mKK0Z0ImpvZmb0YTeo6/BFoi6LSLZU547ICWlS1o/znetVKv+D1cyEe4AwJ8WCXq+ChK
-         2GOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUsy9MNncIm07zw7e/ITwYVfJWVLm9aTaTC/MB+Y73ALrBGbX8HI+RvlNxrPtIjOAl7Kc4=@other.debian.org
-X-Gm-Message-State: AOJu0Yx3FdpPnjwtU/Bc2PB4XZsJXC1Xxl2whZ4+SGZyZGQZrdSMObC1
-	sYwIZb4C5oVB9WGKLvh/XhcDkV4HbUN1HtbIIkyghH9vR3xOrqel/j09CZfw5g==
-X-Gm-Gg: ATEYQzwiAyMYd8T8UB8K6esOOfNGQJhDFO3nlr8GikNCANMMdIUQqJ5Of6FAYLdvMjP
-	S4RtzELsrb+m+R8XJO354luwHQh+WTL4WFD8I+0pBciaJShln7JG96d4AX9GLal8biCkwWRaL8K
-	5n4S9TA6zOG2DJ1lqjFvOOQ7Kd56uPctE0VrdjMPAPX6K79Cshqv7tYlphI8YPP0YdsQxrpV3J3
-	RSuz+tlb/3LkMrAvn/B7kWm5WJWUjHVe59u5w8Ja4bHo85gCqRa06i7iWKYOa/Vw6IaB9qvKbAs
-	G2XCpxgdRx03bUDajhnvGiA7UDDsmQS5W882DtTMKwRa2phO+aPJtqrvwXIGqP3SYp/28LqymYY
-	fu5M3My79jhZjEy28GxOsYzmCxOJXIWRKJDYjq5VI747Na3XxDdY2waYi13G4YBDjJveLSE3DJq
-	GkzT1QaxxTXMtnCvVG+NSTJrgLRg==
-X-Received: by 2002:a05:600c:1f85:b0:47e:e712:aa88 with SMTP id 5b1f17b1804b1-4851989f765mr30694295e9.31.1772626342560;
-        Wed, 04 Mar 2026 04:12:22 -0800 (PST)
-Received: from imac ([88.97.103.74])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-485188923c2sm48580075e9.14.2026.03.04.04.12.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Mar 2026 04:12:21 -0800 (PST)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Hristo Venev <hristo@venev.name>
-Cc: Jakub Kicinski <kuba@kernel.org>,  "David S. Miller"
- <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>,  Paolo Abeni
- <pabeni@redhat.com>,  Simon Horman <horms@kernel.org>,
-  netdev@vger.kernel.org,  Josef Bacik <josef@toxicpanda.com>,  Jens Axboe
- <axboe@kernel.dk>,  linux-block@vger.kernel.org,  nbd@other.debian.org
-Subject: Re: [PATCH] netlink: specs: add specification for NBD
-In-Reply-To: <6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name>
-Date: Wed, 18 Feb 2026 11:28:44 +0000
-Message-ID: <m2fr6yl28j.fsf@gmail.com>
-References: <20260215180309.2255721-3-hristo@venev.name>
-	<m2o6lnlg2y.fsf@gmail.com>
-	<6a1339999b091edaaa15e34aceb7961dfc61581b.camel@venev.name>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+        d=1e100.net; s=20230601; t=1771491564; x=1772096364;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=5nC+b72pVA44Uc6CcxtsvLZb+c2BvwoMTpPD1V9VdNs=;
+        b=XAEZRO1Qy8Wi1y4v3CTnvKPL018wEM9p+KqGs6gqWgE4uKuk6QfzKiuECo2HlwNrn8
+         neSPFpuGWNUQM+VdqX1+u7svjRDjLTTw8jzYX2d4rZU7fYRbIHTO8qvTFlcp/DcNmvaa
+         gMJaJ4jjSVHJR+38W8ZsyFEBh9OKKMrxOfL15GmzolfNx1lU3LFzd+FeJ29FjZBsD1cI
+         3Y/jCkH/pj2BQfqpNXcJg4PeRaUCiMv7a/kBc+WiMxw4RX853oCOX56uJtytXC2tSvsS
+         Ivxq06IH3akkhScaUOKNWkZUi4c7Wa+mep1BWH55Ad+mg6p1vajmCh7cImL0hWg24YuP
+         OwQw==
+X-Forwarded-Encrypted: i=1; AJvYcCXXgb1Uv1ByJbwve9ba6JJrNZQrJRpKZaLwkahJ1nsPoIMtYkG/69aQhoM9+n1AjzI8Wko=@other.debian.org
+X-Gm-Message-State: AOJu0YxEnAak7vFshoW3kvl4wMcoM/nulNkpRqEhKT8qNMwaCowXUrTr
+	mgn6jaT+/E3gEdsD25yW8Rimv7aNodzN+uXuMvXLCgDSm7Q2brsiBK5FS8rA1aJqnNOPpRFJjCV
+	Ld0VtfB74kjvmRSOVhuor26ghWpSTUQfBHf0v+U0P7VizVkfQM8tAOFxPSvM=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-Received: by 2002:a05:6820:4a0d:b0:66e:58f3:b505 with SMTP id
+ 006d021491bc7-679a71b93bdmr1828802eaf.12.1771491564022; Thu, 19 Feb 2026
+ 00:59:24 -0800 (PST)
+Date: Thu, 19 Feb 2026 00:59:24 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6996d0ec.050a0220.21cd75.0107.GAE@google.com>
+Subject: [syzbot] Monthly nbd report (Feb 2026)
+From: syzbot <syzbot+list11bd3f2823c04b2285b6@syzkaller.appspotmail.com>
+To: josef@toxicpanda.com, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <_9vcFyRQn4B.A.PGZP.WXCqpB@bendel>
+Resent-Message-ID: <XTlU_dXyfxC.A.u5iH.kStlpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3511
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3498
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -117,134 +91,71 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/m2fr6yl28j.fsf@gmail.com
-Resent-Date: Wed,  4 Mar 2026 12:30:14 +0000 (UTC)
-X-Rspamd-Queue-Id: CEC021FFB27
+List-Archive: https://lists.debian.org/msgid-search/6996d0ec.050a0220.21cd75.0107.GAE@google.com
+Resent-Date: Thu, 19 Feb 2026 09:15:17 +0000 (UTC)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.11 / 15.00];
-	DATE_IN_PAST(1.00)[337];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+X-Spamd-Result: default: False [-0.21 / 15.00];
 	MAILLIST(-0.20)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : No valid SPF, No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:hristo@venev.name,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:netdev@vger.kernel.org,m:josef@toxicpanda.com,m:axboe@kernel.dk,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:josef@toxicpanda.com,m:linux-block@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:nbd@other.debian.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[nbd=lfdr.de,list11bd3f2823c04b2285b6];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,bounce-nbd=lists@other.debian.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[donaldhunter@gmail.com,bounce-nbd=lists@other.debian.org];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	R_SPF_NA(0.00)[no SPF record];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
+	REDIRECTOR_URL(0.00)[goo.gl];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,bounce-nbd=lists@other.debian.org];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[donaldhunter@gmail.com,bounce-nbd=lists@other.debian.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[nbd];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[venev.name:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,goo.gl:url,bendel.debian.org:helo,bendel.debian.org:rdns]
+X-Rspamd-Queue-Id: 58F8715D3FF
 X-Rspamd-Action: no action
 
-Hristo Venev <hristo@venev.name> writes:
+Hello nbd maintainers/developers,
 
-> On Tue, 2026-02-17 at 12:17 +0000, Donald Hunter wrote:
->> There are yamllint errors:
->>=20
->> make -C tools/net/ynl lint
->> make: Entering directory '/home/donaldh/net-next/tools/net/ynl'
->> yamllint ../../../Documentation/netlink/specs
->> ../../../Documentation/netlink/specs/nbd.yaml
->> =C2=A0 159:81=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 line too long (1=
-04 > 80 characters)=C2=A0 (line-
->> length)
->> =C2=A0 169:6=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 syntax erro=
-r: expected <block end>, but found
->> '<block mapping start>' (syntax)
->> =C2=A0 170:7=C2=A0=C2=A0=C2=A0=C2=A0 error=C2=A0=C2=A0=C2=A0 wrong inden=
-tation: expected 5 but found 6=C2=A0
->> (indentation)
->
-> Thanks, I will fix the lint errors in v2.
->
->> > +doc: See :file:`drivers/block/nbd.c`
->>=20
->> Prefer to see a meaningful doc string here.
->
-> I will add more proper documentation in v2. I couldn't find any
-> existing documentation of this netlink interface, so I guess I will
-> write it myself.
->
->> > +attribute-sets:
->> > +=C2=A0 -
->> > +=C2=A0=C2=A0=C2=A0 name: nbd-attrs
->> > +=C2=A0=C2=A0=C2=A0 name-prefix: nbd-attr-
->> > +=C2=A0=C2=A0=C2=A0 doc: Configuration policy attributes, used for CON=
-NECT
->> > +=C2=A0=C2=A0=C2=A0 attributes:
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type: unused
->>=20
->> No need for unspec in the attribute list, ynl codegen does the right
->> thing.
->
-> For me `pyynl.ynl_gen_c --mode uapi --header` no longer generates
-> `NBD_ATTR_UNSPEC` if I remove this. Is there a YNL property to specify
-> the name of the zero value of the attribute set? If not, should I
-> remove it anyway, changing the generated header?
+This is a 31-day syzbot report for the nbd subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/nbd
 
-Oh sorry, if your goal is 100% equivalence then I guess you need it. We
-have the same in "fou" for example.
+During the period, 1 new issues were detected and 0 were fixed.
+In total, 5 issues are still open and 9 have already been fixed.
 
->> > +operations:
->> > +=C2=A0 enum-model: unified
->> > +=C2=A0 name-prefix: nbd-cmd-
->> > +=C2=A0 list:
->> > +=C2=A0=C2=A0=C2=A0 -
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: unspec
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value: 0
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: NBD_CMD_UNSPEC
->
-> A similar question applies here. If I remove this, `pyynl.ynl_gen_c
-> --mode uapi --header` no longer generates `NBD_CMD_UNSPEC`. Is there a
-> YNL property to generate it? If not, should I remove it anyway?
+Some of the still happening issues:
 
-You'll need to keep it for equivalence.
+Ref Crashes Repro Title
+<1> 3344    Yes   possible deadlock in pcpu_alloc_noprof (2)
+                  https://syzkaller.appspot.com/bug?extid=91771b3fb86ec2dd7227
+<2> 560     Yes   INFO: task hung in nbd_queue_rq
+                  https://syzkaller.appspot.com/bug?extid=30c16035531e3248dcbc
+<3> 74      Yes   possible deadlock in nbd_queue_rq
+                  https://syzkaller.appspot.com/bug?extid=3dbc6142c85cc77eaf04
 
->> > +=C2=A0=C2=A0=C2=A0 -
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name: connect
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: See :file:`drivers/block/nbd.c`,
->> > :code:`nbd_genl_connect()`
->>=20
->> Prefer to see meaningful doc string (same for other ops)
->
-> I guess I will have to document the four operations in v2 as well.
->
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 attribute-set: nbd-attrs
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dont-validate: [strict]
->>
->> nbd.c has strict & dump, should this be [strict, dump] ? (same for
->> other ops)
->
-> The NBD operations don't have `dump`, only `do`, so adding `dump` to
-> `dont-validate` does not change the output of `pyynl.ynl_gen_c --mode
-> kernel --source`. Should I add it anyway?
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-Ah, so it's redundant in nbd.c.
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
 
-Thanks,
-Donald.
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
