@@ -2,171 +2,86 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mPkpIcVnoGkejQQAu9opvQ
+	id UJGEHPdxpWlsBQYAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Thu, 26 Feb 2026 16:33:25 +0100
+	for <lists+nbd@lfdr.de>; Mon, 02 Mar 2026 12:18:15 +0100
 X-Original-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34B201A8C6C
-	for <lists+nbd@lfdr.de>; Thu, 26 Feb 2026 16:33:25 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF0291D7554
+	for <lists+nbd@lfdr.de>; Mon, 02 Mar 2026 12:18:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id E5E78205F3; Thu, 26 Feb 2026 15:33:24 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Thu Feb 26 15:33:24 2026
-Old-Return-Path: <chaitanyak@nvidia.com>
+	id 586A620696; Mon,  2 Mar 2026 11:18:14 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar  2 11:18:14 2026
+Old-Return-Path: <leon@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.3 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+X-Spam-Level: 
+X-Spam-Status: No, score=0.4 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MD5_SHA1_SUM,
-	RCVD_IN_MSPIKE_H2,RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED,TO_TOO_MANY autolearn=no
-	autolearn_force=no version=3.4.6
+	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 8DEC62059D
-	for <lists-other-nbd@bendel.debian.org>; Thu, 26 Feb 2026 15:15:54 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 775F620585
+	for <lists-other-nbd@bendel.debian.org>; Mon,  2 Mar 2026 11:00:47 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.147 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-2.148 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
 	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MD5_SHA1_SUM=-1, RCVD_IN_MSPIKE_H2=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.717,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.236, TO_TOO_MANY=1]
-	autolearn=no autolearn_force=no
+	MD5_SHA1_SUM=-1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.717,
+	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.236] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id CBkdzEGYqU14 for <lists-other-nbd@bendel.debian.org>;
-	Thu, 26 Feb 2026 15:15:47 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .nvidia. - helo: .ch4pr04cu002.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
-X-Greylist: delayed 901 seconds by postgrey-1.36 at bendel; Thu, 26 Feb 2026 15:15:47 UTC
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013052.outbound.protection.outlook.com [40.107.201.52])
+	with ESMTP id LShILbonNbHL for <lists-other-nbd@bendel.debian.org>;
+	Mon,  2 Mar 2026 11:00:40 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.5
+X-Greylist: delayed 582 seconds by postgrey-1.36 at bendel; Mon, 02 Mar 2026 11:00:40 UTC
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
-	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 534BA204DE
-	for <nbd@other.debian.org>; Thu, 26 Feb 2026 15:15:46 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P+dmyDchc5knPjAXbIgxfKfTM29NUQSaIqe4XqLmsxvk0MOBcDDBW+4NsyuZbArChtsWGTWQOlNcPefuUlYl8p8JW2AXh5IsPLtpzmFsr8ifXyJYKEf8NBcOjkFI0aB1nqLzu+H8uXGmI41y1mv1tbsrsmxB0wxsiwwKWw3nJA/Zvm4Ybba19HNdOIe9kbEZp0u3dt5TTfDEpXqVN/RTb8dxNtK8c3z4S9CfDWY4CaKQqY37tBBSco7r4LyrtmEWCF9Ei3qmEM7d5Ql5rw2+Td3KfRFzdqeWz2HdP5OKgFaZhynt7i6YtBmh4VqxcGg+mi/c1LbcqZmy64ICNybjCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6vFMg7aVRInalqMGvlmo/g2oCFM20ZIkxwF7Diiu1OQ=;
- b=czXfZ5GCKySL46OqqZHzL8ni3OLc5G7UqiIr105bbwOvJWr0F+unGvle+gykIcR30CtB7TgOAvA8mVey6eIhFl/qUFDrGOW3JgOK0E0Y3sdQVIvqS62HJrexNnzDmQKJMZjV2luHptQQvzQt78r3ax+T9yD3WEugJHVqrEQbWDMLDgJOOmAOPwAHa/80o0mXgHadCec73W+uZWRqA7SkXviahnZfQOoz5eVooWVvnEs2+hXuo2BgJlLgIZ+ZXG3Gn+sbCpgfmtDhkk4OIf/caqU1AZy7rDPhWdEhAcUTgLL1sTbFlW/MeeymwgGOHueKpsiCz3KEHsDM7g5eK0tO9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6vFMg7aVRInalqMGvlmo/g2oCFM20ZIkxwF7Diiu1OQ=;
- b=mezKKcsCkWyDMo2m7iLTKOAtkAxja4jULJreyejzWRL/V1E92jDgFL+9gMz9+YGmSrcOE2M62YqifGwdLqh8EiiPbAf4maJNwBkf7JnOISrPnlCVYIp09zX1lI7CWmSzO6s+YEMJCGg1uJuqkAqu070PqG8k3in40/zJvI9zepdvGsJblSiTjTEkKHBrcNcA53DJ7lqzw41PnFUP9RhH9PghE7NHthHfiToFcRNy/c3doW7MOnmxtNbUiAJ7uAM5NiOx97A6uShH4K/P/2sGlPizz4GZ06OUjoNRBMNchAez/xI1zcntB/CsRBzjS3cF9MYKmPlHxdVkuCTs5xn01A==
-Received: from LV3PR12MB9404.namprd12.prod.outlook.com (2603:10b6:408:219::9)
- by LV2PR12MB999072.namprd12.prod.outlook.com (2603:10b6:408:354::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.11; Thu, 26 Feb
- 2026 15:00:40 +0000
-Received: from LV3PR12MB9404.namprd12.prod.outlook.com
- ([fe80::2109:679c:3b3e:b008]) by LV3PR12MB9404.namprd12.prod.outlook.com
- ([fe80::2109:679c:3b3e:b008%6]) with mapi id 15.20.9654.007; Thu, 26 Feb 2026
- 15:00:40 +0000
-From: Chaitanya Kulkarni <chaitanyak@nvidia.com>
-To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(Client did not present a certificate)
+	by bendel.debian.org (Postfix) with ESMTPS id 8F1F22056E
+	for <nbd@other.debian.org>; Mon,  2 Mar 2026 11:00:40 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id A2E6960008;
+	Mon,  2 Mar 2026 10:50:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63631C19423;
+	Mon,  2 Mar 2026 10:50:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772448655;
+	bh=ooCwVMtMeof9eUg55NNUtPSMrUI5IYvsBBfPpUNmiu8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=fHKvAGlV1PYQM4oFzHWWPRF/Yv3lsn7pHbcI4wEPesGHyt//zusRP7n9wglL7LoOI
+	 ZhCK58mOpx9cjjpITbEgzKyqV8Ml0pgYDx3WyVQrsAPALthSB4y74AGT934IURginD
+	 S7LDUJ/n1/2o2lmF2Tg4568RN/JKwd+ULiEM0XODU4Xm0DNwN1w3/iQQlPMhM/XO8q
+	 9KzuIHHM1A9UUjdjpOWQ/NtY8TfKfyVjVycIgth2dFNViaI0QB3GPKr1jibnDZHDbJ
+	 uJuryc73Di6wnU+FHiy9nsYte5yb3BVgKohfue+dztdcVYxfNPAZlOKIrXGrEIlveJ
+	 xGjmTzNbjr2FA==
+Date: Mon, 2 Mar 2026 12:50:51 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Chaitanya Kulkarni <chaitanyak@nvidia.com>
+Cc: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
 	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
 	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
 	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
-	<linux-rdma@vger.kernel.org>
+	"nbd@other.debian.org" <nbd@other.debian.org>,
+	"linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
 Subject: Re: blktests failures with v7.0-rc1 kernel
-Thread-Topic: blktests failures with v7.0-rc1 kernel
-Thread-Index: AQHcpvcwQ4wuN59YckSu4sxsMI434LWVE2kA
-Date: Thu, 26 Feb 2026 15:00:40 +0000
-Message-ID: <4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com>
+Message-ID: <20260302105051.GP12611@unreal>
 References: <aZ_-cH8euZLySxdD@shinmob>
-In-Reply-To: <aZ_-cH8euZLySxdD@shinmob>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Mozilla Thunderbird
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV3PR12MB9404:EE_|LV2PR12MB999072:EE_
-x-ms-office365-filtering-correlation-id: 45741917-ebd6-412b-9619-08de7547cebb
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|38070700021;
-x-microsoft-antispam-message-info:
- fsJhoh3U0FGRKvZp4+yZ/xKkgHhWcOaBP5Z+1jRHcSBFpDO4td3xDTfHoqnr5/OAlnEH66HjktcZtHCfzZ7+SBnIgdryIEqY+8/Vciht340GwOfHokdjczdoDSu8rbEB8G3IX5Vo3X1cNksigbCIfMPbs5SlkOEDYhV7oYMUqu0My5z7bdPovp2eansQHVBqmmdfbH4bV72zGG7aFUsHWUTvXZkBETeU1hT+RvP3a9bPDpRQjHh6vpKIm08bPpOY1VD44NJW9UFAabc+evb5HtTRbBXNmK+vcJVxKO5BFjcDrj3xV2UnCoUGqxa7QpMSsW+W6PLZeIP0UVTttfyowNtVrVnW1MGDY3xKLvJ3V/nkFR0dZOJq7WzEiM/WMmvKj3XffYsSFfNClnXM6kkvg5xb71FkqL7UtOfj2Q2IxednuAepGwRv8I5ijyFhCKX1Ve1g79d9gpPRaoEBvCkIJuQkMmVu15Q7yUm59QS6Dvl52m2yTHz9eM9hSvI2sihPTHUOWM/qjPMTKJdtklOHGfbuDyB5az6hkkuB9IsdQI6DdoLZsnTd9vMcGhDXFPoYiRFMmhStkVImS98bMNOOzu1iABAdu0hg+YmzHB3B7p1VEflv1mSZJIYE4PASeGWSkfuVHsGTzFVAnrHDKotfe4RtF+0/QLNd5cWsmP84/HAaDGmYC0XqdJQIIoXw/yilRUHKuYPgdIXcJzK+yu84KrtAiyQf5rle6bJgszclPvl7n6/tUJoS/B3pgxX+GS0oKQaulsxU+xV1Qt6bZVuvXM95gG2AKHJfLIcO5LhQf4Q=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9404.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?VmxYY2EvdlA5emplaHhDRnVTQ1BOYUJvZm5BT3dicHFiTk0zZnBmUGsxNklV?=
- =?utf-8?B?WVdNQ3VpOWVqQjhHODV0T1dzVmNMemF4R0RHVmo1US9Tc254OTN6ZDdCVXg1?=
- =?utf-8?B?QmFHZDhkbEF4ZDlWejNraU94dy9adjJ3M0cvZ2p2T0llYktIbnZJZjdCYTFN?=
- =?utf-8?B?dnk3K3NTdzQ3aFVwamk1ckxIWlR5Q2VaOGlhek9PQ0E0emhma0dONlRad2VN?=
- =?utf-8?B?WXg4cUViTU9yUE5GeE5JV1k1M0MybFRtL1dpWGo5U3VTcGtkYVFhSTFiR2dx?=
- =?utf-8?B?bGc0TkdxQisxSE5zQ1hxTnNwTHQ2R1FYbi9lME42RWZLVFg5Y2pra2xOM1pl?=
- =?utf-8?B?eDk1aHgzQ25BeVNaaXVOeXZKUHdhWS80T2NvV3Y3bEo0dWZ4TVloeEg1V2Jo?=
- =?utf-8?B?bWF1SHpxWFVsbUNWRjZiaVVTbGdFQ3pTK25qbnpUb0x0ckFGMWxPVFU4VEtR?=
- =?utf-8?B?c2hwK1F1RFBKTGdkT3NUMFdhTnlsRlo3VXAvQzgxSS8yQmR2N0NyZVMySlB6?=
- =?utf-8?B?aTFCSGRlb2oyOWZoQURCWGJpNzBNdGZpVEZmanVFOHJDUEx1RFJnMFJDbTdy?=
- =?utf-8?B?TklEK1N0emI2dUswc1kxQm41Z2N3WksrZ3IwQ205K2hMWXg0UWxuTTNNU1NF?=
- =?utf-8?B?UWRKdU5IYk5kb1pQaHprUmhId0NJL3g1cmZ4aGVxTStqZFNXbEgzUnMyUGZR?=
- =?utf-8?B?VDQwOFRVVUw3TEs2T1VHcC9PTWx3QkozZFRTZ0pzWjRSUnNxQldIMjA3TVVt?=
- =?utf-8?B?RVdaS285OW1tdzhGWUkrcFd0TDcreDU4UldEdnQrdzlCSTVSMjJFUDI4VFJB?=
- =?utf-8?B?NzBVWUg1UTdMUmFUOUNtc0wwNENJNmR5cHNOaDgrSnNwRlVSVkZhOG1FaW9l?=
- =?utf-8?B?NHYxdndneXE4SU8yYnVJV3RwUThMbUNMQnk4c0Z2RysvYUlyWURPTGo5cENp?=
- =?utf-8?B?RDdzZDZuNmlpc1ZJWUZvUEpBbEhSTFJDRi8yN01GNVlWdmROTTkvbzh1U3JY?=
- =?utf-8?B?Q3EvNkZ1WURGRWFyUmNSbkFUUVczcXA3T29iWGVGNVUrd2RieFlKR1VnNitG?=
- =?utf-8?B?TlZnMzVKc0NvTVc5Tis3aVFkUmUrbG1LRkFTTVJ1S1lGakorOUVpRnZrZHN5?=
- =?utf-8?B?Z243akFkWHUwOWhnNkVxb2w5Q05zQkM3TmJtMmV4NGZwTlcvRDd3TGhKK3hz?=
- =?utf-8?B?UFZlb3hDSUw0WmNqbnEra1ZMb1k2YjZBK0cwN1RaS1RmWklXUjNDcWU4ZTBi?=
- =?utf-8?B?bEx0cEhnbEhuVVZ4UGxmT3FJUVZPQXZJS3p6bGwzSXFMaXNwRk55bFlLUUVJ?=
- =?utf-8?B?MWgyM3p5NTFOUmZOeGVLeURDVWpoUENzcjdnQm0xYjZ5cjcyNDljNlJuaDRl?=
- =?utf-8?B?eUIraGVHSlZVcVU2dlc5SmRSMVRoMzdwM0FqMUN5bm1DT3dLQUJGNkZrc2k4?=
- =?utf-8?B?NnF3MXBqb0NxVC8zQ0FVQzZJVjYzN3B3dFpYQWpuNEJEWm9ZdTJCOXhJR3lM?=
- =?utf-8?B?NG5lTm9QMnJua2dYMmgycFBNMS9YdVRsMGNQVzJubXEvTjR6NzBOWEF2RUFD?=
- =?utf-8?B?Q3dsbGE2bnhKNWh6aGlqL0NZUU1zQW5taVhoVUJpWFVBdkQxZ0VnZVJrNW5l?=
- =?utf-8?B?eFFuZWp3NklraTZoU2dZVXdDZnZ0QWZSQ0FpMXplRnlqNE1RaSs3b1E3bWFV?=
- =?utf-8?B?c2pkU01OU2F5ZUs2U09mV3RhZS9rRVNCWTg4c0JJK01KTkNkS0xEUlQ5amYr?=
- =?utf-8?B?WmtPUlQ0MkgreFJrS0d2TlVrdHZ2STNsdUZEbTM3OERieDlSdFIrNzNhSGl2?=
- =?utf-8?B?Wm9LbzQ4c0hRVklDSk9JdzlBazc5RHRKVHpldlJmY3psZ1FXZFRJSWlTbnJ2?=
- =?utf-8?B?TzRUWkFib2laK0dHTTVsM0VKVEN2QnptRzdvN2FzUWFTak4vaEE2MGVtdXVk?=
- =?utf-8?B?VVpNY1A0U1hGT0M5WTdBd2JDQ3VPRmZRMk9nS3MybG1kY3BVYmhHdXNZREdm?=
- =?utf-8?B?Zy9Bc09sMGdmU3MyL2VET2ZzTzQyNUZweWFLdXJtT284c3VObTVxeUsyMWNM?=
- =?utf-8?B?Q1dnUWJWQkloc0NScFV5T1g0WEZsUzhBS1R3NTJrOHdCc2NrUEd4ZEc3Y2Fm?=
- =?utf-8?B?R1l0TjZNeFlJNFVxSDNLS0hWbVRiZWVNeVhJMkRmcXNiQlBoUmlZMUhHT3Jz?=
- =?utf-8?B?ak9JVGsvNnQrSERCM0ZpV3lzeVp5RUFNeVl2NDRYOXhFOStXUjBPZ2Z6R2d2?=
- =?utf-8?B?dkVRRGYxMWxlcnhleU1qNXZ5Sm50bUN4MHBFczBtVXZIQVJzUCtqclRiTXFa?=
- =?utf-8?B?RHVHYVJBbDZKUERaMmducUhQaWh1K0pPNzZ3U09pL1AwOUx1U1NwNDJCdTJa?=
- =?utf-8?Q?0ZIwdrr2fDkP9RT0QJc4W+ub8lr3+nFQ7s4/UjJjHu8lh?=
-x-ms-exchange-antispam-messagedata-1: vg+5HyzhrV0dLQ==
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <91A79EB0CD9F944692EBDE87AC6C3CD0@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9404.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45741917-ebd6-412b-9619-08de7547cebb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Feb 2026 15:00:40.4112
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: t/PIX+dgWzavylmj7XMeMQB90JB9fVnmJsWQPwdWHgknJfOo+eCSvHio16e0BgFOTJJOEUKcKmSKyAipjN6h/w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB999072
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com>
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <suk-_wQltJG.A.139M.EfGopB@bendel>
+Resent-Message-ID: <fPN2JpgXlnB.A.ENaG.2HXppB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3505
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3506
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -176,177 +91,228 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com
-Resent-Date: Thu, 26 Feb 2026 15:33:24 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20260302105051.GP12611@unreal
+Resent-Date: Mon,  2 Mar 2026 11:18:14 +0000 (UTC)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.91 / 15.00];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [-0.61 / 15.00];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MAILLIST(-0.20)[generic];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
+	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	HAS_LIST_UNSUB(-0.01)[];
 	R_SPF_NA(0.00)[no SPF record];
+	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[chaitanyak@nvidia.com,bounce-nbd=lists@other.debian.org];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:chaitanyak@nvidia.com,m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
 	TO_DN_EQ_ADDR_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[chaitanyak@nvidia.com,bounce-nbd=lists@other.debian.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-0.989];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,bounce-nbd=lists@other.debian.org];
+	FORGED_SENDER(0.00)[leon@kernel.org,bounce-nbd=lists@other.debian.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
 	TAGGED_RCPT(0.00)[nbd];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,Nvidia.com:dkim,qemu.org:url]
-X-Rspamd-Queue-Id: 34B201A8C6C
+	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,bendel.debian.org:helo,bendel.debian.org:rdns,qemu.org:url]
+X-Rspamd-Queue-Id: EF0291D7554
 X-Rspamd-Action: no action
 
-T24gMi8yNi8yNiAxMjowOSBBTSwgU2hpbmljaGlybyBLYXdhc2FraSB3cm90ZToNCj4gRmFpbHVy
-ZSBkZXNjcmlwdGlvbg0KPiA9PT09PT09PT09PT09PT09PT09DQo+DQo+ICMxOiBibGt0cmFjZS8w
-MDINCj4NCj4gICAgICBUaGUgdGVzdCBjYXNlIGJsa3RyYWNlLzAwMiBmYWlsZWQgZHVlIHRvICJC
-VUc6IHVzaW5nIF9fdGhpc19jcHVfcmVhZCgpIGluDQo+ICAgICAgcHJlZW1wdGlibGUiIGFuZCBh
-IGZvbGxvd2luZyBXQVJOIFsyXS4NCg0KSSBzYXcgdGhpcyBsYXN0IG5pZ2h0IGl0IHdhcyBwcmV0
-dHkgbGF0ZSwganVzdCBnbGFkIHRvIHNlZSBzaW1wbGUgDQp0ZXN0Y2FzZSBjYXRjaGluZyBidWdz
-Lg0KDQpJJ3ZlIGEgcGF0Y2ggZm9yIHRoaXMgSSdsbCBzZW5kIG91dCBzaG9ydGx5IDotDQoNCg0K
-RnJvbSA2YTI4NWRiMWJiZGJiNjEzYTg1YWM1NWEzOTVlZDIwNDNkNGViMTFkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogQ2hhaXRhbnlhIEt1bGthcm5pIDxrY2hAbnZpZGlhLmNvbT4N
-CkRhdGU6IFdlZCwgMjUgRmViIDIwMjYgMjM6MDE6MTIgLTA4MDANClN1YmplY3Q6IFtQQVRDSF0g
-YmxrdHJhY2U6IGZpeCBfX3RoaXNfY3B1X3JlYWQvd3JpdGUgaW4gcHJlZW1wdGlibGUgY29udGV4
-dA0KDQoNCg0KYmxrdHJhY2UvMDAyIChibGt0cmFjZSBmdHJhY2UgY29ycnVwdGlvbiB3aXRoIHN5
-c2ZzIHRyYWNlKSDCoFtmYWlsZWRdDQogwqAgwqAgcnVudGltZcKgIDAuMzY3c8KgIC4uLsKgIDAu
-NDM3cw0KIMKgIMKgIHNvbWV0aGluZyBmb3VuZCBpbiBkbWVzZzoNCiDCoCDCoCBbwqAgwqA4MS4y
-MTEwMThdIHJ1biBibGt0ZXN0cyBibGt0cmFjZS8wMDIgYXQgMjAyNi0wMi0yNSAyMjoyNDozMw0K
-IMKgIMKgIFvCoCDCoDgxLjIzOTU4MF0gbnVsbF9ibGs6IGRpc2sgbnVsbGIxIGNyZWF0ZWQNCiDC
-oCDCoCBbwqAgwqA4MS4zNTcyOTRdIEJVRzogdXNpbmcgX190aGlzX2NwdV9yZWFkKCkgaW4gcHJl
-ZW1wdGlibGUgDQpbMDAwMDAwMDBdIGNvZGU6IGRkLzI1MTYNCiDCoCDCoCBbwqAgwqA4MS4zNjI4
-NDJdIGNhbGxlciBpcyB0cmFjaW5nX3JlY29yZF9jbWRsaW5lKzB4MTAvMHg0MA0KIMKgIMKgIFvC
-oCDCoDgxLjM2Mjg3Ml0gQ1BVOiAxNiBVSUQ6IDAgUElEOiAyNTE2IENvbW06IGRkIFRhaW50ZWQ6
-IEcgwqAgwqAgwqAgwqAgDQogwqAgwqAgwqAgwqBOwqAgNy4wLjAtcmMxbGJsaysgIzg0IFBSRUVN
-UFQoZnVsbCkNCiDCoCDCoCBbwqAgwqA4MS4zNjI4NzddIFRhaW50ZWQ6IFtOXT1URVNUDQogwqAg
-wqAgW8KgIMKgODEuMzYyODc4XSBIYXJkd2FyZSBuYW1lOiBRRU1VIFN0YW5kYXJkIFBDIChpNDQw
-RlggKyBQSUlYLCANCjE5OTYpLCBCSU9TIHJlbC0xLjE3LjAtMC1nYjUyY2E4NmUwOTRkLXByZWJ1
-aWx0LnFlbXUub3JnIDA0LzAxLzIwMTQNCiDCoCDCoCBbwqAgwqA4MS4zNjI4ODFdIENhbGwgVHJh
-Y2U6DQogwqAgwqAgW8KgIMKgODEuMzYyODg0XcKgIDxUQVNLPg0KIMKgIMKgIFvCoCDCoDgxLjM2
-Mjg4Nl3CoCBkdW1wX3N0YWNrX2x2bCsweDhkLzB4YjANCiDCoCDCoCAuLi4NCiDCoCDCoCAoU2Vl
-ICcvbW50L3NkYS9ibGt0ZXN0cy9yZXN1bHRzL25vZGV2L2Jsa3RyYWNlLzAwMi5kbWVzZycgZm9y
-IHRoZSANCmVudGlyZSBtZXNzYWdlKQ0KDQpbwqAgwqA4MS4yMTEwMThdIHJ1biBibGt0ZXN0cyBi
-bGt0cmFjZS8wMDIgYXQgMjAyNi0wMi0yNSAyMjoyNDozMw0KW8KgIMKgODEuMjM5NTgwXSBudWxs
-X2JsazogZGlzayBudWxsYjEgY3JlYXRlZA0KW8KgIMKgODEuMzU3Mjk0XSBCVUc6IHVzaW5nIF9f
-dGhpc19jcHVfcmVhZCgpIGluIHByZWVtcHRpYmxlIFswMDAwMDAwMF0gDQpjb2RlOiBkZC8yNTE2
-DQpbwqAgwqA4MS4zNjI4NDJdIGNhbGxlciBpcyB0cmFjaW5nX3JlY29yZF9jbWRsaW5lKzB4MTAv
-MHg0MA0KW8KgIMKgODEuMzYyODcyXSBDUFU6IDE2IFVJRDogMCBQSUQ6IDI1MTYgQ29tbTogZGQg
-VGFpbnRlZDogRyDCoCDCoCDCoCDCoCDCoCANCiDCoE7CoCA3LjAuMC1yYzFsYmxrKyAjODQgUFJF
-RU1QVChmdWxsKQ0KW8KgIMKgODEuMzYyODc3XSBUYWludGVkOiBbTl09VEVTVA0KW8KgIMKgODEu
-MzYyODc4XSBIYXJkd2FyZSBuYW1lOiBRRU1VIFN0YW5kYXJkIFBDIChpNDQwRlggKyBQSUlYLCAx
-OTk2KSwgDQpCSU9TIHJlbC0xLjE3LjAtMC1nYjUyY2E4NmUwOTRkLXByZWJ1aWx0LnFlbXUub3Jn
-IDA0LzAxLzIwMTQNClvCoCDCoDgxLjM2Mjg4MV0gQ2FsbCBUcmFjZToNClvCoCDCoDgxLjM2Mjg4
-NF3CoCA8VEFTSz4NClvCoCDCoDgxLjM2Mjg4Nl3CoCBkdW1wX3N0YWNrX2x2bCsweDhkLzB4YjAN
-ClvCoCDCoDgxLjM2Mjg5NV3CoCBjaGVja19wcmVlbXB0aW9uX2Rpc2FibGVkKzB4Y2UvMHhlMA0K
-W8KgIMKgODEuMzYyOTAyXcKgIHRyYWNpbmdfcmVjb3JkX2NtZGxpbmUrMHgxMC8weDQwDQpbwqAg
-wqA4MS4zNjI5MjNdwqAgX19ibGtfYWRkX3RyYWNlKzB4MzA3LzB4NWQwDQpbwqAgwqA4MS4zNjI5
-MzRdwqAgPyBsb2NrX2FjcXVpcmUrMHhlMC8weDMwMA0KW8KgIMKgODEuMzYyOTQwXcKgID8gaW92
-X2l0ZXJfZXh0cmFjdF9wYWdlcysweDEwMS8weGEzMA0KW8KgIMKgODEuMzYyOTU5XcKgIGJsa19h
-ZGRfdHJhY2VfYmlvKzB4MTA2LzB4MWUwDQpbwqAgwqA4MS4zNjI5NjhdwqAgc3VibWl0X2Jpb19u
-b2FjY3Rfbm9jaGVjaysweDI0Yi8weDNhMA0KW8KgIMKgODEuMzYyOTc5XcKgID8gbG9ja2RlcF9p
-bml0X21hcF90eXBlKzB4NTgvMHgyNjANClvCoCDCoDgxLjM2Mjk4OF3CoCBzdWJtaXRfYmlvX3dh
-aXQrMHg1Ni8weDkwDQpbwqAgwqA4MS4zNjMwMDldwqAgX19ibGtkZXZfZGlyZWN0X0lPX3NpbXBs
-ZSsweDE2Yy8weDI1MA0KW8KgIMKgODEuMzYzMDI2XcKgID8gX19wZnhfc3VibWl0X2Jpb193YWl0
-X2VuZGlvKzB4MTAvMHgxMA0KW8KgIMKgODEuMzYzMDM4XcKgID8gcmN1X3JlYWRfbG9ja19hbnlf
-aGVsZCsweDczLzB4YTANClvCoCDCoDgxLjM2MzA1MV3CoCBibGtkZXZfcmVhZF9pdGVyKzB4YzEv
-MHgxNDANClvCoCDCoDgxLjM2MzA1OV3CoCB2ZnNfcmVhZCsweDIwYi8weDMzMA0KW8KgIMKgODEu
-MzYzMDgzXcKgIGtzeXNfcmVhZCsweDY3LzB4ZTANClvCoCDCoDgxLjM2MzA5MF3CoCBkb19zeXNj
-YWxsXzY0KzB4YmYvMHhmMDANClvCoCDCoDgxLjM2MzEwMl3CoCBlbnRyeV9TWVNDQUxMXzY0X2Fm
-dGVyX2h3ZnJhbWUrMHg3Ni8weDdlDQpbwqAgwqA4MS4zNjMxMDZdIFJJUDogMDAzMzoweDdmMjgx
-OTA2MDI5ZA0KW8KgIMKgODEuMzYzMTExXSBDb2RlOiAzMSBjMCBlOSBjNiBmZSBmZiBmZiA1MCA0
-OCA4ZCAzZCA2NiA2MyAwYSAwMCBlOCA1OSANCmZmIDAxIDAwIDY2IDBmIDFmIDg0IDAwIDAwIDAw
-IDAwIDAwIDgwIDNkIDQxIDMzIDBlIDAwIDAwIDc0IDE3IDMxIGMwIDBmIA0KMDUgPDQ4PiAzZCAw
-MCBmMCBmZiBmZiA3NyA1YiBjMyA2NiAyZSAwZiAxZiA4NCAwMCAwMCAwMCAwMCAwMCA0OCA4MyBl
-Yw0KW8KgIMKgODEuMzYzMTEzXSBSU1A6IDAwMmI6MDAwMDdmZmNhMTI3ZGQ0OCBFRkxBR1M6IDAw
-MDAwMjQ2IE9SSUdfUkFYOiANCjAwMDAwMDAwMDAwMDAwMDANClvCoCDCoDgxLjM2MzEyMF0gUkFY
-OiBmZmZmZmZmZmZmZmZmZmRhIFJCWDogMDAwMDAwMDAwMDAwMDAwMCBSQ1g6IA0KMDAwMDdmMjgx
-OTA2MDI5ZA0KW8KgIMKgODEuMzYzMTIyXSBSRFg6IDAwMDAwMDAwMDAwMDEwMDAgUlNJOiAwMDAw
-NTU5ZjhiZmFlMDAwIFJESTogDQowMDAwMDAwMDAwMDAwMDAwDQpbwqAgwqA4MS4zNjMxMjNdIFJC
-UDogMDAwMDAwMDAwMDAwMTAwMCBSMDg6IDAwMDAwMDI4NjNhMTBhODEgUjA5OiANCjAwMDA3ZjI4
-MTkxNWYwMDANClvCoCDCoDgxLjM2MzEyNF0gUjEwOiAwMDAwN2YyODE4Zjc3YjYwIFIxMTogMDAw
-MDAwMDAwMDAwMDI0NiBSMTI6IA0KMDAwMDU1OWY4YmZhZTAwMA0KW8KgIMKgODEuMzYzMTI2XSBS
-MTM6IDAwMDAwMDAwMDAwMDAwMDAgUjE0OiAwMDAwMDAwMDAwMDAwMDAwIFIxNTogDQowMDAwMDAw
-MDAwMDAwMDBhDQpbwqAgwqA4MS4zNjMxNDJdwqAgPC9UQVNLPg0KW8KgIMKgODEuMzYzMTU3XSBC
-VUc6IHVzaW5nIF9fdGhpc19jcHVfcmVhZCgpIGluIHByZWVtcHRpYmxlIFswMDAwMDAwMF0gDQpj
-b2RlOiBkZC8yNTE2DQpbwqAgwqA4MS4zNjg0ODZdIGNhbGxlciBpcyB0cmFjaW5nX3JlY29yZF9j
-bWRsaW5lKzB4MTAvMHg0MA0KW8KgIMKgODEuMzY4NDk2XSBDUFU6IDE2IFVJRDogMCBQSUQ6IDI1
-MTYgQ29tbTogZGQgVGFpbnRlZDogRyDCoCDCoCDCoCDCoCDCoCANCiDCoE7CoCA3LjAuMC1yYzFs
-YmxrKyAjODQgUFJFRU1QVChmdWxsKQ0KW8KgIMKgODEuMzY4NTAxXSBUYWludGVkOiBbTl09VEVT
-VA0KW8KgIMKgODEuMzY4NTAyXSBIYXJkd2FyZSBuYW1lOiBRRU1VIFN0YW5kYXJkIFBDIChpNDQw
-RlggKyBQSUlYLCAxOTk2KSwgDQpCSU9TIHJlbC0xLjE3LjAtMC1nYjUyY2E4NmUwOTRkLXByZWJ1
-aWx0LnFlbXUub3JnIDA0LzAxLzIwMTQNClvCoCDCoDgxLjM2ODUwM10gQ2FsbCBUcmFjZToNClvC
-oCDCoDgxLjM2ODUwNV3CoCA8VEFTSz4NClvCoCDCoDgxLjM2ODUwN13CoCBkdW1wX3N0YWNrX2x2
-bCsweDhkLzB4YjANClvCoCDCoDgxLjM2ODUxM13CoCBjaGVja19wcmVlbXB0aW9uX2Rpc2FibGVk
-KzB4Y2UvMHhlMA0KW8KgIMKgODEuMzY4NTE4XcKgIHRyYWNpbmdfcmVjb3JkX2NtZGxpbmUrMHgx
-MC8weDQwDQpbwqAgwqA4MS4zNjg1MjNdwqAgX19ibGtfYWRkX3RyYWNlKzB4MzA3LzB4NWQwDQpb
-wqAgwqA4MS4zNjg1MjhdwqAgPyBsb2NrX2FjcXVpcmUrMHhlMC8weDMwMA0KW8KgIMKgODEuMzY4
-NTQ3XcKgIGJsa19hZGRfdHJhY2VfYmlvKzB4MTA2LzB4MWUwDQpbwqAgwqA4MS4zNjg1NTZdwqAg
-YmxrX21xX3N1Ym1pdF9iaW8rMHg2M2MvMHhiYjANClvCoCDCoDgxLjM2ODU4MF3CoCBfX3N1Ym1p
-dF9iaW8rMHhhZC8weDVjMA0KW8KgIMKgODEuMzY4NTk1XcKgID8gc3VibWl0X2Jpb19ub2FjY3Rf
-bm9jaGVjaysweDJiMC8weDNhMA0KW8KgIMKgODEuMzY4NjAwXcKgIHN1Ym1pdF9iaW9fbm9hY2N0
-X25vY2hlY2srMHgyYjAvMHgzYTANClvCoCDCoDgxLjM2ODYxMV3CoCBzdWJtaXRfYmlvX3dhaXQr
-MHg1Ni8weDkwDQpbwqAgwqA4MS4zNjg2MjJdwqAgX19ibGtkZXZfZGlyZWN0X0lPX3NpbXBsZSsw
-eDE2Yy8weDI1MA0KW8KgIMKgODEuMzY4NjM1XcKgID8gX19wZnhfc3VibWl0X2Jpb193YWl0X2Vu
-ZGlvKzB4MTAvMHgxMA0KW8KgIMKgODEuMzY4NjU2XcKgID8gcmN1X3JlYWRfbG9ja19hbnlfaGVs
-ZCsweDczLzB4YTANClvCoCDCoDgxLjM2ODY2NF3CoCBibGtkZXZfcmVhZF9pdGVyKzB4YzEvMHgx
-NDANClvCoCDCoDgxLjM2ODY3Ml3CoCB2ZnNfcmVhZCsweDIwYi8weDMzMA0KW8KgIMKgODEuMzY4
-Njg3XcKgIGtzeXNfcmVhZCsweDY3LzB4ZTANClvCoCDCoDgxLjM2ODY5NF3CoCBkb19zeXNjYWxs
-XzY0KzB4YmYvMHhmMDANClvCoCDCoDgxLjM2ODcwMl3CoCBlbnRyeV9TWVNDQUxMXzY0X2FmdGVy
-X2h3ZnJhbWUrMHg3Ni8weDdlDQpbwqAgwqA4MS4zNjg3MDVdIFJJUDogMDAzMzoweDdmMjgxOTA2
-MDI5ZA0KW8KgIMKgODEuMzY4NzA4XSBDb2RlOiAzMSBjMCBlOSBjNiBmZSBmZiBmZiA1MCA0OCA4
-ZCAzZCA2NiA2MyAwYSAwMCBlOCA1OSANCmZmIDAxIDAwIDY2IDBmIDFmIDg0IDAwIDAwIDAwIDAw
-IDAwIDgwIDNkIDQxIDMzIDBlIDAwIDAwIDc0IDE3IDMxIGMwIDBmIA0KMDUgPDQ4PiAzZCAwMCBm
-MCBmZiBmZiA3NyA1YiBjMyA2NiAyZSAwZiAxZiA4NCAwMCAwMCAwMCAwMCAwMCA0OCA4MyBlYw0K
-W8KgIMKgODEuMzY4NzEwXSBSU1A6IDAwMmI6MDAwMDdmZmNhMTI3ZGQ0OCBFRkxBR1M6IDAwMDAw
-MjQ2IE9SSUdfUkFYOiANCjAwMDAwMDAwMDAwMDAwMDANClvCoCDCoDgxLjM2ODcxMl0gUkFYOiBm
-ZmZmZmZmZmZmZmZmZmRhIFJCWDogMDAwMDAwMDAwMDAwMDAwMCBSQ1g6IA0KMDAwMDdmMjgxOTA2
-MDI5ZA0KW8KgIMKgODEuMzY4NzEzXSBSRFg6IDAwMDAwMDAwMDAwMDEwMDAgUlNJOiAwMDAwNTU5
-ZjhiZmFlMDAwIFJESTogDQowMDAwMDAwMDAwMDAwMDAwDQpbwqAgwqA4MS4zNjg3MTRdIFJCUDog
-MDAwMDAwMDAwMDAwMTAwMCBSMDg6IDAwMDAwMDI4NjNhMTBhODEgUjA5OiANCjAwMDA3ZjI4MTkx
-NWYwMDANClvCoCDCoDgxLjM2ODcxNl0gUjEwOiAwMDAwN2YyODE4Zjc3YjYwIFIxMTogMDAwMDAw
-MDAwMDAwMDI0NiBSMTI6IA0KMDAwMDU1OWY4YmZhZTAwMA0KW8KgIMKgODEuMzY4NzE3XSBSMTM6
-IDAwMDAwMDAwMDAwMDAwMDAgUjE0OiAwMDAwMDAwMDAwMDAwMDAwIFIxNTogDQowMDAwMDAwMDAw
-MDAwMDBhDQpbwqAgwqA4MS4zNjg3MzRdwqAgPC9UQVNLPg0KDQpUaGUgc2FtZSBCVUcgZmlyZXMg
-ZnJvbSBibGtfYWRkX3RyYWNlX3BsdWcoKSwgYmxrX2FkZF90cmFjZV91bnBsdWcoKSwNCmFuZCBi
-bGtfYWRkX3RyYWNlX3JxKCkgcGF0aHMgYXMgd2VsbC4NCg0KRml4IGJ5IHdyYXBwaW5nIHRoZSB0
-cmFjaW5nX3JlY29yZF9jbWRsaW5lKCkgY2FsbCB3aXRoDQpwcmVlbXB0X2Rpc2FibGUoKS9wcmVl
-bXB0X2VuYWJsZSgpLsKgIFRoaXMgaXMgYSBiZXN0LWVmZm9ydCAicmVjb3JkDQp0aGUgY29tbSBz
-dHJpbmcgZm9yIHRoaXMgUElEIiBvcGVyYXRpb24gYW5kIGJyaWVmbHkgZGlzYWJsaW5nDQpwcmVl
-bXB0aW9uIGFyb3VuZCBpdCBpcyBib3RoIHNhZmUgYW5kIGNvcnJlY3QuDQoNCldpdGggdGhpcyBw
-YXRjaCBub3cgYmxrdGVzdHMgZm9yIGJsa3RyYWNlIHBhc3MgOi0NCg0KYmxrdGVzdHMgKG1hc3Rl
-cikgIyAuL2NoZWNrIGJsa3RyYWNlDQpibGt0cmFjZS8wMDEgKGJsa3RyYWNlIHpvbmUgbWFuYWdl
-bWVudCBjb21tYW5kIHRyYWNpbmcpIFtwYXNzZWRdDQogwqAgwqAgcnVudGltZcKgIDMuNjUyc8Kg
-IC4uLsKgIDMuNjQ5cw0KYmxrdHJhY2UvMDAyIChibGt0cmFjZSBmdHJhY2UgY29ycnVwdGlvbiB3
-aXRoIHN5c2ZzIHRyYWNlKSDCoFtwYXNzZWRdDQogwqAgwqAgcnVudGltZcKgIDAuNDM3c8KgIC4u
-LsKgIDAuMzg5cw0KYmxrdGVzdHMgKG1hc3RlcikgIw0KDQoNClNpZ25lZC1vZmYtYnk6IENoYWl0
-YW55YSBLdWxrYXJuaSA8a2NoQG52aWRpYS5jb20+DQotLS0NCiDCoGtlcm5lbC90cmFjZS9ibGt0
-cmFjZS5jIHwgMiArKw0KIMKgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQ0KDQpkaWZm
-IC0tZ2l0IGEva2VybmVsL3RyYWNlL2Jsa3RyYWNlLmMgYi9rZXJuZWwvdHJhY2UvYmxrdHJhY2Uu
-Yw0KaW5kZXggM2I3YzEwMmE2ZWIzLi40ODg1NTIwMzY1ODMgMTAwNjQ0DQotLS0gYS9rZXJuZWwv
-dHJhY2UvYmxrdHJhY2UuYw0KKysrIGIva2VybmVsL3RyYWNlL2Jsa3RyYWNlLmMNCkBAIC0zODMs
-NyArMzgzLDkgQEAgc3RhdGljIHZvaWQgX19ibGtfYWRkX3RyYWNlKHN0cnVjdCBibGtfdHJhY2Ug
-KmJ0LCANCnNlY3Rvcl90IHNlY3RvciwgaW50IGJ5dGVzLA0KIMKgIMKgIMKgY3B1ID0gcmF3X3Nt
-cF9wcm9jZXNzb3JfaWQoKTsNCg0KIMKgIMKgIMKgaWYgKGJsa190cmFjZXIpIHsNCivCoCDCoCDC
-oCDCoCBwcmVlbXB0X2Rpc2FibGVfbm90cmFjZSgpOw0KIMKgIMKgIMKgIMKgIMKgdHJhY2luZ19y
-ZWNvcmRfY21kbGluZShjdXJyZW50KTsNCivCoCDCoCDCoCDCoCBwcmVlbXB0X2VuYWJsZV9ub3Ry
-YWNlKCk7DQoNCiDCoCDCoCDCoCDCoCDCoGJ1ZmZlciA9IGJsa190ci0+YXJyYXlfYnVmZmVyLmJ1
-ZmZlcjsNCiDCoCDCoCDCoCDCoCDCoHRyYWNlX2N0eCA9IHRyYWNpbmdfZ2VuX2N0eF9mbGFncygw
-KTsNCi0tIA0KMi4zOS41DQoNCg0K
+On Thu, Feb 26, 2026 at 03:00:40PM +0000, Chaitanya Kulkarni wrote:
+> On 2/26/26 12:09 AM, Shinichiro Kawasaki wrote:
+> > Failure description
+> > ===================
+> >
+> > #1: blktrace/002
+> >
+> >      The test case blktrace/002 failed due to "BUG: using __this_cpu_read() in
+> >      preemptible" and a following WARN [2].
+> 
+> I saw this last night it was pretty late, just glad to see simple 
+> testcase catching bugs.
+> 
+> I've a patch for this I'll send out shortly :-
+> 
+> 
+> From 6a285db1bbdbb613a85ac55a395ed2043d4eb11d Mon Sep 17 00:00:00 2001
+> From: Chaitanya Kulkarni <kch@nvidia.com>
+> Date: Wed, 25 Feb 2026 23:01:12 -0800
+> Subject: [PATCH] blktrace: fix __this_cpu_read/write in preemptible context
+> 
+> 
+> 
+> blktrace/002 (blktrace ftrace corruption with sysfs trace)  [failed]
+>      runtime  0.367s  ...  0.437s
+>      something found in dmesg:
+>      [   81.211018] run blktests blktrace/002 at 2026-02-25 22:24:33
+>      [   81.239580] null_blk: disk nullb1 created
+>      [   81.357294] BUG: using __this_cpu_read() in preemptible 
+> [00000000] code: dd/2516
+>      [   81.362842] caller is tracing_record_cmdline+0x10/0x40
+>      [   81.362872] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G         
+>         N  7.0.0-rc1lblk+ #84 PREEMPT(full)
+>      [   81.362877] Tainted: [N]=TEST
+>      [   81.362878] Hardware name: QEMU Standard PC (i440FX + PIIX, 
+> 1996), BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+>      [   81.362881] Call Trace:
+>      [   81.362884]  <TASK>
+>      [   81.362886]  dump_stack_lvl+0x8d/0xb0
+>      ...
+>      (See '/mnt/sda/blktests/results/nodev/blktrace/002.dmesg' for the 
+> entire message)
+> 
+> [   81.211018] run blktests blktrace/002 at 2026-02-25 22:24:33
+> [   81.239580] null_blk: disk nullb1 created
+> [   81.357294] BUG: using __this_cpu_read() in preemptible [00000000] 
+> code: dd/2516
+> [   81.362842] caller is tracing_record_cmdline+0x10/0x40
+> [   81.362872] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G           
+>   N  7.0.0-rc1lblk+ #84 PREEMPT(full)
+> [   81.362877] Tainted: [N]=TEST
+> [   81.362878] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+> BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+> [   81.362881] Call Trace:
+> [   81.362884]  <TASK>
+> [   81.362886]  dump_stack_lvl+0x8d/0xb0
+> [   81.362895]  check_preemption_disabled+0xce/0xe0
+> [   81.362902]  tracing_record_cmdline+0x10/0x40
+> [   81.362923]  __blk_add_trace+0x307/0x5d0
+> [   81.362934]  ? lock_acquire+0xe0/0x300
+> [   81.362940]  ? iov_iter_extract_pages+0x101/0xa30
+> [   81.362959]  blk_add_trace_bio+0x106/0x1e0
+> [   81.362968]  submit_bio_noacct_nocheck+0x24b/0x3a0
+> [   81.362979]  ? lockdep_init_map_type+0x58/0x260
+> [   81.362988]  submit_bio_wait+0x56/0x90
+> [   81.363009]  __blkdev_direct_IO_simple+0x16c/0x250
+> [   81.363026]  ? __pfx_submit_bio_wait_endio+0x10/0x10
+> [   81.363038]  ? rcu_read_lock_any_held+0x73/0xa0
+> [   81.363051]  blkdev_read_iter+0xc1/0x140
+> [   81.363059]  vfs_read+0x20b/0x330
+> [   81.363083]  ksys_read+0x67/0xe0
+> [   81.363090]  do_syscall_64+0xbf/0xf00
+> [   81.363102]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> [   81.363106] RIP: 0033:0x7f281906029d
+> [   81.363111] Code: 31 c0 e9 c6 fe ff ff 50 48 8d 3d 66 63 0a 00 e8 59 
+> ff 01 00 66 0f 1f 84 00 00 00 00 00 80 3d 41 33 0e 00 00 74 17 31 c0 0f 
+> 05 <48> 3d 00 f0 ff ff 77 5b c3 66 2e 0f 1f 84 00 00 00 00 00 48 83 ec
+> [   81.363113] RSP: 002b:00007ffca127dd48 EFLAGS: 00000246 ORIG_RAX: 
+> 0000000000000000
+> [   81.363120] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 
+> 00007f281906029d
+> [   81.363122] RDX: 0000000000001000 RSI: 0000559f8bfae000 RDI: 
+> 0000000000000000
+> [   81.363123] RBP: 0000000000001000 R08: 0000002863a10a81 R09: 
+> 00007f281915f000
+> [   81.363124] R10: 00007f2818f77b60 R11: 0000000000000246 R12: 
+> 0000559f8bfae000
+> [   81.363126] R13: 0000000000000000 R14: 0000000000000000 R15: 
+> 000000000000000a
+> [   81.363142]  </TASK>
+> [   81.363157] BUG: using __this_cpu_read() in preemptible [00000000] 
+> code: dd/2516
+> [   81.368486] caller is tracing_record_cmdline+0x10/0x40
+> [   81.368496] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G           
+>   N  7.0.0-rc1lblk+ #84 PREEMPT(full)
+> [   81.368501] Tainted: [N]=TEST
+> [   81.368502] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
+> BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+> [   81.368503] Call Trace:
+> [   81.368505]  <TASK>
+> [   81.368507]  dump_stack_lvl+0x8d/0xb0
+> [   81.368513]  check_preemption_disabled+0xce/0xe0
+> [   81.368518]  tracing_record_cmdline+0x10/0x40
+> [   81.368523]  __blk_add_trace+0x307/0x5d0
+> [   81.368528]  ? lock_acquire+0xe0/0x300
+> [   81.368547]  blk_add_trace_bio+0x106/0x1e0
+> [   81.368556]  blk_mq_submit_bio+0x63c/0xbb0
+> [   81.368580]  __submit_bio+0xad/0x5c0
+> [   81.368595]  ? submit_bio_noacct_nocheck+0x2b0/0x3a0
+> [   81.368600]  submit_bio_noacct_nocheck+0x2b0/0x3a0
+> [   81.368611]  submit_bio_wait+0x56/0x90
+> [   81.368622]  __blkdev_direct_IO_simple+0x16c/0x250
+> [   81.368635]  ? __pfx_submit_bio_wait_endio+0x10/0x10
+> [   81.368656]  ? rcu_read_lock_any_held+0x73/0xa0
+> [   81.368664]  blkdev_read_iter+0xc1/0x140
+> [   81.368672]  vfs_read+0x20b/0x330
+> [   81.368687]  ksys_read+0x67/0xe0
+> [   81.368694]  do_syscall_64+0xbf/0xf00
+> [   81.368702]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> [   81.368705] RIP: 0033:0x7f281906029d
+> [   81.368708] Code: 31 c0 e9 c6 fe ff ff 50 48 8d 3d 66 63 0a 00 e8 59 
+> ff 01 00 66 0f 1f 84 00 00 00 00 00 80 3d 41 33 0e 00 00 74 17 31 c0 0f 
+> 05 <48> 3d 00 f0 ff ff 77 5b c3 66 2e 0f 1f 84 00 00 00 00 00 48 83 ec
+> [   81.368710] RSP: 002b:00007ffca127dd48 EFLAGS: 00000246 ORIG_RAX: 
+> 0000000000000000
+> [   81.368712] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 
+> 00007f281906029d
+> [   81.368713] RDX: 0000000000001000 RSI: 0000559f8bfae000 RDI: 
+> 0000000000000000
+> [   81.368714] RBP: 0000000000001000 R08: 0000002863a10a81 R09: 
+> 00007f281915f000
+> [   81.368716] R10: 00007f2818f77b60 R11: 0000000000000246 R12: 
+> 0000559f8bfae000
+> [   81.368717] R13: 0000000000000000 R14: 0000000000000000 R15: 
+> 000000000000000a
+> [   81.368734]  </TASK>
+> 
+> The same BUG fires from blk_add_trace_plug(), blk_add_trace_unplug(),
+> and blk_add_trace_rq() paths as well.
+> 
+> Fix by wrapping the tracing_record_cmdline() call with
+> preempt_disable()/preempt_enable().  This is a best-effort "record
+> the comm string for this PID" operation and briefly disabling
+> preemption around it is both safe and correct.
+> 
+> With this patch now blktests for blktrace pass :-
+> 
+> blktests (master) # ./check blktrace
+> blktrace/001 (blktrace zone management command tracing) [passed]
+>      runtime  3.652s  ...  3.649s
+> blktrace/002 (blktrace ftrace corruption with sysfs trace)  [passed]
+>      runtime  0.437s  ...  0.389s
+> blktests (master) #
+> 
+> 
+> Signed-off-by: Chaitanya Kulkarni <kch@nvidia.com>
+> ---
+>   kernel/trace/blktrace.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/kernel/trace/blktrace.c b/kernel/trace/blktrace.c
+> index 3b7c102a6eb3..488552036583 100644
+> --- a/kernel/trace/blktrace.c
+> +++ b/kernel/trace/blktrace.c
+> @@ -383,7 +383,9 @@ static void __blk_add_trace(struct blk_trace *bt, 
+> sector_t sector, int bytes,
+>       cpu = raw_smp_processor_id();
+> 
+>       if (blk_tracer) {
+> +        preempt_disable_notrace();
+>           tracing_record_cmdline(current);
+> +        preempt_enable_notrace();
+
+These lines likely belong in tracing_record_cmdline().
+
+Thanks
+
+> 
+>           buffer = blk_tr->array_buffer.buffer;
+>           trace_ctx = tracing_gen_ctx_flags(0);
+> -- 
+> 2.39.5
+> 
+> 
 
