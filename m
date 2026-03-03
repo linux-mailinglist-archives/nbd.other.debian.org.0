@@ -2,86 +2,170 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UJGEHPdxpWlsBQYAu9opvQ
+	id aJPjDC04p2mofwAAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Mon, 02 Mar 2026 12:18:15 +0100
+	for <lists+nbd@lfdr.de>; Tue, 03 Mar 2026 20:36:13 +0100
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF0291D7554
-	for <lists+nbd@lfdr.de>; Mon, 02 Mar 2026 12:18:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C70841F6201
+	for <lists+nbd@lfdr.de>; Tue, 03 Mar 2026 20:36:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 586A620696; Mon,  2 Mar 2026 11:18:14 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar  2 11:18:14 2026
-Old-Return-Path: <leon@kernel.org>
+	id 516E7205C8; Tue,  3 Mar 2026 19:36:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar  3 19:36:12 2026
+Old-Return-Path: <chaitanyak@nvidia.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,MD5_SHA1_SUM,
-	RCVD_IN_VALIDITY_CERTIFIED_BLOCKED,RCVD_IN_VALIDITY_RPBL_BLOCKED
+X-Spam-Level: *
+X-Spam-Status: No, score=1.2 required=4.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED
 	autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 775F620585
-	for <lists-other-nbd@bendel.debian.org>; Mon,  2 Mar 2026 11:00:47 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2F90220601
+	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Mar 2026 19:19:47 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-2.148 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-1.247 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	MD5_SHA1_SUM=-1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.717,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.717,
 	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.236] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id LShILbonNbHL for <lists-other-nbd@bendel.debian.org>;
-	Mon,  2 Mar 2026 11:00:40 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 582 seconds by postgrey-1.36 at bendel; Mon, 02 Mar 2026 11:00:40 UTC
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	with ESMTP id 756HrBhrXcY8 for <lists-other-nbd@bendel.debian.org>;
+	Tue,  3 Mar 2026 19:19:40 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_NE_HELO=0.5 (check from: .nvidia. - helo: .ch4pr04cu002.outbound.protection.outlook. - helo-domain: .outlook.)  FROM_NOT_FAILED_HELO(DOMAIN)=1 REV_IP_EQ_HELO_DOMAIN=-1.25; rate: -1.25
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013011.outbound.protection.outlook.com [40.107.201.11])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 8F1F22056E
-	for <nbd@other.debian.org>; Mon,  2 Mar 2026 11:00:40 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id A2E6960008;
-	Mon,  2 Mar 2026 10:50:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63631C19423;
-	Mon,  2 Mar 2026 10:50:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772448655;
-	bh=ooCwVMtMeof9eUg55NNUtPSMrUI5IYvsBBfPpUNmiu8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=fHKvAGlV1PYQM4oFzHWWPRF/Yv3lsn7pHbcI4wEPesGHyt//zusRP7n9wglL7LoOI
-	 ZhCK58mOpx9cjjpITbEgzKyqV8Ml0pgYDx3WyVQrsAPALthSB4y74AGT934IURginD
-	 S7LDUJ/n1/2o2lmF2Tg4568RN/JKwd+ULiEM0XODU4Xm0DNwN1w3/iQQlPMhM/XO8q
-	 9KzuIHHM1A9UUjdjpOWQ/NtY8TfKfyVjVycIgth2dFNViaI0QB3GPKr1jibnDZHDbJ
-	 uJuryc73Di6wnU+FHiy9nsYte5yb3BVgKohfue+dztdcVYxfNPAZlOKIrXGrEIlveJ
-	 xGjmTzNbjr2FA==
-Date: Mon, 2 Mar 2026 12:50:51 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Chaitanya Kulkarni <chaitanyak@nvidia.com>
-Cc: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "mail.protection.outlook.com", Issuer "DigiCert Cloud Services CA-1" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 11B3C204B3
+	for <nbd@other.debian.org>; Tue,  3 Mar 2026 19:19:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oGy2QlFZaVWZfrQ1CyYL/V3mtnn/F29+RiDfhkNfJr4cdylXz31M3WxOihQPtUbisXAEGsHUVsZ3/mA9h3poCLtB+tEhd8g/SV1AipF2R0VUOwgSjB702lHXvcAgxljTRf8m+aNMVeBpNTgLRGGs5BQgnXxblnZBxClCMwA2+pg/jlQc9MlK+4gtDg9ZKfcbhFtPpQsCW6C2DmZ5cY+VL6oSLS4K55m14WQ4XY0OkVl6cvFjOe6nA7erbwt1mR5bk+sNwoV8Ip6r3BrYmRweX1LLueUa0iecjOhakixYTVais3anhsJVc71DumGdO5ejpK5U/wGVMB1HmLwp9ZwBYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T7QUzr6ahL+Thz4liWgCD8DFbR6Iv8Z7ngJ2J7X4e9g=;
+ b=GeXgFgCgL0/qpyL0BxQqkDGRlze8FG2u/F+ZG9a9dFA9x7NoQytwBIDeVxFGa+KrElpnzeU0c5wEG2y0MUWWK+/mb6iYS3p9T76iRe8lIbO23ZVDh//QyYrqQaDMm21VO59WlWxGf4uih9pPe3X51avN/BWaTWcEKrfjXV4C0ou1bNJKRDJKKJvUZ29Nf38eMDpCb8Et5zlz8A23dGR8htkUxgIa9FcLzoue1VDyyvSjdBib6+9RrUdXAoC6Y81yBkDmqRWYkV/f5EyiI1xVPehwTr/Pl6jmJ4SXwJdvQlV7LRl9yHUm4ZggbQOXlmW63+5AHJ2IzPbJ3NO6l/S8cw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T7QUzr6ahL+Thz4liWgCD8DFbR6Iv8Z7ngJ2J7X4e9g=;
+ b=WlNHjhg09t6bO/kpFhJRBqg+7VGy51cK1OaT8QaiPM32hp+RnmIL4NIaKavTgRX6/8ZViBIttzh+Fn5G0yGGkbWvmXvC189Hrga+Frkle95RalrNPNTmmK6KcTsnignk428G1K/npiWAk4DiKOBvcuGuKcOqD6INBJFXdDhzRyvngsW+xv3QUuLXQIbmDULG6eeBlAkfq4dRwCXta8I5zXArVAD7QFPYLo2bP94xJFUFnPI6grUWTBGAxviQ7slJ5suZGCKfCKEAzwsyNMMERmsls6gj5qUxhiKOObWickjiHO9GESG1nkx97LfPATyu5635xh2CY/HSVe1ik7JOsQ==
+Received: from LV3PR12MB9404.namprd12.prod.outlook.com (2603:10b6:408:219::9)
+ by PH8PR12MB6842.namprd12.prod.outlook.com (2603:10b6:510:1c9::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
+ 2026 19:19:30 +0000
+Received: from LV3PR12MB9404.namprd12.prod.outlook.com
+ ([fe80::2109:679c:3b3e:b008]) by LV3PR12MB9404.namprd12.prod.outlook.com
+ ([fe80::2109:679c:3b3e:b008%6]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
+ 19:19:30 +0000
+From: Chaitanya Kulkarni <chaitanyak@nvidia.com>
+To: Leon Romanovsky <leon@kernel.org>
+CC: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
 	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
 	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
 	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>,
-	"linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
+	"nbd@other.debian.org" <nbd@other.debian.org>, "linux-rdma@vger.kernel.org"
+	<linux-rdma@vger.kernel.org>
 Subject: Re: blktests failures with v7.0-rc1 kernel
-Message-ID: <20260302105051.GP12611@unreal>
+Thread-Topic: blktests failures with v7.0-rc1 kernel
+Thread-Index: AQHcpvcwQ4wuN59YckSu4sxsMI434LWVE2kAgAYDh4CAAiBxgA==
+Date: Tue, 3 Mar 2026 19:19:30 +0000
+Message-ID: <a5036526-8d94-42d7-ae94-2732b7cc8dec@nvidia.com>
 References: <aZ_-cH8euZLySxdD@shinmob>
  <4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com>
+ <20260302105051.GP12611@unreal>
+In-Reply-To: <20260302105051.GP12611@unreal>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla Thunderbird
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV3PR12MB9404:EE_|PH8PR12MB6842:EE_
+x-ms-office365-filtering-correlation-id: 93e8db38-4ac9-4b1a-0f91-08de7959cb31
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|10070799003|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info:
+ Je79Mr2VMF1or9crwey1GcbIijRWDqrHE4tcW6u21llpQh5b/O8diIi/VeeiqP4uaRiKyy3GciEANMaenh5L0UT3BLoEyZhezWTXvymLRD4Sr7nZ0346BTcBNrtaZoLrwTxOqYyt30reYMPhLbmquvSZbc0j0htEiein/GSxVpddh3ZW8KIWmnj/V/+kuuOEWLYx6ujk/dJxmc+Z7YsLRNvWyNTzyUZSOYp6wBX+lWA+jg6FF48dLR84+Y/QKs2/CLvSvxFziuzD/g2ubWDgHhc+YEb/77MnEqKXWjTrEaEx7Wbk1ZziA9pSLXIwb/cIcCca+EGm5tbmxefCPZJyLKUQuvf3WHO55+hwUVj7oh4ZJiVVXLrAcjho6jC+/5Jz1VT3KvwmYhIICoE0L7aMBkc/mMOLLIrTmrc6H+s8JwB8JEuSbzWVCZhZtkUtSItb73S6RxLRe8vPL/9V6wo9noVPUUM+YrkKxEpJVT7gPGgkxSLnkc1v0qHHfuFPwAVboBX/4o/bqiYSBHF9ehImyFGbaiD/SZ3V7t1KRfF7kTc6/GnL2afX+BcqlPUmIiTEGLVYz+h6/C6DiwwDnSli+1by18xbDsKyibQe3HshLi0vQs+aJgCkB4c8xu5+amQ9pInTU7Z6MMn+1xvial3hyL0b9pzNUY/tbJFwJN8WKlMDrEK3C4ZipUuCnoJtXZr2oab1UK1uejJh3/NUtAZSBs0otSNDOFsrd7FHjLx2tsvKdz2fy7bxZ7y9vX7Foef+oKVeuoOb4Uikc6+EilsCKG8Hs3GjNBqUlkx7o4deHpI=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9404.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?YXhkZGJmVXJpN1ljY2phb09raDVkaHFZcFFNeVhKenNBVnVhYklzdmVzSFZw?=
+ =?utf-8?B?Zjhhcis0d0s2c3RJT3FsL3I1bE5wRndIZG5jeUhQaWthWjVJRUpVRUFudlNV?=
+ =?utf-8?B?a3UxcjVYMlViMndXc0VxTU9jYlVVSExwMGZXdkJFeU4yempVNWlQK0x4Vm5u?=
+ =?utf-8?B?UDV2V2dSNDBHNnFxSFhRdnRjNDljeG1nZS9ZVitJNFZ4Q0c1dStMWjMrVVNm?=
+ =?utf-8?B?Ti9oUElzRElTSUxOQUE1Tk9MTk8zQ1JyL2NSeXVRUk12c3R3R0pLNGZCeU5K?=
+ =?utf-8?B?dFpkcEtJNThpbkR6dEo3Sjh6dVJqSllxNXNKcVVIczh4UmVUTzNPa2V6enZm?=
+ =?utf-8?B?Tk9CQ0ltUW5Xa0VPaWY2elNrSkNtbVY0UVVEQkZwT2hsN3dJTHRpc0VzT281?=
+ =?utf-8?B?enMvZnJUOW5YNGZMcnVWeGpsbjN4VEtheG4rUVpDY2pnaGxGOG1NMldsb0FV?=
+ =?utf-8?B?c2R1RFd6cHFSdjlOZVcrSVNGcnVmdmw0T2c0cG1lMlpvUStvMUp6bWhxdnpy?=
+ =?utf-8?B?MWx0NVMyODhBajREU0R4bTZhaFNQc0Y0ck9oVzcyenV1WEdadUdSRVVvZmtz?=
+ =?utf-8?B?WnBTK3JSeEtiaU1pUlBLK1EyUGpTNTh4bkRCTDM1RHBGOUszVlg0WUpieFRD?=
+ =?utf-8?B?RE1WSGtKRWE4OGY0RzArZkVxNWlSQngxc1RrWXNFL0huUXNvQjg0Yk1vM21G?=
+ =?utf-8?B?N2luQWRXNEFQRCtVNEFNTUhhbEQrV2M0VW5JcU9yK2lNWE04b3JJOHQxQ3R2?=
+ =?utf-8?B?TW5hWU9HNlZIclphVFVLRHY5U3Z5L2huTnRMK2tOR3ZoYUhMdllMZFhSOUZY?=
+ =?utf-8?B?ZVFpZVRZR1I3Q3BEOUtvSFViOTNKSVdVNnNTdTFMMVpKbmlQZzh5Mzh4LzRu?=
+ =?utf-8?B?OWYyTXYrTnBoRE1XQnlRL0hScGFtR05vM0kwR2U4RnJTTGd6d1Vnc2p6S2xi?=
+ =?utf-8?B?MjJqWGtXQ3RySDRLZ2xGbG03VnBOMlJpSzVqOGFyWmNCRVJjR3FHSmVRWWd5?=
+ =?utf-8?B?bjZuZWpXeXBOV1V5NTRGcFRUS0doR2l2emh4SUM5NXJzNFRZVXFqVkdmbnZh?=
+ =?utf-8?B?ZVRla2VsSmltZGJhek5sZUlvUHlBZDlmNnBoVVQyN0ZUNUtQYWZ3Vy9qZyt4?=
+ =?utf-8?B?L2dpQVdaY2pxbTBpVkEyQlNuOWMrQzltSWtOLzRFOE95aHRJMXhjcGFEMzdW?=
+ =?utf-8?B?QUNrUUEzYXVpNFozWXRWRCtWdWdhdmhFSFpDTis1cnFNTHVnbXhlUStKRUJk?=
+ =?utf-8?B?Y2N6allvVVJiR1FKa3FiN0xPTWY5cy9wY3dQSkxzaDJRc0xKRkpBNThvdGVn?=
+ =?utf-8?B?dG80M1FPMWpRQ25Ub0FXVlhkV1JJamVVZXAxcnkvTWpQcjkvcTdvOEsvbEFS?=
+ =?utf-8?B?MDRXbG1CM3crbGZQTXdmY0dDdlZvNkZudnRLaU92SnVlcGxFRHE1MExGTWMv?=
+ =?utf-8?B?VlVzYmR6ZFYrTjJ2ek9QTTV5N1E5S24xV0d3NDZKQURRZnFQODVXZWFDLzJC?=
+ =?utf-8?B?eS9kMjQwQ0JNdGMzRldUTmM5c0xpY3ZHc0xPb2hOZHd4bUp0QTNHWE5ON3Zr?=
+ =?utf-8?B?SVd4TytuWTJLdXN1TnRLN09NTXJlaEwzVFRVQUlzOXVGTjlqd0xaYkovUHJX?=
+ =?utf-8?B?TDRJYnlPUzdqREYyaUx2NFNaSHZ4Y3NjbHVQaUlKd3B3cGYrd1FiRW05bXNZ?=
+ =?utf-8?B?TnlncE9MMkpsa2ZPZWlucmVvdG9zam1VQUNpbTNJbDc4ZjFWOEQxSW5zdHF5?=
+ =?utf-8?B?bW1LRTBHVGdqMzhzbWR0RllneVp0RWc0b3FtR2FSMmdYL3M2cWhtcWFBRTZF?=
+ =?utf-8?B?OTB4dUlabHpGaGlRelpSOGJXOEc4bk9WVkdJTEUxQVA2ZUxiWlNpd21PVFdM?=
+ =?utf-8?B?VUlrTlZDMGh3dGgvRzZvN1VvNS9kZGNYUG9QSTR6cWU4czErUW9Tb1J5NHZQ?=
+ =?utf-8?B?Z2VCK1lnRVBEVjMreVlobGM4aHVGcWdFWWhtUU5PVWE0QUtNaEpzUjRzcFNm?=
+ =?utf-8?B?Q1E3ZGJjQUZQRmpxREFNNDFEdy9ZSitEWTZXVFZHQ3NCanJya0pMREx1UDhu?=
+ =?utf-8?B?SFIxcmtrbGthbUU3cklsQnZvTEhkMTJybEZvbkNxc1lhUVJHRktneU0yYTRF?=
+ =?utf-8?B?cHRuWnF3bENiQk40Zld3OHRvL0M4OTMrRlI3ZFhqVWtqSUFwMk5vS1FhUmlw?=
+ =?utf-8?B?OUZTbmxRdnNlTnVWeWxPZ3VBOFc5R2xJTk84d3d4QmZKWFlZYnZTSU9XQmE1?=
+ =?utf-8?B?Rk5rbHRkNUU1UXpiTlZCbWRaN25GbTlZUVluMXpoTGdSTDRFTGhWZ0RVdU8z?=
+ =?utf-8?B?VzhPcUREQUFCbVhycmh6SFdhclZRMVZWUkJDcXVkRUZBb0twTU9QSUh2L1Vr?=
+ =?utf-8?Q?fbGcHP72U/iHcCM+nGl1QKAWB4LiJNPJd9e0kQDaVwOd3?=
+x-ms-exchange-antispam-messagedata-1: 82p1KygMRtcjIQ==
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <A55AEF1D06F31B45805152D5F8CCDB11@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <4c7aea9f-ae97-43c8-8b08-905696303978@nvidia.com>
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9404.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 93e8db38-4ac9-4b1a-0f91-08de7959cb31
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Mar 2026 19:19:30.1066
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QgQEj6p7QMsxTomwz3nK0iEv0E3nN9c+CV4aLFHhA6pQp+o2zWX0fFEdSHujjjbCyEKiBNv1gx1+HqM6wdXZwQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6842
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <fPN2JpgXlnB.A.ENaG.2HXppB@bendel>
+Resent-Message-ID: <NbQZMSq68rN.A.O8TM.sgzppB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3506
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3507
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -91,228 +175,76 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20260302105051.GP12611@unreal
-Resent-Date: Mon,  2 Mar 2026 11:18:14 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/a5036526-8d94-42d7-ae94-2732b7cc8dec@nvidia.com
+Resent-Date: Tue,  3 Mar 2026 19:36:12 +0000 (UTC)
+X-Rspamd-Queue-Id: C70841F6201
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.61 / 15.00];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+X-Spamd-Result: default: False [-2.01 / 15.00];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
 	MAILLIST(-0.20)[generic];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	HAS_LIST_UNSUB(-0.01)[];
-	R_SPF_NA(0.00)[no SPF record];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:chaitanyak@nvidia.com,m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:leon@kernel.org,m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORGED_SENDER(0.00)[chaitanyak@nvidia.com,bounce-nbd=lists@other.debian.org];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[nbd=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	R_SPF_NA(0.00)[no SPF record];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,bounce-nbd=lists@other.debian.org];
-	FORGED_SENDER(0.00)[leon@kernel.org,bounce-nbd=lists@other.debian.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[nbd];
-	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,bendel.debian.org:helo,bendel.debian.org:rdns,qemu.org:url]
-X-Rspamd-Queue-Id: EF0291D7554
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[chaitanyak@nvidia.com,bounce-nbd=lists@other.debian.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[nbd];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,nvidia.com:mid,nvidia.com:email,marc.info:url,bendel.debian.org:rdns,bendel.debian.org:helo]
 X-Rspamd-Action: no action
 
-On Thu, Feb 26, 2026 at 03:00:40PM +0000, Chaitanya Kulkarni wrote:
-> On 2/26/26 12:09 AM, Shinichiro Kawasaki wrote:
-> > Failure description
-> > ===================
-> >
-> > #1: blktrace/002
-> >
-> >      The test case blktrace/002 failed due to "BUG: using __this_cpu_read() in
-> >      preemptible" and a following WARN [2].
-> 
-> I saw this last night it was pretty late, just glad to see simple 
-> testcase catching bugs.
-> 
-> I've a patch for this I'll send out shortly :-
-> 
-> 
-> From 6a285db1bbdbb613a85ac55a395ed2043d4eb11d Mon Sep 17 00:00:00 2001
-> From: Chaitanya Kulkarni <kch@nvidia.com>
-> Date: Wed, 25 Feb 2026 23:01:12 -0800
-> Subject: [PATCH] blktrace: fix __this_cpu_read/write in preemptible context
-> 
-> 
-> 
-> blktrace/002 (blktrace ftrace corruption with sysfs trace)  [failed]
->      runtime  0.367s  ...  0.437s
->      something found in dmesg:
->      [   81.211018] run blktests blktrace/002 at 2026-02-25 22:24:33
->      [   81.239580] null_blk: disk nullb1 created
->      [   81.357294] BUG: using __this_cpu_read() in preemptible 
-> [00000000] code: dd/2516
->      [   81.362842] caller is tracing_record_cmdline+0x10/0x40
->      [   81.362872] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G         
->         N  7.0.0-rc1lblk+ #84 PREEMPT(full)
->      [   81.362877] Tainted: [N]=TEST
->      [   81.362878] Hardware name: QEMU Standard PC (i440FX + PIIX, 
-> 1996), BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
->      [   81.362881] Call Trace:
->      [   81.362884]  <TASK>
->      [   81.362886]  dump_stack_lvl+0x8d/0xb0
->      ...
->      (See '/mnt/sda/blktests/results/nodev/blktrace/002.dmesg' for the 
-> entire message)
-> 
-> [   81.211018] run blktests blktrace/002 at 2026-02-25 22:24:33
-> [   81.239580] null_blk: disk nullb1 created
-> [   81.357294] BUG: using __this_cpu_read() in preemptible [00000000] 
-> code: dd/2516
-> [   81.362842] caller is tracing_record_cmdline+0x10/0x40
-> [   81.362872] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G           
->   N  7.0.0-rc1lblk+ #84 PREEMPT(full)
-> [   81.362877] Tainted: [N]=TEST
-> [   81.362878] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
-> BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
-> [   81.362881] Call Trace:
-> [   81.362884]  <TASK>
-> [   81.362886]  dump_stack_lvl+0x8d/0xb0
-> [   81.362895]  check_preemption_disabled+0xce/0xe0
-> [   81.362902]  tracing_record_cmdline+0x10/0x40
-> [   81.362923]  __blk_add_trace+0x307/0x5d0
-> [   81.362934]  ? lock_acquire+0xe0/0x300
-> [   81.362940]  ? iov_iter_extract_pages+0x101/0xa30
-> [   81.362959]  blk_add_trace_bio+0x106/0x1e0
-> [   81.362968]  submit_bio_noacct_nocheck+0x24b/0x3a0
-> [   81.362979]  ? lockdep_init_map_type+0x58/0x260
-> [   81.362988]  submit_bio_wait+0x56/0x90
-> [   81.363009]  __blkdev_direct_IO_simple+0x16c/0x250
-> [   81.363026]  ? __pfx_submit_bio_wait_endio+0x10/0x10
-> [   81.363038]  ? rcu_read_lock_any_held+0x73/0xa0
-> [   81.363051]  blkdev_read_iter+0xc1/0x140
-> [   81.363059]  vfs_read+0x20b/0x330
-> [   81.363083]  ksys_read+0x67/0xe0
-> [   81.363090]  do_syscall_64+0xbf/0xf00
-> [   81.363102]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-> [   81.363106] RIP: 0033:0x7f281906029d
-> [   81.363111] Code: 31 c0 e9 c6 fe ff ff 50 48 8d 3d 66 63 0a 00 e8 59 
-> ff 01 00 66 0f 1f 84 00 00 00 00 00 80 3d 41 33 0e 00 00 74 17 31 c0 0f 
-> 05 <48> 3d 00 f0 ff ff 77 5b c3 66 2e 0f 1f 84 00 00 00 00 00 48 83 ec
-> [   81.363113] RSP: 002b:00007ffca127dd48 EFLAGS: 00000246 ORIG_RAX: 
-> 0000000000000000
-> [   81.363120] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 
-> 00007f281906029d
-> [   81.363122] RDX: 0000000000001000 RSI: 0000559f8bfae000 RDI: 
-> 0000000000000000
-> [   81.363123] RBP: 0000000000001000 R08: 0000002863a10a81 R09: 
-> 00007f281915f000
-> [   81.363124] R10: 00007f2818f77b60 R11: 0000000000000246 R12: 
-> 0000559f8bfae000
-> [   81.363126] R13: 0000000000000000 R14: 0000000000000000 R15: 
-> 000000000000000a
-> [   81.363142]  </TASK>
-> [   81.363157] BUG: using __this_cpu_read() in preemptible [00000000] 
-> code: dd/2516
-> [   81.368486] caller is tracing_record_cmdline+0x10/0x40
-> [   81.368496] CPU: 16 UID: 0 PID: 2516 Comm: dd Tainted: G           
->   N  7.0.0-rc1lblk+ #84 PREEMPT(full)
-> [   81.368501] Tainted: [N]=TEST
-> [   81.368502] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), 
-> BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
-> [   81.368503] Call Trace:
-> [   81.368505]  <TASK>
-> [   81.368507]  dump_stack_lvl+0x8d/0xb0
-> [   81.368513]  check_preemption_disabled+0xce/0xe0
-> [   81.368518]  tracing_record_cmdline+0x10/0x40
-> [   81.368523]  __blk_add_trace+0x307/0x5d0
-> [   81.368528]  ? lock_acquire+0xe0/0x300
-> [   81.368547]  blk_add_trace_bio+0x106/0x1e0
-> [   81.368556]  blk_mq_submit_bio+0x63c/0xbb0
-> [   81.368580]  __submit_bio+0xad/0x5c0
-> [   81.368595]  ? submit_bio_noacct_nocheck+0x2b0/0x3a0
-> [   81.368600]  submit_bio_noacct_nocheck+0x2b0/0x3a0
-> [   81.368611]  submit_bio_wait+0x56/0x90
-> [   81.368622]  __blkdev_direct_IO_simple+0x16c/0x250
-> [   81.368635]  ? __pfx_submit_bio_wait_endio+0x10/0x10
-> [   81.368656]  ? rcu_read_lock_any_held+0x73/0xa0
-> [   81.368664]  blkdev_read_iter+0xc1/0x140
-> [   81.368672]  vfs_read+0x20b/0x330
-> [   81.368687]  ksys_read+0x67/0xe0
-> [   81.368694]  do_syscall_64+0xbf/0xf00
-> [   81.368702]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-> [   81.368705] RIP: 0033:0x7f281906029d
-> [   81.368708] Code: 31 c0 e9 c6 fe ff ff 50 48 8d 3d 66 63 0a 00 e8 59 
-> ff 01 00 66 0f 1f 84 00 00 00 00 00 80 3d 41 33 0e 00 00 74 17 31 c0 0f 
-> 05 <48> 3d 00 f0 ff ff 77 5b c3 66 2e 0f 1f 84 00 00 00 00 00 48 83 ec
-> [   81.368710] RSP: 002b:00007ffca127dd48 EFLAGS: 00000246 ORIG_RAX: 
-> 0000000000000000
-> [   81.368712] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 
-> 00007f281906029d
-> [   81.368713] RDX: 0000000000001000 RSI: 0000559f8bfae000 RDI: 
-> 0000000000000000
-> [   81.368714] RBP: 0000000000001000 R08: 0000002863a10a81 R09: 
-> 00007f281915f000
-> [   81.368716] R10: 00007f2818f77b60 R11: 0000000000000246 R12: 
-> 0000559f8bfae000
-> [   81.368717] R13: 0000000000000000 R14: 0000000000000000 R15: 
-> 000000000000000a
-> [   81.368734]  </TASK>
-> 
-> The same BUG fires from blk_add_trace_plug(), blk_add_trace_unplug(),
-> and blk_add_trace_rq() paths as well.
-> 
-> Fix by wrapping the tracing_record_cmdline() call with
-> preempt_disable()/preempt_enable().  This is a best-effort "record
-> the comm string for this PID" operation and briefly disabling
-> preemption around it is both safe and correct.
-> 
-> With this patch now blktests for blktrace pass :-
-> 
-> blktests (master) # ./check blktrace
-> blktrace/001 (blktrace zone management command tracing) [passed]
->      runtime  3.652s  ...  3.649s
-> blktrace/002 (blktrace ftrace corruption with sysfs trace)  [passed]
->      runtime  0.437s  ...  0.389s
-> blktests (master) #
-> 
-> 
-> Signed-off-by: Chaitanya Kulkarni <kch@nvidia.com>
-> ---
->   kernel/trace/blktrace.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/kernel/trace/blktrace.c b/kernel/trace/blktrace.c
-> index 3b7c102a6eb3..488552036583 100644
-> --- a/kernel/trace/blktrace.c
-> +++ b/kernel/trace/blktrace.c
-> @@ -383,7 +383,9 @@ static void __blk_add_trace(struct blk_trace *bt, 
-> sector_t sector, int bytes,
->       cpu = raw_smp_processor_id();
-> 
->       if (blk_tracer) {
-> +        preempt_disable_notrace();
->           tracing_record_cmdline(current);
-> +        preempt_enable_notrace();
-
-These lines likely belong in tracing_record_cmdline().
-
-Thanks
-
-> 
->           buffer = blk_tr->array_buffer.buffer;
->           trace_ctx = tracing_gen_ctx_flags(0);
-> -- 
-> 2.39.5
-> 
-> 
+T24gMy8yLzI2IDAyOjUwLCBMZW9uIFJvbWFub3Zza3kgd3JvdGU6DQo+PiBhbmQgYmxrX2FkZF90
+cmFjZV9ycSgpIHBhdGhzIGFzIHdlbGwuDQo+Pg0KPj4gRml4IGJ5IHdyYXBwaW5nIHRoZSB0cmFj
+aW5nX3JlY29yZF9jbWRsaW5lKCkgY2FsbCB3aXRoDQo+PiBwcmVlbXB0X2Rpc2FibGUoKS9wcmVl
+bXB0X2VuYWJsZSgpLsKgIFRoaXMgaXMgYSBiZXN0LWVmZm9ydCAicmVjb3JkDQo+PiB0aGUgY29t
+bSBzdHJpbmcgZm9yIHRoaXMgUElEIiBvcGVyYXRpb24gYW5kIGJyaWVmbHkgZGlzYWJsaW5nDQo+
+PiBwcmVlbXB0aW9uIGFyb3VuZCBpdCBpcyBib3RoIHNhZmUgYW5kIGNvcnJlY3QuDQo+Pg0KPj4g
+V2l0aCB0aGlzIHBhdGNoIG5vdyBibGt0ZXN0cyBmb3IgYmxrdHJhY2UgcGFzcyA6LQ0KPj4NCj4+
+IGJsa3Rlc3RzIChtYXN0ZXIpICMgLi9jaGVjayBibGt0cmFjZQ0KPj4gYmxrdHJhY2UvMDAxIChi
+bGt0cmFjZSB6b25lIG1hbmFnZW1lbnQgY29tbWFuZCB0cmFjaW5nKSBbcGFzc2VkXQ0KPj4gICDC
+oCDCoCBydW50aW1lwqAgMy42NTJzwqAgLi4uwqAgMy42NDlzDQo+PiBibGt0cmFjZS8wMDIgKGJs
+a3RyYWNlIGZ0cmFjZSBjb3JydXB0aW9uIHdpdGggc3lzZnMgdHJhY2UpIMKgW3Bhc3NlZF0NCj4+
+ICAgwqAgwqAgcnVudGltZcKgIDAuNDM3c8KgIC4uLsKgIDAuMzg5cw0KPj4gYmxrdGVzdHMgKG1h
+c3RlcikgIw0KPj4NCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBDaGFpdGFueWEgS3Vsa2Fybmk8a2No
+QG52aWRpYS5jb20+DQo+PiAtLS0NCj4+ICAgwqBrZXJuZWwvdHJhY2UvYmxrdHJhY2UuYyB8IDIg
+KysNCj4+ICAgwqAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspDQo+Pg0KPj4gZGlmZiAt
+LWdpdCBhL2tlcm5lbC90cmFjZS9ibGt0cmFjZS5jIGIva2VybmVsL3RyYWNlL2Jsa3RyYWNlLmMN
+Cj4+IGluZGV4IDNiN2MxMDJhNmViMy4uNDg4NTUyMDM2NTgzIDEwMDY0NA0KPj4gLS0tIGEva2Vy
+bmVsL3RyYWNlL2Jsa3RyYWNlLmMNCj4+ICsrKyBiL2tlcm5lbC90cmFjZS9ibGt0cmFjZS5jDQo+
+PiBAQCAtMzgzLDcgKzM4Myw5IEBAIHN0YXRpYyB2b2lkIF9fYmxrX2FkZF90cmFjZShzdHJ1Y3Qg
+YmxrX3RyYWNlICpidCwNCj4+IHNlY3Rvcl90IHNlY3RvciwgaW50IGJ5dGVzLA0KPj4gICDCoCDC
+oCDCoGNwdSA9IHJhd19zbXBfcHJvY2Vzc29yX2lkKCk7DQo+Pg0KPj4gICDCoCDCoCDCoGlmIChi
+bGtfdHJhY2VyKSB7DQo+PiArwqAgwqAgwqAgwqAgcHJlZW1wdF9kaXNhYmxlX25vdHJhY2UoKTsN
+Cj4+ICAgwqAgwqAgwqAgwqAgwqB0cmFjaW5nX3JlY29yZF9jbWRsaW5lKGN1cnJlbnQpOw0KPj4g
+K8KgIMKgIMKgIMKgIHByZWVtcHRfZW5hYmxlX25vdHJhY2UoKTsNCj4gVGhlc2UgbGluZXMgbGlr
+ZWx5IGJlbG9uZyBpbiB0cmFjaW5nX3JlY29yZF9jbWRsaW5lKCkuDQo+DQo+IFRoYW5rcw0KPg0K
+Pj4gICDCoCDCoCDCoCDCoCDCoGJ1ZmZlciA9IGJsa190ci0+YXJyYXlfYnVmZmVyLmJ1ZmZlcjsN
+Cj4+ICAgwqAgwqAgwqAgwqAgwqB0cmFjZV9jdHggPSB0cmFjaW5nX2dlbl9jdHhfZmxhZ3MoMCk7
+DQo+PiAtLSANCj4+IDIuMzkuNQ0KPj4NClRoYW5rcyBmb3IgdGFraW5nIGEgbG9vayBhdCBpdC4N
+Cg0KV2UgbW92ZWQgdGhlIGNhbGwgdHJhY2luZ19yZWNvcmRfY21kbGluZSgpIHNvIHdlIGRvbid0
+IGhhdmUgdG8gYWRkDQphYm92ZSBjYWxscyBhbmQgbWVyZ2VkIGZvciBub3csIHNlZSA6LQ0KDQpo
+dHRwczovL21hcmMuaW5mby8/bD1saW51eC1ibG9jayZtPTE3NzI0MTM2NzYyMDczNSZ3PTINCg0K
+SSdsbCBiZSBoYXBweSB0byBzZW5kIGFib3ZlIHN1Z2dlc3RlZCBwYXRjaCBpZiBuZWVkZWQuDQoN
+Ci1jaw0KDQoNCg0KLWNrDQoNCg==
 
