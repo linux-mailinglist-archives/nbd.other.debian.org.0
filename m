@@ -2,219 +2,137 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +B8sNMVjp2mghAAAu9opvQ
+	id aD21Hb3rrmlRKAIAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Tue, 03 Mar 2026 23:42:13 +0100
+	for <lists+nbd@lfdr.de>; Mon, 09 Mar 2026 16:48:13 +0100
 X-Original-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 671241F8188
-	for <lists+nbd@lfdr.de>; Tue, 03 Mar 2026 23:42:13 +0100 (CET)
+Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0289F23C032
+	for <lists+nbd@lfdr.de>; Mon, 09 Mar 2026 16:48:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id C75A220675; Tue,  3 Mar 2026 22:42:12 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Tue Mar  3 22:42:12 2026
-Old-Return-Path: <john.g.garry@oracle.com>
+	id C6D3020457; Mon,  9 Mar 2026 15:48:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Mar  9 15:48:12 2026
+Old-Return-Path: <csander@purestorage.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.6 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,MD5_SHA1_SUM,
-	RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED,RCVD_IN_VALIDITY_SAFE_BLOCKED,
-	TO_TOO_MANY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
+X-Spam-Status: No, score=2.8 required=4.0 tests=CC_TOO_MANY,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,FVGT_m_MULTI_ODD,
+	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id C8B04206C1
-	for <lists-other-nbd@bendel.debian.org>; Tue,  3 Mar 2026 22:25:27 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 3516820458
+	for <lists-other-nbd@bendel.debian.org>; Mon,  9 Mar 2026 15:31:54 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-1.825 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+X-Amavis-Spam-Status: No, score=0.92 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, CC_TOO_MANY=3, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
 	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
-	FVGT_m_MULTI_ODD=0.02, MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_LOW=-0.7,
-	RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
-	RCVD_IN_VALIDITY_RPBL_BLOCKED=0.717,
-	RCVD_IN_VALIDITY_SAFE_BLOCKED=0.236, TO_TOO_MANY=1]
+	FVGT_m_MULTI_ODD=0.02, RCVD_IN_DNSWL_NONE=-0.0001]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id kL1_NY_umm4z for <lists-other-nbd@bendel.debian.org>;
-	Tue,  3 Mar 2026 22:25:17 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-X-Greylist: delayed 1785 seconds by postgrey-1.36 at bendel; Tue, 03 Mar 2026 22:25:17 UTC
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	with ESMTP id A-8WA7CU3qFi for <lists-other-nbd@bendel.debian.org>;
+	Mon,  9 Mar 2026 15:31:46 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .purestorage. - helo: .mail-ot1-x336.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com [IPv6:2607:f8b0:4864:20::336])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "*.pphosted.com", Issuer "Sectigo Public Server Authentication CA OV R36" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 3946A206C8
-	for <nbd@other.debian.org>; Tue,  3 Mar 2026 22:25:16 +0000 (UTC)
-Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 623LbcgQ789434;
-	Tue, 3 Mar 2026 21:55:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	corp-2025-04-25; bh=3O4TJezjjRAe3Bv6DHl69Dg7cpjSViWLYjGpXbomHGQ=; b=
-	D9Dh0Tq8yZL18vta7Ov9C0OKKoJge7syo8Wvy6RI59dYfAfFvkmlP9R6iYzeqqCc
-	3qkPwVMb8pDPKusxrBwg8GxAyDL47AEazPNhmP09cLhRF8/iE9hpmBwbMqRyWdJn
-	rvGjMrXUahISjbZmHEJ/wL/LZ16n53ahCkbv/a74ddo3ZGT51to4n4hu3qcZD9Dg
-	gAd3NNmvIQdFNlDJtnpc3YQgGaPZtzgD7sNvKNREdMo1kjX8AljTJQwYP86BN/I5
-	lJevGNNCUW7FentAWSQ4AZaU+alBcH4tBoH8xIZUuJzSb/9MkI9xqJtjO89Ma07f
-	G2aZxdGITei7IaFBnSXCHw==
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4cp7qq00p2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 03 Mar 2026 21:55:23 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 623LHE15037800;
-	Tue, 3 Mar 2026 21:55:22 GMT
-Received: from sj2pr03cu001.outbound.protection.outlook.com (mail-westusazon11012036.outbound.protection.outlook.com [52.101.43.36])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4ckptf7e2y-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 03 Mar 2026 21:55:21 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OTLEp3otKBhqs/2merWSUTCxBDnpknVsdplaxdLfN287K6C4pBOeKhR7ES7VubVPWIZb5ei76M4G1B39fjdnilnzG5Hs7EnDIop85S6VkIjcxVyCI6eQhm6/bERrPar/9k+/xOZRcRdI66s/Zz3fLlBo/Z4cWkqOy4h8boxVItb9O+nptyVW3kaz12bTK94sFxYGtLPGtFmzktbAiE7+hKxssZwu3dduDbvhk9MPgzgx+l1INGUsG5CyWDwmvp40iXPei2ThON1w99o/mP1f+UOV74XPRuV14hcuWdkDZ6cAZ+FMRTs+Gh7E/xjviTnTLNc/m4uDfoIrlXeYb/4uWw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3O4TJezjjRAe3Bv6DHl69Dg7cpjSViWLYjGpXbomHGQ=;
- b=jYznFhONgYcya0SHmTuoNH+aQwSI+jXUXgP6kxOXyCCTJAxMsR5KAR4b7B6jjpjdXre8C7mcZVtu9RCe430oJDXf11PJMOuv3O63fhjTzgquY08tcl5de46v2D1q0BPqx6GxJieUWLyq3YlroO9b10DzGgx4rNEyvNNN5XMVZF8F4iCY8gdVcFguyklbripz+FZzKo2Z68mmvHzPtBQ4PvFc8bleMP6SaOekTTaSIRJppp1MCHb9N2nVzr9xltbR8KpDILRmRqowwm9NXw3QEvuoj0w/uNFX1w1jNS6zqR691kr8N54Q2NVIfYvAoUcCUTp882BWjjD9aaXAZydkqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id 96A9620452
+	for <nbd@other.debian.org>; Mon,  9 Mar 2026 15:31:43 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id 46e09a7af769-7d738fc8934so86548a34.0
+        for <nbd@other.debian.org>; Mon, 09 Mar 2026 08:31:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773070300; cv=none;
+        d=google.com; s=arc-20240605;
+        b=efbDURQzXgmld3rv3MukkeM4v1leme5AgXEAhIJo0lgWkokEQpP9q6Lvb3702XSA+G
+         ZTWwhLHD80s/eJKqE32FtbYGnMUeAsvwMH06WUQSFvHh+bC/N3qi5jEgJi/QVTOaRwbT
+         ojRdxrI5c39vRAE16Cx3OeL8rt0V/mg87hnSRKPInStuYs13FHOZ2gouWFxQHV+Re5o+
+         CkM5hEe7A0LvoYKNUmadchQiiP7M7rdnqhN2te0m4jGNE7+qbi8dSR9DIVa1rnUKx+Ig
+         UkHsTDdB6pCQhp8wVldYeZJ4l4Gk8peQJBqD3NlU1C8XOO+QXjooVbZeZHbcA/31YSos
+         R3Jw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=6+r9RgPpLrGiXVfQx056rbYEWCZcszUA9kQtErD1KEc=;
+        fh=qP+4aBTUxzgpU+O05zxnq5y9uA4GgBU1cXF91u5gEDY=;
+        b=eMiqTySb82NVxH1fpdLhEeLtRj3OeRA+mHywysMcos5XZB9VJvj03fKqZtwht049pu
+         3jSTiM1GC+xL9wHu09YdDiPQfZqM3a3JU6JDTGMCfCbTh596rXgEZSQdilsIyL5LT1Xz
+         SaKX3H0uhAy+7g1Wi3huK1qB6q0cQ2TjPr7XG9UjZl6pN+yaptoGM46LVoTSl6NxjaKA
+         k3y3C4TUSSK48ydBv0hAiiLeaa1fyHhaXXxx6FGpkorFAme3MFHAWrVNhjYh/4UPKlbm
+         CMLA1cRmn+3h1nZWLSyf2NU9eEoYQZrU8CFR8aFoSzwO5o8UWa78IgbaoVcffBN1v3UJ
+         pq8g==;
+        darn=other.debian.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3O4TJezjjRAe3Bv6DHl69Dg7cpjSViWLYjGpXbomHGQ=;
- b=ec2tNsba202RWv6GF4O0/SO7nERN2Q4ET4sCJLfQziURy6ULaAXUyJGMus8ynOh/PeYcQ1YxvXSkfFYzokCD+zDr/r95mnux88ndWMHQzqRWKDdkajYqc0UvX6M72Tje+ixIzTjKbUCI47I2ELsQ/NI5QXlhlI0Enp6KKcUh2XA=
-Received: from DS4PPFEAFA21C69.namprd10.prod.outlook.com
- (2603:10b6:f:fc00::d54) by SN7PR10MB7002.namprd10.prod.outlook.com
- (2603:10b6:806:344::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 21:55:19 +0000
-Received: from DS4PPFEAFA21C69.namprd10.prod.outlook.com
- ([fe80::5266:1601:5598:3f0a]) by DS4PPFEAFA21C69.namprd10.prod.outlook.com
- ([fe80::5266:1601:5598:3f0a%4]) with mapi id 15.20.9632.017; Tue, 3 Mar 2026
- 21:55:18 +0000
-Message-ID: <46567e4a-9e0c-4020-a976-238b6a95240b@oracle.com>
-Date: Tue, 3 Mar 2026 21:55:16 +0000
-User-Agent: Mozilla Thunderbird
-Subject: Re: blktests failures with v7.0-rc1 kernel
-To: Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-        Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
-        "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-        "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
-        "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
-        "nbd@other.debian.org" <nbd@other.debian.org>,
-        "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>
-References: <aZ_-cH8euZLySxdD@shinmob>
- <15ee757e-6140-4151-a1dd-cccb781c89a1@oracle.com>
- <73ada395-a06d-4ac7-ae0e-dbbc1ebfb36e@nvidia.com>
-Content-Language: en-US
-From: John Garry <john.g.garry@oracle.com>
-Organization: Oracle Corporation
-In-Reply-To: <73ada395-a06d-4ac7-ae0e-dbbc1ebfb36e@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: DUZPR01CA0016.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:46b::9) To DS4PPFEAFA21C69.namprd10.prod.outlook.com
- (2603:10b6:f:fc00::d54)
+        d=purestorage.com; s=google2022; t=1773070300; x=1773675100; darn=other.debian.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6+r9RgPpLrGiXVfQx056rbYEWCZcszUA9kQtErD1KEc=;
+        b=AX42MYMuyC4S7ij0NKuYOVT/C86hAjT/+STtRKs/wutd/NTn915Rvjs+jc3ndHUSiT
+         IMnv9fNpjFPihZP+YBCVjmdPyE+I1Cu8qGCkqyIWGuis06/yqgPHacvpM47BexaugdLK
+         Qy5l9Vvg2PaE/Ci4G2P0ygZArP/phqOUd9jdjc22NgDSqz3nnKLFEPI7F0fDlvSeylap
+         JUjewTawEf1Dg8UMqdvB1JZQj9NH7i2wvuKolxfnZ5mdhU2HuBxt01qxcn7QwUOAAC9U
+         fK9QPFRIMz+hmpH2sAZ+N7so075sBR3htD4O55sCtt+Dms5b+30D8t0At6Xv2ho/wovx
+         Fq8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773070300; x=1773675100;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=6+r9RgPpLrGiXVfQx056rbYEWCZcszUA9kQtErD1KEc=;
+        b=Oqdf5d/RdxxEYOWtRe4hIt8T/h+8vWBGsdrCOpzev2bYdZc8XIXCfN3pXQsLaNqEVD
+         oA9P9ZdLVqMJDJ6e2ZHkkaBdvL1rx9/Pt+NvmrXjYmOtgykpuACl4OMK20+Div/JZoOO
+         hZqv1poDBp8fh6qfPqoBME2hq3GdStn+s9xUsE781BmiXK+0B2LHxvtGpcb3WdSHkUmB
+         DztWbliXPiRh2LJk6S1i6q2dtzMX+6p7DgLzlmENKWD2ZJM3fQNfQC+T0N+zmR554WAW
+         A047ObKzJNZxb/UE2pELmn+8/ofpF3btK2X1nS8+2YxzNHRh2fkZDmeyjRMJ+8kp2xVH
+         P6Nw==
+X-Forwarded-Encrypted: i=1; AJvYcCXWeoMWg8OBkNkSKmGCOGvbsd/xmLi4vVNowwBxgTMsCrkevaHg1uQs3iTA1gCLTPrGRso=@other.debian.org
+X-Gm-Message-State: AOJu0YzL834FGbOk6rMA+6NvFO4UwDPHlj6mIZT+BZeizRGoIzbiit0W
+	6v626bE+m9Kro+k/oRjfp83rc2LwUlb2lYDPBuOHMdrBf9fOjbBTupbELAgVZYnq0aPMQncJoW9
+	s/b81OQvDrvdULykdUNOQsV+SCi0n11FQJJzt+QS5lw==
+X-Gm-Gg: ATEYQzyK9TzxLMHLAIMOUIq+AMMQ9urpQed7pTATvEB7LhgBnbXkkY3NPI4TLK5uwAu
+	2ZHSRf/Lv6FfDBJgQ8QE6IfRh3dYqUhW+ukVvO3uKbmi1FSFQ5DwdndRUk5peibXCoUQmMiOsZg
+	SuX7jJhuXSqDU4KmI9FwGdB9JyVwW2ibDuy9kfOl3UVabp5W0Z25L0ArcKzt7q8QWM1U4r5Avmq
+	lc487Bg8amVMYo9Urk1BrSPdizqKPFMfIzDiV+OmHIlUuub/ndElUS6n8SCVnX3G8l3py7tjPj/
+	K2ZyePE=
+X-Received: by 2002:a05:6830:3495:b0:7d7:40e7:9536 with SMTP id
+ 46e09a7af769-7d740e79670mr3723400a34.0.1773070299522; Mon, 09 Mar 2026
+ 08:31:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS4PPFEAFA21C69:EE_|SN7PR10MB7002:EE_
-X-MS-Office365-Filtering-Correlation-Id: 170a0663-0066-490b-9af9-08de796f8f5e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info:
-	lawf5hplOD9ou65pZQiqi1kcgCVtDwVquHEiNhNBVukQnYasyGpRQyv8ImxKI0n+0s7yKZd6txvOGTZ//xcY0ML5B+02zSZHr6VyZKSG1VWnAefWpuaCptDLR6YSM4jAHSSPlf5hmlJ/Ao1jP3A+FIffbZRvLbsdfHQ0/uxsblxnufCNOplcki3lu3VX3LOPU1P5CNJO7X3Xp69VmDhg0/Ul9cckg0PMBtwh0h/OsAg2J6oozwUxhT7o8WPwXMXJH/WKxDm18i0j7wDvFM1/q9uCufGoCd2JJNFT9fbrnPLzh+JYlz8LjwIaPhmXBKi/PlrBNebovLB4BdogPyoZNGjIvbOO/4fZcpxArZTcXSoMxpNiwqUVMacgzhDs1RukbIJGAjsY7RCI0qc8QJKk749lkgtPaAxjTjqy+znoj+oDaYysmao9h2i/PKPFngJcpeO4L5JTx0S0WQtpqUtiE9NDUNEeIyv53/Q0LLEPNOX4giNbIrJ544j05J2rZINLpmzWa0ZSJIXRw/ysjDHud80X46TgJI1rgSn1wu3eV2A+urMK2xaURuB3pcz8dOIRSbI8dhebkTIydWTLHn65D6UITmjCbIZQeMttt3Qj096IPM0RZL/5qP/gaOsunhXJm3KP2/ANxB3lrNUVFIW2T+WAiEJlZvMD+7xvsgB/lz+soV9rUqr96A/oF9b5/kF1IPU/15U7Wpw8VtzazbIWbh0nE2dzLOwbYNHJZkSbZVs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS4PPFEAFA21C69.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VW8zNkJDYlIrTnRhT2o4cWkvNmNMb3M0WHNtQlZaZzVuZUVUZWNjK211WmFB?=
- =?utf-8?B?T2ZROWFrVmJHMHo3SStVTWxSTyt4WVAzMEtMZjVXRUloeEZWYXUvZkMwb0Nw?=
- =?utf-8?B?NHpHcXExZXF2MkcxMklkMW8wMHM0NWV6TitIeVJFUXdCOHlIYjk5bWhRUjFY?=
- =?utf-8?B?ajV6bmdFSjBVaEZsZCtrNW9aV0F3eGhTMmlEV1BlS1FtakR4L0VaNnhZRkNh?=
- =?utf-8?B?c2JEM081elZ0UnNkOGxHRFVZKy90UWd3NmIvUWRkVCt3WW80c3Y3aDJUS0lH?=
- =?utf-8?B?ZmpCNWdGU2MrbktKZEtiZy9Vb3BpNDVtRHJDSmdiRXcwV24xRi9KOXNhdWFB?=
- =?utf-8?B?bmxXNjBqMFdjeUczM3FWUmpGZDVQV2hRbWVqamZjbnQ0bnA1Q3BDdkVrWWxh?=
- =?utf-8?B?K0VkS1VUL0IvRjZhVXdYUEtacHJrSVdqOVgyTSsvY1NqRElMRTY0WG43QnI5?=
- =?utf-8?B?QXB5YjRXNlpiR3o1ZzFoeng2anZJa0kwc1ByMmN1eks4R3Y2dUZJUytiUjNO?=
- =?utf-8?B?SVFJcTQ1amcyYVdnTndyWUZyZ0RoQ0dLSmlWUXcxdEgveHptMjQwUmZ5SitW?=
- =?utf-8?B?MzliNTFBWnhtRVVSY3h5TUxDOVRiTFVjZU1Ec21zejMrNDRYOTBBVnMybGsr?=
- =?utf-8?B?cDdVV01XZ3RLVmNGdWhlVUhwcnNIS1BUZGc5UFBsTU5vcHJNcGpDRWdjT2dU?=
- =?utf-8?B?Rm1QQnFUKzQzV1d2L2JJVmV0SWlKNnp4VnRtK1hUN1l4bkZ3Vjg5bHdzOTg4?=
- =?utf-8?B?c2FjdGxRaVRiSXVFYVdEQmVOYk5wSFN5Y1UzQVgyNVZUZExreExmUkd6cjdT?=
- =?utf-8?B?dnVyNkNxdmtoaHZFTDZZVmZBQlY2Y1dwd2tmZ2NjdTlXaEo1RGR1RHIranVN?=
- =?utf-8?B?L2tzSVR4SUVaUjJ4cWs3Z1FQQ3kzYlpJUjNhVEw0bU9ueEFiallzQndsQU1k?=
- =?utf-8?B?L3lzLzJyaHpjaUZoWnpvRndRS3ZuT0JVNzlETk55TERRSkVwQUhhM0t1REYx?=
- =?utf-8?B?blo1NUlnUHJOdkQydVFQb1RmYXYzakFObzNLVHRtck0rMmx3YUp0d1llWXBX?=
- =?utf-8?B?TG5vZ0tOWDdmZEo3ai9FcTRlbXVCOUFvZWQvWlJWeG95QXJkR0lTbHRaQVpE?=
- =?utf-8?B?WHZqSDI4ZHdWZ1NlZmp0UFVYamtkc0pURTNUVmc4YndMNVI1MlZPQmJETWpR?=
- =?utf-8?B?bHdhYUliNDVseDF1WjA1S0dvbmdRY1VPVGxyamdITUdRdnUvZ3F0SFVOZmQ4?=
- =?utf-8?B?aE5MbTJlZ3F0Uzg5clV2eTVVd2tZZkNINm1GQmFCdTRTdGR6V0NlRHFpNWNL?=
- =?utf-8?B?QUo0NkcyZ1hHb3EvbmFZQ0lNa2lFeWRMRjZmZmwxMGdtR3FhMHJqYUlSUklk?=
- =?utf-8?B?NUlrUGFCcGR2MlBkRENlbVZVT2YyVVp3VjBKclp5Tm5VZGVoWWxuaE9La1h6?=
- =?utf-8?B?cWMyZGFlNXdVTzFvelliQ1AveGdKcU9TcVQrTEN5ZG9YQkVBYkx4VjlqSEFT?=
- =?utf-8?B?LzJ5V2x6WUEzQVdieDZPdXMwMm5NN3ZMMmZvd014TjFYNzFGc3F3TmFwRVdS?=
- =?utf-8?B?NEF4aFhZcUVSZnlXdHVDZzBVaGtIOTY3Zk9hZENVY3JFNVBtcXY2U3ZIdGM5?=
- =?utf-8?B?TG1USjBvdVhWOUJhUngwMllmd08wejFzL3lZMnZhZWJEUnJ6Q3FBdzV4NGNE?=
- =?utf-8?B?ZXZpMU1adEtrSVlOWFhsbEwrWjc3R0lWOVk3QlVvNVR3c1Vjb2V3VVhITHJ5?=
- =?utf-8?B?YjExQUxTL3BqM2kwNGFuQWVsYW83LzQyUkVCNFovdU5LQWFXa0ZjWktGQVNT?=
- =?utf-8?B?cU5zTXBEM0tqNEx5QWhudmNsMFJDWGJwUVg5Zzc5RWJZTDc5Z3MrSERwQmV1?=
- =?utf-8?B?MytEbXo0Q3pXVG1QWXNIZkpPaEg0UUFHdU9CRFV2Q3BFcStlSGw4c1BFZmdo?=
- =?utf-8?B?Wmx5YVRrMHdQcFBUMWFlYzNpblZoVEVJQlZWSVdEckx1dTIwclVlWnZqZ2Fa?=
- =?utf-8?B?S3AyUEpzUHR3MnRITTZHUHF5YStFaW9EaVRJR3lnbk1CRjZnVFZ4YmRheno1?=
- =?utf-8?B?eHF4NFp1Z29MUzZUT09HWTcvcVgyQXpEcDRJeDVXazNKditMZC9DcmZaRS9L?=
- =?utf-8?B?VGJwUWhCVkNKNU1pMUdmNWVMU2p4c0Y0NjNBTUdLMS92bVU0dXBmV1MzUG9P?=
- =?utf-8?B?czVOOWYyN00zSnFPQTFNem5PTitlanVHMEdrNFdTb2NQSjBmOVMzY216cHRI?=
- =?utf-8?B?US9zNW5URTdxeGRkNkZKankxZE5mV1hxZHplOUZsZHZ4KzF2bWtJUUlUSzdX?=
- =?utf-8?B?STA5aEV5OEc1aHQrZzNOd1FYaFFOSFVpS3ZEVE94cktzR2Zod1oxQT09?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	sW3xkZY/5fTddnzw+/d1KnEs37s8yA4YZt85Ta0uqAOmo6/gEZrI7Bx9u4UJZzQCBkgSqBloqFA8GzQKz3i7ogNG+8j1N5J76+v0XOlYV5SdnBWbudtXiS5clQILsJlqKYXVa/TTYwKudk3CUsfRTYSxQhOBapvBPn9J2UmmY7bk/TYiZKF0cXm/NvqD46u5jApzYffxSOeUKF+TDX9XHtHUKeY5U+m6qZ1EJ7adj0ysbMgoNMdXTEcuDvwI77j7XNvERmYMPLgziMi4XvtQCUWzWlVA30vsc2q5m2q80zJKBtAnf3XA3Evf1kW5XqtMVfK/F3fK4Bki4k7VrlyA2SaWZ/0Ef2JC7T1GKGnVw+Y66I/Pj0bZfsdVlc189n6L8RY/3s2WR82IgBy0rGf3hYsO3aAfFbmVrNN8t67fwM3z6P6Op04mDhxuPfmFVFOyk8mmvgb/ETBPoH3go7XPBqsF0zy8j324YncHKzAI0W5hCdTU+r+UVVh2igh0t8ainhDED3GvPfUzgS2B0ucmix9HshDqmN6Dow+1fWyBLU5GjGn6S7eOPTOofoPmhKfztGWF20OnGd+Td8+DyCx/x7T6luBYrDYL6x/OS+LQ2C4=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 170a0663-0066-490b-9af9-08de796f8f5e
-X-MS-Exchange-CrossTenant-AuthSource: DS4PPFEAFA21C69.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 21:55:18.8786
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BuQViSbaqyoBtuqYL/T/Ga4sMD+YK3yKdjANFGuWMf3INDcnPgEj5ZUjBk3l9Ip4yjqqg+gZ6KanfMvRFPDgQQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB7002
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-03_03,2026-03-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 malwarescore=0 phishscore=0
- spamscore=0 mlxscore=0 mlxlogscore=999 suspectscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2602130000
- definitions=main-2603030180
-X-Authority-Analysis: v=2.4 cv=TK5Iilla c=1 sm=1 tr=0 ts=69a758cb b=1 cx=c_pps
- a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=Yq5XynenixoA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=jiCTI4zE5U7BLdzWsZGv:22 a=x0eKOSpe3m1H3M0S9YoZ:22 a=W_wgObZiZZpR-WtE39MA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 cc=ntf awl=host:13812
-X-Proofpoint-GUID: qt9gZsG0W7iMQ8tcimexrkwXJq4r6rZ1
-X-Proofpoint-ORIG-GUID: qt9gZsG0W7iMQ8tcimexrkwXJq4r6rZ1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzAzMDE4MCBTYWx0ZWRfX96IeolHagMKT
- cwMEJwOWnrbTVchbFZA+lymyiuQVVhPvNHrxFStM/r0bZksuxFjhkUi8D1gRBf1ZtFu1JCtpR00
- 1uilkYSPfn0RDtN4B6rCcR6bKA6eUxVHlk6MqwkE6366lTbCkSMZKFVo6KVYdw/UdKAaTm+9gbw
- tpw34a2DbnOwFcik+BBRwib31krvIaXAQ9TN4WUz912fG07iXQdj45xt7YB/6jRe/hmj3/yKHfK
- C14rbeXBtmdoximyQgEHQ2+TEmezzp56/v0mZnRSptyunQVFskpqCnf+NqcU5vB/np0KxxLW+m6
- epV434EVlBVy3B2h7YBNfUVr5Hj1nBUcOc4gBTlEHc3NpigqlWaesYzWlghIjUtDYu9OZBi/9wV
- H4WWh6E5GzHvsirToHt3KG2o+sYlCI0eZD7U4GovblZ0Omcz1nE79yJNwNsJzsSmkH43oy+RRQn
- U9AFjOsOPDzG6XBRR0kW3ctLTAqkepy9rlWknn1A=
+References: <20260309062840.2937858-2-iam@sung-woo.kim>
+In-Reply-To: <20260309062840.2937858-2-iam@sung-woo.kim>
+From: Caleb Sander Mateos <csander@purestorage.com>
+Date: Mon, 9 Mar 2026 08:31:27 -0700
+X-Gm-Features: AaiRm50lVynE24y1iGtUrsPblHqAJTvTl9abhpAYnSu85cy3kb3SYItst0KXwYA
+Message-ID: <CADUfDZorSQCVtQyfjBuaziwG2Jo28yZiiqLKbp9PkFFw-9VgfQ@mail.gmail.com>
+Subject: Re: [PATCH] blk-mq: nvme: Fix general protection fault in nvme_setup_descriptor_pools()
+To: Sungwoo Kim <iam@sung-woo.kim>
+Cc: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>, 
+	Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, 
+	Mikulas Patocka <mpatocka@redhat.com>, dm-devel@lists.linux.dev, 
+	Ulf Hansson <ulf.hansson@linaro.org>, Richard Weinberger <richard@nod.at>, 
+	Miquel Raynal <miquel.raynal@bootlin.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+	Hector Martin <marcan@marcan.st>, Sven Peter <sven@svenpeter.dev>, 
+	Alyssa Rosenzweig <alyssa@rosenzweig.io>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, 
+	Sagi Grimberg <sagi@grimberg.me>, James Smart <james.smart@broadcom.com>, 
+	Chaitanya Kulkarni <kch@nvidia.com>, "James E.J. Bottomley" <jejb@linux.ibm.com>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, Chao Shi <cshi008@fiu.edu>, 
+	Weidong Zhu <weizhu@fiu.edu>, Dave Tian <daveti@purdue.edu>, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, nbd@other.debian.org, linux-mmc@vger.kernel.org, 
+	linux-mtd@lists.infradead.org, asahi@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-nvme@lists.infradead.org, 
+	linux-scsi@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <QsEPMgBHz6C.A.9rjN.EP2ppB@bendel>
+Resent-Message-ID: <4eg5_SQ6G4O.A.ILgO.8uurpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3510
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3512
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -224,100 +142,412 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/46567e4a-9e0c-4020-a976-238b6a95240b@oracle.com
-Resent-Date: Tue,  3 Mar 2026 22:42:12 +0000 (UTC)
-X-Rspamd-Queue-Id: 671241F8188
+List-Archive: https://lists.debian.org/msgid-search/CADUfDZorSQCVtQyfjBuaziwG2Jo28yZiiqLKbp9PkFFw-9VgfQ@mail.gmail.com
+Resent-Date: Mon,  9 Mar 2026 15:48:12 +0000 (UTC)
+X-Rspamd-Queue-Id: 0289F23C032
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.11 / 15.00];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
+X-Spamd-Result: default: False [-1.51 / 15.00];
+	ARC_ALLOW(-1.00)[google.com:s=arc-20240605:i=1];
+	R_DKIM_ALLOW(-0.20)[purestorage.com:s=google2022];
 	MAILLIST(-0.20)[generic];
-	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25,oracle.onmicrosoft.com:s=selector2-oracle-onmicrosoft-com];
-	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:iam@sung-woo.kim,m:axboe@kernel.dk,m:josef@toxicpanda.com,m:agk@redhat.com,m:snitzer@kernel.org,m:mpatocka@redhat.com,m:dm-devel@lists.linux.dev,m:ulf.hansson@linaro.org,m:richard@nod.at,m:miquel.raynal@bootlin.com,m:vigneshr@ti.com,m:marcan@marcan.st,m:sven@svenpeter.dev,m:alyssa@rosenzweig.io,m:kbusch@kernel.org,m:hch@lst.de,m:sagi@grimberg.me,m:james.smart@broadcom.com,m:kch@nvidia.com,m:jejb@linux.ibm.com,m:martin.petersen@oracle.com,m:cshi008@fiu.edu,m:weizhu@fiu.edu,m:daveti@purdue.edu,m:linux-block@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:nbd@other.debian.org,m:linux-mmc@vger.kernel.org,m:linux-mtd@lists.infradead.org,m:asahi@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:chaitanyak@nvidia.com,m:shinichiro.kawasaki@wdc.com,m:linux-block@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-scsi@vger.kernel.org,m:nbd@other.debian.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[john.g.garry@oracle.com,bounce-nbd=lists@other.debian.org];
-	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
-	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[csander@purestorage.com,bounce-nbd=lists@other.debian.org];
 	R_SPF_NA(0.00)[no SPF record];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	TAGGED_FROM(0.00)[nbd=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	DKIM_TRACE(0.00)[purestorage.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:rdns,bendel.debian.org:helo,oracle.com:dkim,oracle.com:mid];
-	FROM_NEQ_ENVFROM(0.00)[john.g.garry@oracle.com,bounce-nbd=lists@other.debian.org];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[csander@purestorage.com,bounce-nbd=lists@other.debian.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[oracle.com:+,oracle.onmicrosoft.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[nbd];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DMARC_DNSFAIL(0.00)[purestorage.com : server fail];
+	NEURAL_HAM(-0.00)[-0.963];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
+	TAGGED_RCPT(0.00)[nbd];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:rdns,bendel.debian.org:helo,mail.gmail.com:mid,purestorage.com:dkim,purdue.edu:email,sung-woo.kim:email,qemu.org:url]
 X-Rspamd-Action: no action
 
-On 03/03/2026 19:48, Chaitanya Kulkarni wrote:
-> On 2/26/26 01:18, John Garry wrote:
->> JFYI, I saw this splat for nvme/033 on nvme-7.0 branch *:
->>
->> [   15.525025] systemd-journald[347]:
->> /var/log/journal/89df182291654cc0b051327dd5a58135/user-1000.journal:
->> Journal file uses a different sequence number ID, rotating.
->> [   21.339287] run blktests nvme/033 at 2026-02-26 08:45:20
->> [   21.522168] nvmet: Created nvm controller 1 for subsystem
->> blktests-subsystem-1 for NQN
->> nqn.2014-08.org.nvmexpress:uuid:0f01fb42-9f7f-4856-b0b3-51e60b8de349.
->> [   21.527332]
->> ==================================================================
->> [   21.527408] BUG: KASAN: slab-out-of-bounds in
->> nvmet_passthru_execute_cmd_work+0xf94/0x1a80 [nvmet]
->> [   21.527494] Read of size 256 at addr ffff888100be2bc0 by task
->> kworker/u17:2/50
->>
->> [   21.527580] CPU: 0 UID: 0 PID: 50 Comm: kworker/u17:2 Not tainted
->> 6.19.0-rc3-00080-g6c7172c14e92 #37 PREEMPT(voluntary)
->> [   21.527589] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009),
->> BIOS 1.16.3-debian-1.16.3-2 04/01/2014
->> [   21.527594] Workqueue: nvmet-wq nvmet_passthru_execute_cmd_work
->> [nvmet]
->> [   21.527636] Call Trace:
->> [   21.527639]  <TASK>
->> [   21.527643]  dump_stack_lvl+0x91/0xf0
->> [   21.527695]  print_report+0xd1/0x660
->> [   21.527710]  ? __virt_addr_valid+0x23a/0x440
->> [   21.527721]  ? kasan_complete_mode_report_info+0x26/0x200
->> [   21.527733]  kasan_report+0xf3/0x130
->> [   21.527739]  ? nvmet_passthru_execute_cmd_work+0xf94/0x1a80 [nvmet]
->> [   21.527776]  ? nvmet_passthru_execute_cmd_work+0xf94/0x1a80 [nvmet]
->> [   21.527816]  kasan_check_range+0x11c/0x200
->> [   21.527824]  __asan_memcpy+0x23/0x80
->> [   21.527834]  nvmet_passthru_execute_cmd_work+0xf94/0x1a80 [nvmet]
-> 
-> I've not seen this, can you try following, from quick look it
-> from copying subsnqn admin-cmd.c uses strscpy() and passhru-cmd.c uses
-> memcpy :-
-> 
-> diff --git a/drivers/nvme/target/passthru.c b/drivers/nvme/target/passthru.c
-> index 96648ec2fadb..67c423a8b052 100644
-> --- a/drivers/nvme/target/passthru.c
-> +++ b/drivers/nvme/target/passthru.c
-> @@ -150,7 +150,7 @@ static u16 nvmet_passthru_override_id_ctrl(struct nvmet_req *req)
->    	 * code path with duplicate ctrl subsysnqn. In order to prevent that we
->    	 * mask the passthru-ctrl subsysnqn with the target ctrl subsysnqn.
->    	 */
-> -	memcpy(id->subnqn, ctrl->subsys->subsysnqn, sizeof(id->subnqn));
-> +	strscpy(id->subnqn, ctrl->subsys->subsysnqn, sizeof(id->subnqn));
+On Sun, Mar 8, 2026 at 11:30=E2=80=AFPM Sungwoo Kim <iam@sung-woo.kim> wrot=
+e:
+>
+> The numa_node can be < 0 since NUMA_NO_NODE =3D -1. However,
+> struct blk_mq_hw_ctx{} defines numa_node as unsigned int. As a result,
+> numa_node is set to UINT_MAX for NUMA_NO_NODE in blk_mq_alloc_hctx().
 
+The node argument to blk_mq_alloc_hctx() comes from
+blk_mq_alloc_and_init_hctx(), which is called by
+blk_mq_alloc_and_init_hctx() with int node =3D blk_mq_get_hctx_node(set,
+i). node =3D NUMA_NO_NODE would suggest that blk_mq_hw_queue_to_node()
+doesn't find any CPU affinitized to the queue. Is that even possible?
 
-Yeah, AFAICS, this same change is in mainline as an nvme fix, but it was 
-not in the nvme 7.0 branch.
+>
+> Later, nvme_setup_descriptor_pools() accesses
+> descriptor_pools[numa_node]. Due to the above, it tries to access
+> descriptor_pools[UINT_MAX]. The address is garbage but accessible
+> because it is canonical and still within the slab memory range.
+> Therefore, no page fault occurs, and KASAN cannot detect this since it
+> is beyond the redzones.
+>
+> Subsequently, normal I/O calls dma_pool_alloc() with the garbage pool
+> address. pool->next_block contains a wild pointer, causing a general
+> protection fault (GPF).
+>
+> To fix this, this patch changes the type of numa_node to int and adds
+> a check for NUMA_NO_NODE.
+>
+> Log:
+>
+> Oops: general protection fault, probably for non-canonical address 0xe980=
+3b040854d02c: 0000 [#1] SMP KASAN PTI
+> KASAN: maybe wild-memory-access in range [0x4c01f82042a68160-0x4c01f82042=
+a68167][FEMU] Err: I/O cmd failed: opcode=3D0x2 status=3D0x4002
+> CPU: 0 UID: 0 PID: 112363 Comm: systemd-udevd Not tainted 6.19.0-dirty #1=
+0 PREEMPT(voluntary)
+> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-=
+ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+> RIP: 0010:pool_block_pop mm/dmapool.c:187 [inline]
+> RIP: 0010:dma_pool_alloc+0x110/0x990 mm/dmapool.c:417
+> Code: 00 0f 85 a4 07 00 00 4c 8b 63 58 4d 85 e4 0f 84 12 01 00 00 e8 41 1=
+d 93 ff 4c 89 e2 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f=
+ 85 a7 07 00 00 49 8b 04 24 48 8d 7b 68 48 89 fa 48
+> RSP: 0018:ffffc90002b9efd0 EFLAGS: 00010003
+> RAX: dffffc0000000000 RBX: ffff888005466800 RCX: ffffffff94faab7f
+> RDX: 09803f040854d02c RSI: 6c9b26c9b26c9b27 RDI: ffff88800c725ea0
+> RBP: ffffc90002b9f060 R08: 0000000000000001 R09: 0000000000000001
+> R10: 0000000000000003 R11: 0000000000000000 R12: 4c01f82042a68164
+> R13: ffff888005466800 R14: 0000000000000820 R15: ffff888007b29000
+> FS:  00007f2abc4ff8c0(0000) GS:ffff8880d1ff7000(0000) knlGS:0000000000000=
+000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 000056360eb89000 CR3: 000000000a480000 CR4: 00000000000006f0
+> Call Trace:
+>  <TASK>
+>  nvme_pci_setup_data_prp drivers/nvme/host/pci.c:906 [inline]
+>  nvme_map_data drivers/nvme/host/pci.c:1114 [inline]
+>  nvme_prep_rq.part.0+0x17d3/0x3c90 drivers/nvme/host/pci.c:1243
+>  nvme_prep_rq drivers/nvme/host/pci.c:1239 [inline]
+>  nvme_prep_rq_batch drivers/nvme/host/pci.c:1321 [inline]
+>  nvme_queue_rqs+0x37b/0x8a0 drivers/nvme/host/pci.c:1336
+>  __blk_mq_flush_list block/blk-mq.c:2848 [inline]
+>  __blk_mq_flush_list+0xaa/0xe0 block/blk-mq.c:2844
+>  blk_mq_dispatch_queue_requests+0x4f5/0x990 block/blk-mq.c:2893
+>  blk_mq_flush_plug_list+0x232/0x650 block/blk-mq.c:2981
+>  __blk_flush_plug+0x2c3/0x510 block/blk-core.c:1225
+>  blk_finish_plug block/blk-core.c:1252 [inline]
+>  blk_finish_plug+0x64/0xc0 block/blk-core.c:1249
+>  read_pages+0x6bd/0x9d0 mm/readahead.c:176
+>  page_cache_ra_unbounded+0x659/0x950 mm/readahead.c:269
+>  do_page_cache_ra mm/readahead.c:332 [inline]
+>  force_page_cache_ra+0x282/0x3a0 mm/readahead.c:361
+>  page_cache_sync_ra+0x201/0xbf0 mm/readahead.c:579
+>  filemap_get_pages+0x3be/0x1990 mm/filemap.c:2690
+>  filemap_read+0x3ea/0xdf0 mm/filemap.c:2800
+>  blkdev_read_iter+0x1b8/0x520 block/fops.c:856
+>  new_sync_read fs/read_write.c:491 [inline]
+>  vfs_read+0x90f/0xd80 fs/read_write.c:572
+>  ksys_read+0x14e/0x280 fs/read_write.c:715
+>  __do_sys_read fs/read_write.c:724 [inline]
+>  __se_sys_read fs/read_write.c:722 [inline]
+>  __x64_sys_read+0x7b/0xc0 fs/read_write.c:722
+>  x64_sys_call+0x17ec/0x21b0 arch/x86/include/generated/asm/syscalls_64.h:=
+1
+>  do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+>  do_syscall_64+0x8b/0x1200 arch/x86/entry/syscall_64.c:94
+>  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> RIP: 0033:0x7f2abc7b204e
+> Code: 0f 1f 40 00 48 8b 15 79 af 00 00 f7 d8 64 89 02 48 c7 c0 ff ff ff f=
+f eb ba 0f 1f 00 64 8b 04 25 18 00 00 00 85 c0 75 14 0f 05 <48> 3d 00 f0 ff=
+ ff 77 5a c3 66 0f 1f 84 00 00 00 00 00 48 83 ec 28
+> RSP: 002b:00007fff07113cb8 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+> RAX: ffffffffffffffda RBX: 000056360eb6a528 RCX: 00007f2abc7b204e
+> RDX: 0000000000040000 RSI: 000056360eb6a538 RDI: 000000000000000f
+> RBP: 000056360e8d23d0 R08: 000056360eb6a510 R09: 00007f2abc79abe0
+> R10: 0000000000040050 R11: 0000000000000246 R12: 000000003ff80000
+> R13: 0000000000040000 R14: 000056360eb6a510 R15: 000056360e8d2420
+>  </TASK>
+> Modules linked in:
+>
+> Fixes: 320ae51feed5 ("blk-mq: new multi-queue block IO queueing mechanism=
+")
+> Fixes: d977506f8863 ("nvme-pci: make PRP list DMA pools per-NUMA-node")
+> Acked-by: Chao Shi <cshi008@fiu.edu>
+> Acked-by: Weidong Zhu <weizhu@fiu.edu>
+> Acked-by: Dave Tian <daveti@purdue.edu>
+> Signed-off-by: Sungwoo Kim <iam@sung-woo.kim>
+> ---
+>  block/bsg-lib.c                   |  2 +-
+>  drivers/block/mtip32xx/mtip32xx.c |  2 +-
+>  drivers/block/nbd.c               |  2 +-
+>  drivers/md/dm-rq.c                |  2 +-
+>  drivers/mmc/core/queue.c          |  2 +-
+>  drivers/mtd/ubi/block.c           |  2 +-
+>  drivers/nvme/host/apple.c         |  2 +-
+>  drivers/nvme/host/fc.c            |  2 +-
+>  drivers/nvme/host/pci.c           | 11 ++++++++---
+>  drivers/nvme/host/rdma.c          |  2 +-
+>  drivers/nvme/host/tcp.c           |  2 +-
+>  drivers/nvme/target/loop.c        |  2 +-
+>  drivers/scsi/scsi_lib.c           |  2 +-
+>  include/linux/blk-mq.h            |  4 ++--
+>  14 files changed, 22 insertions(+), 17 deletions(-)
+>
+> diff --git a/block/bsg-lib.c b/block/bsg-lib.c
+> index 9ceb5d0832f5..e93b1018a346 100644
+> --- a/block/bsg-lib.c
+> +++ b/block/bsg-lib.c
+> @@ -299,7 +299,7 @@ static blk_status_t bsg_queue_rq(struct blk_mq_hw_ctx=
+ *hctx,
+>
+>  /* called right after the request is allocated for the request_queue */
+>  static int bsg_init_rq(struct blk_mq_tag_set *set, struct request *req,
+> -                      unsigned int hctx_idx, unsigned int numa_node)
+> +                      unsigned int hctx_idx, int numa_node)
+>  {
+>         struct bsg_job *job =3D blk_mq_rq_to_pdu(req);
+>
+> diff --git a/drivers/block/mtip32xx/mtip32xx.c b/drivers/block/mtip32xx/m=
+tip32xx.c
+> index 567192e371a8..8aedba9b5690 100644
+> --- a/drivers/block/mtip32xx/mtip32xx.c
+> +++ b/drivers/block/mtip32xx/mtip32xx.c
+> @@ -3340,7 +3340,7 @@ static void mtip_free_cmd(struct blk_mq_tag_set *se=
+t, struct request *rq,
+>  }
+>
+>  static int mtip_init_cmd(struct blk_mq_tag_set *set, struct request *rq,
+> -                        unsigned int hctx_idx, unsigned int numa_node)
+> +                        unsigned int hctx_idx, int numa_node)
+>  {
+>         struct driver_data *dd =3D set->driver_data;
+>         struct mtip_cmd *cmd =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+> index f6c33b21f69e..e1fac1c0c4cd 100644
+> --- a/drivers/block/nbd.c
+> +++ b/drivers/block/nbd.c
+> @@ -1888,7 +1888,7 @@ static void nbd_dbg_close(void)
+>  #endif
+>
+>  static int nbd_init_request(struct blk_mq_tag_set *set, struct request *=
+rq,
+> -                           unsigned int hctx_idx, unsigned int numa_node=
+)
+> +                           unsigned int hctx_idx, int numa_node)
+>  {
+>         struct nbd_cmd *cmd =3D blk_mq_rq_to_pdu(rq);
+>         cmd->nbd =3D set->driver_data;
+> diff --git a/drivers/md/dm-rq.c b/drivers/md/dm-rq.c
+> index a6ca92049c10..b687a209256b 100644
+> --- a/drivers/md/dm-rq.c
+> +++ b/drivers/md/dm-rq.c
+> @@ -455,7 +455,7 @@ static void dm_start_request(struct mapped_device *md=
+, struct request *orig)
+>  }
+>
+>  static int dm_mq_init_request(struct blk_mq_tag_set *set, struct request=
+ *rq,
+> -                             unsigned int hctx_idx, unsigned int numa_no=
+de)
+> +                             unsigned int hctx_idx, int numa_node)
+>  {
+>         struct mapped_device *md =3D set->driver_data;
+>         struct dm_rq_target_io *tio =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/drivers/mmc/core/queue.c b/drivers/mmc/core/queue.c
+> index 284856c8f655..06cb29190a88 100644
+> --- a/drivers/mmc/core/queue.c
+> +++ b/drivers/mmc/core/queue.c
+> @@ -203,7 +203,7 @@ static unsigned short mmc_get_max_segments(struct mmc=
+_host *host)
+>  }
+>
+>  static int mmc_mq_init_request(struct blk_mq_tag_set *set, struct reques=
+t *req,
+> -                              unsigned int hctx_idx, unsigned int numa_n=
+ode)
+> +                              unsigned int hctx_idx, int numa_node)
+>  {
+>         struct mmc_queue_req *mq_rq =3D req_to_mmc_queue_req(req);
+>         struct mmc_queue *mq =3D set->driver_data;
+> diff --git a/drivers/mtd/ubi/block.c b/drivers/mtd/ubi/block.c
+> index b53fd147fa65..1c0bd2b36637 100644
+> --- a/drivers/mtd/ubi/block.c
+> +++ b/drivers/mtd/ubi/block.c
+> @@ -312,7 +312,7 @@ static blk_status_t ubiblock_queue_rq(struct blk_mq_h=
+w_ctx *hctx,
+>
+>  static int ubiblock_init_request(struct blk_mq_tag_set *set,
+>                 struct request *req, unsigned int hctx_idx,
+> -               unsigned int numa_node)
+> +               int numa_node)
+>  {
+>         struct ubiblock_pdu *pdu =3D blk_mq_rq_to_pdu(req);
+>
+> diff --git a/drivers/nvme/host/apple.c b/drivers/nvme/host/apple.c
+> index ed61b97fde59..50ff5e9a168d 100644
+> --- a/drivers/nvme/host/apple.c
+> +++ b/drivers/nvme/host/apple.c
+> @@ -819,7 +819,7 @@ static int apple_nvme_init_hctx(struct blk_mq_hw_ctx =
+*hctx, void *data,
+>
+>  static int apple_nvme_init_request(struct blk_mq_tag_set *set,
+>                                    struct request *req, unsigned int hctx=
+_idx,
+> -                                  unsigned int numa_node)
+> +                                  int numa_node)
+>  {
+>         struct apple_nvme_queue *q =3D set->driver_data;
+>         struct apple_nvme *anv =3D queue_to_apple_nvme(q);
+> diff --git a/drivers/nvme/host/fc.c b/drivers/nvme/host/fc.c
+> index 6948de3f438a..64d0c5d7613a 100644
+> --- a/drivers/nvme/host/fc.c
+> +++ b/drivers/nvme/host/fc.c
+> @@ -2109,7 +2109,7 @@ __nvme_fc_init_request(struct nvme_fc_ctrl *ctrl,
+>
+>  static int
+>  nvme_fc_init_request(struct blk_mq_tag_set *set, struct request *rq,
+> -               unsigned int hctx_idx, unsigned int numa_node)
+> +               unsigned int hctx_idx, int numa_node)
+>  {
+>         struct nvme_fc_ctrl *ctrl =3D to_fc_ctrl(set->driver_data);
+>         struct nvme_fcp_op_w_sgl *op =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
+> index 3c83076a57e5..a5f12fc7655d 100644
+> --- a/drivers/nvme/host/pci.c
+> +++ b/drivers/nvme/host/pci.c
+> @@ -443,11 +443,16 @@ static bool nvme_dbbuf_update_and_check_event(u16 v=
+alue, __le32 *dbbuf_db,
+>  }
+>
+>  static struct nvme_descriptor_pools *
+> -nvme_setup_descriptor_pools(struct nvme_dev *dev, unsigned numa_node)
+> +nvme_setup_descriptor_pools(struct nvme_dev *dev, int numa_node)
+>  {
+> -       struct nvme_descriptor_pools *pools =3D &dev->descriptor_pools[nu=
+ma_node];
+> +       struct nvme_descriptor_pools *pools;
+>         size_t small_align =3D NVME_SMALL_POOL_SIZE;
+>
+> +       if (numa_node =3D=3D NUMA_NO_NODE)
+> +               pools =3D &dev->descriptor_pools[numa_node_id()];
+> +       else
+> +               pools =3D &dev->descriptor_pools[numa_node];
 
-Thanks for checking
+Simpler: if (numa_node =3D=3D NUMA_NO_NODE) numa_node =3D numa_node_id();
+
+> +
+>         if (pools->small)
+>                 return pools; /* already initialized */
+>
+> @@ -516,7 +521,7 @@ static int nvme_init_hctx(struct blk_mq_hw_ctx *hctx,=
+ void *data,
+>
+>  static int nvme_pci_init_request(struct blk_mq_tag_set *set,
+>                 struct request *req, unsigned int hctx_idx,
+> -               unsigned int numa_node)
+> +               int numa_node)
+>  {
+>         struct nvme_iod *iod =3D blk_mq_rq_to_pdu(req);
+>
+> diff --git a/drivers/nvme/host/rdma.c b/drivers/nvme/host/rdma.c
+> index 35c0822edb2d..c2514ef94028 100644
+> --- a/drivers/nvme/host/rdma.c
+> +++ b/drivers/nvme/host/rdma.c
+> @@ -292,7 +292,7 @@ static void nvme_rdma_exit_request(struct blk_mq_tag_=
+set *set,
+>
+>  static int nvme_rdma_init_request(struct blk_mq_tag_set *set,
+>                 struct request *rq, unsigned int hctx_idx,
+> -               unsigned int numa_node)
+> +               int numa_node)
+>  {
+>         struct nvme_rdma_ctrl *ctrl =3D to_rdma_ctrl(set->driver_data);
+>         struct nvme_rdma_request *req =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/drivers/nvme/host/tcp.c b/drivers/nvme/host/tcp.c
+> index 69cb04406b47..385eef98081b 100644
+> --- a/drivers/nvme/host/tcp.c
+> +++ b/drivers/nvme/host/tcp.c
+> @@ -547,7 +547,7 @@ static void nvme_tcp_exit_request(struct blk_mq_tag_s=
+et *set,
+>
+>  static int nvme_tcp_init_request(struct blk_mq_tag_set *set,
+>                 struct request *rq, unsigned int hctx_idx,
+> -               unsigned int numa_node)
+> +               int numa_node)
+>  {
+>         struct nvme_tcp_ctrl *ctrl =3D to_tcp_ctrl(set->driver_data);
+>         struct nvme_tcp_request *req =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/drivers/nvme/target/loop.c b/drivers/nvme/target/loop.c
+> index fc8e7c9ad858..72a8ea70eae7 100644
+> --- a/drivers/nvme/target/loop.c
+> +++ b/drivers/nvme/target/loop.c
+> @@ -202,7 +202,7 @@ static int nvme_loop_init_iod(struct nvme_loop_ctrl *=
+ctrl,
+>
+>  static int nvme_loop_init_request(struct blk_mq_tag_set *set,
+>                 struct request *req, unsigned int hctx_idx,
+> -               unsigned int numa_node)
+> +               int numa_node)
+>  {
+>         struct nvme_loop_ctrl *ctrl =3D to_loop_ctrl(set->driver_data);
+>         struct nvme_loop_iod *iod =3D blk_mq_rq_to_pdu(req);
+> diff --git a/drivers/scsi/scsi_lib.c b/drivers/scsi/scsi_lib.c
+> index 4a902c9dfd8b..8958ad31ed2a 100644
+> --- a/drivers/scsi/scsi_lib.c
+> +++ b/drivers/scsi/scsi_lib.c
+> @@ -1948,7 +1948,7 @@ static blk_status_t scsi_queue_rq(struct blk_mq_hw_=
+ctx *hctx,
+>  }
+>
+>  static int scsi_mq_init_request(struct blk_mq_tag_set *set, struct reque=
+st *rq,
+> -                               unsigned int hctx_idx, unsigned int numa_=
+node)
+> +                               unsigned int hctx_idx, int numa_node)
+>  {
+>         struct Scsi_Host *shost =3D set->driver_data;
+>         struct scsi_cmnd *cmd =3D blk_mq_rq_to_pdu(rq);
+> diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
+> index cae9e857aea4..1a5a3786522c 100644
+> --- a/include/linux/blk-mq.h
+> +++ b/include/linux/blk-mq.h
+> @@ -426,7 +426,7 @@ struct blk_mq_hw_ctx {
+>         struct blk_mq_tags      *sched_tags;
+>
+>         /** @numa_node: NUMA node the storage adapter has been connected =
+to. */
+> -       unsigned int            numa_node;
+> +       int             numa_node;
+>         /** @queue_num: Index of this hardware queue. */
+>         unsigned int            queue_num;
+>
+> @@ -651,7 +651,7 @@ struct blk_mq_ops {
+>          * flush request.
+>          */
+>         int (*init_request)(struct blk_mq_tag_set *set, struct request *,
+> -                           unsigned int, unsigned int);
+> +                           unsigned int, int);
+
+Pre-existing, but naming these integer arguments would be helpful for
+documentation.
+
+Best,
+Caleb
+
+>         /**
+>          * @exit_request: Ditto for exit/teardown.
+>          */
+> --
+> 2.47.3
+>
+>
 
