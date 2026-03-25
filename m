@@ -2,86 +2,85 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mBtTNV6Hw2lRrQQAu9opvQ
+	id WNZ2N2qHw2lRrQQAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Wed, 25 Mar 2026 07:57:34 +0100
+	for <lists+nbd@lfdr.de>; Wed, 25 Mar 2026 07:57:46 +0100
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7659D3205AC
-	for <lists+nbd@lfdr.de>; Wed, 25 Mar 2026 07:57:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE67E3205B3
+	for <lists+nbd@lfdr.de>; Wed, 25 Mar 2026 07:57:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 5DE272059A; Wed, 25 Mar 2026 06:57:34 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar 25 06:57:34 2026
-Old-Return-Path: <3_4LDaQYKA2gQaTOeaMUUMRK.IUSTHJUZNKX.JKHOGT.UXM@flex--kuniyu.bounces.google.com>
+	id 8B70D20598; Wed, 25 Mar 2026 06:57:46 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Wed Mar 25 06:57:46 2026
+Old-Return-Path: <3AIPDaQYKA2kRbUPfbNVVNSL.JVTUIKVaOLY.KLIPHU.VYN@flex--kuniyu.bounces.google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.7 required=4.0 tests=DKIMWL_WL_MED,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FOURLA,RCVD_IN_DNSWL_NONE,
-	TO_TOO_MANY,USER_IN_DEF_DKIM_WL autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Status: No, score=-6.8 required=4.0 tests=DKIMWL_WL_MED,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,TO_TOO_MANY,
+	USER_IN_DEF_DKIM_WL autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 4D7EF205A1
-	for <lists-other-nbd@bendel.debian.org>; Wed, 25 Mar 2026 06:39:09 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 90E5920599
+	for <lists-other-nbd@bendel.debian.org>; Wed, 25 Mar 2026 06:39:12 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-8.601 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=-8.701 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIMWL_WL_MED=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FOURLA=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
 	RCVD_IN_DNSWL_NONE=-0.0001, TO_TOO_MANY=1, USER_IN_DEF_DKIM_WL=-7.5]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id AT-CKPmFJDvC for <lists-other-nbd@bendel.debian.org>;
-	Wed, 25 Mar 2026 06:39:02 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-pl1-x64a.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-pl1-x64a.google.com (mail-pl1-x64a.google.com [IPv6:2607:f8b0:4864:20::64a])
+	with ESMTP id dU9c1wRAEz5A for <lists-other-nbd@bendel.debian.org>;
+	Wed, 25 Mar 2026 06:39:03 +0000 (UTC)
+X-policyd-weight: using cached result; rate: -5.25
+Received: from mail-pf1-x449.google.com (mail-pf1-x449.google.com [IPv6:2607:f8b0:4864:20::449])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 8D8732059B
-	for <nbd@other.debian.org>; Wed, 25 Mar 2026 06:38:59 +0000 (UTC)
-Received: by mail-pl1-x64a.google.com with SMTP id d9443c01a7336-2b064884a7cso403126955ad.3
-        for <nbd@other.debian.org>; Tue, 24 Mar 2026 23:38:59 -0700 (PDT)
+	by bendel.debian.org (Postfix) with ESMTPS id 97AE32059A
+	for <nbd@other.debian.org>; Wed, 25 Mar 2026 06:39:00 +0000 (UTC)
+Received: by mail-pf1-x449.google.com with SMTP id d2e1a72fcca58-82a68acce26so1359196b3a.3
+        for <nbd@other.debian.org>; Tue, 24 Mar 2026 23:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1774420736; x=1775025536; darn=other.debian.org;
+        d=google.com; s=20251104; t=1774420737; x=1775025537; darn=other.debian.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=nL4L22a9Ck1NAZ8TRhufw+BZmJs95X+mOcKWTHsxd3s=;
-        b=IeklQr5OzoA7WEMPEMY3KQ6A9KF4T0dpbKZY0QPoWFh2gliqfs0pNpcPNH5o6ewacj
-         Jed3LYaKKV0u5At+JdEHc04hV80b2to4uSjjxijt6IzBFMqS7zfnwyvnItLtjU+LJ5SV
-         yz5G0+KUsdHTOzQfdQND5JQYGmRBdrcoTnrmkvw1GG7iquFFG9RDRhMxA3kGshatMPyA
-         maNL2vlP6AA5tZPnCCI8cHwKY7XckPwf7xyO/3TUiu/ty8h3CshlfiIrL26OrfDFSZvh
-         6VIZ5fC7mCeZoanUItgx44mSBoeoa6LVIFfIHEInjg5ePaBjsmqcXkx7fYLxmwTswGwv
-         SyEA==
+        bh=v5KS0AwVtElapM67R1okpaPmVE6Ykz6fWReVphg8duc=;
+        b=CF21jZbgxpYtMeFEzRTQCq4f8h0ouibmZGz1t2vWdccfKPY+2hb95vBwuWv8e0K6dl
+         qYG5V9RcDVI3b7yi3pZNJFVp27szlP/H2R3f/aTlrPyL1o2GhFW2lWsIwH3PzyzeWIn5
+         nfN/tB1q0Tgg7Sp+ja7k/FAhtIIlVVlujukW+cixaz1nsDQsCPKgQBll28gJvq6oLE62
+         w2aDS0YwkQJ52o71TSNvV8tjye152oavlQLjl+Ug96WFu82zVCJLnKgX6a7P9KgSTq68
+         hm6H0XmbQ2oYkJkjYwI3l9ZfVyZzKX3NXBPXcNR+3+N4u941uu1vbhzvMGeV+mToN3L1
+         RdYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774420736; x=1775025536;
+        d=1e100.net; s=20251104; t=1774420737; x=1775025537;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nL4L22a9Ck1NAZ8TRhufw+BZmJs95X+mOcKWTHsxd3s=;
-        b=NxezWfC0VPOeAR2lwInwd2ch2qyHPs36Y0mo/XDFd0i5swP7g9OckjjtxVlpgtTIqd
-         ey9Ti1ijOX2zkED8FCaaJ3TsPHw/MXk2raIXi81ca41ORkutAhJmrbfEG/Iq1RbJJs4l
-         KPhSmW6UA7zG1h13xlcP4PBZoP6ywM3ywGNmZVt4cjTDyzUYKvfcLzKnb/v5P+57u3xX
-         nNWk5kgtBNSI3ovte2yB6yJTOTEry7pSC72rQM70PSjD5eQqJuJrgo1HouwFSf/1NpKF
-         mNaKpz7pLtG10TSE9p/n61Vu7/6kCF/uN52H0Khb8MFfuRrK02KJac7Q9EqPdr4Xbrtv
-         3yQw==
-X-Forwarded-Encrypted: i=1; AJvYcCUhf0fztBG/tVP8QYBzDZ30EZb+/9l1SYYdYYSrQCSQ2F00Qu99MEHijYyThuUtMEuKyXE=@other.debian.org
-X-Gm-Message-State: AOJu0YzB+xkxd2aBH39e+vyDcWUCvPWB0Probina/mzjLw3lFKXSTp/1
-	96a9mjicOtA1OBxOXyTo4IFgOj2owIPAWKGDewdZTPlHvW5qeWKobe7x42wTwAz9cz/LUb47cR5
-	RNtNQtw==
-X-Received: from pglu12.prod.google.com ([2002:a63:140c:0:b0:c76:3cb2:929c])
- (user=kuniyu job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:958e:b0:39c:1f90:2867
- with SMTP id adf61e73a8af0-39c4ae9f50bmr2735620637.59.1774420735355; Tue, 24
- Mar 2026 23:38:55 -0700 (PDT)
-Date: Wed, 25 Mar 2026 06:38:23 +0000
+        bh=v5KS0AwVtElapM67R1okpaPmVE6Ykz6fWReVphg8duc=;
+        b=RCOpNdhlBrMpbg2YzaKKAnF6CHyz5j2e6e39F5irFL2ICjcmzqK5ZP1bEApBCk7jQc
+         Owc87aZfycIZrTkVyEQwQP0KilO1exEXwr45GOe66nj/6etOH9eAr9WAwah9pA6061L4
+         8wZy6y+ky9UR297TDpyXjzJMxl5JG7OTSd9NaUTO8xOi8LxnplEkK4XzrTcVPxkHtMgN
+         TGcJy5aq58j/GHer0SzBdkxET9Li8WljpsVioKOpUPODf+sx2MoynHqll0s1ws39HryB
+         ks2zdi+6c7EkOCpUNylHYml4A94AEUTdELmurQJdsiSZ/ejyxWUzzNkVgYN7jBEpSkrT
+         dMBg==
+X-Forwarded-Encrypted: i=1; AJvYcCXvDqLCrkWzYhmjTsBYu6OtGzBnjdt7R3yHwN9TLdmRyJhiaJa1tFbxeAegvXWV4TZB5tU=@other.debian.org
+X-Gm-Message-State: AOJu0YzfKeIu5AaR1GcG+QLEmp0PwF0c39AVgyc9lN/0bVGnhT4SxRrT
+	urkGqixXvD2V/7OHAdMSnYDgqTJC6opqra6lTCQMgSHo0v+ww7c9hH6HV7Agdx5MwFuIfAulG2P
+	FqcZtqw==
+X-Received: from pfbmy7-n2.prod.google.com ([2002:a05:6a00:6d47:20b0:822:4e8c:2c9e])
+ (user=kuniyu job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:1acf:b0:7f7:2f82:9904
+ with SMTP id d2e1a72fcca58-82c6de992dcmr2345147b3a.5.1774420736872; Tue, 24
+ Mar 2026 23:38:56 -0700 (PDT)
+Date: Wed, 25 Mar 2026 06:38:24 +0000
 In-Reply-To: <20260325063843.1790782-1-kuniyu@google.com>
 Mime-Version: 1.0
 References: <20260325063843.1790782-1-kuniyu@google.com>
 X-Mailer: git-send-email 2.53.0.1018.g2bb0e51243-goog
-Message-ID: <20260325063843.1790782-3-kuniyu@google.com>
-Subject: [PATCH 2/5] nbd: Reject unconnected sockets in nbd_get_socket().
+Message-ID: <20260325063843.1790782-4-kuniyu@google.com>
+Subject: [PATCH 3/5] net: Introduce lock_sock_try().
 From: Kuniyuki Iwashima <kuniyu@google.com>
 To: Josef Bacik <josef@toxicpanda.com>, Jens Axboe <axboe@kernel.dk>, 
 	"David S . Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
@@ -93,9 +92,9 @@ Content-Type: text/plain; charset="UTF-8"
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <MSr2RSj9leJ.A.5l9M.ed4wpB@bendel>
+Resent-Message-ID: <DxcCFcKFSlG.A.Yu9M.qd4wpB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3526
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3527
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -105,8 +104,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20260325063843.1790782-3-kuniyu@google.com
-Resent-Date: Wed, 25 Mar 2026 06:57:34 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20260325063843.1790782-4-kuniyu@google.com
+Resent-Date: Wed, 25 Mar 2026 06:57:46 +0000 (UTC)
 X-Spamd-Result: default: False [0.49 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
@@ -139,42 +138,91 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[bendel.debian.org:helo,bendel.debian.org:rdns]
-X-Rspamd-Queue-Id: 7659D3205AC
+X-Rspamd-Queue-Id: AE67E3205B3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-NBD requires a handshake, so passing unconnected or half-closed
-sockets to NBD does not make sense.
+syzbot has reported 100+ possible deadlock splats involving NBD,
+typically following this pattern:
 
-Let's accept TCP_ESTABLISHED sockets only.
+  lock_sock(sk)
+  -> GFP_KERNEL memory allocation
+     -> fs reclaim
+       -> lock_sock(sk) at NBD
 
-Note that AF_UNIX sockets remain in TCP_ESTABLISHED once connect()ed
-regardless of shutdown(), but this is a prep patch for TCP, allowing
-a subsequent patch to call tcp_sendmsg_locked() directly without extra
-setup (e.g. inet_send_prepare()).
+Before calling sock_sendmsg() or sock_recvmsg(), NBD sets
+sk->sk_allocation to GFP_NOIO to prevent fs reclaim from being
+triggered during memory allocation for the backend socket.
+
+However, even after a socket is passed to NBD, it remains
+exposed to userspace and thus can exercise various slow paths
+under lock_sock(), where GFP_KERNEL is used directly instead
+of sk->sk_allocation, leading to the deadlock.
+
+Some of those paths do not currently have a reference to struct
+sock, and plumbing the sk pointer through the call chain just to
+fix the allocation flags would be extremely cumbersome.
+
+Even with that, lockdep would not be happy because such a path
+could be exercised before passing the socket to NBD, and then
+lockdep would learn that the path could trigger fs reclaim.
+
+Additionally, since the socket is exposed to userspace, we
+cannot change the lockdep key (even for sk->sk_lock.dep_map,
+due to lock_sock_fast()).
+
+We could spread memalloc_noio_{save,restore} over the networking
+code, but we want to avoid that and solve it in the NBD layer,
+which requires the trylock variant of lock_sock().
+
+Let's introduce lock_sock_try() for that purpose.
 
 Signed-off-by: Kuniyuki Iwashima <kuniyu@google.com>
 ---
- drivers/block/nbd.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ include/net/sock.h | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index fc714cba1f23..1877554d362e 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -1228,6 +1228,13 @@ static struct socket *nbd_get_socket(struct nbd_device *nbd, unsigned long fd,
- 		return NULL;
- 	}
+diff --git a/include/net/sock.h b/include/net/sock.h
+index 6c9a83016e95..69e4b8d17afb 100644
+--- a/include/net/sock.h
++++ b/include/net/sock.h
+@@ -1710,6 +1710,37 @@ static inline void lock_sock(struct sock *sk)
+ }
  
-+	if (READ_ONCE(sock->sk->sk_state) != TCP_ESTABLISHED) {
-+		dev_err(disk_to_dev(nbd->disk), "Socket does not have bi-directional stream.\n");
-+		*err = -EPIPE;
-+		sockfd_put(sock);
-+		return NULL;
+ void __lock_sock(struct sock *sk);
++
++/**
++ * lock_sock_try - trylock version of lock_sock
++ * @sk: socket
++ *
++ * Use of this function is strongly discouraged.
++ *
++ * It is primarily intended for NBD, where the driver must avoid
++ * deadlock during fs reclaim caused by the backend socket remaining
++ * exposed to userspace even after being handed over to NBD,
++ * which _is_ bad but too late to change.
++ *
++ * Return: true if the lock was acquired, false otherwise.
++ */
++static inline bool lock_sock_try(struct sock *sk)
++{
++	if (!spin_trylock_bh(&sk->sk_lock.slock))
++		return false;
++
++	if (sk->sk_lock.owned) {
++		spin_unlock_bh(&sk->sk_lock.slock);
++		return false;
 +	}
 +
- 	return sock;
- }
++	sk->sk_lock.owned = 1;
++	spin_unlock_bh(&sk->sk_lock.slock);
++
++	mutex_acquire(&sk->sk_lock.dep_map, 0, 1, _RET_IP_);
++	return true;
++}
++
+ void __release_sock(struct sock *sk);
+ void release_sock(struct sock *sk);
  
 -- 
 2.53.0.1018.g2bb0e51243-goog
