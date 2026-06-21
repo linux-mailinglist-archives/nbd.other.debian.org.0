@@ -2,132 +2,112 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gBwkN9qzL2olEwUAu9opvQ
+	id NI+SASl9OGomcwcAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Mon, 15 Jun 2026 10:12:10 +0200
+	for <lists+nbd@lfdr.de>; Mon, 22 Jun 2026 02:09:13 +0200
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 756D46846E7
-	for <lists+nbd@lfdr.de>; Mon, 15 Jun 2026 10:12:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 811B66ABD73
+	for <lists+nbd@lfdr.de>; Mon, 22 Jun 2026 02:09:12 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=bAr4IPHk;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="iW/NTni2";
 	spf=none (mail.lfdr.de: domain of "bounce-nbd=lists+nbd=lfdr.de@other.debian.org" has no SPF policy when checking 2001:41b8:202:deb:216:36ff:fe40:4002) smtp.mailfrom="bounce-nbd=lists+nbd=lfdr.de@other.debian.org";
-	dmarc=pass (policy=reject) header.from=google.com;
-	arc=pass ("google.com:s=arc-20240605:i=1")
+	dmarc=pass (policy=none) header.from=gmail.com
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 2B8BD20778; Mon, 15 Jun 2026 08:12:10 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 15 08:12:10 2026
-Old-Return-Path: <edumazet@google.com>
+	id 066AA2089F; Mon, 22 Jun 2026 00:09:12 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jun 22 00:09:11 2026
+Old-Return-Path: <kartikey406@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.8 required=4.0 tests=DKIMWL_WL_MED,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=no autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 1659C2074E
-	for <lists-other-nbd@bendel.debian.org>; Mon, 15 Jun 2026 07:54:07 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 2FF9320B38
+	for <lists-other-nbd@bendel.debian.org>; Sun, 21 Jun 2026 23:53:15 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-9.701 tagged_above=-10000 required=5.3
-	tests=[BAYES_00=-2, DKIMWL_WL_MED=-0.001, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
-	RCVD_IN_DNSWL_NONE=-0.0001, USER_IN_DEF_DKIM_WL=-7.5]
-	autolearn=no autolearn_force=no
+X-Amavis-Spam-Status: No, score=-1.949 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-2, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+	FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+	RCVD_IN_DNSWL_NONE=-0.0001] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id w1AhlV0UZY0k for <lists-other-nbd@bendel.debian.org>;
-	Mon, 15 Jun 2026 07:54:01 +0000 (UTC)
-X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .google. - helo: .mail-qt1-x829.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com [IPv6:2607:f8b0:4864:20::829])
+	with ESMTP id HF41FgGIHssb for <lists-other-nbd@bendel.debian.org>;
+	Sun, 21 Jun 2026 23:53:09 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .gmail. - helo: .mail-pf1-x42b.google. - helo-domain: .google.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com [IPv6:2607:f8b0:4864:20::42b])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
 	(Client CN "smtp.gmail.com", Issuer "WR4" (not verified))
-	by bendel.debian.org (Postfix) with ESMTPS id 3BC0B20739
-	for <nbd@other.debian.org>; Mon, 15 Jun 2026 07:53:57 +0000 (UTC)
-Received: by mail-qt1-x829.google.com with SMTP id d75a77b69052e-516d0db9372so25320091cf.2
-        for <nbd@other.debian.org>; Mon, 15 Jun 2026 00:53:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781510035; cv=none;
-        d=google.com; s=arc-20240605;
-        b=K05YCfp0nK8iFYX3iLsCgqPFjJAD4AX03b3b7BkUFGynXuqOsnbYIb6f4Yy5uHpK61
-         VkRazqZVT9eNCiKCjhxJDCMu9ZWR+ae1Ue2XLJEgHPOYOLjrHZYKBGMYOiMTzlNnsLTB
-         AFiQZ96CHveI+hTsJRyXqbgYVfOubekIacZlSNkH8XmZL+WmwQab1vO0QE1XpJFqNbLR
-         E7vZy9b73MMN9bElxTxLIIHvh1PUk6TUo6Ntqzgfb3e5MuqB42yOc5p/+cLjvmwCqylc
-         dXD8Jk+6aLzKWu45IulxeZXzTKixsvGFaai1eXd0pM0X9MiCZIVYC5BAS0GlLneUBFfs
-         kr7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=iqFN/tpX3q6tjB+xBeLewyCE5xHFkLdK34oVqtX0Nhc=;
-        fh=zhyAvBkCNV0eCqJhxtDNBz5onJzpdQS7r7rMXrzX+90=;
-        b=XT2CrWhYzNLL8dncr14A6rd/Zg76QK9e0/lmOGE++lgTTeSiIwHStruFiZ5T0ymPdj
-         Va/U6glqdpfbXKRKYw1Ms4dwn66QmwcArg0Lv3WeYx0cMxNUWkUoyg+y8ugCXDVqOxDv
-         Je6OB4oGgcS+kE/q0G6LQBXd2k3U7zGWLug4kYzyXjdjWv2ZG40tAPTjh/8bcK5skR2O
-         mp+PNDc0rm6kME2fq/xkQTTj2ia9gy8NYufeGV1U2F88odQTTeoDp0dOmkRaG6+QuJ6k
-         j/YF8S2PSxzctPXWjpheTjUTA9lGRjhpzHMcDUQSL/e3tVRKxj1lIM9BXRv607gNszSR
-         mTkg==;
-        darn=other.debian.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by bendel.debian.org (Postfix) with ESMTPS id 7F32320B31
+	for <nbd@other.debian.org>; Sun, 21 Jun 2026 23:53:06 +0000 (UTC)
+Received: by mail-pf1-x42b.google.com with SMTP id d2e1a72fcca58-8453bcf7276so2018976b3a.2
+        for <nbd@other.debian.org>; Sun, 21 Jun 2026 16:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781510035; x=1782114835; darn=other.debian.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iqFN/tpX3q6tjB+xBeLewyCE5xHFkLdK34oVqtX0Nhc=;
-        b=bAr4IPHk31ILGvm4vQIZo/wHrSM8muyoGKdKfrpZEjU1mSRbhnAH98I9p7wlbBC3r8
-         pUIo6e3UG+b+axA1d0crnI8UIAarERdXfdot+Znvf020p04O2p9TFFXvlhHaamKLlQRo
-         K8P3eZut1c+e/Ku+ystHw9snnHUeyHgEUsaB8t6o1W1+/u+9OoDF4zAwcGFr4yl6wESr
-         zmDGJGOMhz9b9YoohnNt32nXPJwlNaSdwHvhIAq1o7Hhsc+H3F/RX+RCtDapC1DXJpJj
-         LGJLE+5PlEeFV69zJaVqYQ4edmNJ95yXV33NhWHFcD6/7SNS6L07zNskK9mqf132YuuP
-         pvGg==
+        d=gmail.com; s=20251104; t=1782085983; x=1782690783; darn=other.debian.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UUwkknzM3W8jOMgWbU+Q98oClrKuC6/1N4Q1+LqXc2M=;
+        b=iW/NTni2mGzRuuJNUrd783UmkZnHYiZjclvlIZOWHjQ6w+YgMFSX0d1zi4nCa46Qxl
+         9tExJXY6agWjVE4qHB4Iz0e0qnUHOkFWEGU/Jdc0aSUO5ihOnOBLGezPk1k0Sk/5o0sr
+         XTZE9+MlddHqw3aU8UfDKX2/WyK2TOvUKGaGNxUyET+W197vhK7zZqP/Axg2kteJiN26
+         FvlH2G83YW0WLQh9yQ6fx6pLcEZKbHEUS0AkPurFdymGZoo0k03beWq4xps6vW5HsqNL
+         kEnCblOt1XkU9rLXFG5s46Ff7cGdWVApVZgjo/lgiSK/M6GPhXwwXrlqlo07iV/PGYuM
+         rfwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781510035; x=1782114835;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=iqFN/tpX3q6tjB+xBeLewyCE5xHFkLdK34oVqtX0Nhc=;
-        b=SwipoTXPRihligD2IdicmOUkAc5gBGKL9TCN78TXJNHIMnjDcpyjGGMrfp4n2prI8x
-         nE8VQ9fxtF6aTFvgXNihT6TQGf4BcB0IeOZO7pyZvI8Qi06HBMZplhuLeZBzAHNovFVz
-         +KPT42JJsIWmDh0XE+iIzY46q6Pn3uoLzaJUmyGm4sTdmBX0jznoGjxiXg3Y2Sms/UVG
-         lvUR54dmlGLGCVbdPC0yPbAWgn7su9/2sak4illJK7AwNyJIg9hK0Xtb78Cw1F8dEjmD
-         W802oc73b8toob4/6Yh1CcCQIq4VNG8Iup2gXXQSbfhM84VbrdbMfeAzPrqaly1Df8ee
-         yZUA==
-X-Forwarded-Encrypted: i=1; AFNElJ9Ffrf2pHLgC6npBiZcOFqf6RAn3x28+N7luv8ZzMFnJoqS46ts1II3mFppRrsh143/IB0=@other.debian.org
-X-Gm-Message-State: AOJu0Yy9R5L3PWypkq0N0eNQTo2AHsO8ucKcP3cekscdYeX54aJZ0e3Q
-	akzfGEQlsJKcTYUgG/3yUMmaIMSg/qS+ekTc8yaBC6DGBVZBBbjXVtCIODC4G+6PeVmaGxMdlwe
-	Lasz1Fqk8/bcsvBydbEFcKmjsecjNl1H/LP48c5nh
-X-Gm-Gg: Acq92OHvd8T9apNJOBbeYxTx5BtLFLoCYk4c7ICecbTxPrn6oKJ7Q1E8G2D4NaC5XUx
-	46MdLZbk/hksE4A5EELVOr6hXAWxJFb0THB6/rOSXUx+TYmwh2AfVkgGpDsSNH9GRnRIC0WkWoW
-	Tt341jyBLDuGPrt18mHqxopesq7Nl5U+IjE1jUngW925QCxDFYPxsK735PUT1xmfTC392eE3jlX
-	1WBL9TZBDUaKpEIbr+n7Lu2l/B4qikvXmUZU4UA8Nhomr8qIrm0JWbx2q74dRLqWdyYzrY9kqIv
-	cUTpbhztP0DtngH8CUpBgGH1oJz8e274JuJ1RJxighCNpbWFhCBcQZ3YV2zrNkwsb6Bi79pUeNP
-	+xFgig9ckXwfZqtpXRG0SbxfPjenEaA==
-X-Received: by 2002:a05:622a:4245:b0:519:75f9:e874 with SMTP id
- d75a77b69052e-51976ed6934mr28436331cf.10.1781510034038; Mon, 15 Jun 2026
- 00:53:54 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782085983; x=1782690783;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UUwkknzM3W8jOMgWbU+Q98oClrKuC6/1N4Q1+LqXc2M=;
+        b=RwM8lqrHf+Z2IijLh7a0BSZoNf9T9FjRQNyuSls4OoWPwXOlkrB9J18nr0YgX6l0Ti
+         9VmKhu0Wml/6C8eIp8k3jPHSKoGkjXBTv7jnQRTQkolmYqPm2QAjYf43RXJ051fQLkEB
+         Cd3BSgKTWuSWWydUKr/82b9RJvlrQajvf+qFBzKi+MLgU3QWMolgBoKdcg83Px+ssdmH
+         Ml8oR5g/0+b2N2f6mYcnLDlu/n4Rz8bq06rycFr0bTvzlk/PwMy9jEOKC/fcu5zDEom1
+         421w2NgDqAoEBfQesx38bpXZ0IPc005YgI+kJ0kcd9UvQ6klOOS3TZEStSykIyXuDmst
+         IZgw==
+X-Forwarded-Encrypted: i=1; AFNElJ/cbHZU04eDx8cgQlgW6cddp0wDC2DiQD3soWcfP1oXIbmzTU0o87Mx7Y0e65Pf2IUn9h0=@other.debian.org
+X-Gm-Message-State: AOJu0YyCdfcmdhuq+Izzo+gUsCalbN72ZVdfRrfo/1cFMGWOYttuFtSn
+	qhtbuHA1A9sGWsVTcpVYfCTMVkLCddIKEAGZiJnIqQplmLwuQ6F2XfJn
+X-Gm-Gg: AfdE7ckBwYy09McEHrKyKO0aIL5z3o6EKr+DoLr57nG7bqtjHqtHDXIWwSkmcO9le+v
+	GQAvgN6E48xJHx1gMiJuw/hdylpStp/0Y+tQ71HpL3PxO/0gkGGAR72pP2Bg8LGHPJRJQbaStcR
+	ZswX6Deih2HKMZ2U+hbQgY5PK1et+BbJ6yWoCWMSUcCD8/aZSzUiVk2GM6vg4V6T8vjfnAjGXue
+	oO1n1KS3H0qSCGpLMl0qPtEKy6CS1z3oaNX9VEbiCBGYV2rvz8oddnTsK17ohCeGrLG4QvGfiF9
+	1I0WFsmlgO3uRDvY4zIsK2bGFR+4ouX9b7CxY6TlQAJL0pptFQn5o6b2mq0eqdmalyV0eGLtO//
+	2Qcn5xQhk20e+mTrff0NTJM5wlAPmpyVXbBQftp5utVdIHLYh2aXlvQG3WgXsQ8ZvGaqBWPfOaw
+	104l7duMP2LJntlyX7WO8EjssRKw8VopAHWX5AP6j42lRWOLUFh+3pT+egWMFgwglLxKk=
+X-Received: by 2002:a05:6a00:2d8b:b0:845:44c7:2fdd with SMTP id d2e1a72fcca58-845508bb8camr13490364b3a.34.1782085982563;
+        Sun, 21 Jun 2026 16:53:02 -0700 (PDT)
+Received: from deepanshu-kernel-hacker.. ([2405:201:682f:383f:a10c:b74:f527:1266])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84564ec335csm5449327b3a.49.2026.06.21.16.52.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 21 Jun 2026 16:53:01 -0700 (PDT)
+From: Deepanshu Kartikey <kartikey406@gmail.com>
+To: josef@toxicpanda.com,
+	axboe@kernel.dk,
+	edumazet@google.com
+Cc: linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	linux-kernel@vger.kernel.org,
+	Deepanshu Kartikey <kartikey406@gmail.com>,
+	syzbot+6b85d1e39a5b8ed9a954@syzkaller.appspotmail.com
+Subject: [PATCH] nbd: don't warn when reclassifying a busy socket lock
+Date: Mon, 22 Jun 2026 05:22:55 +0530
+Message-ID: <20260621235255.66015-1-kartikey406@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260613042619.1108126-1-edumazet@google.com> <20260613101214.1771-1-hdanton@sina.com>
-In-Reply-To: <20260613101214.1771-1-hdanton@sina.com>
-From: Eric Dumazet <edumazet@google.com>
-Date: Mon, 15 Jun 2026 00:53:42 -0700
-X-Gm-Features: AVVi8Cf6uGM8M8DJH4c64JCDlR5PdeR2re5zLcOyooPl5X-inb2su2lIUzphgfc
-Message-ID: <CANn89iJq89KWm3eyfKTqjXhdKFy6raRLgfsRX8vXYgBpmBnDiA@mail.gmail.com>
-Subject: Re: [PATCH] nbd: Reclassify sockets to avoid lockdep circular dependency
-To: Hillf Danton <hdanton@sina.com>
-Cc: linux-kernel <linux-kernel@vger.kernel.org>, Jens Axboe <axboe@kernel.dk>, 
-	linux-block@vger.kernel.org, nbd@other.debian.org, 
-	Kuniyuki Iwashima <kuniyu@google.com>, netdev@vger.kernel.org, 
-	syzbot+607cdcf978b3e79da878@syzkaller.appspotmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <3imcg_3UbFJ.A.lvcN.aP7LqB@bendel>
+Resent-Message-ID: <v_amyLnPeHE.A.XYSD.n0HOqB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3551
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3552
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -137,70 +117,89 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/CANn89iJq89KWm3eyfKTqjXhdKFy6raRLgfsRX8vXYgBpmBnDiA@mail.gmail.com
-Resent-Date: Mon, 15 Jun 2026 08:12:10 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20260621235255.66015-1-kartikey406@gmail.com
+Resent-Date: Mon, 22 Jun 2026 00:09:12 +0000 (UTC)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.51 / 15.00];
+X-Spamd-Result: default: False [1.99 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[google.com:s=arc-20240605:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	MAILLIST(-0.20)[generic];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,other.debian.org,gmail.com,syzkaller.appspotmail.com];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:hdanton@sina.com,m:linux-kernel@vger.kernel.org,m:axboe@kernel.dk,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,m:kuniyu@google.com,m:netdev@vger.kernel.org,m:syzbot+607cdcf978b3e79da878@syzkaller.appspotmail.com,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[edumazet@google.com,bounce-nbd=lists@other.debian.org];
-	FREEMAIL_TO(0.00)[sina.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:josef@toxicpanda.com,m:axboe@kernel.dk,m:edumazet@google.com,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,m:linux-kernel@vger.kernel.org,m:kartikey406@gmail.com,m:syzbot+6b85d1e39a5b8ed9a954@syzkaller.appspotmail.com,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[kartikey406@gmail.com,bounce-nbd=lists@other.debian.org];
 	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,appspotmail.com:email];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[edumazet@google.com,bounce-nbd=lists@other.debian.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
+	FROM_NEQ_ENVFROM(0.00)[kartikey406@gmail.com,bounce-nbd=lists@other.debian.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
 	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
-	TAGGED_RCPT(0.00)[nbd,607cdcf978b3e79da878];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sina.com:email,bendel.debian.org:rdns,bendel.debian.org:helo]
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[nbd,6b85d1e39a5b8ed9a954];
+	R_SPF_NA(0.00)[no SPF record]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 756D46846E7
+X-Rspamd-Queue-Id: 811B66ABD73
 
-On Sat, Jun 13, 2026 at 3:12=E2=80=AFAM Hillf Danton <hdanton@sina.com> wro=
-te:
->
-> On Sat, 13 Jun 2026 04:26:19 +0000 Eric Dumazet wrote:
-> > syzbot reported a possible circular locking dependency in udp_sendmsg()
-> > where fs_reclaim can be triggered while holding sk_lock, and fs_reclaim
-> > can eventually depend on another sk_lock (e.g., if NBD is used for swap
-> > or writeback and NBD uses TLS/TCP which acquires sk_lock).
-> >
-> > Since the UDP socket and the NBD TCP/TLS socket are different, this is =
-a
-> > false positive. Fix this by reclassifying NBD sockets to a separate loc=
-k
-> > class when they are added to the NBD device.
-> >
-> > This is similar to what nvme-tcp and other network block devices do.
-> >
-> > Fixes: ffa1e7ada456 ("block: Make request_queue lockdep splats show up =
-earlier")
->
-> Given the Fixes tag, can you specify anything wrong that commit added?
 
-Nothing 'wrong'.
+nbd_reclassify_socket() warns via WARN_ON_ONCE() if the socket lock is
+held at the point of reclassification. That assertion was copied from
+nvme-tcp, where the socket is created internally by the kernel
+(sock_create_kern()) and is never visible to user space, so the lock
+is guaranteed to be free.
 
-This (good) commit allowed LOCKDEP to throw a warning and eventually
-panic the box.
+NBD is different: the socket is looked up from a user-supplied fd in
+nbd_get_socket(), and user space retains that fd. A concurrent syscall
+on the same socket (or softirq processing taking bh_lock_sock() on a
+connected TCP socket) can legitimately hold the lock at the instant
+NBD reclassifies it. sock_allow_reclassification() then returns false
+and the WARN_ON_ONCE() fires, which turns into a crash under
+panic_on_warn. This is reachable by simply racing NBD_CMD_CONNECT
+against socket activity on the same fd, as reported by syzbot.
 
-A Fixes: tag does not imply the patch was wrong.
+Hitting a held lock here is expected for an externally owned socket and
+is not a kernel bug, so skip reclassification silently instead of
+warning. Reclassification is a lockdep-only annotation, so skipping it
+in the rare racing case is harmless.
+
+Reported-by: syzbot+6b85d1e39a5b8ed9a954@syzkaller.appspotmail.com
+Closes: https://syzkaller.appspot.com/bug?extid=6b85d1e39a5b8ed9a954
+Fixes: d532cddb6c60 ("nbd: Reclassify sockets to avoid lockdep circular dependency")
+Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
+---
+ drivers/block/nbd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 3a585a0c882a..8f10762e90ef 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -1246,7 +1246,7 @@ static void nbd_reclassify_socket(struct socket *sock)
+ {
+ 	struct sock *sk = sock->sk;
+ 
+-	if (WARN_ON_ONCE(!sock_allow_reclassification(sk)))
++	if (!sock_allow_reclassification(sk))
+ 		return;
+ 
+ 	switch (sk->sk_family) {
+-- 
+2.43.0
 
