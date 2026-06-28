@@ -2,103 +2,107 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kQ5+J6f+PWrA+AgAu9opvQ
+	id gCesAJ66QGprhgkAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Fri, 26 Jun 2026 06:23:03 +0200
+	for <lists+nbd@lfdr.de>; Sun, 28 Jun 2026 08:09:34 +0200
 X-Original-To: lists+nbd@lfdr.de
-Received: from bendel.debian.org (bendel.debian.org [IPv6:2001:41b8:202:deb:216:36ff:fe40:4002])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FBFF6CA193
-	for <lists+nbd@lfdr.de>; Fri, 26 Jun 2026 06:23:01 +0200 (CEST)
+Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78F886D342B
+	for <lists+nbd@lfdr.de>; Sun, 28 Jun 2026 08:09:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=smail.nju.edu.cn header.s=iohv2404 header.b=NL2OuAS3;
-	spf=none (mail.lfdr.de: domain of "bounce-nbd=lists+nbd=lfdr.de@other.debian.org" has no SPF policy when checking 2001:41b8:202:deb:216:36ff:fe40:4002) smtp.mailfrom="bounce-nbd=lists+nbd=lfdr.de@other.debian.org";
-	dmarc=pass (policy=reject) header.from=smail.nju.edu.cn
+	dkim=temperror ("DNS error when getting key") header.d=smail.nju.edu.cn header.s=iohv2404 header.b=sARzUPSB;
+	spf=none (mail.lfdr.de: domain of "bounce-nbd=lists+nbd=lfdr.de@other.debian.org" has no SPF policy when checking 82.195.75.100) smtp.mailfrom="bounce-nbd=lists+nbd=lfdr.de@other.debian.org";
+	dmarc=temperror reason="SPF/DKIM temp error" header.from=smail.nju.edu.cn (policy=temperror)
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id B08B220575; Fri, 26 Jun 2026 04:23:00 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Fri Jun 26 04:23:00 2026
+	id 58E182051D; Sun, 28 Jun 2026 06:09:28 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Sun Jun 28 06:09:28 2026
 Old-Return-Path: <peiyang_he@smail.nju.edu.cn>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=4.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	FORGED_MUA_MOZILLA,FOURLA,FVGT_m_MULTI_ODD,MD5_SHA1_SUM,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	SARE_HTML_INV_CHARSET,UPPERCASE_75_100 autolearn=no autolearn_force=no
-	version=3.4.6
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.0 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,FORGED_MUA_MOZILLA,FOURLA,FUZZY_OFFERS,FVGT_m_MULTI_ODD,
+	MD5_SHA1_SUM,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+	SARE_HTML_INV_CHARSET,UPPERCASE_50_75,WORD_WITHOUT_VOWELS autolearn=no
+	autolearn_force=no version=3.4.6
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 7F3BA20573
-	for <lists-other-nbd@bendel.debian.org>; Fri, 26 Jun 2026 04:06:00 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id 6BF1120554
+	for <lists-other-nbd@bendel.debian.org>; Sun, 28 Jun 2026 05:52:57 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
-X-Amavis-Spam-Status: No, score=-0.368 tagged_above=-10000 required=5.3
+X-Amavis-Spam-Status: No, score=0.639 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, DKIM_INVALID=0.1, DKIM_SIGNED=0.1,
 	FORGED_MUA_MOZILLA=2.309, FOURLA=0.1, FVGT_m_MULTI_ODD=0.02,
 	MD5_SHA1_SUM=-1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
-	RCVD_IN_MSPIKE_WL=0.001, UPPERCASE_75_100=0.001]
+	RCVD_IN_MSPIKE_WL=0.001, UPPERCASE_50_75=0.008, WORD_WITHOUT_VOWELS=1]
 	autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id T8Cilyrpk7xM for <lists-other-nbd@bendel.debian.org>;
-	Fri, 26 Jun 2026 04:05:47 +0000 (UTC)
+	with ESMTP id hzps-_WAgCPt for <lists-other-nbd@bendel.debian.org>;
+	Sun, 28 Jun 2026 05:52:41 +0000 (UTC)
 X-policyd-weight: using cached result; rate: -5.5
 Received: from bg5.exmail.qq.com (bg5.exmail.qq.com [43.154.197.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id 567CA20571
-	for <nbd@other.debian.org>; Fri, 26 Jun 2026 04:05:46 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTPS id 4D8BA207AF
+	for <nbd@other.debian.org>; Sun, 28 Jun 2026 05:52:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smail.nju.edu.cn;
-	s=iohv2404; t=1782446725;
-	bh=U6tNDaPAnM3MWiByZaJsNXy+PSF8W0YFYTGZv6w1nac=;
-	h=Message-ID:Date:MIME-Version:To:From:Subject;
-	b=NL2OuAS3VbFgyKnCi3LMyzqG0Zsha7Oe5faGngmePEW1z4s+3aSv4EEmsZubHL6KC
-	 G/YPr34SRFv8v71T9GkoelN2pN3EKtV30I42673FBUP1jOt3I30jDeG/zxiypt7Ocv
-	 kH+EgpPs/nxQSCAOTOeZUe8SZGRg6ajwwlOyHFwI=
-X-QQ-mid: esmtpsz20t1782446470t9a5df925
-X-QQ-Originating-IP: paZ6fiUosFpC5g8e4kzfdDurgO3Rc9kFQzL1MlyQpC8=
-Received: from [172.27.139.54] ( [202.119.46.254])
+	s=iohv2404; t=1782625894;
+	bh=tPC8S42FdVFg8Kw6IkB6V8Q+Lxuy8h9i9BHHDaNfwlo=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To;
+	b=sARzUPSBEdQfas6oCG8DA5/zTDcxrTu/M8tZVqTKQXA/w9BExt4G8JoB7m/2RZhXq
+	 NhfYX6F+2FlCqSM8WZTc62I2SypMar2PdQtm3P1/uo8sK9ClIV4LnhH2cV0lS4ZvKy
+	 12PZuTceyiQQBEJgI2LS2cJzy2RNsWMMHnLrknC0=
+X-QQ-mid: zesmtpsz1t1782625883tc07d44ed
+X-QQ-Originating-IP: HBrF/eHSt/HILiXcQCsF8G/3kRNkDXX4gV2Nr/rTe3E=
+Received: from [172.27.139.54] ( [218.94.142.77])
 	by bizesmtp.qq.com (ESMTP) with 
-	id ; Fri, 26 Jun 2026 12:01:08 +0800 (CST)
+	id ; Sun, 28 Jun 2026 13:51:21 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 7029255149677803791
-Content-Type: multipart/mixed; boundary="------------Ui0mWu4pvi0tV4zcMWNm13qV"
-Message-ID: <3B61C69B231FBBB5+d21e6eaa-7979-45e0-b378-d60adaff7295@smail.nju.edu.cn>
-Date: Fri, 26 Jun 2026 12:01:07 +0800
+X-BIZMAIL-ID: 845508943769258801
+Content-Type: multipart/mixed; boundary="------------4sXyKLmFfI9pYrmyjaqUBWVK"
+Message-ID: <78F0930B81153FDC+47f7d776-8ece-4f6e-901d-b9ad86724efd@smail.nju.edu.cn>
+Date: Sun, 28 Jun 2026 13:51:20 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: josef@toxicpanda.com, axboe@kernel.dk
-Cc: ming.lei@redhat.com, linux-block@vger.kernel.org, nbd@other.debian.org,
- linux-kernel@vger.kernel.org, syzkaller@googlegroups.com
 From: Peiyang He <peiyang_he@smail.nju.edu.cn>
-Subject: [BUG] nbd: NULL pointer dereference in nbd_pending_cmd_work()
+Subject: [BUG] nbd: NBD_CLEAR_SOCK races with buffered writes and triggers
+ mark_buffer_dirty() warning
+To: josef@toxicpanda.com, axboe@kernel.dk
+Cc: linux-kernel@vger.kernel.org, nbd@other.debian.org,
+ linux-block@vger.kernel.org, syzkaller@googlegroups.com,
+ linux-fsdevel@vger.kernel.org, viro@zeniv.linux.org.uk, brauner@kernel.org,
+ jack@suse.cz
 X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpsz:smail.nju.edu.cn:qybglogicsvrsz:qybglogicsvrsz4b-0
-X-QQ-XMAILINFO: N4i6onhdodx6NbUErciBV7YspCFDh5nuXZavQugx6xiuWk/ZPPQt9E8i
-	9cx9npkrVakbkP1AsOslXeA1W+PVjzAh18eKeLNrVxaVvtjvDYakO03I50aU3bbWvtQgGDt
-	nMzCvG3Nf6vtdJbAWCW1/OjyGGNd2FyIUR/un8B2XnGOSn1QUgoZ7cvN2c2MuD4tylLZ8gz
-	56InhVTTPZXVUOWDZ6Y3DRwL6Cj+S7+rY+3l+aQEh/fNAUvVtfBHkOVIDVnKEQYZGp915NL
-	CyPKPAa/o6CgCS5dOb63zK7kk+Qzqh11Hw9FgmNk6dNTfRzhTjM1XtkceuRyPR2SNU/4mu9
-	GPrtlu/xVBJdQm3lysW6dBPmjk40VS5bkwl5IVdsMFGvDIeTN1do1U0RTZUJJhc9e83aBmm
-	BXZbxZ+718WgchOZYj5CcsQQViWAfUlLC9L637ge52P90n0LCjNjZkfo2sGq309H/RHoLRO
-	N43uJBQcRQoc981mb/3yqdRpS+jM+EebR67aK+rJsGNotvSl2GebEmy8pPo3yjyg1wP+elq
-	XRODPtCTh3ka0DJMn/pWHrMHyNvzvtdfxOCmFl1hGwshVgu8jLWFZ00xB8SyL4WM94H1T+7
-	k4bTSxILGspMQTGiQEuuZuH02jLTHoAcLzxiGit0NYCaIrAvoOu4RYDBWYOCglppYxvU4Xj
-	QTZWNrv5YsJY/TXe4xaWXjE7Qo8XW/x2jCA9PG9c2GyOjd8UcBqE0bAMjisVjjMkdYazRVX
-	6oSow7n3NJQdNc+mWzze53JSS/YCWTdqfrtytCs8Rp1ORd78LdpZTPymsS8B9MdkamYGh76
-	NHr2MS+HTEuSUeYjukjajkqbJSQ8ihFXUhpkyLip2tAbL8HuxTUj4TbrQH4Uz5aAUPFK3lt
-	utgIphKgs1uOBIBEprcZ2vCvy9tSZyk4NhJjb1B9OJzo91p7KOGQjvYHycMIE43Evd7XzAg
-	Rt3zUFM7Fp8FokrTFamZdduZqA2Vrp6n4bfireFgwev/Af+KHP8hySLi6iE2M360mLH3Gb2
-	22nV3JneQSriSJJTN/rpC2l1I16LZvaOsSc1JCzA==
-X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+Feedback-ID: zesmtpsz:smail.nju.edu.cn:qybglogicsvrsz:qybglogicsvrsz4b-0
+X-QQ-XMAILINFO: No4GWyI4cWt6oEsd7Sbtv2R3RFCwVUPZogtv5I10IAnUxKpzY1OflNo+
+	bltUT30wmxBsnExDQoQSicNKaTJf6mZ1AHVgSnkuJBV4rBxDDfLPcvUFb2eXulVRZ/tOwH3
+	uUX8SbkvhjAO57GDUW3OTujiNyKYk1fD/d3mtFVN/tBWKBLR83egCDQiP2TZ0PlmzsXThft
+	vzz1nu0/DkVXbKPLjnCssPCjMFDhLSgOkcI1QaIFUsVhY1neLZj0ub2tuogyAnTWT6/tRWt
+	EJ+Rzp/K+N+B1jjgJI/YkP7PO8H0W71WF1uQUZpF6cHUFQd2Ncdc7gMXmQ/pjCgMeCfBeNI
+	cYnFROsVlrI1YaD3e01VHLY7kuBoBDS4aEGePNLx+g21Kj0e3QzRpQ0zgOkaTFFnBsckUC0
+	KHGQ4MqoQ8hXTuOXZoyiUSHIQVCKW7amttBkAt88QhOaqQ6QS44FmpIR+D+yP5NP4GtttuH
+	UP9+8Idhv/PI+2rKIMxKxr+81SwJdnq0L8HTD7bsxqzX/sFX+waTZx1qnfheI3RboxUEkOm
+	monAGkbWC4Ythhs8ehIo5R6KDq/AGVY3j7Yi81YANEUBu1RzrsM3PXas+aRdfsDJ8sYADrP
+	wlLzvUfgM+Ojj2w7vpFWQfLCr+4TMMPhJz4Wf8VQKsgrISRO+NvSX6t7SsPkkWcMAdFpBVH
+	RANYYd9sOyaa96lVd0uowxg2zKPBT8IQqKLPWQ8i6SLKq7/prnLA9lto1P+HtYdwoEnT7Wz
+	bO8E42fAEeQgIadtc1W+BiIKz+JCwClkF5ZQtB8yUxAGRRcnhiFkq8w+fisOGfVKoi1PNYw
+	ptIzfLX+ggA8rz+fydutwUhufZpUBu3/qLBBVMdAI62Zz9GqM3SM7SB9EvIRiENxKtfm8mq
+	U43Yx0zqEegzDFMmLfNbYnwz92OWLPpSjPO7mWufqDBNhKdC/+DPy99rzECP5eJIkr9EJPB
+	SkKNc4yLtOBSnvE1TC8A3ybfA7qNCG9FQuNZiZtpxCM0Fs4eLOqi2S72SAdk1SQC0M0Tvyq
+	uWDKvveapctB1K0NrVm0SkUAtTZC8JmEJWJwzjLBUHgubWU4Vy4deT7OPsvsZgs4HsPuQKC
+	fiNH6Z1DHFX
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
 X-QQ-RECHKSPAM: 0
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <2rdTvoub0ND.A.YIbJ.k6fPqB@bendel>
+Resent-Message-ID: <42Z8AyAghXK.A.ssrK.YqLQqB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3569
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3570
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -108,135 +112,120 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/3B61C69B231FBBB5+d21e6eaa-7979-45e0-b378-d60adaff7295@smail.nju.edu.cn
-Resent-Date: Fri, 26 Jun 2026 04:23:00 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/78F0930B81153FDC+47f7d776-8ece-4f6e-901d-b9ad86724efd@smail.nju.edu.cn
+Resent-Date: Sun, 28 Jun 2026 06:09:28 +0000 (UTC)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.69 / 15.00];
+X-Spamd-Result: default: False [2.39 / 15.00];
 	MIME_BAD_ATTACHMENT(1.60)[config:text/plain];
 	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[smail.nju.edu.cn,reject];
 	MAILLIST(-0.20)[generic];
-	R_DKIM_ALLOW(-0.20)[smail.nju.edu.cn:s=iohv2404];
-	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
 	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
+	RWL_MAILSPIKE_GOOD(-0.10)[82.195.75.100:from];
+	MIME_UNKNOWN(0.10)[application/x-sh];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[nbd=lfdr.de];
-	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_MUA_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:josef@toxicpanda.com,m:axboe@kernel.dk,m:ming.lei@redhat.com,m:linux-block@vger.kernel.org,m:nbd@other.debian.org,m:linux-kernel@vger.kernel.org,m:syzkaller@googlegroups.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:josef@toxicpanda.com,m:axboe@kernel.dk,m:linux-kernel@vger.kernel.org,m:nbd@other.debian.org,m:linux-block@vger.kernel.org,m:syzkaller@googlegroups.com,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[peiyang_he@smail.nju.edu.cn,bounce-nbd=lists@other.debian.org];
-	R_SPF_NA(0.00)[no SPF record];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:+,5:~];
+	DKIM_TRACE(0.00)[smail.nju.edu.cn:?];
+	FORWARDED(0.00)[lists-other-nbd@bendel.debian.org];
+	ARC_NA(0.00)[];
 	HAS_ATTACHMENT(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+];
+	R_SPF_NA(0.00)[no SPF record];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[peiyang_he@smail.nju.edu.cn,bounce-nbd=lists@other.debian.org];
-	DKIM_TRACE(0.00)[smail.nju.edu.cn:+];
+	ASN(0.00)[asn:8365, ipnet:82.195.64.0/19, country:DE];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:8365, ipnet:2001:41b8::/29, country:DE];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DMARC_DNSFAIL(0.00)[smail.nju.edu.cn : SPF/DKIM temp error,reject];
+	R_DKIM_TEMPFAIL(0.00)[smail.nju.edu.cn:s=iohv2404];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[nbd];
-	FORGED_SENDER_MAILLIST(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[i.mx:url,run_warning_repro.sh:url,smail.nju.edu.cn:mid,smail.nju.edu.cn:from_mime,bendel.debian.org:rdns,bendel.debian.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1FBFF6CA193
+X-Rspamd-Queue-Id: 78F886D342B
 
 This is a multi-part message in MIME format.
---------------Ui0mWu4pvi0tV4zcMWNm13qV
+--------------4sXyKLmFfI9pYrmyjaqUBWVK
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 Hello Linux kernel developers and maintainers,
 
-I found a NULL pointer dereference bug in nbd_pending_cmd_work() in drivers/block/nbd.c when fuzzing with Syzkaller.
+We found a WARNING in mark_buffer_dirty() in fs/buffer.c when fuzzing drivers/block/nbd.c with our modified Syzkaller.
+
+The warning means a buffer_head was being dirtied after losing the BH_Uptodate bit, 
+because NBD_CLEAR_SOCK RACED with buffered block-device writes and removed the BH_Uptodate bit.
 
 Kernel version: commit 8cd9520d35a6c38db6567e97dd93b1f11f185dc6 (tag v7.1).
 And the bug is also possible in the current mainline.
 
 Relevant kernel config: (the complete config is included in the attachments.)
 
-CONFIG_BLK_DEV_NBD=y
 CONFIG_BLOCK=y
-CONFIG_NET=y
-CONFIG_KASAN=y
+CONFIG_BLK_DEV_NBD=y
+CONFIG_FS_IOMAP=y
+CONFIG_BUFFER_HEAD=y
+CONFIG_BUG=y
 
 =============================
 The original Syzkaller report
 =============================
 
-BUG: kernel NULL pointer dereference, address: 0000000000000110
-#PF: supervisor read access in kernel mode
-#PF: error_code(0x0000) - not-present page
-PGD 30731067 P4D 30731067 PUD 0 
-Oops: Oops: 0000 [#1] SMP NOPTI
-CPU: 1 UID: 0 PID: 10394 Comm: kworker/1:5 Not tainted 7.1.0 #6 PREEMPT(lazy) 
+------------[ cut here ]------------
+WARNING: fs/buffer.c:1087 at mark_buffer_dirty+0x273/0x4c0 fs/buffer.c:1087, CPU#1: syz.1.1229/17574
+Modules linked in:
+CPU: 1 UID: 0 PID: 17574 Comm: syz.1.1229 Not tainted 7.1.0 #6 PREEMPT(lazy) 
 Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
-Workqueue: events nbd_pending_cmd_work
-RIP: 0010:nbd_pending_cmd_work+0x58/0x5f0 drivers/block/nbd.c:813
-Code: 89 dc 4c 8b 7b e8 48 89 bd 78 ff ff ff e8 a0 41 09 fa 4c 8b 28 8b 02 89 45 d4 4d 8d b7 10 01 00 00 4d 85 ed 0f 85 0f 04 00 00 <49> 8b 87 10 01 00 00 48 89 45 a0 4c 89 f7 e8 75 41 09 fa 49 8d bf
-RSP: 0018:ffff88813e40fb48 EFLAGS: 00010246
-RAX: 0000000000000000 RBX: ffff888064c479f8 RCX: 00000000001f6963
-RDX: ffff8880648479e0 RSI: ffff88807fffa880 RDI: ffff888064c479e0
-RBP: ffff88813e40fbf0 R08: ffffea000000000f R09: 0000000000000000
-R10: ffff88813bcb2028 R11: ffffffff8892f2d0 R12: ffff888064c479f8
-R13: 0000000000000000 R14: 0000000000000110 R15: 0000000000000000
-FS:  0000000000000000(0000) GS:ffff8881aa7fc000(0000) knlGS:0000000000000000
+RIP: 0010:mark_buffer_dirty+0x273/0x4c0 fs/buffer.c:1087
+Code: 4c 8b 33 48 89 df e8 6c a5 c3 ff 48 83 38 00 0f 85 d6 00 00 00 4c 89 f7 be 40 00 00 00 e8 b5 c5 f8 ff eb 24 e8 1e 63 17 ff 90 <0f> 0b 90 e9 ec fd ff ff 44 89 e7 e8 4d b0 c3 ff 4d 85 ff 0f 84 95
+RSP: 0018:ffff88807efbb800 EFLAGS: 00010287
+RAX: ffffffff82d88f62 RBX: ffff888074bdad58 RCX: 0000000000080000
+RDX: ffffc900089cc000 RSI: 000000000000c6b0 RDI: 000000000000c6b1
+RBP: ffff88807efbb838 R08: ffffea000000000f R09: 0000000000000000
+R10: ffff8880466f4068 R11: 0000000000000002 R12: 0000000000000001
+R13: 0000000000000000 R14: ffff888046ef40d0 R15: 0000000000000000
+FS:  00007f6c4c0c96c0(0000) GS:ffff8881aa7fc000(0000) knlGS:0000000000000000
 CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000000000110 CR3: 000000003f7ee000 CR4: 0000000000350ef0
+CR2: 00007fb615f29ff8 CR3: 000000006df0f000 CR4: 0000000000350ef0
 Call Trace:
  <TASK>
- process_one_work kernel/workqueue.c:3314 [inline]
- process_scheduled_works+0xbfe/0x1e40 kernel/workqueue.c:3397
- worker_thread+0xebb/0x1550 kernel/workqueue.c:3478
- kthread+0x563/0x620 kernel/kthread.c:436
- ret_from_fork+0x4ec/0x950 arch/x86/kernel/process.c:158
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ block_commit_write fs/buffer.c:2115 [inline]
+ block_write_end+0x393/0x6f0 fs/buffer.c:2191
+ iomap_write_end+0x4d4/0xc50 fs/iomap/buffered-io.c:1091
+ iomap_write_iter fs/iomap/buffered-io.c:1159 [inline]
+ iomap_file_buffered_write+0xbfd/0x1d20 fs/iomap/buffered-io.c:1225
+ blkdev_buffered_write block/fops.c:735 [inline]
+ blkdev_write_iter+0x92c/0xd10 block/fops.c:801
+ new_sync_write fs/read_write.c:595 [inline]
+ vfs_write+0xb5c/0x1550 fs/read_write.c:688
+ ksys_write+0x23c/0x490 fs/read_write.c:740
+ __do_sys_write fs/read_write.c:751 [inline]
+ __se_sys_write fs/read_write.c:748 [inline]
+ __x64_sys_write+0x97/0xf0 fs/read_write.c:748
+ x64_sys_call+0x2ff0/0x3ea0 arch/x86/include/generated/asm/syscalls_64.h:2
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x15c/0x3c0 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f6c4b1a788d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f6c4c0c9018 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007f6c4b435fa0 RCX: 00007f6c4b1a788d
+RDX: 00000000fffffc53 RSI: 0000200000001100 RDI: 0000000000000009
+RBP: 00007f6c4b24e9cf R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f6c4b436038 R14: 00007f6c4b435fa0 R15: 00007ffc2d3d7490
  </TASK>
-Modules linked in:
-CR2: 0000000000000110
----[ end trace 0000000000000000 ]---
-RIP: 0010:nbd_pending_cmd_work+0x58/0x5f0 drivers/block/nbd.c:813
-Code: 89 dc 4c 8b 7b e8 48 89 bd 78 ff ff ff e8 a0 41 09 fa 4c 8b 28 8b 02 89 45 d4 4d 8d b7 10 01 00 00 4d 85 ed 0f 85 0f 04 00 00 <49> 8b 87 10 01 00 00 48 89 45 a0 4c 89 f7 e8 75 41 09 fa 49 8d bf
-RSP: 0018:ffff88813e40fb48 EFLAGS: 00010246
-RAX: 0000000000000000 RBX: ffff888064c479f8 RCX: 00000000001f6963
-RDX: ffff8880648479e0 RSI: ffff88807fffa880 RDI: ffff888064c479e0
-RBP: ffff88813e40fbf0 R08: ffffea000000000f R09: 0000000000000000
-R10: ffff88813bcb2028 R11: ffffffff8892f2d0 R12: ffff888064c479f8
-R13: 0000000000000000 R14: 0000000000000110 R15: 0000000000000000
-FS:  0000000000000000(0000) GS:ffff8881aa7fc000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000000000110 CR3: 000000003f7ee000 CR4: 0000000000350ef0
-----------------
-Code disassembly (best guess):
-   0:	89 dc                	mov    %ebx,%esp
-   2:	4c 8b 7b e8          	mov    -0x18(%rbx),%r15
-   6:	48 89 bd 78 ff ff ff 	mov    %rdi,-0x88(%rbp)
-   d:	e8 a0 41 09 fa       	call   0xfa0941b2
-  12:	4c 8b 28             	mov    (%rax),%r13
-  15:	8b 02                	mov    (%rdx),%eax
-  17:	89 45 d4             	mov    %eax,-0x2c(%rbp)
-  1a:	4d 8d b7 10 01 00 00 	lea    0x110(%r15),%r14
-  21:	4d 85 ed             	test   %r13,%r13
-  24:	0f 85 0f 04 00 00    	jne    0x439
-* 2a:	49 8b 87 10 01 00 00 	mov    0x110(%r15),%rax <-- trapping instruction
-  31:	48 89 45 a0          	mov    %rax,-0x60(%rbp)
-  35:	4c 89 f7             	mov    %r14,%rdi
-  38:	e8 75 41 09 fa       	call   0xfa0941b2
-  3d:	49                   	rex.WB
-  3e:	8d                   	.byte 0x8d
-  3f:	bf                   	.byte 0xbf
-
-<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
-
-SYZFAIL: failed to recv rpc
-fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
 
 <<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
 
@@ -244,50 +233,385 @@ fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
 Root cause
 ==========
 
-The root cause is a race between the NBD partial-send worker and socket teardown.
-nbd_sched_pending_work() queues nbd_pending_cmd_work() with nsock->pending set to the partially sent request, 
-but before the worker runs, a disconnect, clear-sock, or receive-error path can call nbd_mark_nsock_dead() 
-and CLEAR nsock->pending without cancelling or synchronizing with the already queued work. 
-The worker then reads nsock->pending as NULL, passes it to blk_mq_rq_to_pdu(),
-which turns NULL into address sizeof(struct request) (0x110 in this build),
-and crashes when dereferencing cmd->nbd.
+The relevant locking domains do not match. blkdev_write_iter() runs the
+buffered write path under inode_lock_shared(bd_inode), while NBD_CLEAR_SOCK is
+handled under nbd->config_lock. These two locks do not exclude each other, so
+NBD_CLEAR_SOCK can complete an in-flight NBD write request with BLK_STS_IOERR
+and clear BH_Uptodate on the same bh while block_commit_write() is about to
+dirty that bh.
 
 Race timeline:
 
 CPU0                                           CPU1
 ====                                           ====
 
-nbd_send_cmd
---> sock_xmit returns -EINTR after
-    part of the request was sent
-    --> nbd_sched_pending_work
-        --> nsock->pending = req
-        --> set NBD_CMD_PARTIAL_SEND
-        --> schedule_work(&nsock->work)
+write(/dev/nbdX)
+--> blkdev_write_iter
+    --> bd_inode = bdev_file_inode(file)
+    --> inode_lock_shared(bd_inode)
+    --> blkdev_buffered_write
+        --> iomap_file_buffered_write
+            --> iomap_write_end
+                --> block_write_end
+                    --> block_commit_write
+                        --> bh = head = folio_buffers(folio)
+                        --> set_buffer_uptodate(bh) /* BH_Uptodate is set here */
 
-                                               NBD_DISCONNECT / NBD_CLEAR_SOCK
-                                               or recv_work error
-                                               --> sock_shutdown
-                                                   --> lock nsock->tx_lock
-                                                       --> nbd_mark_nsock_dead
-                                                           --> nsock->dead = true
-                                                           --> nsock->pending = NULL /* BUGGY here */
-                                                           --> nsock->sent = 0
-                                                   --> unlock nsock->tx_lock
+                                               ioctl(/dev/nbdX, NBD_CLEAR_SOCK)
+                                               --> nbd_ioctl
+                                                   --> mutex_lock(&nbd->config_lock)
+                                                   --> __nbd_ioctl
+                                                       --> nbd_clear_sock_ioctl
+                                                           --> nbd_clear_sock
+                                                               --> nbd_clear_que
+                                                                   --> nbd_clear_req(req, NULL)
+                                                                       --> cmd->status = BLK_STS_IOERR
+                                                                       --> blk_mq_complete_request(req)
+                                                                           --> nbd_complete_rq
+                                                                               --> blk_mq_end_request(req, cmd->status)
+                                                                                   --> bio_endio(bio)
+                                                                                       --> end_bio_bh_io_sync
+                                                                                           --> end_buffer_async_write(bh, uptodate = 0)
+                                                                                               --> clear_buffer_uptodate(bh) /* BUGGY: BH_Uptodate is lost here */
+                                                   --> mutex_unlock(&nbd->config_lock)
 
-kworker runs queued nsock->work
---> nbd_pending_cmd_work
-    --> req = nsock->pending        /* NULL */
-    --> cmd = blk_mq_rq_to_pdu(req) /* NULL + sizeof(struct request) */
-    --> nbd = cmd->nbd              /* NULL pointer dereference at 0x110 */
+CPU0 continues block_commit_write() with the same bh
+                        --> mark_buffer_dirty(bh)
+                            --> WARN_ON_ONCE(!buffer_uptodate(bh)) /* BUGGY here */
 
 
+===
+PoC
+===
 
-I'm still working on a stable PoC since this race is a little tricky.
+The kernel instrumentation patch, C PoC and helper script are included in the attachments.
 
-Best,
+Usage: 
+
+1. apply the patch to the v7.1 kernel, enable relevant kernel config (see above) and compile the kernel.
+2. Override the KERNEL, IMAGE, SSH_KEY environments with local paths and just run run_warning_repro.sh.
+   The script will automatically compile the C PoC, boot the kernel with QEMU, run the PoC in the guest and
+   check for the WARNING message.
+
+Details:
+
+Kernel instrumentation patch: the tested kernel should be instrumented to enlarge the race window.  
+The patch adds a boot parameter, nbd_block_commit_delay_ms=, and makes block_commit_write()
+sleep for the requested time only when the current buffer_head belongs to an NBD block device.  
+The delay is inserted immediately after set_buffer_uptodate(bh) and immediately before mark_buffer_dirty(bh), 
+so NBD_CLEAR_SOCK has a stable window to complete an in-flight NBD write with BLK_STS_IOERR and clear
+BH_Uptodate before mark_buffer_dirty() checks it.
+
+C PoC: the C reproducer configures /dev/nbd0 through the legacy NBD ioctl interface
+and uses a socketpair-backed userspace NBD server.  
+The userspace backend replies to READ requests with zeroes, but intentionally drains and stalls the
+first WRITE request without sending an NBD reply.
+The main thread first writes block 0 and starts fsync(), which leaves that first NBD WRITE in flight.  
+After the backend confirms that the WRITE is stalled, the PoC starts a second buffered pwrite()
+to the same block and then issues NBD_CLEAR_SOCK from another NBD file descriptor.
+NBD_CLEAR_SOCK completes the stalled writeback request with BLK_STS_IOERR
+while the second buffered write is inside the instrumented block_commit_write() window, 
+which makes mark_buffer_dirty() observe the lost BH_Uptodate bit and trigger the warning.
+
+
+Best, 
 Peiyang
---------------Ui0mWu4pvi0tV4zcMWNm13qV
+--------------4sXyKLmFfI9pYrmyjaqUBWVK
+Content-Type: text/plain; charset=UTF-8; name="poc_warning_block_write_end.c"
+Content-Disposition: attachment; filename="poc_warning_block_write_end.c"
+Content-Transfer-Encoding: base64
+
+LyoKICogUG9DIGZvciB0aGUgTkJEL2Jsb2NrX2NvbW1pdF93cml0ZSgpIHJhY2UgdGhhdCBj
+YW4gdHJpZ2dlcjoKICoKICogICBXQVJOSU5HIGluIG1hcmtfYnVmZmVyX2RpcnR5KCkKICoK
+ICogVGhlIHJlcHJvZHVjZXIgdXNlcyB0aGUgbGVnYWN5IE5CRCBpb2N0bCBpbnRlcmZhY2Ug
+d2l0aCBhIHRpbnkgdXNlcnNwYWNlCiAqIGJhY2tlbmQuICBUaGUgYmFja2VuZCBpbnRlbnRp
+b25hbGx5IHN0YWxscyB0aGUgZmlyc3QgV1JJVEUgcmVwbHkgc28gZnN5bmMoKQogKiBsZWF2
+ZXMgYW4gTkJEIHdyaXRlYmFjayByZXF1ZXN0IGluZmxpZ2h0LiAgQSBzZWNvbmQgYnVmZmVy
+ZWQgd3JpdGUgdG8gdGhlCiAqIHNhbWUgYmxvY2sgdGhlbiByYWNlcyB3aXRoIE5CRF9DTEVB
+Ul9TT0NLLCB3aGljaCBjb21wbGV0ZXMgdGhlIG9sZCB3cml0ZWJhY2sKICogcmVxdWVzdCB3
+aXRoIEJMS19TVFNfSU9FUlIuCiAqLwoKI2RlZmluZSBfR05VX1NPVVJDRQoKI2luY2x1ZGUg
+PGFycGEvaW5ldC5oPgojaW5jbHVkZSA8ZW5kaWFuLmg+CiNpbmNsdWRlIDxlcnJuby5oPgoj
+aW5jbHVkZSA8ZmNudGwuaD4KI2luY2x1ZGUgPGxpbnV4L25iZC5oPgojaW5jbHVkZSA8cHRo
+cmVhZC5oPgojaW5jbHVkZSA8c3RkYXRvbWljLmg+CiNpbmNsdWRlIDxzdGRib29sLmg+CiNp
+bmNsdWRlIDxzdGRpbnQuaD4KI2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxzdGRsaWIu
+aD4KI2luY2x1ZGUgPHN0cmluZy5oPgojaW5jbHVkZSA8c3lzL2lvY3RsLmg+CiNpbmNsdWRl
+IDxzeXMvc29ja2V0Lmg+CiNpbmNsdWRlIDxzeXMvdHlwZXMuaD4KI2luY2x1ZGUgPHVuaXN0
+ZC5oPgoKI2lmbmRlZiBOQkRfQ01EX1dSSVRFX1pFUk9FUwojZGVmaW5lIE5CRF9DTURfV1JJ
+VEVfWkVST0VTIDYKI2VuZGlmCgojaWZuZGVmIE5CRF9GTEFHX0hBU19GTEFHUwojZGVmaW5l
+IE5CRF9GTEFHX0hBU19GTEFHUyAoMSA8PCAwKQojZW5kaWYKCiNkZWZpbmUgREVGQVVMVF9E
+RVZJQ0UgIi9kZXYvbmJkMCIKI2RlZmluZSBERUZBVUxUX0NMRUFSX0RFTEFZX1VTIDUwMDAw
+CiNkZWZpbmUgREVGQVVMVF9SRVBFQVQgMQojZGVmaW5lIERFRkFVTFRfU1RBUlRfREVMQVlf
+VVMgMjAwMDAwCiNkZWZpbmUgREVGQVVMVF9TVEFMTF9USU1FT1VUX01TIDUwMDAKI2RlZmlu
+ZSBCTE9DS19TSVpFIDQwOTYKI2RlZmluZSBERVZJQ0VfQkxPQ0tTIDMyCiNkZWZpbmUgTkJE
+X0NNRF9NQVNLIDB4ZmZmZlUKCi8qIE9wdGlvbnMgc3RvcmVzIGNvbW1hbmQtbGluZSBzZXR0
+aW5ncyBmb3IgdGhlIHJlcHJvZHVjZXIuICovCnN0cnVjdCBvcHRpb25zIHsKCWNvbnN0IGNo
+YXIgKmRldmljZTsgLyogTkJEIGRldmljZSBub2RlIHRvIGNvbmZpZ3VyZSBhbmQgd3JpdGUu
+ICovCglpbnQgcmVwZWF0OyAvKiBOdW1iZXIgb2YgaW5kZXBlbmRlbnQgcmVwcm9kdWN0aW9u
+IGF0dGVtcHRzLiAqLwoJaW50IGNsZWFyX2RlbGF5X3VzOyAvKiBEZWxheSBiZXR3ZWVuIHN0
+YXJ0aW5nIHRoZSBzZWNvbmQgd3JpdGUgYW5kIENMRUFSX1NPQ0suICovCglpbnQgc3RhcnRf
+ZGVsYXlfdXM7IC8qIERlbGF5IGFmdGVyIE5CRF9ET19JVCBzdGFydHMgYmVmb3JlIGRvaW5n
+IGJsb2NrIEkvTy4gKi8KCWludCBzdGFsbF90aW1lb3V0X21zOyAvKiBNYXhpbXVtIHdhaXQg
+Zm9yIHRoZSBiYWNrZW5kIHRvIG9ic2VydmUgdGhlIGZpcnN0IFdSSVRFLiAqLwp9OwoKLyog
+QmFja2VuZF9zdGF0ZSB0cmFja3MgdGhlIG1pbmltYWwgdXNlcnNwYWNlIE5CRCBzZXJ2ZXIu
+ICovCnN0cnVjdCBiYWNrZW5kX3N0YXRlIHsKCWludCBmZDsgLyogVXNlcnNwYWNlIGVuZCBv
+ZiB0aGUgc29ja2V0cGFpciB1c2VkIGJ5IHRoZSBOQkQgYmFja2VuZC4gKi8KCWF0b21pY19i
+b29sIHN0b3A7IC8qIFNldCB3aGVuIGNsZWFudXAgc2hvdWxkIHVuYmxvY2sgdGhlIGJhY2tl
+bmQgdGhyZWFkLiAqLwoJYXRvbWljX2Jvb2wgc3RhbGxlZF93cml0ZV9zZWVuOyAvKiBTZXQg
+YWZ0ZXIgdGhlIGZpcnN0IFdSSVRFIGhhcyBiZWVuIGRyYWluZWQuICovCglhdG9taWNfYm9v
+bCBzdGFsbGVkX29uY2U7IC8qIFByZXZlbnRzIHN0YWxsaW5nIG1vcmUgdGhhbiBvbmUgV1JJ
+VEUuICovCglhdG9taWNfaW50IHdyaXRlX3JlcXVlc3RzOyAvKiBOdW1iZXIgb2YgV1JJVEUg
+cmVxdWVzdHMgb2JzZXJ2ZWQuICovCglhdG9taWNfaW50IHJlYWRfcmVxdWVzdHM7IC8qIE51
+bWJlciBvZiBSRUFEIHJlcXVlc3RzIG9ic2VydmVkLiAqLwp9OwoKLyogSW9fdGhyZWFkX2Fy
+ZyBzdG9yZXMgYSBmaWxlLWRlc2NyaXB0b3Igb3BlcmF0aW9uIHJlc3VsdC4gKi8Kc3RydWN0
+IGlvX3RocmVhZF9hcmcgewoJaW50IGZkOyAvKiBGaWxlIGRlc2NyaXB0b3IgcGFzc2VkIHRv
+IGZzeW5jKCkgb3IgcHdyaXRlKCkuICovCgljaGFyICpidWY7IC8qIE9wdGlvbmFsIGJ1ZmZl
+ciBmb3IgcHdyaXRlKCk7IE5VTEwgZm9yIGZzeW5jKCkuICovCglzaXplX3QgbGVuOyAvKiBM
+ZW5ndGggb2YgdGhlIHB3cml0ZSgpIGJ1ZmZlci4gKi8KCW9mZl90IG9mZjsgLyogT2Zmc2V0
+IHVzZWQgYnkgcHdyaXRlKCkuICovCglzc2l6ZV90IHJldDsgLyogUmV0dXJuIHZhbHVlIGZy
+b20gdGhlIG9wZXJhdGlvbi4gKi8KCWludCBlcnI7IC8qIGVycm5vIGNhcHR1cmVkIGltbWVk
+aWF0ZWx5IGFmdGVyIGZhaWx1cmUuICovCn07CgovKiBEb19pdF9hcmcgc3RvcmVzIHRoZSBi
+bG9ja2luZyBOQkRfRE9fSVQgaW9jdGwgcmVzdWx0LiAqLwpzdHJ1Y3QgZG9faXRfYXJnIHsK
+CWludCBmZDsgLyogTkJEIGNvbnRyb2wgZmlsZSBkZXNjcmlwdG9yLiAqLwoJaW50IHJldDsg
+LyogUmV0dXJuIHZhbHVlIGZyb20gTkJEX0RPX0lULiAqLwoJaW50IGVycjsgLyogZXJybm8g
+Y2FwdHVyZWQgaW1tZWRpYXRlbHkgYWZ0ZXIgZmFpbHVyZS4gKi8KfTsKCi8qIERpZSByZXBv
+cnRzIGEgZmF0YWwgdXNlcnNwYWNlIGVycm9yIGFuZCBleGl0cy4gKi8Kc3RhdGljIHZvaWQg
+ZGllKGNvbnN0IGNoYXIgKm1zZykKewoJcGVycm9yKG1zZyk7CglleGl0KDEpOwp9CgovKiBV
+c2FnZSBwcmludHMgY29tbWFuZC1saW5lIGhlbHAuICovCnN0YXRpYyB2b2lkIHVzYWdlKGNv
+bnN0IGNoYXIgKnByb2cpCnsKCWZwcmludGYoc3RkZXJyLAoJCSJ1c2FnZTogJXMgWy0tZGV2
+aWNlIC9kZXYvbmJkMF0gWy0tcmVwZWF0IE5dIFstLWNsZWFyLWRlbGF5LXVzIE5dXG4iCgkJ
+IiAgICAgICAgICBbLS1zdGFydC1kZWxheS11cyBOXSBbLS1zdGFsbC10aW1lb3V0LW1zIE5d
+XG5cbiIKCQkiRGVmYXVsdHM6IC0tZGV2aWNlICVzIC0tcmVwZWF0ICVkIC0tY2xlYXItZGVs
+YXktdXMgJWRcbiIKCQkiICAgICAgICAgIC0tc3RhcnQtZGVsYXktdXMgJWQgLS1zdGFsbC10
+aW1lb3V0LW1zICVkXG5cbiIKCQkiUnVuIGFzIHJvb3QuICBGb3Igc3RhYmxlIHJlcHJvZHVj
+dGlvbiwgYm9vdCBhIGtlcm5lbCBwYXRjaGVkIHdpdGhcbiIKCQkibmJkX2Jsb2NrX2NvbW1p
+dF9kZWxheV9tcz0yNTAgb3IgbGFyZ2VyLlxuIiwKCQlwcm9nLCBERUZBVUxUX0RFVklDRSwg
+REVGQVVMVF9SRVBFQVQsIERFRkFVTFRfQ0xFQVJfREVMQVlfVVMsCgkJREVGQVVMVF9TVEFS
+VF9ERUxBWV9VUywgREVGQVVMVF9TVEFMTF9USU1FT1VUX01TKTsKfQoKLyogUGFyc2VfaW50
+IHBhcnNlcyBhIHBvc2l0aXZlIGRlY2ltYWwgaW50ZWdlciBvcHRpb24uICovCnN0YXRpYyBp
+bnQgcGFyc2VfaW50KGNvbnN0IGNoYXIgKnRleHQsIGNvbnN0IGNoYXIgKm5hbWUpCnsKCWNo
+YXIgKmVuZCA9IE5VTEw7Cglsb25nIHZhbDsKCgllcnJubyA9IDA7Cgl2YWwgPSBzdHJ0b2wo
+dGV4dCwgJmVuZCwgMTApOwoJaWYgKGVycm5vIHx8ICFlbmQgfHwgKmVuZCB8fCB2YWwgPCAw
+IHx8IHZhbCA+IElOVDMyX01BWCkgewoJCWZwcmludGYoc3RkZXJyLCAiaW52YWxpZCAlczog
+JXNcbiIsIG5hbWUsIHRleHQpOwoJCWV4aXQoMik7Cgl9CglyZXR1cm4gKGludCl2YWw7Cn0K
+Ci8qIFBhcnNlX29wdGlvbnMgcmVhZHMgdGhlIHNtYWxsIGhhbmQtd3JpdHRlbiBvcHRpb24g
+c2V0LiAqLwpzdGF0aWMgc3RydWN0IG9wdGlvbnMgcGFyc2Vfb3B0aW9ucyhpbnQgYXJnYywg
+Y2hhciAqKmFyZ3YpCnsKCXN0cnVjdCBvcHRpb25zIG9wdHMgPSB7CgkJLmRldmljZSA9IERF
+RkFVTFRfREVWSUNFLAoJCS5yZXBlYXQgPSBERUZBVUxUX1JFUEVBVCwKCQkuY2xlYXJfZGVs
+YXlfdXMgPSBERUZBVUxUX0NMRUFSX0RFTEFZX1VTLAoJCS5zdGFydF9kZWxheV91cyA9IERF
+RkFVTFRfU1RBUlRfREVMQVlfVVMsCgkJLnN0YWxsX3RpbWVvdXRfbXMgPSBERUZBVUxUX1NU
+QUxMX1RJTUVPVVRfTVMsCgl9OwoKCWZvciAoaW50IGkgPSAxOyBpIDwgYXJnYzsgaSsrKSB7
+CgkJaWYgKCFzdHJjbXAoYXJndltpXSwgIi0taGVscCIpIHx8ICFzdHJjbXAoYXJndltpXSwg
+Ii1oIikpIHsKCQkJdXNhZ2UoYXJndlswXSk7CgkJCWV4aXQoMCk7CgkJfSBlbHNlIGlmICgh
+c3RyY21wKGFyZ3ZbaV0sICItLWRldmljZSIpICYmIGkgKyAxIDwgYXJnYykgewoJCQlvcHRz
+LmRldmljZSA9IGFyZ3ZbKytpXTsKCQl9IGVsc2UgaWYgKCFzdHJjbXAoYXJndltpXSwgIi0t
+cmVwZWF0IikgJiYgaSArIDEgPCBhcmdjKSB7CgkJCW9wdHMucmVwZWF0ID0gcGFyc2VfaW50
+KGFyZ3ZbKytpXSwgIi0tcmVwZWF0Iik7CgkJfSBlbHNlIGlmICghc3RyY21wKGFyZ3ZbaV0s
+ICItLWNsZWFyLWRlbGF5LXVzIikgJiYgaSArIDEgPCBhcmdjKSB7CgkJCW9wdHMuY2xlYXJf
+ZGVsYXlfdXMgPSBwYXJzZV9pbnQoYXJndlsrK2ldLCAiLS1jbGVhci1kZWxheS11cyIpOwoJ
+CX0gZWxzZSBpZiAoIXN0cmNtcChhcmd2W2ldLCAiLS1zdGFydC1kZWxheS11cyIpICYmIGkg
+KyAxIDwgYXJnYykgewoJCQlvcHRzLnN0YXJ0X2RlbGF5X3VzID0gcGFyc2VfaW50KGFyZ3Zb
+KytpXSwgIi0tc3RhcnQtZGVsYXktdXMiKTsKCQl9IGVsc2UgaWYgKCFzdHJjbXAoYXJndltp
+XSwgIi0tc3RhbGwtdGltZW91dC1tcyIpICYmIGkgKyAxIDwgYXJnYykgewoJCQlvcHRzLnN0
+YWxsX3RpbWVvdXRfbXMgPSBwYXJzZV9pbnQoYXJndlsrK2ldLCAiLS1zdGFsbC10aW1lb3V0
+LW1zIik7CgkJfSBlbHNlIHsKCQkJdXNhZ2UoYXJndlswXSk7CgkJCWV4aXQoMik7CgkJfQoJ
+fQoJaWYgKG9wdHMucmVwZWF0IDwgMSkgewoJCXVzYWdlKGFyZ3ZbMF0pOwoJCWV4aXQoMik7
+Cgl9CglyZXR1cm4gb3B0czsKfQoKLyogUmVhZF9mdWxsIHJlYWRzIGV4YWN0bHkgbGVuIGJ5
+dGVzIHVubGVzcyBFT0Ygb3IgYW4gZXJyb3Igb2NjdXJzLiAqLwpzdGF0aWMgaW50IHJlYWRf
+ZnVsbChpbnQgZmQsIHZvaWQgKmJ1Ziwgc2l6ZV90IGxlbikKewoJY2hhciAqcHRyID0gYnVm
+OwoJc2l6ZV90IGRvbmUgPSAwOwoKCXdoaWxlIChkb25lIDwgbGVuKSB7CgkJc3NpemVfdCBy
+ZXQgPSByZWFkKGZkLCBwdHIgKyBkb25lLCBsZW4gLSBkb25lKTsKCgkJaWYgKHJldCA9PSAw
+KQoJCQlyZXR1cm4gMTsKCQlpZiAocmV0IDwgMCkgewoJCQlpZiAoZXJybm8gPT0gRUlOVFIp
+CgkJCQljb250aW51ZTsKCQkJcmV0dXJuIC0xOwoJCX0KCQlkb25lICs9IChzaXplX3QpcmV0
+OwoJfQoJcmV0dXJuIDA7Cn0KCi8qIFdyaXRlX2Z1bGwgd3JpdGVzIGV4YWN0bHkgbGVuIGJ5
+dGVzIHVubGVzcyBhbiBlcnJvciBvY2N1cnMuICovCnN0YXRpYyBpbnQgd3JpdGVfZnVsbChp
+bnQgZmQsIGNvbnN0IHZvaWQgKmJ1Ziwgc2l6ZV90IGxlbikKewoJY29uc3QgY2hhciAqcHRy
+ID0gYnVmOwoJc2l6ZV90IGRvbmUgPSAwOwoKCXdoaWxlIChkb25lIDwgbGVuKSB7CgkJc3Np
+emVfdCByZXQgPSB3cml0ZShmZCwgcHRyICsgZG9uZSwgbGVuIC0gZG9uZSk7CgoJCWlmIChy
+ZXQgPCAwKSB7CgkJCWlmIChlcnJubyA9PSBFSU5UUikKCQkJCWNvbnRpbnVlOwoJCQlyZXR1
+cm4gLTE7CgkJfQoJCWRvbmUgKz0gKHNpemVfdClyZXQ7Cgl9CglyZXR1cm4gMDsKfQoKLyog
+RHJhaW5fcGF5bG9hZCBjb25zdW1lcyBhIFdSSVRFIHBheWxvYWQgZnJvbSB0aGUgTkJEIHNv
+Y2tldC4gKi8Kc3RhdGljIGludCBkcmFpbl9wYXlsb2FkKGludCBmZCwgdWludDMyX3QgbGVu
+KQp7CgljaGFyIGJ1Zls4MTkyXTsKCgl3aGlsZSAobGVuKSB7CgkJc2l6ZV90IGNodW5rID0g
+bGVuIDwgc2l6ZW9mKGJ1ZikgPyBsZW4gOiBzaXplb2YoYnVmKTsKCQlpbnQgcmV0ID0gcmVh
+ZF9mdWxsKGZkLCBidWYsIGNodW5rKTsKCgkJaWYgKHJldCkKCQkJcmV0dXJuIHJldDsKCQls
+ZW4gLT0gKHVpbnQzMl90KWNodW5rOwoJfQoJcmV0dXJuIDA7Cn0KCi8qIFNlbmRfcmVwbHkg
+c2VuZHMgYSBzaW1wbGUgb2xkc3R5bGUgTkJEIHJlcGx5IGhlYWRlci4gKi8Kc3RhdGljIGlu
+dCBzZW5kX3JlcGx5KGludCBmZCwgY29uc3Qgc3RydWN0IG5iZF9yZXF1ZXN0ICpyZXEsIHVp
+bnQzMl90IGVycm9yKQp7CglzdHJ1Y3QgbmJkX3JlcGx5IHJlcGx5ID0gewoJCS5tYWdpYyA9
+IGh0b25sKE5CRF9SRVBMWV9NQUdJQyksCgkJLmVycm9yID0gaHRvbmwoZXJyb3IpLAoJCS5j
+b29raWUgPSByZXEtPmNvb2tpZSwKCX07CgoJcmV0dXJuIHdyaXRlX2Z1bGwoZmQsICZyZXBs
+eSwgc2l6ZW9mKHJlcGx5KSk7Cn0KCi8qIFNlbmRfemVyb2VzIHNlbmRzIGEgemVyby1maWxs
+ZWQgUkVBRCBwYXlsb2FkIGFmdGVyIHRoZSByZXBseSBoZWFkZXIuICovCnN0YXRpYyBpbnQg
+c2VuZF96ZXJvZXMoaW50IGZkLCB1aW50MzJfdCBsZW4pCnsKCWNoYXIgemVyb2VzWzgxOTJd
+ID0ge307CgoJd2hpbGUgKGxlbikgewoJCXNpemVfdCBjaHVuayA9IGxlbiA8IHNpemVvZih6
+ZXJvZXMpID8gbGVuIDogc2l6ZW9mKHplcm9lcyk7CgoJCWlmICh3cml0ZV9mdWxsKGZkLCB6
+ZXJvZXMsIGNodW5rKSkKCQkJcmV0dXJuIC0xOwoJCWxlbiAtPSAodWludDMyX3QpY2h1bms7
+Cgl9CglyZXR1cm4gMDsKfQoKLyogQmFja2VuZF90aHJlYWQgaW1wbGVtZW50cyB0aGUgdGlu
+eSBOQkQgYmFja2VuZCB1c2VkIGJ5IHRoaXMgcmVwcm9kdWNlci4gKi8Kc3RhdGljIHZvaWQg
+KmJhY2tlbmRfdGhyZWFkKHZvaWQgKmFyZykKewoJc3RydWN0IGJhY2tlbmRfc3RhdGUgKnN0
+YXRlID0gYXJnOwoKCXdoaWxlICghYXRvbWljX2xvYWRfZXhwbGljaXQoJnN0YXRlLT5zdG9w
+LCBtZW1vcnlfb3JkZXJfcmVsYXhlZCkpIHsKCQlzdHJ1Y3QgbmJkX3JlcXVlc3QgcmVxOwoJ
+CXVpbnQzMl90IHJhd190eXBlOwoJCXVpbnQzMl90IHR5cGU7CgkJdWludDMyX3QgbGVuOwoJ
+CXVpbnQ2NF90IGZyb207CgkJaW50IHJldDsKCgkJcmV0ID0gcmVhZF9mdWxsKHN0YXRlLT5m
+ZCwgJnJlcSwgc2l6ZW9mKHJlcSkpOwoJCWlmIChyZXQpCgkJCWJyZWFrOwoKCQlpZiAobnRv
+aGwocmVxLm1hZ2ljKSAhPSBOQkRfUkVRVUVTVF9NQUdJQykgewoJCQlmcHJpbnRmKHN0ZGVy
+ciwgIltiYWNrZW5kXSBiYWQgcmVxdWVzdCBtYWdpYzogMHgleFxuIiwKCQkJCW50b2hsKHJl
+cS5tYWdpYykpOwoJCQlicmVhazsKCQl9CgoJCXJhd190eXBlID0gbnRvaGwocmVxLnR5cGUp
+OwoJCXR5cGUgPSByYXdfdHlwZSAmIE5CRF9DTURfTUFTSzsKCQlsZW4gPSBudG9obChyZXEu
+bGVuKTsKCQlmcm9tID0gYmU2NHRvaChyZXEuZnJvbSk7CgoJCWlmICh0eXBlID09IE5CRF9D
+TURfV1JJVEUpIHsKCQkJaW50IHdyaXRlX25vOwoKCQkJcmV0ID0gZHJhaW5fcGF5bG9hZChz
+dGF0ZS0+ZmQsIGxlbik7CgkJCWlmIChyZXQpCgkJCQlicmVhazsKCgkJCXdyaXRlX25vID0g
+YXRvbWljX2ZldGNoX2FkZF9leHBsaWNpdCgmc3RhdGUtPndyaXRlX3JlcXVlc3RzLAoJCQkJ
+CQkJICAgICAxLCBtZW1vcnlfb3JkZXJfcmVsYXhlZCkgKyAxOwoJCQlmcHJpbnRmKHN0ZGVy
+ciwgIltiYWNrZW5kXSBXUklURSAjJWQgb2ZmPSVsbHUgbGVuPSV1XG4iLAoJCQkJd3JpdGVf
+bm8sICh1bnNpZ25lZCBsb25nIGxvbmcpZnJvbSwgbGVuKTsKCgkJCWlmICghYXRvbWljX2V4
+Y2hhbmdlX2V4cGxpY2l0KCZzdGF0ZS0+c3RhbGxlZF9vbmNlLCB0cnVlLAoJCQkJCQkgICAg
+ICBtZW1vcnlfb3JkZXJfcmVsYXhlZCkpIHsKCQkJCWZwcmludGYoc3RkZXJyLCAiW2JhY2tl
+bmRdIHN0YWxsaW5nIFdSSVRFICMlZCB3aXRob3V0IHJlcGx5XG4iLAoJCQkJCXdyaXRlX25v
+KTsKCQkJCWF0b21pY19zdG9yZV9leHBsaWNpdCgmc3RhdGUtPnN0YWxsZWRfd3JpdGVfc2Vl
+biwKCQkJCQkJICAgICAgdHJ1ZSwgbWVtb3J5X29yZGVyX3JlbGVhc2UpOwoJCQkJd2hpbGUg
+KCFhdG9taWNfbG9hZF9leHBsaWNpdCgmc3RhdGUtPnN0b3AsCgkJCQkJCQkgICAgIG1lbW9y
+eV9vcmRlcl9yZWxheGVkKSkKCQkJCQl1c2xlZXAoMTAwMDApOwoJCQkJYnJlYWs7CgkJCX0K
+CgkJCWlmIChzZW5kX3JlcGx5KHN0YXRlLT5mZCwgJnJlcSwgMCkpCgkJCQlicmVhazsKCQl9
+IGVsc2UgaWYgKHR5cGUgPT0gTkJEX0NNRF9SRUFEKSB7CgkJCWludCByZWFkX25vID0gYXRv
+bWljX2ZldGNoX2FkZF9leHBsaWNpdCgmc3RhdGUtPnJlYWRfcmVxdWVzdHMsCgkJCQkJCQkJ
+MSwgbWVtb3J5X29yZGVyX3JlbGF4ZWQpICsgMTsKCgkJCWZwcmludGYoc3RkZXJyLCAiW2Jh
+Y2tlbmRdIFJFQUQgIyVkIG9mZj0lbGx1IGxlbj0ldVxuIiwKCQkJCXJlYWRfbm8sICh1bnNp
+Z25lZCBsb25nIGxvbmcpZnJvbSwgbGVuKTsKCQkJaWYgKHNlbmRfcmVwbHkoc3RhdGUtPmZk
+LCAmcmVxLCAwKSB8fCBzZW5kX3plcm9lcyhzdGF0ZS0+ZmQsIGxlbikpCgkJCQlicmVhazsK
+CQl9IGVsc2UgaWYgKHR5cGUgPT0gTkJEX0NNRF9GTFVTSCB8fCB0eXBlID09IE5CRF9DTURf
+VFJJTSB8fAoJCQkgICB0eXBlID09IE5CRF9DTURfV1JJVEVfWkVST0VTKSB7CgkJCWZwcmlu
+dGYoc3RkZXJyLCAiW2JhY2tlbmRdIGNvbW1hbmQgdHlwZT0ldSBvZmY9JWxsdSBsZW49JXVc
+biIsCgkJCQl0eXBlLCAodW5zaWduZWQgbG9uZyBsb25nKWZyb20sIGxlbik7CgkJCWlmIChz
+ZW5kX3JlcGx5KHN0YXRlLT5mZCwgJnJlcSwgMCkpCgkJCQlicmVhazsKCQl9IGVsc2UgaWYg
+KHR5cGUgPT0gTkJEX0NNRF9ESVNDKSB7CgkJCWZwcmludGYoc3RkZXJyLCAiW2JhY2tlbmRd
+IGRpc2Nvbm5lY3QgcmVxdWVzdFxuIik7CgkJCWJyZWFrOwoJCX0gZWxzZSB7CgkJCWZwcmlu
+dGYoc3RkZXJyLCAiW2JhY2tlbmRdIHVuc3VwcG9ydGVkIGNvbW1hbmQgdHlwZT0ldVxuIiwg
+dHlwZSk7CgkJCWlmIChzZW5kX3JlcGx5KHN0YXRlLT5mZCwgJnJlcSwgRUlPKSkKCQkJCWJy
+ZWFrOwoJCX0KCX0KCglyZXR1cm4gTlVMTDsKfQoKLyogRnN5bmNfdGhyZWFkIHJ1bnMgZnN5
+bmMoKSBzbyB0aGUgbWFpbiB0aHJlYWQgY2FuIHJhY2Ugd2l0aCB3cml0ZWJhY2suICovCnN0
+YXRpYyB2b2lkICpmc3luY190aHJlYWQodm9pZCAqYXJnKQp7CglzdHJ1Y3QgaW9fdGhyZWFk
+X2FyZyAqaW8gPSBhcmc7CgoJaW8tPnJldCA9IGZzeW5jKGlvLT5mZCk7Cglpby0+ZXJyID0g
+aW8tPnJldCA8IDAgPyBlcnJubyA6IDA7CglmcHJpbnRmKHN0ZGVyciwgIltmc3luY10gcmV0
+PSV6ZCBlcnJubz0lZCAoJXMpXG4iLAoJCWlvLT5yZXQsIGlvLT5lcnIsIGlvLT5lcnIgPyBz
+dHJlcnJvcihpby0+ZXJyKSA6ICJvayIpOwoJcmV0dXJuIE5VTEw7Cn0KCi8qIFdyaXRlcl90
+aHJlYWQgcGVyZm9ybXMgdGhlIHNlY29uZCBidWZmZXJlZCB3cml0ZSB0byB0aGUgc2FtZSBi
+bG9jay4gKi8Kc3RhdGljIHZvaWQgKndyaXRlcl90aHJlYWQodm9pZCAqYXJnKQp7CglzdHJ1
+Y3QgaW9fdGhyZWFkX2FyZyAqaW8gPSBhcmc7CgoJaW8tPnJldCA9IHB3cml0ZShpby0+ZmQs
+IGlvLT5idWYsIGlvLT5sZW4sIGlvLT5vZmYpOwoJaW8tPmVyciA9IGlvLT5yZXQgPCAwID8g
+ZXJybm8gOiAwOwoJZnByaW50ZihzdGRlcnIsICJbd3JpdGVyXSBwd3JpdGUgcmV0PSV6ZCBl
+cnJubz0lZCAoJXMpXG4iLAoJCWlvLT5yZXQsIGlvLT5lcnIsIGlvLT5lcnIgPyBzdHJlcnJv
+cihpby0+ZXJyKSA6ICJvayIpOwoJcmV0dXJuIE5VTEw7Cn0KCi8qIERvX2l0X3RocmVhZCBy
+dW5zIHRoZSBibG9ja2luZyBOQkRfRE9fSVQgaW9jdGwuICovCnN0YXRpYyB2b2lkICpkb19p
+dF90aHJlYWQodm9pZCAqYXJnKQp7CglzdHJ1Y3QgZG9faXRfYXJnICpkb19pdCA9IGFyZzsK
+Cglkb19pdC0+cmV0ID0gaW9jdGwoZG9faXQtPmZkLCBOQkRfRE9fSVQpOwoJZG9faXQtPmVy
+ciA9IGRvX2l0LT5yZXQgPCAwID8gZXJybm8gOiAwOwoJZnByaW50ZihzdGRlcnIsICJbbmJk
+XSBOQkRfRE9fSVQgcmV0PSVkIGVycm5vPSVkICglcylcbiIsCgkJZG9faXQtPnJldCwgZG9f
+aXQtPmVyciwgZG9faXQtPmVyciA/IHN0cmVycm9yKGRvX2l0LT5lcnIpIDogIm9rIik7Cgly
+ZXR1cm4gTlVMTDsKfQoKLyogV2FpdF9mb3Jfc3RhbGxlZF93cml0ZSB3YWl0cyB1bnRpbCB0
+aGUgYmFja2VuZCBoYXMgb25lIGluZmxpZ2h0IFdSSVRFLiAqLwpzdGF0aWMgaW50IHdhaXRf
+Zm9yX3N0YWxsZWRfd3JpdGUoc3RydWN0IGJhY2tlbmRfc3RhdGUgKmJhY2tlbmQsIGludCB0
+aW1lb3V0X21zKQp7Cglmb3IgKGludCB3YWl0ZWQgPSAwOyB3YWl0ZWQgPCB0aW1lb3V0X21z
+OyB3YWl0ZWQgKz0gMTApIHsKCQlpZiAoYXRvbWljX2xvYWRfZXhwbGljaXQoJmJhY2tlbmQt
+PnN0YWxsZWRfd3JpdGVfc2VlbiwKCQkJCQkgbWVtb3J5X29yZGVyX2FjcXVpcmUpKQoJCQly
+ZXR1cm4gMDsKCQl1c2xlZXAoMTAwMDApOwoJfQoJcmV0dXJuIC0xOwp9CgovKiBGaWxsX3Bh
+dHRlcm4gaW5pdGlhbGl6ZXMgYSB3cml0ZSBidWZmZXIgd2l0aCBkZXRlcm1pbmlzdGljIG5v
+bnplcm8gZGF0YS4gKi8Kc3RhdGljIHZvaWQgZmlsbF9wYXR0ZXJuKGNoYXIgKmJ1Ziwgc2l6
+ZV90IGxlbiwgdW5zaWduZWQgaW50IHNlZWQpCnsKCWZvciAoc2l6ZV90IGkgPSAwOyBpIDwg
+bGVuOyBpKyspCgkJYnVmW2ldID0gKGNoYXIpKHNlZWQgKyBpKTsKfQoKLyogT3Blbl9uYmQg
+b3BlbnMgYW4gTkJEIGRldmljZSBmb3IgcmVhZC93cml0ZSBjb250cm9sIG9yIGRhdGEgSS9P
+LiAqLwpzdGF0aWMgaW50IG9wZW5fbmJkKGNvbnN0IGNoYXIgKmRldmljZSkKewoJaW50IGZk
+ID0gb3BlbihkZXZpY2UsIE9fUkRXUiB8IE9fQ0xPRVhFQyk7CgoJaWYgKGZkIDwgMCkKCQlm
+cHJpbnRmKHN0ZGVyciwgIm9wZW4oJXMpOiAlc1xuIiwgZGV2aWNlLCBzdHJlcnJvcihlcnJu
+bykpOwoJcmV0dXJuIGZkOwp9CgovKiBSdW5fb25jZSBleGVjdXRlcyBvbmUgaW5kZXBlbmRl
+bnQgcmFjZSBhdHRlbXB0LiAqLwpzdGF0aWMgaW50IHJ1bl9vbmNlKGNvbnN0IHN0cnVjdCBv
+cHRpb25zICpvcHRzLCBpbnQgYXR0ZW1wdCkKewoJc3RydWN0IGJhY2tlbmRfc3RhdGUgYmFj
+a2VuZDsKCXN0cnVjdCBkb19pdF9hcmcgZG9faXQgPSB7LmZkID0gLTEsIC5yZXQgPSAwLCAu
+ZXJyID0gMH07CglzdHJ1Y3QgaW9fdGhyZWFkX2FyZyBmc3luY19pbyA9IHsuZmQgPSAtMSwg
+LnJldCA9IDAsIC5lcnIgPSAwfTsKCXN0cnVjdCBpb190aHJlYWRfYXJnIHdyaXRlcl9pbyA9
+IHsuZmQgPSAtMSwgLnJldCA9IDAsIC5lcnIgPSAwfTsKCXB0aHJlYWRfdCBiYWNrZW5kX3Rp
+ZDsKCXB0aHJlYWRfdCBkb19pdF90aWQ7CglwdGhyZWFkX3QgZnN5bmNfdGlkOwoJcHRocmVh
+ZF90IHdyaXRlcl90aWQ7Cglib29sIGJhY2tlbmRfc3RhcnRlZCA9IGZhbHNlOwoJYm9vbCBk
+b19pdF9zdGFydGVkID0gZmFsc2U7Cglib29sIGZzeW5jX3N0YXJ0ZWQgPSBmYWxzZTsKCWJv
+b2wgd3JpdGVyX3N0YXJ0ZWQgPSBmYWxzZTsKCWJvb2wgY2xlYXJfc29ja19kb25lID0gZmFs
+c2U7CglpbnQgc29ja19wYWlyWzJdID0gey0xLCAtMX07CglpbnQgc2V0dXBfZmQgPSAtMTsK
+CWludCBpb19mZCA9IC0xOwoJaW50IGNsZWFyX2ZkID0gLTE7CgljaGFyIGZpcnN0W0JMT0NL
+X1NJWkVdOwoJY2hhciBzZWNvbmRbQkxPQ0tfU0laRV07CglpbnQgcmV0ID0gMTsKCglmcHJp
+bnRmKHN0ZGVyciwgIlttYWluXSBhdHRlbXB0ICVkOiBjb25maWd1cmluZyAlc1xuIiwgYXR0
+ZW1wdCwgb3B0cy0+ZGV2aWNlKTsKCW1lbXNldCgmYmFja2VuZCwgMCwgc2l6ZW9mKGJhY2tl
+bmQpKTsKCWF0b21pY19pbml0KCZiYWNrZW5kLnN0b3AsIGZhbHNlKTsKCWF0b21pY19pbml0
+KCZiYWNrZW5kLnN0YWxsZWRfd3JpdGVfc2VlbiwgZmFsc2UpOwoJYXRvbWljX2luaXQoJmJh
+Y2tlbmQuc3RhbGxlZF9vbmNlLCBmYWxzZSk7CglhdG9taWNfaW5pdCgmYmFja2VuZC53cml0
+ZV9yZXF1ZXN0cywgMCk7CglhdG9taWNfaW5pdCgmYmFja2VuZC5yZWFkX3JlcXVlc3RzLCAw
+KTsKCglpZiAoc29ja2V0cGFpcihBRl9VTklYLCBTT0NLX1NUUkVBTSB8IFNPQ0tfQ0xPRVhF
+QywgMCwgc29ja19wYWlyKSkKCQlkaWUoInNvY2tldHBhaXIiKTsKCWJhY2tlbmQuZmQgPSBz
+b2NrX3BhaXJbMV07CgoJaWYgKHB0aHJlYWRfY3JlYXRlKCZiYWNrZW5kX3RpZCwgTlVMTCwg
+YmFja2VuZF90aHJlYWQsICZiYWNrZW5kKSkKCQlkaWUoInB0aHJlYWRfY3JlYXRlIGJhY2tl
+bmQiKTsKCWJhY2tlbmRfc3RhcnRlZCA9IHRydWU7CgoJc2V0dXBfZmQgPSBvcGVuX25iZChv
+cHRzLT5kZXZpY2UpOwoJaWYgKHNldHVwX2ZkIDwgMCkKCQlnb3RvIG91dDsKCWlmIChpb2N0
+bChzZXR1cF9mZCwgTkJEX1NFVF9TT0NLLCBzb2NrX3BhaXJbMF0pIDwgMCkgewoJCXBlcnJv
+cigiaW9jdGwoTkJEX1NFVF9TT0NLKSIpOwoJCWdvdG8gb3V0OwoJfQoJaWYgKGlvY3RsKHNl
+dHVwX2ZkLCBOQkRfU0VUX0JMS1NJWkUsIEJMT0NLX1NJWkUpIDwgMCkgewoJCXBlcnJvcigi
+aW9jdGwoTkJEX1NFVF9CTEtTSVpFKSIpOwoJCWdvdG8gb3V0OwoJfQoJaWYgKGlvY3RsKHNl
+dHVwX2ZkLCBOQkRfU0VUX1NJWkVfQkxPQ0tTLCBERVZJQ0VfQkxPQ0tTKSA8IDApIHsKCQlw
+ZXJyb3IoImlvY3RsKE5CRF9TRVRfU0laRV9CTE9DS1MpIik7CgkJZ290byBvdXQ7Cgl9Cglp
+ZiAoaW9jdGwoc2V0dXBfZmQsIE5CRF9TRVRfRkxBR1MsIE5CRF9GTEFHX0hBU19GTEFHUykg
+PCAwKSB7CgkJcGVycm9yKCJpb2N0bChOQkRfU0VUX0ZMQUdTKSIpOwoJCWdvdG8gb3V0OwoJ
+fQoKCWRvX2l0LmZkID0gc2V0dXBfZmQ7CglpZiAocHRocmVhZF9jcmVhdGUoJmRvX2l0X3Rp
+ZCwgTlVMTCwgZG9faXRfdGhyZWFkLCAmZG9faXQpKQoJCWRpZSgicHRocmVhZF9jcmVhdGUg
+TkJEX0RPX0lUIik7Cglkb19pdF9zdGFydGVkID0gdHJ1ZTsKCgl1c2xlZXAob3B0cy0+c3Rh
+cnRfZGVsYXlfdXMpOwoJaW9fZmQgPSBvcGVuX25iZChvcHRzLT5kZXZpY2UpOwoJY2xlYXJf
+ZmQgPSBvcGVuX25iZChvcHRzLT5kZXZpY2UpOwoJaWYgKGlvX2ZkIDwgMCB8fCBjbGVhcl9m
+ZCA8IDApCgkJZ290byBvdXQ7CgoJZmlsbF9wYXR0ZXJuKGZpcnN0LCBzaXplb2YoZmlyc3Qp
+LCAweDQxICsgKHVuc2lnbmVkIGludClhdHRlbXB0KTsKCWZpbGxfcGF0dGVybihzZWNvbmQs
+IHNpemVvZihzZWNvbmQpLCAweDYxICsgKHVuc2lnbmVkIGludClhdHRlbXB0KTsKCglmcHJp
+bnRmKHN0ZGVyciwgIlttYWluXSBkaXJ0eWluZyBibG9jayAwXG4iKTsKCWlmIChwd3JpdGUo
+aW9fZmQsIGZpcnN0LCBzaXplb2YoZmlyc3QpLCAwKSAhPSAoc3NpemVfdClzaXplb2YoZmly
+c3QpKSB7CgkJcGVycm9yKCJmaXJzdCBwd3JpdGUiKTsKCQlnb3RvIG91dDsKCX0KCglmcHJp
+bnRmKHN0ZGVyciwgIlttYWluXSBzdGFydGluZyBmc3luYyB0byBjcmVhdGUgYW4gaW5mbGln
+aHQgTkJEIFdSSVRFXG4iKTsKCWZzeW5jX2lvLmZkID0gaW9fZmQ7CglpZiAocHRocmVhZF9j
+cmVhdGUoJmZzeW5jX3RpZCwgTlVMTCwgZnN5bmNfdGhyZWFkLCAmZnN5bmNfaW8pKQoJCWRp
+ZSgicHRocmVhZF9jcmVhdGUgZnN5bmMiKTsKCWZzeW5jX3N0YXJ0ZWQgPSB0cnVlOwoKCWlm
+ICh3YWl0X2Zvcl9zdGFsbGVkX3dyaXRlKCZiYWNrZW5kLCBvcHRzLT5zdGFsbF90aW1lb3V0
+X21zKSkgewoJCWZwcmludGYoc3RkZXJyLCAiW21haW5dIHRpbWVkIG91dCB3YWl0aW5nIGZv
+ciBzdGFsbGVkIFdSSVRFXG4iKTsKCQlnb3RvIG91dDsKCX0KCglmcHJpbnRmKHN0ZGVyciwg
+IlttYWluXSBzdGFydGluZyBzZWNvbmQgYnVmZmVyZWQgd3JpdGVcbiIpOwoJd3JpdGVyX2lv
+LmZkID0gaW9fZmQ7Cgl3cml0ZXJfaW8uYnVmID0gc2Vjb25kOwoJd3JpdGVyX2lvLmxlbiA9
+IHNpemVvZihzZWNvbmQpOwoJd3JpdGVyX2lvLm9mZiA9IDA7CglpZiAocHRocmVhZF9jcmVh
+dGUoJndyaXRlcl90aWQsIE5VTEwsIHdyaXRlcl90aHJlYWQsICZ3cml0ZXJfaW8pKQoJCWRp
+ZSgicHRocmVhZF9jcmVhdGUgd3JpdGVyIik7Cgl3cml0ZXJfc3RhcnRlZCA9IHRydWU7CgoJ
+dXNsZWVwKG9wdHMtPmNsZWFyX2RlbGF5X3VzKTsKCWZwcmludGYoc3RkZXJyLCAiW21haW5d
+IGlzc3VpbmcgTkJEX0NMRUFSX1NPQ0sgYWZ0ZXIgJWQgdXNcbiIsCgkJb3B0cy0+Y2xlYXJf
+ZGVsYXlfdXMpOwoJaWYgKGlvY3RsKGNsZWFyX2ZkLCBOQkRfQ0xFQVJfU09DSykgPCAwKQoJ
+CWZwcmludGYoc3RkZXJyLCAiaW9jdGwoTkJEX0NMRUFSX1NPQ0spOiAlc1xuIiwgc3RyZXJy
+b3IoZXJybm8pKTsKCWNsZWFyX3NvY2tfZG9uZSA9IHRydWU7CgoJaWYgKHdyaXRlcl9zdGFy
+dGVkKSB7CgkJcHRocmVhZF9qb2luKHdyaXRlcl90aWQsIE5VTEwpOwoJCXdyaXRlcl9zdGFy
+dGVkID0gZmFsc2U7Cgl9CglpZiAoZnN5bmNfc3RhcnRlZCkgewoJCXB0aHJlYWRfam9pbihm
+c3luY190aWQsIE5VTEwpOwoJCWZzeW5jX3N0YXJ0ZWQgPSBmYWxzZTsKCX0KCglyZXQgPSAw
+OwoKb3V0OgoJaWYgKCFjbGVhcl9zb2NrX2RvbmUgJiYgY2xlYXJfZmQgPj0gMCkKCQlpb2N0
+bChjbGVhcl9mZCwgTkJEX0NMRUFSX1NPQ0spOwoJYXRvbWljX3N0b3JlX2V4cGxpY2l0KCZi
+YWNrZW5kLnN0b3AsIHRydWUsIG1lbW9yeV9vcmRlcl9yZWxheGVkKTsKCWlmIChzb2NrX3Bh
+aXJbMV0gPj0gMCkKCQlzaHV0ZG93bihzb2NrX3BhaXJbMV0sIFNIVVRfUkRXUik7CglpZiAo
+c29ja19wYWlyWzBdID49IDApCgkJc2h1dGRvd24oc29ja19wYWlyWzBdLCBTSFVUX1JEV1Ip
+OwoJaWYgKHdyaXRlcl9zdGFydGVkKQoJCXB0aHJlYWRfam9pbih3cml0ZXJfdGlkLCBOVUxM
+KTsKCWlmIChmc3luY19zdGFydGVkKQoJCXB0aHJlYWRfam9pbihmc3luY190aWQsIE5VTEwp
+OwoJaWYgKGJhY2tlbmRfc3RhcnRlZCkKCQlwdGhyZWFkX2pvaW4oYmFja2VuZF90aWQsIE5V
+TEwpOwoJaWYgKGRvX2l0X3N0YXJ0ZWQpCgkJcHRocmVhZF9qb2luKGRvX2l0X3RpZCwgTlVM
+TCk7CglpZiAoY2xlYXJfZmQgPj0gMCkKCQljbG9zZShjbGVhcl9mZCk7CglpZiAoaW9fZmQg
+Pj0gMCkKCQljbG9zZShpb19mZCk7CglpZiAoc2V0dXBfZmQgPj0gMCkKCQljbG9zZShzZXR1
+cF9mZCk7CglpZiAoc29ja19wYWlyWzBdID49IDApCgkJY2xvc2Uoc29ja19wYWlyWzBdKTsK
+CWlmIChzb2NrX3BhaXJbMV0gPj0gMCkKCQljbG9zZShzb2NrX3BhaXJbMV0pOwoKCXJldHVy
+biByZXQ7Cn0KCi8qIE1haW4gcGFyc2VzIG9wdGlvbnMgYW5kIHJ1bnMgdGhlIHJlcXVlc3Rl
+ZCBudW1iZXIgb2YgYXR0ZW1wdHMuICovCmludCBtYWluKGludCBhcmdjLCBjaGFyICoqYXJn
+dikKewoJc3RydWN0IG9wdGlvbnMgb3B0cyA9IHBhcnNlX29wdGlvbnMoYXJnYywgYXJndik7
+CglpbnQgZmFpbHVyZXMgPSAwOwoKCWZvciAoaW50IGkgPSAxOyBpIDw9IG9wdHMucmVwZWF0
+OyBpKyspIHsKCQlpZiAocnVuX29uY2UoJm9wdHMsIGkpKQoJCQlmYWlsdXJlcysrOwoJCXVz
+bGVlcCgyMDAwMDApOwoJfQoKCWlmIChmYWlsdXJlcykgewoJCWZwcmludGYoc3RkZXJyLCAi
+W21haW5dICVkLyVkIGF0dGVtcHRzIGZhaWxlZCBiZWZvcmUgdGhlIHJhY2Ugd2luZG93XG4i
+LAoJCQlmYWlsdXJlcywgb3B0cy5yZXBlYXQpOwoJCXJldHVybiAxOwoJfQoJZnByaW50Zihz
+dGRlcnIsICJbbWFpbl0gYWxsIGF0dGVtcHRzIGNvbXBsZXRlZDsgY2hlY2sgZG1lc2cgZm9y
+IG1hcmtfYnVmZmVyX2RpcnR5IHdhcm5pbmdcbiIpOwoJcmV0dXJuIDA7Cn0K
+--------------4sXyKLmFfI9pYrmyjaqUBWVK
 Content-Type: text/plain; charset=UTF-8; name=".config"
 Content-Disposition: attachment; filename=".config"
 Content-Transfer-Encoding: base64
@@ -5300,6 +5624,263 @@ TkZJR19NRU1URVNUIGlzIG5vdCBzZXQKIyBlbmQgb2YgS2VybmVsIFRlc3RpbmcgYW5kIENv
 dmVyYWdlCgojCiMgUnVzdCBoYWNraW5nCiMKIyBlbmQgb2YgUnVzdCBoYWNraW5nCiMgZW5k
 IG9mIEtlcm5lbCBoYWNraW5nCgpDT05GSUdfSU9fVVJJTkdfWkNSWD15CkNPTkZJR19JT19V
 UklOR19CUEY9eQo=
+--------------4sXyKLmFfI9pYrmyjaqUBWVK
+Content-Type: text/plain; charset=UTF-8;
+ name="nbd_block_write_end_race_window.patch"
+Content-Disposition: attachment;
+ filename="nbd_block_write_end_race_window.patch"
+Content-Transfer-Encoding: base64
 
---------------Ui0mWu4pvi0tV4zcMWNm13qV--
+ZGlmZiAtLWdpdCBhL2ZzL2J1ZmZlci5jIGIvZnMvYnVmZmVyLmMKaW5kZXggYjBiMzc5MmIx
+NDk2Li5kNTkzN2IxOTNlZDIgMTAwNjQ0Ci0tLSBhL2ZzL2J1ZmZlci5jCisrKyBiL2ZzL2J1
+ZmZlci5jCkBAIC0zOSw2ICszOSw5IEBACiAjaW5jbHVkZSA8bGludXgvaGFzaC5oPgogI2lu
+Y2x1ZGUgPGxpbnV4L3N1c3BlbmQuaD4KICNpbmNsdWRlIDxsaW51eC9idWZmZXJfaGVhZC5o
+PgorI2luY2x1ZGUgPGxpbnV4L2RlbGF5Lmg+CisjaW5jbHVkZSA8bGludXgvaW5pdC5oPgor
+I2luY2x1ZGUgPGxpbnV4L21ham9yLmg+CiAjaW5jbHVkZSA8bGludXgvdGFza19pb19hY2Nv
+dW50aW5nX29wcy5oPgogI2luY2x1ZGUgPGxpbnV4L2Jpby5oPgogI2luY2x1ZGUgPGxpbnV4
+L2NwdS5oPgpAQCAtNTcsNiArNjAsNDQgQEAKIHN0YXRpYyB2b2lkIHN1Ym1pdF9iaF93YmMo
+YmxrX29wZl90IG9wZiwgc3RydWN0IGJ1ZmZlcl9oZWFkICpiaCwKIAkJCSAgZW51bSByd19o
+aW50IGhpbnQsIHN0cnVjdCB3cml0ZWJhY2tfY29udHJvbCAqd2JjKTsKIAorc3RhdGljIHVu
+c2lnbmVkIGludCBuYmRfYmxvY2tfY29tbWl0X2RlbGF5X21zOworCisvKgorICogUGFyc2Ug
+dGhlIHRlc3Qtb25seSBkZWxheSB0aGF0IHdpZGVucyB0aGUgYmxvY2tfY29tbWl0X3dyaXRl
+KCkgd2luZG93IGZvcgorICogTkJEIGJ1ZmZlcl9oZWFkcy4KKyAqLworc3RhdGljIGludCBf
+X2luaXQgbmJkX2Jsb2NrX2NvbW1pdF9kZWxheV9zZXR1cChjaGFyICpzdHIpCit7CisJaWYg
+KGtzdHJ0b3VpbnQoc3RyLCAwLCAmbmJkX2Jsb2NrX2NvbW1pdF9kZWxheV9tcykpCisJCW5i
+ZF9ibG9ja19jb21taXRfZGVsYXlfbXMgPSAwOworCXJldHVybiAxOworfQorX19zZXR1cCgi
+bmJkX2Jsb2NrX2NvbW1pdF9kZWxheV9tcz0iLCBuYmRfYmxvY2tfY29tbWl0X2RlbGF5X3Nl
+dHVwKTsKKworLyogUmV0dXJuIHdoZXRoZXIgYSBidWZmZXJfaGVhZCBiZWxvbmdzIHRvIGFu
+IE5CRCBibG9jayBkZXZpY2UuICovCitzdGF0aWMgYm9vbCBidWZmZXJfaGVhZF9pc19uYmQo
+c3RydWN0IGJ1ZmZlcl9oZWFkICpiaCkKK3sKKwlpZiAoIWJoLT5iX2JkZXYpCisJCXJldHVy
+biBmYWxzZTsKKwlyZXR1cm4gTUFKT1IoYmgtPmJfYmRldi0+YmRfZGV2KSA9PSBOQkRfTUFK
+T1I7Cit9CisKKy8qCisgKiBEZWxheSBhZnRlciBCSF9VcHRvZGF0ZSBpcyBzZXQgYnV0IGJl
+Zm9yZSBtYXJrX2J1ZmZlcl9kaXJ0eSgpIGNoZWNrcyBpdCwgc28KKyAqIE5CRF9DTEVBUl9T
+T0NLIGhhcyBhIGxhcmdlciB3aW5kb3cgdG8gY29tcGxldGUgYW4gb2xkIHdyaXRlYmFjayB3
+aXRoIElPRVJSLgorICovCitzdGF0aWMgdm9pZCBuYmRfYmxvY2tfY29tbWl0X2RlbGF5KHN0
+cnVjdCBidWZmZXJfaGVhZCAqYmgpCit7CisJdW5zaWduZWQgaW50IGRlbGF5X21zID0gUkVB
+RF9PTkNFKG5iZF9ibG9ja19jb21taXRfZGVsYXlfbXMpOworCisJaWYgKCFkZWxheV9tcyB8
+fCAhYnVmZmVyX2hlYWRfaXNfbmJkKGJoKSkKKwkJcmV0dXJuOworCisJcHJfaW5mb19yYXRl
+bGltaXRlZCgibmJkLWJsb2NrLWNvbW1pdC1kZWxheTogZGVsYXlpbmcgJXUgbXMgZm9yIGJo
+PSVwIGJfc3RhdGU9MHglbHggYmRldj0lcGdcbiIsCisJCQkgICAgZGVsYXlfbXMsIGJoLCBi
+aC0+Yl9zdGF0ZSwgYmgtPmJfYmRldik7CisJbXNsZWVwKGRlbGF5X21zKTsKK30KKwogI2Rl
+ZmluZSBCSF9FTlRSWShsaXN0KSBsaXN0X2VudHJ5KChsaXN0KSwgc3RydWN0IGJ1ZmZlcl9o
+ZWFkLCBiX2Fzc29jX2J1ZmZlcnMpCiAKIGlubGluZSB2b2lkIHRvdWNoX2J1ZmZlcihzdHJ1
+Y3QgYnVmZmVyX2hlYWQgKmJoKQpAQCAtMjExMiw2ICsyMTUzLDcgQEAgdm9pZCBibG9ja19j
+b21taXRfd3JpdGUoc3RydWN0IGZvbGlvICpmb2xpbywgc2l6ZV90IGZyb20sIHNpemVfdCB0
+bykKIAkJCQlwYXJ0aWFsID0gdHJ1ZTsKIAkJfSBlbHNlIHsKIAkJCXNldF9idWZmZXJfdXB0
+b2RhdGUoYmgpOworCQkJbmJkX2Jsb2NrX2NvbW1pdF9kZWxheShiaCk7CiAJCQltYXJrX2J1
+ZmZlcl9kaXJ0eShiaCk7CiAJCX0KIAkJaWYgKGJ1ZmZlcl9uZXcoYmgpKQo=
+--------------4sXyKLmFfI9pYrmyjaqUBWVK
+Content-Type: application/x-sh; name="run_warning_repro.sh"
+Content-Disposition: attachment; filename="run_warning_repro.sh"
+Content-Transfer-Encoding: 7bit
+
+#!/bin/sh
+# Boot the target kernel, run the NBD block_write_end race PoC, and collect logs.
+#
+# Usage:
+#   ./run_warning_repro.sh [out_dir] [port]
+#   ./run_warning_repro.sh /tmp/warning_block_write_end_qemu 10470
+#
+# Environment overrides:
+#   KERNEL=/path/to/instrumented/bzImage
+#   IMAGE=/path/to/rootfs.img
+#   SSH_KEY=/path/to/id_rsa
+#   CC=gcc
+#   CFLAGS='-O2 -g -Wall -Wextra'
+#   DEVICE=/dev/nbd0
+#   NBDS_MAX=8
+#   DELAY_MS=500
+#   CLEAR_DELAY_US=50000
+#   START_DELAY_US=200000
+#   STALL_TIMEOUT_MS=5000
+#   REPEAT=3
+#   PANIC_ON_WARN=0
+
+set -eu
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+out_dir="${1:-/tmp/warning_block_write_end_qemu}"
+port="${2:-10470}"
+
+kernel="${KERNEL:-/home/ubuntu/linux-repro-warning/arch/x86/boot/bzImage}"
+image="${IMAGE:-/home/ubuntu/trixie-image/trixie.img}"
+ssh_key="${SSH_KEY:-/home/ubuntu/trixie-image/trixie.id_rsa}"
+device="${DEVICE:-/dev/nbd0}"
+nbds_max="${NBDS_MAX:-8}"
+delay_ms="${DELAY_MS:-500}"
+clear_delay_us="${CLEAR_DELAY_US:-50000}"
+start_delay_us="${START_DELAY_US:-200000}"
+stall_timeout_ms="${STALL_TIMEOUT_MS:-5000}"
+repeat="${REPEAT:-3}"
+panic_on_warn="${PANIC_ON_WARN:-0}"
+poc_src="$script_dir/poc_warning_block_write_end.c"
+poc="$script_dir/poc_warning_block_write_end"
+
+overlay="$out_dir/overlay.qcow2"
+console="$out_dir/console.log"
+pidfile="$out_dir/qemu.pid"
+guest_log="$out_dir/guest.log"
+dmesg_log="$out_dir/dmesg.log"
+summary="$out_dir/summary.txt"
+
+status="not_started"
+
+# Cleanup stops the temporary QEMU instance started by this script.
+cleanup()
+{
+	if [ -f "$pidfile" ]; then
+		pid="$(cat "$pidfile" 2>/dev/null || true)"
+		if [ -n "$pid" ]; then
+			kill "$pid" 2>/dev/null || true
+		fi
+	fi
+}
+
+trap cleanup EXIT INT TERM
+
+cd "$script_dir"
+cc="${CC:-gcc}"
+cflags="${CFLAGS:--O2 -g -Wall -Wextra}"
+echo "[host] Compiling PoC with $cc"
+if [ ! -e "$poc_src" ]; then
+	echo "missing required file: $poc_src" >&2
+	exit 1
+fi
+"$cc" $cflags -pthread -o "$poc" "$poc_src"
+chmod 755 "$poc"
+
+echo "[host] Checking required input files"
+for path in "$kernel" "$image" "$ssh_key" "$poc"; do
+	if [ ! -e "$path" ]; then
+		echo "missing required file: $path" >&2
+		exit 1
+	fi
+done
+
+echo "[host] Checking SSH forwarding port: $port"
+if command -v ss >/dev/null 2>&1 &&
+   ss -ltn "sport = :$port" 2>/dev/null | grep -q LISTEN; then
+	echo "host TCP port $port is already in use" >&2
+	exit 1
+fi
+
+echo "[host] Preparing QEMU output directory: $out_dir"
+mkdir -p "$out_dir"
+rm -f "$overlay" "$console" "$pidfile" "$guest_log" "$dmesg_log" "$summary"
+qemu-img create -f qcow2 -F raw -b "$image" "$overlay" >/dev/null
+
+echo "[host] Booting target kernel: $kernel"
+qemu-system-x86_64 \
+	-m 2048 \
+	-smp 2 \
+	-enable-kvm \
+	-cpu host,migratable=off \
+	-no-reboot \
+	-display none \
+	-serial "file:$console" \
+	-pidfile "$pidfile" \
+	-device virtio-rng-pci \
+	-device e1000,netdev=net0 \
+	-netdev "user,id=net0,restrict=on,hostfwd=tcp:127.0.0.1:${port}-:22" \
+	-hda "$overlay" \
+	-kernel "$kernel" \
+	-append "root=/dev/sda console=ttyS0 panic_on_warn=$panic_on_warn net.ifnames=0 biosdevname=0 earlyprintk=serial rcupdate.rcu_expedited=1 nbd.nbds_max=$nbds_max nbd_block_commit_delay_ms=$delay_ms" \
+	-daemonize
+echo "[host] QEMU started; console log: $console"
+
+ssh_opts="-o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -i $ssh_key -p $port"
+scp_opts="-o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -i $ssh_key -P $port"
+
+status="boot_timeout"
+echo "[host] Waiting for guest SSH on 127.0.0.1:$port"
+for _ in $(seq 1 120); do
+	if ssh $ssh_opts root@127.0.0.1 'echo ready' 2>/dev/null | grep -q ready; then
+		status="ready"
+		break
+	fi
+	sleep 2
+done
+
+if [ "$status" != "ready" ]; then
+	printf 'status=%s\nconsole=%s\n' "$status" "$console" | tee "$summary"
+	echo "--- console tail ---"
+	tail -120 "$console" 2>/dev/null || true
+	exit 1
+fi
+
+echo "[host] Copying PoC into guest"
+scp -q -O $scp_opts "$poc" root@127.0.0.1:/root/poc_warning_block_write_end
+
+echo "[host] Running guest reproducer; live output is saved to $guest_log"
+set +e
+ssh $ssh_opts root@127.0.0.1 sh -s -- \
+	"$device" "$repeat" "$clear_delay_us" "$start_delay_us" \
+	"$stall_timeout_ms" "$nbds_max" >"$guest_log" 2>&1 <<'GUEST'
+set -eu
+
+device="$1"
+repeat="$2"
+clear_delay_us="$3"
+start_delay_us="$4"
+stall_timeout_ms="$5"
+nbds_max="$6"
+
+echo "[guest] Preparing nbd module and clearing dmesg"
+modprobe nbd nbds_max="$nbds_max" 2>/dev/null || modprobe nbd 2>/dev/null || true
+chmod +x /root/poc_warning_block_write_end
+dmesg -C 2>/dev/null || true
+
+echo "[guest] Running PoC: device=$device repeat=$repeat clear_delay_us=$clear_delay_us"
+set +e
+/root/poc_warning_block_write_end \
+	--device "$device" \
+	--repeat "$repeat" \
+	--clear-delay-us "$clear_delay_us" \
+	--start-delay-us "$start_delay_us" \
+	--stall-timeout-ms "$stall_timeout_ms"
+poc_rc="$?"
+set -e
+
+dmesg > /root/warning_block_write_end.dmesg 2>&1 || true
+if dmesg | grep -Eq 'WARNING:.*mark_buffer_dirty|WARNING: fs/buffer.c:.*mark_buffer_dirty|mark_buffer_dirty\+.*fs/buffer.c'; then
+	echo "GUEST_STATUS=warning_found"
+else
+	echo "GUEST_STATUS=no_warning"
+fi
+echo "POC_RC=$poc_rc"
+exit 0
+GUEST
+guest_rc="$?"
+set -e
+cat "$guest_log"
+
+scp -q -O $scp_opts root@127.0.0.1:/root/warning_block_write_end.dmesg "$dmesg_log" 2>/dev/null || true
+
+status="not_reproduced"
+if grep -Eqs 'WARNING:.*mark_buffer_dirty|WARNING: fs/buffer.c:.*mark_buffer_dirty|mark_buffer_dirty\+.*fs/buffer.c' \
+	"$guest_log" "$dmesg_log" "$console"; then
+	status="warning_found"
+elif grep -Eqs 'Kernel panic - not syncing: kernel: panic_on_warn set|panic_on_warn' \
+	"$guest_log" "$dmesg_log" "$console"; then
+	status="panic_seen_check_console"
+fi
+
+{
+	printf 'status=%s\n' "$status"
+	printf 'guest_rc=%s\n' "$guest_rc"
+	printf 'kernel=%s\n' "$kernel"
+	printf 'delay_ms=%s\n' "$delay_ms"
+	printf 'clear_delay_us=%s\n' "$clear_delay_us"
+	printf 'repeat=%s\n' "$repeat"
+	printf 'console=%s\n' "$console"
+	printf 'guest_log=%s\n' "$guest_log"
+	printf 'dmesg_log=%s\n' "$dmesg_log"
+} | tee "$summary"
+
+if [ "$status" = "warning_found" ]; then
+	exit 0
+fi
+exit 1
+
+--------------4sXyKLmFfI9pYrmyjaqUBWVK--
 
