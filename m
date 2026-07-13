@@ -2,21 +2,21 @@ Return-Path: <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>
 Delivered-To: lists+nbd@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QeAWMzGSVGpRngMAu9opvQ
+	id tuF5GAySVGo9ngMAu9opvQ
 	(envelope-from <bounce-nbd=lists+nbd=lfdr.de@other.debian.org>)
-	for <lists+nbd@lfdr.de>; Mon, 13 Jul 2026 09:22:25 +0200
+	for <lists+nbd@lfdr.de>; Mon, 13 Jul 2026 09:21:48 +0200
 X-Original-To: lists+nbd@lfdr.de
 Received: from bendel.debian.org (bendel.debian.org [82.195.75.100])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74AC7748065
-	for <lists+nbd@lfdr.de>; Mon, 13 Jul 2026 09:22:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A11B74803E
+	for <lists+nbd@lfdr.de>; Mon, 13 Jul 2026 09:21:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="No valid SPF, No valid DKIM" header.from=huawei.com (policy=quarantine);
 	spf=none (mail.lfdr.de: domain of "bounce-nbd=lists+nbd=lfdr.de@other.debian.org" has no SPF policy when checking 82.195.75.100) smtp.mailfrom="bounce-nbd=lists+nbd=lfdr.de@other.debian.org"
 Received: from localhost (localhost [127.0.0.1])
 	by bendel.debian.org (Postfix) with QMQP
-	id 59C692067F; Mon, 13 Jul 2026 07:22:25 +0000 (UTC)
-X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jul 13 07:22:25 2026
+	id 20F8C20684; Mon, 13 Jul 2026 07:21:48 +0000 (UTC)
+X-Mailbox-Line: From nbd-request@other.debian.org  Mon Jul 13 07:21:48 2026
 Old-Return-Path: <yangerkun@huaweicloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on bendel.debian.org
 X-Spam-Level: 
@@ -25,31 +25,31 @@ X-Spam-Status: No, score=-2.0 required=4.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 X-Original-To: lists-other-nbd@bendel.debian.org
 Delivered-To: lists-other-nbd@bendel.debian.org
 Received: from localhost (localhost [127.0.0.1])
-	by bendel.debian.org (Postfix) with ESMTP id 895C020404
-	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Jul 2026 07:05:19 +0000 (UTC)
+	by bendel.debian.org (Postfix) with ESMTP id DDDA62043E
+	for <lists-other-nbd@bendel.debian.org>; Mon, 13 Jul 2026 07:05:13 +0000 (UTC)
 X-Virus-Scanned: at lists.debian.org with policy bank en-lt
 X-Amavis-Spam-Status: No, score=-4.051 tagged_above=-10000 required=5.3
 	tests=[BAYES_00=-2, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
 	RCVD_IN_DNSWL_MED=-2.3] autolearn=no autolearn_force=no
 Received: from bendel.debian.org ([127.0.0.1])
 	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
-	with ESMTP id YnGBIosVfJH2 for <lists-other-nbd@bendel.debian.org>;
-	Mon, 13 Jul 2026 07:05:11 +0000 (UTC)
-X-policyd-weight: using cached result; rate: -5.5
-Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com [45.249.212.56])
+	with ESMTP id bvvFYGx-0khx for <lists-other-nbd@bendel.debian.org>;
+	Mon, 13 Jul 2026 07:05:04 +0000 (UTC)
+X-policyd-weight:  NOT_IN_SBL_XBL_SPAMHAUS=-1.5 CL_IP_EQ_HELO_IP=-2 (check from: .huaweicloud. - helo: .dggsgout11.his.huawei. - helo-domain: .huawei.)  FROM/MX_MATCHES_HELO(DOMAIN)=-2; rate: -5.5
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by bendel.debian.org (Postfix) with ESMTPS id A705B2066A
+	by bendel.debian.org (Postfix) with ESMTPS id A0B022062D
 	for <nbd@other.debian.org>; Mon, 13 Jul 2026 07:05:02 +0000 (UTC)
 Received: from mail.maildlp.com (unknown [172.19.163.170])
-	by dggsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gzD2N3TN6zKHMPT
-	for <nbd@other.debian.org>; Mon, 13 Jul 2026 15:04:28 +0800 (CST)
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4gzD2h0R12zYQtkM
+	for <nbd@other.debian.org>; Mon, 13 Jul 2026 15:04:44 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
-	by mail.maildlp.com (Postfix) with ESMTP id 317F54056D
+	by mail.maildlp.com (Postfix) with ESMTP id 437B540561
 	for <nbd@other.debian.org>; Mon, 13 Jul 2026 15:04:57 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.50.85.155])
-	by APP1 (Coremail) with UTF8SMTPSA id cCh0CgD3B3QQjlRq9dc7BA--.38720S9;
+	by APP1 (Coremail) with UTF8SMTPSA id cCh0CgD3B3QQjlRq9dc7BA--.38720S10;
 	Mon, 13 Jul 2026 15:04:57 +0800 (CST)
 From: Yang Erkun <yangerkun@huawei.com>
 To: josef@toxicpanda.com,
@@ -64,18 +64,18 @@ Cc: yi.zhang@huawei.com,
 	yangerkun@huawei.com,
 	linux-block@vger.kernel.org,
 	nbd@other.debian.org
-Subject: [PATCH v3 5/6] nbd: skip queue freeze when setting size at device startup
-Date: Mon, 13 Jul 2026 14:56:43 +0800
-Message-ID: <20260713065644.1637594-6-yangerkun@huawei.com>
+Subject: [PATCH v3 6/6] nbd: add nr_hw_queues module parameter for pre-created devices
+Date: Mon, 13 Jul 2026 14:56:44 +0800
+Message-ID: <20260713065644.1637594-7-yangerkun@huawei.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260713065644.1637594-1-yangerkun@huawei.com>
 References: <20260713065644.1637594-1-yangerkun@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgD3B3QQjlRq9dc7BA--.38720S9
-X-Coremail-Antispam: 1UD129KBjvJXoWxGF4xXw18XFy3ZFy5ury5CFg_yoW5CFyxpF
-	4UAa95GrW8KF4xur4vvFs5Xw45twnrC3sFg347G34F9F1qy392yry0yryaqw10qryDWFs8
-	Ga98KF4Iya4UJr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID:cCh0CgD3B3QQjlRq9dc7BA--.38720S10
+X-Coremail-Antispam: 1UD129KBjvJXoW7uFy7WFyxtw4kXrW3Xry3CFg_yoW8ArWUpF
+	W5tFZrKFWxKr43uaykXwnrWFn8Ga4kC34fWF1xt34xuFy5Zwnavr97ta4Yqr1UtF9xAF4Y
+	v3WDZF48GF4UCrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
 	9KBjDU0xBIdaVrnRJUUUmKb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
 	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAV
 	Cq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0
@@ -95,9 +95,9 @@ X-CM-SenderInfo: 51dqwvhunx0q5kxd4v5lfo033gof0z/
 X-Rc-Spam: 2008-11-04_01
 X-Rc-Virus: 2007-09-13_01
 X-Rc-Spam: 2008-11-04_01
-Resent-Message-ID: <6WRl3l6lwSN.A.337B.xIJVqB@bendel>
+Resent-Message-ID: <3M97cL7TkbE.A.0v7B.MIJVqB@bendel>
 Resent-From: nbd@other.debian.org
-X-Mailing-List: <nbd@other.debian.org> archive/latest/3590
+X-Mailing-List: <nbd@other.debian.org> archive/latest/3587
 X-Loop: nbd@other.debian.org
 List-Id: <nbd.other.debian.org>
 List-URL: <https://lists.debian.org/nbd/>
@@ -107,8 +107,8 @@ List-Subscribe: <mailto:nbd-request@other.debian.org?subject=subscribe>
 List-Unsubscribe: <mailto:nbd-request@other.debian.org?subject=unsubscribe>
 Precedence: list
 Resent-Sender: nbd-request@other.debian.org
-List-Archive: https://lists.debian.org/msgid-search/20260713065644.1637594-6-yangerkun@huawei.com
-Resent-Date: Mon, 13 Jul 2026 07:22:25 +0000 (UTC)
+List-Archive: https://lists.debian.org/msgid-search/20260713065644.1637594-7-yangerkun@huawei.com
+Resent-Date: Mon, 13 Jul 2026 07:21:48 +0000 (UTC)
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [2.59 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : No valid SPF, No valid DKIM,quarantine];
@@ -139,97 +139,57 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[nbd];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:from_mime,huawei.com:email,huawei.com:mid,bendel.debian.org:helo,bendel.debian.org:rdns,other.debian.org:from_smtp];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[other.debian.org:from_smtp,bendel.debian.org:helo,bendel.debian.org:rdns,huawei.com:from_mime,huawei.com:email,huawei.com:mid];
 	R_SPF_NA(0.00)[no SPF record]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 74AC7748065
+X-Rspamd-Queue-Id: 3A11B74803E
 
-Commit 242a49e5c878 ("nbd: freeze the queue for queue limits updates")
-introduce queue freeze/unfreeze in nbd_set_size to avoid inflight
-commands see this inconsistent limits. However, this cannot be happened
-when device setup since the capacity is still 0.
+Previous commit can help remove all freeze for netlink newly created nbd
+device. But for the devices pre-created at module load(nbds_max default
+as 16), the nr_hw_queues was setting default as 1, then ioctl/netlink
+path will set the real connection count, and blk_mq_update_nr_hw_queues
+in nbd_start_device will introduce freeze.
 
-time nbd-client --name myexport --connections 96 127.0.0.1 1234
-
-Before this patchset:
-real    0m2.195s
-user    0m0.005s
-sys     0m0.022s
-
-After this patchset:
-real    0m0.090s
-user    0m0.004s
-sys     0m0.018s
+Add an nr_hw_queues module parameter so that users who know their
+expected connection count can pre-created devices with the right queue
+count to avoid this freeze too.
 
 Signed-off-by: Yang Erkun <yangerkun@huawei.com>
 ---
- drivers/block/nbd.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ drivers/block/nbd.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 400f638e832e..2c7b09c70da2 100644
+index 2c7b09c70da2..f918c9efa9b2 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -331,7 +331,8 @@ static void nbd_mark_nsock_dead(struct nbd_device *nbd, struct nbd_sock *nsock,
- 	nsock->sent = 0;
- }
+@@ -166,6 +166,7 @@ static struct dentry *nbd_dbg_dir;
  
--static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize, loff_t blksize)
-+static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize, loff_t blksize,
-+			bool freeze)
- {
- 	struct queue_limits lim;
- 	int error;
-@@ -371,7 +372,13 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize, loff_t blksize)
+ static unsigned int nbds_max = 16;
+ static int max_part = 16;
++static int nr_hw_queues = 1;
+ static int part_shift;
  
- 	lim.logical_block_size = blksize;
- 	lim.physical_block_size = blksize;
--	error = queue_limits_commit_update_frozen(nbd->disk->queue, &lim);
-+
-+	if (freeze)
-+		error = queue_limits_commit_update_frozen(nbd->disk->queue,
-+				&lim);
-+	else
-+		error = queue_limits_commit_update(nbd->disk->queue, &lim);
-+
- 	if (error)
- 		return error;
- 
-@@ -1563,7 +1570,7 @@ static int nbd_start_device(struct nbd_device *nbd)
- 		args->index = i;
- 		queue_work(nbd->recv_workq, &args->work);
+ static int nbd_dev_dbg_init(struct nbd_device *nbd);
+@@ -2752,8 +2753,10 @@ static int __init nbd_init(void)
  	}
--	return nbd_set_size(nbd, config->bytesize, nbd_blksize(config));
-+	return nbd_set_size(nbd, config->bytesize, nbd_blksize(config), false);
- }
+ 	nbd_dbg_init();
  
- static int nbd_start_device_ioctl(struct nbd_device *nbd)
-@@ -1631,13 +1638,13 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
- 	case NBD_SET_SOCK:
- 		return nbd_add_socket(nbd, arg, false);
- 	case NBD_SET_BLKSIZE:
--		return nbd_set_size(nbd, config->bytesize, arg);
-+		return nbd_set_size(nbd, config->bytesize, arg, true);
- 	case NBD_SET_SIZE:
--		return nbd_set_size(nbd, arg, nbd_blksize(config));
-+		return nbd_set_size(nbd, arg, nbd_blksize(config), true);
- 	case NBD_SET_SIZE_BLOCKS:
- 		if (check_shl_overflow(arg, config->blksize_bits, &bytesize))
- 			return -EINVAL;
--		return nbd_set_size(nbd, bytesize, nbd_blksize(config));
-+		return nbd_set_size(nbd, bytesize, nbd_blksize(config), true);
- 	case NBD_SET_TIMEOUT:
- 		nbd_set_cmd_timeout(nbd, arg);
- 		return 0;
-@@ -2122,7 +2129,7 @@ static int nbd_genl_size_set(struct genl_info *info, struct nbd_device *nbd)
- 		bsize = nla_get_u64(info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES]);
- 
- 	if (bytes != config->bytesize || bsize != nbd_blksize(config))
--		return nbd_set_size(nbd, bytes, bsize);
-+		return nbd_set_size(nbd, bytes, bsize, true);
++	if (nr_hw_queues < 1)
++		nr_hw_queues = 1;
+ 	for (i = 0; i < nbds_max; i++)
+-		nbd_dev_add(i, 1, 1);
++		nbd_dev_add(i, 1, nr_hw_queues);
  	return 0;
  }
  
+@@ -2814,3 +2817,6 @@ module_param(nbds_max, int, 0444);
+ MODULE_PARM_DESC(nbds_max, "number of network block devices to initialize (default: 16)");
+ module_param(max_part, int, 0444);
+ MODULE_PARM_DESC(max_part, "number of partitions per device (default: 16)");
++module_param(nr_hw_queues, int, 0444);
++MODULE_PARM_DESC(nr_hw_queues,
++"number of hardware queues for devices pre-created at module load (default: 1). ");
 -- 
 2.52.0
 
